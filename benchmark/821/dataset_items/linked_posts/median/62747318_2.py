@@ -1,0 +1,5 @@
+>>> import statistics
+>>> statistics.median([9, 12, 20, 21, 34, 80])  # Even
+20.5
+>>> statistics.median([9, 12, 80, 21, 34])  # Odd
+21

@@ -1,0 +1,544 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "subclass"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 642441,
+                                "reputation": 668,
+                                "user_id": 423560,
+                                "user_type": "registered",
+                                "display_name": "Samantha Atkins"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1564502000,
+                            "post_id": 3862957,
+                            "comment_id": 101049058,
+                            "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/3862957#comment101049058_3862957",
+                            "body": "Suppose I wanted to find all subclasses in a module whether the submodule of the module containing it had been imported or not?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 64585,
+                                "reputation": 864612,
+                                "user_id": 190597,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "unutbu"
+                            },
+                            "reply_to_user": {
+                                "account_id": 642441,
+                                "reputation": 668,
+                                "user_id": 423560,
+                                "user_type": "registered",
+                                "display_name": "Samantha Atkins"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1564512369,
+                            "post_id": 3862957,
+                            "comment_id": 101053081,
+                            "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/3862957#comment101053081_3862957",
+                            "body": "@SamanthaAtkins: Generate a <a href=\"https://stackoverflow.com/q/1707709/190597\">list of all submodules of the package</a>, and then generate a <a href=\"https://stackoverflow.com/q/1796180/190597\">list of all classes for each module</a>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 642441,
+                                "reputation": 668,
+                                "user_id": 423560,
+                                "user_type": "registered",
+                                "display_name": "Samantha Atkins"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1564595582,
+                            "post_id": 3862957,
+                            "comment_id": 101086982,
+                            "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/3862957#comment101086982_3862957",
+                            "body": "Thanks, that is what I ended up doing but was curious if there might be a better way I had missed."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 490787,
+                                "reputation": 388,
+                                "user_id": 1022684,
+                                "user_type": "registered",
+                                "display_name": "nikicat"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1675250096,
+                            "post_id": 3862957,
+                            "comment_id": 132886746,
+                            "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/3862957#comment132886746_3862957",
+                            "body": "A bit more simple version of <code>all_subclasses</code>: <code>return {cls}.union(s for c in cls.__subclasses__() for s in all_subclasses(c))</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4574194,
+                                "reputation": 142,
+                                "user_id": 3713085,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "jim vickroy"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1677025377,
+                            "post_id": 3862957,
+                            "comment_id": 133255123,
+                            "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/3862957#comment133255123_3862957",
+                            "body": "Use of: <code>@dataclass (slots=True)</code> as the class decorator causes each element to be duplicated in the <code>Foo.__subclasses__()</code> list."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 64585,
+                        "reputation": 864612,
+                        "user_id": 190597,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "unutbu"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": true,
+                    "score": 492,
+                    "last_activity_date": 1536856356,
+                    "last_edit_date": 1536856356,
+                    "creation_date": 1286275984,
+                    "answer_id": 3862957,
+                    "question_id": 3862310,
+                    "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/3862957#3862957",
+                    "body": "<p>New-style classes (i.e. subclassed from <code>object</code>, which is the default in Python 3) have a <code>__subclasses__</code> method which returns the subclasses:</p>\n\n<pre><code>class Foo(object): pass\nclass Bar(Foo): pass\nclass Baz(Foo): pass\nclass Bing(Bar): pass\n</code></pre>\n\n<p>Here are the names of the subclasses:</p>\n\n<pre><code>print([cls.__name__ for cls in Foo.__subclasses__()])\n# ['Bar', 'Baz']\n</code></pre>\n\n<p>Here are the subclasses themselves:</p>\n\n<pre><code>print(Foo.__subclasses__())\n# [&lt;class '__main__.Bar'&gt;, &lt;class '__main__.Baz'&gt;]\n</code></pre>\n\n<p>Confirmation that the subclasses do indeed list <code>Foo</code> as their base:</p>\n\n<pre><code>for cls in Foo.__subclasses__():\n    print(cls.__base__)\n# &lt;class '__main__.Foo'&gt;\n# &lt;class '__main__.Foo'&gt;\n</code></pre>\n\n<p>Note if you want subsubclasses, you'll have to recurse:</p>\n\n<pre><code>def all_subclasses(cls):\n    return set(cls.__subclasses__()).union(\n        [s for c in cls.__subclasses__() for s in all_subclasses(c)])\n\nprint(all_subclasses(Foo))\n# {&lt;class '__main__.Bar'&gt;, &lt;class '__main__.Baz'&gt;, &lt;class '__main__.Bing'&gt;}\n</code></pre>\n\n<p>Note that if the class definition of a subclass hasn't been executed yet - for example, if the subclass's module hasn't been imported yet - then that subclass doesn't exist yet, and <code>__subclasses__</code> won't find it.</p>\n\n<hr>\n\n<p>You mentioned \"given its name\". Since Python classes are first-class objects, you don't need to use a string with the class's name in place of the class or anything like that. You can just use the class directly, and you probably should.</p>\n\n<p>If you do have a string representing the name of a class and you want to find that class's subclasses, then there are two steps: find the class given its name, and then find the subclasses with <code>__subclasses__</code> as above.</p>\n\n<p>How to find the class from the name depends on where you're expecting to find it. If you're expecting to find it in the same module as the code that's trying to locate the class, then</p>\n\n<pre><code>cls = globals()[name]\n</code></pre>\n\n<p>would do the job, or in the unlikely case that you're expecting to find it in locals,</p>\n\n<pre><code>cls = locals()[name]\n</code></pre>\n\n<p>If the class could be in any module, then your name string should contain the fully-qualified name - something like <code>'pkg.module.Foo'</code> instead of just <code>'Foo'</code>. Use <code>importlib</code> to load the class's module, then retrieve the corresponding attribute:</p>\n\n<pre><code>import importlib\nmodname, _, clsname = name.rpartition('.')\nmod = importlib.import_module(modname)\ncls = getattr(mod, clsname)\n</code></pre>\n\n<p>However you find the class, <code>cls.__subclasses__()</code> would then return a list of its subclasses.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 145428,
+                        "reputation": 121960,
+                        "user_id": 355230,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "martineau"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1592836172,
+                    "last_edit_date": 1592836172,
+                    "creation_date": 1286283692,
+                    "answer_id": 3863845,
+                    "question_id": 3862310,
+                    "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/3863845#3863845",
+                    "body": "<p>This isn't as good an answer as using the special built-in <code>__subclasses__()</code> class method which @unutbu mentions, so I present it merely as an exercise. The <code>subclasses()</code> function defined returns a dictionary which maps all the subclass names to the subclasses themselves.</p>\n<pre><code>def traced_subclass(baseclass):\n    class _SubclassTracer(type):\n        def __new__(cls, classname, bases, classdict):\n            obj = type(classname, bases, classdict)\n            if baseclass in bases: # sanity check\n                attrname = '_%s__derived' % baseclass.__name__\n                derived = getattr(baseclass, attrname, {})\n                derived.update( {classname:obj} )\n                setattr(baseclass, attrname, derived)\n             return obj\n    return _SubclassTracer\n\ndef subclasses(baseclass):\n    attrname = '_%s__derived' % baseclass.__name__\n    return getattr(baseclass, attrname, None)\n\n\nclass BaseClass(object):\n    pass\n\nclass SubclassA(BaseClass):\n    __metaclass__ = traced_subclass(BaseClass)\n\nclass SubclassB(BaseClass):\n    __metaclass__ = traced_subclass(BaseClass)\n\nprint subclasses(BaseClass)\n</code></pre>\n<p>Output:</p>\n<pre class=\"lang-none prettyprint-override\"><code>{'SubclassB': &lt;class '__main__.SubclassB'&gt;,\n 'SubclassA': &lt;class '__main__.SubclassA'&gt;}\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 48439,
+                                "reputation": 13055,
+                                "user_id": 143923,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Roman Prykhodchenko"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1373010379,
+                            "post_id": 17246726,
+                            "comment_id": 25409539,
+                            "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/17246726#comment25409539_17246726",
+                            "body": "Thank you @fletom! Although what I needed back to those days was just __subclasses__() your solution is really nice. Take you +1 ;) Btw, I think it might be more reliable using generators in your case."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2191785,
+                                "reputation": 6629,
+                                "user_id": 1938621,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Ryne Everett"
+                            },
+                            "edited": false,
+                            "score": 9,
+                            "creation_date": 1472951185,
+                            "post_id": 17246726,
+                            "comment_id": 65958205,
+                            "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/17246726#comment65958205_17246726",
+                            "body": "Shouldn&#39;t <code>all_subclasses</code> be a <code>set</code> to eliminate duplicates?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 60157,
+                                "reputation": 1998,
+                                "user_id": 179805,
+                                "user_type": "registered",
+                                "display_name": "fletom"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2191785,
+                                "reputation": 6629,
+                                "user_id": 1938621,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Ryne Everett"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1474551709,
+                            "post_id": 17246726,
+                            "comment_id": 66584932,
+                            "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/17246726#comment66584932_17246726",
+                            "body": "@RyneEverett You mean if you&#39;re using multiple inheritance? I think otherwise you shouldn&#39;t end up with duplicates."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2191785,
+                                "reputation": 6629,
+                                "user_id": 1938621,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Ryne Everett"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1474558962,
+                            "post_id": 17246726,
+                            "comment_id": 66590253,
+                            "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/17246726#comment66590253_17246726",
+                            "body": "@fletom Yes, multiple inheritance would be necessary for duplicates. For instance, <code>A(object)</code>, <code>B(A)</code>, <code>C(A)</code>, and <code>D(B, C)</code>. <code>get_all_subclasses(A) == [B, C, D, D]</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 145428,
+                                "reputation": 121960,
+                                "user_id": 355230,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "martineau"
+                            },
+                            "reply_to_user": {
+                                "account_id": 48439,
+                                "reputation": 13055,
+                                "user_id": 143923,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Roman Prykhodchenko"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1519499418,
+                            "post_id": 17246726,
+                            "comment_id": 84938848,
+                            "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/17246726#comment84938848_17246726",
+                            "body": "@RomanPrykhodchenko: The title of your question says to find all the subclasses of a class given its name, but this as well as other only work given the class itself, not just its name\u2014so just what is it?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1004301,
+                                "reputation": 787,
+                                "user_id": 1018447,
+                                "user_type": "registered",
+                                "display_name": "Peter Ba\u0161ista"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1615312313,
+                            "post_id": 17246726,
+                            "comment_id": 117650392,
+                            "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/17246726#comment117650392_17246726",
+                            "body": "What would be the correct way to add type annotations to the proposed function?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4716618,
+                                "reputation": 4610,
+                                "user_id": 3815611,
+                                "user_type": "registered",
+                                "display_name": "BlackJack"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1004301,
+                                "reputation": 787,
+                                "user_id": 1018447,
+                                "user_type": "registered",
+                                "display_name": "Peter Ba\u0161ista"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1684856482,
+                            "post_id": 17246726,
+                            "comment_id": 134577049,
+                            "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/17246726#comment134577049_17246726",
+                            "body": "@PeterBa\u0161ista The type of <code>class</code> objects is <code>type</code>.  So it would be <code>def get_all_subclasses(cls: type) -&gt; List[type]:</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1004301,
+                                "reputation": 787,
+                                "user_id": 1018447,
+                                "user_type": "registered",
+                                "display_name": "Peter Ba\u0161ista"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1684949373,
+                            "post_id": 17246726,
+                            "comment_id": 134593629,
+                            "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/17246726#comment134593629_17246726",
+                            "body": "I was looking for a more specific type annotation, i.e. one that would reflect the fact that the returned list only contains classes which are <i>subclasses</i> of the class given as a parameter."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 60157,
+                        "reputation": 1998,
+                        "user_id": 179805,
+                        "user_type": "registered",
+                        "display_name": "fletom"
+                    },
+                    "comment_count": 8,
+                    "is_accepted": false,
+                    "score": 77,
+                    "last_activity_date": 1422583135,
+                    "last_edit_date": 1422583135,
+                    "creation_date": 1371867734,
+                    "answer_id": 17246726,
+                    "question_id": 3862310,
+                    "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/17246726#17246726",
+                    "body": "<p>If you just want direct subclasses then <code>.__subclasses__()</code> works fine. If you want all subclasses, subclasses of subclasses, and so on, you'll need a function to do that for you.</p>\n\n<p>Here's a simple, readable function that recursively finds all subclasses of a given class:</p>\n\n<pre><code>def get_all_subclasses(cls):\n    all_subclasses = []\n\n    for subclass in cls.__subclasses__():\n        all_subclasses.append(subclass)\n        all_subclasses.extend(get_all_subclasses(subclass))\n\n    return all_subclasses\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 145428,
+                        "reputation": 121960,
+                        "user_id": 355230,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "martineau"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 10,
+                    "last_activity_date": 1579815573,
+                    "last_edit_date": 1579815573,
+                    "creation_date": 1421794381,
+                    "answer_id": 28056657,
+                    "question_id": 3862310,
+                    "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/28056657#28056657",
+                    "body": "<p><em>Note: I see that someone (not @unutbu) changed the referenced answer so that it no longer uses <code>vars()['Foo']</code> \u2014 so the primary point of my post no longer applies.</em></p>\n\n<p>FWIW, here's what I meant about <a href=\"https://stackoverflow.com/a/3862957/355230\">@unutbu's answer</a> only working with locally defined classes &mdash; and that using <code>eval()</code> instead of <code>vars()</code> would make it work with any accessible class, not only those defined in the current scope.</p>\n\n<p>For those who dislike using <code>eval()</code>, a way is also shown to avoid it.</p>\n\n<p>First here's a concrete example demonstrating the potential problem with using <code>vars()</code>:</p>\n\n<pre><code>class Foo(object): pass\nclass Bar(Foo): pass\nclass Baz(Foo): pass\nclass Bing(Bar): pass\n\n# unutbu's approach\ndef all_subclasses(cls):\n    return cls.__subclasses__() + [g for s in cls.__subclasses__()\n                                       for g in all_subclasses(s)]\n\nprint(all_subclasses(vars()['Foo']))  # Fine because  Foo is in scope\n# -&gt; [&lt;class '__main__.Bar'&gt;, &lt;class '__main__.Baz'&gt;, &lt;class '__main__.Bing'&gt;]\n\ndef func():  # won't work because Foo class is not locally defined\n    print(all_subclasses(vars()['Foo']))\n\ntry:\n    func()  # not OK because Foo is not local to func()\nexcept Exception as e:\n    print('calling func() raised exception: {!r}'.format(e))\n    # -&gt; calling func() raised exception: KeyError('Foo',)\n\nprint(all_subclasses(eval('Foo')))  # OK\n# -&gt; [&lt;class '__main__.Bar'&gt;, &lt;class '__main__.Baz'&gt;, &lt;class '__main__.Bing'&gt;]\n\n# using eval('xxx') instead of vars()['xxx']\ndef func2():\n    print(all_subclasses(eval('Foo')))\n\nfunc2()  # Works\n# -&gt; [&lt;class '__main__.Bar'&gt;, &lt;class '__main__.Baz'&gt;, &lt;class '__main__.Bing'&gt;]\n</code></pre>\n\n<p>This could be improved by moving the <code>eval('ClassName')</code> down into the function defined, which makes using it easier without loss of the additional generality gained by using <code>eval()</code> which unlike <code>vars()</code> is not context-sensitive:</p>\n\n<pre><code># easier to use version\ndef all_subclasses2(classname):\n    direct_subclasses = eval(classname).__subclasses__()\n    return direct_subclasses + [g for s in direct_subclasses\n                                    for g in all_subclasses2(s.__name__)]\n\n# pass 'xxx' instead of eval('xxx')\ndef func_ez():\n    print(all_subclasses2('Foo'))  # simpler\n\nfunc_ez()\n# -&gt; [&lt;class '__main__.Bar'&gt;, &lt;class '__main__.Baz'&gt;, &lt;class '__main__.Bing'&gt;]\n</code></pre>\n\n<p>Lastly, it's possible, and perhaps even important in some cases, to avoid using <code>eval()</code> for security reasons, so here's a version without it:</p>\n\n<pre><code>def get_all_subclasses(cls):\n    \"\"\" Generator of all a class's subclasses. \"\"\"\n    try:\n        for subclass in cls.__subclasses__():\n            yield subclass\n            for subclass in get_all_subclasses(subclass):\n                yield subclass\n    except TypeError:\n        return\n\ndef all_subclasses3(classname):\n    for cls in get_all_subclasses(object):  # object is base of all new-style classes.\n        if cls.__name__.split('.')[-1] == classname:\n            break\n    else:\n        raise ValueError('class %s not found' % classname)\n    direct_subclasses = cls.__subclasses__()\n    return direct_subclasses + [g for s in direct_subclasses\n                                    for g in all_subclasses3(s.__name__)]\n\n# no eval('xxx')\ndef func3():\n    print(all_subclasses3('Foo'))\n\nfunc3()  # Also works\n# -&gt; [&lt;class '__main__.Bar'&gt;, &lt;class '__main__.Baz'&gt;, &lt;class '__main__.Bing'&gt;]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 164831,
+                                "reputation": 1722,
+                                "user_id": 387851,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "four43"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1519491732,
+                            "post_id": 33607093,
+                            "comment_id": 84936500,
+                            "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/33607093#comment84936500_33607093",
+                            "body": "The generator approach is really clean."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 60297,
+                        "reputation": 39000,
+                        "user_id": 180174,
+                        "user_type": "registered",
+                        "accept_rate": 96,
+                        "display_name": "Kimvais"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 58,
+                    "last_activity_date": 1447064880,
+                    "creation_date": 1447064880,
+                    "answer_id": 33607093,
+                    "question_id": 3862310,
+                    "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/33607093#33607093",
+                    "body": "<p>The simplest solution in general form:</p>\n\n<pre><code>def get_subclasses(cls):\n    for subclass in cls.__subclasses__():\n        yield from get_subclasses(subclass)\n        yield subclass\n</code></pre>\n\n<p>And a classmethod in case you have a single class where you inherit from:</p>\n\n<pre><code>@classmethod\ndef get_subclasses(cls):\n    for subclass in cls.__subclasses__():\n        yield from subclass.get_subclasses()\n        yield subclass\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 127172,
+                        "reputation": 1190,
+                        "user_id": 324164,
+                        "user_type": "registered",
+                        "accept_rate": 50,
+                        "display_name": "Peter Brooks"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1491513572,
+                    "last_edit_date": 1491513572,
+                    "creation_date": 1473178475,
+                    "answer_id": 39353528,
+                    "question_id": 3862310,
+                    "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/39353528#39353528",
+                    "body": "<p>A much shorter version for getting a list of all subclasses:</p>\n\n<pre><code>from itertools import chain\n\ndef subclasses(cls):\n    return list(\n        chain.from_iterable(\n            [list(chain.from_iterable([[x], subclasses(x)])) for x in cls.__subclasses__()]\n        )\n    )\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3005786,
+                                "reputation": 13490,
+                                "user_id": 2550354,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Or Duan"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3195242,
+                                "reputation": 28894,
+                                "user_id": 2698552,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Chillar Anand"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1497283149,
+                            "post_id": 43057166,
+                            "comment_id": 76001290,
+                            "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/43057166#comment76001290_43057166",
+                            "body": "Yes any sub class from any kind would trigger the <code>__init_subclass</code> on the parent&#39;s class."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3005786,
+                        "reputation": 13490,
+                        "user_id": 2550354,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Or Duan"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 34,
+                    "last_activity_date": 1497282868,
+                    "last_edit_date": 1592644375,
+                    "creation_date": 1490651894,
+                    "answer_id": 43057166,
+                    "question_id": 3862310,
+                    "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/43057166#43057166",
+                    "body": "<h1><strong>Python 3.6</strong> - <code>__init_subclass__</code></h1>\n<p>As other answer mentioned you can check the <code>__subclasses__</code> attribute to get the list of subclasses, since python 3.6 you can modify this attribute creation by overriding the <a href=\"https://docs.python.org/3.6/whatsnew/3.6.html#pep-487-simpler-customization-of-class-creation\" rel=\"noreferrer\"><code>__init_subclass__</code></a> method.</p>\n<pre><code>class PluginBase:\n    subclasses = []\n\n    def __init_subclass__(cls, **kwargs):\n        super().__init_subclass__(**kwargs)\n        cls.subclasses.append(cls)\n\nclass Plugin1(PluginBase):\n    pass\n\nclass Plugin2(PluginBase):\n    pass\n</code></pre>\n<p>This way, if you know what you're doing, you can override the behavior of of <code>__subclasses__</code> and omit/add subclasses from this list.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 442466,
+                        "reputation": 2411,
+                        "user_id": 833093,
+                        "user_type": "registered",
+                        "accept_rate": 60,
+                        "display_name": "Thomas Grainger"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1496839716,
+                    "creation_date": 1496839716,
+                    "answer_id": 44413119,
+                    "question_id": 3862310,
+                    "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/44413119#44413119",
+                    "body": "<p>Here's a version without recursion:</p>\n\n<pre><code>def get_subclasses_gen(cls):\n\n    def _subclasses(classes, seen):\n        while True:\n            subclasses = sum((x.__subclasses__() for x in classes), [])\n            yield from classes\n            yield from seen\n            found = []\n            if not subclasses:\n                return\n\n            classes = subclasses\n            seen = found\n\n    return _subclasses([cls], [])\n</code></pre>\n\n<p>This differs from other implementations in that it returns the original class.\nThis is because it makes the code simpler and:</p>\n\n<pre><code>class Ham(object):\n    pass\n\nassert(issubclass(Ham, Ham)) # True\n</code></pre>\n\n<p>If get_subclasses_gen looks a bit weird that's because it was created by converting a tail-recursive implementation into a looping generator:</p>\n\n<pre><code>def get_subclasses(cls):\n\n    def _subclasses(classes, seen):\n        subclasses = sum(*(frozenset(x.__subclasses__()) for x in classes))\n        found = classes + seen\n        if not subclasses:\n            return found\n\n        return _subclasses(subclasses, found)\n\n    return _subclasses([cls], [])\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 258754,
+                        "reputation": 385523,
+                        "user_id": 541136,
+                        "user_type": "moderator",
+                        "accept_rate": 96,
+                        "display_name": "Russia Must Remove Putin"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1509560562,
+                    "last_edit_date": 1592644375,
+                    "creation_date": 1509556084,
+                    "answer_id": 47060128,
+                    "question_id": 3862310,
+                    "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/47060128#47060128",
+                    "body": "<blockquote>\n<h2>How can I find all subclasses of a class given its name?</h2>\n</blockquote>\n<p>We can certainly easily do this given access to the object itself, yes.</p>\n<p>Simply given its name is a poor idea, as there can be multiple classes of the same name, even defined in the same module.</p>\n<p>I created an implementation for another <a href=\"https://stackoverflow.com/a/47060013/541136\">answer</a>, and since it answers this question and it's a little more elegant than the other solutions here, here it is:</p>\n<pre><code>def get_subclasses(cls):\n    &quot;&quot;&quot;returns all subclasses of argument, cls&quot;&quot;&quot;\n    if issubclass(cls, type):\n        subclasses = cls.__subclasses__(cls)\n    else:\n        subclasses = cls.__subclasses__()\n    for subclass in subclasses:\n        subclasses.extend(get_subclasses(subclass))\n    return subclasses\n</code></pre>\n<p>Usage:</p>\n<pre><code>&gt;&gt;&gt; import pprint\n&gt;&gt;&gt; list_of_classes = get_subclasses(int)\n&gt;&gt;&gt; pprint.pprint(list_of_classes)\n[&lt;class 'bool'&gt;,\n &lt;enum 'IntEnum'&gt;,\n &lt;enum 'IntFlag'&gt;,\n &lt;class 'sre_constants._NamedIntConstant'&gt;,\n &lt;class 'subprocess.Handle'&gt;,\n &lt;enum '_ParameterKind'&gt;,\n &lt;enum 'Signals'&gt;,\n &lt;enum 'Handlers'&gt;,\n &lt;enum 'RegexFlag'&gt;]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 9001583,
+                        "reputation": 131,
+                        "user_id": 6710003,
+                        "user_type": "registered",
+                        "display_name": "dhnam"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 9,
+                    "last_activity_date": 1599894191,
+                    "last_edit_date": 1599894191,
+                    "creation_date": 1599845049,
+                    "answer_id": 63851681,
+                    "question_id": 3862310,
+                    "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/63851681#63851681",
+                    "body": "<p>Here is a simple but efficient version of code:</p>\n<pre><code>def get_all_subclasses(cls):\n    subclass_list = []\n\n    def recurse(klass):\n        for subclass in klass.__subclasses__():\n            subclass_list.append(subclass)\n            recurse(subclass)\n\n    recurse(cls)\n\n    return set(subclass_list)\n</code></pre>\n<p>Its time complexity is <code>O(n)</code> where <code>n</code> is the number of all subclasses if there's no multiple inheritance.\nIt's more efficient than the functions that recursively create lists or yield classes with generators, whose complexity could be (1) <code>O(nlogn)</code> when the class hierarchy is a balanced tree or (2) <code>O(n^2)</code> when the class hierarchy is a biased tree.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 365893,
+                        "reputation": 90060,
+                        "user_id": 711085,
+                        "user_type": "registered",
+                        "display_name": "ninjagecko"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1707468392,
+                    "last_edit_date": 1707468392,
+                    "creation_date": 1663764835,
+                    "answer_id": 73801091,
+                    "question_id": 3862310,
+                    "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name/73801091#73801091",
+                    "body": "<p>While I'm very partial to the <code>__init_subclass__</code> approach, this will preserve definition order, and avoid combinatorial order of growth if you have a very dense hierarchy with multiple inheritance everywhere:</p>\n<pre><code>def descendents(cls):\n    '''Does not return the class itself'''\n    R = {}\n    def visit(cls):\n        for subCls in cls.__subclasses__():\n            if not subCls in R:\n                R[subCls] = True\n                visit(subCls)\n    visit(cls)\n    return list(R.keys())\n</code></pre>\n<p>This works because dictionaries remember the insertion order of their keys.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 48439,
+                "reputation": 13055,
+                "user_id": 143923,
+                "user_type": "registered",
+                "accept_rate": 75,
+                "display_name": "Roman Prykhodchenko"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 3862957,
+            "answer_count": 11,
+            "score": 329,
+            "last_activity_date": 1707468392,
+            "creation_date": 1286270255,
+            "last_edit_date": 1519498008,
+            "question_id": 3862310,
+            "link": "https://stackoverflow.com/questions/3862310/how-to-find-all-the-subclasses-of-a-class-given-its-name",
+            "title": "How to find all the subclasses of a class given its name?",
+            "body": "<p>I need a working approach of getting all classes that are inherited from a base class in Python.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9268
+}

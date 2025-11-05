@@ -1,0 +1,773 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 81501,
+                        "reputation": 25136,
+                        "user_id": 229753,
+                        "user_type": "registered",
+                        "accept_rate": 71,
+                        "display_name": "Tobu"
+                    },
+                    "edited": false,
+                    "score": 16,
+                    "creation_date": 1354469076,
+                    "post_id": 3041986,
+                    "comment_id": 18765612,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input#comment18765612_3041986",
+                    "body": "In Python 3, <code>raw_input()</code> is called <a href=\"http://docs.python.org/dev/library/functions.html#input\" rel=\"nofollow noreferrer\"><code>input()</code></a>."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 26866,
+                                "reputation": 22166,
+                                "user_id": 70293,
+                                "user_type": "registered",
+                                "accept_rate": 33,
+                                "display_name": "Alexander Artemenko"
+                            },
+                            "edited": false,
+                            "score": 28,
+                            "creation_date": 1357893794,
+                            "post_id": 3041990,
+                            "comment_id": 19816843,
+                            "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/3041990#comment19816843_3041990",
+                            "body": "Actually, there is a function strtobool in the standart library: <a href=\"http://docs.python.org/2/distutils/apiref.html?highlight=distutils.util#distutils.util.strtobool\" rel=\"nofollow noreferrer\">docs.python.org/2/distutils/&hellip;</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1066464,
+                                "reputation": 1071,
+                                "user_id": 1579961,
+                                "user_type": "registered",
+                                "display_name": "nachouve"
+                            },
+                            "edited": false,
+                            "score": 18,
+                            "creation_date": 1453971960,
+                            "post_id": 3041990,
+                            "comment_id": 57837299,
+                            "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/3041990#comment57837299_3041990",
+                            "body": "Just a remember:   <code>raw_input()</code> is called <code>input()</code> in Python3"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 36238,
+                        "reputation": 57949,
+                        "user_id": 103225,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "fmark"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 284,
+                    "last_activity_date": 1619441769,
+                    "last_edit_date": 1619441769,
+                    "creation_date": 1276564560,
+                    "answer_id": 3041990,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/3041990#3041990",
+                    "body": "<p>As you mentioned, the easiest way is to use <code>raw_input()</code> (or simply <code>input()</code> for <a href=\"https://docs.python.org/3/whatsnew/3.0.html\" rel=\"noreferrer\">Python 3</a>). There is no built-in way to do this. From <a href=\"http://code.activestate.com/recipes/577058/\" rel=\"noreferrer\">Recipe 577058</a>:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import sys\n\n\ndef query_yes_no(question, default=&quot;yes&quot;):\n    &quot;&quot;&quot;Ask a yes/no question via raw_input() and return their answer.\n\n    &quot;question&quot; is a string that is presented to the user.\n    &quot;default&quot; is the presumed answer if the user just hits &lt;Enter&gt;.\n            It must be &quot;yes&quot; (the default), &quot;no&quot; or None (meaning\n            an answer is required of the user).\n\n    The &quot;answer&quot; return value is True for &quot;yes&quot; or False for &quot;no&quot;.\n    &quot;&quot;&quot;\n    valid = {&quot;yes&quot;: True, &quot;y&quot;: True, &quot;ye&quot;: True, &quot;no&quot;: False, &quot;n&quot;: False}\n    if default is None:\n        prompt = &quot; [y/n] &quot;\n    elif default == &quot;yes&quot;:\n        prompt = &quot; [Y/n] &quot;\n    elif default == &quot;no&quot;:\n        prompt = &quot; [y/N] &quot;\n    else:\n        raise ValueError(&quot;invalid default answer: '%s'&quot; % default)\n\n    while True:\n        sys.stdout.write(question + prompt)\n        choice = input().lower()\n        if default is not None and choice == &quot;&quot;:\n            return valid[default]\n        elif choice in valid:\n            return valid[choice]\n        else:\n            sys.stdout.write(&quot;Please respond with 'yes' or 'no' &quot; &quot;(or 'y' or 'n').\\n&quot;)\n</code></pre>\n<p>(For Python 2, use <code>raw_input</code> instead of <code>input</code>.)\nUsage example:</p>\n<pre><code>&gt;&gt;&gt; query_yes_no(&quot;Is cabbage yummier than cauliflower?&quot;)\nIs cabbage yummier than cauliflower? [Y/n] oops\nPlease respond with 'yes' or 'no' (or 'y' or 'n').\nIs cabbage yummier than cauliflower? [Y/n] [ENTER]\n&gt;&gt;&gt; True\n\n&gt;&gt;&gt; query_yes_no(&quot;Is cabbage yummier than cauliflower?&quot;, None)\nIs cabbage yummier than cauliflower? [y/n] [ENTER]\nPlease respond with 'yes' or 'no' (or 'y' or 'n').\nIs cabbage yummier than cauliflower? [y/n] y\n&gt;&gt;&gt; True\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3477191,
+                                "reputation": 1547,
+                                "user_id": 2910092,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "gizzmole"
+                            },
+                            "edited": false,
+                            "score": 9,
+                            "creation_date": 1520426505,
+                            "post_id": 3042378,
+                            "comment_id": 85308589,
+                            "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/3042378#comment85308589_3042378",
+                            "body": "<code>raw_input()</code> is called <code>input()</code> in Python3"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 564412,
+                        "reputation": 3469,
+                        "user_id": 88879,
+                        "user_type": "registered",
+                        "display_name": "Vicki Laidler"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 101,
+                    "last_activity_date": 1503907017,
+                    "last_edit_date": 1503907017,
+                    "creation_date": 1276573067,
+                    "answer_id": 3042378,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/3042378#3042378",
+                    "body": "<p>I'd do it this way:</p>\n\n<pre><code># raw_input returns the empty string for \"enter\"\nyes = {'yes','y', 'ye', ''}\nno = {'no','n'}\n\nchoice = raw_input().lower()\nif choice in yes:\n   return True\nelif choice in no:\n   return False\nelse:\n   sys.stdout.write(\"Please respond with 'yes' or 'no'\")\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 169237,
+                                "reputation": 39537,
+                                "user_id": 395202,
+                                "user_type": "registered",
+                                "accept_rate": 59,
+                                "display_name": "Adrian Shum"
+                            },
+                            "edited": false,
+                            "score": 9,
+                            "creation_date": 1456968466,
+                            "post_id": 4741730,
+                            "comment_id": 59196023,
+                            "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/4741730#comment59196023_4741730",
+                            "body": "Love the first approach.  Short and easy.  I used something like <code>result = raw_input(&quot;message&quot;).lower() in (&#39;y&#39;,&#39;yes&#39;)</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 106793,
+                        "reputation": 19103,
+                        "user_id": 284318,
+                        "user_type": "registered",
+                        "accept_rate": 85,
+                        "display_name": "Danilo Bargen"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 50,
+                    "last_activity_date": 1528384315,
+                    "last_edit_date": 1528384315,
+                    "creation_date": 1295477489,
+                    "answer_id": 4741730,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/4741730#4741730",
+                    "body": "<p>A very simple (but not very sophisticated) way of doing this for a single choice would be:</p>\n\n<pre><code>msg = 'Shall I?'\nshall = input(\"%s (y/N) \" % msg).lower() == 'y'\n</code></pre>\n\n<p>You could also write a simple (slightly improved) function around this:</p>\n\n<pre><code>def yn_choice(message, default='y'):\n    choices = 'Y/n' if default.lower() in ('y', 'yes') else 'y/N'\n    choice = input(\"%s (%s) \" % (message, choices))\n    values = ('y', 'yes', '') if choices == 'Y/n' else ('y', 'yes')\n    return choice.strip().lower() in values\n</code></pre>\n\n<p>Note: On Python 2, use <code>raw_input</code> instead of <code>input</code>.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7250601,
+                                "reputation": 1560,
+                                "user_id": 5531059,
+                                "user_type": "registered",
+                                "display_name": "Fran&#231;ois Leblanc"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1516369116,
+                            "post_id": 14274466,
+                            "comment_id": 83669994,
+                            "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/14274466#comment83669994_14274466",
+                            "body": "<code>f</code> probably stands for False, and <code>False == 0</code>, so I get the logic. Why the function would return an <code>int</code> instead of a <code>bool</code> is a mystery to me though."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2136496,
+                                "reputation": 3446,
+                                "user_id": 1896134,
+                                "user_type": "registered",
+                                "display_name": "JayRizzo"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7250601,
+                                "reputation": 1560,
+                                "user_id": 5531059,
+                                "user_type": "registered",
+                                "display_name": "Fran&#231;ois Leblanc"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1526370027,
+                            "post_id": 14274466,
+                            "comment_id": 87705290,
+                            "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/14274466#comment87705290_14274466",
+                            "body": "@Fran&#231;oisLeblanc as to Why it is most common in Databases. If it is not explicitly <code>False</code> or <code>0</code> (Zero).  Anything, else that is evaluated using the bool function becomes true and will return: <code>1</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7250601,
+                                "reputation": 1560,
+                                "user_id": 5531059,
+                                "user_type": "registered",
+                                "display_name": "Fran&#231;ois Leblanc"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2136496,
+                                "reputation": 3446,
+                                "user_id": 1896134,
+                                "user_type": "registered",
+                                "display_name": "JayRizzo"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1529085622,
+                            "post_id": 14274466,
+                            "comment_id": 88763446,
+                            "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/14274466#comment88763446_14274466",
+                            "body": "@JayRizzo I get that, and they&#39;re <a href=\"https://stackoverflow.com/questions/40640674/differentiate-false-and-0\">both functionally similar</a> in most respects. But it means you can&#39;t use singleton comparison, i.e. <code>if strtobool(string) is False: do_stuff()</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 26866,
+                        "reputation": 22166,
+                        "user_id": 70293,
+                        "user_type": "registered",
+                        "accept_rate": 33,
+                        "display_name": "Alexander Artemenko"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 54,
+                    "last_activity_date": 1369169535,
+                    "last_edit_date": 1369169535,
+                    "creation_date": 1357893869,
+                    "answer_id": 14274466,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/14274466#14274466",
+                    "body": "<p>There is a function <code>strtobool</code> in Python's standard library: <a href=\"http://docs.python.org/2/distutils/apiref.html?highlight=distutils.util#distutils.util.strtobool\">http://docs.python.org/2/distutils/apiref.html?highlight=distutils.util#distutils.util.strtobool</a></p>\n\n<p>You can use it to check user's input and transform it to <code>True</code> or <code>False</code> value.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 436242,
+                        "reputation": 2245,
+                        "user_id": 823281,
+                        "user_type": "registered",
+                        "accept_rate": 83,
+                        "display_name": "Visgean Skeloru"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1369170396,
+                    "creation_date": 1369170396,
+                    "answer_id": 16679481,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/16679481#16679481",
+                    "body": "<p>How about this: </p>\n\n<pre><code>def yes(prompt = 'Please enter Yes/No: '):\nwhile True:\n    try:\n        i = raw_input(prompt)\n    except KeyboardInterrupt:\n        return False\n    if i.lower() in ('yes','y'): return True\n    elif i.lower() in ('no','n'): return False\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 944088,
+                        "reputation": 3576,
+                        "user_id": 971694,
+                        "user_type": "registered",
+                        "display_name": "Randy Skretka"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1383515856,
+                    "creation_date": 1383515856,
+                    "answer_id": 19758669,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/19758669#19758669",
+                    "body": "<p>You could try something like the code below to be able to work with choices from the variable 'accepted' show here:</p>\n\n<pre><code>print( 'accepted: {}'.format(accepted) )\n# accepted: {'yes': ['', 'Yes', 'yes', 'YES', 'y', 'Y'], 'no': ['No', 'no', 'NO', 'n', 'N']}\n</code></pre>\n\n<p>Here is the code ..</p>\n\n<pre><code>#!/usr/bin/python3\n\ndef makeChoi(yeh, neh):\n    accept = {}\n    # for w in words:\n    accept['yes'] = [ '', yeh, yeh.lower(), yeh.upper(), yeh.lower()[0], yeh.upper()[0] ]\n    accept['no'] = [ neh, neh.lower(), neh.upper(), neh.lower()[0], neh.upper()[0] ]\n    return accept\n\naccepted = makeChoi('Yes', 'No')\n\ndef doYeh():\n    print('Yeh! Let\\'s do it.')\n\ndef doNeh():\n    print('Neh! Let\\'s not do it.')\n\nchoi = None\nwhile not choi:\n    choi = input( 'Please choose: Y/n? ' )\n    if choi in accepted['yes']:\n        choi = True\n        doYeh()\n    elif choi in accepted['no']:\n        choi = True\n        doNeh()\n    else:\n        print('Your choice was \"{}\". Please use an accepted input value ..'.format(choi))\n        print( accepted )\n        choi = None\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 69505,
+                                "reputation": 33095,
+                                "user_id": 202168,
+                                "user_type": "registered",
+                                "accept_rate": 66,
+                                "display_name": "Anentropic"
+                            },
+                            "edited": false,
+                            "score": 10,
+                            "creation_date": 1426169849,
+                            "post_id": 22222073,
+                            "comment_id": 46269335,
+                            "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/22222073#comment46269335_22222073",
+                            "body": "just curious... why <code>sys.stdout.write</code> instead of <code>print</code> ?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 86842,
+                                "reputation": 8744,
+                                "user_id": 241211,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Michael come lately"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1470236106,
+                            "post_id": 22222073,
+                            "comment_id": 64867938,
+                            "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/22222073#comment64867938_22222073",
+                            "body": "Note that <code>strtobool()</code> does not (from my tests) require a <code>lower()</code>. This is not explicit in its documentation, however."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2009340,
+                        "reputation": 4394,
+                        "user_id": 1798234,
+                        "user_type": "registered",
+                        "accept_rate": 57,
+                        "display_name": "james"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 28,
+                    "last_activity_date": 1678446930,
+                    "last_edit_date": 1678446930,
+                    "creation_date": 1394102695,
+                    "answer_id": 22222073,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/22222073#22222073",
+                    "body": "<p>as mentioned by @Alexander Artemenko, here's a simple solution using strtobool</p>\n<pre><code>from distutils.util import strtobool\n\ndef user_yes_no_query(question):\n    sys.stdout.write('%s [y/n]\\n' % question)\n    while True:\n        try:\n            return strtobool(raw_input().lower())\n        except ValueError:\n            sys.stdout.write('Please respond with \\'y\\' or \\'n\\'.\\n')\n\n#usage\n\n&gt;&gt;&gt; user_yes_no_query('Do you like cheese?')\nDo you like cheese? [y/n]\nOnly on tuesdays\nPlease respond with 'y' or 'n'.\nok\nPlease respond with 'y' or 'n'.\ny\n&gt;&gt;&gt; True\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1933972,
+                                "reputation": 992,
+                                "user_id": 1763984,
+                                "user_type": "registered",
+                                "display_name": "Brian Tingle"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1507858247,
+                            "post_id": 26514097,
+                            "comment_id": 80389066,
+                            "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/26514097#comment80389066_26514097",
+                            "body": "this does not work with python 2 -- <code>raw_input</code> was renamed <code>input</code> in python 3 <a href=\"https://stackoverflow.com/questions/21122540/input-error-nameerror-name-is-not-defined\" title=\"input error nameerror name is not defined\">stackoverflow.com/questions/21122540/&hellip;</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2867392,
+                        "reputation": 1550,
+                        "user_id": 2461430,
+                        "user_type": "registered",
+                        "display_name": "Douglas Adams"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 16,
+                    "last_activity_date": 1445965203,
+                    "last_edit_date": 1445965203,
+                    "creation_date": 1414001025,
+                    "answer_id": 26514097,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/26514097#26514097",
+                    "body": "<p>I know this has been answered a bunch of ways and this may not answer OP's specific question (with the list of criteria) but this is what I did for the most common use case and it's far simpler than the other responses:</p>\n\n<pre><code>answer = input('Please indicate approval: [y/n]')\nif not answer or answer[0].lower() != 'y':\n    print('You did not indicate approval')\n    exit(1)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 295205,
+                        "reputation": 2552,
+                        "user_id": 599484,
+                        "user_type": "registered",
+                        "accept_rate": 87,
+                        "display_name": "fyngyrz"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1428462130,
+                    "creation_date": 1428462130,
+                    "answer_id": 29505187,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/29505187#29505187",
+                    "body": "<p>This is what I use:</p>\n\n<pre><code>import sys\n\n# cs = case sensitive\n# ys = whatever you want to be \"yes\" - string or tuple of strings\n\n#  prompt('promptString') == 1:               # only y\n#  prompt('promptString',cs = 0) == 1:        # y or Y\n#  prompt('promptString','Yes') == 1:         # only Yes\n#  prompt('promptString',('y','yes')) == 1:   # only y or yes\n#  prompt('promptString',('Y','Yes')) == 1:   # only Y or Yes\n#  prompt('promptString',('y','yes'),0) == 1: # Yes, YES, yes, y, Y etc.\n\ndef prompt(ps,ys='y',cs=1):\n    sys.stdout.write(ps)\n    ii = raw_input()\n    if cs == 0:\n        ii = ii.lower()\n    if type(ys) == tuple:\n        for accept in ys:\n            if cs == 0:\n                accept = accept.lower()\n            if ii == accept:\n                return True\n    else:\n        if ii == ys:\n            return True\n    return False\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1131734,
+                                "reputation": 1348,
+                                "user_id": 1117664,
+                                "user_type": "registered",
+                                "display_name": "rem"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1491388489,
+                            "post_id": 35634301,
+                            "comment_id": 73527107,
+                            "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/35634301#comment73527107_35634301",
+                            "body": "Beware that the behaviour of prompter is pretty backwards when you&#39;re using it with &quot;default=&#39;no&#39;&quot;; it will return True when you choose &#39;no&#39; and False when you choose &#39;yes&#39;."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 998173,
+                        "reputation": 3193,
+                        "user_id": 1013628,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "ibizaman"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 12,
+                    "last_activity_date": 1456421621,
+                    "creation_date": 1456421621,
+                    "answer_id": 35634301,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/35634301#35634301",
+                    "body": "<p>You can also use <a href=\"https://github.com/tylerdave/prompter\" rel=\"noreferrer\">prompter</a>.</p>\n\n<p>Shamelessly taken from the README:</p>\n\n<pre><code>#pip install prompter\n\nfrom prompter import yesno\n\n&gt;&gt;&gt; yesno('Really?')\nReally? [Y/n]\nTrue\n\n&gt;&gt;&gt; yesno('Really?')\nReally? [Y/n] no\nFalse\n\n&gt;&gt;&gt; yesno('Really?', default='no')\nReally? [y/N]\nTrue\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2271397,
+                        "reputation": 661,
+                        "user_id": 1998692,
+                        "user_type": "registered",
+                        "display_name": "Callam Delaney"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1460731394,
+                    "creation_date": 1460731394,
+                    "answer_id": 36650241,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/36650241#36650241",
+                    "body": "<pre><code>def question(question, answers):\n    acceptable = False\n    while not acceptable:\n        print(question + \"specify '%s' or '%s'\") % answers\n        answer = raw_input()\n        if answer.lower() == answers[0].lower() or answers[0].lower():\n            print('Answer == %s') % answer\n            acceptable = True\n    return answer\n\nraining = question(\"Is it raining today?\", (\"Y\", \"N\"))\n</code></pre>\n\n<p>This is how I'd do it.</p>\n\n<p>Output</p>\n\n<pre><code>Is it raining today? Specify 'Y' or 'N'\n&gt; Y\nanswer = 'Y'\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7250601,
+                                "reputation": 1560,
+                                "user_id": 5531059,
+                                "user_type": "registered",
+                                "display_name": "Fran&#231;ois Leblanc"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1516369347,
+                            "post_id": 38516474,
+                            "comment_id": 83670118,
+                            "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/38516474#comment83670118_38516474",
+                            "body": "Compatible with both Python 2 and 3, very readable. I ended up using this answer."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 226424,
+                        "reputation": 3562,
+                        "user_id": 487464,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Bryce Guinta"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1469148084,
+                    "creation_date": 1469148084,
+                    "answer_id": 38516474,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/38516474#38516474",
+                    "body": "<p>I modified fmark's answer to by python 2/3 compatible more pythonic.</p>\n\n<p>See <a href=\"https://github.com/ipython/ipython/blob/aa586fd81940e557a1df54ecd0478f9d67dfb6b4/IPython/utils/io.py#L141-171\" rel=\"noreferrer\">ipython's utility module</a> if you are interested in something with more error handling</p>\n\n<pre><code># PY2/3 compatibility\nfrom __future__ import print_function\n# You could use the six package for this\ntry:\n    input_ = raw_input\nexcept NameError:\n    input_ = input\n\ndef query_yes_no(question, default=True):\n    \"\"\"Ask a yes/no question via standard input and return the answer.\n\n    If invalid input is given, the user will be asked until\n    they acutally give valid input.\n\n    Args:\n        question(str):\n            A question that is presented to the user.\n        default(bool|None):\n            The default value when enter is pressed with no value.\n            When None, there is no default value and the query\n            will loop.\n    Returns:\n        A bool indicating whether user has entered yes or no.\n\n    Side Effects:\n        Blocks program execution until valid input(y/n) is given.\n    \"\"\"\n    yes_list = [\"yes\", \"y\"]\n    no_list = [\"no\", \"n\"]\n\n    default_dict = {  # default =&gt; prompt default string\n        None: \"[y/n]\",\n        True: \"[Y/n]\",\n        False: \"[y/N]\",\n    }\n\n    default_str = default_dict[default]\n    prompt_str = \"%s %s \" % (question, default_str)\n\n    while True:\n        choice = input_(prompt_str).lower()\n\n        if not choice and default is not None:\n            return default\n        if choice in yes_list:\n            return True\n        if choice in no_list:\n            return False\n\n        notification_str = \"Please respond with 'y' or 'n'\"\n        print(notification_str)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1874064,
+                        "reputation": 17503,
+                        "user_id": 1695680,
+                        "user_type": "registered",
+                        "accept_rate": 44,
+                        "display_name": "ThorSummoner"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1477433739,
+                    "last_edit_date": 1477433739,
+                    "creation_date": 1472619099,
+                    "answer_id": 39240985,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/39240985#39240985",
+                    "body": "<p>Here's my take on it, I simply wanted to abort if the user did not affirm the action.</p>\n\n<pre><code>import distutils\n\nif unsafe_case:\n    print('Proceed with potentially unsafe thing? [y/n]')\n    while True:\n        try:\n            verify = distutils.util.strtobool(raw_input())\n            if not verify:\n                raise SystemExit  # Abort on user reject\n            break\n        except ValueError as err:\n            print('Please enter \\'yes\\' or \\'no\\'')\n            # Try again\n    print('Continuing ...')\ndo_unsafe_thing()\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 9433854,
+                        "reputation": 61,
+                        "user_id": 7016446,
+                        "user_type": "unregistered",
+                        "display_name": "Speqtre"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1476401309,
+                    "creation_date": 1476401309,
+                    "answer_id": 40032648,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/40032648#40032648",
+                    "body": "<p>on 2.7, is this too non-pythonic?</p>\n\n<pre><code>if raw_input('your prompt').lower()[0]=='y':\n   your code here\nelse:\n   alternate code here\n</code></pre>\n\n<p>it captures any variation of Yes at least.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4180236,
+                                "reputation": 380,
+                                "user_id": 3425488,
+                                "user_type": "registered",
+                                "display_name": "Gormador"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1478253534,
+                            "post_id": 40242347,
+                            "comment_id": 68088231,
+                            "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/40242347#comment68088231_40242347",
+                            "body": "Nope, this doesn&#39;t work. In more than one way actually. Currently trying to fix it, but I think this will look a lot like the accepted answer after I&#39;m done."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4180236,
+                                "reputation": 380,
+                                "user_id": 3425488,
+                                "user_type": "registered",
+                                "display_name": "Gormador"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1478255352,
+                            "post_id": 40242347,
+                            "comment_id": 68089336,
+                            "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/40242347#comment68089336_40242347",
+                            "body": "I edited you anwser @pjm . Please consider reviewing it :-)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 9512491,
+                        "reputation": 41,
+                        "user_id": 7070004,
+                        "user_type": "registered",
+                        "display_name": "pjm"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1478896815,
+                    "last_edit_date": 1478896815,
+                    "creation_date": 1477404728,
+                    "answer_id": 40242347,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/40242347#40242347",
+                    "body": "<p>Doing the same with python 3.x, where <code>raw_input()</code> doesn't exist:</p>\n\n<pre><code>def ask(question, default = None):\n    hasDefault = default is not None\n    prompt = (question \n               + \" [\" + [\"y\", \"Y\"][hasDefault and default] + \"/\" \n               + [\"n\", \"N\"][hasDefault and not default] + \"] \")\n\n    while True:\n        sys.stdout.write(prompt)\n        choice = input().strip().lower()\n        if choice == '':\n            if default is not None:\n                return default\n        else:\n            if \"yes\".startswith(choice):\n                return True\n            if \"no\".startswith(choice):\n                return False\n\n        sys.stdout.write(\"Please respond with 'yes' or 'no' \"\n                             \"(or 'y' or 'n').\\n\")\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 203831,
+                        "reputation": 17388,
+                        "user_id": 451710,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "Eyal Levin"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 95,
+                    "last_activity_date": 1480249615,
+                    "last_edit_date": 1480249615,
+                    "creation_date": 1480249023,
+                    "answer_id": 40828840,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/40828840#40828840",
+                    "body": "<p>You can use <a href=\"http://click.pocoo.org/\" rel=\"noreferrer\">click</a>'s <code>confirm</code> method.</p>\n\n<pre><code>import click\n\nif click.confirm('Do you want to continue?', default=True):\n    print('Do something')\n</code></pre>\n\n<p>This will print:</p>\n\n<pre><code>$ Do you want to continue? [Y/n]:\n</code></pre>\n\n<p>Should work for <code>Python 2/3</code> on Linux, Mac or Windows.</p>\n\n<p>Docs: <a href=\"http://click.pocoo.org/5/prompts/#confirmation-prompts\" rel=\"noreferrer\">http://click.pocoo.org/5/prompts/#confirmation-prompts</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1324492,
+                                "reputation": 2481,
+                                "user_id": 1269634,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Geoff"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1598894325,
+                            "post_id": 50216611,
+                            "comment_id": 112598971,
+                            "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/50216611#comment112598971_50216611",
+                            "body": "And one minor thing that probably doesn&#39;t matter much in practice: <code>strtobool</code>, for some reason, returns 0 and 1, rather than <code>False</code> and <code>True</code>. So if you need <code>False</code> and <code>True</code>, be sure to call <code>bool(strtobool(user_input))</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6357232,
+                        "reputation": 3305,
+                        "user_id": 4934061,
+                        "user_type": "registered",
+                        "display_name": "Josef"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1607868058,
+                    "last_edit_date": 1607868058,
+                    "creation_date": 1525703293,
+                    "answer_id": 50216611,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/50216611#50216611",
+                    "body": "<p>For Python 3, I'm using this function:</p>\n<pre><code>def user_prompt(question: str) -&gt; bool:\n    &quot;&quot;&quot; Prompt the yes/no-*question* to the user. &quot;&quot;&quot;\n    from distutils.util import strtobool\n\n    while True:\n        user_input = input(question + &quot; [y/n]: &quot;)\n        try:\n            return bool(strtobool(user_input))\n        except ValueError:\n            print(&quot;Please use y/n or yes/no.\\n&quot;)\n</code></pre>\n<p>The <a href=\"https://docs.python.org/3.6/distutils/apiref.html?highlight=distutils.util#distutils.util.strtobool\" rel=\"nofollow noreferrer\" title=\"strtobool\"><code>strtobool()</code></a> function converts a string into a bool. If the string cant be parsed it will raise a ValueError.</p>\n<p>In Python 3 <code>raw_input()</code> has been renamed to <a href=\"https://docs.python.org/3/library/functions.html#input\" rel=\"nofollow noreferrer\" title=\"input\"><code>input()</code></a>.</p>\n<p>As Geoff said, strtobool actually returns 0 or 1, therefore the result has to be cast to bool.</p>\n<hr />\n<p>This is the implementation of <code>strtobool</code>, if you want special words to be recognized as <code>true</code>, you can copy the code and add your own cases.</p>\n<pre class=\"lang-py prettyprint-override\"><code>def strtobool (val):\n    &quot;&quot;&quot;Convert a string representation of truth to true (1) or false (0).\n    True values are 'y', 'yes', 't', 'true', 'on', and '1'; false values\n    are 'n', 'no', 'f', 'false', 'off', and '0'.  Raises ValueError if\n    'val' is anything else.\n    &quot;&quot;&quot;\n    val = val.lower()\n    if val in ('y', 'yes', 't', 'true', 'on', '1'):\n        return 1\n    elif val in ('n', 'no', 'f', 'false', 'off', '0'):\n        return 0\n    else:\n        raise ValueError(&quot;invalid truth value %r&quot; % (val,))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3000070,
+                                "reputation": 2488,
+                                "user_id": 2545722,
+                                "user_type": "registered",
+                                "accept_rate": 69,
+                                "display_name": "AFP_555"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1540705941,
+                            "post_id": 51795677,
+                            "comment_id": 92958568,
+                            "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/51795677#comment92958568_51795677",
+                            "body": "Shouldn&#39;t the argument be called &quot;question&quot; instead of &quot;answer&quot;?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 11630709,
+                        "reputation": 201,
+                        "user_id": 8519006,
+                        "user_type": "registered",
+                        "accept_rate": 50,
+                        "display_name": "Mike"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1540996668,
+                    "last_edit_date": 1540996668,
+                    "creation_date": 1533950743,
+                    "answer_id": 51795677,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/51795677#51795677",
+                    "body": "<p>As a programming noob, I found a bunch of the above answers overly complex, especially if the goal is to have a simple function that you can pass various yes/no questions to, forcing the user to select yes or no. After scouring this page and several others, and borrowing all of the various good ideas, I ended up with the following:</p>\n\n<pre><code>def yes_no(question_to_be_answered):\n    while True:\n        choice = input(question_to_be_answered).lower()\n        if choice[:1] == 'y': \n            return True\n        elif choice[:1] == 'n':\n            return False\n        else:\n            print(\"Please respond with 'Yes' or 'No'\\n\")\n\n#See it in Practice below \n\nmusical_taste = yes_no('Do you like Pine Coladas?')\nif musical_taste == True:\n    print('and getting caught in the rain')\nelif musical_taste == False:\n    print('You clearly have no taste in music')\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1825134,
+                        "reputation": 698,
+                        "user_id": 2463796,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "scenox"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1602859507,
+                    "last_edit_date": 1602859507,
+                    "creation_date": 1602859197,
+                    "answer_id": 64391310,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/64391310#64391310",
+                    "body": "<p>One-liner with Python 3.8 and above:</p>\n<pre><code>while res:= input(&quot;When correct, press enter to continue...&quot;).lower() not in {'y','yes','Y','YES',''}: pass\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1550224,
+                        "reputation": 2019,
+                        "user_id": 1442789,
+                        "user_type": "registered",
+                        "accept_rate": 82,
+                        "display_name": "AK_"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1610828831,
+                    "creation_date": 1610828831,
+                    "answer_id": 65754380,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/65754380#65754380",
+                    "body": "<p>Python x.x</p>\n<pre><code>res = True\nwhile res:\n    res = input(&quot;Please confirm with y/yes...&quot;).lower(); res = res not in {'y','yes','Y','YES',''}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 18096884,
+                        "reputation": 7857,
+                        "user_id": 13155046,
+                        "user_type": "registered",
+                        "display_name": "Milovan Toma\u0161evi\u0107"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1614119467,
+                    "creation_date": 1614119467,
+                    "answer_id": 66342063,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/66342063#66342063",
+                    "body": "<p>Since the answer is expected yes or no, in the examples below, the first solution is to repeat the question using the function <code>while</code>, and the second solution is to use <code>recursion</code> - is the process of defining something in terms of itself.</p>\n<pre class=\"lang-py prettyprint-override\"><code>def yes_or_no(question):\n    while &quot;the answer is invalid&quot;:\n        reply = str(input(question+' (y/n): ')).lower().strip()\n        if reply[:1] == 'y':\n            return True\n        if reply[:1] == 'n':\n            return False\n\nyes_or_no(&quot;Do you know who Novak Djokovic is?&quot;)\n</code></pre>\n<p>second solution:</p>\n<pre class=\"lang-py prettyprint-override\"><code>def yes_or_no(question):\n    &quot;&quot;&quot;Simple Yes/No Function.&quot;&quot;&quot;\n    prompt = f'{question} ? (y/n): '\n    answer = input(prompt).strip().lower()\n    if answer not in ['y', 'n']:\n        print(f'{answer} is invalid, please try again...')\n        return yes_or_no(question)\n    if answer == 'y':\n        return True\n    return False\n\ndef main():\n    &quot;&quot;&quot;Run main function.&quot;&quot;&quot;\n    answer = yes_or_no(&quot;Do you know who Novak Djokovic is?&quot;)\n    print(f'you answer was: {answer}')\n\n\nif __name__ == '__main__':\n    main()\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 23721656,
+                        "reputation": 1,
+                        "user_id": 17742121,
+                        "user_type": "unregistered",
+                        "display_name": "Kashyap"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1640189296,
+                    "creation_date": 1640189296,
+                    "answer_id": 70451960,
+                    "question_id": 3041986,
+                    "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input/70451960#70451960",
+                    "body": "<p>What I used to do is...</p>\n<pre><code>question = 'Will the apple fall?'\nprint(question)\nanswer = int(input(&quot;Pls enter the answer: &quot;\nif answer == &quot;y&quot;,\nprint('Well done')\nprint(answer)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 37074,
+                "reputation": 10868,
+                "user_id": 105905,
+                "user_type": "registered",
+                "accept_rate": 58,
+                "display_name": "h3."
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 3041990,
+            "answer_count": 22,
+            "score": 213,
+            "last_activity_date": 1678446930,
+            "creation_date": 1276564434,
+            "last_edit_date": 1468419159,
+            "question_id": 3041986,
+            "link": "https://stackoverflow.com/questions/3041986/apt-command-line-interface-like-yes-no-input",
+            "title": "APT command line interface-like yes/no input?",
+            "body": "<p>Is there any short way to achieve what the APT (<em>Advanced Package Tool</em>) command line interface does in Python?</p>\n\n<p>I mean, when the package manager prompts a yes/no question followed by <code>[Yes/no]</code>, the script accepts <code>YES/Y/yes/y</code> or <kbd>Enter</kbd> (defaults to <code>Yes</code> as hinted by the capital letter).</p>\n\n<p>The only thing I find in the official docs is <code>input</code> and <code>raw_input</code>...</p>\n\n<p>I know it's not that hard to emulate, but it's annoying to rewrite :|</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5937
+}

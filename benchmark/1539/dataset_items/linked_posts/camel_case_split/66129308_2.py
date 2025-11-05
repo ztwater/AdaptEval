@@ -1,0 +1,7 @@
+XYZCamelCase => ['XYZ', 'Camel', 'Case']
+CamelCaseXYZ => ['Camel', 'Case', 'XYZ']
+Camel_CaseXYZ => ['Camel', 'Case', 'XYZ']
+3DCamelCase => ['3D', 'Camel', 'Case']
+Camel5Case => ['Camel', '5', 'Case']
+Camel5Case5D => ['Camel', '5', 'Case', '5D']
+Camel Case XYZ => ['Camel', 'Case', 'XYZ']

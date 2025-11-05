@@ -1,0 +1,217 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "image",
+                "colors",
+                "python-imaging-library",
+                "rotation"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 94736,
+                                "reputation": 49403,
+                                "user_id": 258483,
+                                "user_type": "registered",
+                                "accept_rate": 46,
+                                "display_name": "Dims"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1531337691,
+                            "post_id": 5253554,
+                            "comment_id": 89563573,
+                            "link": "https://stackoverflow.com/questions/5252170/specify-image-filling-color-when-rotating-in-python-with-pil-and-setting-expand/5253554#comment89563573_5253554",
+                            "body": "Why does <code>rot</code> used 2 times in <code>composite</code>?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15146,
+                                "reputation": 43070,
+                                "user_id": 31676,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Paul"
+                            },
+                            "reply_to_user": {
+                                "account_id": 94736,
+                                "reputation": 49403,
+                                "user_id": 258483,
+                                "user_type": "registered",
+                                "accept_rate": 46,
+                                "display_name": "Dims"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1531347038,
+                            "post_id": 5253554,
+                            "comment_id": 89567229,
+                            "link": "https://stackoverflow.com/questions/5252170/specify-image-filling-color-when-rotating-in-python-with-pil-and-setting-expand/5253554#comment89567229_5253554",
+                            "body": "@Dims <a href=\"http://pillow.readthedocs.io/en/3.1.x/reference/Image.html#PIL.Image.composite\" rel=\"nofollow noreferrer\">pillow.readthedocs.io/en/3.1.x/reference/&hellip;</a> The third arg uses only the alpha layer of <code>rot</code> as a mask."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 94736,
+                                "reputation": 49403,
+                                "user_id": 258483,
+                                "user_type": "registered",
+                                "accept_rate": 46,
+                                "display_name": "Dims"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1531348679,
+                            "post_id": 5253554,
+                            "comment_id": 89567686,
+                            "link": "https://stackoverflow.com/questions/5252170/specify-image-filling-color-when-rotating-in-python-with-pil-and-setting-expand/5253554#comment89567686_5253554",
+                            "body": "Still don&#39;t understand. Why not just put rotated image onto white?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15146,
+                                "reputation": 43070,
+                                "user_id": 31676,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Paul"
+                            },
+                            "reply_to_user": {
+                                "account_id": 94736,
+                                "reputation": 49403,
+                                "user_id": 258483,
+                                "user_type": "registered",
+                                "accept_rate": 46,
+                                "display_name": "Dims"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1531363211,
+                            "post_id": 5253554,
+                            "comment_id": 89570515,
+                            "link": "https://stackoverflow.com/questions/5252170/specify-image-filling-color-when-rotating-in-python-with-pil-and-setting-expand/5253554#comment89570515_5253554",
+                            "body": "@Dims I don&#39;t think the mask argument is optional for <code>composite</code>. I&#39;m sure <code>paste</code> or some other method would work equally well if that is your point."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 15146,
+                        "reputation": 43070,
+                        "user_id": 31676,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "Paul"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": true,
+                    "score": 37,
+                    "last_activity_date": 1299713189,
+                    "last_edit_date": 1299713189,
+                    "creation_date": 1299712847,
+                    "answer_id": 5253554,
+                    "question_id": 5252170,
+                    "link": "https://stackoverflow.com/questions/5252170/specify-image-filling-color-when-rotating-in-python-with-pil-and-setting-expand/5253554#5253554",
+                    "body": "<p>If your original image has no alpha layer, you can use an alpha layer as a mask to convert the background to white.  When <code>rotate</code> creates the \"background\", it makes it fully transparent.</p>\n\n<pre><code># original image\nimg = Image.open('test.png')\n# converted to have an alpha layer\nim2 = img.convert('RGBA')\n# rotated image\nrot = im2.rotate(22.2, expand=1)\n# a white image same size as rotated image\nfff = Image.new('RGBA', rot.size, (255,)*4)\n# create a composite image using the alpha layer of rot as a mask\nout = Image.composite(rot, fff, rot)\n# save your work (converting back to mode='1' or whatever..)\nout.convert(img.mode).save('test2.bmp')\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2140991,
+                        "reputation": 8420,
+                        "user_id": 1899628,
+                        "user_type": "registered",
+                        "accept_rate": 82,
+                        "display_name": "stenci"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1456256387,
+                    "creation_date": 1456256387,
+                    "answer_id": 35586636,
+                    "question_id": 5252170,
+                    "link": "https://stackoverflow.com/questions/5252170/specify-image-filling-color-when-rotating-in-python-with-pil-and-setting-expand/35586636#35586636",
+                    "body": "<p>Here is a working version, inspired by the answer, but it works without opening or saving images and shows how to rotate a text.</p>\n\n<p>The two images have colored background and alpha channel different from zero to show what's going on. Changing the two alpha channels from 92 to 0 will make them completely transparent.</p>\n\n<pre><code>from PIL import Image, ImageFont, ImageDraw\n\ntext = 'TEST'\nfont = ImageFont.truetype(r'C:\\Windows\\Fonts\\Arial.ttf', 50)\nwidth, height = font.getsize(text)\n\nimage1 = Image.new('RGBA', (200, 150), (0, 128, 0, 92))\ndraw1 = ImageDraw.Draw(image1)\ndraw1.text((0, 0), text=text, font=font, fill=(255, 128, 0))\n\nimage2 = Image.new('RGBA', (width, height), (0, 0, 128, 92))\ndraw2 = ImageDraw.Draw(image2)\ndraw2.text((0, 0), text=text, font=font, fill=(0, 255, 128))\n\nimage2 = image2.rotate(30, expand=1)\n\npx, py = 10, 10\nsx, sy = image2.size\nimage1.paste(image2, (px, py, px + sx, py + sy), image2)\n\nimage1.show()\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4775729,
+                                "reputation": 1836,
+                                "user_id": 6929343,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "WinEunuuchs2Unix"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1598808190,
+                            "post_id": 61586840,
+                            "comment_id": 112571687,
+                            "link": "https://stackoverflow.com/questions/5252170/specify-image-filling-color-when-rotating-in-python-with-pil-and-setting-expand/61586840#comment112571687_61586840",
+                            "body": "It should be noted you need pillow version &gt; 5.0 or something like that. Otherwise error: <code>TypeError: rotate() got an unexpected keyword argument &#39;fillcolor&#39;</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8583516,
+                                "reputation": 391,
+                                "user_id": 6430403,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Rishabh Gupta"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1610809092,
+                            "post_id": 61586840,
+                            "comment_id": 116251433,
+                            "link": "https://stackoverflow.com/questions/5252170/specify-image-filling-color-when-rotating-in-python-with-pil-and-setting-expand/61586840#comment116251433_61586840",
+                            "body": "Pass <code>&#39;white&#39;</code> as a string."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1006998,
+                        "reputation": 502,
+                        "user_id": 1020472,
+                        "user_type": "registered",
+                        "accept_rate": 50,
+                        "display_name": "Deil"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 11,
+                    "last_activity_date": 1588576123,
+                    "creation_date": 1588576123,
+                    "answer_id": 61586840,
+                    "question_id": 5252170,
+                    "link": "https://stackoverflow.com/questions/5252170/specify-image-filling-color-when-rotating-in-python-with-pil-and-setting-expand/61586840#61586840",
+                    "body": "<p>There is a parameter <code>fillcolor</code> in a <code>rotate</code> method to specify color which will be use for expanded area:</p>\n\n<pre><code>white = (255,255,255)\npil_image.rotate(angle, PIL.Image.NEAREST, expand = 1, fillcolor = white)\n</code></pre>\n\n<p><a href=\"https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.rotate\" rel=\"noreferrer\">https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.rotate</a></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 329058,
+                "reputation": 1575,
+                "user_id": 652360,
+                "user_type": "registered",
+                "accept_rate": 86,
+                "display_name": "Alex B"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 5253554,
+            "answer_count": 3,
+            "score": 24,
+            "last_activity_date": 1588576123,
+            "creation_date": 1299704891,
+            "question_id": 5252170,
+            "link": "https://stackoverflow.com/questions/5252170/specify-image-filling-color-when-rotating-in-python-with-pil-and-setting-expand",
+            "title": "Specify image filling color when rotating in python with PIL and setting expand argument to true",
+            "body": "<p>I'm trying to rotate an image in Python using PIL and having the expand argument to true. It seems that when the background of my image is black, the resulting image saved as a bmp will be a lot smaller than if I have a white background for my image, and then I replace the black due to expand with white. In either case, my original image is always of two colors, and right now i need the file size to be small, since I'm putting these images on an embedded device. </p>\n\n<p>Any ideas if i can force rotate to fill in another color when expanding or if there is another way to rotate my picture in order to make it small?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6895
+}

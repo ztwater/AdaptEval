@@ -1,0 +1,222 @@
+{
+    "items": [
+        {
+            "tags": [
+                "tensorflow",
+                "deep-learning",
+                "conv-neural-network"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 10952502,
+                        "reputation": 909,
+                        "user_id": 8098322,
+                        "user_type": "registered",
+                        "display_name": "Onkar Musale"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1552903836,
+                    "post_id": 55218726,
+                    "comment_id": 97172814,
+                    "link": "https://stackoverflow.com/questions/55218726/how-to-open-pbtxt-file#comment97172814_55218726",
+                    "body": "Possible duplicate of <a href=\"https://stackoverflow.com/questions/40305996/open-tensorflow-graph-from-file\">open tensorflow graph from file</a>"
+                },
+                {
+                    "owner": {
+                        "account_id": 3882738,
+                        "reputation": 18954,
+                        "user_id": 3214872,
+                        "user_type": "registered",
+                        "accept_rate": 82,
+                        "display_name": "GPhilo"
+                    },
+                    "reply_to_user": {
+                        "account_id": 10952502,
+                        "reputation": 909,
+                        "user_id": 8098322,
+                        "user_type": "registered",
+                        "display_name": "Onkar Musale"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1552906300,
+                    "post_id": 55218726,
+                    "comment_id": 97174263,
+                    "link": "https://stackoverflow.com/questions/55218726/how-to-open-pbtxt-file#comment97174263_55218726",
+                    "body": "@OnkarMusale the labels pbtxt file in the object detection API is not a TF Graph, but a label map (<a href=\"https://github.com/tensorflow/models/blob/master/research/object_detection/data/mscoco_label_map.pbtxt\" rel=\"nofollow noreferrer\">see MSCOCO example here</a>). The OP doesn&#39;t need to load the graph, but literally just open the text file and modify it"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 11947686,
+                                "reputation": 165,
+                                "user_id": 8742334,
+                                "user_type": "registered",
+                                "display_name": "YoungChul"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1552906139,
+                            "post_id": 55218897,
+                            "comment_id": 97174166,
+                            "link": "https://stackoverflow.com/questions/55218726/how-to-open-pbtxt-file/55218897#comment97174166_55218897",
+                            "body": "I think you&#39;re misunderstanding the question. He is simply asking about how to open the label file for training a Tensorflow model. Which can be done with a simple text editor."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7034939,
+                        "reputation": 566,
+                        "user_id": 5389410,
+                        "user_type": "registered",
+                        "display_name": "Shariful Islam"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1552903699,
+                    "creation_date": 1552903699,
+                    "answer_id": 55218897,
+                    "question_id": 55218726,
+                    "link": "https://stackoverflow.com/questions/55218726/how-to-open-pbtxt-file/55218897#55218897",
+                    "body": "<p>i.e your pbtxt file name is graphfilename.pbtxt</p>\n\n<p><strong>Example</strong></p>\n\n<pre><code>import tensorflow as tf\nfrom tensorflow.core.framework import graph_pb2 as gpb\nfrom google.protobuf import text_format as pbtf\n\ngdef = gpb.GraphDef()\n\nwith open('graphfilename.pbtxt', 'r') as fh:\n    graph_str = fh.read()\n\npbtf.Parse(graph_str, gdef)\n\ntf.import_graph_def(gdef)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 11947686,
+                        "reputation": 165,
+                        "user_id": 8742334,
+                        "user_type": "registered",
+                        "display_name": "YoungChul"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 3,
+                    "last_activity_date": 1552906018,
+                    "creation_date": 1552906018,
+                    "answer_id": 55219550,
+                    "question_id": 55218726,
+                    "link": "https://stackoverflow.com/questions/55218726/how-to-open-pbtxt-file/55219550#55219550",
+                    "body": "<p>You can open it in any text editor, like Sublime Text or whatever your OS has to offer by default.</p>\n\n<p>If you are on a Linux/macOS system, you can also open it in Terminal by directing to its directory and writing</p>\n\n<pre><code>nano {filename}.pbtxt\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5738868,
+                                "reputation": 121,
+                                "user_id": 4532133,
+                                "user_type": "registered",
+                                "display_name": "Achyut Sarma"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1620922816,
+                            "post_id": 65891556,
+                            "comment_id": 119348280,
+                            "link": "https://stackoverflow.com/questions/55218726/how-to-open-pbtxt-file/65891556#comment119348280_65891556",
+                            "body": "This is exactly what I was looking for. Thanks, man for making it so simple."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2267401,
+                                "reputation": 147,
+                                "user_id": 1995673,
+                                "user_type": "registered",
+                                "accept_rate": 77,
+                                "display_name": "BaseballR"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1637272074,
+                            "post_id": 65891556,
+                            "comment_id": 123789270,
+                            "link": "https://stackoverflow.com/questions/55218726/how-to-open-pbtxt-file/65891556#comment123789270_65891556",
+                            "body": "came here and used this. One note, if your IDs include id or name in them this won&#39;t work. I added id: and name: and worked for me, but just make sure your data doesn&#39;t have that in it."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1743934,
+                        "reputation": 1334,
+                        "user_id": 1594557,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "leenremm"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1703028297,
+                    "last_edit_date": 1703028297,
+                    "creation_date": 1611604590,
+                    "answer_id": 65891556,
+                    "question_id": 55218726,
+                    "link": "https://stackoverflow.com/questions/55218726/how-to-open-pbtxt-file/65891556#65891556",
+                    "body": "<p>Here is a solution to read the label_map.pbtxt file. It doesn't require any protobuf imports, so it works across all versions of TF.</p>\n<pre><code>def read_label_map(label_map_path):\n\n    item_id = None\n    item_name = None\n    items = {}\n    \n    with open(label_map_path, &quot;r&quot;) as file:\n        for line in file:\n            line.replace(&quot; &quot;, &quot;&quot;)\n            if line == &quot;item{&quot;:\n                pass\n            elif line == &quot;}&quot;:\n                pass\n            elif &quot;id&quot; in line:\n                item_id = int(line.split(&quot;:&quot;, 1)[1].strip())\n            elif &quot;name&quot; in line:\n                item_name = line.split(&quot;:&quot;, 1)[1].replace(&quot;'&quot;, &quot;&quot;).replace('&quot;', &quot;&quot;).strip()\n\n            if item_id is not None and item_name is not None:\n                items[item_name] = item_id\n                item_id = None\n                item_name = None\n\n    return items\n\nprint ([i for i in read_label_map(&quot;label_map.pbtxt&quot;)])\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7574669,
+                        "reputation": 3527,
+                        "user_id": 5747414,
+                        "user_type": "registered",
+                        "display_name": "blitu12345"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1635248695,
+                    "last_edit_date": 1635248695,
+                    "creation_date": 1630396510,
+                    "answer_id": 68994908,
+                    "question_id": 55218726,
+                    "link": "https://stackoverflow.com/questions/55218726/how-to-open-pbtxt-file/68994908#68994908",
+                    "body": "<p>Just modified the @leenremm's code as it wasnt working out for me!</p>\n<pre><code>def read_label_map(label_map_path):\n\n    item_id = None\n    item_name = None\n    items = {}\n\n    with open(label_map_path, &quot;r&quot;) as file:\n        for line in file:\n            line.replace(&quot; &quot;, &quot;&quot;)\n            if line == &quot;item{&quot;:\n                pass\n            elif line == &quot;}&quot;:\n                pass\n            elif &quot;id&quot; in line:\n                item_id = int(line.split(&quot;:&quot;, 1)[1].strip())\n            elif &quot;display_name&quot; in line:\n                item_name = line.split(&quot; &quot;)[-1].replace(&quot;\\&quot;&quot;, &quot; &quot;).strip()\n            if item_id is not None and item_name is not None:\n                items[item_id] = item_name\n                item_id = None\n                item_name = None\n\n    return items\n\nprint(read_label_map(pbtxt_path))\n</code></pre>\n<p>The function will return a dictionary where you can easily &quot;get()&quot; the category names by the category id.</p>\n<pre><code>label_map = read_label_map(label_map_path)\nlabel_map.get(2)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 24881584,
+                        "reputation": 59,
+                        "user_id": 18754716,
+                        "user_type": "registered",
+                        "display_name": "Maryam_Bibi"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1656405132,
+                    "creation_date": 1656405132,
+                    "answer_id": 72783184,
+                    "question_id": 55218726,
+                    "link": "https://stackoverflow.com/questions/55218726/how-to-open-pbtxt-file/72783184#72783184",
+                    "body": "<p>You can open it using colab notebook, first mount google drive, using:</p>\n<pre><code>from google.colab import drive\ndrive.mount('/content/drive')\n</code></pre>\n<p>Then choose your .pdtxt file from drive files.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 13399412,
+                "reputation": 1168,
+                "user_id": 11006284,
+                "user_type": "registered",
+                "display_name": "Harshal Deore"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "accepted_answer_id": 55219550,
+            "answer_count": 5,
+            "score": 3,
+            "last_activity_date": 1703028297,
+            "creation_date": 1552903199,
+            "question_id": 55218726,
+            "link": "https://stackoverflow.com/questions/55218726/how-to-open-pbtxt-file",
+            "title": "How to open .pbtxt file?",
+            "body": "<p>Trying to change the labels from the tensorflow object detection model but Not able to open pbtxt file. Can tell me if there is any application to open it?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7620
+}

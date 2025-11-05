@@ -1,0 +1,13 @@
+camel_case
+camel_camel_case
+camel_2_camel_2_case
+get_http_response_code
+get_200_http_response_code
+get_http_200_response_code
+http_response_code
+response_http
+response_http_2
+fun_awesome
+fun_awesome
+10_cool_dudes
+20_cool_dudes

@@ -1,0 +1,177 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "tensorflow"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 223417,
+                        "reputation": 8408,
+                        "user_id": 482601,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "fabian789"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1483954291,
+                    "post_id": 41543774,
+                    "comment_id": 70294101,
+                    "link": "https://stackoverflow.com/questions/41543774/invalidargumenterror-for-tensor-bool-tensorflow-0-12-1#comment70294101_41543774",
+                    "body": "What is the definition of <code>var</code>?"
+                },
+                {
+                    "owner": {
+                        "account_id": 223417,
+                        "reputation": 8408,
+                        "user_id": 482601,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "fabian789"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1483954331,
+                    "post_id": 41543774,
+                    "comment_id": 70294120,
+                    "link": "https://stackoverflow.com/questions/41543774/invalidargumenterror-for-tensor-bool-tensorflow-0-12-1#comment70294120_41543774",
+                    "body": "Also, you define a placeholder <code>training</code> but you feed a value for the tensor <code>is_training</code>."
+                },
+                {
+                    "owner": {
+                        "account_id": 1622829,
+                        "reputation": 2657,
+                        "user_id": 1499038,
+                        "user_type": "registered",
+                        "accept_rate": 72,
+                        "display_name": "ziky90"
+                    },
+                    "reply_to_user": {
+                        "account_id": 223417,
+                        "reputation": 8408,
+                        "user_id": 482601,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "fabian789"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1483954994,
+                    "post_id": 41543774,
+                    "comment_id": 70294562,
+                    "link": "https://stackoverflow.com/questions/41543774/invalidargumenterror-for-tensor-bool-tensorflow-0-12-1#comment70294562_41543774",
+                    "body": "@fabian789 sorry it was just a typo, both were <code>training</code> and <code>var</code> is a tensorflow tensor."
+                },
+                {
+                    "owner": {
+                        "account_id": 223417,
+                        "reputation": 8408,
+                        "user_id": 482601,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "fabian789"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1483955411,
+                    "post_id": 41543774,
+                    "comment_id": 70294801,
+                    "link": "https://stackoverflow.com/questions/41543774/invalidargumenterror-for-tensor-bool-tensorflow-0-12-1#comment70294801_41543774",
+                    "body": "Well the log says you are not passing a value for the placeholder &#39;is_training&#39; so maybe there is some other placeholder you are missing?"
+                },
+                {
+                    "owner": {
+                        "account_id": 1622829,
+                        "reputation": 2657,
+                        "user_id": 1499038,
+                        "user_type": "registered",
+                        "accept_rate": 72,
+                        "display_name": "ziky90"
+                    },
+                    "reply_to_user": {
+                        "account_id": 223417,
+                        "reputation": 8408,
+                        "user_id": 482601,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "fabian789"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1483957253,
+                    "post_id": 41543774,
+                    "comment_id": 70295929,
+                    "link": "https://stackoverflow.com/questions/41543774/invalidargumenterror-for-tensor-bool-tensorflow-0-12-1#comment70295929_41543774",
+                    "body": "I was doing some refactoring from <code>is_training</code> to <code>training</code>, the new correct log was updated. It&#39;s <code>training</code> placeholder. Still the code works with <code>tensorflow=0.11</code>, but not with <code>tensorflow==0.12.1</code>"
+                },
+                {
+                    "owner": {
+                        "account_id": 223417,
+                        "reputation": 8408,
+                        "user_id": 482601,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "fabian789"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1483959107,
+                    "post_id": 41543774,
+                    "comment_id": 70297240,
+                    "link": "https://stackoverflow.com/questions/41543774/invalidargumenterror-for-tensor-bool-tensorflow-0-12-1#comment70297240_41543774",
+                    "body": "I just saw that the error is actually about <code>sess.run(tf.global_variables_initializer())</code> missing a value for the <code>training</code> placeholder. So it seems that you have to feed values for <code>training</code> there too, i.e., <code>sess.run(tf.global_variables_initializer(), {training: True})</code>. This makes me really curious as to how <code>var</code> is defined, do you mind sharing?"
+                },
+                {
+                    "owner": {
+                        "account_id": 1622829,
+                        "reputation": 2657,
+                        "user_id": 1499038,
+                        "user_type": "registered",
+                        "accept_rate": 72,
+                        "display_name": "ziky90"
+                    },
+                    "reply_to_user": {
+                        "account_id": 223417,
+                        "reputation": 8408,
+                        "user_id": 482601,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "fabian789"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1483967588,
+                    "post_id": 41543774,
+                    "comment_id": 70302485,
+                    "link": "https://stackoverflow.com/questions/41543774/invalidargumenterror-for-tensor-bool-tensorflow-0-12-1#comment70302485_41543774",
+                    "body": "It&#39;s basically a tensor, that comes out of <code>var = tf.nn.batch_normalization(inp, mean, variance, offset, scale, variance_epsilon)</code> and <code>inp = tf.placeholder(tf.float32, [None, 10, 10, 3], name=&#39;input&#39;)</code>"
+                }
+            ],
+            "owner": {
+                "account_id": 1622829,
+                "reputation": 2657,
+                "user_id": 1499038,
+                "user_type": "registered",
+                "accept_rate": 72,
+                "display_name": "ziky90"
+            },
+            "comment_count": 7,
+            "is_answered": false,
+            "answer_count": 0,
+            "score": 3,
+            "last_activity_date": 1483967695,
+            "creation_date": 1483950307,
+            "last_edit_date": 1483967695,
+            "question_id": 41543774,
+            "link": "https://stackoverflow.com/questions/41543774/invalidargumenterror-for-tensor-bool-tensorflow-0-12-1",
+            "title": "InvalidArgumentError: for tensor bool tensorflow==0.12.1",
+            "body": "<p>I have experimented with <code>tensorflow==0.12.1</code> and I have following problem:</p>\n\n<p>I am trying to run:</p>\n\n<pre><code>inp = tf.placeholder(tf.float32, [None, 10, 10, 3], name='inp')\nvar = tf.nn.batch_normalization(inp, mean, variance, offset, scale, variance_epsilon)\ntraining = tf.placeholder(tf.bool, name='training')\nx1 = np.random.random([20, 10, 10, 3])\n\nconfig = tf.ConfigProto(device_count={'GPU': 0})\nwith tf.Session(config=config) as sess:\n    sess.run(tf.global_variables_initializer())\n    result = var.eval({inp: x1, training: True}, sess)\n</code></pre>\n\n<p>But I'm getting following stack trace:</p>\n\n<blockquote>\n  <p>File \"myscript.py\", line 35, in tf_run\n      sess.run(tf.global_variables_initializer())\n      File \"/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py\",\n  line 766, in run\n      run_metadata_ptr)\n      File \"/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py\",\n  line 964, in _run\n      feed_dict_string, options, run_metadata)\n      File \"/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py\",\n  line 1014, in _do_run\n      target_list, options, run_metadata)\n      File \"/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py\",\n  line 1034, in _do_call\n      raise type(e)(node_def, op, message)\n      InvalidArgumentError: You must feed a value for placeholder tensor 'training' with dtype bool      [[Node: training =\n  Placeholderdtype=DT_BOOL, shape=[],\n  _device=\"/job:localhost/replica:0/task:0/cpu:0\"]]</p>\n\n<pre><code>Caused by op u'training', defined at:\n    File \"myscript.py\", line 30, in tf_run\ntraining = tf.placeholder(tf.bool, name='training')\n    File \"/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/array_ops.py\",\n</code></pre>\n  \n  <p>line 1587, in placeholder\n      name=name)\n          File \"/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/gen_array_ops.py\",\n  line 2043, in _placeholder\n      name=name)\n          File \"/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/op_def_library.py\",\n  line 759, in apply_op\n      op_def=op_def)\n         File \"/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py\",\n  line 2240, in create_op\n      original_op=self._default_original_op, op_def=op_def)\n         File \"/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py\",\n  line 1128, in <strong>init</strong>\n      self._traceback = _extract_stack()</p>\n</blockquote>\n\n<p>This problem appears on:\n<code>Ubuntu 16.04.1 - tensorflow GPU</code> installation\n<code>Mac - tensorflow CPU</code> only installation</p>\n\n<p>When I try to downgrade to <code>tensorflow==0.11.0</code> and replace line </p>\n\n<p><code>sess.run(tf.global_variables_initializer()</code>\n by \n<code>sess.run(tf.initialize_all_variables())</code>, then everything works well.</p>\n\n<p>Related issue in tensorflow repo is here <a href=\"https://github.com/tensorflow/tensorflow/issues/6661\" rel=\"nofollow noreferrer\">https://github.com/tensorflow/tensorflow/issues/6661</a></p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6876
+}

@@ -1,0 +1,226 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "stack",
+                "interpreter"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 1386171,
+                        "reputation": 10907,
+                        "user_id": 1318181,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "kylieCatt"
+                    },
+                    "edited": false,
+                    "score": 5,
+                    "creation_date": 1449388950,
+                    "post_id": 34115298,
+                    "comment_id": 55979973,
+                    "link": "https://stackoverflow.com/questions/34115298/how-do-i-get-the-current-depth-of-the-python-interpreter-stack#comment55979973_34115298",
+                    "body": "This sounds like an XY problem. Instead of figuring out how to bypass the recursion limit you should try to figure out why you are hitting it."
+                },
+                {
+                    "owner": {
+                        "account_id": 1593422,
+                        "reputation": 27603,
+                        "user_id": 1476240,
+                        "user_type": "registered",
+                        "display_name": "Pedro M Duarte"
+                    },
+                    "reply_to_user": {
+                        "account_id": 1386171,
+                        "reputation": 10907,
+                        "user_id": 1318181,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "kylieCatt"
+                    },
+                    "edited": false,
+                    "score": 4,
+                    "creation_date": 1449389087,
+                    "post_id": 34115298,
+                    "comment_id": 55980009,
+                    "link": "https://stackoverflow.com/questions/34115298/how-do-i-get-the-current-depth-of-the-python-interpreter-stack#comment55980009_34115298",
+                    "body": "@IanAuld Indeed.  That is exactly what I am trying to do,  I am trying to see if the issue depends on the stack depth at the point where I make the offending call.    To do that I need to figure out how to obtain the current depth of the stack."
+                },
+                {
+                    "owner": {
+                        "account_id": 1386171,
+                        "reputation": 10907,
+                        "user_id": 1318181,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "kylieCatt"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1449390651,
+                    "post_id": 34115298,
+                    "comment_id": 55980295,
+                    "link": "https://stackoverflow.com/questions/34115298/how-do-i-get-the-current-depth-of-the-python-interpreter-stack#comment55980295_34115298",
+                    "body": "What is the value of <code>x</code>?"
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 165654,
+                        "reputation": 18569,
+                        "user_id": 389289,
+                        "user_type": "registered",
+                        "display_name": "zvone"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 29,
+                    "last_activity_date": 1577759531,
+                    "last_edit_date": 1577759531,
+                    "creation_date": 1449390524,
+                    "answer_id": 34115488,
+                    "question_id": 34115298,
+                    "link": "https://stackoverflow.com/questions/34115298/how-do-i-get-the-current-depth-of-the-python-interpreter-stack/34115488#34115488",
+                    "body": "<p>You can see the whole call stack from <code>inspect.stack()</code>, so currently taken depth would be <code>len(inspect.stack(0))</code>.</p>\n\n<p>On the other hand, I guess you got the complete stack printed out when <em>\"maximum recursion depth exceeded\"</em> exception was raised. That stack trace should show you exactly what went wrong.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 12441344,
+                                "reputation": 21066,
+                                "user_id": 9059420,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Darkonaut"
+                            },
+                            "reply_to_user": {
+                                "account_id": 152400,
+                                "reputation": 242173,
+                                "user_id": 366904,
+                                "user_type": "moderator",
+                                "accept_rate": 82,
+                                "display_name": "Cody Gray - on strike"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1577741800,
+                            "post_id": 47956089,
+                            "comment_id": 105243949,
+                            "link": "https://stackoverflow.com/questions/34115298/how-do-i-get-the-current-depth-of-the-python-interpreter-stack/47956089#comment105243949_47956089",
+                            "body": "@lunixbochs The usage-idea of the algorithm is to place the size-hint at the lower bound of your expected stack depth for a jump start, while still being able to cope with every drastic and short-lived change in stack-depth. The <i>lower</i> bound and not the middle because triggered exceptions are relatively expensive, so the reverse-search of the algorithm should be limited."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 12441344,
+                                "reputation": 21066,
+                                "user_id": 9059420,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Darkonaut"
+                            },
+                            "reply_to_user": {
+                                "account_id": 152400,
+                                "reputation": 242173,
+                                "user_id": 366904,
+                                "user_type": "moderator",
+                                "accept_rate": 82,
+                                "display_name": "Cody Gray - on strike"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1577741850,
+                            "post_id": 47956089,
+                            "comment_id": 105243965,
+                            "link": "https://stackoverflow.com/questions/34115298/how-do-i-get-the-current-depth-of-the-python-interpreter-stack/47956089#comment105243965_47956089",
+                            "body": "@lunixbochs It makes most sense if you have a bigger application which basically doesn&#39;t drop below a certain stack depth and you have a good reason to look into speed over code brevity in the first place, like you&#39;re very frequently trying to log callers (Python&#39;s dynamic nature makes this quite difficult for things like e.g. staticmethods), stack depth itself, or something like that."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 12441344,
+                                "reputation": 21066,
+                                "user_id": 9059420,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Darkonaut"
+                            },
+                            "reply_to_user": {
+                                "account_id": 110945,
+                                "reputation": 22115,
+                                "user_id": 293352,
+                                "user_type": "registered",
+                                "display_name": "lunixbochs"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1577743109,
+                            "post_id": 47956089,
+                            "comment_id": 105244406,
+                            "link": "https://stackoverflow.com/questions/34115298/how-do-i-get-the-current-depth-of-the-python-interpreter-stack/47956089#comment105244406_47956089",
+                            "body": "@lunixbochs Yeah, sounds like a reason. It depends on the expected stack size then. If you don&#39;t come over ~20 frames on average you should be fine with sticking with your answer for speed."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 49850,
+                                "reputation": 5892,
+                                "user_id": 148585,
+                                "user_type": "registered",
+                                "display_name": "theY4Kman"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1579563973,
+                            "post_id": 47956089,
+                            "comment_id": 105800811,
+                            "link": "https://stackoverflow.com/questions/34115298/how-do-i-get-the-current-depth-of-the-python-interpreter-stack/47956089#comment105800811_47956089",
+                            "body": "Wow, this is an amazing answer. Thank you for diving deep into detail and showing all the pretty graphs."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 12441344,
+                        "reputation": 21066,
+                        "user_id": 9059420,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Darkonaut"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": true,
+                    "score": 38,
+                    "last_activity_date": 1578597173,
+                    "last_edit_date": 1578597173,
+                    "creation_date": 1514063863,
+                    "answer_id": 47956089,
+                    "question_id": 34115298,
+                    "link": "https://stackoverflow.com/questions/34115298/how-do-i-get-the-current-depth-of-the-python-interpreter-stack/47956089#47956089",
+                    "body": "<p>If speed is an issue, it's way faster to bypass inspect module.</p>\n\n<pre class=\"lang-none prettyprint-override\"><code>testing depth: 50 (CPython 3.7.3)\nstacksize4b()         | depth: 50   |    2.0 \u00b5s\nstacksize4b(200)      | depth: 50   |    2.2 \u00b5s\nstacksize3a()         | depth: 50   |    2.4 \u00b5s\nstacksize2a()         | depth: 50   |    2.9 \u00b5s\nstackdepth2()         | depth: 50   |    3.0 \u00b5s\nstackdepth1()         | depth: 50   |    3.0 \u00b5s\nstackdepth3()         | depth: 50   |    3.4 \u00b5s\nstacksize1()          | depth: 50   |    7.4 \u00b5s  # deprecated\nlen(inspect.stack())  | depth: 50   |    1.9 ms\n</code></pre>\n\n<p>I shortened the name of my functions to <code>stacksize()</code> and for easier differentiation, I'm referring to @lunixbochs' functions as <code>stackdepth()</code>.</p>\n\n<hr>\n\n<h1>Basic Algorithms:</h1>\n\n<p>That's probably the best compromise between code brevity, readability and speed for small stack sizes. For under ~10 frames, only <code>stackdepth1()</code> is slightly faster due to lower overhead.</p>\n\n<pre><code>from itertools import count\n\ndef stack_size2a(size=2):\n    \"\"\"Get stack size for caller's frame.\n    \"\"\"\n    frame = sys._getframe(size)\n\n    for size in count(size):\n        frame = frame.f_back\n        if not frame:\n            return size\n</code></pre>\n\n<p>For achieving better timings for larger stack sizes, some more refined algorithms are possible. \n<code>stacksize3a()</code> is combining chained attribute lookup with a close range finish from <code>stackdepth1()</code> for a much more favorable slope in timings, starting to pay off for roughly > 70 frames in my benchmarks.</p>\n\n<pre><code>from itertools import count\n\ndef stack_size3a(size=2):\n    \"\"\"Get stack size for caller's frame.\n    \"\"\"\n    frame = sys._getframe(size)\n    try:\n        for size in count(size, 8):\n            frame = frame.f_back.f_back.f_back.f_back.\\\n                f_back.f_back.f_back.f_back\n    except AttributeError:\n        while frame:\n            frame = frame.f_back\n            size += 1\n        return size - 1\n</code></pre>\n\n<p><a href=\"https://i.stack.imgur.com/SiQdG.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/SiQdG.png\" alt=\"benchmark100\"></a></p>\n\n<h1>Advanced Algorithms:</h1>\n\n<p>As @lunixbochs has brought up in an answer, <code>sys._getframe()</code> is basically <code>stackdepth1()</code> in C-code. While simpler algorithms always start their depth-search <strong>in Python</strong> from an existing frame at the top of stack, checking the stack downward for further existing frames, <code>stacksize4b()</code> allows starting the search from any level by its <code>stack_hint</code>-parameter and can search the stack down- or upward if needed.</p>\n\n<p>Under the hood, calling <code>sys._getframe()</code> always means walking the stack from the top frame downward to a specified depth. Because the performance difference between Python and C is so huge, it can still pay off to call <code>sys._getframe()</code> multiple times if necessary to find a frame closer to the deepest one, before applying a basic close-range frame-by-frame search in Python with <code>frame.f_back</code>.</p>\n\n<pre><code>from itertools import count\n\ndef stack_size4b(size_hint=8):\n    \"\"\"Get stack size for caller's frame.\n    \"\"\"\n    get_frame = sys._getframe\n    frame = None\n    try:\n        while True:\n            frame = get_frame(size_hint)\n            size_hint *= 2\n    except ValueError:\n        if frame:\n            size_hint //= 2\n        else:\n            while not frame:\n                size_hint = max(2, size_hint // 2)\n                try:\n                    frame = get_frame(size_hint)\n                except ValueError:\n                    continue\n\n    for size in count(size_hint):\n        frame = frame.f_back\n        if not frame:\n            return size\n</code></pre>\n\n<p>The usage-idea of <code>stacksize4b()</code> is to place the size-hint at the lower bound of your expected stack depth for a jump start, while still being able to cope with every drastic and short-lived change in stack-depth. </p>\n\n<p>The benchmark shows <code>stacksize4b()</code> with default <code>size_hint=8</code> and adjusted <code>size_hint=200</code>. For the benchmark all stack depths in the range 3-3000 have been tested to show the characteristic saw pattern in timings for <code>stacksize4b()</code>.</p>\n\n<p><a href=\"https://i.stack.imgur.com/USNt7.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/USNt7.png\" alt=\"benchmark300\"></a>\n<a href=\"https://i.stack.imgur.com/otdqt.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/otdqt.png\" alt=\"benchmark3000\"></a></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 1593422,
+                "reputation": 27603,
+                "user_id": 1476240,
+                "user_type": "registered",
+                "display_name": "Pedro M Duarte"
+            },
+            "comment_count": 3,
+            "is_answered": true,
+            "accepted_answer_id": 47956089,
+            "answer_count": 2,
+            "score": 23,
+            "last_activity_date": 1578597173,
+            "creation_date": 1449388822,
+            "last_edit_date": 1548453464,
+            "question_id": 34115298,
+            "link": "https://stackoverflow.com/questions/34115298/how-do-i-get-the-current-depth-of-the-python-interpreter-stack",
+            "title": "How do I get the current depth of the Python interpreter stack?",
+            "body": "<p>From the <a href=\"https://docs.python.org/3.5/library/sys.html#sys.getrecursionlimit\" rel=\"noreferrer\">documentation</a>: </p>\n\n<blockquote>\n  <p><code>sys.getrecursionlimit()</code></p>\n  \n  <p><em>Return the current value of the recursion limit, the maximum depth of the Python interpreter stack. This limit prevents infinite recursion\n  from causing an overflow of the C stack and crashing Python. It can be\n  set by setrecursionlimit().</em></p>\n</blockquote>\n\n<p>I am currently hitting the recursion limit when pickling an object. The object I am pickling only has a few levels of nesting, so I am a bit puzzled by what is happening.</p>\n\n<p>I have been able to circumvent the issue with the following hack:</p>\n\n<pre><code>try:\n    return pickle.dumps(x)\nexcept:\n    try:\n        recursionlimit = getrecursionlimit()\n        setrecursionlimit(2*recursionlimit)\n        dumped = pickle.dumps(x)\n        setrecursionlimit(recursionlimit)\n        return dumped\n    except:\n        raise\n</code></pre>\n\n<p>Testing the above snippet on different contexts sometimes leads to success on the first <code>try</code>, and sometimes it leads to success on the second <code>try</code>.   So far I have not been able to make it <code>raise</code> the exception.   </p>\n\n<p>To further debug my issue it would be helpful to have a way to obtain the current depth of the stack.  That would allow me to verify if the entering stack depth is determining whether the snippet above will succeed on the first <code>try</code> or on the second. </p>\n\n<p>Does the standard library provide a function to get the depth of the stack, or if not, how can I obtain it? </p>\n\n<pre><code>def get_stack_depth():\n    # what goes here?\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9536
+}

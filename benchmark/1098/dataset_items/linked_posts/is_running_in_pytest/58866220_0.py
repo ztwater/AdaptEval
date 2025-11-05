@@ -1,0 +1,3 @@
+import os
+if "PYTEST_CURRENT_TEST" in os.environ:
+    # We are running under pytest, act accordingly...

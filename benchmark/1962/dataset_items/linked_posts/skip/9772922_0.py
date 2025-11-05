@@ -1,0 +1,1 @@
+autoclass_content = 'both'

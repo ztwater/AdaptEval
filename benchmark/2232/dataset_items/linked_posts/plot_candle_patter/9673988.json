@@ -1,0 +1,187 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "charts",
+                "matplotlib"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 949544,
+                        "reputation": 8554,
+                        "user_id": 975979,
+                        "user_type": "registered",
+                        "display_name": "gcalmettes"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1331668192,
+                    "post_id": 9673988,
+                    "comment_id": 12314430,
+                    "link": "https://stackoverflow.com/questions/9673988/intraday-candlestick-charts-using-matplotlib#comment12314430_9673988",
+                    "body": "From the data you provide, it looks like your data have been collected every day every 30min from 9:30AM to 4:00PM. The gap may just reflect the time between 4:00PM to 9:30AM between days where no data are acquired. By the way, using the <a href=\"http://pandas.pydata.org/\" rel=\"nofollow noreferrer\">pandas</a> librairy you can directly handle and analyze your raw data as well as plot them."
+                },
+                {
+                    "owner": {
+                        "account_id": 266417,
+                        "reputation": 6263,
+                        "user_id": 553975,
+                        "user_type": "registered",
+                        "accept_rate": 72,
+                        "display_name": "NoviceCoding"
+                    },
+                    "reply_to_user": {
+                        "account_id": 949544,
+                        "reputation": 8554,
+                        "user_id": 975979,
+                        "user_type": "registered",
+                        "display_name": "gcalmettes"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1331744762,
+                    "post_id": 9673988,
+                    "comment_id": 12337487,
+                    "link": "https://stackoverflow.com/questions/9673988/intraday-candlestick-charts-using-matplotlib#comment12337487_9673988",
+                    "body": "Pandas doesn&#39;t seem to be able to plot ohlc/candlestick data..."
+                },
+                {
+                    "owner": {
+                        "account_id": 20681,
+                        "reputation": 1538,
+                        "user_id": 49678,
+                        "user_type": "registered",
+                        "accept_rate": 77,
+                        "display_name": "alexandroid"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1429624118,
+                    "post_id": 9673988,
+                    "comment_id": 47678496,
+                    "link": "https://stackoverflow.com/questions/9673988/intraday-candlestick-charts-using-matplotlib#comment47678496_9673988",
+                    "body": "pastebin link is not available anymore"
+                },
+                {
+                    "owner": {
+                        "account_id": 24885,
+                        "reputation": 31173,
+                        "user_id": 63550,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "Peter Mortensen"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1486062586,
+                    "post_id": 9673988,
+                    "comment_id": 71196263,
+                    "link": "https://stackoverflow.com/questions/9673988/intraday-candlestick-charts-using-matplotlib#comment71196263_9673988",
+                    "body": "Related (meta): <i><a href=\"http://meta.stackoverflow.com/questions/342802\">What can be done about many duplicates of a fairly specific question?</a></i>"
+                },
+                {
+                    "owner": {
+                        "account_id": 49973,
+                        "reputation": 29990,
+                        "user_id": 148978,
+                        "user_type": "registered",
+                        "accept_rate": 67,
+                        "display_name": "DNB5brims"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1505641029,
+                    "post_id": 9673988,
+                    "comment_id": 79488277,
+                    "link": "https://stackoverflow.com/questions/9673988/intraday-candlestick-charts-using-matplotlib#comment79488277_9673988",
+                    "body": "Would you kindly updated the pastebin data again?"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 266417,
+                                "reputation": 6263,
+                                "user_id": 553975,
+                                "user_type": "registered",
+                                "accept_rate": 72,
+                                "display_name": "NoviceCoding"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1332301571,
+                            "post_id": 9713447,
+                            "comment_id": 12477258,
+                            "link": "https://stackoverflow.com/questions/9673988/intraday-candlestick-charts-using-matplotlib/9713447#comment12477258_9713447",
+                            "body": "Thank you so much for this sir, I&#39;ve been away from programming the past week or I would&#39;ve gave you the bounty earlier. Thanks again."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 949544,
+                        "reputation": 8554,
+                        "user_id": 975979,
+                        "user_type": "registered",
+                        "display_name": "gcalmettes"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": true,
+                    "score": 49,
+                    "last_activity_date": 1331792298,
+                    "last_edit_date": 1331792298,
+                    "creation_date": 1331780715,
+                    "answer_id": 9713447,
+                    "question_id": 9673988,
+                    "link": "https://stackoverflow.com/questions/9673988/intraday-candlestick-charts-using-matplotlib/9713447#9713447",
+                    "body": "<p>If I understand well, one of your major concern is the gaps between the daily data.\nTo get rid of them, one method is to artificially 'evenly space' your data (but of course you will loose any temporal indication intra-day).</p>\n\n<p>Anyways, doing this way, you will be able to obtain a chart that looks like the one you have proposed as an example.</p>\n\n<p>The commented code and the resulting graph are below.</p>\n\n<pre><code>import numpy as np\nimport matplotlib.pyplot as plt\nimport datetime\n\nfrom matplotlib.finance import candlestick\nfrom matplotlib.dates import num2date\n\n# data in a text file, 5 columns: time, opening, close, high, low\n# note that I'm using the time you formated into an ordinal float\ndata = np.loadtxt('finance-data.txt', delimiter=',')\n\n# determine number of days and create a list of those days\nndays = np.unique(np.trunc(data[:,0]), return_index=True)\nxdays =  []\nfor n in np.arange(len(ndays[0])):\n    xdays.append(datetime.date.isoformat(num2date(data[ndays[1],0][n])))\n\n# creation of new data by replacing the time array with equally spaced values.\n# this will allow to remove the gap between the days, when plotting the data\ndata2 = np.hstack([np.arange(data[:,0].size)[:, np.newaxis], data[:,1:]])\n\n# plot the data\nfig = plt.figure(figsize=(10, 5))\nax = fig.add_axes([0.1, 0.2, 0.85, 0.7])\n    # customization of the axis\nax.spines['right'].set_color('none')\nax.spines['top'].set_color('none')\nax.xaxis.set_ticks_position('bottom')\nax.yaxis.set_ticks_position('left')\nax.tick_params(axis='both', direction='out', width=2, length=8,\n               labelsize=12, pad=8)\nax.spines['left'].set_linewidth(2)\nax.spines['bottom'].set_linewidth(2)\n    # set the ticks of the x axis only when starting a new day\nax.set_xticks(data2[ndays[1],0])\nax.set_xticklabels(xdays, rotation=45, horizontalalignment='right')\n\nax.set_ylabel('Quote ($)', size=20)\nax.set_ylim([177, 196])\n\ncandlestick(ax, data2, width=0.5, colorup='g', colordown='r')\n\nplt.show()\n</code></pre>\n\n<p><img src=\"https://i.stack.imgur.com/zdH9i.png\" alt=\"graph\"></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 31907,
+                        "reputation": 25759,
+                        "user_id": 87973,
+                        "user_type": "registered",
+                        "accept_rate": 95,
+                        "display_name": "Jonas Bystr&#246;m"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1603576474,
+                    "last_edit_date": 1603576474,
+                    "creation_date": 1594546060,
+                    "answer_id": 62859329,
+                    "question_id": 9673988,
+                    "link": "https://stackoverflow.com/questions/9673988/intraday-candlestick-charts-using-matplotlib/62859329#62859329",
+                    "body": "<p>I got tired of matplotlib's (and plotly's) bad performance and lack of such features you request, so implemented <a href=\"https://pypi.org/project/finplot/\" rel=\"noreferrer\">one of my own</a>. Here's how that works:</p>\n<pre><code>import finplot as fplt\nimport yfinance\ndf = yfinance.download('AAPL')\nfplt.candlestick_ochl(df[['Open', 'Close', 'High', 'Low']])\nfplt.show()\n</code></pre>\n<p><img src=\"https://i.stack.imgur.com/xrdes.png\" alt=\"finplot leaves out days without trading data\" /></p>\n<p>Not only are days in which the exchange is closed left out automatically, but also has better performance and a nicer api. For something that more resembles what you're ultimately looking for:</p>\n<pre><code>import finplot as fplt\nimport yfinance\n\nsymbol = 'AAPL'\ndf = yfinance.download(symbol)\n\nax = fplt.create_plot(symbol)\n\nfplt.candlestick_ochl(df[['Open', 'Close', 'High', 'Low']], ax=ax)\nfplt.plot(df['Close'].rolling(200).mean(), ax=ax, legend='SMA 200')\nfplt.plot(df['Close'].rolling(50).mean(), ax=ax, legend='SMA 50')\nfplt.plot(df['Close'].rolling(20).mean(), ax=ax, legend='SMA 20')\n\nfplt.volume_ocv(df[['Open', 'Close', 'Volume']], ax=ax.overlay())\n\nfplt.show()\n</code></pre>\n<p><a href=\"https://i.stack.imgur.com/oWYP6.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/oWYP6.png\" alt=\"enter image description here\" /></a></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 266417,
+                "reputation": 6263,
+                "user_id": 553975,
+                "user_type": "registered",
+                "accept_rate": 72,
+                "display_name": "NoviceCoding"
+            },
+            "comment_count": 5,
+            "is_answered": true,
+            "accepted_answer_id": 9713447,
+            "answer_count": 2,
+            "score": 19,
+            "last_activity_date": 1603576474,
+            "creation_date": 1331582622,
+            "last_edit_date": 1486062510,
+            "question_id": 9673988,
+            "link": "https://stackoverflow.com/questions/9673988/intraday-candlestick-charts-using-matplotlib",
+            "title": "Intraday candlestick charts using Matplotlib",
+            "body": "<p>I've been having some difficulty with Matplotlib's finance charting. It seems like their candlestick charts work best with daily data, and I am having a hard time making them work with intraday (every 5 minutes, between 9:30 and 4&nbsp;pm) data.</p>\n\n<p>I have pasted sample data in pastebin. The top is what I get from the database, and the bottom is tupled with the date formatted into an ordinal float for use in Matplotlib.</p>\n\n<p><a href=\"http://pastebin.com/JWG0idDG\" rel=\"noreferrer\">Link to sample data</a></p>\n\n<p>When I draw my charts there are huge gaps in it, the axes suck, and the zoom is equally horrible. <a href=\"https://i.stack.imgur.com/lO35U.jpg\" rel=\"noreferrer\">https://i.stack.imgur.com/lO35U.jpg</a></p>\n\n<p><a href=\"https://i.stack.imgur.com/csdrS.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/csdrS.png\" alt=\"Enter image description here\"></a></p>\n\n<p>How do I make a nice readable graph out of this data? My ultimate goal is to get a chart that looks remotely like this:</p>\n\n<p><a href=\"https://i.stack.imgur.com/3oUS7.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/3oUS7.png\" alt=\"Enter image description here\"></a></p>\n\n<p><a href=\"https://i.stack.imgur.com/gawAl.png\" rel=\"noreferrer\">https://i.stack.imgur.com/gawAl.png</a> </p>\n\n<p>The data points can be in various increments from 5 minutes to 30 minutes.</p>\n\n<hr>\n\n<p>I have also made a Pandas dataframe of the data, but I am not sure if pandas has candlestick functionality.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5761
+}

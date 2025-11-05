@@ -1,0 +1,598 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "computer-vision",
+                "bounding-box",
+                "object-detection",
+                "scikit-image"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 931887,
+                                "reputation": 12619,
+                                "user_id": 961627,
+                                "user_type": "registered",
+                                "accept_rate": 61,
+                                "display_name": "user961627"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1413441687,
+                            "post_id": 26386665,
+                            "comment_id": 41446528,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/26386665#comment41446528_26386665",
+                            "body": "In terms of coordinates, the returned value represents: <code>[[ x1 y1 ] [ x2 y2 ]]</code>, am I right?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 931887,
+                                "reputation": 12619,
+                                "user_id": 961627,
+                                "user_type": "registered",
+                                "accept_rate": 61,
+                                "display_name": "user961627"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1413442512,
+                            "post_id": 26386665,
+                            "comment_id": 41446881,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/26386665#comment41446881_26386665",
+                            "body": "And the input boxes should conform to the same coordinates representation as well, right?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 931887,
+                                "reputation": 12619,
+                                "user_id": 961627,
+                                "user_type": "registered",
+                                "accept_rate": 61,
+                                "display_name": "user961627"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1415011920,
+                            "post_id": 26386665,
+                            "comment_id": 42016248,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/26386665#comment42016248_26386665",
+                            "body": "Thanks - I&#39;ve been using it fine for a while! But now it&#39;s running into an error sometimes, I&#39;m not sure why: <a href=\"http://stackoverflow.com/questions/26712637/how-to-fix-valueerror-need-at-least-one-array-to-concatenate-error\" title=\"how to fix valueerror need at least one array to concatenate error\">stackoverflow.com/questions/26712637/&hellip;</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 74774,
+                        "reputation": 7225,
+                        "user_id": 214686,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "Stefan van der Walt"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1413387852,
+                    "creation_date": 1413387852,
+                    "answer_id": 26386665,
+                    "question_id": 25349178,
+                    "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/26386665#26386665",
+                    "body": "<p>In the snippet below, I construct a polygon along the edges of the first box.  I then use Matplotlib to clip the polygon to the second box.  The resulting polygon contains four vertices, but we are only interested in the top left and bottom right corners, so I take the max and the min of the coordinates to get a bounding box, which is returned to the user.</p>\n\n<pre><code>import numpy as np\nfrom matplotlib import path, transforms\n\ndef clip_boxes(box0, box1):\n    path_coords = np.array([[box0[0, 0], box0[0, 1]],\n                            [box0[1, 0], box0[0, 1]],\n                            [box0[1, 0], box0[1, 1]],\n                            [box0[0, 0], box0[1, 1]]])\n\n    poly = path.Path(np.vstack((path_coords[:, 0],\n                                path_coords[:, 1])).T, closed=True)\n    clip_rect = transforms.Bbox(box1)\n\n    poly_clipped = poly.clip_to_bbox(clip_rect).to_polygons()[0]\n\n    return np.array([np.min(poly_clipped, axis=0),\n                     np.max(poly_clipped, axis=0)])\n\nbox0 = np.array([[0, 0], [1, 1]])\nbox1 = np.array([[0, 0], [0.5, 0.5]])\n\nprint clip_boxes(box0, box1)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 11367201,
+                                "reputation": 875,
+                                "user_id": 8333795,
+                                "user_type": "registered",
+                                "display_name": "James Meakin"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1521021407,
+                            "post_id": 42874377,
+                            "comment_id": 85551557,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/42874377#comment85551557_42874377",
+                            "body": "There is a bug in this code - <code>y_top = max(bb1[&#39;y1&#39;], bb2[&#39;y1&#39;])</code> should use <code>min</code>. Similarily <code>y_bottom</code> should use <code>max</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9897892,
+                                "reputation": 58642,
+                                "user_id": 7328782,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Cris Luengo"
+                            },
+                            "reply_to_user": {
+                                "account_id": 11367201,
+                                "reputation": 875,
+                                "user_id": 8333795,
+                                "user_type": "registered",
+                                "display_name": "James Meakin"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1530026229,
+                            "post_id": 42874377,
+                            "comment_id": 89083696,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/42874377#comment89083696_42874377",
+                            "body": "@JamesMeakin: The code is correct. <code>y=0</code> is at the top, and increases downwards."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6428649,
+                                "reputation": 6226,
+                                "user_id": 4982729,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "markroxor"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1538392986,
+                            "post_id": 42874377,
+                            "comment_id": 92114699,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/42874377#comment92114699_42874377",
+                            "body": "What if the bounding box is not a rectangle?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 271958,
+                                "reputation": 131576,
+                                "user_id": 562769,
+                                "user_type": "registered",
+                                "accept_rate": 61,
+                                "display_name": "Martin Thoma"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1538395236,
+                            "post_id": 42874377,
+                            "comment_id": 92115917,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/42874377#comment92115917_42874377",
+                            "body": "Then copy-paste will not work. I only had axis aligned bounding boxes so far in detection. For semantic segmentation there are arbitrary complex shapes. But the concept is the same."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 271958,
+                                "reputation": 131576,
+                                "user_id": 562769,
+                                "user_type": "registered",
+                                "accept_rate": 61,
+                                "display_name": "Martin Thoma"
+                            },
+                            "reply_to_user": {
+                                "account_id": 10873277,
+                                "reputation": 1380,
+                                "user_id": 7994456,
+                                "user_type": "registered",
+                                "accept_rate": 41,
+                                "display_name": "Chaine"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1538477761,
+                            "post_id": 42874377,
+                            "comment_id": 92147858,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/42874377#comment92147858_42874377",
+                            "body": "@Chaine I&#39;m not sure what I should write. Don&#39;t the docstrings answer your question?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9690466,
+                                "reputation": 484,
+                                "user_id": 7188690,
+                                "user_type": "registered",
+                                "display_name": "sam"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1543307776,
+                            "post_id": 42874377,
+                            "comment_id": 93860619,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/42874377#comment93860619_42874377",
+                            "body": "@MartinThoma will this work for a rectangle inside another rectangle?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 12155295,
+                                "reputation": 4081,
+                                "user_id": 8874388,
+                                "user_type": "registered",
+                                "display_name": "Mitch McMabers"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1569703322,
+                            "post_id": 42874377,
+                            "comment_id": 102684278,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/42874377#comment102684278_42874377",
+                            "body": "There was indeed a bug in the code, but not the one suggested by James Meaking. The bug was instead in the area calculation, IF you are working with PIXEL COORDINATES. Computer screens use pixels/rectangles that start at <code>0,0</code> (for the top left point) and end at <code>w-1, h-1</code>. And the coordinates are <code>inclusive:inclusive</code>. That fails with the math used in the original function. I have submitted a separate answer with just the fixed math and a long explanation of why the fix is necessary. Thanks Martin for the original function. With the fixes, I am now using it in my AI / pixel analysis code! &lt;3"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 271958,
+                        "reputation": 131576,
+                        "user_id": 562769,
+                        "user_type": "registered",
+                        "accept_rate": 61,
+                        "display_name": "Martin Thoma"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": false,
+                    "score": 99,
+                    "last_activity_date": 1568120094,
+                    "last_edit_date": 1568120094,
+                    "creation_date": 1489839935,
+                    "answer_id": 42874377,
+                    "question_id": 25349178,
+                    "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/42874377#42874377",
+                    "body": "<p>For axis-aligned bounding boxes it is relatively simple. \"Axis-aligned\" means that the bounding box isn't rotated; or in other words that the boxes lines are parallel to the axes. Here's how to calculate the IoU of two axis-aligned bounding boxes.</p>\n\n<pre><code>def get_iou(bb1, bb2):\n    \"\"\"\n    Calculate the Intersection over Union (IoU) of two bounding boxes.\n\n    Parameters\n    ----------\n    bb1 : dict\n        Keys: {'x1', 'x2', 'y1', 'y2'}\n        The (x1, y1) position is at the top left corner,\n        the (x2, y2) position is at the bottom right corner\n    bb2 : dict\n        Keys: {'x1', 'x2', 'y1', 'y2'}\n        The (x, y) position is at the top left corner,\n        the (x2, y2) position is at the bottom right corner\n\n    Returns\n    -------\n    float\n        in [0, 1]\n    \"\"\"\n    assert bb1['x1'] &lt; bb1['x2']\n    assert bb1['y1'] &lt; bb1['y2']\n    assert bb2['x1'] &lt; bb2['x2']\n    assert bb2['y1'] &lt; bb2['y2']\n\n    # determine the coordinates of the intersection rectangle\n    x_left = max(bb1['x1'], bb2['x1'])\n    y_top = max(bb1['y1'], bb2['y1'])\n    x_right = min(bb1['x2'], bb2['x2'])\n    y_bottom = min(bb1['y2'], bb2['y2'])\n\n    if x_right &lt; x_left or y_bottom &lt; y_top:\n        return 0.0\n\n    # The intersection of two axis-aligned bounding boxes is always an\n    # axis-aligned bounding box\n    intersection_area = (x_right - x_left) * (y_bottom - y_top)\n\n    # compute the area of both AABBs\n    bb1_area = (bb1['x2'] - bb1['x1']) * (bb1['y2'] - bb1['y1'])\n    bb2_area = (bb2['x2'] - bb2['x1']) * (bb2['y2'] - bb2['y1'])\n\n    # compute the intersection over union by taking the intersection\n    # area and dividing it by the sum of prediction + ground-truth\n    # areas - the interesection area\n    iou = intersection_area / float(bb1_area + bb2_area - intersection_area)\n    assert iou &gt;= 0.0\n    assert iou &lt;= 1.0\n    return iou\n</code></pre>\n\n<h2>Explanation</h2>\n\n<p><img src=\"https://i.stack.imgur.com/QU04v.jpg\" alt=\"enter image description here\">\n<img src=\"https://i.stack.imgur.com/n1AZj.png\" alt=\"enter image description here\"></p>\n\n<p>Images are from <a href=\"https://stackoverflow.com/a/41660682/562769\">this answer</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 12155295,
+                                "reputation": 4081,
+                                "user_id": 8874388,
+                                "user_type": "registered",
+                                "display_name": "Mitch McMabers"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1568120134,
+                            "post_id": 51730512,
+                            "comment_id": 102167432,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/51730512#comment102167432_51730512",
+                            "body": "You are right... A <code>1920x1080</code> screen is indexed from <code>0</code> (first pixel) to <code>1919</code> (last pixel horizontally) and from <code>0</code> (first pixel) to <code>1079</code> (last pixel vertically). So if we have a rectangle in &quot;pixel coordinate space&quot;, to calculate its area we must add 1 in each direction. Otherwise imagine that our 1920x1080 screen has a fullscreen rectangle with <code>left=0,top=0,right=1919,bottom=1079</code>. Well, we know that <code>1920x1080</code> pixels is <code>2073600</code> pixels. But with the wrong <code>area = (x_right - x_left) * (y_bottom - y_top)</code> math, we get: <code>(1919 - 0) * (1079 - 0)</code> = <code>1919 * 1079</code> = <code>2070601</code> pixels!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 12155295,
+                                "reputation": 4081,
+                                "user_id": 8874388,
+                                "user_type": "registered",
+                                "display_name": "Mitch McMabers"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1568120981,
+                            "post_id": 51730512,
+                            "comment_id": 102167897,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/51730512#comment102167897_51730512",
+                            "body": "I&#39;ve done a bunch of tests to verify, and have now submitted an edit for the accepted answer based on your correct observation. Thanks! I wonder how many codebases have copy-pasted the original, bugged math after all these years. ;-)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 12155295,
+                                "reputation": 4081,
+                                "user_id": 8874388,
+                                "user_type": "registered",
+                                "display_name": "Mitch McMabers"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1569703090,
+                            "post_id": 51730512,
+                            "comment_id": 102684232,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/51730512#comment102684232_51730512",
+                            "body": "There were a bunch of problems with the approval of the bugfixed edit, so I posted a separate answer on this page. The short answer is: You are correct. Pixel ranges are <code>inclusive:inclusive</code>, so we must add <code>+ 1</code> to each axis if we want the true area of a pixel range."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 9021067,
+                        "reputation": 145,
+                        "user_id": 6722135,
+                        "user_type": "registered",
+                        "display_name": "Jindil"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1617786652,
+                    "last_edit_date": 1617786652,
+                    "creation_date": 1533655929,
+                    "answer_id": 51730512,
+                    "question_id": 25349178,
+                    "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/51730512#51730512",
+                    "body": "<p>For the intersection distance, shouldn't we add a +1 so as to have</p>\n<pre><code>intersection_area = (x_right - x_left + 1) * (y_bottom - y_top + 1)   \n</code></pre>\n<p>(same for the AABB)<br />\nLike on this <a href=\"https://www.pyimagesearch.com/2014/11/17/non-maximum-suppression-object-detection-python\" rel=\"nofollow noreferrer\">pyimage search post</a></p>\n<p>I agree <em>(x_right - x_left) x (y_bottom - y_top)</em> works in mathematics with point coordinates but since we deal with pixels it is I think different.</p>\n<p>Consider a 1D example :</p>\n<ul>\n<li>2 points           : <em>x1 = 1</em> and <em>x2 = 3</em>, the distance is indeed <em>x2-x1 = 2</em></li>\n<li>2 pixels of index  : <em>i1 = 1</em>  and <em>i2 = 3</em>, the segment from pixel i1 to i2 contains 3 pixels ie <em>l = i2 - i1 + 1</em></li>\n</ul>\n<p>EDIT: I recently got to know that this is a &quot;little-square&quot; approach.<br />\nIf however you consider pixels as point-samples (ie the bounding box corner would be at the centre of the pixel as apparently in matplotlib) then you don't need the +1.<br />\nSee <a href=\"https://github.com/scikit-image/scikit-image/pull/5226#issuecomment-813846512\" rel=\"nofollow noreferrer\">this comment</a> and <a href=\"https://github.com/napari/napari/issues/310#issuecomment-506002559\" rel=\"nofollow noreferrer\">this illustration</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 12155295,
+                                "reputation": 4081,
+                                "user_id": 8874388,
+                                "user_type": "registered",
+                                "display_name": "Mitch McMabers"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1568117801,
+                            "post_id": 52694736,
+                            "comment_id": 102166049,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/52694736#comment102166049_52694736",
+                            "body": "Making a fixed-size matrix like that and filling it with numbers at the offset of each shape seems a bit insane. Try using the Shapely library for Python. It has helper functions for calculating intersections and unions of various shapes. I haven&#39;t tried doing arbitrary (non-box) shapes with it, but it is probably possible."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 12155295,
+                                "reputation": 4081,
+                                "user_id": 8874388,
+                                "user_type": "registered",
+                                "display_name": "Mitch McMabers"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1568121048,
+                            "post_id": 52694736,
+                            "comment_id": 102167951,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/52694736#comment102167951_52694736",
+                            "body": "What I mean by &quot;insane&quot; is: Slow and memory-bloated. The Shapely library handles complex intersections/area calculations using much smarter math, and shortcuts when objects are nowhere near each other at all, etc. And yes, I just verified that Shapely perfectly handles complex shapes, polygons, rotated shapes, etc."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 14496431,
+                        "reputation": 1,
+                        "user_id": 10470840,
+                        "user_type": "registered",
+                        "display_name": "Reno Fiedler"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": -3,
+                    "last_activity_date": 1538966584,
+                    "creation_date": 1538966584,
+                    "answer_id": 52694736,
+                    "question_id": 25349178,
+                    "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/52694736#52694736",
+                    "body": "<p>how about this approach? Could be extended to any number of unioned shapes</p>\n\n<pre><code>surface = np.zeros([1024,1024])\nsurface[1:1+10, 1:1+10] += 1\nsurface[100:100+500, 100:100+100] += 1\nunionArea = (surface==2).sum()\nprint(unionArea)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 12155295,
+                                "reputation": 4081,
+                                "user_id": 8874388,
+                                "user_type": "registered",
+                                "display_name": "Mitch McMabers"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1568117585,
+                            "post_id": 57247833,
+                            "comment_id": 102165945,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/57247833#comment102165945_57247833",
+                            "body": "Nice for using a library which has the functions already. But I am almost 100% sure this code is wrong: <code>iou = poly_1.intersection(poly_2).area &#47; poly_1.union(poly_2).area</code>. You&#39;re calculating the area of the intersection of the two boxes. And dividing by the area of the union of the two boxes. Well, go look at the &quot;Jaccard index&quot; (IoU) formula. The correct Jaccard Index formula is: <code>iou = intersection_area &#47; (union_area - intersection_area)</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 12155295,
+                                "reputation": 4081,
+                                "user_id": 8874388,
+                                "user_type": "registered",
+                                "display_name": "Mitch McMabers"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1568119167,
+                            "post_id": 57247833,
+                            "comment_id": 102166870,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/57247833#comment102166870_57247833",
+                            "body": "Actually, turns out that the &quot;union&quot; function in Shapely already ignores the intersection. So your code is correct. Proof: <code>poly_1.area</code> and <code>poly_2.area</code> are both <code>2310</code>. <code>poly_1.union(poly_2).area</code> is <code>4059</code>. <code>poly_1.intersection(poly_2).area</code> is <code>561</code>. And to prove everything: <code>4059+561 == 2310+2310</code>. Both sum to <code>4620</code>. So yes, your code is correct and follows the Jaccard formula, because Shapely calculates its union minus intersection. Nice."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2345973,
+                                "reputation": 347,
+                                "user_id": 2056223,
+                                "user_type": "registered",
+                                "display_name": "totjammykd"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1573233473,
+                            "post_id": 57247833,
+                            "comment_id": 103828176,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/57247833#comment103828176_57247833",
+                            "body": "red box in the figure has bottom two point co-ordinates marked incorrectly. These should be swapped."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 991398,
+                                "reputation": 4339,
+                                "user_id": 1008596,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "netskink"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1644019743,
+                            "post_id": 57247833,
+                            "comment_id": 125502855,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/57247833#comment125502855_57247833",
+                            "body": "Thanks for this answer and the time you took to draw it out."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5340808,
+                        "reputation": 3085,
+                        "user_id": 4257991,
+                        "user_type": "registered",
+                        "display_name": "Uzzal Podder"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 37,
+                    "last_activity_date": 1671769443,
+                    "last_edit_date": 1671769443,
+                    "creation_date": 1564379576,
+                    "answer_id": 57247833,
+                    "question_id": 25349178,
+                    "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/57247833#57247833",
+                    "body": "<p>A <strong>Simple</strong> way for <strong>any kind of polygon</strong>.</p>\n<p><a href=\"https://i.stack.imgur.com/URk9l.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/URk9l.png\" alt=\"example\" /></a>\n(Image is not drawn to scale)</p>\n<pre class=\"lang-py prettyprint-override\"><code>from shapely.geometry import Polygon\n\n\ndef calculate_iou(box_1, box_2):\n    poly_1 = Polygon(box_1)\n    poly_2 = Polygon(box_2)\n    iou = poly_1.intersection(poly_2).area / poly_1.union(poly_2).area\n    return iou\n\n\nbox_1 = [[511, 41], [577, 41], [577, 76], [511, 76]]\nbox_2 = [[544, 59], [610, 59], [610, 94], [544, 94]]\n\nprint(calculate_iou(box_1, box_2))\n</code></pre>\n<p>The result will be <code>0.138211...</code> which means <code>13.82%</code>.</p>\n<p>You can also use <code>shapely.geometry.box</code> <strong>if your box is rectangular</strong>  <code>[minx, miny, maxx, maxy]</code> shape.</p>\n<hr />\n<hr />\n<p><em>Note: The origin of Coordinate Systems in shapely library is left-bottom where origin in computer graphics is left-top. This difference does not affect the IoU calculation, but if you do other types of calculation, this information might be helpful.</em></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 16230354,
+                                "reputation": 3892,
+                                "user_id": 11725056,
+                                "user_type": "registered",
+                                "display_name": "Deshwal"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1661795430,
+                            "post_id": 58108241,
+                            "comment_id": 129851621,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/58108241#comment129851621_58108241",
+                            "body": "Better implemention"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 12155295,
+                        "reputation": 4081,
+                        "user_id": 8874388,
+                        "user_type": "registered",
+                        "display_name": "Mitch McMabers"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 51,
+                    "last_activity_date": 1569705274,
+                    "last_edit_date": 1569705274,
+                    "creation_date": 1569459625,
+                    "answer_id": 58108241,
+                    "question_id": 25349178,
+                    "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/58108241#58108241",
+                    "body": "<p>The <a href=\"https://stackoverflow.com/a/42874377/8874388\">top-voted answer</a> has a mathematical error if you are working with screen (pixel) coordinates! I submitted <a href=\"https://stackoverflow.com/review/suggested-edits/24012424\">an edit</a> a few weeks ago with a long explanation for all readers so that they would understand the math. But that edit wasn't understood by the reviewers and was removed, so I've submitted the same edit again, but more briefly summarized this time. (Update: <a href=\"https://stackoverflow.com/review/suggested-edits/24148934\">Rejected 2vs1</a> because it was deemed a \"substantial change\", heh).</p>\n\n<p>So I will completely explain the BIG problem with its math here in this separate answer.</p>\n\n<p>So, yes, in general, the top-voted answer is correct and is a good way to calculate the IoU. But (as other people have pointed out too) its math is completely incorrect for computer screens. You cannot just do <code>(x2 - x1) * (y2 - y1)</code>, since that will not produce the correct area calculations whatsoever. Screen indexing starts at pixel <code>0,0</code> and ends at <code>width-1,height-1</code>. The range of screen coordinates is <code>inclusive:inclusive</code> (inclusive on both ends), so a range from <code>0</code> to <code>10</code> in pixel coordinates is actually 11 pixels wide, because it includes <code>0 1 2 3 4 5 6 7 8 9 10</code> (11 items). So, to calculate the area of screen coordinates, you MUST therefore add +1 to each dimension, as follows: <code>(x2 - x1 + 1) * (y2 - y1 + 1)</code>.</p>\n\n<p>If you're working in some other coordinate system where the range is not inclusive (such as an <code>inclusive:exclusive</code> system where <code>0</code> to <code>10</code> means \"elements 0-9 but not 10\"), then this extra math would NOT be necessary. But most likely, you are processing pixel-based bounding boxes. Well, screen coordinates start at <code>0,0</code> and go up from there.</p>\n\n<p>A <code>1920x1080</code> screen is indexed from <code>0</code> (first pixel) to <code>1919</code> (last pixel horizontally) and from <code>0</code> (first pixel) to <code>1079</code> (last pixel vertically).</p>\n\n<p>So if we have a rectangle in \"pixel coordinate space\", to calculate its area we <em>must</em> add 1 in each direction. Otherwise, we get the wrong answer for the area calculation.</p>\n\n<p>Imagine that our <code>1920x1080</code> screen has a pixel-coordinate based rectangle with <code>left=0,top=0,right=1919,bottom=1079</code> (covering all pixels on the whole screen).</p>\n\n<p>Well, we know that <code>1920x1080</code> pixels is <code>2073600</code> pixels, which is the correct area of a 1080p screen.</p>\n\n<p>But with the wrong math <code>area = (x_right - x_left) * (y_bottom - y_top)</code>, we would get: <code>(1919 - 0) * (1079 - 0)</code> = <code>1919 * 1079</code> = <code>2070601</code> pixels! That's wrong!</p>\n\n<p>That is why we must add <code>+1</code> to each calculation, which gives us the following corrected math: <code>area = (x_right - x_left + 1) * (y_bottom - y_top + 1)</code>, giving us: <code>(1919 - 0 + 1) * (1079 - 0 + 1)</code> = <code>1920 * 1080</code> = <code>2073600</code> pixels! And that's indeed the correct answer!</p>\n\n<p>The shortest possible summary is: Pixel coordinate ranges are <code>inclusive:inclusive</code>, so we must add <code>+ 1</code> to each axis if we want the true area of a pixel coordinate range.</p>\n\n<p>For a few more details about why <code>+1</code> is needed, see Jindil's answer: <a href=\"https://stackoverflow.com/a/51730512/8874388\">https://stackoverflow.com/a/51730512/8874388</a></p>\n\n<p>As well as this pyimagesearch article:\n<a href=\"https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/\" rel=\"noreferrer\">https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/</a></p>\n\n<p>And this GitHub comment:\n<a href=\"https://github.com/AlexeyAB/darknet/issues/3995#issuecomment-535697357\" rel=\"noreferrer\">https://github.com/AlexeyAB/darknet/issues/3995#issuecomment-535697357</a></p>\n\n<p>Since the fixed math wasn't approved, anyone who copies the code from the top-voted answer hopefully sees this answer, and will be able to bugfix it themselves, by simply copying the bugfixed assertions and area-calculation lines below, which have been fixed for <code>inclusive:inclusive</code> (pixel) coordinate ranges:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>    assert bb1['x1'] &lt;= bb1['x2']\n    assert bb1['y1'] &lt;= bb1['y2']\n    assert bb2['x1'] &lt;= bb2['x2']\n    assert bb2['y1'] &lt;= bb2['y2']\n\n................................................\n\n    # The intersection of two axis-aligned bounding boxes is always an\n    # axis-aligned bounding box.\n    # NOTE: We MUST ALWAYS add +1 to calculate area when working in\n    # screen coordinates, since 0,0 is the top left pixel, and w-1,h-1\n    # is the bottom right pixel. If we DON'T add +1, the result is wrong.\n    intersection_area = (x_right - x_left + 1) * (y_bottom - y_top + 1)\n\n    # compute the area of both AABBs\n    bb1_area = (bb1['x2'] - bb1['x1'] + 1) * (bb1['y2'] - bb1['y1'] + 1)\n    bb2_area = (bb2['x2'] - bb2['x1'] + 1) * (bb2['y2'] - bb2['y1'] + 1)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 14724831,
+                                "reputation": 135,
+                                "user_id": 10634207,
+                                "user_type": "registered",
+                                "display_name": "Toni Nagy"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1637686816,
+                            "post_id": 65988061,
+                            "comment_id": 123890696,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/65988061#comment123890696_65988061",
+                            "body": "Thank you, this answer should be further up for anyone not wanting to bother with the technicalities"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5432112,
+                        "reputation": 8575,
+                        "user_id": 4510421,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Keiku"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 35,
+                    "last_activity_date": 1612160717,
+                    "creation_date": 1612160717,
+                    "answer_id": 65988061,
+                    "question_id": 25349178,
+                    "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/65988061#65988061",
+                    "body": "<p>You can calculate with <code>torchvision</code> as follows. The bbox is prepared in the format of <code>[x1, y1, x2, y2]</code>.</p>\n<pre class=\"lang-py prettyprint-override\"><code>import torch\nimport torchvision.ops.boxes as bops\n\nbox1 = torch.tensor([[511, 41, 577, 76]], dtype=torch.float)\nbox2 = torch.tensor([[544, 59, 610, 94]], dtype=torch.float)\niou = bops.box_iou(box1, box2)\n# tensor([[0.1382]])\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4952989,
+                                "reputation": 3020,
+                                "user_id": 3986395,
+                                "user_type": "registered",
+                                "display_name": "Simas Joneliunas"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1625714685,
+                            "post_id": 68287792,
+                            "comment_id": 120701779,
+                            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/68287792#comment120701779_68287792",
+                            "body": "While this code can answer the question, there is a lot to read here and no description on what the code does (external links do not count!). Could you please add a commentary to help the other readers out?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 15421252,
+                        "reputation": 21,
+                        "user_id": 11125225,
+                        "user_type": "registered",
+                        "display_name": "Sri Ganesh Tallapaneni"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1625667820,
+                    "last_edit_date": 1625667820,
+                    "creation_date": 1625667515,
+                    "answer_id": 68287792,
+                    "question_id": 25349178,
+                    "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/68287792#68287792",
+                    "body": "<pre><code>import numpy as np\n\ndef box_area(arr):\n    # arr: np.array([[x1, y1, x2, y2]])\n    width = arr[:, 2] - arr[:, 0]\n    height = arr[:, 3] - arr[:, 1]\n    return width * height\n\ndef _box_inter_union(arr1, arr2):\n    # arr1 of [N, 4]\n    # arr2 of [N, 4]\n    area1 = box_area(arr1)\n    area2 = box_area(arr2)\n\n    # Intersection\n    top_left = np.maximum(arr1[:, :2], arr2[:, :2]) # [[x, y]]\n    bottom_right = np.minimum(arr1[:, 2:], arr2[:, 2:]) # [[x, y]]\n    wh = bottom_right - top_left\n    # clip: if boxes not overlap then make it zero\n    intersection = wh[:, 0].clip(0) * wh[:, 1].clip(0)\n\n    #union \n    union = area1 + area2 - intersection\n    return intersection, union\n\ndef box_iou(arr1, arr2):\n    # arr1[N, 4]\n    # arr2[N, 4]\n    # N = number of bounding boxes\n    assert(arr1[:, 2:] &gt; arr[:, :2]).all()\n    assert(arr2[:, 2:] &gt; arr[:, :2]).all()\n    inter, union = _box_inter_union(arr1, arr2)\n    iou = inter / union\n    print(iou)\nbox1 = np.array([[10, 10, 80, 80]])\nbox2 = np.array([[20, 20, 100, 100]])\nbox_iou(box1, box2)\n</code></pre>\n<p>reference: <a href=\"https://pytorch.org/vision/stable/_modules/torchvision/ops/boxes.html#nms\" rel=\"nofollow noreferrer\">https://pytorch.org/vision/stable/_modules/torchvision/ops/boxes.html#nms</a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2204690,
+                        "reputation": 2213,
+                        "user_id": 1948204,
+                        "user_type": "registered",
+                        "display_name": "JASON G PETERSON"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1651057077,
+                    "creation_date": 1651057077,
+                    "answer_id": 72027585,
+                    "question_id": 25349178,
+                    "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation/72027585#72027585",
+                    "body": "<p>Maybe one for the more visually inclined, like me . . .</p>\n<p>Say your ROIs are atop an HD Rez surface. You can make a matrix for each in numpy like . .</p>\n<pre><code>roi1 = np.zeros((1080, 1920))\n</code></pre>\n<p>Then &quot;fill in&quot; ROI area like . . .</p>\n<pre><code>roi1[y1:y2, x1:x2] = 1 # y1,x1 &amp; y2,x2 are the ROI corners\n</code></pre>\n<p>Repeat for roi2. Then calculate IoU with a this function . . .</p>\n<pre><code>def calc_iou(roi1, roi2):\n    # Sum all &quot;white&quot; pixels clipped to 1\n    U = np.sum(np.clip(roi1 + roi2, 0 , 1))\n    # +1 for each overlapping white pixel (these will = 2)\n    I = len(np.where(roi1 + roi2 == 2)[0])\n    return(I/U)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 931887,
+                "reputation": 12619,
+                "user_id": 961627,
+                "user_type": "registered",
+                "accept_rate": 61,
+                "display_name": "user961627"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "answer_count": 9,
+            "score": 62,
+            "last_activity_date": 1690719482,
+            "creation_date": 1408278484,
+            "last_edit_date": 1408287715,
+            "question_id": 25349178,
+            "link": "https://stackoverflow.com/questions/25349178/calculating-percentage-of-bounding-box-overlap-for-image-detector-evaluation",
+            "title": "Calculating percentage of Bounding box overlap, for image detector evaluation",
+            "body": "<p>In testing an object detection algorithm in large images, we check our detected bounding boxes against the coordinates given for the ground truth rectangles.</p>\n\n<p>According to the Pascal VOC challenges, there's this:</p>\n\n<blockquote>\n  <p>A predicted bounding box is considered correct if it overlaps more\n  than 50% with a ground-truth bounding box, otherwise the bounding box\n  is considered a false positive detection. Multiple detections are\n  penalized. If a system predicts several bounding boxes that overlap\n  with a single ground-truth bounding box, only one prediction is\n  considered correct, the others are considered false positives.</p>\n</blockquote>\n\n<p>This means that we need to calculate the percentage of overlap. Does this mean that the ground truth box is 50% covered by the detected boundary box? Or that 50% of the bounding box is absorbed by the ground truth box?</p>\n\n<p>I've searched but I haven't found a standard algorithm for this - which is surprising because I would have thought that this is something pretty common in computer vision. (I'm new to it). Have I missed it? Does anyone know what the standard algorithm is for this type of problem?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7956
+}

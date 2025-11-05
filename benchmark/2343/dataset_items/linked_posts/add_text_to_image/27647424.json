@@ -1,0 +1,161 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "opencv"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 2346717,
+                        "reputation": 39530,
+                        "user_id": 2056772,
+                        "user_type": "registered",
+                        "display_name": "berak"
+                    },
+                    "edited": false,
+                    "score": 2,
+                    "creation_date": 1419513736,
+                    "post_id": 27647424,
+                    "comment_id": 43712788,
+                    "link": "https://stackoverflow.com/questions/27647424/opencv-puttext-new-line-character#comment43712788_27647424",
+                    "body": "putText can do letters, numbers and some symbols like =!* . not much more."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 9160818,
+                                "reputation": 2085,
+                                "user_id": 6812182,
+                                "user_type": "registered",
+                                "display_name": "Mark Loyman"
+                            },
+                            "edited": false,
+                            "score": 12,
+                            "creation_date": 1603255830,
+                            "post_id": 27647540,
+                            "comment_id": 113975713,
+                            "link": "https://stackoverflow.com/questions/27647424/opencv-puttext-new-line-character/27647540#comment113975713_27647540",
+                            "body": "<code>cv2.getTextSize</code> can be used to calculate &quot;good&quot; <code>dy</code> - <a href=\"https://stackoverflow.com/a/54234703/6812182\">full example</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 13329066,
+                                "reputation": 658,
+                                "user_id": 9621080,
+                                "user_type": "registered",
+                                "display_name": "LC117"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1680539340,
+                            "post_id": 27647540,
+                            "comment_id": 133911961,
+                            "link": "https://stackoverflow.com/questions/27647424/opencv-puttext-new-line-character/27647540#comment133911961_27647540",
+                            "body": "Short example: (_, label_height), _ = cv2.getTextSize(text, cv2.FONT_HERSHEY_SIMPLEX, font_scale, thickness)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1401626,
+                        "reputation": 40465,
+                        "user_id": 1330293,
+                        "user_type": "registered",
+                        "accept_rate": 89,
+                        "display_name": "elyase"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 74,
+                    "last_activity_date": 1419513384,
+                    "creation_date": 1419513384,
+                    "answer_id": 27647540,
+                    "question_id": 27647424,
+                    "link": "https://stackoverflow.com/questions/27647424/opencv-puttext-new-line-character/27647540#27647540",
+                    "body": "<p>Unfortunately <code>putText</code> doesn't correctly handle <code>\\n</code> symbols. See the <a href=\"https://github.com/Itseez/opencv/pull/313\">relevant rejected  pull request</a>. You need to split your text yourself and make several <code>putText</code> calls, something like:</p>\n\n<pre><code>text = \"This is \\n some text\"\ny0, dy = 50, 4\nfor i, line in enumerate(text.split('\\n')):\n    y = y0 + i*dy\n    cv2.putText(img, line, (50, y ), cv2.FONT_HERSHEY_SIMPLEX, 1, 2)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 10631529,
+                        "reputation": 2004,
+                        "user_id": 7829525,
+                        "user_type": "registered",
+                        "accept_rate": 20,
+                        "display_name": "Eric Cousineau"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1605911217,
+                    "creation_date": 1605911217,
+                    "answer_id": 64937750,
+                    "question_id": 27647424,
+                    "link": "https://stackoverflow.com/questions/27647424/opencv-puttext-new-line-character/64937750#64937750",
+                    "body": "<p>Here's another example:</p>\n<p><a href=\"https://gist.github.com/EricCousineau-TRI/596f04c83da9b82d0389d3ea1d782592\" rel=\"nofollow noreferrer\">https://gist.github.com/EricCousineau-TRI/596f04c83da9b82d0389d3ea1d782592</a></p>\n<p>Basically, same as elyase's answer, but using <code>getTextSize()</code> as well (though I had to increase line size a bit larger than expected).</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2917557,
+                        "reputation": 1,
+                        "user_id": 2500453,
+                        "user_type": "registered",
+                        "display_name": "drmikeburns"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1612729738,
+                    "creation_date": 1612729738,
+                    "answer_id": 66092775,
+                    "question_id": 27647424,
+                    "link": "https://stackoverflow.com/questions/27647424/opencv-puttext-new-line-character/66092775#66092775",
+                    "body": "<p>The approach posed by elyase worked well for me in OpenCV 4.5.1.38. I did verify that the text strings can still be joined with &quot;+&quot; and numeric values can be inserted using &quot;str(value)&quot;. The start of the newline is just prepended with the &quot;\\n&quot; and everything behaved as expected.</p>\n<pre><code>y0, dy, text = 185,50, &quot;FPS: &quot;+str(framerate)+&quot;\\nMIN: &quot;+str(frMIN)+&quot;\\nMAX: &quot;+str(frMAX)+&quot;\\nAVG: &quot;+str(frAVG)\nfor i, line in enumerate(text.split('\\n')):\n    y = y0 + i*dy\n    cv2.putText(currStack, line, (50, y ), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA, False)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6277292,
+                        "reputation": 1487,
+                        "user_id": 4879610,
+                        "user_type": "registered",
+                        "display_name": "YoniChechik"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1710852582,
+                    "last_edit_date": 1710852582,
+                    "creation_date": 1661338805,
+                    "answer_id": 73471951,
+                    "question_id": 27647424,
+                    "link": "https://stackoverflow.com/questions/27647424/opencv-puttext-new-line-character/73471951#73471951",
+                    "body": "<p>I've wrote a utility function for this porpuse:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import cv2\nimport numpy as np\n\n\ndef add_text_to_image(\n    image_rgb: np.ndarray,\n    label: str,\n    top_left_xy: tuple = (0, 0),\n    font_scale: float = 1,\n    font_thickness: float = 1,\n    font_face=cv2.FONT_HERSHEY_SIMPLEX,\n    font_color_rgb: tuple = (0, 0, 255),\n    bg_color_rgb: tuple | None = None,\n    outline_color_rgb: tuple | None = None,\n    line_spacing: float = 1,\n):\n    &quot;&quot;&quot;\n    Adds text (including multi line text) to images.\n    You can also control background color, outline color, and line spacing.\n\n    outline color and line spacing adopted from: https://gist.github.com/EricCousineau-TRI/596f04c83da9b82d0389d3ea1d782592\n    &quot;&quot;&quot;\n    OUTLINE_FONT_THICKNESS = 3 * font_thickness\n\n    im_h, im_w = image_rgb.shape[:2]\n\n    for line in label.splitlines():\n        x, y = top_left_xy\n\n        # ====== get text size\n        if outline_color_rgb is None:\n            get_text_size_font_thickness = font_thickness\n        else:\n            get_text_size_font_thickness = OUTLINE_FONT_THICKNESS\n\n        (line_width, line_height_no_baseline), baseline = cv2.getTextSize(\n            line,\n            font_face,\n            font_scale,\n            get_text_size_font_thickness,\n        )\n        line_height = line_height_no_baseline + baseline\n\n        if bg_color_rgb is not None and line:\n            # === get actual mask sizes with regard to image crop\n            if im_h - (y + line_height) &lt;= 0:\n                sz_h = max(im_h - y, 0)\n            else:\n                sz_h = line_height\n\n            if im_w - (x + line_width) &lt;= 0:\n                sz_w = max(im_w - x, 0)\n            else:\n                sz_w = line_width\n\n            # ==== add mask to image\n            if sz_h &gt; 0 and sz_w &gt; 0:\n                bg_mask = np.zeros((sz_h, sz_w, 3), np.uint8)\n                bg_mask[:, :] = np.array(bg_color_rgb)\n                image_rgb[\n                    y : y + sz_h,\n                    x : x + sz_w,\n                ] = bg_mask\n\n        # === add outline text to image\n        if outline_color_rgb is not None:\n            image_rgb = cv2.putText(\n                image_rgb,\n                line,\n                (x, y + line_height_no_baseline),  # putText start bottom-left\n                font_face,\n                font_scale,\n                outline_color_rgb,\n                OUTLINE_FONT_THICKNESS,\n                cv2.LINE_AA,\n            )\n        # === add text to image\n        image_rgb = cv2.putText(\n            image_rgb,\n            line,\n            (x, y + line_height_no_baseline),  # putText start bottom-left\n            font_face,\n            font_scale,\n            font_color_rgb,\n            font_thickness,\n            cv2.LINE_AA,\n        )\n        top_left_xy = (x, y + int(line_height * line_spacing))\n\n    return image_rgb\n\n</code></pre>\n<p>Here are example results:</p>\n<pre class=\"lang-py prettyprint-override\"><code>image = 200 * np.ones((550, 410, 3), dtype=np.uint8)\n\nimage = add_text_to_image(\n    image,\n    &quot;New line\\nDouble new line\\n\\nLine too longggggggggggggggggggggg&quot;,\n    top_left_xy=(0, 10),\n)\nimage = add_text_to_image(\n    image,\n    &quot;Different font scale&quot;,\n    font_scale=0.5,\n    font_color_rgb=(0, 255, 0),\n    top_left_xy=(0, 150),\n)\nimage = add_text_to_image(\n    image,\n    &quot;New line with bg\\nDouble new line\\n\\nLine too longggggggggggggggggggggg&quot;,\n    bg_color_rgb=(255, 255, 255),\n    font_color_rgb=(255, 0, 0),\n    top_left_xy=(0, 200),\n)\nimage = add_text_to_image(\n    image,\n    &quot;Different line specing,\\noutline and font face&quot;,\n    font_color_rgb=(0, 255, 255),\n    outline_color_rgb=(0, 0, 0),\n    top_left_xy=(0, 350),\n    line_spacing=1.5,\n    font_face=cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,\n)\nimport matplotlib.pyplot as plt\n\nplt.imshow(image)\nplt.show()\n</code></pre>\n<p><a href=\"https://i.stack.imgur.com/2egap.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/2egap.png\" alt=\"code results\" /></a></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 3383626,
+                "reputation": 4128,
+                "user_id": 2840136,
+                "user_type": "registered",
+                "accept_rate": 88,
+                "display_name": "Vipul"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 27647540,
+            "answer_count": 4,
+            "score": 45,
+            "last_activity_date": 1710852582,
+            "creation_date": 1419512474,
+            "question_id": 27647424,
+            "link": "https://stackoverflow.com/questions/27647424/opencv-puttext-new-line-character",
+            "title": "OpenCV putText() new line character",
+            "body": "<p>I am using cv2.putText() to draw a text string on an image.</p>\n\n<p>When I write: </p>\n\n<pre><code>cv2.putText(img, \"This is \\n some text\", (50,50), cv2.FONT_HERSHEY_SIMPLEX, 1, 2)\n</code></pre>\n\n<p>The text drawn on the image is:</p>\n\n<p><code>This is ? some text</code></p>\n\n<p>I was expecting the text to be printed in the new line as <code>\\n</code> is an escape character for newline but it draws <code>?</code> on the image instead.</p>\n\n<p>Why this is happening ? am I doing something wrong ? </p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5482
+}

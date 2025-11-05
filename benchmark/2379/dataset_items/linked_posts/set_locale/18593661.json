@@ -1,0 +1,326 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "locale",
+                "strftime",
+                "setlocale"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 617181,
+                        "reputation": 1554,
+                        "user_id": 342539,
+                        "user_type": "registered",
+                        "display_name": "Silas S. Brown"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1711541086,
+                    "post_id": 18593661,
+                    "comment_id": 137920169,
+                    "link": "https://stackoverflow.com/questions/18593661/how-do-i-strftime-a-date-object-in-a-different-locale#comment137920169_18593661",
+                    "body": "You could just not use strftime but write it yourself.  E.g. for the HTTP If-Modified-Since format in Python 3 with format strings: f&quot;{&#39;Mon Tue Wed Thu Fri Sat Sun&#39;.split()[t.tm_wday]}, {t.tm_mday} {&#39;Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec&#39;.split()[t.tm_mon-1]} {t.tm_year} {t.tm_hour:02d}:{t.tm_min:02d}:{t.tm_sec:02d} GMT&quot;"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 89979,
+                                "reputation": 2907,
+                                "user_id": 247903,
+                                "user_type": "registered",
+                                "accept_rate": 33,
+                                "display_name": "MagerValp"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1378215780,
+                            "post_id": 18593833,
+                            "comment_id": 27363828,
+                            "link": "https://stackoverflow.com/questions/18593661/how-do-i-strftime-a-date-object-in-a-different-locale/18593833#comment27363828_18593833",
+                            "body": "That&#39;s interesting, but I need to generate a date stamp with English words for weekdays (%a) and months (%b), not change the timezone. Can pytz do that too?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 465038,
+                                "reputation": 1192,
+                                "user_id": 2638387,
+                                "user_type": "registered",
+                                "display_name": "Philippe T."
+                            },
+                            "reply_to_user": {
+                                "account_id": 89979,
+                                "reputation": 2907,
+                                "user_id": 247903,
+                                "user_type": "registered",
+                                "accept_rate": 33,
+                                "display_name": "MagerValp"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1378216057,
+                            "post_id": 18593833,
+                            "comment_id": 27363998,
+                            "link": "https://stackoverflow.com/questions/18593661/how-do-i-strftime-a-date-object-in-a-different-locale/18593833#comment27363998_18593833",
+                            "body": "take a look to calendar <a href=\"http://docs.python.org/2/library/calendar.html#module-calendar\" rel=\"nofollow noreferrer\">docs.python.org/2/library/calendar.html#module-calendar</a> and the calendar.month_name method perhaps"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 739313,
+                                "reputation": 11530,
+                                "user_id": 705086,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "Dima Tisnek"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1426076053,
+                            "post_id": 18593833,
+                            "comment_id": 46221140,
+                            "link": "https://stackoverflow.com/questions/18593661/how-do-i-strftime-a-date-object-in-a-different-locale/18593833#comment46221140_18593833",
+                            "body": "Again, it&#39;s not what OP wants. <code>calendar.month_name</code> An array that represents the months of the year in the current locale."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 465038,
+                        "reputation": 1192,
+                        "user_id": 2638387,
+                        "user_type": "registered",
+                        "display_name": "Philippe T."
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": -5,
+                    "last_activity_date": 1378216518,
+                    "last_edit_date": 1378216518,
+                    "creation_date": 1378215537,
+                    "answer_id": 18593833,
+                    "question_id": 18593661,
+                    "link": "https://stackoverflow.com/questions/18593661/how-do-i-strftime-a-date-object-in-a-different-locale/18593833#18593833",
+                    "body": "<p>take a look to the <a href=\"https://pypi.python.org/pypi/pytz\" rel=\"nofollow\">pytz package</a></p>\n\n<p>you can use like this</p>\n\n<pre><code>import pytz\nUTC = pytz.timezone('UTC') # utc\nfr = pytz.timezone('Europe/Paris') #your local\nfrom datetime import datetime\ndate = datetime.now(fr)\ndateUTC = date.astimezone(UTC)\n</code></pre>\n\n<p>strftime will render in the timezone specified</p>\n\n<p>for have month name in the locale use <a href=\"http://docs.python.org/2/library/calendar.html#module-calendar\" rel=\"nofollow\">calendar</a> for example :</p>\n\n<pre><code>import calendar\nprint calendar.month_name[dateUTC.month] #will print in the locale\n</code></pre>\n\n<p>inspect more deeply calendar for having more information</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 465038,
+                                "reputation": 1192,
+                                "user_id": 2638387,
+                                "user_type": "registered",
+                                "display_name": "Philippe T."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1378216619,
+                            "post_id": 18594128,
+                            "comment_id": 27364352,
+                            "link": "https://stackoverflow.com/questions/18593661/how-do-i-strftime-a-date-object-in-a-different-locale/18594128#comment27364352_18594128",
+                            "body": "that&#39;s the locale in all the script i think so be careful"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5436,
+                                "reputation": 166517,
+                                "user_id": 8747,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Rob\u1d69"
+                            },
+                            "reply_to_user": {
+                                "account_id": 465038,
+                                "reputation": 1192,
+                                "user_id": 2638387,
+                                "user_type": "registered",
+                                "display_name": "Philippe T."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1378218160,
+                            "post_id": 18594128,
+                            "comment_id": 27365355,
+                            "link": "https://stackoverflow.com/questions/18593661/how-do-i-strftime-a-date-object-in-a-different-locale/18594128#comment27365355_18594128",
+                            "body": "Yes, <code>locale.setlocale()</code> affects the entire program. The <code>try-finally</code> block or the <code>with</code> block sets and restores the locale so as not to disturb the rest of the program."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5436,
+                        "reputation": 166517,
+                        "user_id": 8747,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Rob\u1d69"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 20,
+                    "last_activity_date": 1378217610,
+                    "last_edit_date": 1378217610,
+                    "creation_date": 1378216438,
+                    "answer_id": 18594128,
+                    "question_id": 18593661,
+                    "link": "https://stackoverflow.com/questions/18593661/how-do-i-strftime-a-date-object-in-a-different-locale/18594128#18594128",
+                    "body": "<p>No, there is no way to call <code>strftime()</code> with a specific locale.</p>\n\n<p>Assuming that your app is not multi-threaded, save and restore the existing locale, and set your locale to <code>'C'</code> when you invoke <code>strftime</code>.</p>\n\n<pre><code>#! /usr/bin/python3\nimport time\nimport locale\n\n\ndef get_c_locale_abbrev():\n  lc = locale.setlocale(locale.LC_TIME)\n  try:\n    locale.setlocale(locale.LC_TIME, \"C\")\n    return time.strftime(\"%a-%b\")\n  finally:\n    locale.setlocale(locale.LC_TIME, lc)\n\n# Let's suppose that we're french\nlocale.setlocale(locale.LC_ALL, 'fr_FR.utf8')\n\n# Should print french, english, then french\nprint(time.strftime('%a-%b'))\nprint(get_c_locale_abbrev())\nprint(time.strftime('%a-%b'))\n</code></pre>\n\n<hr>\n\n<p>If you prefer <code>with:</code> to <code>try:</code>-<code>finally:</code>, you could whip up a context manager:</p>\n\n<pre><code>#! /usr/bin/python3\nimport time\nimport locale\nimport contextlib\n\n@contextlib.contextmanager\ndef setlocale(*args, **kw):\n  saved = locale.setlocale(locale.LC_ALL)\n  yield locale.setlocale(*args, **kw)\n  locale.setlocale(locale.LC_ALL, saved)\n\ndef get_c_locale_abbrev():\n  with setlocale(locale.LC_TIME, \"C\"):\n    return time.strftime(\"%a-%b\")\n\n# Let's suppose that we're french\nlocale.setlocale(locale.LC_ALL, 'fr_FR.utf8')\n\n# Should print french, english, then french\nprint(time.strftime('%a-%b'))\nprint(get_c_locale_abbrev())\nprint(time.strftime('%a-%b'))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 6797,
+                                "reputation": 53738,
+                                "user_id": 11549,
+                                "user_type": "registered",
+                                "display_name": "ddaa"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1408555341,
+                            "post_id": 24070673,
+                            "comment_id": 39637477,
+                            "link": "https://stackoverflow.com/questions/18593661/how-do-i-strftime-a-date-object-in-a-different-locale/24070673#comment39637477_24070673",
+                            "body": "Note that for setlocale() to succeed, you need that locale installed at the system level. Which, generally speaking, you cannot rely on. For anything that means to be localizable, you need to stay away from strftime, and use a proper i18n library, like Babel."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 237182,
+                                "reputation": 5543,
+                                "user_id": 505165,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "vonPetrushev"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1413831432,
+                            "post_id": 24070673,
+                            "comment_id": 41583246,
+                            "link": "https://stackoverflow.com/questions/18593661/how-do-i-strftime-a-date-object-in-a-different-locale/24070673#comment41583246_24070673",
+                            "body": "is that a typo on <code>saved = locale.setlocale(...</code> ?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 54877,
+                                "reputation": 8532,
+                                "user_id": 164268,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Daniel"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1413845633,
+                            "post_id": 24070673,
+                            "comment_id": 41589575,
+                            "link": "https://stackoverflow.com/questions/18593661/how-do-i-strftime-a-date-object-in-a-different-locale/24070673#comment41589575_24070673",
+                            "body": "I don&#39;t believe there&#39;s a typo - if the second argument to setlocale is None then you get the currently set locale returned."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 37594,
+                                "reputation": 9747,
+                                "user_id": 107510,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "WhyNotHugo"
+                            },
+                            "reply_to_user": {
+                                "account_id": 6797,
+                                "reputation": 53738,
+                                "user_id": 11549,
+                                "user_type": "registered",
+                                "display_name": "ddaa"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1426424526,
+                            "post_id": 24070673,
+                            "comment_id": 46358019,
+                            "link": "https://stackoverflow.com/questions/18593661/how-do-i-strftime-a-date-object-in-a-different-locale/24070673#comment46358019_24070673",
+                            "body": "@ddaa: Thanks for that suggestion. Indeed, one can&#39;t rely on those being installed, even if you live in the country for which you&#39;re trying to use the locale. Babel is really the way to go, and this should be a separate answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1412466,
+                                "reputation": 8603,
+                                "user_id": 1338797,
+                                "user_type": "registered",
+                                "display_name": "Tomasz Gandor"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1461582873,
+                            "post_id": 24070673,
+                            "comment_id": 61247823,
+                            "link": "https://stackoverflow.com/questions/18593661/how-do-i-strftime-a-date-object-in-a-different-locale/24070673#comment61247823_24070673",
+                            "body": "Will it still <code>yield</code> if <code>setlocale</code> throws? Wouldn&#39;t this mess with the <code>with</code> construct? (like premature <code>StopIteration</code> raised etc.) (And BTW - cool answer, with a lot going on in there. I thought the problem &quot;locale is per process&quot; could not be dispatched so easy.)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 80938,
+                                "reputation": 4304,
+                                "user_id": 228539,
+                                "user_type": "registered",
+                                "accept_rate": 38,
+                                "display_name": "altendky"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1617766779,
+                            "post_id": 24070673,
+                            "comment_id": 118394828,
+                            "link": "https://stackoverflow.com/questions/18593661/how-do-i-strftime-a-date-object-in-a-different-locale/24070673#comment118394828_24070673",
+                            "body": "Doesn&#39;t this just block other threads from also setting the locale at the same time?  It does nothing to help isolate the global change from affecting other locale-aware code that doesn&#39;t use this construct.  most wouldn&#39;t since it would normally just use the locale setup at the beginning of the program.  Or am I missing something?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 54877,
+                        "reputation": 8532,
+                        "user_id": 164268,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Daniel"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": true,
+                    "score": 51,
+                    "last_activity_date": 1402004510,
+                    "creation_date": 1402004510,
+                    "answer_id": 24070673,
+                    "question_id": 18593661,
+                    "link": "https://stackoverflow.com/questions/18593661/how-do-i-strftime-a-date-object-in-a-different-locale/24070673#24070673",
+                    "body": "<p>The example given by Rob is great, but isn't threadsafe. Here's a version that works with threads:</p>\n\n<pre><code>import locale\nimport threading\n\nfrom datetime import datetime\nfrom contextlib import contextmanager\n\n\nLOCALE_LOCK = threading.Lock()\n\n@contextmanager\ndef setlocale(name):\n    with LOCALE_LOCK:\n        saved = locale.setlocale(locale.LC_ALL)\n        try:\n            yield locale.setlocale(locale.LC_ALL, name)\n        finally:\n            locale.setlocale(locale.LC_ALL, saved)\n\n# Let's set a non-US locale\nlocale.setlocale(locale.LC_ALL, 'de_DE.UTF-8')\n\n# Example to write a formatted English date\nwith setlocale('C'):\n    print(datetime.now().strftime('%a, %b')) # e.g. =&gt; \"Thu, Jun\"\n\n# Example to read a formatted English date\nwith setlocale('C'):\n    mydate = datetime.strptime('Thu, Jun', '%a, %b')\n</code></pre>\n\n<p>It creates a threadsafe context manager using a global lock and allows you to have multiple threads running locale-dependent code by using the LOCALE_LOCK. It also handles exceptions from the yield statement to ensure the original locale is always restored.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 89979,
+                "reputation": 2907,
+                "user_id": 247903,
+                "user_type": "registered",
+                "accept_rate": 33,
+                "display_name": "MagerValp"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "closed_date": 1613265393,
+            "accepted_answer_id": 24070673,
+            "answer_count": 3,
+            "score": 45,
+            "last_activity_date": 1402004510,
+            "creation_date": 1378215066,
+            "last_edit_date": 1378215815,
+            "question_id": 18593661,
+            "link": "https://stackoverflow.com/questions/18593661/how-do-i-strftime-a-date-object-in-a-different-locale",
+            "closed_reason": "Duplicate",
+            "title": "How do I strftime a date object in a different locale?",
+            "body": "<p>I have a date object in python and I need to generate a time stamp in the C locale for a legacy system, using the %a (weekday) and %b (month) codes. However I do not wish to change the application's locale, since other parts need to respect the user's current locale. Is there a way to call strftime() with a certain locale?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5422
+}

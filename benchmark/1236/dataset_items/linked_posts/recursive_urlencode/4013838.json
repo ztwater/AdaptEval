@@ -1,0 +1,439 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "urlencode"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 18751,
+                                "reputation": 2066,
+                                "user_id": 43273,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "pablobm"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1288005026,
+                            "post_id": 4013899,
+                            "comment_id": 4302504,
+                            "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/4013899#comment4302504_4013899",
+                            "body": "Afraid not. Please notice the difference between &#39;a=b&amp;c[d]=e&#39; and your proposed &#39;a=b&amp;c%5Bd%5D=e&#39;. That escaping should not be there."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 202404,
+                                "reputation": 210323,
+                                "user_id": 449449,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "eumiro"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1288006348,
+                            "post_id": 4013899,
+                            "comment_id": 4302711,
+                            "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/4013899#comment4302711_4013899",
+                            "body": "Then you will have to iterate over the dictionary like I did and urlencode each item separately..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 444379,
+                                "reputation": 8875,
+                                "user_id": 836144,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Hassek"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1316714629,
+                            "post_id": 4013899,
+                            "comment_id": 9107141,
+                            "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/4013899#comment9107141_4013899",
+                            "body": "This only takes the first inner value in a dict but I like the way you did it so +1 for you hehe"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 202404,
+                        "reputation": 210323,
+                        "user_id": 449449,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "eumiro"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1288004396,
+                    "creation_date": 1288004396,
+                    "answer_id": 4013899,
+                    "question_id": 4013838,
+                    "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/4013899#4013899",
+                    "body": "<p>Something like this?</p>\n\n<pre><code>a = {'a': 'b', 'c': {'d': 'e'}}\n\nurl = urllib.urlencode([('%s[%s]'%(k,v.keys()[0]), v.values()[0] ) if type(v)==dict else (k,v) for k,v in a.iteritems()])\n\nurl = 'a=b&amp;c%5Bd%5D=e'\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 331901,
+                                "reputation": 491,
+                                "user_id": 656875,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Vineet Bansal"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1534174420,
+                            "post_id": 4014081,
+                            "comment_id": 90605909,
+                            "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/4014081#comment90605909_4014081",
+                            "body": "I might be wrong, but seems to me that json.dumps followed by a url-encode does seem like a great solution to the problem. This particular construction of query strings across frameworks (like Django etc.) evolved with the widespread use of json, so the string representation being valid json is not a mere accident. json.dumps (which is recursion-aware) is thus the more Pythonic solution. The URL-encoding at the end is incidental to the problem, and should be the responsibility of a library that keeps up with encoding standards, so once again the solution is best left to urllib."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 42191,
+                        "reputation": 6452,
+                        "user_id": 122851,
+                        "user_type": "registered",
+                        "display_name": "sunqiang"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1288006003,
+                    "creation_date": 1288006003,
+                    "answer_id": 4014081,
+                    "question_id": 4013838,
+                    "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/4014081#4014081",
+                    "body": "<p>what about json.dumps and json.loads?</p>\n\n<pre><code>d = {'a': 'b', 'c': {'d': 'e'}}\ns = json.dumps(d)  # s: '{\"a\": \"b\", \"c\": {\"d\": \"e\"}}'\njson.loads(s)  # -&gt; d\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 10108,
+                                "reputation": 532737,
+                                "user_id": 18936,
+                                "user_type": "registered",
+                                "display_name": "bobince"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1288006848,
+                            "post_id": 4014164,
+                            "comment_id": 4302773,
+                            "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/4014164#comment4302773_4014164",
+                            "body": "Why should it? This is not in any way a standard format. The thing with the square brackets is a PHP-specific peculiarity not present in most other languages/frameworks or any web standard."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 18751,
+                                "reputation": 2066,
+                                "user_id": 43273,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "pablobm"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1288011789,
+                            "post_id": 4014164,
+                            "comment_id": 4303569,
+                            "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/4014164#comment4303569_4014164",
+                            "body": "It may not be a pure-blood RFC-described IETF/W3C-backed holy-macaroni standard, but it&#39;s so commonly used nowadays that its not being included in Python&#39;s standard library does defy my comprehension.  I have developed web applications in a number of platforms and languages, and this has always been the convention. And this includes Python-based environments such as Django: so no, it&#39;s not a PHP-only thing anymore."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 80518,
+                                "reputation": 773,
+                                "user_id": 227644,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Eric Lubow"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1336592516,
+                            "post_id": 4014164,
+                            "comment_id": 13609706,
+                            "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/4014164#comment13609706_4014164",
+                            "body": "Just so people who come here later are aware, this code comes close to working but doesn&#39;t work for objects with &gt; 1 nesting level.  So objects with &gt; 1 nesting level get booted back to the top of the hash."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 18751,
+                                "reputation": 2066,
+                                "user_id": 43273,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "pablobm"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1379777537,
+                            "post_id": 4014164,
+                            "comment_id": 27957888,
+                            "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/4014164#comment27957888_4014164",
+                            "body": "Eric Lubow: thanks for the bug report. I just corrected it and should be ok now."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 76,
+                                "reputation": 21505,
+                                "user_id": 92,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "Justin Standard"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1471628696,
+                            "post_id": 4014164,
+                            "comment_id": 65439517,
+                            "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/4014164#comment65439517_4014164",
+                            "body": "Fantastic.  This saved me last night late.  Kind of sad that urllib/urllib2 and wrappers like requests don&#39;t natively support this.  Again, thank you - I wish I could upvote this 10 times."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 108398,
+                                "reputation": 1095,
+                                "user_id": 287746,
+                                "user_type": "registered",
+                                "display_name": "JGurtz"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1487276515,
+                            "post_id": 4014164,
+                            "comment_id": 71724315,
+                            "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/4014164#comment71724315_4014164",
+                            "body": "Cpan has a module to handle this php encoding peculiarity; maybe the code will provide inspiration: <a href=\"https://github.com/mschilli/php-httpbuildquery-perl\" rel=\"nofollow noreferrer\">github.com/mschilli/php-httpbuildquery-perl</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 18751,
+                        "reputation": 2066,
+                        "user_id": 43273,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "pablobm"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": true,
+                    "score": 13,
+                    "last_activity_date": 1379777508,
+                    "last_edit_date": 1379777508,
+                    "creation_date": 1288006691,
+                    "answer_id": 4014164,
+                    "question_id": 4013838,
+                    "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/4014164#4014164",
+                    "body": "<p>OK people. I implemented it myself:</p>\n\n<pre><code>import urllib\n\ndef recursive_urlencode(d):\n    \"\"\"URL-encode a multidimensional dictionary.\n\n    &gt;&gt;&gt; data = {'a': 'b&amp;c', 'd': {'e': {'f&amp;g': 'h*i'}}, 'j': 'k'}\n    &gt;&gt;&gt; recursive_urlencode(data)\n    u'a=b%26c&amp;j=k&amp;d[e][f%26g]=h%2Ai'\n    \"\"\"\n    def recursion(d, base=[]):\n        pairs = []\n\n        for key, value in d.items():\n            new_base = base + [key]\n            if hasattr(value, 'values'):\n                pairs += recursion(value, new_base)\n            else:\n                new_pair = None\n                if len(new_base) &gt; 1:\n                    first = urllib.quote(new_base.pop(0))\n                    rest = map(lambda x: urllib.quote(x), new_base)\n                    new_pair = \"%s[%s]=%s\" % (first, ']['.join(rest), urllib.quote(unicode(value)))\n                else:\n                    new_pair = \"%s=%s\" % (urllib.quote(unicode(key)), urllib.quote(unicode(value)))\n                pairs.append(new_pair)\n        return pairs\n\n    return '&amp;'.join(recursion(d))\n\nif __name__ == \"__main__\":\n    import doctest\n    doctest.testmod()\n</code></pre>\n\n<p>Still, I'd be interested to know if there's a better way to do this. I can't believe Python's standard library doesn't implement this.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 444379,
+                        "reputation": 8875,
+                        "user_id": 836144,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "Hassek"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1316718600,
+                    "last_edit_date": 1316718600,
+                    "creation_date": 1316716249,
+                    "answer_id": 7519663,
+                    "question_id": 4013838,
+                    "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/7519663#7519663",
+                    "body": "<p>what about this simplified version:</p>\n\n<pre><code>def _clean(value):\n    return urllib.quote(unicode(value))\n\n'&amp;'.join([ v for val in [[ \"%s[%s]=%s\"%(k,ik, _(iv)) \n    for ik, iv in v.items()] if type(v)==dict else [\"%s=%s\"%(k,_(v))] \n    for k,v in data.items() ] \n    for v in val ])\n</code></pre>\n\n<p>I agree is not readable, maybe flattening the list can be better done with itertools.chain instead of another list comprehension.</p>\n\n<p>This only goes 1 level deeper, yours can go N levels deeper if you would add some logic to manage N numbers of \"[%s]\" depending on the level, but I guess is not that necesary</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 979979,
+                                "reputation": 2266,
+                                "user_id": 999951,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Do Not Track Me"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1370946610,
+                            "post_id": 10541214,
+                            "comment_id": 24636295,
+                            "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/10541214#comment24636295_10541214",
+                            "body": "This function seems to pass the string through unicode twice.  So a &#39;!&#39; turns into &#39;%25%21&#39; not simply &#39;%21&#39;"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 165097,
+                        "reputation": 92,
+                        "user_id": 388270,
+                        "user_type": "registered",
+                        "display_name": "Malaney"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1336682572,
+                    "last_edit_date": 1336682572,
+                    "creation_date": 1336679732,
+                    "answer_id": 10541214,
+                    "question_id": 4013838,
+                    "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/10541214#10541214",
+                    "body": "<p>The above solution only works for arrays with depth &lt; 2.  The code below will properly urlencode a multidimensional array of any depth.</p>\n\n<pre><code>#!/usr/bin/env python\n\nimport sys\nimport urllib\n\ndef recursive_urlencode(data):\n    def r_urlencode(data, parent=None, pairs=None):\n        if pairs is None:\n            pairs = {}\n        if parent is None:\n            parents = []\n        else:\n            parents = parent\n\n        for key, value in data.items():\n            if hasattr(value, 'values'):\n                parents.append(key)\n                r_urlencode(value, parents, pairs)\n                parents.pop()\n            else:\n                pairs[renderKey(parents + [key])] = renderVal(value)\n\n        return pairs\n    return urllib.urlencode(r_urlencode(data))\n\n\ndef renderKey(parents):\n    depth, outStr = 0, ''\n    for x in parents:\n        str = \"[%s]\" if depth &gt; 0 else \"%s\"\n        outStr += str % renderVal(x)\n        depth += 1\n    return outStr\n\n\ndef renderVal(val):\n    return urllib.quote(unicode(val))\n\n\ndef main():\n    print recursive_urlencode(payload)\n\n\nif __name__ == '__main__':\n    sys.exit(main())\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 8171744,
+                        "reputation": 111,
+                        "user_id": 6151941,
+                        "user_type": "registered",
+                        "display_name": "LNoor"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1471875748,
+                    "creation_date": 1471875748,
+                    "answer_id": 39082010,
+                    "question_id": 4013838,
+                    "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/39082010#39082010",
+                    "body": "<p>Based on the code of @malaney, I think that the code below emulates the PHP function <code>http_build_query()</code> quite well.</p>\n\n<pre><code>#!/usr/bin/env python3\n\nimport urllib.parse\n\ndef http_build_query(data):\n    parents = list()\n    pairs = dict()\n\n    def renderKey(parents):\n        depth, outStr = 0, ''\n        for x in parents:\n            s = \"[%s]\" if depth &gt; 0 or isinstance(x, int) else \"%s\"\n            outStr += s % str(x)\n            depth += 1\n        return outStr\n\n    def r_urlencode(data):\n        if isinstance(data, list) or isinstance(data, tuple):\n            for i in range(len(data)):\n                parents.append(i)\n                r_urlencode(data[i])\n                parents.pop()\n        elif isinstance(data, dict):\n            for key, value in data.items():\n                parents.append(key)\n                r_urlencode(value)\n                parents.pop()\n        else:\n            pairs[renderKey(parents)] = str(data)\n\n        return pairs\n    return urllib.parse.urlencode(r_urlencode(data))\n\nif __name__ == '__main__':\n    payload = {\n        'action': 'add',\n        'controller': 'invoice',\n        'code': 'debtor',\n        'InvoiceLines': [\n            {'PriceExcl': 150, 'Description': 'Setupfee'},\n            {'PriceExcl':49.99, 'Description':'Subscription'}\n        ],\n        'date': '2016-08-01',\n        'key': 'Yikes&amp;ampersand'\n    }\n    print(http_build_query(payload))\n\n    payload2 = [\n        'item1',\n        'item2'\n    ]\n    print(http_build_query(payload2))\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3004591,
+                        "reputation": 143,
+                        "user_id": 2549346,
+                        "user_type": "registered",
+                        "display_name": "Tony_Wang"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1491917694,
+                    "last_edit_date": 1491917694,
+                    "creation_date": 1491916554,
+                    "answer_id": 43347067,
+                    "question_id": 4013838,
+                    "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/43347067#43347067",
+                    "body": "<p>I think the code below may be what you want</p>\n\n<pre>\nimport urllib.parse\n\ndef url_encoder(params):\n    g_encode_params = {}\n\n    def _encode_params(params, p_key=None):\n        encode_params = {}\n        if isinstance(params, dict):\n            for key in params:\n                encode_key = '{}[{}]'.format(p_key,key)\n                encode_params[encode_key] = params[key]\n        elif isinstance(params, (list, tuple)):\n            for offset,value in enumerate(params):\n                encode_key = '{}[{}]'.format(p_key, offset)\n                encode_params[encode_key] = value\n        else:\n            g_encode_params[p_key] = params\n\n        for key in encode_params:\n            value = encode_params[key]\n            _encode_params(value, key)\n\n    if isinstance(params, dict):\n        for key in params:\n            _encode_params(params[key], key)\n\n    return urllib.parse.urlencode(g_encode_params)\n\nif __name__ == '__main__':\n    params = {'name': 'interface_name', 'interfaces': [{'interface': 'inter1'}, {'interface': 'inter2'}]}\n    print(url_encoder(params)) \n</pre>\n\n<p>the output is </p>\n\n<pre>\ninterfaces%5B1%5D%5Binterface%5D=inter2&name=interface_name&interfaces%5B0%5D%5Binterface%5D=inter1\n</pre>\n\n<p>which is look like </p>\n\n<pre>\ninterfaces[1][interface]=inter2&name=interface_name&interfaces[0][interface]=inter1\n</pre>\n\n<p>PS: you may want use <code>OrderDict</code> to replace <code>dict</code> above</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3268834,
+                        "reputation": 1923,
+                        "user_id": 2752670,
+                        "user_type": "registered",
+                        "display_name": "vikyd"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1513672736,
+                    "last_edit_date": 1513672736,
+                    "creation_date": 1513664449,
+                    "answer_id": 47881085,
+                    "question_id": 4013838,
+                    "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/47881085#47881085",
+                    "body": "<p>If you want to convert python dict/list/nested to PHP Array like urlencoded string.</p>\n\n<p>In python, most of the data type you want to convert to urlencoded maybe: <code>dict</code> <code>list</code> <code>tuple</code> <code>nested of them</code>, Like</p>\n\n<pre><code>a = [1, 2]\nprint(recursive_urlencode(a))\n# 0=1&amp;1=2\n\n\na2 = (1, '2')\nprint(recursive_urlencode(a2))\n# 0=1&amp;1=2\n\n\nb = {'a': 11, 'b': 'foo'}\nprint(recursive_urlencode(b))\n# a=11&amp;b=foo\n\n\nc = {'a': 11, 'b': [1, 2]}\nprint(recursive_urlencode(c))\n# a=11&amp;b[0]=1&amp;b[1]=2\n\n\nd = [1, {'a': 11, 'b': 22}]\nprint(recursive_urlencode(d))\n# 0=1&amp;1[a]=11&amp;1[b]=22\n\n\ne = {'a': 11, 'b': [1, {'c': 123}, [3, 'foo']]}\nprint(recursive_urlencode(e))\n# a=11&amp;b[0]=1&amp;b[1][c]=123&amp;b[2][0]=3&amp;b[2][1]=foo\n</code></pre>\n\n<p><a href=\"https://github.com/Viky-zhang/to_php_post_arr\" rel=\"nofollow noreferrer\">https://github.com/Viky-zhang/to_php_post_arr</a></p>\n\n<p>P.S. some code from: <a href=\"https://stackoverflow.com/a/4014164/2752670\">https://stackoverflow.com/a/4014164/2752670</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 14443980,
+                                "reputation": 1634,
+                                "user_id": 10433739,
+                                "user_type": "registered",
+                                "display_name": "Benjamin Urquhart"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1557344077,
+                            "post_id": 56047575,
+                            "comment_id": 98737306,
+                            "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/56047575#comment98737306_56047575",
+                            "body": "Could you explain your answer?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9486539,
+                                "reputation": 85,
+                                "user_id": 7052778,
+                                "user_type": "registered",
+                                "display_name": "vikkz"
+                            },
+                            "reply_to_user": {
+                                "account_id": 14443980,
+                                "reputation": 1634,
+                                "user_id": 10433739,
+                                "user_type": "registered",
+                                "display_name": "Benjamin Urquhart"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1557513190,
+                            "post_id": 56047575,
+                            "comment_id": 98804469,
+                            "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/56047575#comment98804469_56047575",
+                            "body": "@BenjaminUrquhart the function get_encoded_url_params() takes a dict/map and gives key-value pairs as url encoded parameters. It&#39;s similar to urllib.urlencode() but also works the case when there is dict or list inside the original dict. I have provided an example in the comment inside function."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 9486539,
+                        "reputation": 85,
+                        "user_id": 7052778,
+                        "user_type": "registered",
+                        "display_name": "vikkz"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1557512701,
+                    "last_edit_date": 1557512701,
+                    "creation_date": 1557342856,
+                    "answer_id": 56047575,
+                    "question_id": 4013838,
+                    "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python/56047575#56047575",
+                    "body": "<p>The function get_encoded_url_params() takes a dict as argument and returns url encoded form of the dict.</p>\n\n<pre><code>def get_encoded_url_params(d):\n    \"\"\"URL-encode a nested dictionary.\n    :param d = dict\n    :returns url encoded string with dict key-value pairs as query parameters\n    e.g.\n    if d = { \"addr\":{ \"country\": \"US\", \"line\": [\"a\",\"b\"] },\n            \"routing_number\": \"011100915\", \"token\": \"asdf\"\n        }\n    :returns 'addr[country]=US&amp;addr[line][0]=a&amp;addr[line][1]=b&amp;routing_number=011100915&amp;token=asdf'\n    or 'addr%5Bcountry%5D=US&amp;addr%5Bline%5D%5B0%5D=a&amp;addr%5Bline%5D%5B1%5D=b&amp;routing_number=011100915&amp;token=asdf'\n    (which is url encoded form of the former using quote_plus())\n    \"\"\"\n\n    def get_pairs(value, base):\n        if isinstance(value, dict):\n            return get_dict_pairs(value, base)\n        elif isinstance(value, list):\n            return get_list_pairs(value, base)\n        else:\n            return [base + '=' + str(value)]\n            # use quote_plus() to get url encoded string\n            # return [quote_plus(base) + '=' + quote_plus(str(value))]\n\n    def get_list_pairs(li, base):\n        pairs = []\n        for idx, value in enumerate(li):\n            new_base = base + '[' + str(idx) + ']'\n            pairs += get_pairs(value, new_base)\n        return pairs\n\n    def get_dict_pairs(d, base=''):\n        pairs = []\n        for key, value in d.items():\n            new_base = key if base == '' else base + '[' + key + ']'\n            pairs += get_pairs(value, new_base)\n        return pairs\n\n    return '&amp;'.join(get_dict_pairs(d))\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 18751,
+                "reputation": 2066,
+                "user_id": 43273,
+                "user_type": "registered",
+                "accept_rate": 100,
+                "display_name": "pablobm"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 4014164,
+            "answer_count": 9,
+            "score": 13,
+            "last_activity_date": 1557512701,
+            "creation_date": 1288003868,
+            "question_id": 4013838,
+            "link": "https://stackoverflow.com/questions/4013838/urlencode-a-multidimensional-dictionary-in-python",
+            "title": "urlencode a multidimensional dictionary in python",
+            "body": "<p>How can I get a URL-encoded version of a multidimensional dictionary in Python? Unfortunately, <code>urllib.urlencode()</code> only works in a single dimension. I would need a version capable of recursively encoding the dictionary.</p>\n\n<p>For example, if I have the following dictionary:</p>\n\n<pre><code>{'a': 'b', 'c': {'d': 'e'}}\n</code></pre>\n\n<p>I want to obtain the following string:</p>\n\n<pre><code>a=b&amp;c[d]=e\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7706
+}

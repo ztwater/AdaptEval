@@ -1,0 +1,75 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "graph",
+                "gis",
+                "shapely",
+                "fiona"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2302579,
+                                "reputation": 677,
+                                "user_id": 2023783,
+                                "user_type": "registered",
+                                "accept_rate": 48,
+                                "display_name": "user14696"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1393268599,
+                            "post_id": 21922058,
+                            "comment_id": 33337347,
+                            "link": "https://stackoverflow.com/questions/21824157/how-to-extract-interior-polygon-coordinates-using-shapely/21922058#comment33337347_21922058",
+                            "body": "Okay...well, I got passed that block...but I can&#39;t delete a coordinate (i.e. item) from the list of .coords? I keep getting: &gt;&gt;TypeError: &#39;CoordinateSequence&#39; object doesn&#39;t support item deletion on &gt;&gt;        for i in sorted(removeList, reverse=True):             del ring.coords[i]"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 128865,
+                        "reputation": 42475,
+                        "user_id": 327026,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "Mike T"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 17,
+                    "last_activity_date": 1489759192,
+                    "last_edit_date": 1489759192,
+                    "creation_date": 1392939204,
+                    "answer_id": 21922058,
+                    "question_id": 21824157,
+                    "link": "https://stackoverflow.com/questions/21824157/how-to-extract-interior-polygon-coordinates-using-shapely/21922058#21922058",
+                    "body": "<p>Interior and exterior rings are structured differently. For any polygon, there is always 1 exterior ring with zero or more interior rings.</p>\n\n<p>So looking at the structure of a geometry, <code>exterior</code> is a <code>LinearRing</code> object, and <code>interiors</code> is a <em>list</em> of zero or more <code>LinearRing</code> objects. Any <code>LinearRing</code> object will have <code>coords</code>, which you can slice to see a list of the coordinates with <code>coords[:]</code>.</p>\n\n<p>The following is a function that returns a dict of lists of exterior and interior coordinates:</p>\n\n<pre><code>def extract_poly_coords(geom):\n    if geom.type == 'Polygon':\n        exterior_coords = geom.exterior.coords[:]\n        interior_coords = []\n        for interior in geom.interiors:\n            interior_coords += interior.coords[:]\n    elif geom.type == 'MultiPolygon':\n        exterior_coords = []\n        interior_coords = []\n        for part in geom:\n            epc = extract_poly_coords(part)  # Recursive call\n            exterior_coords += epc['exterior_coords']\n            interior_coords += epc['interior_coords']\n    else:\n        raise ValueError('Unhandled geometry type: ' + repr(geom.type))\n    return {'exterior_coords': exterior_coords,\n            'interior_coords': interior_coords}\n</code></pre>\n\n<p>E.g.:</p>\n\n<pre><code>extract_poly_coords(myShape)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 2302579,
+                "reputation": 677,
+                "user_id": 2023783,
+                "user_type": "registered",
+                "accept_rate": 48,
+                "display_name": "user14696"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "answer_count": 1,
+            "score": 6,
+            "last_activity_date": 1489759192,
+            "creation_date": 1392625968,
+            "question_id": 21824157,
+            "link": "https://stackoverflow.com/questions/21824157/how-to-extract-interior-polygon-coordinates-using-shapely",
+            "title": "How to extract interior polygon coordinates using Shapely?",
+            "body": "<p>I am new to Shapely (but enthusiastic about it), and recently I've discovered a bit of a road bump.</p>\n\n<p>I have a polygon shapefile that I am reading in via Fiona. This shapefile contains BOTH polygon and multipolygon items and I need to build an array for each feature of all the coordinates within it (i.e. both exterior and/or interior). Notably, two of the polygon items have interior rings (and they are valid).</p>\n\n<p>I seem to have no problem accessing the exterior coordinates of the polygon(s)/multipolygon(s) ... but I am not pulling anything for the interior coordinates.</p>\n\n<p>Do I need to take a new approach here (i.e. LinearRings)...?</p>\n\n<pre><code>def convert_polygons(inFile):\n\n    for polys in fiona.open(inFile):\n        myShape = shape(polys['geometry'])\n        exterior_poly = 0\n        interior_poly = 0\n        if isinstance(myShape, Polygon):\n            print \"yes, I am a polygon\"\n            # count how many points for each interior polygon\n            try:\n                interior_poly += len(myShape.interior.coords)\n            except:\n                pass\n            # count how many points for each exterior polygon\n            exterior_poly += len(myShape.exterior.coords)\n            geomArray = asarray(myShape.exterior)\n            print geomArray\n            print \"number of interior points in polygon \" + str(interior_poly)\n            print \"number of exterior points in polygon \" + str(exterior_poly)\n        elif isinstance(myShape, MultiPolygon):\n            print \"yes, I am a MultiPolygon\"\n            # count how many points for each interior polygon\n            try:\n                interior_poly += len(myShape.interior.coords)\n            except:\n                pass\n            try:\n                # count how many points for each exterior polygon\n                exterior_poly += len(myShape.exterior.coords)\n            except:\n                pass\n            try:\n                geomArray = asarray(myShape.interior)\n            except:\n                pass\n            try:\n                geomArray = asarray(myShape.exterior)\n            except:\n                pass\n            print geomArray\n            print \"number of interior points in polygon \" + str(interior_poly)\n            print \"number of exterior points in polygon \" + str(exterior_poly)\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6801
+}

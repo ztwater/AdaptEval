@@ -1,0 +1,378 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "matplotlib",
+                "colors"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 5884701,
+                        "reputation": 1767,
+                        "user_id": 4633075,
+                        "user_type": "registered",
+                        "accept_rate": 36,
+                        "display_name": "Eular"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1465657793,
+                    "post_id": 37765197,
+                    "comment_id": 62999167,
+                    "link": "https://stackoverflow.com/questions/37765197/darken-or-lighten-a-color-in-matplotlib#comment62999167_37765197",
+                    "body": "are you asking about the <code>alpha</code> value?"
+                },
+                {
+                    "owner": {
+                        "account_id": 2918228,
+                        "reputation": 13428,
+                        "user_id": 2501018,
+                        "user_type": "registered",
+                        "accept_rate": 65,
+                        "display_name": "8one6"
+                    },
+                    "reply_to_user": {
+                        "account_id": 5884701,
+                        "reputation": 1767,
+                        "user_id": 4633075,
+                        "user_type": "registered",
+                        "accept_rate": 36,
+                        "display_name": "Eular"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1465657859,
+                    "post_id": 37765197,
+                    "comment_id": 62999181,
+                    "link": "https://stackoverflow.com/questions/37765197/darken-or-lighten-a-color-in-matplotlib#comment62999181_37765197",
+                    "body": "No.  I don&#39;t want to make a color more or less transparent, I want to make it darker (more black) or lighter (more white)."
+                },
+                {
+                    "owner": {
+                        "account_id": 7565400,
+                        "reputation": 210226,
+                        "user_id": 5741205,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "MaxU - stand with Ukraine"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1465657954,
+                    "post_id": 37765197,
+                    "comment_id": 62999217,
+                    "link": "https://stackoverflow.com/questions/37765197/darken-or-lighten-a-color-in-matplotlib#comment62999217_37765197",
+                    "body": "check: <a href=\"http://matplotlib.org/api/colors_api.html#matplotlib.colors.LightSource.shade\" rel=\"nofollow noreferrer\">matplotlib.org/api/&hellip;</a> and <a href=\"http://matplotlib.org/api/colors_api.html#matplotlib.colors.LightSource.shade_rgb\" rel=\"nofollow noreferrer\">matplotlib.org/api/&hellip;</a>"
+                },
+                {
+                    "owner": {
+                        "account_id": 6174953,
+                        "reputation": 191,
+                        "user_id": 9606141,
+                        "user_type": "registered",
+                        "display_name": "Mike"
+                    },
+                    "reply_to_user": {
+                        "account_id": 5884701,
+                        "reputation": 1767,
+                        "user_id": 4633075,
+                        "user_type": "registered",
+                        "accept_rate": 36,
+                        "display_name": "Eular"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1678363971,
+                    "post_id": 37765197,
+                    "comment_id": 133519955,
+                    "link": "https://stackoverflow.com/questions/37765197/darken-or-lighten-a-color-in-matplotlib#comment133519955_37765197",
+                    "body": "@Eular I agree, this should make a fast and efficient effect.  Two lines should do it:    <code>alpha = 1 if CRITERIA else 0.35                                                         linewidth = 1 if alpha == 1 else 1.4</code>"
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 3420558,
+                        "reputation": 13225,
+                        "user_id": 2868335,
+                        "user_type": "registered",
+                        "display_name": "armatita"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1465667189,
+                    "last_edit_date": 1465667189,
+                    "creation_date": 1465665533,
+                    "answer_id": 37766527,
+                    "question_id": 37765197,
+                    "link": "https://stackoverflow.com/questions/37765197/darken-or-lighten-a-color-in-matplotlib/37766527#37766527",
+                    "body": "<p>A few months ago I had to solve that problem. The idea was for the user to choose a color (any color) and the software automatically generated a colormap (this was part of a package for scientific purposes).</p>\n\n<p>In any case here is the code that I used to achieve it. You won't need most of what the object does but it will give you what you ask:</p>\n\n<pre><code>import math\n\nclass Color():\n    def __init__(self, color, fmt='rgb'):\n        self.__initialize__(color, fmt)\n\n    def __initialize__(self, color, fmt='rgb'):\n        if fmt == 'rgb':\n            self.rgb = (int(color[0]), int(color[1]), int(color[2]))\n            self.hex = self._rgb2hex(self.rgb)\n            self.hsv = self._rgb2hsv(self.rgb)\n            self.rgb0 = self.rgb[0] / 255, self.rgb[1] / 255, self.rgb[2] / 255\n        elif fmt == 'rgb0':\n            self.rgb = (int(color[0] * 255), int(color[1] * 255), int(color[2] * 255))\n            self.hex = self._rgb2hex(self.rgb)\n            self.hsv = self._rgb2hsv(self.rgb)\n            self.rgb0 = (color[0], color[1], color[2])\n        elif fmt == 'hex':\n            self.hex = color\n            self.rgb = self._hex2rgb(self.hex)\n            self.hsv = self._rgb2hsv(self.rgb)\n            self.rgb0 = self.rgb[0] / 255, self.rgb[1] / 255, self.rgb[2] / 255\n        elif fmt == 'hsv':\n            self.hsv = color\n            self.rgb = self._hsv2rgb(self.hsv)\n            self.hex = self._rgb2hex(self.rgb)\n            self.rgb0 = self.rgb[0] / 255, self.rgb[1] / 255, self.rgb[2] / 255\n        self.__automaticPalette__()\n\n    def __automaticPalette__(self):\n        self.rgbColors = []\n        self.hexColors = []\n        self.hsvColors = []\n        self.rgb0Colors = []\n        hsv = self.hsv\n        for i in range(255):\n            new_hsv = hsv[0], hsv[1], (1 / 255) * i\n            self.rgbColors.append(self._hsv2rgb(new_hsv))\n            self.hexColors.append(self._rgb2hex(self.rgbColors[-1]))\n            self.hsvColors.append(new_hsv)\n            r, g, b = self.rgbColors[-1]\n            self.rgb0Colors.append((r / 255, g / 255, b / 255))\n\n    def _testPalette(self, o=1):\n        from matplotlib import pyplot as plt\n        from matplotlib.patches import Rectangle\n        if o == 1:\n            someX, someY = 0.5, 0.1\n            plt.figure()\n            s = 1\n            currentAxis = plt.gca()\n            for x in range(254):\n                currentAxis.add_patch(Rectangle((x * s, someY), s, 0.1, alpha=1, color=self.rgb0Colors[x]))\n            currentAxis.add_patch(Rectangle((5 * s, someY + 0.07), 30, 0.02, alpha=1, color=self.rgb0))\n\n            plt.ylim(0.1, 0.2)\n            plt.xlim(0, (x + 1) * s)\n            plt.show()\n        elif o == 2:\n            local = self.rgb0Colors[90:190][0:-1:10]\n            someX, someY = 0.5, 0.1\n            plt.figure()\n            s = 1\n            currentAxis = plt.gca()\n            for x in range(len(local)):\n                currentAxis.add_patch(Rectangle((x * s, someY), s, 0.1, alpha=1, color=local[x]))\n            currentAxis.add_patch(Rectangle((5 * s, someY + 0.07), 30, 0.02, alpha=1, color=self.rgb0))\n\n            plt.ylim(0.1, 0.2)\n            plt.xlim(0, (x + 1) * s)\n            plt.show()\n\n    def _hex2rgb(self, value):\n        # http://stackoverflow.com/questions/214359/converting-hex-color-to-rgb-and-vice-versa\n        value = value.lstrip('#')\n        lv = len(value)\n        return tuple(int(value[i:i + int(lv / 3)], 16) for i in range(0, lv, int(lv / 3)))\n\n    def _rgb2hex(self, rgb):\n        # http://stackoverflow.com/questions/214359/converting-hex-color-to-rgb-and-vice-versa\n        r = rgb[0]\n        g = rgb[1]\n        b = rgb[2]\n        return '#%02X%02X%02X' % (r, g, b)\n\n    def _hsv2rgb(self, hsv):\n        # http://code.activestate.com/recipes/576919-python-rgb-and-hsv-conversion/\n        h, s, v = hsv\n        h = float(h)\n        s = float(s)\n        v = float(v)\n        h60 = h / 60.0\n        h60f = math.floor(h60)\n        hi = int(h60f) % 6\n        f = h60 - h60f\n        p = v * (1 - s)\n        q = v * (1 - f * s)\n        t = v * (1 - (1 - f) * s)\n        r, g, b = 0, 0, 0\n        if hi == 0:\n            r, g, b = v, t, p\n        elif hi == 1:\n            r, g, b = q, v, p\n        elif hi == 2:\n            r, g, b = p, v, t\n        elif hi == 3:\n            r, g, b = p, q, v\n        elif hi == 4:\n            r, g, b = t, p, v\n        elif hi == 5:\n            r, g, b = v, p, q\n        r, g, b = int(r * 255), int(g * 255), int(b * 255)\n        return r, g, b\n\n    def _rgb2hsv(self, rgb):\n        # http://code.activestate.com/recipes/576919-python-rgb-and-hsv-conversion/\n        r, g, b = rgb\n        r, g, b = r / 255.0, g / 255.0, b / 255.0\n        mx = max(r, g, b)\n        mn = min(r, g, b)\n        df = mx - mn\n        if mx == mn:\n            h = 0\n        elif mx == r:\n            h = (60 * ((g - b) / df) + 360) % 360\n        elif mx == g:\n            h = (60 * ((b - r) / df) + 120) % 360\n        elif mx == b:\n            h = (60 * ((r - g) / df) + 240) % 360\n        if mx == 0:\n            s = 0\n        else:\n            s = df / mx\n        v = mx\n        return h, s, v\n\n    def getColor(self, fmt='rgb'):\n        if fmt == 'rgb':\n            return self.rgb\n        elif fmt == 'hex':\n            return self.hex\n        elif fmt == 'rgb0':\n            return self.rgb0\n        elif fmt == 'hsv':\n            return self.hsv\n</code></pre>\n\n<p>So if you call it like this:</p>\n\n<pre><code>c = Color((51, 153, 255))\n# c = Color((0.5, 0.1, 0.8), fmt='rgb0') # It should work with rgb0\n# c = Color('#05d4fa', fmt='hex')        # and hex but I don't remember if it was well tested so be careful (the conversions might be messy).\nc._testPalette(1)\nprint(c.rgbColors)\n</code></pre>\n\n<p>It will return you this:</p>\n\n<p><a href=\"https://i.stack.imgur.com/t1C5E.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/t1C5E.png\" alt=\"Automatically building a colormap from a single color\"></a></p>\n\n<p>, and this:</p>\n\n<pre><code>[(0, 0, 0), (0, 0, 1), (0, 1, 2), (0, 1, 3), (0, 2, 4), (0, 3, 5), (1, 3, 6), (1, 4, 7), (1, 4, 8), (1, 5, 9), (1, 6, 10), (2, 6, 11), (2, 7, 12), (2, 7, 13), (2, 8, 14), (2, 9, 15), (3, 9, 16), (3, 10, 17), (3, 10, 18), (3, 11, 19), (3, 12, 20), (4, 12, 21), (4, 13, 22), (4, 13, 23), (4, 14, 24), (4, 15, 25), (5, 15, 26), (5, 16, 27), (5, 16, 28), (5, 17, 29), (5, 18, 30), (6, 18, 31), (6, 19, 32), (6, 19, 32), (6, 20, 34), (6, 21, 35), (7, 21, 36), (7, 22, 36), (7, 22, 38), (7, 23, 39), (7, 24, 40), (8, 24, 40), (8, 25, 42), (8, 25, 43), (8, 26, 44), (8, 26, 44), (9, 27, 46), (9, 28, 47), (9, 28, 48), (9, 29, 48), (9, 30, 50), (10, 30, 51), (10, 31, 52), (10, 31, 52), (10, 32, 54), (10, 33, 55), (11, 33, 56), (11, 34, 56), (11, 34, 58), (11, 35, 59), (11, 36, 60), (12, 36, 60), (12, 37, 62), (12, 37, 63), (12, 38, 64), (12, 38, 65), (13, 39, 65), (13, 40, 67), (13, 40, 68), (13, 41, 69), (13, 42, 70), (14, 42, 71), (14, 43, 72), (14, 43, 73), (14, 44, 73), (14, 45, 75), (15, 45, 76), (15, 46, 77), (15, 46, 78), (15, 47, 79), (15, 48, 80), (16, 48, 81), (16, 49, 81), (16, 49, 83), (16, 50, 84), (16, 50, 85), (17, 51, 86), (17, 52, 87), (17, 52, 88), (17, 53, 89), (17, 53, 89), (18, 54, 91), (18, 55, 92), (18, 55, 93), (18, 56, 94), (18, 57, 95), (19, 57, 96), (19, 58, 97), (19, 58, 97), (19, 59, 99), (19, 60, 100), (20, 60, 101), (20, 61, 102), (20, 61, 103), (20, 62, 104), (20, 62, 105), (21, 63, 105), (21, 64, 107), (21, 64, 108), (21, 65, 109), (21, 66, 110), (22, 66, 111), (22, 67, 112), (22, 67, 113), (22, 68, 113), (22, 69, 115), (23, 69, 116), (23, 70, 117), (23, 70, 118), (23, 71, 119), (23, 72, 120), (24, 72, 121), (24, 73, 121), (24, 73, 123), (24, 74, 124), (24, 74, 125), (25, 75, 126), (25, 76, 127), (25, 76, 128), (25, 77, 129), (25, 77, 130), (26, 78, 131), (26, 79, 131), (26, 79, 133), (26, 80, 134), (26, 81, 135), (27, 81, 136), (27, 82, 137), (27, 82, 138), (27, 83, 139), (27, 84, 140), (28, 84, 141), (28, 85, 142), (28, 85, 143), (28, 86, 144), (28, 86, 145), (29, 87, 146), (29, 88, 147), (29, 88, 147), (29, 89, 149), (29, 90, 150), (30, 90, 151), (30, 91, 152), (30, 91, 153), (30, 92, 154), (30, 93, 155), (31, 93, 156), (31, 94, 157), (31, 94, 158), (31, 95, 159), (31, 96, 160), (32, 96, 161), (32, 97, 162), (32, 97, 163), (32, 98, 163), (32, 99, 165), (33, 99, 166), (33, 100, 167), (33, 100, 168), (33, 101, 169), (33, 101, 170), (34, 102, 171), (34, 103, 172), (34, 103, 173), (34, 104, 174), (34, 105, 175), (35, 105, 176), (35, 106, 177), (35, 106, 178), (35, 107, 179), (35, 107, 179), (36, 108, 181), (36, 109, 182), (36, 109, 183), (36, 110, 184), (36, 110, 185), (37, 111, 186), (37, 112, 187), (37, 112, 188), (37, 113, 189), (37, 114, 190), (38, 114, 191), (38, 115, 192), (38, 115, 193), (38, 116, 194), (38, 116, 195), (39, 117, 195), (39, 118, 197), (39, 118, 198), (39, 119, 199), (39, 120, 200), (40, 120, 201), (40, 121, 202), (40, 121, 203), (40, 122, 204), (40, 123, 205), (41, 123, 206), (41, 124, 207), (41, 124, 208), (41, 125, 209), (41, 125, 210), (42, 126, 211), (42, 127, 211), (42, 127, 213), (42, 128, 214), (42, 129, 215), (43, 129, 216), (43, 130, 217), (43, 130, 218), (43, 131, 219), (43, 132, 220), (44, 132, 221), (44, 133, 222), (44, 133, 223), (44, 134, 224), (44, 135, 225), (45, 135, 226), (45, 136, 227), (45, 136, 227), (45, 137, 229), (45, 138, 230), (46, 138, 231), (46, 139, 232), (46, 139, 233), (46, 140, 234), (46, 140, 235), (47, 141, 236), (47, 142, 237), (47, 142, 238), (47, 143, 239), (47, 144, 240), (48, 144, 241), (48, 145, 242), (48, 145, 243), (48, 146, 243), (48, 147, 245), (49, 147, 246), (49, 148, 247), (49, 148, 248), (49, 149, 249), (49, 149, 250), (50, 150, 251), (50, 151, 252), (50, 151, 253), (50, 152, 254)]\n</code></pre>\n\n<p>Which is a list of all the color generated to create that color map. It's custom though, matplotlib was just used to plot it.</p>\n\n<p><strong>EDIT:</strong> Just a note to explain how this is achieved. RGB gives you a value for Red, Green and Blue. HSL (HSV) on the other hand gives you hue, saturation, and lightness (value). So if you convert your color from RGB into HSL and than run the whole spectrum of lightness you'll obtain the dark to light values of a color (for example blue will always remain blue, although lighter and darker). </p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 176476,
+                                "reputation": 2194,
+                                "user_id": 407197,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Alexander"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1524655461,
+                            "post_id": 49601444,
+                            "comment_id": 87057764,
+                            "link": "https://stackoverflow.com/questions/37765197/darken-or-lighten-a-color-in-matplotlib/49601444#comment87057764_49601444",
+                            "body": "This works great here. Amazing that python even has functions for different color systems in the standard library!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7732487,
+                                "reputation": 1982,
+                                "user_id": 5855131,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Jiadong"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1543715109,
+                            "post_id": 49601444,
+                            "comment_id": 94017485,
+                            "link": "https://stackoverflow.com/questions/37765197/darken-or-lighten-a-color-in-matplotlib/49601444#comment94017485_49601444",
+                            "body": "For darken, when you have a too large value of <code>amount</code>, you will get wrong rgb, please fix that..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 956771,
+                                "reputation": 12660,
+                                "user_id": 981933,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "F Lekschas"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1570026377,
+                            "post_id": 49601444,
+                            "comment_id": 102785240,
+                            "link": "https://stackoverflow.com/questions/37765197/darken-or-lighten-a-color-in-matplotlib/49601444#comment102785240_49601444",
+                            "body": "Awesome gist! I changed the return value to <code>return colorsys.hls_to_rgb(c[0], max(0, min(1, amount * c[1])), c[2])</code> such that the color gets brighter when <code>amount &gt; 1</code> and darker when <code>amount &lt; 1</code>. I also restricted the luminosity to <code>[0,1]</code> as values outside don&#39;t make sense."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 997611,
+                                "reputation": 3888,
+                                "user_id": 1082565,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "Ian Hincks"
+                            },
+                            "reply_to_user": {
+                                "account_id": 956771,
+                                "reputation": 12660,
+                                "user_id": 981933,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "F Lekschas"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1570119858,
+                            "post_id": 49601444,
+                            "comment_id": 102821858,
+                            "link": "https://stackoverflow.com/questions/37765197/darken-or-lighten-a-color-in-matplotlib/49601444#comment102821858_49601444",
+                            "body": "Thanks @FLekschas, let me know if I can add anything else to the edit."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1467337,
+                                "reputation": 1849,
+                                "user_id": 1379826,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Sos"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1571988501,
+                            "post_id": 49601444,
+                            "comment_id": 103427697,
+                            "link": "https://stackoverflow.com/questions/37765197/darken-or-lighten-a-color-in-matplotlib/49601444#comment103427697_49601444",
+                            "body": "Any possibility of converting back to the same color format? e.g. if input is hex, return hex"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 997611,
+                                "reputation": 3888,
+                                "user_id": 1082565,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "Ian Hincks"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1467337,
+                                "reputation": 1849,
+                                "user_id": 1379826,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Sos"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1572287507,
+                            "post_id": 49601444,
+                            "comment_id": 103505799,
+                            "link": "https://stackoverflow.com/questions/37765197/darken-or-lighten-a-color-in-matplotlib/49601444#comment103505799_49601444",
+                            "body": "@Sosi <a href=\"https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.colors.to_hex.html\" rel=\"nofollow noreferrer\">matplotlib.org/3.1.1/api/_as_gen/matplotlib.colors.to_hex.ht&zwnj;&#8203;ml</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 945916,
+                                "reputation": 2926,
+                                "user_id": 973184,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Martin Meeser"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1580758266,
+                            "post_id": 49601444,
+                            "comment_id": 106195214,
+                            "link": "https://stackoverflow.com/questions/37765197/darken-or-lighten-a-color-in-matplotlib/49601444#comment106195214_49601444",
+                            "body": "PIP 8: do not use bare except (immediately pops up) - what I am trying to say is: thanks!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 997611,
+                        "reputation": 3888,
+                        "user_id": 1082565,
+                        "user_type": "registered",
+                        "accept_rate": 56,
+                        "display_name": "Ian Hincks"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": false,
+                    "score": 94,
+                    "last_activity_date": 1570119676,
+                    "last_edit_date": 1570119676,
+                    "creation_date": 1522608212,
+                    "answer_id": 49601444,
+                    "question_id": 37765197,
+                    "link": "https://stackoverflow.com/questions/37765197/darken-or-lighten-a-color-in-matplotlib/49601444#49601444",
+                    "body": "<p>Here is a function from <a href=\"https://gist.github.com/ihincks/6a420b599f43fcd7dbd79d56798c4e5a\" rel=\"noreferrer\">my gist</a> to lighten any color that I think will work with any color format known to <code>matplotlib</code>. I think setting an amount > 1 might darken too.</p>\n\n<pre><code>def lighten_color(color, amount=0.5):\n    \"\"\"\n    Lightens the given color by multiplying (1-luminosity) by the given amount.\n    Input can be matplotlib color string, hex string, or RGB tuple.\n\n    Examples:\n    &gt;&gt; lighten_color('g', 0.3)\n    &gt;&gt; lighten_color('#F034A3', 0.6)\n    &gt;&gt; lighten_color((.3,.55,.1), 0.5)\n    \"\"\"\n    import matplotlib.colors as mc\n    import colorsys\n    try:\n        c = mc.cnames[color]\n    except:\n        c = color\n    c = colorsys.rgb_to_hls(*mc.to_rgb(c))\n    return colorsys.hls_to_rgb(c[0], 1 - amount * (1 - c[1]), c[2])\n</code></pre>\n\n<p><strong>EDIT:</strong> Indeed, it does darken as well as lighten:</p>\n\n<pre><code>import matplotlib.pyplot as plt\nimport numpy as np\n\nxs = np.linspace(-1, 1, 100)\nplt.plot(xs, 0 * xs, color='b', lw=3)\nplt.plot(xs, xs**2, color=lighten_color('b', 0.4), lw=3)\nplt.plot(xs, -xs**2, color=lighten_color('b', 1.6), lw=3)\n</code></pre>\n\n<p><a href=\"https://i.stack.imgur.com/qTUfC.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/qTUfC.png\" alt=\"image with example of darken and lighten\"></a></p>\n\n<p><strong>Edit 2:</strong> Removed un-needed numpy dependency in the function.</p>\n\n<p><strong>Edit 3:</strong> Function modified with improvements from @FLekschas</p>\n\n<pre><code>def adjust_lightness(color, amount=0.5):\n    import matplotlib.colors as mc\n    import colorsys\n    try:\n        c = mc.cnames[color]\n    except:\n        c = color\n    c = colorsys.rgb_to_hls(*mc.to_rgb(c))\n    return colorsys.hls_to_rgb(c[0], max(0, min(1, amount * c[1])), c[2])\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7353533,
+                                "reputation": 425,
+                                "user_id": 5599281,
+                                "user_type": "registered",
+                                "display_name": "fhgd"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1589882232,
+                            "post_id": 60562502,
+                            "comment_id": 109462365,
+                            "link": "https://stackoverflow.com/questions/37765197/darken-or-lighten-a-color-in-matplotlib/60562502#comment109462365_60562502",
+                            "body": "When you look at the code of <code>sns.set_hls_values()</code> it <i>sets</i> the l-value of the color and not scale it which is needed for lighten/darken. You can test it with <code>sns.set_hls_values([0.2, 0.2, 0.2], l=0.5) == [0.5, 0.5, 0.5]</code> which is <i>not</i> the original color of <code>[0.2, 0.2, 0.2]</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4237848,
+                                "reputation": 2476,
+                                "user_id": 9058671,
+                                "user_type": "registered",
+                                "display_name": "Night Train"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7353533,
+                                "reputation": 425,
+                                "user_id": 5599281,
+                                "user_type": "registered",
+                                "display_name": "fhgd"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1589894817,
+                            "post_id": 60562502,
+                            "comment_id": 109469374,
+                            "link": "https://stackoverflow.com/questions/37765197/darken-or-lighten-a-color-in-matplotlib/60562502#comment109469374_60562502",
+                            "body": "Now the scaling works. You can try it with eg. <code>color = &quot;lime&quot;</code>, <code>color = &quot;lightblue&quot;</code>, <code>color = [0.8, 0.8, 0.8]</code> and so on..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4237848,
+                                "reputation": 2476,
+                                "user_id": 9058671,
+                                "user_type": "registered",
+                                "display_name": "Night Train"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7353533,
+                                "reputation": 425,
+                                "user_id": 5599281,
+                                "user_type": "registered",
+                                "display_name": "fhgd"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1595403277,
+                            "post_id": 60562502,
+                            "comment_id": 111458414,
+                            "link": "https://stackoverflow.com/questions/37765197/darken-or-lighten-a-color-in-matplotlib/60562502#comment111458414_60562502",
+                            "body": "in just one line using numpy: <code>colorsys.hls_to_rgb(*np.array(colorsys.rgb_to_hls(53, 255, 10)) * [1, .5, 1])</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4237848,
+                        "reputation": 2476,
+                        "user_id": 9058671,
+                        "user_type": "registered",
+                        "display_name": "Night Train"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 34,
+                    "last_activity_date": 1595402672,
+                    "last_edit_date": 1595402672,
+                    "creation_date": 1583491737,
+                    "answer_id": 60562502,
+                    "question_id": 37765197,
+                    "link": "https://stackoverflow.com/questions/37765197/darken-or-lighten-a-color-in-matplotlib/60562502#60562502",
+                    "body": "<p>Using only <a href=\"https://docs.python.org/library/colorsys.html\" rel=\"noreferrer\">colorsys</a> which is part of the python standard library it is possible to scale the lighntess with just two lines of code</p>\n<p>If you still want the option to pass non rgb values like colornames or HEX you can simply use <code>matplotlib.colors.ColorConverter.to_rgb(&quot;#ff0000&quot;)</code>.</p>\n<p>This method scales the lightness of an rgb color</p>\n<pre class=\"lang-py prettyprint-override\"><code>import colorsys\n\ndef scale_lightness(rgb, scale_l):\n    # convert rgb to hls\n    h, l, s = colorsys.rgb_to_hls(*rgb)\n    # manipulate h, l, s values and return as rgb\n    return colorsys.hls_to_rgb(h, min(1, l * scale_l), s = s)\n</code></pre>\n<p>A simple demonstration. For more details have a look at the old example.</p>\n<pre class=\"lang-py prettyprint-override\"><code>import matplotlib\nimport seaborn as sns\n\ncolor = matplotlib.colors.ColorConverter.to_rgb(&quot;navy&quot;)\nrgbs = [scale_lightness(color, scale) for scale in [0, .5, 1, 1.5, 2]]\nsns.palplot(rgbs)\n</code></pre>\n<p><a href=\"https://i.stack.imgur.com/Ig0gm.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/Ig0gm.png\" alt=\"enter image description here\" /></a></p>\n<br>\n<h2>Old Answer</h2>\n<p>There is a <a href=\"https://seaborn.pydata.org/generated/seaborn.set_hls_values.html\" rel=\"noreferrer\">Seaborn method</a>, that easily lets you manipulate the lightness.\n<code>seaborn.set_hls_values()</code> takes a color as RGB-Tuple, HEX or HTML-name and lets you manipulate the hue, lightness and saturation.</p>\n<p>The scaled lightness should be between <code>0</code> and <code>1</code>, where <code>1 &lt; scale</code> increases the lightness and <code>0 \u2264 scale &lt; 1</code> darkens the color.</p>\n<pre class=\"lang-py prettyprint-override\"><code>from colorsys import rgb_to_hls\nimport seaborn as sns\n\ncolor = (1.0, 0.0, 0.0)     # RGB\n\nprint(f&quot;Input color:    \\t Lightness:  {rgb_to_hls(*color)[1]: .2g}\\t RGB:  {color}&quot;)\n\nrgbs = []\nfor scale in [0, .5, 1, 1.5, 2]:\n\n    # scale the lightness (The values should be between 0 and 1)\n    lightness = min(1, rgb_to_hls(*color)[1] * scale)\n\n    # manipulate h, l, s channel of a rgb color\n    rgb = sns.set_hls_values(color = color, h = None, l = lightness, s = None)\n\n    print(f&quot;Scale factor: {scale: .2g}\\t Lightness:  {lightness: .2g}  \\t RGB:  {rgb}&quot;)\n    rgbs.append(rgb)\n\nsns.palplot(rgbs)\n</code></pre>\n<p>In case you want to use other than RGB codes you need to convert your color to RGB. You could use the following command.</p>\n<pre class=\"lang-py prettyprint-override\"><code>color = &quot;red&quot;               # HTML name\ncolor = &quot;#ff0000&quot;           # HEX\ncolor = matplotlib.colors.ColorConverter.to_rgb(color)\n</code></pre>\n<p>The returned values are RGB-Tuples:</p>\n<pre><code>Input color:        Lightness:   0.5    RGB:  (1.0, 0.0, 0.0)\n\nScale factor:  0    Lightness:   0      RGB:  (0.0, 0.0, 0.0)  # Black\nScale factor:  0.5  Lightness:   0.25   RGB:  (0.5, 0.0, 0.0)\nScale factor:  1    Lightness:   0.5    RGB:  (1.0, 0.0, 0.0)  # Unchanged\nScale factor:  1.5  Lightness:   0.75   RGB:  (1.0, 0.5, 0.5)\nScale factor:  2    Lightness:   1      RGB:  (1.0, 1.0, 1.0)  # White\n</code></pre>\n<p><a href=\"https://i.stack.imgur.com/MAH5M.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/MAH5M.png\" alt=\"enter image description here\" /></a>\n<a href=\"https://i.stack.imgur.com/iMcFA.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/iMcFA.png\" alt=\"enter image description here\" /></a>\n<a href=\"https://i.stack.imgur.com/0GzS1.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/0GzS1.png\" alt=\"enter image description here\" /></a>\n<a href=\"https://i.stack.imgur.com/6A9qW.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/6A9qW.png\" alt=\"enter image description here\" /></a>\n<a href=\"https://i.stack.imgur.com/kx2Jx.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/kx2Jx.png\" alt=\"enter image description here\" /></a></p>\n<h2>EDIT:</h2>\n<p>Thanks @fhgd! I changed the code to actually scale the lightness and not just set it.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 2918228,
+                "reputation": 13428,
+                "user_id": 2501018,
+                "user_type": "registered",
+                "accept_rate": 65,
+                "display_name": "8one6"
+            },
+            "comment_count": 4,
+            "is_answered": true,
+            "answer_count": 3,
+            "score": 71,
+            "last_activity_date": 1595402672,
+            "creation_date": 1465657562,
+            "question_id": 37765197,
+            "link": "https://stackoverflow.com/questions/37765197/darken-or-lighten-a-color-in-matplotlib",
+            "title": "Darken or lighten a color in matplotlib",
+            "body": "<p>Say I have a color in Matplotlib.  Maybe it's a string (<code>'k'</code>) or an rgb tuple (<code>(0.5, 0.1, 0.8)</code>) or even some hex (<code>#05FA2B</code>).  Is there a command / convenience function in Matplotlib that would allow me to darken (or lighten) that color.  </p>\n\n<p>I.e. is there <code>matplotlib.pyplot.darken(c, 0.1)</code> or something like that?  I guess what I'm hoping for is something that, behind the scenes, would take a color, convert it to HSL, then either multiply the L value by some given factor (flooring at 0 and capping at 1) or explicitly set the L value to a given value and return the modified color.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8309
+}

@@ -1,0 +1,281 @@
+[
+    {
+        "id": 0,
+        "type": "Method_Signature.Rename_Func",
+        "description": "Change the function name from 'batch_norm' to 'batch_norm_template'.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": []
+    },
+    {
+        "id": 1,
+        "type": "Refactoring.Rename_Param",
+        "description": "Rename 'x', 'phase_train' to 'inputs' and 'is_training' to improve readibility.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_parameter_renaming"
+        ]
+    },
+    {
+        "id": 2,
+        "type": "Method_Signature.Del_Param",
+        "description": "Remove the 'n_out' from the parameters by calculating its value from 'inputs'.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_parameter_renaming"
+        ]
+    },
+    {
+        "id": 3,
+        "type": "Method_Signature.Upd_Param",
+        "description": "Update the 'scope' parameter by removing its default value.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_parameter_renaming"
+        ]
+    },
+    {
+        "id": 4,
+        "type": "Method_Signature.Ins_Param",
+        "description": "Introduce 'moments_dims' parameter to specify dimensions for moments calculation.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_parameter_renaming"
+        ]
+    },
+    {
+        "id": 5,
+        "type": "Method_Signature.Ins_Param",
+        "description": "Introduce 'bn_decay' parameter to control moving average weight.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_parameter_renaming"
+        ]
+    },
+    {
+        "id": 6,
+        "type": "Refactoring.Ins_Tmp_Var",
+        "description": "Add code to determine the number of channels from 'inputs' tensor shape.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": [
+                "tensorflow.Tensor.get_shape"
+            ]
+        },
+        "associated_tests": [
+            "test_num_channels"
+        ]
+    },
+    {
+        "id": 7,
+        "type": "Logic.Upd_Call",
+        "description": "Set decay to 'bn_decay' if provided, otherwise use default value 0.9.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_decay_value"
+        ]
+    },
+    {
+        "id": 8,
+        "type": "Refactoring.Rename_Var",
+        "description": "Assign 'scope' variable as 'sc' within variable scope.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_assign_scope"
+        ]
+    },
+    {
+        "id": 9,
+        "type": "Logic.Upd_Call",
+        "description": "Update moments calculation to use 'moments_dims' parameter instead of a hardcoded list.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_modify_batch_mean_and_var_calculation"
+        ]
+    },
+    {
+        "id": 10,
+        "type": "Logic.Upd_Call",
+        "description": "Set the decay argument with the calculated 'decay' in the ExponentialMovingAverage call",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_decay_value"
+        ]
+    },
+    {
+        "id": 11,
+        "type": "Logic.Ins_Cond",
+        "description": "Calculate 'ema_apply_op' within a conditional context based on 'is_training'. If it is false, use 'tf.no_op()'.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": [
+                "tensorflow.cond",
+                "tensorflow.no_op"
+            ]
+        },
+        "associated_tests": [
+            "test_update_ema_op"
+        ]
+    }
+]

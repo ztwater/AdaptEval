@@ -1,0 +1,248 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "unicode",
+                "ucs2"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 7405,
+                        "reputation": 313805,
+                        "user_id": 12855,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "SilentGhost"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1253301260,
+                    "creation_date": 1253301260,
+                    "answer_id": 1446378,
+                    "question_id": 1446347,
+                    "link": "https://stackoverflow.com/questions/1446347/how-to-find-out-if-python-is-compiled-with-ucs-2-or-ucs-4/1446378#1446378",
+                    "body": "<p>65535 is UCS-2:</p>\n\n<blockquote>\n  <p><a href=\"http://en.wikipedia.org/wiki/UTF-16/UCS-2\" rel=\"nofollow noreferrer\">Thus code point U+0000 is encoded as the number 0, and U+FFFF is encoded as 65535 (which is FFFF16 in hexadecimal).</a></p>\n</blockquote>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 36018,
+                                "reputation": 96689,
+                                "user_id": 102441,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "Eric"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1579880396,
+                            "post_id": 1446411,
+                            "comment_id": 105926363,
+                            "link": "https://stackoverflow.com/questions/1446347/how-to-find-out-if-python-is-compiled-with-ucs-2-or-ucs-4/1446411#comment105926363_1446411",
+                            "body": "Note that this function is <i>not</i> used to implement <code>sys.maxunicode</code> after python 3.3 (ie, all maintained version of python as of this comment) - it only concerns the size of the now-deprecated <code>Py_UNICODE</code> typedef. <code>maxunicode</code> originates from <code>SET_SYS_FROM_STRING(&quot;maxunicode&quot;, PyLong_FromLong(0x10FFFF));</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 15562,
+                        "reputation": 126261,
+                        "user_id": 33006,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "Martin v. L&#246;wis"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 20,
+                    "last_activity_date": 1253301644,
+                    "creation_date": 1253301644,
+                    "answer_id": 1446411,
+                    "question_id": 1446347,
+                    "link": "https://stackoverflow.com/questions/1446347/how-to-find-out-if-python-is-compiled-with-ucs-2-or-ucs-4/1446411#1446411",
+                    "body": "<p>It's 0xFFFF (or 65535) for UCS-2, and 0x10FFFF (or 1114111) for UCS-4:</p>\n\n<pre><code>Py_UNICODE\nPyUnicode_GetMax(void)\n{\n#ifdef Py_UNICODE_WIDE\n    return 0x10FFFF;\n#else\n    /* This is actually an illegal character, so it should\n       not be passed to unichr. */\n    return 0xFFFF;\n#endif\n}\n</code></pre>\n\n<p>The maximum character in UCS-4 mode is defined by the maxmimum value representable in UTF-16.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 48893,
+                                "reputation": 34735,
+                                "user_id": 145400,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "Dr. Jan-Philip Gehrcke"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1444642815,
+                            "post_id": 1446456,
+                            "comment_id": 53972540,
+                            "link": "https://stackoverflow.com/questions/1446347/how-to-find-out-if-python-is-compiled-with-ucs-2-or-ucs-4/1446456#comment53972540_1446456",
+                            "body": "This is not universally correct anymore for Python 3. See <a href=\"https://docs.python.org/3.4/c-api/unicode.html\" rel=\"nofollow noreferrer\">docs.python.org/3.4/c-api/unicode.html</a>: <code>Since the implementation of PEP 393 in Python 3.3, Unicode objects internally use a variety of representations</code>. <a href=\"https://www.python.org/dev/peps/pep-0393/\" rel=\"nofollow noreferrer\">python.org/dev/peps/pep-0393</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3021,
+                                "reputation": 408304,
+                                "user_id": 4279,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "jfs"
+                            },
+                            "reply_to_user": {
+                                "account_id": 48893,
+                                "reputation": 34735,
+                                "user_id": 145400,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "Dr. Jan-Philip Gehrcke"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1457205104,
+                            "post_id": 1446456,
+                            "comment_id": 59304693,
+                            "link": "https://stackoverflow.com/questions/1446347/how-to-find-out-if-python-is-compiled-with-ucs-2-or-ucs-4/1446456#comment59304693_1446456",
+                            "body": "@Jan-PhilipGehrcke: <code>deficient_unicode_build = (sys.maxunicode &lt; 0x10ffff)</code> works on any Python version (even if the flexible internal representation is used where <code>sys.maxunicode == 0x10ffff</code>). The flexible representations allows to get correct results like ucs4 did on previous versions while using less memory than ucs4 in some cases."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 44728,
+                        "reputation": 6869,
+                        "user_id": 131414,
+                        "user_type": "registered",
+                        "display_name": "Stef"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 131,
+                    "last_activity_date": 1253302425,
+                    "creation_date": 1253302425,
+                    "answer_id": 1446456,
+                    "question_id": 1446347,
+                    "link": "https://stackoverflow.com/questions/1446347/how-to-find-out-if-python-is-compiled-with-ucs-2-or-ucs-4/1446456#1446456",
+                    "body": "<p>When built with --enable-unicode=ucs4:</p>\n\n<pre><code>&gt;&gt;&gt; import sys\n&gt;&gt;&gt; print sys.maxunicode\n1114111\n</code></pre>\n\n<p>When built with --enable-unicode=ucs2:</p>\n\n<pre><code>&gt;&gt;&gt; import sys\n&gt;&gt;&gt; print sys.maxunicode\n65535\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2662014,
+                                "reputation": 45632,
+                                "user_id": 2301450,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "vaultah"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1470582025,
+                            "post_id": 1450155,
+                            "comment_id": 64998088,
+                            "link": "https://stackoverflow.com/questions/1446347/how-to-find-out-if-python-is-compiled-with-ucs-2-or-ucs-4/1450155#comment64998088_1450155",
+                            "body": "For anyone wondering what this does: it is an old (&lt; Python 2.5) way of doing <code>&#39;UCS4&#39; if sys.maxunicode &gt; 65536 else &#39;UCS2&#39;</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 25405,
+                        "reputation": 385,
+                        "user_id": 65283,
+                        "user_type": "registered",
+                        "display_name": "Dave"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 11,
+                    "last_activity_date": 1253415011,
+                    "creation_date": 1253415011,
+                    "answer_id": 1450155,
+                    "question_id": 1446347,
+                    "link": "https://stackoverflow.com/questions/1446347/how-to-find-out-if-python-is-compiled-with-ucs-2-or-ucs-4/1450155#1450155",
+                    "body": "<p>I had this same issue once.  I documented it for myself on my wiki at</p>\n\n<p><a href=\"http://arcoleo.org/dsawiki/Wiki.jsp?page=Python%20UTF%20-%20UCS2%20or%20UCS4\" rel=\"noreferrer\">http://arcoleo.org/dsawiki/Wiki.jsp?page=Python%20UTF%20-%20UCS2%20or%20UCS4</a></p>\n\n<p>I wrote -</p>\n\n<pre><code>import sys\nsys.maxunicode &gt; 65536 and 'UCS4' or 'UCS2'\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7976161,
+                        "reputation": 101,
+                        "user_id": 6019273,
+                        "user_type": "registered",
+                        "display_name": "stateoff"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 10,
+                    "last_activity_date": 1457109642,
+                    "creation_date": 1457109642,
+                    "answer_id": 35801395,
+                    "question_id": 1446347,
+                    "link": "https://stackoverflow.com/questions/1446347/how-to-find-out-if-python-is-compiled-with-ucs-2-or-ucs-4/35801395#35801395",
+                    "body": "<p><a href=\"https://docs.python.org/2.7/library/sysconfig.html\" rel=\"noreferrer\">sysconfig</a> will tell the unicode size from the configuration variables of python.</p>\n\n<p>The buildflags can be queried like this.</p>\n\n<p><strong>Python 2.7:</strong></p>\n\n<pre><code>import sysconfig\nsysconfig.get_config_var('Py_UNICODE_SIZE')\n</code></pre>\n\n<p><strong>Python 2.6:</strong></p>\n\n<pre><code>import distutils\ndistutils.sysconfig.get_config_var('Py_UNICODE_SIZE')\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3589951,
+                        "reputation": 835,
+                        "user_id": 2996250,
+                        "user_type": "registered",
+                        "display_name": "Boris Feld"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1471420547,
+                    "last_edit_date": 1471420547,
+                    "creation_date": 1471418882,
+                    "answer_id": 38990558,
+                    "question_id": 1446347,
+                    "link": "https://stackoverflow.com/questions/1446347/how-to-find-out-if-python-is-compiled-with-ucs-2-or-ucs-4/38990558#38990558",
+                    "body": "<p>I had the same issue and found a semi-official piece of code that does exactly that and may be interesting for people with the same issue: <a href=\"https://bitbucket.org/pypa/wheel/src/cf4e2d98ecb1f168c50a6de496959b4a10c6b122/wheel/pep425tags.py?at=default&amp;fileviewer=file-view-default#pep425tags.py-83:89\" rel=\"nofollow\">https://bitbucket.org/pypa/wheel/src/cf4e2d98ecb1f168c50a6de496959b4a10c6b122/wheel/pep425tags.py?at=default&amp;fileviewer=file-view-default#pep425tags.py-83:89</a>.</p>\n\n<p>It comes from the wheel project which needs to check if the python is compiled with ucs-2 or ucs-4 because it will change the name of the binary file generated.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 9077719,
+                        "reputation": 589,
+                        "user_id": 6758673,
+                        "user_type": "unregistered",
+                        "display_name": "user6758673"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1473248584,
+                    "last_edit_date": 1473248584,
+                    "creation_date": 1473247710,
+                    "answer_id": 39368698,
+                    "question_id": 1446347,
+                    "link": "https://stackoverflow.com/questions/1446347/how-to-find-out-if-python-is-compiled-with-ucs-2-or-ucs-4/39368698#39368698",
+                    "body": "<p>Another way is to create an Unicode array and look at the itemsize:</p>\n\n<pre><code>import array\nbytes_per_char = array.array('u').itemsize\n</code></pre>\n\n<p>Quote from the <a href=\"https://docs.python.org/2/library/array.html\" rel=\"nofollow\"><code>array</code> docs</a>:</p>\n\n<blockquote>\n  <p>The <code>'u'</code> typecode corresponds to Python\u2019s unicode character. On narrow Unicode builds this is 2-bytes, on wide builds this is 4-bytes.</p>\n</blockquote>\n\n<p>Note that the distinction between narrow and wide Unicode builds is dropped from Python 3.3 onward, see <a href=\"https://www.python.org/dev/peps/pep-0393/\" rel=\"nofollow\">PEP393</a>. The <code>'u'</code> typecode for <code>array</code> is deprecated since 3.3 and scheduled for removal in Python 4.0.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 22422,
+                "reputation": 83464,
+                "user_id": 55246,
+                "user_type": "registered",
+                "accept_rate": 69,
+                "display_name": "Sridhar Ratnakumar"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 1446456,
+            "answer_count": 7,
+            "score": 65,
+            "last_activity_date": 1473248584,
+            "creation_date": 1253300809,
+            "last_edit_date": 1306428809,
+            "question_id": 1446347,
+            "link": "https://stackoverflow.com/questions/1446347/how-to-find-out-if-python-is-compiled-with-ucs-2-or-ucs-4",
+            "title": "How to find out if Python is compiled with UCS-2 or UCS-4?",
+            "body": "<p>Just what the title says.</p>\n\n<pre><code>$ ./configure --help | grep -i ucs\n  --enable-unicode[=ucs[24]]\n</code></pre>\n\n<p>Searching the official documentation, I found this:</p>\n\n<blockquote>\n  <p><strong><a href=\"http://docs.python.org/3.1/library/sys.html#sys.maxunicode\" rel=\"noreferrer\">sys.maxunicode</a></strong>: An integer giving the\n  largest supported code point for a\n  Unicode character. The <strong>value</strong> of this\n  depends on the configuration option\n  that specifies whether Unicode\n  characters are stored as UCS-2 or\n  UCS-4.</p>\n</blockquote>\n\n<p>What is not clear here is - which value(s) correspond to UCS-2 and UCS-4.</p>\n\n<p>The code is expected to work on Python 2.6+.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8797
+}

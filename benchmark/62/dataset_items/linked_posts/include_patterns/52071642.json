@@ -1,0 +1,133 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "design-patterns",
+                "copy",
+                "include",
+                "shutil"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 4551150,
+                        "reputation": 3660,
+                        "user_id": 4098408,
+                        "user_type": "registered",
+                        "display_name": "Yaniv Oliver"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1535527445,
+                    "post_id": 52071642,
+                    "comment_id": 91093099,
+                    "link": "https://stackoverflow.com/questions/52071642/python-copying-the-files-with-include-pattern#comment91093099_52071642",
+                    "body": "How about <a href=\"https://docs.python.org/2/library/glob.html\" rel=\"nofollow noreferrer\">glob</a>?"
+                },
+                {
+                    "owner": {
+                        "account_id": 2168820,
+                        "reputation": 1640,
+                        "user_id": 1921336,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Radan"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1535527747,
+                    "post_id": 52071642,
+                    "comment_id": 91093256,
+                    "link": "https://stackoverflow.com/questions/52071642/python-copying-the-files-with-include-pattern#comment91093256_52071642",
+                    "body": "there is no include_patterns in shutil, is that what you are trying to achieve?"
+                },
+                {
+                    "owner": {
+                        "account_id": 9984655,
+                        "reputation": 598,
+                        "user_id": 7386335,
+                        "user_type": "registered",
+                        "display_name": "ArockiaRaj"
+                    },
+                    "reply_to_user": {
+                        "account_id": 2168820,
+                        "reputation": 1640,
+                        "user_id": 1921336,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Radan"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1535527910,
+                    "post_id": 52071642,
+                    "comment_id": 91093365,
+                    "link": "https://stackoverflow.com/questions/52071642/python-copying-the-files-with-include-pattern#comment91093365_52071642",
+                    "body": "I need  to copy the files with cetain pattern that files alone needs to be copied @Radan"
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 2168820,
+                        "reputation": 1640,
+                        "user_id": 1921336,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Radan"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1535528003,
+                    "creation_date": 1535528003,
+                    "answer_id": 52071926,
+                    "question_id": 52071642,
+                    "link": "https://stackoverflow.com/questions/52071642/python-copying-the-files-with-include-pattern/52071926#52071926",
+                    "body": "<p>There is no such support in shutil, unless you overload the ignore with your own method. But using glob probably is much simpler, for example. </p>\n\n<pre><code>import glob\nimport shutil\ndest_dir = \"C:/test\"\nfor file in glob.glob(r'C:/*.txt'):\n    print(file)\n    shutil.copy(file, dest_dir)\n</code></pre>\n\n<p><a href=\"https://stackoverflow.com/questions/18371768/python-copy-files-by-wildcards\">python copy files by wildcards</a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 9984655,
+                        "reputation": 598,
+                        "user_id": 7386335,
+                        "user_type": "registered",
+                        "display_name": "ArockiaRaj"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 5,
+                    "last_activity_date": 1535530613,
+                    "creation_date": 1535530613,
+                    "answer_id": 52072685,
+                    "question_id": 52071642,
+                    "link": "https://stackoverflow.com/questions/52071642/python-copying-the-files-with-include-pattern/52072685#52072685",
+                    "body": "<p>The below solution works fine   </p>\n\n<pre><code> from fnmatch import fnmatch, filter\n    from os.path import isdir, join\n    from shutil import copytree\n\n    def include_patterns(*patterns):\n        \"\"\"Factory function that can be used with copytree() ignore parameter.\n\n        Arguments define a sequence of glob-style patterns\n        that are used to specify what files to NOT ignore.\n        Creates and returns a function that determines this for each directory\n        in the file hierarchy rooted at the source directory when used with\n        shutil.copytree().\n        \"\"\"\n        def _ignore_patterns(path, names):\n            keep = set(name for pattern in patterns\n                                for name in filter(names, pattern))\n            ignore = set(name for name in names\n                            if name not in keep and not isdir(join(path, name)))\n            return ignore\n        return _ignore_patterns\n\n    # sample usage\n\n    copytree(src_directory, dst_directory,\n         ignore=include_patterns('*.dwg', '*.dxf'))\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 9984655,
+                "reputation": 598,
+                "user_id": 7386335,
+                "user_type": "registered",
+                "display_name": "ArockiaRaj"
+            },
+            "comment_count": 3,
+            "is_answered": true,
+            "accepted_answer_id": 52072685,
+            "answer_count": 2,
+            "score": 6,
+            "last_activity_date": 1535530613,
+            "creation_date": 1535527083,
+            "last_edit_date": 1535527602,
+            "question_id": 52071642,
+            "link": "https://stackoverflow.com/questions/52071642/python-copying-the-files-with-include-pattern",
+            "title": "python copying the files with include pattern",
+            "body": "<p>I need to copy the files with include pattern using python script. Since shutil supports ignore_patterns to ignore the file. Is there any method to include the pattern to copy the files. \nOtherwise do I have to write the code explicitly?. </p>\n\n<p>Thanks in advance</p>\n\n<p><strong>EDIT</strong></p>\n\n<pre><code>from shutil import copytree, ignore_patterns\n\nsource=r'SOURCE_PATH'\ndestination=r'DESTINATION_PATH'\ncopytree(source, destination, ignore=ignore_patterns('*.txt'))\n</code></pre>\n\n<p>The above code copied the files from dir except specified format, But I need something like this below</p>\n\n<pre><code>from shutil import copytree, include_patterns\n\nsource=r'SOURCE_PATH'\ndestination=r'DESTINATION_PATH'\ncopytree(source, destination, ignore=include_patterns('*.txt'))\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9879
+}

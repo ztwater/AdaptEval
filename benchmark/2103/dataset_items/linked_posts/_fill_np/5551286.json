@@ -1,0 +1,338 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "numpy",
+                "matplotlib",
+                "scipy",
+                "interpolation"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 53417,
+                        "reputation": 2109,
+                        "user_id": 159633,
+                        "user_type": "registered",
+                        "accept_rate": 32,
+                        "display_name": "Jose"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1302006587,
+                    "post_id": 5551286,
+                    "comment_id": 6311961,
+                    "link": "https://stackoverflow.com/questions/5551286/filling-gaps-in-a-numpy-array#comment6311961_5551286",
+                    "body": "This is a very relevant post: <a href=\"http://stackoverflow.com/questions/3104781/inverse-distance-weighted-idw-interpolation-with-python\" title=\"inverse distance weighted idw interpolation with python\">stackoverflow.com/questions/3104781/&hellip;</a>"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 53417,
+                                "reputation": 2109,
+                                "user_id": 159633,
+                                "user_type": "registered",
+                                "accept_rate": 32,
+                                "display_name": "Jose"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1302004965,
+                            "post_id": 5551410,
+                            "comment_id": 6311460,
+                            "link": "https://stackoverflow.com/questions/5551286/filling-gaps-in-a-numpy-array/5551410#comment6311460_5551410",
+                            "body": "This is overkill for my requirements. I just need to plug some gaps in the data with a simple interpolation mechanism that is &quot;stable&quot;."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 354449,
+                        "reputation": 10475,
+                        "user_id": 692799,
+                        "user_type": "registered",
+                        "accept_rate": 74,
+                        "display_name": "Simon Bergot"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1302004642,
+                    "creation_date": 1302004642,
+                    "answer_id": 5551410,
+                    "question_id": 5551286,
+                    "link": "https://stackoverflow.com/questions/5551286/filling-gaps-in-a-numpy-array/5551410#5551410",
+                    "body": "<p>Maybe what you are looking for is a machine learning algorithm, like a neural network or a support vector machine.</p>\n\n<p>You may check this page, which has some links to SVM packages for python: <a href=\"http://web.media.mit.edu/~stefie10/technical/pythonml.html\" rel=\"nofollow\">http://web.media.mit.edu/~stefie10/technical/pythonml.html</a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 282321,
+                        "reputation": 7520,
+                        "user_id": 579145,
+                        "user_type": "registered",
+                        "display_name": "eat"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1302251727,
+                    "last_edit_date": 1302251727,
+                    "creation_date": 1302006921,
+                    "answer_id": 5551887,
+                    "question_id": 5551286,
+                    "link": "https://stackoverflow.com/questions/5551286/filling-gaps-in-a-numpy-array/5551887#5551887",
+                    "body": "<p>You may try to tackle your problem like:</p>\n\n<pre><code># main ideas described in very high level pseudo code\nchoose suitable base kernel shape and type (gaussian?)\nwhile true\n    loop over your array (moving average manner)\n        adapt your base kernel to current sparsity pattern\n        set current value based on adapted kernel\n    break if converged\n</code></pre>\n\n<p>This actually can be implemented quite a straightforward manner (especially if performance is not a top concern).</p>\n\n<p>Obviously this is just heuristics and you need to do some experiments with your actual data to find proper adaptation scheme. When seeing kernel adaptation as kernel reweighing, you may like to do it based on how the values have been propagated. For example your weights for original supports are 1 and they decay related on which iteration they emerged.  </p>\n\n<p>Also the determination of when this process has actually converged may be tricky one. Depending on the application it may be reasonable eventually to leave some 'gap regions' remain 'unfilled'.</p>\n\n<p><strong>Update</strong>: Here is a very simple implementation along the lines *) described above:</p>\n\n<pre><code>from numpy import any, asarray as asa, isnan, NaN, ones, seterr\nfrom numpy.lib.stride_tricks import as_strided as ast\nfrom scipy.stats import nanmean\n\ndef _a2t(a):\n    \"\"\"Array to tuple.\"\"\"\n    return tuple(a.tolist())\n\ndef _view(D, shape, strides):\n    \"\"\"View of flattened neighbourhood of D.\"\"\"\n    V= ast(D, shape= shape, strides= strides)\n    return V.reshape(V.shape[:len(D.shape)]+ (-1,))\n\ndef filler(A, n_shape, n_iter= 49):\n    \"\"\"Fill in NaNs from mean calculated from neighbour.\"\"\"\n    # boundary conditions\n    D= NaN* ones(_a2t(asa(A.shape)+ asa(n_shape)- 1), dtype= A.dtype)\n    slc= tuple([slice(n/ 2, -(n/ 2)) for n in n_shape])\n    D[slc]= A\n\n    # neighbourhood\n    shape= _a2t(asa(D.shape)- asa(n_shape)+ 1)+ n_shape\n    strides= D.strides* 2\n\n    # iterate until no NaNs, but not more than n iterations\n    old= seterr(invalid= 'ignore')\n    for k in xrange(n_iter):\n        M= isnan(D[slc])\n        if not any(M): break\n        D[slc][M]= nanmean(_view(D, shape, strides), -1)[M]\n    seterr(**old)\n    A[:]= D[slc]\n</code></pre>\n\n<p>And a simple demonstration of the <code>filler(.)</code> on action, would be something like:</p>\n\n<pre><code>In []: x= ones((3, 6, 99))\nIn []: x.sum(-1)\nOut[]:\narray([[ 99.,  99.,  99.,  99.,  99.,  99.],\n       [ 99.,  99.,  99.,  99.,  99.,  99.],\n       [ 99.,  99.,  99.,  99.,  99.,  99.]])\nIn []: x= NaN* x\nIn []: x[1, 2, 3]= 1\nIn []: x.sum(-1)\nOut[]:\narray([[ nan,  nan,  nan,  nan,  nan,  nan],\n       [ nan,  nan,  nan,  nan,  nan,  nan],\n       [ nan,  nan,  nan,  nan,  nan,  nan]])\nIn []: filler(x, (3, 3, 5))\nIn []: x.sum(-1)\nOut[]:\narray([[ 99.,  99.,  99.,  99.,  99.,  99.],\n       [ 99.,  99.,  99.,  99.,  99.,  99.],\n       [ 99.,  99.,  99.,  99.,  99.,  99.]])\n</code></pre>\n\n<p>*) So here the <code>nanmean(.)</code> is just used to demonstrate the idea of the adaptation process. Based on this demonstration, it should be quite straightforward to implement a more complex adaptation and decaying weighing scheme. Also note that, no attention is paid to actual execution performance, but it still should be good (with reasonable input shapes).</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 282321,
+                                "reputation": 7520,
+                                "user_id": 579145,
+                                "user_type": "registered",
+                                "display_name": "eat"
+                            },
+                            "reply_to_user": {
+                                "account_id": 15146,
+                                "reputation": 43070,
+                                "user_id": 31676,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Paul"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1302115152,
+                            "post_id": 5556426,
+                            "comment_id": 6337805,
+                            "link": "https://stackoverflow.com/questions/5551286/filling-gaps-in-a-numpy-array/5556426#comment6337805_5556426",
+                            "body": "Nice one! A question (or two): It&#39;s not quite so obvious (at least for me) how to generalize this solution to arbitrate dimensions (1D, 2D, ...). But anyway you seem to be able to attack (quite nicely) the boundary conditions from inward side, but are you aware of any side-effects related to that approach? Care to elaborate more on these issues? Thanks"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15146,
+                                "reputation": 43070,
+                                "user_id": 31676,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Paul"
+                            },
+                            "reply_to_user": {
+                                "account_id": 282321,
+                                "reputation": 7520,
+                                "user_id": 579145,
+                                "user_type": "registered",
+                                "display_name": "eat"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1302118203,
+                            "post_id": 5556426,
+                            "comment_id": 6338627,
+                            "link": "https://stackoverflow.com/questions/5551286/filling-gaps-in-a-numpy-array/5556426#comment6338627_5556426",
+                            "body": "@eat:  This <i>is</i> generalized for ND.  Just change <code>shape</code> to <code>(10,10,10,10,10)</code> and see.  I don&#39;t understand your second question.  Could you maybe re-state it a different way?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 282321,
+                                "reputation": 7520,
+                                "user_id": 579145,
+                                "user_type": "registered",
+                                "display_name": "eat"
+                            },
+                            "reply_to_user": {
+                                "account_id": 15146,
+                                "reputation": 43070,
+                                "user_id": 31676,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Paul"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1302122010,
+                            "post_id": 5556426,
+                            "comment_id": 6339666,
+                            "link": "https://stackoverflow.com/questions/5551286/filling-gaps-in-a-numpy-array/5556426#comment6339666_5556426",
+                            "body": "Yeah, after a while of tinkering, I&#39;ll (kind of) figured out how it could generalize to ND. Anyway, about the boundaries, I just meant that (with your solution) it seems that you don&#39;t need to be explicit on them at all (correct?). Now, since we seem to posses some substance related to OPs question, would it be nice to compare how they perform on some selected cases? Perhaps on other thread, in order to be able to fully focus on the topic. Thanks"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15146,
+                                "reputation": 43070,
+                                "user_id": 31676,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Paul"
+                            },
+                            "reply_to_user": {
+                                "account_id": 282321,
+                                "reputation": 7520,
+                                "user_id": 579145,
+                                "user_type": "registered",
+                                "display_name": "eat"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1302145390,
+                            "post_id": 5556426,
+                            "comment_id": 6343502,
+                            "link": "https://stackoverflow.com/questions/5551286/filling-gaps-in-a-numpy-array/5556426#comment6343502_5556426",
+                            "body": "@eat:  No, the boundaries between filled values are not explicitly defined.  Sure, I&#39;d be happy to discuss this further.  I don&#39;t know any good forums over which to collaborate.  SO is probably as good a place as any (as long as you post in the form of a question!)  I posted the code on pastie.org <a href=\"http://pastie.org/pastes/1766087\" rel=\"nofollow noreferrer\">pastie.org/pastes/1766087</a>  I&#39;d be curious what &quot;tweaks&quot; were needed to make it ND general.  I thought it already was."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 15146,
+                        "reputation": 43070,
+                        "user_id": 31676,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "Paul"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": true,
+                    "score": 16,
+                    "last_activity_date": 1302029890,
+                    "last_edit_date": 1302029890,
+                    "creation_date": 1302027009,
+                    "answer_id": 5556426,
+                    "question_id": 5551286,
+                    "link": "https://stackoverflow.com/questions/5551286/filling-gaps-in-a-numpy-array/5556426#5556426",
+                    "body": "<p>You can set up a crystal-growth-style algorithm shifting a view alternately along each axis, replacing only data that is flagged with a <code>False</code> but has a <code>True</code> neighbor.  This gives a \"nearest-neighbor\"-like result (but not in Euclidean or Manhattan distance -- I think it might be nearest-neighbor if you are counting pixels, counting all connecting pixels with common corners)  This should be fairly efficient with NumPy as it iterates over only axis and convergence iterations, not small slices of the data. </p>\n\n<p>Crude, fast and stable.  I think that's what you were after:</p>\n\n<pre><code>import numpy as np\n# -- setup --\nshape = (10,10,10)\ndim = len(shape)\ndata = np.random.random(shape)\nflag = np.zeros(shape, dtype=bool)\nt_ct = int(data.size/5)\nflag.flat[np.random.randint(0, flag.size, t_ct)] = True\n# True flags the data\n# -- end setup --\n\nslcs = [slice(None)]*dim\n\nwhile np.any(~flag): # as long as there are any False's in flag\n    for i in range(dim): # do each axis\n        # make slices to shift view one element along the axis\n        slcs1 = slcs[:]\n        slcs2 = slcs[:]\n        slcs1[i] = slice(0, -1)\n        slcs2[i] = slice(1, None)\n\n        # replace from the right\n        repmask = np.logical_and(~flag[slcs1], flag[slcs2])\n        data[slcs1][repmask] = data[slcs2][repmask]\n        flag[slcs1][repmask] = True\n\n        # replace from the left\n        repmask = np.logical_and(~flag[slcs2], flag[slcs1])\n        data[slcs2][repmask] = data[slcs1][repmask]\n        flag[slcs2][repmask] = True\n</code></pre>\n\n<p>For good measure, here's a visualization (2D) of the zones seeded by the data originally flagged <code>True</code>.</p>\n\n<p><img src=\"https://i.stack.imgur.com/kW1IZ.png\" alt=\"enter image description here\"></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 53417,
+                                "reputation": 2109,
+                                "user_id": 159633,
+                                "user_type": "registered",
+                                "accept_rate": 32,
+                                "display_name": "Jose"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1330361506,
+                            "post_id": 9262129,
+                            "comment_id": 11981422,
+                            "link": "https://stackoverflow.com/questions/5551286/filling-gaps-in-a-numpy-array/9262129#comment11981422_9262129",
+                            "body": "Wow, I wasn&#39;t aware of <code>distance_transform_edt</code>. This is a very useful function."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 12703982,
+                                "reputation": 1229,
+                                "user_id": 9229923,
+                                "user_type": "registered",
+                                "display_name": "Jingnan Jia"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1637609613,
+                            "post_id": 9262129,
+                            "comment_id": 123867539,
+                            "link": "https://stackoverflow.com/questions/5551286/filling-gaps-in-a-numpy-array/9262129#comment123867539_9262129",
+                            "body": "Very nice solution !"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 13031309,
+                                "reputation": 83,
+                                "user_id": 9417583,
+                                "user_type": "registered",
+                                "display_name": "Nephilim700"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1707990552,
+                            "post_id": 9262129,
+                            "comment_id": 137509766,
+                            "link": "https://stackoverflow.com/questions/5551286/filling-gaps-in-a-numpy-array/9262129#comment137509766_9262129",
+                            "body": "@Juh_ this is a great solution!! Would you also know if there is a possibility to consider some of the coordinates neither as foreground or background? I have an image, and I want to fill some of the non-zero(foreground) places with the distance transform with other non-zero(foreground) places. But I have 0 as my background and I don&#39;t want to consider those pixels at all"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1245419,
+                                "reputation": 15078,
+                                "user_id": 1206998,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Juh_"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1714999088,
+                            "post_id": 9262129,
+                            "comment_id": 138281729,
+                            "link": "https://stackoverflow.com/questions/5551286/filling-gaps-in-a-numpy-array/9262129#comment138281729_9262129",
+                            "body": "Probably too late :\\ but for future reader: In this specific case, I think the easiest way would be to find nearest valid pixels for both pixel to replace and background, then override background pixels in the result array. Some thing like return data[tuple(ind)] * background_mask, where background_mask is maybe data!=0"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1245419,
+                        "reputation": 15078,
+                        "user_id": 1206998,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "Juh_"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 40,
+                    "last_activity_date": 1422949326,
+                    "last_edit_date": 1422949326,
+                    "creation_date": 1329143137,
+                    "answer_id": 9262129,
+                    "question_id": 5551286,
+                    "link": "https://stackoverflow.com/questions/5551286/filling-gaps-in-a-numpy-array/9262129#9262129",
+                    "body": "<p>Using scipy.ndimage, your problem can be solved with nearest neighbor interpolation in 2 lines :</p>\n\n<pre><code>from scipy import ndimage as nd\n\nindices = nd.distance_transform_edt(invalid_cell_mask, return_distances=False, return_indices=True)\ndata = data[tuple(ind)]\n</code></pre>\n\n<hr>\n\n<p>Now, in the form of a function:</p>\n\n<pre><code>import numpy as np\nfrom scipy import ndimage as nd\n\ndef fill(data, invalid=None):\n    \"\"\"\n    Replace the value of invalid 'data' cells (indicated by 'invalid') \n    by the value of the nearest valid data cell\n\n    Input:\n        data:    numpy array of any dimension\n        invalid: a binary array of same shape as 'data'. \n                 data value are replaced where invalid is True\n                 If None (default), use: invalid  = np.isnan(data)\n\n    Output: \n        Return a filled array. \n    \"\"\"    \n    if invalid is None: invalid = np.isnan(data)\n\n    ind = nd.distance_transform_edt(invalid, \n                                    return_distances=False, \n                                    return_indices=True)\n    return data[tuple(ind)]\n</code></pre>\n\n<p>Exemple of use:</p>\n\n<pre><code>def test_fill(s,d):\n     # s is size of one dimension, d is the number of dimension\n    data = np.arange(s**d).reshape((s,)*d)\n    seed = np.zeros(data.shape,dtype=bool)\n    seed.flat[np.random.randint(0,seed.size,int(data.size/20**d))] = True\n\n    return fill(data,-seed), seed\n\nimport matplotlib.pyplot as plt\ndata,seed  = test_fill(500,2)\ndata[nd.binary_dilation(seed,iterations=2)] = 0   # draw (dilated) seeds in black\nplt.imshow(np.mod(data,42))                       # show cluster\n</code></pre>\n\n<p>result:\n<img src=\"https://i.stack.imgur.com/CPcxO.png\" alt=\"enter image description here\"></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5651010,
+                        "reputation": 41,
+                        "user_id": 4471621,
+                        "user_type": "registered",
+                        "display_name": "opit"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1430431150,
+                    "creation_date": 1430431150,
+                    "answer_id": 29978569,
+                    "question_id": 5551286,
+                    "link": "https://stackoverflow.com/questions/5551286/filling-gaps-in-a-numpy-array/29978569#29978569",
+                    "body": "<p>Some time ago I wrote this script for my PhD: <a href=\"https://github.com/Technariumas/Inpainting\" rel=\"nofollow\">https://github.com/Technariumas/Inpainting</a></p>\n\n<p>An example: <a href=\"http://blog.technariumas.lt/post/117630308826/healing-holes-in-python-arrays\" rel=\"nofollow\">http://blog.technariumas.lt/post/117630308826/healing-holes-in-python-arrays</a></p>\n\n<p>Slow, but does the work. Gaussian kernel is the best choice, just check size/sigma values.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 53417,
+                "reputation": 2109,
+                "user_id": 159633,
+                "user_type": "registered",
+                "accept_rate": 32,
+                "display_name": "Jose"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 5556426,
+            "answer_count": 5,
+            "score": 16,
+            "last_activity_date": 1430431150,
+            "creation_date": 1302004009,
+            "last_edit_date": 1302088216,
+            "question_id": 5551286,
+            "link": "https://stackoverflow.com/questions/5551286/filling-gaps-in-a-numpy-array",
+            "title": "Filling gaps in a numpy array",
+            "body": "<p>I just want to interpolate, in the simplest possible terms, a 3D dataset. Linear interpolation, nearest neighbour, all that would suffice (this is to start off some algorithm, so no accurate estimate is required). </p>\n\n<p>In new scipy versions, things like griddata would be useful, but currently I only have scipy 0.8. So I have a \"cube\" (<code>data[:,:,:]</code>, (NixNjxNk)) array, and an array of flags (<code>flags[:,:,:,]</code>, <code>True</code> or <code>False</code>) of the same size. I want to interpolate my data for the elements of data where the corresponding element of  flag is False, using eg the nearest valid datapoint in data, or some linear combination of \"close by\" points.</p>\n\n<p>There can be large gaps in the dataset in at least two dimensions. Other than coding a full-blown nearest neighbour algorithm using kdtrees or similar, I can't really find a generic, N-dimensional nearest-neighbour interpolator.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6014
+}

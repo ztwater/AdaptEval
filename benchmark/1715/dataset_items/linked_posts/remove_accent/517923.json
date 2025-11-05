@@ -1,0 +1,1415 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "python-3.x",
+                "unicode",
+                "python-2.x",
+                "diacritics"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 82769,
+                                "reputation": 20238,
+                                "user_id": 232485,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Jabba"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1326065258,
+                            "post_id": 517974,
+                            "comment_id": 10951973,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/517974#comment10951973_517974",
+                            "body": "I had to add &#39;utf8&#39; to unicode: <code>nkfd_form = unicodedata.normalize(&#39;NFKD&#39;, unicode(input_str, &#39;utf8&#39;))</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 310851,
+                                "reputation": 13200,
+                                "user_id": 624066,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "MestreLion"
+                            },
+                            "reply_to_user": {
+                                "account_id": 82769,
+                                "reputation": 20238,
+                                "user_id": 232485,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Jabba"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1334704535,
+                            "post_id": 517974,
+                            "comment_id": 13098132,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/517974#comment13098132_517974",
+                            "body": "@Jabba: <code>, &#39;utf8&#39;</code> is a &quot;safety net&quot; needed if you are testing input in terminal (which by default does not use unicode). But usually you don&#39;t <i>have</i> to add it, since if you&#39;re removing accents then <code>input_str</code> is very likely to be utf8 already. It doesn&#39;t hurt to be safe, though."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 174206,
+                                "reputation": 1888,
+                                "user_id": 403423,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "rbp"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1370792455,
+                            "post_id": 517974,
+                            "comment_id": 24582114,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/517974#comment24582114_517974",
+                            "body": "&gt;&gt;&gt; def remove_accents(input_str): ...     nkfd_form = unicodedata.normalize(&#39;NFKD&#39;, unicode(input_str)) ...     return u&quot;&quot;.join([c for c in nkfd_form if not unicodedata.combining(c)]) ...  &gt;&gt;&gt; remove_accents(&#39;&#233;&#39;) Traceback (most recent call last):   File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;   File &quot;&lt;stdin&gt;&quot;, line 2, in remove_accents UnicodeDecodeError: &#39;ascii&#39; codec can&#39;t decode byte 0xc3 in position 0: ordinal not in range(128)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 17306,
+                                "reputation": 47633,
+                                "user_id": 38626,
+                                "user_type": "registered",
+                                "accept_rate": 51,
+                                "display_name": "MiniQuark"
+                            },
+                            "reply_to_user": {
+                                "account_id": 174206,
+                                "reputation": 1888,
+                                "user_id": 403423,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "rbp"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1370945502,
+                            "post_id": 517974,
+                            "comment_id": 24635711,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/517974#comment24635711_517974",
+                            "body": "@rbp: you should pass a unicode string to <code>remove_accents</code> instead of a regular string (u&quot;&#233;&quot; instead of &quot;&#233;&quot;).  You passed a regular string to <code>remove_accents</code>, so when trying to convert your string to a unicode string, the default <code>ascii</code> encoding was used.  This encoding does not support any byte whose value is &gt;127.  When you typed &quot;&#233;&quot; in your shell, your O.S. encoded that, probably with UTF-8 or some Windows Code Page encoding, and that included bytes &gt;127.  I&#39;ll change my function in order to remove the conversion to unicode: it will bomb more clearly if a non-unicode string is passed."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 174206,
+                                "reputation": 1888,
+                                "user_id": 403423,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "rbp"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1371070745,
+                            "post_id": 517974,
+                            "comment_id": 24695234,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/517974#comment24695234_517974",
+                            "body": "@MiniQuark that worked perfectly &gt;&gt;&gt; remove_accents(unicode(&#39;&#233;&#39;))"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 227774,
+                                "reputation": 2037,
+                                "user_id": 489638,
+                                "user_type": "registered",
+                                "display_name": "s29"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1528425521,
+                            "post_id": 517974,
+                            "comment_id": 88513161,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/517974#comment88513161_517974",
+                            "body": "This answer gave me the best result on a large data set, the only exception is &quot;&#240;&quot;- unicodedata wouldn&#39;t touch it!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2967426,
+                                "reputation": 1240,
+                                "user_id": 2520298,
+                                "user_type": "registered",
+                                "display_name": "mirek"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1573216971,
+                            "post_id": 517974,
+                            "comment_id": 103819275,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/517974#comment103819275_517974",
+                            "body": "The first example removes &quot;\u0142&quot; (&quot;LATIN SMALL LETTER L WITH STROKE&quot;) completely :("
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1904855,
+                                "reputation": 3699,
+                                "user_id": 1719931,
+                                "user_type": "registered",
+                                "accept_rate": 40,
+                                "display_name": "robertspierre"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1606582878,
+                            "post_id": 517974,
+                            "comment_id": 115006348,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/517974#comment115006348_517974",
+                            "body": "In Python 3, the first version of <code>remove_accents</code> in this post returns a <code>bytes</code>. To return a <code>str</code>, you need to call <code>nfkd_form.encode(&#39;ASCII&#39;, &#39;ignore&#39;).decode(&#39;utf8&#39;)</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1091241,
+                                "reputation": 3800,
+                                "user_id": 1085848,
+                                "user_type": "registered",
+                                "accept_rate": 47,
+                                "display_name": "TomSawyer"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1611042962,
+                            "post_id": 517974,
+                            "comment_id": 116315569,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/517974#comment116315569_517974",
+                            "body": "doesn&#39;t work on <code>\u0111</code> character, it supposed to be <code>d</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5862446,
+                                "reputation": 2347,
+                                "user_id": 4870273,
+                                "user_type": "registered",
+                                "accept_rate": 51,
+                                "display_name": "luky"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1621369338,
+                            "post_id": 517974,
+                            "comment_id": 119474624,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/517974#comment119474624_517974",
+                            "body": "works good but note that the first function doesnt work for &#223;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5862446,
+                                "reputation": 2347,
+                                "user_id": 4870273,
+                                "user_type": "registered",
+                                "accept_rate": 51,
+                                "display_name": "luky"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1621373166,
+                            "post_id": 517974,
+                            "comment_id": 119475763,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/517974#comment119475763_517974",
+                            "body": "also note that the function returns bytes like b&quot;xxx&quot; not string like &quot;xxx&quot; you have to convert it to string first like str(remove_accents(input_str), &#39;utf8&#39;) <a href=\"https://stackabuse.com/convert-bytes-to-string-in-python/\" rel=\"nofollow noreferrer\">stackabuse.com/convert-bytes-to-string-in-python</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3687917,
+                                "reputation": 444,
+                                "user_id": 3288380,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "Martin"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1647408925,
+                            "post_id": 517974,
+                            "comment_id": 126360722,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/517974#comment126360722_517974",
+                            "body": "the Spanish &quot;&#241;&quot; is not an accent, but this changes it to an &quot;n&quot;. &quot;n&quot; and &quot;&#241;&quot; are different letters in Spanish..."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 17306,
+                        "reputation": 47633,
+                        "user_id": 38626,
+                        "user_type": "registered",
+                        "accept_rate": 51,
+                        "display_name": "MiniQuark"
+                    },
+                    "comment_count": 12,
+                    "is_accepted": false,
+                    "score": 220,
+                    "last_activity_date": 1442250060,
+                    "last_edit_date": 1442250060,
+                    "creation_date": 1233868774,
+                    "answer_id": 517974,
+                    "question_id": 517923,
+                    "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/517974#517974",
+                    "body": "<p>I just found this answer on the Web:</p>\n\n<pre><code>import unicodedata\n\ndef remove_accents(input_str):\n    nfkd_form = unicodedata.normalize('NFKD', input_str)\n    only_ascii = nfkd_form.encode('ASCII', 'ignore')\n    return only_ascii\n</code></pre>\n\n<p>It works fine (for French, for example), but I think the second step (removing the accents) could be handled better than dropping the non-ASCII characters, because this will fail for some languages (Greek, for example).  The best solution would probably be to explicitly remove the unicode characters that are tagged as being diacritics.</p>\n\n<p><strong>Edit</strong>: this does the trick:</p>\n\n<pre><code>import unicodedata\n\ndef remove_accents(input_str):\n    nfkd_form = unicodedata.normalize('NFKD', input_str)\n    return u\"\".join([c for c in nfkd_form if not unicodedata.combining(c)])\n</code></pre>\n\n<p><code>unicodedata.combining(c)</code> will return true if the character <code>c</code> can be combined with the preceding character, that is mainly if it's a diacritic.</p>\n\n<p><strong>Edit 2</strong>: <code>remove_accents</code> expects a <em>unicode</em> string, not a byte string.  If you have a byte string, then you must decode it into a unicode string like this:</p>\n\n<pre><code>encoding = \"utf-8\" # or iso-8859-15, or cp1252, or whatever encoding you use\nbyte_string = b\"caf\u00e9\"  # or simply \"caf\u00e9\" before python 3.\nunicode_string = byte_string.decode(encoding)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 358503,
+                                "reputation": 49494,
+                                "user_id": 699305,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "alexis"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1333797932,
+                            "post_id": 518232,
+                            "comment_id": 12865174,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/518232#comment12865174_518232",
+                            "body": "These are not composed characters, unfortunately--even though &quot;\u0142&quot; is named &quot;LATIN SMALL LETTER L WITH STROKE&quot;! You&#39;ll either need to play games with parsing <code>unicodedata.name</code>, or break down and use a look-alike table-- which you&#39;d need for Greek letters anyway (\u0391 is just &quot;GREEK CAPITAL LETTER ALPHA&quot;)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 358503,
+                                "reputation": 49494,
+                                "user_id": 699305,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "alexis"
+                            },
+                            "reply_to_user": {
+                                "account_id": 922034,
+                                "reputation": 22798,
+                                "user_id": 953553,
+                                "user_type": "registered",
+                                "accept_rate": 77,
+                                "display_name": "andilabs"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1416701538,
+                            "post_id": 518232,
+                            "comment_id": 42677167,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/518232#comment42677167_518232",
+                            "body": "@andi, I&#39;m afraid I can&#39;t guess what point you want to make. The email exchange reflects what I wrote above: Because the letter &quot;\u0142&quot; is not an accented letter (and is not treated as one in the Unicode standard), it does not have a decomposition."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1877557,
+                                "reputation": 5728,
+                                "user_id": 1698431,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "lenz"
+                            },
+                            "reply_to_user": {
+                                "account_id": 358503,
+                                "reputation": 49494,
+                                "user_id": 699305,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "alexis"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1463384508,
+                            "post_id": 518232,
+                            "comment_id": 62026070,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/518232#comment62026070_518232",
+                            "body": "@alexis (late follow-up): This works perfectly well for Greek as well \u2013 eg. &quot;GREEK CAPITAL LETTER ALPHA WITH DASIA AND VARIA&quot; is normalised into &quot;GREEK CAPITAL LETTER ALPHA&quot; just as expected. Unless you are referring to <i>transliteration</i> (eg. &quot;\u03b1&quot; \u2192 &quot;a&quot;), which is not the same as &quot;removing accents&quot;..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 358503,
+                                "reputation": 49494,
+                                "user_id": 699305,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "alexis"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1877557,
+                                "reputation": 5728,
+                                "user_id": 1698431,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "lenz"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1463418116,
+                            "post_id": 518232,
+                            "comment_id": 62045428,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/518232#comment62045428_518232",
+                            "body": "@lenz, I wasn&#39;t talking about removing accents from Greek, but about the &quot;stroke&quot; on the ell. Since it is not a diacritic, changing it to plain ell is the same as changing Greek Alpha to <code>A</code>. If don&#39;t want it don&#39;t do it, but in both cases you&#39;re substituting a Latin (near) look-alike."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5501416,
+                                "reputation": 2285,
+                                "user_id": 4370639,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Art"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1488351220,
+                            "post_id": 518232,
+                            "comment_id": 72186177,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/518232#comment72186177_518232",
+                            "body": "Mostly works nice :) But it doesn&#39;t transform <code>&#223;</code> into ascii <code>ss</code> in example. I would still use <code>unidecode</code> to avoid accidents."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1500888,
+                                "reputation": 15688,
+                                "user_id": 1405588,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "o11c"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1494020809,
+                            "post_id": 518232,
+                            "comment_id": 74667802,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/518232#comment74667802_518232",
+                            "body": "Should probably use <code>.combining()</code> to check the property directly, rather than only handling <code>.category() == &#39;Mn</code>, which will mess up"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6538517,
+                                "reputation": 608,
+                                "user_id": 5057078,
+                                "user_type": "registered",
+                                "display_name": "Brambor"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1606183557,
+                            "post_id": 518232,
+                            "comment_id": 114879468,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/518232#comment114879468_518232",
+                            "body": "+ for not requiring installing anything"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3687917,
+                                "reputation": 444,
+                                "user_id": 3288380,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "Martin"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1647408813,
+                            "post_id": 518232,
+                            "comment_id": 126360696,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/518232#comment126360696_518232",
+                            "body": "the spanish &quot;&#241;&quot; is not an accent, but this changes it to an &quot;n&quot; (another letter)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7378049,
+                                "reputation": 3307,
+                                "user_id": 5615873,
+                                "user_type": "registered",
+                                "accept_rate": 0,
+                                "display_name": "Apostolos"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1686823465,
+                            "post_id": 518232,
+                            "comment_id": 134853604,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/518232#comment134853604_518232",
+                            "body": "This is definitely a better solution than the above (by @oefe)  since it uses Pythoin internal module, whereas the above use an external module which needs to be installed. An external module needs to be installed <b>only when a problem cannot be solved with internal modules</b>.  This should be added to the &quot;The Zen of Python&quot; :)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 20722,
+                        "reputation": 19616,
+                        "user_id": 49793,
+                        "user_type": "registered",
+                        "display_name": "oefe"
+                    },
+                    "comment_count": 9,
+                    "is_accepted": true,
+                    "score": 421,
+                    "last_activity_date": 1469713191,
+                    "last_edit_date": 1469713191,
+                    "creation_date": 1233872242,
+                    "answer_id": 518232,
+                    "question_id": 517923,
+                    "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/518232#518232",
+                    "body": "<p>How about this:</p>\n\n<pre><code>import unicodedata\ndef strip_accents(s):\n   return ''.join(c for c in unicodedata.normalize('NFD', s)\n                  if unicodedata.category(c) != 'Mn')\n</code></pre>\n\n<p>This works on greek letters, too:</p>\n\n<pre><code>&gt;&gt;&gt; strip_accents(u\"A \\u00c0 \\u0394 \\u038E\")\nu'A A \\u0394 \\u03a5'\n&gt;&gt;&gt; \n</code></pre>\n\n<p>The <a href=\"http://www.unicode.org/reports/tr44/#GC_Values_Table\" rel=\"noreferrer\">character category</a> \"Mn\" stands for <code>Nonspacing_Mark</code>, which is similar to unicodedata.combining in MiniQuark's answer (I didn't think of unicodedata.combining, but it is probably the better solution, because it's more explicit).</p>\n\n<p>And keep in mind, these manipulations may significantly alter the meaning of the text. Accents, Umlauts etc. are not \"decoration\".</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 39780,
+                                "reputation": 19931,
+                                "user_id": 114917,
+                                "user_type": "registered",
+                                "accept_rate": 95,
+                                "display_name": "Paul McMillan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1271194164,
+                            "post_id": 2633310,
+                            "comment_id": 2646992,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/2633310#comment2646992_2633310",
+                            "body": "Yeah, this is a better solution than simply stripping the accents. It provides much more useful transliterations for the languages that have conventions for writing words in ASCII."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 61551,
+                                "reputation": 1663,
+                                "user_id": 183376,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "kolinko"
+                            },
+                            "edited": false,
+                            "score": 19,
+                            "creation_date": 1333217710,
+                            "post_id": 2633310,
+                            "comment_id": 12718559,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/2633310#comment12718559_2633310",
+                            "body": "depends what you&#39;re trying to achieve. for example I&#39;m doing a search right now, and I don&#39;t want to transliterate greek/russian/chinese, I just want to replace &quot;\u0105/\u0119/\u015b/\u0107&quot; with &quot;a/e/s/c&quot;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 39785,
+                                "reputation": 3354,
+                                "user_id": 114926,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Karl Bartel"
+                            },
+                            "reply_to_user": {
+                                "account_id": 18661,
+                                "reputation": 93232,
+                                "user_id": 42973,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "Eric O. Lebigot"
+                            },
+                            "edited": false,
+                            "score": 73,
+                            "creation_date": 1335778722,
+                            "post_id": 2633310,
+                            "comment_id": 13383764,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/2633310#comment13383764_2633310",
+                            "body": "@EOL unidecode works for great for strings like &quot;Fran&#231;ois&quot;, if you pass unicode objects to it. It looks like you tried with a plain byte string."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1277779,
+                                "reputation": 573,
+                                "user_id": 1232651,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Kimonode"
+                            },
+                            "reply_to_user": {
+                                "account_id": 18661,
+                                "reputation": 93232,
+                                "user_id": 42973,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "Eric O. Lebigot"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1362291192,
+                            "post_id": 2633310,
+                            "comment_id": 21388825,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/2633310#comment21388825_2633310",
+                            "body": "@EOL It looks like the &quot;C c&#233;dille&quot; is now handled properly. So, as far as I tested unidecode, which isn&#39;t much, I now consider it gives very good results."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 39745,
+                                "reputation": 22108,
+                                "user_id": 114795,
+                                "user_type": "registered",
+                                "display_name": "Mikhail Korobov"
+                            },
+                            "edited": false,
+                            "score": 29,
+                            "creation_date": 1393194472,
+                            "post_id": 2633310,
+                            "comment_id": 33300004,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/2633310#comment33300004_2633310",
+                            "body": "Note that unidecode &gt;= 0.04.10 (Dec 2012) is GPL. Use earlier versions or check <a href=\"https://github.com/kmike/text-unidecode\" rel=\"nofollow noreferrer\">github.com/kmike/text-unidecode</a> if you need a more permissive license and can stand a slightly worse implementation."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 448955,
+                                "reputation": 12084,
+                                "user_id": 843463,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "chhantyal"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1420637616,
+                            "post_id": 2633310,
+                            "comment_id": 44046921,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/2633310#comment44046921_2633310",
+                            "body": "Doesn&#39;t seem to work with German eg. &#214; =&gt; O Where it should be Oe"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6277369,
+                                "reputation": 6239,
+                                "user_id": 4879665,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Liam"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1448824335,
+                            "post_id": 2633310,
+                            "comment_id": 55729240,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/2633310#comment55729240_2633310",
+                            "body": "how to use it with variables?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 556766,
+                                "reputation": 132341,
+                                "user_id": 918959,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "Antti Haapala -- \u0421\u043b\u0430\u0432\u0430 \u0423\u043a\u0440\u0430\u0457\u043d\u0456"
+                            },
+                            "reply_to_user": {
+                                "account_id": 448955,
+                                "reputation": 12084,
+                                "user_id": 843463,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "chhantyal"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1471673220,
+                            "post_id": 2633310,
+                            "comment_id": 65451317,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/2633310#comment65451317_2633310",
+                            "body": "@chhantyal the &#214; =&gt; OE is quite German-specific. In Finnish, some words like <code>&#228;&#228;li&#246;</code> would render completely unrecognizable <code>aeaelioe</code>; it is simply more correct to omit diaresis than to add the <code>e</code>, though pronunciation of the accented letter is pretty much on par with the German umlaut."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1891677,
+                                "reputation": 148638,
+                                "user_id": 1709587,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Mark Amery"
+                            },
+                            "reply_to_user": {
+                                "account_id": 18661,
+                                "reputation": 93232,
+                                "user_id": 42973,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "Eric O. Lebigot"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1473947087,
+                            "post_id": 2633310,
+                            "comment_id": 66341207,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/2633310#comment66341207_2633310",
+                            "body": "@EOL You&#39;ll be pleased to know that in the latest version of the library, <code>&#39;Fran&#231;ois&#39;</code> is mapped to <code>&#39;Francois&#39;</code> as you&#39;d expect."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8566752,
+                                "reputation": 53694,
+                                "user_id": 6419007,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Eric Duminil"
+                            },
+                            "edited": false,
+                            "score": 37,
+                            "creation_date": 1493380951,
+                            "post_id": 2633310,
+                            "comment_id": 74405433,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/2633310#comment74405433_2633310",
+                            "body": "<code>unidecode</code> replaces <code>&#176;</code> with <code>deg</code>. It does more than just removing accents."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5275672,
+                                "reputation": 2980,
+                                "user_id": 4592067,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "imrek"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1494781247,
+                            "post_id": 2633310,
+                            "comment_id": 74963104,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/2633310#comment74963104_2633310",
+                            "body": "People need to understand that Unicode character decomposition is a language specific mapping, it does not work universally and modules like unidecode are never going to work well with ignoring the locale or language of the input. As to CJK characters, it&#39;s a childish assumption that you can take an arbitary CJK character and &#39;render&#39; it with ASCII: CJK characters can have multiple readings both in Chinese and Japanese, and the Chinese, Japanese, etc. readings are also going to be different. These modules are a waste of time."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7499043,
+                                "reputation": 351,
+                                "user_id": 5698170,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Mohsin"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1532949296,
+                            "post_id": 2633310,
+                            "comment_id": 90150674,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/2633310#comment90150674_2633310",
+                            "body": "What if I&#39;m reading a string from a file how do I give it as input to the the library? like u+&#39;str&#39;  but that would give me a varible answer name u is not defined"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3552618,
+                                "reputation": 181,
+                                "user_id": 2967125,
+                                "user_type": "registered",
+                                "display_name": "oscarAguayo"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1649241301,
+                            "post_id": 2633310,
+                            "comment_id": 126824258,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/2633310#comment126824258_2633310",
+                            "body": "<code>pip install Unidecode</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 13865604,
+                                "reputation": 388,
+                                "user_id": 10010173,
+                                "user_type": "registered",
+                                "display_name": "MMM"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1693988114,
+                            "post_id": 2633310,
+                            "comment_id": 135830551,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/2633310#comment135830551_2633310",
+                            "body": "Unfortunately, It also replaces cyrillic characters with latin ones like &quot;\u0444&quot; -&gt; &quot;f&quot;."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 703628,
+                                "reputation": 14902,
+                                "user_id": 595305,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "mike rodent"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1715022901,
+                            "post_id": 2633310,
+                            "comment_id": 138285537,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/2633310#comment138285537_2633310",
+                            "body": "&quot;Unidecode is the correct answer for this&quot;. No, it is the WRONG answer for this. OP is clearly trying to get the same script (Unicode plane) but with diacritics stripped out. Look up the word normalisation, as you <b>DON&#39;T UNDERSTAND THE MEANING OF THE WORD</b>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2680,
+                        "reputation": 49156,
+                        "user_id": 3757,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "Christian Oudard"
+                    },
+                    "comment_count": 15,
+                    "is_accepted": false,
+                    "score": 799,
+                    "last_activity_date": 1668707873,
+                    "last_edit_date": 1668707873,
+                    "creation_date": 1271193674,
+                    "answer_id": 2633310,
+                    "question_id": 517923,
+                    "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/2633310#2633310",
+                    "body": "<p><a href=\"https://pypi.python.org/pypi/Unidecode\" rel=\"noreferrer\">Unidecode</a> is the correct answer for this. It transliterates any unicode string into the closest possible representation in ascii text.</p>\n<p>Example:</p>\n<pre><code>&gt;&gt;&gt; from unidecode import unidecode\n&gt;&gt;&gt; unidecode('ko\u017eu\u0161\u010dek')\n'kozuscek'\n&gt;&gt;&gt; unidecode('\u5317\u4eb0')\n'Bei Jing '\n&gt;&gt;&gt; unidecode('Fran\u00e7ois')\n'Francois'\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 88877,
+                                "reputation": 572,
+                                "user_id": 245594,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "janek37"
+                            },
+                            "edited": false,
+                            "score": 9,
+                            "creation_date": 1436435141,
+                            "post_id": 15547803,
+                            "comment_id": 50615496,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/15547803#comment50615496_15547803",
+                            "body": "You should catch the exception if the new symbol doesn&#39;t exist. For example there&#39;s SQUARE WITH VERTICAL FILL \u25a5, but there&#39;s no SQUARE. (not to mention that this code transforms UMBRELLA WITH RAIN DROPS \u2614 into UMBRELLA \u2602)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1636318,
+                                "reputation": 14131,
+                                "user_id": 1509695,
+                                "user_type": "registered",
+                                "accept_rate": 38,
+                                "display_name": "matanox"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1546093801,
+                            "post_id": 15547803,
+                            "comment_id": 94778300,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/15547803#comment94778300_15547803",
+                            "body": "This looks elegant in harnessing the semantic descriptions of characters that are available. Do we really need the <code>unicode</code> function call in there with python 3 though? I think a tighter regex in place of the <code>find</code> would avoid all the trouble mentioned in the comment above, and also, memoization would help performance when it&#39;s a critical code path."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1877557,
+                                "reputation": 5728,
+                                "user_id": 1698431,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "lenz"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1636318,
+                                "reputation": 14131,
+                                "user_id": 1509695,
+                                "user_type": "registered",
+                                "accept_rate": 38,
+                                "display_name": "matanox"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1546094719,
+                            "post_id": 15547803,
+                            "comment_id": 94778525,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/15547803#comment94778525_15547803",
+                            "body": "@matanster no, this is an old answer from the Python-2 era; the <code>unicode</code> typecast is no longer appropriate in Python 3. In any case, in my experience there is no universal, elegant solution to this problem. Depending on the application, any approach has its pros and cons. Quality-thriving tools like <code>unidecode</code> are based on hand-crafted tables. Some resources (tables, algorithms) are provided by Unicode, eg. for collation."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2967426,
+                                "reputation": 1240,
+                                "user_id": 2520298,
+                                "user_type": "registered",
+                                "display_name": "mirek"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1573217440,
+                            "post_id": 15547803,
+                            "comment_id": 103819491,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/15547803#comment103819491_15547803",
+                            "body": "I just repeat, what is above (py3): 1) unicode(char)-&gt;char 2) try: return ud.lookup(desc) except KeyError: return char"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1877557,
+                                "reputation": 5728,
+                                "user_id": 1698431,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "lenz"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2967426,
+                                "reputation": 1240,
+                                "user_id": 2520298,
+                                "user_type": "registered",
+                                "display_name": "mirek"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1573237350,
+                            "post_id": 15547803,
+                            "comment_id": 103829807,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/15547803#comment103829807_15547803",
+                            "body": "@mirek you are right: since this thread is so popular, this answer deserves some updating/improving. I edited it."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1877557,
+                        "reputation": 5728,
+                        "user_id": 1698431,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "lenz"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": false,
+                    "score": 32,
+                    "last_activity_date": 1573237191,
+                    "last_edit_date": 1573237191,
+                    "creation_date": 1363869558,
+                    "answer_id": 15547803,
+                    "question_id": 517923,
+                    "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/15547803#15547803",
+                    "body": "<p>This handles not only accents, but also \"strokes\" (as in \u00f8 etc.):</p>\n\n<pre><code>import unicodedata as ud\n\ndef rmdiacritics(char):\n    '''\n    Return the base character of char, by \"removing\" any\n    diacritics like accents or curls and strokes and the like.\n    '''\n    desc = ud.name(char)\n    cutoff = desc.find(' WITH ')\n    if cutoff != -1:\n        desc = desc[:cutoff]\n        try:\n            char = ud.lookup(desc)\n        except KeyError:\n            pass  # removing \"WITH ...\" produced an invalid name\n    return char\n</code></pre>\n\n<p>This is the most elegant way I can think of (and it has been mentioned by alexis in a comment on this page), although I don't think it is very elegant indeed.\nIn fact, it's more of a hack, as pointed out in comments, since Unicode names are \u2013 really just names, they give no guarantee to be consistent or anything.</p>\n\n<p>There are still special letters that are not handled by this, such as turned and inverted letters, since their unicode name does not contain 'WITH'. It depends on what you want to do anyway. I sometimes needed accent stripping for achieving dictionary sort order.</p>\n\n<h3>EDIT NOTE:</h3>\n\n<p>Incorporated suggestions from the comments (handling lookup errors, Python-3 code).</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 17306,
+                                "reputation": 47633,
+                                "user_id": 38626,
+                                "user_type": "registered",
+                                "accept_rate": 51,
+                                "display_name": "MiniQuark"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1371066731,
+                            "post_id": 17069876,
+                            "comment_id": 24693221,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/17069876#comment24693221_17069876",
+                            "body": "<code>remove_accents</code> was meant to remove accents from a unicode string.  In case it&#39;s passed a byte-string, it tries to convert it to a unicode string with <code>unicode(input_str)</code>.  This uses python&#39;s default encoding, which is &quot;ascii&quot;.  Since your file is encoded with UTF-8, this would fail.  Lines 2 and 3 change python&#39;s default encoding to UTF-8, so then it works, as you found out.  Another option is to pass <code>remove_accents</code> a unicode string: remove lines 2 and 3, and on the last line replace <code>element</code> by <code>element.decode(&quot;utf-8&quot;)</code>.  I tested: it works.  I&#39;ll update my answer to make this clearer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2008054,
+                                "reputation": 1211,
+                                "user_id": 1797327,
+                                "user_type": "registered",
+                                "display_name": "aseagram"
+                            },
+                            "reply_to_user": {
+                                "account_id": 17306,
+                                "reputation": 47633,
+                                "user_id": 38626,
+                                "user_type": "registered",
+                                "accept_rate": 51,
+                                "display_name": "MiniQuark"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1371067864,
+                            "post_id": 17069876,
+                            "comment_id": 24693762,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/17069876#comment24693762_17069876",
+                            "body": "Nice edit, good point. (On another note: The real problem I&#39;ve realised is that my data file is apparently encoded in <code>iso-8859-1</code>, which I can&#39;t get to work with this function, unfortunately!)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 17306,
+                                "reputation": 47633,
+                                "user_id": 38626,
+                                "user_type": "registered",
+                                "accept_rate": 51,
+                                "display_name": "MiniQuark"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1371109408,
+                            "post_id": 17069876,
+                            "comment_id": 24705972,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/17069876#comment24705972_17069876",
+                            "body": "aseagram: simply replace &quot;utf-8&quot; with &quot;iso-8859-1&quot;, and it should work.  If you&#39;re on windows, then you should probably use &quot;cp1252&quot; instead."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4993527,
+                                "reputation": 54950,
+                                "user_id": 4014959,
+                                "user_type": "registered",
+                                "display_name": "PM 2Ring"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1526476399,
+                            "post_id": 17069876,
+                            "comment_id": 87759658,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/17069876#comment87759658_17069876",
+                            "body": "BTW, <code>reload(sys); sys.setdefaultencoding(&quot;utf-8&quot;)</code> is a dubious hack sometimes recommended for Windows systems; see <a href=\"https://stackoverflow.com/questions/28657010/dangers-of-sys-setdefaultencodingutf-8\" title=\"dangers of sys setdefaultencodingutf 8\">stackoverflow.com/questions/28657010/&hellip;</a> for details."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2008054,
+                        "reputation": 1211,
+                        "user_id": 1797327,
+                        "user_type": "registered",
+                        "display_name": "aseagram"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 16,
+                    "last_activity_date": 1371060605,
+                    "last_edit_date": 1371060605,
+                    "creation_date": 1371052128,
+                    "answer_id": 17069876,
+                    "question_id": 517923,
+                    "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/17069876#17069876",
+                    "body": "<p>In response to @MiniQuark's answer:</p>\n\n<p>I was trying to read in a csv file that was half-French (containing accents) and also some strings which would eventually become integers and floats.\nAs a test, I created a <code>test.txt</code> file that looked like this:</p>\n\n<blockquote>\n  <p>Montr\u00e9al, \u00fcber, 12.89, M\u00e8re, Fran\u00e7oise, no\u00ebl, 889</p>\n</blockquote>\n\n<p>I had to include lines <code>2</code> and <code>3</code> to get it to work (which I found in a python ticket), as well as incorporate @Jabba's comment:</p>\n\n<pre><code>import sys \nreload(sys) \nsys.setdefaultencoding(\"utf-8\")\nimport csv\nimport unicodedata\n\ndef remove_accents(input_str):\n    nkfd_form = unicodedata.normalize('NFKD', unicode(input_str))\n    return u\"\".join([c for c in nkfd_form if not unicodedata.combining(c)])\n\nwith open('test.txt') as f:\n    read = csv.reader(f)\n    for row in read:\n        for element in row:\n            print remove_accents(element)\n</code></pre>\n\n<p>The result:</p>\n\n<pre><code>Montreal\nuber\n12.89\nMere\nFrancoise\nnoel\n889\n</code></pre>\n\n<p>(Note: I am on Mac OS X 10.8.4 and using Python 2.7.3)</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 929409,
+                                "reputation": 13092,
+                                "user_id": 959570,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Daniel Reis"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1458316564,
+                            "post_id": 31607735,
+                            "comment_id": 59822037,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/31607735#comment59822037_31607735",
+                            "body": "With Py2.7, passing an already unicode string errors at <code>text = unicode(text, &#39;utf-8&#39;)</code>. A workaround for that was to add<code>except TypeError: pass</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8949690,
+                                "reputation": 4478,
+                                "user_id": 6676101,
+                                "user_type": "registered",
+                                "accept_rate": 11,
+                                "display_name": "Toothpick Anemone"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1677187847,
+                            "post_id": 31607735,
+                            "comment_id": 133294095,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/31607735#comment133294095_31607735",
+                            "body": "Is there someway to make sure than if the letter <code>M</code> is large (capitalized) in the input then <code>M</code> is also large (capitalized) in the output? The input string <code>&quot;Montr&#233;al&quot;</code> becomes the output string <code>&quot;Montreal&quot;</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1711076,
+                        "reputation": 823,
+                        "user_id": 1569144,
+                        "user_type": "registered",
+                        "display_name": "hexaJer"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 62,
+                    "last_activity_date": 1511475134,
+                    "last_edit_date": 1511475134,
+                    "creation_date": 1437732494,
+                    "answer_id": 31607735,
+                    "question_id": 517923,
+                    "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/31607735#31607735",
+                    "body": "<p>Actually I work on project compatible python 2.6, 2.7 and 3.4 and I have to create IDs from free user entries. </p>\n\n<p>Thanks to you, I have created this function that works wonders.</p>\n\n<pre><code>import re\nimport unicodedata\n\ndef strip_accents(text):\n    \"\"\"\n    Strip accents from input String.\n\n    :param text: The input string.\n    :type text: String.\n\n    :returns: The processed String.\n    :rtype: String.\n    \"\"\"\n    try:\n        text = unicode(text, 'utf-8')\n    except (TypeError, NameError): # unicode is a default on python 3 \n        pass\n    text = unicodedata.normalize('NFD', text)\n    text = text.encode('ascii', 'ignore')\n    text = text.decode(\"utf-8\")\n    return str(text)\n\ndef text_to_id(text):\n    \"\"\"\n    Convert input text to id.\n\n    :param text: The input string.\n    :type text: String.\n\n    :returns: The processed String.\n    :rtype: String.\n    \"\"\"\n    text = strip_accents(text.lower())\n    text = re.sub('[ ]+', '_', text)\n    text = re.sub('[^0-9a-zA-Z_-]', '', text)\n    return text\n</code></pre>\n\n<p>result:</p>\n\n<pre><code>text_to_id(\"Montr\u00e9al, \u00fcber, 12.89, M\u00e8re, Fran\u00e7oise, no\u00ebl, 889\")\n&gt;&gt;&gt; 'montreal_uber_1289_mere_francoise_noel_889'\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 218909,
+                        "reputation": 4773,
+                        "user_id": 475477,
+                        "user_type": "registered",
+                        "accept_rate": 50,
+                        "display_name": "sirex"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1437737642,
+                    "creation_date": 1437737642,
+                    "answer_id": 31609516,
+                    "question_id": 517923,
+                    "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/31609516#31609516",
+                    "body": "<p>Some languages have combining diacritics as language letters and accent diacritics to specify accent.</p>\n\n<p>I think it is more safe to specify explicitly what diactrics you want to strip:</p>\n\n<pre><code>def strip_accents(string, accents=('COMBINING ACUTE ACCENT', 'COMBINING GRAVE ACCENT', 'COMBINING TILDE')):\n    accents = set(map(unicodedata.lookup, accents))\n    chars = [c for c in unicodedata.normalize('NFD', string) if c not in accents]\n    return unicodedata.normalize('NFC', ''.join(chars))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7472091,
+                                "reputation": 91,
+                                "user_id": 5679741,
+                                "user_type": "registered",
+                                "display_name": "lcieslak"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1560154419,
+                            "post_id": 48512137,
+                            "comment_id": 99629600,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/48512137#comment99629600_48512137",
+                            "body": "<code>deaccent</code> still gives <code>\u0142</code> instead of <code>l</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4661280,
+                                "reputation": 5118,
+                                "user_id": 3775493,
+                                "user_type": "registered",
+                                "display_name": "Nuno Andr&#233;"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1568400402,
+                            "post_id": 48512137,
+                            "comment_id": 102275277,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/48512137#comment102275277_48512137",
+                            "body": "You needn&#39;t to install <code>NumPy</code> and <code>SciPy</code> to get accents removed."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8191220,
+                                "reputation": 682,
+                                "user_id": 6165395,
+                                "user_type": "registered",
+                                "display_name": "Etienne Kintzler"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1576841893,
+                            "post_id": 48512137,
+                            "comment_id": 105035362,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/48512137#comment105035362_48512137",
+                            "body": "thanks for gensim reference ! how does it compare to unidecode (in terms of speed or accuracy) ?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3687917,
+                                "reputation": 444,
+                                "user_id": 3288380,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "Martin"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1647408635,
+                            "post_id": 48512137,
+                            "comment_id": 126360669,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/48512137#comment126360669_48512137",
+                            "body": "Changes the &quot;&#241;&quot; for &quot;n&quot; which you wouldn&#39;t want, at least if you&#39;re looking for removing accents in Spanish"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 506817,
+                        "reputation": 12312,
+                        "user_id": 907575,
+                        "user_type": "registered",
+                        "accept_rate": 67,
+                        "display_name": "Piotr Migdal"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 17,
+                    "last_activity_date": 1568607780,
+                    "last_edit_date": 1568607780,
+                    "creation_date": 1517272078,
+                    "answer_id": 48512137,
+                    "question_id": 517923,
+                    "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/48512137#48512137",
+                    "body": "<p><a href=\"https://radimrehurek.com/gensim/utils.html#gensim.utils.deaccent\" rel=\"noreferrer\">gensim.utils.deaccent(text)</a> from <a href=\"https://radimrehurek.com/gensim/\" rel=\"noreferrer\">Gensim - topic modelling for humans</a>:</p>\n\n<pre><code>'Sef chomutovskych komunistu dostal postou bily prasek'\n</code></pre>\n\n<p>Another solution is <a href=\"https://pypi.python.org/pypi/Unidecode\" rel=\"noreferrer\">unidecode</a>.</p>\n\n<p>Note that the suggested solution with <strong>unicodedata</strong> typically removes accents only in some character (e.g. it turns <code>'\u0142'</code> into <code>''</code>, rather than into <code>'l'</code>).</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 703628,
+                                "reputation": 14902,
+                                "user_id": 595305,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "mike rodent"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1612705153,
+                            "post_id": 66020622,
+                            "comment_id": 116844495,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/66020622#comment116844495_66020622",
+                            "body": "Haha... amazing. All these bits and pieces did actually install. The script did actually run. The graph actually displayed. And it is very similar to yours.  <code>unidecode</code> actually handles the Chinese characters.  And none of the three comes up with the hilarious &quot;FranASSois&quot;."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7587333,
+                        "reputation": 407,
+                        "user_id": 7966259,
+                        "user_type": "registered",
+                        "display_name": "mo-han"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 14,
+                    "last_activity_date": 1612321185,
+                    "creation_date": 1612321185,
+                    "answer_id": 66020622,
+                    "question_id": 517923,
+                    "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/66020622#66020622",
+                    "body": "<p><a href=\"https://i.stack.imgur.com/LiUKk.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/LiUKk.png\" alt=\"perfplot\" /></a></p>\n<pre class=\"lang-py prettyprint-override\"><code>import unicodedata\nfrom random import choice\n\nimport perfplot\nimport regex\nimport text_unidecode\n\n\ndef remove_accent_chars_regex(x: str):\n    return regex.sub(r'\\p{Mn}', '', unicodedata.normalize('NFKD', x))\n\n\ndef remove_accent_chars_join(x: str):\n    # answer by MiniQuark\n    # https://stackoverflow.com/a/517974/7966259\n    return u&quot;&quot;.join([c for c in unicodedata.normalize('NFKD', x) if not unicodedata.combining(c)])\n\n\nperfplot.show(\n    setup=lambda n: ''.join([choice('M\u00e1laga Fran\u00e7ois Ph\u00fat H\u01a1n \u4e2d\u6587') for i in range(n)]),\n    kernels=[\n        remove_accent_chars_regex,\n        remove_accent_chars_join,\n        text_unidecode.unidecode,\n    ],\n    labels=['regex', 'join', 'unidecode'],\n    n_range=[2 ** k for k in range(22)],\n    equality_check=None, relative_to=0, xlabel='str len'\n)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5104898,
+                        "reputation": 3310,
+                        "user_id": 4093278,
+                        "user_type": "registered",
+                        "display_name": "Eric McLachlan"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1621838827,
+                    "last_edit_date": 1621838827,
+                    "creation_date": 1619950142,
+                    "answer_id": 67355119,
+                    "question_id": 517923,
+                    "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/67355119#67355119",
+                    "body": "<p>If you are hoping to get functionality similar to Elasticsearch's <code>asciifolding</code> filter, you might want to consider <a href=\"https://pypi.org/project/fold-to-ascii/\" rel=\"nofollow noreferrer\">fold-to-ascii</a>, which is [itself]...</p>\n<blockquote>\n<p>A Python port of the Apache Lucene ASCII Folding Filter that converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the &quot;Basic Latin&quot; Unicode block) into ASCII equivalents, if they exist.</p>\n</blockquote>\n<p>Here's an example from the page mentioned above:</p>\n<pre class=\"lang-py prettyprint-override\"><code>from fold_to_ascii import fold\ns = u'Astroturf\u00ae pat\u00e9'\nfold(s)\n&gt; u'Astroturf pate'\nfold(s, u'?')\n&gt; u'Astroturf? pate'\n</code></pre>\n<p><strong>EDIT</strong>: The <code>fold_to_ascii</code> module seems to work well for normalizing Latin-based alphabets; however unmappable characters are removed, which means that this module will reduce Chinese text, for example, to empty strings. If you want to preserve Chinese, Japanese, and other Unicode alphabets, consider using @mo-han's <code>remove_accent_chars_regex</code> implementation, above.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 271958,
+                                "reputation": 131586,
+                                "user_id": 562769,
+                                "user_type": "registered",
+                                "accept_rate": 61,
+                                "display_name": "Martin Thoma"
+                            },
+                            "edited": false,
+                            "score": 11,
+                            "creation_date": 1645189528,
+                            "post_id": 69099798,
+                            "comment_id": 125811334,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/69099798#comment125811334_69099798",
+                            "body": "&quot;correct answer should only do that, not that plus other, unspecified, changes&quot; -&gt; you make capital letters in lower case"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7514234,
+                                "reputation": 548,
+                                "user_id": 5708232,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Just a nice guy"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1661771408,
+                            "post_id": 69099798,
+                            "comment_id": 129842973,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/69099798#comment129842973_69099798",
+                            "body": "Well... your answer convert &quot;M&quot; into &quot;m&quot; (not requested by OQ)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6017387,
+                        "reputation": 460,
+                        "user_id": 4725707,
+                        "user_type": "registered",
+                        "display_name": "RiGonz"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 26,
+                    "last_activity_date": 1631242451,
+                    "last_edit_date": 1631242451,
+                    "creation_date": 1631090620,
+                    "answer_id": 69099798,
+                    "question_id": 517923,
+                    "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/69099798#69099798",
+                    "body": "<p>In my view, the proposed solutions should NOT be accepted answers. The original question is asking for <strong>the removal of accents</strong>, so the correct answer should only do that, not that plus other, unspecified, changes.</p>\n<p>Simply observe the result of this code which is the accepted answer. where I have changed &quot;M\u00e1laga&quot; by &quot;M\u00e1lague\u00f1a:</p>\n<pre><code>accented_string = u'M\u00e1lague\u00f1a'\n# accented_string is of type 'unicode'\nimport unidecode\nunaccented_string = unidecode.unidecode(accented_string)\n# unaccented_string contains 'Malaguena'and is of type 'str'\n</code></pre>\n<p>There is an additional change (\u00f1 -&gt; n), which is not requested in the OQ.</p>\n<p>A simple function that does the requested task, in lower form:</p>\n<pre><code>def f_remove_accents(old):\n    &quot;&quot;&quot;\n    Removes common accent characters, lower form.\n    Uses: regex.\n    &quot;&quot;&quot;\n    new = old.lower()\n    new = re.sub(r'[\u00e0\u00e1\u00e2\u00e3\u00e4\u00e5]', 'a', new)\n    new = re.sub(r'[\u00e8\u00e9\u00ea\u00eb]', 'e', new)\n    new = re.sub(r'[\u00ec\u00ed\u00ee\u00ef]', 'i', new)\n    new = re.sub(r'[\u00f2\u00f3\u00f4\u00f5\u00f6]', 'o', new)\n    new = re.sub(r'[\u00f9\u00fa\u00fb\u00fc]', 'u', new)\n    return new\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 34865,
+                                "reputation": 4341,
+                                "user_id": 98600,
+                                "user_type": "registered",
+                                "accept_rate": 73,
+                                "display_name": "John J. Camilleri"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1687170027,
+                            "post_id": 71408065,
+                            "comment_id": 134894625,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/71408065#comment134894625_71408065",
+                            "body": "This looks like a nice solution, but on Python 3 I get the error message <code>ValueError: string keys in translate table must be of length 1</code>. This limitation is clearly stated in the Python docs: <a href=\"https://docs.python.org/3/library/stdtypes.html#str.maketrans\" rel=\"nofollow noreferrer\">docs.python.org/3/library/stdtypes.html#str.maketrans</a>. Maybe you only tested with Python 2?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 57752,
+                                "reputation": 3834,
+                                "user_id": 173003,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "Aristide"
+                            },
+                            "reply_to_user": {
+                                "account_id": 34865,
+                                "reputation": 4341,
+                                "user_id": 98600,
+                                "user_type": "registered",
+                                "accept_rate": 73,
+                                "display_name": "John J. Camilleri"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1687179191,
+                            "post_id": 71408065,
+                            "comment_id": 134896351,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/71408065#comment134896351_71408065",
+                            "body": "You&#39;re right, there was a <code>&quot;SS&quot;</code>  in the (untested) <code>LATIN</code> string for the case-preserving variant. I have replaced it by <code>&quot;\u1e9e&quot;</code>, namely LATIN CAPITAL LETTER SHARP S. Thanks!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 57752,
+                        "reputation": 3834,
+                        "user_id": 173003,
+                        "user_type": "registered",
+                        "accept_rate": 60,
+                        "display_name": "Aristide"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1687179048,
+                    "last_edit_date": 1687179048,
+                    "creation_date": 1646822769,
+                    "answer_id": 71408065,
+                    "question_id": 517923,
+                    "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/71408065#71408065",
+                    "body": "<p>Here is a short function which strips the diacritics, but keeps the non-latin characters. Most cases (e.g., <code>&quot;\u00e0&quot;</code> -&gt; <code>&quot;a&quot;</code>) are handled by <code>unicodedata</code> (standard library), but several (e.g., <code>&quot;\u00e6&quot;</code> -&gt; <code>&quot;ae&quot;</code>) rely on the given parallel strings.</p>\n<h2>Code</h2>\n<pre class=\"lang-py prettyprint-override\"><code>from unicodedata import combining, normalize\n\nLATIN = &quot;\u00e4  \u00e6  \u01fd  \u0111 \u00f0 \u0192 \u0127 \u0131 \u0142 \u00f8 \u01ff \u00f6  \u0153  \u00df  \u0167 \u00fc &quot;\nASCII = &quot;ae ae ae d d f h i l o o oe oe ss t ue&quot;\n\ndef remove_diacritics(s, outliers=str.maketrans(dict(zip(LATIN.split(), ASCII.split())))):\n    return &quot;&quot;.join(c for c in normalize(&quot;NFD&quot;, s.lower().translate(outliers)) if not combining(c))\n</code></pre>\n<p><strong>NB.</strong> The default argument <code>outliers</code> is evaluated once and not meant to be provided by the caller.</p>\n<h2>Intended usage</h2>\n<p>As a key to sort a list of strings in a more \u201cnatural\u201d order:</p>\n<pre class=\"lang-py prettyprint-override\"><code>sorted(['cote', 'coteau', &quot;crottez&quot;, 'crott\u00e9', 'c\u00f4te', 'c\u00f4t\u00e9'], key=remove_diacritics)\n</code></pre>\n<p>Output:</p>\n<pre class=\"lang-py prettyprint-override\"><code>['cote', 'c\u00f4te', 'c\u00f4t\u00e9', 'coteau', 'crott\u00e9', 'crottez']\n</code></pre>\n<p>If your strings mix texts and numbers, you may be interested in composing <code>remove_diacritics()</code> with the function <code>string_to_pairs()</code> I give <a href=\"https://stackoverflow.com/a/71402061/173003\">elsewhere</a>.</p>\n<h2>Tests</h2>\n<p>To make sure the behavior meets your needs, take a look at the <a href=\"https://en.wikipedia.org/wiki/Pangram\" rel=\"nofollow noreferrer\">pangrams</a> below:</p>\n<pre class=\"lang-py prettyprint-override\"><code>examples = [\n    (&quot;hello, world&quot;, &quot;hello, world&quot;),\n    (&quot;42&quot;, &quot;42&quot;),\n    (&quot;\u4f60\u597d\uff0c\u4e16\u754c&quot;, &quot;\u4f60\u597d\uff0c\u4e16\u754c&quot;),\n    (\n        &quot;D\u00e8s No\u00ebl, o\u00f9 un z\u00e9phyr ha\u00ef me v\u00eat de gla\u00e7ons w\u00fcrmiens, je d\u00eene d\u2019exquis r\u00f4tis de b\u0153uf au kir, \u00e0 l\u2019a\u00ff d\u2019\u00e2ge m\u00fbr, &amp;c\u00e6tera.&quot;,\n        &quot;des noel, ou un zephyr hai me vet de glacons wuermiens, je dine d\u2019exquis rotis de boeuf au kir, a l\u2019ay d\u2019age mur, &amp;caetera.&quot;,\n    ),\n    (\n        &quot;Falsches \u00dcben von Xylophonmusik qu\u00e4lt jeden gr\u00f6\u00dferen Zwerg.&quot;,\n        &quot;falsches ueben von xylophonmusik quaelt jeden groesseren zwerg.&quot;,\n    ),\n    (\n        &quot;\u0409\u0443\u0431\u0430\u0437\u043d\u0438 \u0444\u0435\u045a\u0435\u0440\u045f\u0438\u0458\u0430 \u0447\u0430\u0452\u0430\u0432\u043e\u0433 \u043b\u0438\u0446\u0430 \u0445\u043e\u045b\u0435 \u0434\u0430 \u043c\u0438 \u043f\u043e\u043a\u0430\u0436\u0435 \u0448\u0442\u043e\u0441.&quot;,\n        &quot;\u0459\u0443\u0431\u0430\u0437\u043d\u0438 \u0444\u0435\u045a\u0435\u0440\u045f\u0438\u0458\u0430 \u0447\u0430\u0452\u0430\u0432\u043e\u0433 \u043b\u0438\u0446\u0430 \u0445\u043e\u045b\u0435 \u0434\u0430 \u043c\u0438 \u043f\u043e\u043a\u0430\u0436\u0435 \u0448\u0442\u043e\u0441.&quot;,\n    ),\n    (\n        &quot;Ljubazni fenjerd\u017eija \u010da\u0111avog lica ho\u0107e da mi poka\u017ee \u0161tos.&quot;,\n        &quot;ljubazni fenjerdzija cadavog lica hoce da mi pokaze stos.&quot;,\n    ),\n    (\n        &quot;Quizdeltagerne spiste jordb\u00e6r med fl\u00f8de, mens cirkusklovnen Walther spillede p\u00e5 xylofon.&quot;,\n        &quot;quizdeltagerne spiste jordbaer med flode, mens cirkusklovnen walther spillede pa xylofon.&quot;,\n    ),\n    (\n        &quot;K\u00e6mi n\u00fd \u00f6xi h\u00e9r ykist \u00fej\u00f3fum n\u00fa b\u00e6\u00f0i v\u00edl og \u00e1drepa.&quot;,\n        &quot;kaemi ny oexi her ykist \u00fejofum nu baedi vil og adrepa.&quot;,\n    ),\n    (\n        &quot;Gl\u0101\u017e\u0161\u0137\u016b\u0146a r\u016b\u0137\u012b\u0161i dz\u0113rum\u0101 \u010diepj Baha koncertfl\u012b\u0123e\u013cu v\u0101kus.&quot;,\n        &quot;glazskuna rukisi dzeruma ciepj baha koncertfligelu vakus.&quot;,\n    )\n]\n\nfor (given, expected) in examples:\n    assert remove_diacritics(given) == expected\n</code></pre>\n<h2>Case-preserving variant</h2>\n<pre class=\"lang-py prettyprint-override\"><code>LATIN = &quot;\u00e4  \u00e6  \u01fd  \u0111 \u00f0 \u0192 \u0127 \u0131 \u0142 \u00f8 \u01ff \u00f6  \u0153  \u00df  \u0167 \u00fc  \u00c4  \u00c6  \u01fc  \u0110 \u00d0 \u0191 \u0126 I \u0141 \u00d8 \u01fe \u00d6  \u0152  \u1e9e  \u0166 \u00dc &quot;\nASCII = &quot;ae ae ae d d f h i l o o oe oe ss t ue AE AE AE D D F H I L O O OE OE SS T UE&quot;\n\ndef remove_diacritics(s, outliers=str.maketrans(dict(zip(LATIN.split(), ASCII.split())))):\n    return &quot;&quot;.join(c for c in normalize(&quot;NFD&quot;, s.translate(outliers)) if not combining(c))\n\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 703628,
+                                "reputation": 14902,
+                                "user_id": 595305,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "mike rodent"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1715064161,
+                            "post_id": 72476587,
+                            "comment_id": 138288879,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/72476587#comment138288879_72476587",
+                            "body": "This works ... but the sklearn module is absolutely huge. If there is a core Python solution (accepted answer), the only possible case for advocating this instead would be if you can prove it is MUCH faster. You don&#39;t even attempt to do that."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6326973,
+                                "reputation": 1842,
+                                "user_id": 4913143,
+                                "user_type": "registered",
+                                "accept_rate": 47,
+                                "display_name": "Rodrigo Laguna"
+                            },
+                            "reply_to_user": {
+                                "account_id": 703628,
+                                "reputation": 14902,
+                                "user_id": 595305,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "mike rodent"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1715167071,
+                            "post_id": 72476587,
+                            "comment_id": 138302120,
+                            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/72476587#comment138302120_72476587",
+                            "body": "Agree. However, if you already have scikit as a dependency it is not a problem (in fact, it was my case)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6326973,
+                        "reputation": 1842,
+                        "user_id": 4913143,
+                        "user_type": "registered",
+                        "accept_rate": 47,
+                        "display_name": "Rodrigo Laguna"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1654174284,
+                    "creation_date": 1654174284,
+                    "answer_id": 72476587,
+                    "question_id": 517923,
+                    "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/72476587#72476587",
+                    "body": "<p>There are already many answers here, but this was not previously considered: using <a href=\"https://scikit-learn.org/stable/\" rel=\"noreferrer\">sklearn</a></p>\n<pre class=\"lang-py prettyprint-override\"><code>from sklearn.feature_extraction.text import strip_accents_ascii, strip_accents_unicode\n\naccented_string = u'M\u00e1lague\u00f1a\u00ae'\n\nprint(strip_accents_unicode(accented_string)) # output: Malaguena\u00ae\nprint(strip_accents_ascii(accented_string)) # output: Malaguena\n\n</code></pre>\n<p>This is particularly useful if you are already using sklearn to process text. Those are the functions internally called by classes like <a href=\"https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer\" rel=\"noreferrer\">CountVectorizer</a> to normalize strings: when using <code>strip_accents='ascii'</code> then <code>strip_accents_ascii</code> is called and when <code>strip_accents='unicode'</code> is used, then <code>strip_accents_unicode</code> is called.</p>\n<p><strong>More details</strong></p>\n<p>Finally, consider those details from its docstring:</p>\n<pre><code>Signature: strip_accents_ascii(s)\nTransform accentuated unicode symbols into ascii or nothing\n\nWarning: this solution is only suited for languages that have a direct\ntransliteration to ASCII symbols.\n</code></pre>\n<p>and</p>\n<pre><code>Signature: strip_accents_unicode(s)\nTransform accentuated unicode symbols into their simple counterpart\n\nWarning: the python-level loop and join operations make this\nimplementation 20 times slower than the strip_accents_ascii basic\nnormalization.\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 20567196,
+                        "reputation": 326,
+                        "user_id": 15096247,
+                        "user_type": "registered",
+                        "display_name": "Hans"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -3,
+                    "last_activity_date": 1688633158,
+                    "last_edit_date": 1688633158,
+                    "creation_date": 1688632326,
+                    "answer_id": 76626943,
+                    "question_id": 517923,
+                    "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string/76626943#76626943",
+                    "body": "<p>I came up with this one <strong>(especially for Latin letters - linguistic purposes)</strong></p>\n<pre><code>import string\nfrom functools import lru_cache\n\nimport unicodedata\n\n\n# This can improve performance by avoiding redundant computations when the function is\n# called multiple times with the same arguments.\n@lru_cache\ndef lookup(\n    l: str, case_sens: bool = True, replace: str = &quot;&quot;, add_to_printable: str = &quot;&quot;\n):\n    r&quot;&quot;&quot;\n    Look up information about a character and suggest a replacement.\n\n    Args:\n        l (str): The character to look up.\n        case_sens (bool, optional): Whether to consider case sensitivity for replacements. Defaults to True.\n        replace (str, optional): The default replacement character when not found. Defaults to ''.\n        add_to_printable (str, optional): Additional uppercase characters to consider as printable. Defaults to ''.\n\n    Returns:\n        dict: A dictionary containing the following information:\n            - 'all_data': A sorted list of words representing the character name.\n            - 'is_printable_letter': True if the character is a printable letter, False otherwise.\n            - 'is_printable': True if the character is printable, False otherwise.\n            - 'is_capital': True if the character is a capital letter, False otherwise.\n            - 'suggested': The suggested replacement for the character based on the provided criteria.\n    Example:\n        sen = &quot;Montr\u00e9al, \u00fcber, 12.89, M\u00e8re, Fran\u00e7oise, no\u00ebl, 889&quot;\n        norm = ''.join([lookup(k, case_sens=True, replace='x', add_to_printable='')['suggested'] for k in sen])\n        print(norm)\n        #########################\n        sen2 = 'ko\u017eu\u0161\u010dek'\n        norm2 = ''.join([lookup(k, case_sens=True, replace='x', add_to_printable='')['suggested'] for k in sen2])\n        print(norm2)\n        #########################\n\n        sen3=&quot;Falsches \u00dcben von Xylophonmusik qu\u00e4lt jeden gr\u00f6\u00dferen Zwerg.&quot;\n        norm3 = ''.join([lookup(k, case_sens=True, replace='x', add_to_printable='')['suggested'] for k in sen3]) # doesn't preserve \u00fc - ue ...\n        print(norm3)\n        #########################\n        sen4 = &quot;c\u00e6tera&quot;\n        norm4 = ''.join([lookup(k, case_sens=True, replace='x', add_to_printable='ae')['suggested'] for k in\n                         sen4])  \n        print(norm4)\n\n\n        # Montreal, uber, 12.89, Mere, Francoise, noel, 889\n        # kozuscek\n        # Falsches Uben von Xylophonmusik qualt jeden groseren Zwerg.\n        # caetera\n    &quot;&quot;&quot;\n    # The name of the character l is retrieved using the unicodedata.name()\n    # function and split into a list of words and sorted by len (shortest is the wanted letter)\n    v = sorted(unicodedata.name(l).split(), key=len)\n    sug = replace\n    stri_pri = string.printable + add_to_printable.upper()\n    is_printable_letter = v[0] in stri_pri\n    is_printable = l in stri_pri\n    is_capital = &quot;CAPITAL&quot; in v\n    # Depending on the values of the boolean variables, the variable sug may be\n    # updated to suggest a replacement for the character l. If the character is a printable letter,\n    # the suggested replacement is set to the first word in the sorted list of names (v).\n    # If case_sens is True and the character is a printable letter but not a capital,\n    # the suggested replacement is set to the lowercase version of the first word in v.\n    # If the character is printable, the suggested replacement is set to the character l itself.\n    if is_printable_letter:\n        sug = v[0]\n\n        if case_sens:\n            if not is_capital:\n                sug = v[0].lower()\n    elif is_printable:\n        sug = l\n    return {\n        &quot;all_data&quot;: v,\n        &quot;is_printable_letter&quot;: is_printable_letter,\n        &quot;is_printable&quot;: is_printable,\n        &quot;is_capital&quot;: is_capital,\n        &quot;suggested&quot;: sug,\n    }\n</code></pre>\n<p>There is another solution I came up with which is also based on lookup dicts and Numba, but the source code is way too big to post it here. Here is the GitHub link: <a href=\"https://github.com/hansalemaos/charchef\" rel=\"nofollow noreferrer\">https://github.com/hansalemaos/charchef</a></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 17306,
+                "reputation": 47633,
+                "user_id": 38626,
+                "user_type": "registered",
+                "accept_rate": 51,
+                "display_name": "MiniQuark"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 518232,
+            "answer_count": 14,
+            "score": 802,
+            "last_activity_date": 1688633158,
+            "creation_date": 1233868240,
+            "last_edit_date": 1593560844,
+            "question_id": 517923,
+            "link": "https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-normalize-in-a-python-unicode-string",
+            "title": "What is the best way to remove accents (normalize) in a Python unicode string?",
+            "body": "<p>I have a Unicode string in Python, and I would like to remove all the accents (diacritics).</p>\n<p>I found on the web an elegant way to do this (in Java):</p>\n<ol>\n<li>convert the Unicode string to its <em><strong>long normalized form</strong></em> (with a separate character for letters and diacritics)</li>\n<li>remove all the characters whose Unicode type is &quot;diacritic&quot;.</li>\n</ol>\n<p>Do I need to install a library such as pyICU or is this possible with just the Python standard library?  And what about python 3?</p>\n<p>Important note: I would like to avoid code with an explicit mapping from accented characters to their non-accented counterpart.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6720
+}

@@ -1,0 +1,588 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "numpy",
+                "machine-learning",
+                "neural-network"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2062486,
+                                "reputation": 6558,
+                                "user_id": 1838726,
+                                "user_type": "registered",
+                                "accept_rate": 63,
+                                "display_name": "Daniel S."
+                            },
+                            "edited": false,
+                            "score": 12,
+                            "creation_date": 1464543467,
+                            "post_id": 32109519,
+                            "comment_id": 62519312,
+                            "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/32109519#comment62519312_32109519",
+                            "body": "np.maximum(x, 0, x) runs fastest here."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8769119,
+                                "reputation": 4140,
+                                "user_id": 8776746,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ynn"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2062486,
+                                "reputation": 6558,
+                                "user_id": 1838726,
+                                "user_type": "registered",
+                                "accept_rate": 63,
+                                "display_name": "Daniel S."
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1593688437,
+                            "post_id": 32109519,
+                            "comment_id": 110870823,
+                            "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/32109519#comment110870823_32109519",
+                            "body": "@DanielS. For the future reader: The last <code>x</code> in <code>maximum(x, 0, x)</code> means &quot;please change <code>x</code> in place rather than allocating a new matrix&quot;. (<a href=\"https://numpy.org/doc/stable/reference/generated/numpy.maximum.html?highlight=max#numpy.maximum\" rel=\"nofollow noreferrer\">source</a>)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4816493,
+                                "reputation": 5732,
+                                "user_id": 3888455,
+                                "user_type": "registered",
+                                "display_name": "Sid"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2062486,
+                                "reputation": 6558,
+                                "user_id": 1838726,
+                                "user_type": "registered",
+                                "accept_rate": 63,
+                                "display_name": "Daniel S."
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1593888565,
+                            "post_id": 32109519,
+                            "comment_id": 110936782,
+                            "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/32109519#comment110936782_32109519",
+                            "body": "@DanielS. if in-place ops are an option, then there are faster in-place ops as pointed out in <a href=\"https://stackoverflow.com/a/46837904/3888455\">Tobias&#39;s response</a>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4816493,
+                        "reputation": 5732,
+                        "user_id": 3888455,
+                        "user_type": "registered",
+                        "display_name": "Sid"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": true,
+                    "score": 175,
+                    "last_activity_date": 1440072491,
+                    "last_edit_date": 1440072491,
+                    "creation_date": 1440044534,
+                    "answer_id": 32109519,
+                    "question_id": 32109319,
+                    "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/32109519#32109519",
+                    "body": "<p>There are a couple of ways.</p>\n\n<pre><code>&gt;&gt;&gt; x = np.random.random((3, 2)) - 0.5\n&gt;&gt;&gt; x\narray([[-0.00590765,  0.18932873],\n       [-0.32396051,  0.25586596],\n       [ 0.22358098,  0.02217555]])\n&gt;&gt;&gt; np.maximum(x, 0)\narray([[ 0.        ,  0.18932873],\n       [ 0.        ,  0.25586596],\n       [ 0.22358098,  0.02217555]])\n&gt;&gt;&gt; x * (x &gt; 0)\narray([[-0.        ,  0.18932873],\n       [-0.        ,  0.25586596],\n       [ 0.22358098,  0.02217555]])\n&gt;&gt;&gt; (abs(x) + x) / 2\narray([[ 0.        ,  0.18932873],\n       [ 0.        ,  0.25586596],\n       [ 0.22358098,  0.02217555]])\n</code></pre>\n\n<p>If timing the results with the following code:</p>\n\n<pre><code>import numpy as np\n\nx = np.random.random((5000, 5000)) - 0.5\nprint(\"max method:\")\n%timeit -n10 np.maximum(x, 0)\n\nprint(\"multiplication method:\")\n%timeit -n10 x * (x &gt; 0)\n\nprint(\"abs method:\")\n%timeit -n10 (abs(x) + x) / 2\n</code></pre>\n\n<p>We get:</p>\n\n<pre><code>max method:\n10 loops, best of 3: 239 ms per loop\nmultiplication method:\n10 loops, best of 3: 145 ms per loop\nabs method:\n10 loops, best of 3: 288 ms per loop\n</code></pre>\n\n<p>So the multiplication seems to be the fastest.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3352158,
+                                "reputation": 675,
+                                "user_id": 3678911,
+                                "user_type": "registered",
+                                "accept_rate": 27,
+                                "display_name": "pikachuchameleon"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1484337919,
+                            "post_id": 40013151,
+                            "comment_id": 70485044,
+                            "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/40013151#comment70485044_40013151",
+                            "body": "How does np.maximum(x,0,x) take less time compared to np.maximum(0,x) ?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6108641,
+                                "reputation": 302,
+                                "user_id": 5106073,
+                                "user_type": "registered",
+                                "display_name": "Andrea"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1488192260,
+                            "post_id": 40013151,
+                            "comment_id": 72106822,
+                            "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/40013151#comment72106822_40013151",
+                            "body": "also worth noting that this will modify x"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 454788,
+                                "reputation": 6069,
+                                "user_id": 852592,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "Lenar Hoyt"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3352158,
+                                "reputation": 675,
+                                "user_id": 3678911,
+                                "user_type": "registered",
+                                "accept_rate": 27,
+                                "display_name": "pikachuchameleon"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1497721720,
+                            "post_id": 40013151,
+                            "comment_id": 76202105,
+                            "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/40013151#comment76202105_40013151",
+                            "body": "@pikachuchameleon It is faster because it is in-place. The return value of <code>np.maximum(x, 0, x)</code> is ignored and the result is directly written to <code>x</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4816493,
+                                "reputation": 5732,
+                                "user_id": 3888455,
+                                "user_type": "registered",
+                                "display_name": "Sid"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1593888586,
+                            "post_id": 40013151,
+                            "comment_id": 110936789,
+                            "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/40013151#comment110936789_40013151",
+                            "body": "If in-place ops are an option, then there are faster in-place ops as pointed out in <a href=\"https://stackoverflow.com/a/46837904/3888455\">Tobias&#39;s response</a>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6590293,
+                        "reputation": 712,
+                        "user_id": 5091738,
+                        "user_type": "registered",
+                        "display_name": "Richard M&#246;hn"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 49,
+                    "last_activity_date": 1594000574,
+                    "last_edit_date": 1594000574,
+                    "creation_date": 1476337446,
+                    "answer_id": 40013151,
+                    "question_id": 32109319,
+                    "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/40013151#40013151",
+                    "body": "<p>I'm completely revising my original answer because of points raised in the other questions and comments. Here is the new benchmark script:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import time\nimport numpy as np\n\n\ndef fancy_index_relu(m):\n    m[m &lt; 0] = 0\n\n\nrelus = {\n    &quot;max&quot;: lambda x: np.maximum(x, 0),\n    &quot;in-place max&quot;: lambda x: np.maximum(x, 0, x),\n    &quot;mul&quot;: lambda x: x * (x &gt; 0),\n    &quot;abs&quot;: lambda x: (abs(x) + x) / 2,\n    &quot;fancy index&quot;: fancy_index_relu,\n}\n\nfor name, relu in relus.items():\n    n_iter = 20\n    x = np.random.random((n_iter, 5000, 5000)) - 0.5\n\n    t1 = time.time()\n    for i in range(n_iter):\n        relu(x[i])\n    t2 = time.time()\n\n    print(&quot;{:&gt;12s}  {:3.0f} ms&quot;.format(name, (t2 - t1) / n_iter * 1000))\n</code></pre>\n<p>It takes care to use a different ndarray for each implementation and iteration. Here are the results:</p>\n<pre><code>         max  126 ms\nin-place max  107 ms\n         mul  136 ms\n         abs   86 ms\n fancy index  132 ms\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3761440,
+                                "reputation": 2784,
+                                "user_id": 3126298,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "n1k31t4"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1530828811,
+                            "post_id": 46837904,
+                            "comment_id": 89382721,
+                            "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/46837904#comment89382721_46837904",
+                            "body": "(+1) Your fancy method is the only method I have actually seen used before! It&#39;s not only efficient, but also perfectly describes the ReLU operation, in my opinion."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9989340,
+                                "reputation": 4058,
+                                "user_id": 7389264,
+                                "user_type": "registered",
+                                "display_name": "jirassimok"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1581233576,
+                            "post_id": 46837904,
+                            "comment_id": 106357448,
+                            "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/46837904#comment106357448_46837904",
+                            "body": "This method is only faster than the others when the array has no negative numbers; your test seems fast because timeit modifies the array, so after the first loop, there are no negatives left and it runs faster. In a test that re-generated the array each time, the logical indexing assignment (<code>a[a &lt; 0] = 0</code>) performed worst of the methods, with <code>np.maximum</code> doing best."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9720066,
+                                "reputation": 541,
+                                "user_id": 7957031,
+                                "user_type": "registered",
+                                "display_name": "Tobias"
+                            },
+                            "reply_to_user": {
+                                "account_id": 9989340,
+                                "reputation": 4058,
+                                "user_id": 7389264,
+                                "user_type": "registered",
+                                "display_name": "jirassimok"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1594625880,
+                            "post_id": 46837904,
+                            "comment_id": 111179380,
+                            "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/46837904#comment111179380_46837904",
+                            "body": "@jirassimok you are right. My function will modify the data in place. And after one run it will be a lot faster. I will change my post"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 9720066,
+                        "reputation": 541,
+                        "user_id": 7957031,
+                        "user_type": "registered",
+                        "display_name": "Tobias"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 36,
+                    "last_activity_date": 1594626071,
+                    "last_edit_date": 1594626071,
+                    "creation_date": 1508442846,
+                    "answer_id": 46837904,
+                    "question_id": 32109319,
+                    "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/46837904#46837904",
+                    "body": "<p><strong>EDIT</strong> As  jirassimok has mentioned below my function will change the data in place, after that it runs a lot faster in timeit. This causes the good results. It's some kind of cheating. Sorry for your inconvenience.</p>\n<p>I found a faster method for ReLU with numpy. You can use the fancy index feature of numpy as well.</p>\n<p>fancy index:</p>\n<p><strong>20.3</strong> ms \u00b1 272 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 10 loops each)</p>\n<pre><code>&gt;&gt;&gt; x = np.random.random((5,5)) - 0.5 \n&gt;&gt;&gt; x\narray([[-0.21444316, -0.05676216,  0.43956365, -0.30788116, -0.19952038],\n       [-0.43062223,  0.12144647, -0.05698369, -0.32187085,  0.24901568],\n       [ 0.06785385, -0.43476031, -0.0735933 ,  0.3736868 ,  0.24832288],\n       [ 0.47085262, -0.06379623,  0.46904916, -0.29421609, -0.15091168],\n       [ 0.08381359, -0.25068492, -0.25733763, -0.1852205 , -0.42816953]])\n&gt;&gt;&gt; x[x&lt;0]=0\n&gt;&gt;&gt; x\narray([[ 0.        ,  0.        ,  0.43956365,  0.        ,  0.        ],\n       [ 0.        ,  0.12144647,  0.        ,  0.        ,  0.24901568],\n       [ 0.06785385,  0.        ,  0.        ,  0.3736868 ,  0.24832288],\n       [ 0.47085262,  0.        ,  0.46904916,  0.        ,  0.        ],\n       [ 0.08381359,  0.        ,  0.        ,  0.        ,  0.        ]])\n</code></pre>\n<p>Here is my benchmark:</p>\n<pre><code>import numpy as np\nx = np.random.random((5000, 5000)) - 0.5\nprint(&quot;max method:&quot;)\n%timeit -n10 np.maximum(x, 0)\nprint(&quot;max inplace method:&quot;)\n%timeit -n10 np.maximum(x, 0,x)\nprint(&quot;multiplication method:&quot;)\n%timeit -n10 x * (x &gt; 0)\nprint(&quot;abs method:&quot;)\n%timeit -n10 (abs(x) + x) / 2\nprint(&quot;fancy index:&quot;)\n%timeit -n10 x[x&lt;0] =0\n\nmax method:\n241 ms \u00b1 3.53 ms per loop (mean \u00b1 std. dev. of 7 runs, 10 loops each)\nmax inplace method:\n38.5 ms \u00b1 4 ms per loop (mean \u00b1 std. dev. of 7 runs, 10 loops each)\nmultiplication method:\n162 ms \u00b1 3.1 ms per loop (mean \u00b1 std. dev. of 7 runs, 10 loops each)\nabs method:\n181 ms \u00b1 4.18 ms per loop (mean \u00b1 std. dev. of 7 runs, 10 loops each)\nfancy index:\n20.3 ms \u00b1 272 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 10 loops each)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7613922,
+                                "reputation": 2991,
+                                "user_id": 5774004,
+                                "user_type": "registered",
+                                "accept_rate": 73,
+                                "display_name": "Sreeragh A R"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1580628368,
+                            "post_id": 47936476,
+                            "comment_id": 106155085,
+                            "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/47936476#comment106155085_47936476",
+                            "body": "Thanks. I found this to be faster than the fancy index method. @Shital Shah Could you please explain this syntax more or share some links?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 71838,
+                                "reputation": 66456,
+                                "user_id": 207661,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "Shital Shah"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7613922,
+                                "reputation": 2991,
+                                "user_id": 5774004,
+                                "user_type": "registered",
+                                "accept_rate": 73,
+                                "display_name": "Sreeragh A R"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1580630602,
+                            "post_id": 47936476,
+                            "comment_id": 106155420,
+                            "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/47936476#comment106155420_47936476",
+                            "body": "It&#39;s just broadcasting and element-wise multiplication. The <code>0</code> will automatically be turned in to same size as tensor <code>x</code>. The <code>bool</code> result will be turned in to 0 or 1 and then will get multiplied elementwise. There is no magic :)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 10238335,
+                                "reputation": 860,
+                                "user_id": 7556522,
+                                "user_type": "registered",
+                                "display_name": "Olivier D&#39;Ancona"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1647081000,
+                            "post_id": 47936476,
+                            "comment_id": 126287112,
+                            "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/47936476#comment126287112_47936476",
+                            "body": "the derivative should be <code>1. * ( x &gt;= 0) </code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 71838,
+                        "reputation": 66456,
+                        "user_id": 207661,
+                        "user_type": "registered",
+                        "accept_rate": 64,
+                        "display_name": "Shital Shah"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 57,
+                    "last_activity_date": 1580630708,
+                    "last_edit_date": 1580630708,
+                    "creation_date": 1513921899,
+                    "answer_id": 47936476,
+                    "question_id": 32109319,
+                    "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/47936476#47936476",
+                    "body": "<p>You can do it in much easier way:</p>\n\n<pre><code>def ReLU(x):\n    return x * (x &gt; 0)\n\ndef dReLU(x):\n    return 1. * (x &gt; 0)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1386318,
+                                "reputation": 4009,
+                                "user_id": 1430829,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Matt Hancock"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1556800808,
+                            "post_id": 48947333,
+                            "comment_id": 98557227,
+                            "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/48947333#comment98557227_48947333",
+                            "body": "Why? The <code>abs</code> is unnecessary given that your stamping out all the negative components."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3284421,
+                        "reputation": 461,
+                        "user_id": 2764243,
+                        "user_type": "registered",
+                        "display_name": "Patel Sunil"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -3,
+                    "last_activity_date": 1519386988,
+                    "creation_date": 1519386988,
+                    "answer_id": 48947333,
+                    "question_id": 32109319,
+                    "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/48947333#48947333",
+                    "body": "<p>This is more precise implementation:</p>\n\n<pre><code>def ReLU(x):\n    return abs(x) * (x &gt; 0)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3761440,
+                                "reputation": 2784,
+                                "user_id": 3126298,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "n1k31t4"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1530458185,
+                            "post_id": 49734841,
+                            "comment_id": 89234103,
+                            "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/49734841#comment89234103_49734841",
+                            "body": "Why does your benchmark show that <code>relu_mul</code> is fastest, but you say<code>relu_max_inplace</code> is slightly faster? Also, why do you initialise the test matrix in each function and no just once at the beginning for each method? Your timings now include time taken to create a matrix with 5000*5000 = 25000000 elements - roughly 200 Mb in size if default <code>float64</code> is used. <code>%timeit np.random.random((5000, 5000)) - 0.5</code> gives <code>273 ms &#177; 7.95 ms per loop (mean &#177; std. dev. of 7 runs, 1 loop each)</code>. That is over a third of the actual timings you posted."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 10266549,
+                                "reputation": 71,
+                                "user_id": 7576360,
+                                "user_type": "registered",
+                                "display_name": "ivanpp"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3761440,
+                                "reputation": 2784,
+                                "user_id": 3126298,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "n1k31t4"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1536903330,
+                            "post_id": 49734841,
+                            "comment_id": 91597904,
+                            "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/49734841#comment91597904_49734841",
+                            "body": "@n1k31t4 First, i say <code>relu_max_inplace</code> is slighter faster than <code>relu_max</code>, but the most recommended method is <code>relu_mul</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 10266549,
+                                "reputation": 71,
+                                "user_id": 7576360,
+                                "user_type": "registered",
+                                "display_name": "ivanpp"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3761440,
+                                "reputation": 2784,
+                                "user_id": 3126298,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "n1k31t4"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1536918878,
+                            "post_id": 49734841,
+                            "comment_id": 91605640,
+                            "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/49734841#comment91605640_49734841",
+                            "body": "I add the initialise func <code>np.random.random()</code> intentionally, because if i don&#39;t do this, <code>relu_max_inplace</code> method will seem to be extremly fast, like @Richard M&#246;hn &#39;s result. @Richard M&#246;hn &#39;s result shows that <code>relu_max_inplace</code> vs <code>relu_max</code> is 38.4ms vs 238ms per loop. It&#39;s just because the in_place method will only be excuted once. And initialise the matrix in each loop will avoid this situation. The comparison will be fair."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4816493,
+                                "reputation": 5732,
+                                "user_id": 3888455,
+                                "user_type": "registered",
+                                "display_name": "Sid"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1593888309,
+                            "post_id": 49734841,
+                            "comment_id": 110936697,
+                            "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/49734841#comment110936697_49734841",
+                            "body": "@ivanpp I&#39;m not sure including the random generation op in timing results is fair at all."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 10266549,
+                        "reputation": 71,
+                        "user_id": 7576360,
+                        "user_type": "registered",
+                        "display_name": "ivanpp"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1536918915,
+                    "last_edit_date": 1536918915,
+                    "creation_date": 1523282507,
+                    "answer_id": 49734841,
+                    "question_id": 32109319,
+                    "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/49734841#49734841",
+                    "body": "<p><strong><a href=\"https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/40013151#40013151\">Richard M\u00f6hn's comparison</a>  is not fair.<br>\nAs <a href=\"https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy#comment72106822_40013151\">Andrea Di Biagio's comment</a>, the in-place method <code>np.maximum(x, 0, x)</code> will modify x at the first loop.</strong><br>\nSo here is my benchmark:  </p>\n\n<pre><code>import numpy as np\n\ndef baseline():\n    x = np.random.random((5000, 5000)) - 0.5\n    return x\n\ndef relu_mul():\n    x = np.random.random((5000, 5000)) - 0.5\n    out = x * (x &gt; 0)\n    return out\n\ndef relu_max():\n    x = np.random.random((5000, 5000)) - 0.5\n    out = np.maximum(x, 0)\n    return out\n\ndef relu_max_inplace():\n    x = np.random.random((5000, 5000)) - 0.5\n    np.maximum(x, 0, x)\n    return x \n</code></pre>\n\n<p>Timing it:  </p>\n\n<pre><code>print(\"baseline:\")\n%timeit -n10 baseline()\nprint(\"multiplication method:\")\n%timeit -n10 relu_mul()\nprint(\"max method:\")\n%timeit -n10 relu_max()\nprint(\"max inplace method:\")\n%timeit -n10 relu_max_inplace()\n</code></pre>\n\n<p>Get the results:  </p>\n\n<pre><code>baseline:\n10 loops, best of 3: 425 ms per loop\nmultiplication method:\n10 loops, best of 3: 596 ms per loop\nmax method:\n10 loops, best of 3: 682 ms per loop\nmax inplace method:\n10 loops, best of 3: 602 ms per loop\n</code></pre>\n\n<p>In-place maximum method is only a bit faster than the maximum method, and it may because it omits the variable assignment for 'out'. And it's still slower than the multiplication method.<br>\nAnd since you're implementing the ReLU func. You may have to save the 'x' for backprop through relu. E.g.:  </p>\n\n<pre><code>def relu_backward(dout, cache):\n    x = cache\n    dx = np.where(x &gt; 0, dout, 0)\n    return dx\n</code></pre>\n\n<p>So i recommend you to use multiplication method.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 10041924,
+                        "reputation": 306,
+                        "user_id": 7424478,
+                        "user_type": "registered",
+                        "display_name": "Boooooooooms"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1535540075,
+                    "creation_date": 1535540075,
+                    "answer_id": 52075706,
+                    "question_id": 32109319,
+                    "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/52075706#52075706",
+                    "body": "<p>If we have 3 parameters <code>(t0, a0, a1)</code> for Relu, that is we want to implement</p>\n\n<pre><code>if x &gt; t0:\n    x = x * a1\nelse:\n    x = x * a0\n</code></pre>\n\n<p>We can use the following code:</p>\n\n<pre><code>X = X * (X &gt; t0) * a1 +  X * (X &lt; t0) * a0\n</code></pre>\n\n<p><code>X</code> there is a matrix.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 16340471,
+                        "reputation": 31,
+                        "user_id": 11801476,
+                        "user_type": "registered",
+                        "display_name": "Donald Su"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1563454357,
+                    "creation_date": 1563454357,
+                    "answer_id": 57094920,
+                    "question_id": 32109319,
+                    "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/57094920#57094920",
+                    "body": "<p>numpy didn't have the function of relu, but you define it by yourself as follow:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>def relu(x):\n    return np.maximum(0, x)\n</code></pre>\n\n<p>for example:</p>\n\n<pre><code>arr = np.array([[-1,2,3],[1,2,3]])\n\nret = relu(arr)\nprint(ret) # print [[0 2 3] [1 2 3]]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 18730312,
+                        "reputation": 11,
+                        "user_id": 13655863,
+                        "user_type": "unregistered",
+                        "display_name": "Ramy"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1590980610,
+                    "creation_date": 1590980610,
+                    "answer_id": 62125080,
+                    "question_id": 32109319,
+                    "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/62125080#62125080",
+                    "body": "<p>ReLU(x) also is equal to (x+abs(x))/2  </p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 8316733,
+                        "reputation": 111,
+                        "user_id": 6249729,
+                        "user_type": "registered",
+                        "display_name": "Kishor Bhoyar"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1674231111,
+                    "last_edit_date": 1674231111,
+                    "creation_date": 1674210462,
+                    "answer_id": 75182736,
+                    "question_id": 32109319,
+                    "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy/75182736#75182736",
+                    "body": "<p><strong>For a single neuron</strong></p>\n<pre><code>def relu(net):\n\n    return max(0, net)\n</code></pre>\n<p>Where net is the net activity at the neuron's input(net=dot(w,x)), where dot() is the dot product of w and x (weight vector and input vector respectively). dot() is a function defined in numpy package in Python.</p>\n<p><strong>For neurons in a layer with net vector</strong></p>\n<pre><code>def relu(net):\n  \n   return np.maximum(net)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 4026369,
+                "reputation": 1315,
+                "user_id": 4467507,
+                "user_type": "registered",
+                "accept_rate": 100,
+                "display_name": "Andoni Zubizarreta"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 32109519,
+            "answer_count": 10,
+            "score": 101,
+            "last_activity_date": 1674231111,
+            "creation_date": 1440043136,
+            "last_edit_date": 1595207201,
+            "question_id": 32109319,
+            "link": "https://stackoverflow.com/questions/32109319/how-to-implement-the-relu-function-in-numpy",
+            "title": "How to implement the ReLU function in Numpy",
+            "body": "<p>I want to make a simple neural network which uses the ReLU function. Can someone give me a clue of how can I implement the function using numpy.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9868
+}

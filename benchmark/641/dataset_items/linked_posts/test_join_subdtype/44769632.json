@@ -1,0 +1,167 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "python-3.x",
+                "numpy",
+                "structured-array"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 36018,
+                        "reputation": 96689,
+                        "user_id": 102441,
+                        "user_type": "registered",
+                        "accept_rate": 76,
+                        "display_name": "Eric"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1498517993,
+                    "post_id": 44769632,
+                    "comment_id": 76520613,
+                    "link": "https://stackoverflow.com/questions/44769632/numpy-recfunctions-join-by-typeerror#comment76520613_44769632",
+                    "body": "Looks like a bug to me - you should report it on the bug tracker"
+                },
+                {
+                    "owner": {
+                        "account_id": 36018,
+                        "reputation": 96689,
+                        "user_id": 102441,
+                        "user_type": "registered",
+                        "accept_rate": 76,
+                        "display_name": "Eric"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1498518250,
+                    "post_id": 44769632,
+                    "comment_id": 76520684,
+                    "link": "https://stackoverflow.com/questions/44769632/numpy-recfunctions-join-by-typeerror#comment76520684_44769632",
+                    "body": "The bug is visible more simply as <code>bar.view(np.ma.MaskedArray).sort()</code>"
+                },
+                {
+                    "owner": {
+                        "account_id": 2355834,
+                        "reputation": 1582,
+                        "user_id": 2063640,
+                        "user_type": "registered",
+                        "display_name": "eatcrayons"
+                    },
+                    "reply_to_user": {
+                        "account_id": 36018,
+                        "reputation": 96689,
+                        "user_id": 102441,
+                        "user_type": "registered",
+                        "accept_rate": 76,
+                        "display_name": "Eric"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1498518648,
+                    "post_id": 44769632,
+                    "comment_id": 76520792,
+                    "link": "https://stackoverflow.com/questions/44769632/numpy-recfunctions-join-by-typeerror#comment76520792_44769632",
+                    "body": "@Eric - Ah... so it is probably closely related to <a href=\"https://github.com/numpy/numpy/issues/8069\" rel=\"nofollow noreferrer\">this bug</a>."
+                },
+                {
+                    "owner": {
+                        "account_id": 36018,
+                        "reputation": 96689,
+                        "user_id": 102441,
+                        "user_type": "registered",
+                        "accept_rate": 76,
+                        "display_name": "Eric"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1498518890,
+                    "post_id": 44769632,
+                    "comment_id": 76520858,
+                    "link": "https://stackoverflow.com/questions/44769632/numpy-recfunctions-join-by-typeerror#comment76520858_44769632",
+                    "body": "Good find - this is indeed that bug"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2355834,
+                                "reputation": 1582,
+                                "user_id": 2063640,
+                                "user_type": "registered",
+                                "display_name": "eatcrayons"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1498524559,
+                            "post_id": 44770508,
+                            "comment_id": 76522153,
+                            "link": "https://stackoverflow.com/questions/44769632/numpy-recfunctions-join-by-typeerror/44770508#comment76522153_44770508",
+                            "body": "Thanks for looking into this! I&#39;ll see if I can find a workaround for now."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2355834,
+                                "reputation": 1582,
+                                "user_id": 2063640,
+                                "user_type": "registered",
+                                "display_name": "eatcrayons"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1498526727,
+                            "post_id": 44770508,
+                            "comment_id": 76522692,
+                            "link": "https://stackoverflow.com/questions/44769632/numpy-recfunctions-join-by-typeerror/44770508#comment76522692_44770508",
+                            "body": "Although not a specific answer to this question, <a href=\"https://stackoverflow.com/questions/13795390/numpy-append-field-gives-shape-error-for-new-field-with-2d-shape\">this post</a> provided me with enough information to develop a workaround using merge_arrays."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 36018,
+                        "reputation": 96689,
+                        "user_id": 102441,
+                        "user_type": "registered",
+                        "accept_rate": 76,
+                        "display_name": "Eric"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 2,
+                    "last_activity_date": 1498923474,
+                    "last_edit_date": 1498923474,
+                    "creation_date": 1498522505,
+                    "answer_id": 44770508,
+                    "question_id": 44769632,
+                    "link": "https://stackoverflow.com/questions/44769632/numpy-recfunctions-join-by-typeerror/44770508#44770508",
+                    "body": "<p>This is a bug. <a href=\"https://github.com/numpy/numpy/pull/9302/\" rel=\"nofollow noreferrer\">This PR</a> partially fixes it, but it seems you've stumbled across a can of worms relating to <code>np.ma</code> and subdtypes.</p>\n\n<p>As for why it worked for <code>float16</code> - <code>None</code> was being coerced into <code>nan</code> (a questionable feature), rather than erroring.</p>\n\n<p><strong>edit:</strong> PR is merged, this will be fixed in numpy 1.14</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 2355834,
+                "reputation": 1582,
+                "user_id": 2063640,
+                "user_type": "registered",
+                "display_name": "eatcrayons"
+            },
+            "comment_count": 4,
+            "is_answered": true,
+            "accepted_answer_id": 44770508,
+            "answer_count": 1,
+            "score": 2,
+            "last_activity_date": 1498923474,
+            "creation_date": 1498516461,
+            "last_edit_date": 1498517558,
+            "question_id": 44769632,
+            "link": "https://stackoverflow.com/questions/44769632/numpy-recfunctions-join-by-typeerror",
+            "title": "NumPy recfunctions join_by TypeError",
+            "body": "<p>I encounter a TypeError when I attempt to join a 'uint16' field to a structured array in NumPy 1.11 or 1.12 (Python 3.5).</p>\n\n<pre><code>import numpy as np\nfrom numpy.lib import recfunctions as rfn\nfoo = np.array([(1,)],\n               dtype=[('key', int)])\nbar = np.array([(1,np.array([1,2,3]))],\n               dtype=[('key', int), ('value', 'uint16', 3)])\nrfn.join_by('key', foo, bar)\n</code></pre>\n\n<p>This is the error:</p>\n\n<pre><code>Traceback (most recent call last):\n  File \"&lt;stdin&gt;\", line 1, in &lt;module&gt;\n  File \"/home/user/anaconda3/lib/python3.5/site-packages/numpy/lib/recfunctions.py\", line 986, in join_by\n    output.sort(order=key)\n  File \"/home/user/anaconda3/lib/python3.5/site-packages/numpy/ma/core.py\", line 5420, in sort\n    sidx = self.filled(filler).argsort(axis=axis, kind=kind,\n  File \"/home/user/anaconda3/lib/python3.5/site-packages/numpy/ma/core.py\", line 3668, in filled\n    fill_value = _check_fill_value(fill_value, self.dtype)\n  File \"/home/user/anaconda3/lib/python3.5/site-packages/numpy/ma/core.py\", line 470, in _check_fill_value\n    fill_value = np.array(_recursive_set_fill_value(fill_value, ndtype),\n  File \"/home/user/anaconda3/lib/python3.5/site-packages/numpy/ma/core.py\", line 436, in _recursive_set_fill_value\n    output_value.append(np.array(fval, dtype=cdtype).item())\nTypeError: int() argument must be a string, a bytes-like object or a number, not 'NoneType'\n</code></pre>\n\n<p>The same problem does not occur if I use a 'float16'.</p>\n\n<pre><code>import numpy as np\nfrom numpy.lib import recfunctions as rfn\nfoo = np.array([(1,)],\n               dtype=[('key', int)])\nbar = np.array([(1,np.array([1,2,3]))],\n               dtype=[('key', int), ('value', 'float16', 3)])\nrfn.join_by('key', foo, bar)\n</code></pre>\n\n<p>Is this just a bug? Or is there some way to prevent this problem?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8876
+}

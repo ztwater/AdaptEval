@@ -1,0 +1,17 @@
+print(padzero_with_lower('file1.txt'))   # file0000000001.txt
+print(padzero_with_lower('file12.txt'))  # file0000000012.txt
+print(padzero_with_lower('file23.txt'))  # file0000000023.txt
+print(padzero_with_lower('file123.txt')) # file0000000123.txt
+print(padzero_with_lower('file301.txt')) # file0000000301.txt
+print(padzero_with_lower('Dir2/file15.txt'))  # dir0000000002/file0000000015.txt
+print(padzero_with_lower('dir2/file123.txt')) # dir0000000002/file0000000123.txt
+print(padzero_with_lower('dir15/file2.txt'))  # dir0000000015/file0000000002.txt
+print(padzero_with_lower('Dir15/file15.txt')) # dir0000000015/file0000000015.txt
+print(padzero_with_lower('elm0'))  # elm0000000000
+print(padzero_with_lower('elm1'))  # elm0000000001
+print(padzero_with_lower('Elm2'))  # elm0000000002
+print(padzero_with_lower('elm9'))  # elm0000000009
+print(padzero_with_lower('elm10')) # elm0000000010
+print(padzero_with_lower('Elm11')) # elm0000000011 
+print(padzero_with_lower('Elm12')) # elm0000000012
+print(padzero_with_lower('elm13')) # elm0000000013

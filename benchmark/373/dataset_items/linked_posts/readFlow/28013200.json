@@ -1,0 +1,290 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "c++",
+                "image",
+                "numpy",
+                "file-format"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 1528147,
+                        "reputation": 102082,
+                        "user_id": 1426065,
+                        "user_type": "registered",
+                        "accept_rate": 82,
+                        "display_name": "MattDMo"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1421608737,
+                    "post_id": 28013200,
+                    "comment_id": 44414661,
+                    "link": "https://stackoverflow.com/questions/28013200/reading-middlebury-flow-files-with-python-bytes-array-numpy#comment44414661_28013200",
+                    "body": "well, the format is described in the README you linked, and sample C++ code for reading <code>.flo</code> files is <a href=\"http://vision.middlebury.edu/flow/code/flow-code/flowIO.cpp\" rel=\"nofollow noreferrer\">here</a> - see the <code>ReadFlowFile()</code> function (line 46) for details. Translation shouldn&#39;t be too terribly difficult for someone with a little bit of knowledge of C/C++ (which unfortunately is not me...)"
+                },
+                {
+                    "owner": {
+                        "account_id": 1528147,
+                        "reputation": 102082,
+                        "user_id": 1426065,
+                        "user_type": "registered",
+                        "accept_rate": 82,
+                        "display_name": "MattDMo"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1421609129,
+                    "post_id": 28013200,
+                    "comment_id": 44414811,
+                    "link": "https://stackoverflow.com/questions/28013200/reading-middlebury-flow-files-with-python-bytes-array-numpy#comment44414811_28013200",
+                    "body": "Also, if you download <a href=\"http://vision.middlebury.edu/flow/code/flow-code-matlab.zip\" rel=\"nofollow noreferrer\"><code>flow-code-matlab.zip</code></a>, you can find <code>readFlowFile.m</code> which has the same code in Matlab, if you&#39;re more fluent in that."
+                },
+                {
+                    "owner": {
+                        "account_id": 5645128,
+                        "reputation": 149,
+                        "user_id": 4467502,
+                        "user_type": "registered",
+                        "display_name": "Paul Parneix"
+                    },
+                    "reply_to_user": {
+                        "account_id": 1528147,
+                        "reputation": 102082,
+                        "user_id": 1426065,
+                        "user_type": "registered",
+                        "accept_rate": 82,
+                        "display_name": "MattDMo"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1421609799,
+                    "post_id": 28013200,
+                    "comment_id": 44415080,
+                    "link": "https://stackoverflow.com/questions/28013200/reading-middlebury-flow-files-with-python-bytes-array-numpy#comment44415080_28013200",
+                    "body": "hi, thanks for comments, I&#39;m not that fluent in C++ or mathlab, but I&#39;ll try. Actually I&#39;m trying to find a numpy solution to avoid C++ style for loop, that will be quite slow in python."
+                },
+                {
+                    "owner": {
+                        "account_id": 1599133,
+                        "reputation": 2731,
+                        "user_id": 1480560,
+                        "user_type": "registered",
+                        "accept_rate": 55,
+                        "display_name": "bsa"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1421626481,
+                    "post_id": 28013200,
+                    "comment_id": 44419948,
+                    "link": "https://stackoverflow.com/questions/28013200/reading-middlebury-flow-files-with-python-bytes-array-numpy#comment44419948_28013200",
+                    "body": "Two things that jump out: 1) You are specifying np.float16. From the readme and the C source code, there are two bands of 4 byte (32-bit) floats. Try np.float32. 2) You are fseeking offset 11.. shouldn&#39;t that be offset 12 for the start of the data?"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5645128,
+                                "reputation": 149,
+                                "user_id": 4467502,
+                                "user_type": "registered",
+                                "display_name": "Paul Parneix"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1421634528,
+                            "post_id": 28016469,
+                            "comment_id": 44421475,
+                            "link": "https://stackoverflow.com/questions/28013200/reading-middlebury-flow-files-with-python-bytes-array-numpy/28016469#comment44421475_28016469",
+                            "body": "Thanks ! It&#39;s working perfectly. I ended with a working solution, but it was quite dirty ; specify w &amp; h, read the whole file and delete the header... your way is really clever. thanks again :)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 175711,
+                                "reputation": 6346,
+                                "user_id": 405906,
+                                "user_type": "registered",
+                                "display_name": "BeRecursive"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1427729650,
+                            "post_id": 28016469,
+                            "comment_id": 46886089,
+                            "link": "https://stackoverflow.com/questions/28013200/reading-middlebury-flow-files-with-python-bytes-array-numpy/28016469#comment46886089_28016469",
+                            "body": "Flip <code>w</code> and <code>h</code> in <code>(w, h, 2)</code>-&gt;<code>(h, w 2)</code> if you want to view it with something like Matplotlib."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4326508,
+                                "reputation": 801,
+                                "user_id": 3533188,
+                                "user_type": "registered",
+                                "display_name": "Farshid PirahanSiah"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1445440486,
+                            "post_id": 28016469,
+                            "comment_id": 54327260,
+                            "link": "https://stackoverflow.com/questions/28013200/reading-middlebury-flow-files-with-python-bytes-array-numpy/28016469#comment54327260_28016469",
+                            "body": "could you please give the C++ code for this. I would like to compare two fol files ( optical flow Sintel dataset) and get the evaluation of algorithms.I want to get &quot;EPE all EPE matched EPE unmatched d0-10 d10-60 d60-140 s0-10 s10-40 s40+&quot; result of Optical flow from &quot;<a href=\"http://sintel.is.tue.mpg.de/results\" rel=\"nofollow noreferrer\">sintel.is.tue.mpg.de/results</a>&quot; dataset. I used OpenCV 3, VC++ 2013, Win 7 64bit. and I need example code of getting this results."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1599133,
+                                "reputation": 2731,
+                                "user_id": 1480560,
+                                "user_type": "registered",
+                                "accept_rate": 55,
+                                "display_name": "bsa"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1445601429,
+                            "post_id": 28016469,
+                            "comment_id": 54402210,
+                            "link": "https://stackoverflow.com/questions/28013200/reading-middlebury-flow-files-with-python-bytes-array-numpy/28016469#comment54402210_28016469",
+                            "body": "How about posting a new question, and linking back to this one. Post the code you have so far."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1562548,
+                                "reputation": 2316,
+                                "user_id": 1452097,
+                                "user_type": "registered",
+                                "accept_rate": 54,
+                                "display_name": "redrubia"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1487955989,
+                            "post_id": 28016469,
+                            "comment_id": 72032368,
+                            "link": "https://stackoverflow.com/questions/28013200/reading-middlebury-flow-files-with-python-bytes-array-numpy/28016469#comment72032368_28016469",
+                            "body": "I&#39;m a tad confused if something is wrong here, as you are reading in the same number for width and height  <code>w = np.fromfile(f, np.int32, count=1) ; h = np.fromfile(f, np.int32, count=1)</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1599133,
+                                "reputation": 2731,
+                                "user_id": 1480560,
+                                "user_type": "registered",
+                                "accept_rate": 55,
+                                "display_name": "bsa"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1488073706,
+                            "post_id": 28016469,
+                            "comment_id": 72069639,
+                            "link": "https://stackoverflow.com/questions/28013200/reading-middlebury-flow-files-with-python-bytes-array-numpy/28016469#comment72069639_28016469",
+                            "body": "<code>np.fromfile</code> advances the file pointer. So the first call reads 4 bytes, then the second call reads the next 4 bytes."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1599133,
+                        "reputation": 2731,
+                        "user_id": 1480560,
+                        "user_type": "registered",
+                        "accept_rate": 55,
+                        "display_name": "bsa"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": true,
+                    "score": 11,
+                    "last_activity_date": 1569024263,
+                    "last_edit_date": 1569024263,
+                    "creation_date": 1421627792,
+                    "answer_id": 28016469,
+                    "question_id": 28013200,
+                    "link": "https://stackoverflow.com/questions/28013200/reading-middlebury-flow-files-with-python-bytes-array-numpy/28016469#28016469",
+                    "body": "<p>Try this. I've tested it on one .flo file so far.</p>\n\n<pre><code>import numpy as np\nimport sys\n\nif __name__ == '__main__':\n    if len(sys.argv) &lt;= 1:\n        print('Specify a .flo file on the command line.')\n    else:\n        with open(sys.argv[1], 'rb') as f:\n            magic, = np.fromfile(f, np.float32, count=1)\n            if 202021.25 != magic:\n                print('Magic number incorrect. Invalid .flo file')\n            else:\n                w, h = np.fromfile(f, np.int32, count=2)\n                print(f'Reading {w} x {h} flo file')\n                data = np.fromfile(f, np.float32, count=2*w*h)\n                # Reshape data into 3D array (columns, rows, bands)\n                data2D = np.resize(data, (w, h, 2))\n                print(data2D)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1599133,
+                                "reputation": 2731,
+                                "user_id": 1480560,
+                                "user_type": "registered",
+                                "accept_rate": 55,
+                                "display_name": "bsa"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1568998848,
+                            "post_id": 44906777,
+                            "comment_id": 102467194,
+                            "link": "https://stackoverflow.com/questions/28013200/reading-middlebury-flow-files-with-python-bytes-array-numpy/44906777#comment102467194_44906777",
+                            "body": "I don&#39;t think your code will work in Python 3.5 because you are still using Python 2 style <code>print &#39;blah&#39;</code> instead of <code>print(&#39;blah&#39;)</code>.."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1599133,
+                                "reputation": 2731,
+                                "user_id": 1480560,
+                                "user_type": "registered",
+                                "accept_rate": 55,
+                                "display_name": "bsa"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1569024281,
+                            "post_id": 44906777,
+                            "comment_id": 102474230,
+                            "link": "https://stackoverflow.com/questions/28013200/reading-middlebury-flow-files-with-python-bytes-array-numpy/44906777#comment102474230_44906777",
+                            "body": "I&#39;ve updated my code so it works with Python 3.6 or higher."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 558141,
+                        "reputation": 368,
+                        "user_id": 920689,
+                        "user_type": "registered",
+                        "display_name": "Mr.Epic Fail"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1569842965,
+                    "last_edit_date": 1569842965,
+                    "creation_date": 1499173260,
+                    "answer_id": 44906777,
+                    "question_id": 28013200,
+                    "link": "https://stackoverflow.com/questions/28013200/reading-middlebury-flow-files-with-python-bytes-array-numpy/44906777#44906777",
+                    "body": "<p>bsa's answer does not work for python 3.5 onwards. The small modification shown below, e.g. np.fromfile(f, np.int32, count=1)[0], will. </p>\n\n<pre><code>import numpy as np\nimport os\nimport sys\n\n# WARNING: this will work on little-endian architectures (eg Intel x86) only!\nif '__main__' == __name__:\n    if len(sys.argv) &gt; 1:\n        with open(sys.argv[1], 'rb') as f:\n            magic = np.fromfile(f, np.float32, count=1)\n            if 202021.25 != magic:\n                print('Magic number incorrect. Invalid .flo file')\n            else:\n                w = np.fromfile(f, np.int32, count=1)[0]\n                h = np.fromfile(f, np.int32, count=1)[0]\n                print('Reading %d x %d flo file' % (w, h))\n                data = np.fromfile(f, np.float32, count=2*w*h)\n                # Reshape data into 3D array (columns, rows, bands)\n                data2D = np.resize(data, (h, w, 2))\n    else:\n        print('Specify a .flo file on the command line.')\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 5645128,
+                "reputation": 149,
+                "user_id": 4467502,
+                "user_type": "registered",
+                "display_name": "Paul Parneix"
+            },
+            "comment_count": 4,
+            "is_answered": true,
+            "accepted_answer_id": 28016469,
+            "answer_count": 2,
+            "score": 4,
+            "last_activity_date": 1569842965,
+            "creation_date": 1421605414,
+            "last_edit_date": 1421616398,
+            "question_id": 28013200,
+            "link": "https://stackoverflow.com/questions/28013200/reading-middlebury-flow-files-with-python-bytes-array-numpy",
+            "title": "reading middlebury &#39;flow&#39; files with python (bytes array &amp; numpy)",
+            "body": "<p>I'm trying to read a .flo file as a numpy 2Channels image.</p>\n\n<p>The format is described like this:</p>\n\n\n\n<pre class=\"lang-none prettyprint-override\"><code>\".flo\" file format used for optical flow evaluation\n\nStores 2-band float image for horizontal (u) and vertical (v) flow components.\nFloats are stored in little-endian order.\nA flow value is considered \"unknown\" if either |u| or |v| is greater than 1e9.\n\nbytes  contents\n\n0-3     tag: \"PIEH\" in ASCII, which in little endian happens to be the float 202021.25\n        (just a sanity check that floats are represented correctly)\n4-7     width as an integer\n8-11    height as an integer\n12-end  data (width*height*2*4 bytes total)\n        the float values for u and v, interleaved, in row order, i.e.,\n        u[row0,col0], v[row0,col0], u[row0,col1], v[row0,col1], ...\n</code></pre>\n\n<p>(Excerpt from this <a href=\"http://vision.middlebury.edu/flow/code/flow-code/README.txt\" rel=\"nofollow\">readme</a>)</p>\n\n<p>Here's my code but I'm kind of stuck, I don't know how to read the file as a 2 Channels numpy 2D array. </p>\n\n<pre class=\"lang-none prettyprint-override\"><code>import numpy as np\nimport os\n\n# test.flo, 512*512 optical flow file\n\nf = open('test.flo', 'rb')\nf.seek(11, os.SEEK_SET)  # skip header bytes\n\n\ndata_array = np.fromfile(f, np.float16)\ndata_2D = np.resize(data_array, (512, 512))\n</code></pre>\n\n<p>Maybe someone knows how to do that ?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9427
+}

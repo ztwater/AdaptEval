@@ -1,0 +1,115 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "xml",
+                "unicode",
+                "utf-8",
+                "iso-8859-1"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 415213,
+                                "reputation": 1815,
+                                "user_id": 789884,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "ingalcala"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1604286218,
+                            "post_id": 64631201,
+                            "comment_id": 114292105,
+                            "link": "https://stackoverflow.com/questions/64629600/how-can-you-convert-a-xml-iso-8859-1-to-utf-8-using-python-3-7-7/64631201#comment114292105_64631201",
+                            "body": "Thank you JosefZ, this code does change the header to: &lt;?xml version=&#39;1.0&#39; encoding=&#39;utf-8&#39;?&gt; &lt;articulos&gt;&lt;item&gt;&lt;node1&gt;&lt;/node1&gt;&lt;node2&gt;&lt;/node2&gt;&lt;/item&gt;&lt;/arti&zwnj;&#8203;culos&gt;  but I now see some weird characters within the converted file. I would like to have them encoded to UTF8 using your code."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4198672,
+                                "reputation": 29211,
+                                "user_id": 3439404,
+                                "user_type": "registered",
+                                "display_name": "JosefZ"
+                            },
+                            "reply_to_user": {
+                                "account_id": 415213,
+                                "reputation": 1815,
+                                "user_id": 789884,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "ingalcala"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1604303978,
+                            "post_id": 64631201,
+                            "comment_id": 114296143,
+                            "link": "https://stackoverflow.com/questions/64629600/how-can-you-convert-a-xml-iso-8859-1-to-utf-8-using-python-3-7-7/64631201#comment114296143_64631201",
+                            "body": "@ingalcala The output file <code>myFileOu</code> <i>is</i> saved using UTF-8 encoding. What do you mean by <i>weird characters</i>? For instance, UTF-8 byte sequence of the <code>&#161;</code> <i>Inverted Exclamation Mark</i> (<code>U+00A1</code>) is <code>0xC2</code>,<code>0xA1</code>. This byte sequence <i>appears</i> as <code>&#194;&#161;</code> if interpreted as  characters in <i>ISO-8859-1</i>, or as <code>\u252c&#237;</code> if interpreted as  characters in <i>cp850</i> etc\u2026 Typical <a href=\"https://en.wikipedia.org/wiki/Mojibake\" rel=\"nofollow noreferrer\">mojibake</a>\u2026"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4198672,
+                        "reputation": 29211,
+                        "user_id": 3439404,
+                        "user_type": "registered",
+                        "display_name": "JosefZ"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1604228986,
+                    "creation_date": 1604228986,
+                    "answer_id": 64631201,
+                    "question_id": 64629600,
+                    "link": "https://stackoverflow.com/questions/64629600/how-can-you-convert-a-xml-iso-8859-1-to-utf-8-using-python-3-7-7/64631201#64631201",
+                    "body": "<p>Getting together <code>xml.etree.ElementTree</code> \u2014 <a href=\"https://docs.python.org/3.7/library/xml.etree.elementtree.html\" rel=\"nofollow noreferrer\">The ElementTree XML API</a> with StackOverflow</p>\n<ul>\n<li><a href=\"https://stackoverflow.com/a/47885524/3439404\">deceze's answer</a> to <em>Parse XML in Python with encoding other than utf-8</em> and</li>\n<li><a href=\"https://stackoverflow.com/a/56683426/3439404\">Tomalak's answer</a> to <em>xml.etree.ElementTree.Element' object has no attribute 'write'</em></li>\n</ul>\n<p>Script:</p>\n<pre><code>myFileIn = 'ISO_8859_1.xml'\nmyFileOu = 'utf_8.xml'\n\nfrom xml.etree import ElementTree\n\n#  open in binary mode \u2193\nwith open( myFileIn, 'rb') as f:\n    root = ElementTree.fromstring( f.read())\n\ntree = ElementTree.ElementTree( root)\ntree.write( myFileOu, encoding=&quot;utf-8&quot;, xml_declaration=True)\n</code></pre>\n<p>Tested on the following <code>myFileIn</code> file (<a href=\"https://en.wikipedia.org/wiki/ISO/IEC_8859-1#Code_page_layout\" rel=\"nofollow noreferrer\">data from Wikipedia</a>):</p>\n<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;\n&lt;articulos&gt;\n  &lt;item&gt;\n    &lt;table&gt;&quot;upper&quot;&lt;/table&gt;\n    &lt;A_&gt;\u00a0~A0 \u00a1~A1 \u00a2~A2 \u00a3~A3 \u00a4~A4 \u00a5~A5 \u00a6~A6 \u00a7~A7 \u00a8~A8 \u00a9~A9 \u00aa~AA \u00ab~AB \u00ac~AC  ~AD \u00ae~AE \u00af~AF&lt;/A_&gt;\n    &lt;B_&gt;\u00b0~B0 \u00b1~B1 \u00b2~B2 \u00b3~B3 \u00b4~B4 \u00b5~B5 \u00b6~B6 \u00b7~B7 \u00b8~B8 \u00b9~B9 \u00ba~BA \u00bb~BB \u00bc~BC \u00bd~BD \u00be~BE \u00bf~BF&lt;/B_&gt;\n    &lt;C_&gt;\u00c0~C0 \u00c1~C1 \u00c2~C2 \u00c3~C3 \u00c4~C4 \u00c5~C5 \u00c6~C6 \u00c7~C7 \u00c8~C8 \u00c9~C9 \u00ca~CA \u00cb~CB \u00cc~CC \u00cd~CD \u00ce~CE \u00cf~CF&lt;/C_&gt;\n    &lt;D_&gt;\u00d0~D0 \u00d1~D1 \u00d2~D2 \u00d3~D3 \u00d4~D4 \u00d5~D5 \u00d6~D6 \u00d7~D7 \u00d8~D8 \u00d9~D9 \u00da~DA \u00db~DB \u00dc~DC \u00dd~DD \u00de~DE \u00df~DF&lt;/D_&gt;\n    &lt;E_&gt;\u00e0~E0 \u00e1~E1 \u00e2~E2 \u00e3~E3 \u00e4~E4 \u00e5~E5 \u00e6~E6 \u00e7~E7 \u00e8~E8 \u00e9~E9 \u00ea~EA \u00eb~EB \u00ec~EC \u00ed~ED \u00ee~EE \u00ef~EF&lt;/E_&gt;\n    &lt;F_&gt;\u00f0~F0 \u00f1~F1 \u00f2~F2 \u00f3~F3 \u00f4~F4 \u00f5~F5 \u00f6~F6 \u00f7~F7 \u00f8~F8 \u00f9~F9 \u00fa~FA \u00fb~FB \u00fc~FC \u00fd~FD \u00fe~FE \u00ff~FF&lt;/F_&gt;\n  &lt;/item&gt;\n&lt;/articulos&gt;\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 19376449,
+                        "reputation": 4372,
+                        "user_id": 14168623,
+                        "user_type": "registered",
+                        "display_name": "Alexandra Dudkina"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1604249679,
+                    "creation_date": 1604249679,
+                    "answer_id": 64634454,
+                    "question_id": 64629600,
+                    "link": "https://stackoverflow.com/questions/64629600/how-can-you-convert-a-xml-iso-8859-1-to-utf-8-using-python-3-7-7/64634454#64634454",
+                    "body": "<p>I would additionally add decoding / encoding for preserving special characters:</p>\n<pre><code>from lxml import etree\n\nsource = &quot;input.xml&quot;\n\nwith open(source, 'rb') as source:\n    parser = etree.XMLParser(encoding = &quot;iso-8859-1&quot;)\n    root = etree.parse(source, parser)\n      \nstring = etree.tostring(root, xml_declaration = True, encoding=&quot;UTF-8&quot;, pretty_print=True).decode('utf8').encode('iso-8859-1')\n\nwith open('output.xml', 'wb') as target:\n    target.write(string)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 415213,
+                "reputation": 1815,
+                "user_id": 789884,
+                "user_type": "registered",
+                "accept_rate": 76,
+                "display_name": "ingalcala"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "answer_count": 2,
+            "score": 0,
+            "last_activity_date": 1604249679,
+            "creation_date": 1604215773,
+            "question_id": 64629600,
+            "link": "https://stackoverflow.com/questions/64629600/how-can-you-convert-a-xml-iso-8859-1-to-utf-8-using-python-3-7-7",
+            "title": "How can you convert a XML ISO-8859-1 TO UTF-8 using PYTHON 3.7.7",
+            "body": "<p>hi I have been searching a lot about this subject using Python without a success. I have a file that I download from the web and its named import.xml and it starts with this:</p>\n<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;\n&lt;articulos&gt;&lt;item&gt;\n</code></pre>\n<p>I would like to convert it to UTF-8, any idea of where I should start??</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9220
+}

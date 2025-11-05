@@ -1,0 +1,6 @@
+Signature: strip_accents_unicode(s)
+Transform accentuated unicode symbols into their simple counterpart
+
+Warning: the python-level loop and join operations make this
+implementation 20 times slower than the strip_accents_ascii basic
+normalization.

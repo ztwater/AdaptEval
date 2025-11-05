@@ -1,0 +1,280 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "machine-learning",
+                "scikit-learn",
+                "normalization"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 6429765,
+                        "reputation": 213278,
+                        "user_id": 4983450,
+                        "user_type": "registered",
+                        "accept_rate": 74,
+                        "display_name": "Psidom"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 22,
+                    "last_activity_date": 1486005428,
+                    "creation_date": 1486005428,
+                    "answer_id": 41993627,
+                    "question_id": 41993565,
+                    "link": "https://stackoverflow.com/questions/41993565/save-minmaxscaler-model-in-sklearn/41993627#41993627",
+                    "body": "<p>You can use <code>pickle</code>, to save the scaler:</p>\n\n<pre><code>import pickle\nscalerfile = 'scaler.sav'\npickle.dump(scaler, open(scalerfile, 'wb'))\n</code></pre>\n\n<p>Load it back:</p>\n\n<pre><code>import pickle\nscalerfile = 'scaler.sav'\nscaler = pickle.load(open(scalerfile, 'rb'))\ntest_scaled_set = scaler.transform(test_set)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 12421416,
+                                "reputation": 305,
+                                "user_id": 9048198,
+                                "user_type": "registered",
+                                "display_name": "gold-kou"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1530421627,
+                            "post_id": 41993653,
+                            "comment_id": 89226504,
+                            "link": "https://stackoverflow.com/questions/41993565/save-minmaxscaler-model-in-sklearn/41993653#comment89226504_41993653",
+                            "body": "It&#39;s a good solution, but same with pickle isn&#39; it? I&#39;m a beginner in machine learning."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4235716,
+                                "reputation": 1737,
+                                "user_id": 3466910,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Ivan"
+                            },
+                            "reply_to_user": {
+                                "account_id": 12421416,
+                                "reputation": 305,
+                                "user_id": 9048198,
+                                "user_type": "registered",
+                                "display_name": "gold-kou"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1530549040,
+                            "post_id": 41993653,
+                            "comment_id": 89264758,
+                            "link": "https://stackoverflow.com/questions/41993565/save-minmaxscaler-model-in-sklearn/41993653#comment89264758_41993653",
+                            "body": "It is not -- <code>joblib.dump</code> is optimized for dumping sklearn objects and therefore creates much smaller files than pickle, which dumps the object with all its dependencies and such."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 13192817,
+                                "reputation": 554,
+                                "user_id": 9528643,
+                                "user_type": "registered",
+                                "display_name": "Vojta F"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1551194616,
+                            "post_id": 41993653,
+                            "comment_id": 96546747,
+                            "link": "https://stackoverflow.com/questions/41993565/save-minmaxscaler-model-in-sklearn/41993653#comment96546747_41993653",
+                            "body": "My experience with <code>pickle</code> is poor: it probably works for a short-term export but over long period of time, you have to deal with protocol version (one of parameters for pickling) and I&#39;ve encountered errors when loading old exports. I prefer this answer, thus."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4235716,
+                        "reputation": 1737,
+                        "user_id": 3466910,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Ivan"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 117,
+                    "last_activity_date": 1647540692,
+                    "last_edit_date": 1647540692,
+                    "creation_date": 1486005744,
+                    "answer_id": 41993653,
+                    "question_id": 41993565,
+                    "link": "https://stackoverflow.com/questions/41993565/save-minmaxscaler-model-in-sklearn/41993653#41993653",
+                    "body": "<p><strong>Update:</strong> <code>sklearn.externals.joblib</code> is deprecated. Install and use the pure <code>joblib</code> instead. Please see <a href=\"https://stackoverflow.com/a/56978681/3466910\">Engineero's answer below</a>, which is otherwise identical to mine.</p>\n<h3>Original answer</h3>\n<p>Even better than <code>pickle</code> (which creates much larger files than this method), you can use <code>sklearn</code>'s built-in tool:</p>\n<pre><code>from sklearn.externals import joblib\nscaler_filename = &quot;scaler.save&quot;\njoblib.dump(scaler, scaler_filename) \n\n# And now to load...\n\nscaler = joblib.load(scaler_filename) \n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7198509,
+                                "reputation": 12131,
+                                "user_id": 5496433,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "BallpointBen"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1496951581,
+                            "post_id": 41993681,
+                            "comment_id": 75886472,
+                            "link": "https://stackoverflow.com/questions/41993565/save-minmaxscaler-model-in-sklearn/41993681#comment75886472_41993681",
+                            "body": "For some reason, when I use this to save a <code>MinMaxScaler</code>, the loaded scaler doesn&#39;t scale the data identically to a freshly fitted scaler. Any idea why?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1110258,
+                                "reputation": 537,
+                                "user_id": 1100859,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Breina"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7198509,
+                                "reputation": 12131,
+                                "user_id": 5496433,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "BallpointBen"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1498988794,
+                            "post_id": 41993681,
+                            "comment_id": 76717682,
+                            "link": "https://stackoverflow.com/questions/41993565/save-minmaxscaler-model-in-sklearn/41993681#comment76717682_41993681",
+                            "body": "@BallpointBen Just tried it on a separate test set and got the same results. Maybe you used <code>np.random.rand</code> again?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 8462693,
+                        "reputation": 983,
+                        "user_id": 6347839,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "jlarks32"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 41,
+                    "last_activity_date": 1590073514,
+                    "last_edit_date": 1590073514,
+                    "creation_date": 1486005951,
+                    "answer_id": 41993681,
+                    "question_id": 41993565,
+                    "link": "https://stackoverflow.com/questions/41993565/save-minmaxscaler-model-in-sklearn/41993681#41993681",
+                    "body": "<p>So I'm actually not an expert with this but from a bit of research and a few helpful <a href=\"https://stackoverflow.com/questions/10592605/save-classifier-to-disk-in-scikit-learn\">links</a>, I think <code>pickle</code> and <code>sklearn.externals.joblib</code> are going to be your friends here.</p>\n\n<p>The package <code>pickle</code> lets you save models or \"dump\" models to a file. </p>\n\n<p>I think this <a href=\"http://scikit-learn.org/stable/modules/model_persistence.html\" rel=\"noreferrer\">link</a> is also helpful. It talks about creating a persistence model. Something that you're going to want to try is:</p>\n\n<pre><code># could use: import pickle... however let's do something else\nfrom sklearn.externals import joblib \n\n# this is more efficient than pickle for things like large numpy arrays\n# ... which sklearn models often have.   \n\n# then just 'dump' your file\njoblib.dump(clf, 'my_dope_model.pkl') \n</code></pre>\n\n<p><a href=\"https://pythonhosted.org/joblib/generated/joblib.dump.html\" rel=\"noreferrer\">Here</a> is where you can learn more about the sklearn  externals.</p>\n\n<p>Let me know if that doesn't help or I'm not understanding something about your model.</p>\n\n<p>Note: <code>sklearn.externals.joblib</code> is deprecated. Install and use the pure <code>joblib</code> instead</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2871299,
+                        "reputation": 12660,
+                        "user_id": 2464597,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Engineero"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 41,
+                    "last_activity_date": 1582221246,
+                    "last_edit_date": 1582221246,
+                    "creation_date": 1562792985,
+                    "answer_id": 56978681,
+                    "question_id": 41993565,
+                    "link": "https://stackoverflow.com/questions/41993565/save-minmaxscaler-model-in-sklearn/56978681#56978681",
+                    "body": "<p>Just a note that <code>sklearn.externals.joblib</code> has been deprecated and is superseded by plain old <a href=\"https://joblib.readthedocs.io/en/latest/index.html\" rel=\"noreferrer\"><code>joblib</code></a>, which can be installed with <code>pip install joblib</code>:</p>\n\n<pre><code>import joblib\njoblib.dump(my_scaler, 'scaler.gz')\nmy_scaler = joblib.load('scaler.gz')\n</code></pre>\n\n<p>Note that file extensions can be anything, but if it is one of <code>['.z', '.gz', '.bz2', '.xz', '.lzma']</code> then the corresponding compression protocol will be used. Docs for <a href=\"https://joblib.readthedocs.io/en/latest/generated/joblib.dump.html\" rel=\"noreferrer\"><code>joblib.dump()</code></a> and <a href=\"https://joblib.readthedocs.io/en/latest/generated/joblib.load.html\" rel=\"noreferrer\"><code>joblib.load()</code></a> methods.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5202422,
+                                "reputation": 2446,
+                                "user_id": 4161385,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "PSN"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5417892,
+                                "reputation": 933,
+                                "user_id": 4312519,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "Riley"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1566552241,
+                            "post_id": 57599931,
+                            "comment_id": 101700564,
+                            "link": "https://stackoverflow.com/questions/41993565/save-minmaxscaler-model-in-sklearn/57599931#comment101700564_57599931",
+                            "body": "You can use joblib or pickle here. The point is to create a pipeline so that you don\u2019t have to separately call the scaler."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 63045,
+                                "reputation": 173,
+                                "user_id": 186874,
+                                "user_type": "registered",
+                                "display_name": "codehearted"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1597289862,
+                            "post_id": 57599931,
+                            "comment_id": 112085688,
+                            "link": "https://stackoverflow.com/questions/41993565/save-minmaxscaler-model-in-sklearn/57599931#comment112085688_57599931",
+                            "body": "This is <i>instead</i> of saving the model, correct? If so, this seems like a better answer than the above, as you don&#39;t have to manage two separate files."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5202422,
+                        "reputation": 2446,
+                        "user_id": 4161385,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "PSN"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 14,
+                    "last_activity_date": 1566426701,
+                    "creation_date": 1566426701,
+                    "answer_id": 57599931,
+                    "question_id": 41993565,
+                    "link": "https://stackoverflow.com/questions/41993565/save-minmaxscaler-model-in-sklearn/57599931#57599931",
+                    "body": "<h3>The best way to do this is to create an ML pipeline like the following:</h3>\n\n<pre><code>from sklearn.pipeline import make_pipeline\nfrom sklearn.preprocessing import MinMaxScaler\nfrom sklearn.externals import joblib\n\n\npipeline = make_pipeline(MinMaxScaler(),YOUR_ML_MODEL() )\n\nmodel = pipeline.fit(X_train, y_train)\n</code></pre>\n\n<h3>Now you can save it to a file:</h3>\n\n<pre><code>joblib.dump(model, 'filename.mod') \n</code></pre>\n\n<h3>Later you can load it like this:</h3>\n\n<pre><code>model = joblib.load('filename.mod')\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 5756767,
+                "reputation": 10051,
+                "user_id": 4544413,
+                "user_type": "registered",
+                "accept_rate": 78,
+                "display_name": "Luis Ramon Ramirez Rodriguez"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 41993681,
+            "answer_count": 5,
+            "score": 74,
+            "last_activity_date": 1647540692,
+            "creation_date": 1486004846,
+            "last_edit_date": 1562793084,
+            "question_id": 41993565,
+            "link": "https://stackoverflow.com/questions/41993565/save-minmaxscaler-model-in-sklearn",
+            "title": "Save MinMaxScaler model in sklearn",
+            "body": "<p>I'm using the <code>MinMaxScaler</code> model in sklearn to normalize the features of a model.</p>\n\n<pre><code>training_set = np.random.rand(4,4)*10\ntraining_set\n\n       [[ 6.01144787,  0.59753007,  2.0014852 ,  3.45433657],\n       [ 6.03041646,  5.15589559,  6.64992437,  2.63440202],\n       [ 2.27733136,  9.29927394,  0.03718093,  7.7679183 ],\n       [ 9.86934288,  7.59003904,  6.02363739,  2.78294206]]\n\n\nscaler = MinMaxScaler()\nscaler.fit(training_set)    \nscaler.transform(training_set)\n\n\n   [[ 0.49184811,  0.        ,  0.29704831,  0.15972182],\n   [ 0.4943466 ,  0.52384506,  1.        ,  0.        ],\n   [ 0.        ,  1.        ,  0.        ,  1.        ],\n   [ 1.        ,  0.80357559,  0.9052909 ,  0.02893534]]\n</code></pre>\n\n<p>Now I want to use the same scaler to normalize the test set:</p>\n\n<pre><code>   [[ 8.31263467,  7.99782295,  0.02031658,  9.43249727],\n   [ 1.03761228,  9.53173021,  5.99539478,  4.81456067],\n   [ 0.19715961,  5.97702519,  0.53347403,  5.58747666],\n   [ 9.67505429,  2.76225253,  7.39944931,  8.46746594]]\n</code></pre>\n\n<p>But I don't want so use the <code>scaler.fit()</code> with the training data all the time. Is there a way to save the scaler and load it later from a different file?    </p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5762
+}

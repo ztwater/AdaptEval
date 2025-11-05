@@ -1,0 +1,1 @@
+myList.sort(key=sortKeyFunc)

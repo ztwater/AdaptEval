@@ -1,0 +1,105 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 49492,
+                        "reputation": 297035,
+                        "user_id": 147356,
+                        "user_type": "registered",
+                        "accept_rate": 54,
+                        "display_name": "larsks"
+                    },
+                    "edited": false,
+                    "score": 3,
+                    "creation_date": 1490744983,
+                    "post_id": 43081859,
+                    "comment_id": 73246761,
+                    "link": "https://stackoverflow.com/questions/43081859/how-to-create-empty-file-in-python#comment73246761_43081859",
+                    "body": "The argument to <code>os.system</code> needs to be a string.  That&#39;s not what you&#39;re passing right now.  Also, there&#39;s no reason to call out to the <code>touch</code> command when you could just use Python&#39;s own <code>open</code> method."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 193260,
+                                "reputation": 1721,
+                                "user_id": 434888,
+                                "user_type": "registered",
+                                "display_name": "Gino"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1506867827,
+                            "post_id": 43081892,
+                            "comment_id": 79980764,
+                            "link": "https://stackoverflow.com/questions/43081859/how-to-create-empty-file-in-python/43081892#comment79980764_43081892",
+                            "body": "I suggest adding the &#39;with&#39; in front of the &#39;open&#39;, so that it will automatically clean up the returned file handle, e.g. &#39; with open(gdsfile, &#39;x&#39;) as touched_file: pass&#39;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11733472,
+                                "reputation": 905,
+                                "user_id": 8588108,
+                                "user_type": "registered",
+                                "display_name": "vishal"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1568198380,
+                            "post_id": 43081892,
+                            "comment_id": 102196504,
+                            "link": "https://stackoverflow.com/questions/43081859/how-to-create-empty-file-in-python/43081892#comment102196504_43081892",
+                            "body": "``` with open(file_name, &#39;a&#39;) as f:             pass ```"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 11394,
+                        "reputation": 85931,
+                        "user_id": 21945,
+                        "user_type": "registered",
+                        "display_name": "mhawke"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1490746953,
+                    "last_edit_date": 1490746953,
+                    "creation_date": 1490745082,
+                    "answer_id": 43081892,
+                    "question_id": 43081859,
+                    "link": "https://stackoverflow.com/questions/43081859/how-to-create-empty-file-in-python/43081892#43081892",
+                    "body": "<p>First you have a syntax error because <code>os.system()</code> expects a string argument and you have not provided one. This will fix your code:</p>\n\n<pre><code>os.system('touch {}'.format(gdsfile))\n</code></pre>\n\n<p>which constructs a string and passes it to <code>os.system()</code>.</p>\n\n<p>But a better way (in Python >= 3.3) is to simply open the file using the <a href=\"https://docs.python.org/3/library/functions.html#open\" rel=\"noreferrer\"><code>open()</code></a> builtin:</p>\n\n<pre><code>gdsfile  = \"/home/hha/temp.gds\"\ntry:\n   open(gdsfile, 'x')\nexcept FileExistsError:\n   pass\n</code></pre>\n\n<p>This specifies mode <code>x</code> which means exclusive creation - the operation will fail if the file already exists, but create it if it does not.</p>\n\n<p>This is safer than using <code>os.path.isfile()</code> followed by <code>open()</code> because it avoids the potential race condition where the file might be created by another process in between the check and the create.</p>\n\n<hr>\n\n<p>If you are using Python 2, or an earlier version of Python 3, you can use <a href=\"https://docs.python.org/2/library/os.html#os.open\" rel=\"noreferrer\"><code>os.open()</code></a> to open the file with the exclusive flag.</p>\n\n<pre><code>import os\nimport errno\n\ngdsfile  = \"/home/hha/temp.gds\"\ntry:\n    os.close(os.open(gdsfile, os.O_CREAT|os.O_EXCL))\nexcept OSError as exc:\n    if exc.errno != errno.EEXIST:\n        raise\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 9913361,
+                "reputation": 51,
+                "user_id": 7339195,
+                "user_type": "registered",
+                "display_name": "howard"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "closed_date": 1490776068,
+            "answer_count": 1,
+            "score": -3,
+            "last_activity_date": 1490746953,
+            "creation_date": 1490744852,
+            "question_id": 43081859,
+            "link": "https://stackoverflow.com/questions/43081859/how-to-create-empty-file-in-python",
+            "closed_reason": "Duplicate",
+            "title": "how to create empty file in python",
+            "body": "<p>I would like to create an empty file in Python. But I have difficulty creating one..Below is the Python code I used to create but it gives me error:</p>\n\n<pre><code>gdsfile  = \"/home/hha/temp.gds\"\nif not (os.path.isfile(gdsfile)):\n    os.system(touch gdsfile)\n</code></pre>\n\n<p>Error I got:\n File \"/home/hha/bin/test.py\", line 29\n    os.system(touch gdsfile)\n                          ^\nSyntaxError: invalid syntax</p>\n\n<p>But from the command line, I am able to create new file using: touch </p>\n\n<p>Thank you very much for your help\nHoward</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8444
+}

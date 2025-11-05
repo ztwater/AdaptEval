@@ -1,0 +1,497 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "pandas",
+                "dataframe"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 166334,
+                        "reputation": 42329,
+                        "user_id": 390388,
+                        "user_type": "registered",
+                        "accept_rate": 95,
+                        "display_name": "John"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1385797023,
+                    "post_id": 20297317,
+                    "comment_id": 30286029,
+                    "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int#comment30286029_20297317",
+                    "body": "I figure this will not work for the reasons shown here: <a href=\"http://stackoverflow.com/questions/13411544/delete-column-from-pandas-dataframe\" title=\"delete column from pandas dataframe\">stackoverflow.com/questions/13411544/&hellip;</a>"
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 3299056,
+                        "reputation": 14633,
+                        "user_id": 2775630,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "mkln"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1385803058,
+                    "creation_date": 1385803058,
+                    "answer_id": 20298535,
+                    "question_id": 20297317,
+                    "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/20298535#20298535",
+                    "body": "<p>if you really want to do it with integers (but why?), then you could build a dictionary.</p>\n\n<pre><code>col_dict = {x: col for x, col in enumerate(df.columns)}\n</code></pre>\n\n<p>then <code>df = df.drop(col_dict[0], 1)</code> will work as desired</p>\n\n<p>edit: you can put it in a function that does that for you, though this way it creates the dictionary every time you call it</p>\n\n<pre><code>def drop_col_n(df, col_n_to_drop):\n    col_dict = {x: col for x, col in enumerate(df.columns)}\n    return df.drop(col_dict[col_n_to_drop], 1)\n\ndf = drop_col_n(df, 2)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1358412,
+                                "reputation": 547,
+                                "user_id": 1296309,
+                                "user_type": "registered",
+                                "display_name": "Darren"
+                            },
+                            "edited": false,
+                            "score": 18,
+                            "creation_date": 1557436537,
+                            "post_id": 20301769,
+                            "comment_id": 98775055,
+                            "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/20301769#comment98775055_20301769",
+                            "body": "I think you missed the point - they want to drop by index, not by label.  Converting index into a label is just dropping by label :("
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15698586,
+                                "reputation": 648,
+                                "user_id": 11327283,
+                                "user_type": "registered",
+                                "display_name": "mArk"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1590674746,
+                            "post_id": 20301769,
+                            "comment_id": 109774200,
+                            "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/20301769#comment109774200_20301769",
+                            "body": "How to index cols, if I have to drop 100 columns that are continuous in the middle of the data frame"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 481372,
+                                "reputation": 1394,
+                                "user_id": 895163,
+                                "user_type": "registered",
+                                "display_name": "Nick"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1618162097,
+                            "post_id": 20301769,
+                            "comment_id": 118513015,
+                            "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/20301769#comment118513015_20301769",
+                            "body": "The second technique using iloc works well given duplicate column names and is very performant. Thanks."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1937821,
+                        "reputation": 110962,
+                        "user_id": 1744834,
+                        "user_type": "registered",
+                        "accept_rate": 56,
+                        "display_name": "Roman Pekar"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 263,
+                    "last_activity_date": 1455619690,
+                    "last_edit_date": 1455619690,
+                    "creation_date": 1385824018,
+                    "answer_id": 20301769,
+                    "question_id": 20297317,
+                    "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/20301769#20301769",
+                    "body": "<p>You can delete column on <code>i</code> index like this:</p>\n\n<pre><code>df.drop(df.columns[i], axis=1)\n</code></pre>\n\n<p>It could work strange, if you have duplicate names in columns, so to do this you can rename column you want to delete column by new name. Or you can reassign DataFrame like this:</p>\n\n<pre><code>df = df.iloc[:, [j for j, c in enumerate(df.columns) if j != i]]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4379632,
+                                "reputation": 735,
+                                "user_id": 3571602,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "sidpat"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1454947020,
+                            "post_id": 32909107,
+                            "comment_id": 58259260,
+                            "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/32909107#comment58259260_32909107",
+                            "body": "What is inplace argument for?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3767962,
+                                "reputation": 13547,
+                                "user_id": 3130926,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "muon"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4379632,
+                                "reputation": 735,
+                                "user_id": 3571602,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "sidpat"
+                            },
+                            "edited": false,
+                            "score": 15,
+                            "creation_date": 1454962889,
+                            "post_id": 32909107,
+                            "comment_id": 58268704,
+                            "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/32909107#comment58268704_32909107",
+                            "body": "if you do not use <code>inplace=True</code> then you will have to do <code>df = df.drop()</code> if you want to see the change in <code>df</code> itself."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15698586,
+                                "reputation": 648,
+                                "user_id": 11327283,
+                                "user_type": "registered",
+                                "display_name": "mArk"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1590674715,
+                            "post_id": 32909107,
+                            "comment_id": 109774178,
+                            "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/32909107#comment109774178_32909107",
+                            "body": "How to index cols, if I have to drop 100 columns that are continuous in the middle of the data frame."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3767962,
+                                "reputation": 13547,
+                                "user_id": 3130926,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "muon"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1638553587,
+                            "post_id": 32909107,
+                            "comment_id": 124128126,
+                            "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/32909107#comment124128126_32909107",
+                            "body": "you could do something like <code>col_indices = [df.columns.tolist().index(c) for c in list_of_colnames]</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7816742,
+                                "reputation": 1552,
+                                "user_id": 5911206,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Silidrone"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1694784693,
+                            "post_id": 32909107,
+                            "comment_id": 135940622,
+                            "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/32909107#comment135940622_32909107",
+                            "body": "@muon I can&#39;t believe you got +15 on that comment. It just goes to show how much noobs there are using python. I can&#39;t believe that someone gets to use pandas without knowing what an in place assignment is. Anyway, it is a useful comment, I am just very surprised."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3767962,
+                        "reputation": 13547,
+                        "user_id": 3130926,
+                        "user_type": "registered",
+                        "accept_rate": 82,
+                        "display_name": "muon"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": false,
+                    "score": 172,
+                    "last_activity_date": 1562699829,
+                    "last_edit_date": 1562699829,
+                    "creation_date": 1443795043,
+                    "answer_id": 32909107,
+                    "question_id": 20297317,
+                    "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/32909107#32909107",
+                    "body": "<p>Drop multiple columns like this:</p>\n\n<pre><code>cols = [1,2,4,5,12]\ndf.drop(df.columns[cols],axis=1,inplace=True)\n</code></pre>\n\n<p><code>inplace=True</code> is used to make the changes in the dataframe itself without doing the column dropping on a copy of the data frame. If you need to keep your original intact, use:</p>\n\n<pre><code>df_after_dropping = df.drop(df.columns[cols],axis=1)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 12197245,
+                                "reputation": 349,
+                                "user_id": 8902486,
+                                "user_type": "registered",
+                                "display_name": "ATK7474"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1590593991,
+                            "post_id": 48671822,
+                            "comment_id": 109739943,
+                            "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/48671822#comment109739943_48671822",
+                            "body": "You&#39;re my hero. Was trying to think of a clever way to do this for way too long."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 16302058,
+                                "reputation": 327,
+                                "user_id": 11772897,
+                                "user_type": "registered",
+                                "display_name": "JDenman6"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1609945881,
+                            "post_id": 48671822,
+                            "comment_id": 115979741,
+                            "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/48671822#comment115979741_48671822",
+                            "body": "This iloc solution is exactly what I was looking for. dropping the first x columns becomes <code>df = df.iloc[:, x:]</code>   If you want to drop columns x through y you could do something like:       <code>all_cols = set(range(0,len(df.columns)))       keep_cols = all_cols - set(range(x,y+1))       df = df.iloc[:, list(keep_cols)]</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2184632,
+                                "reputation": 364,
+                                "user_id": 1933315,
+                                "user_type": "registered",
+                                "display_name": "u-phoria"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1620915189,
+                            "post_id": 48671822,
+                            "comment_id": 119344703,
+                            "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/48671822#comment119344703_48671822",
+                            "body": "This answer deserves more upvotes as it handles duplicate column names correctly."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5983163,
+                                "reputation": 1907,
+                                "user_id": 4701426,
+                                "user_type": "registered",
+                                "accept_rate": 46,
+                                "display_name": "Saeed"
+                            },
+                            "reply_to_user": {
+                                "account_id": 11928478,
+                                "reputation": 896,
+                                "user_id": 8729073,
+                                "user_type": "registered",
+                                "display_name": "Alexandre Huat"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1629810189,
+                            "post_id": 48671822,
+                            "comment_id": 121781047,
+                            "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/48671822#comment121781047_48671822",
+                            "body": "@AlexandreHuat a CS Lord with less than 1500 points! ;) Thanks you, anyways"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11928478,
+                                "reputation": 896,
+                                "user_id": 8729073,
+                                "user_type": "registered",
+                                "display_name": "Alexandre Huat"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1629975183,
+                            "post_id": 48671822,
+                            "comment_id": 121832012,
+                            "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/48671822#comment121832012_48671822",
+                            "body": "Haha, I just wanted to brighten the day of someone"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5983163,
+                        "reputation": 1907,
+                        "user_id": 4701426,
+                        "user_type": "registered",
+                        "accept_rate": 46,
+                        "display_name": "Saeed"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": false,
+                    "score": 72,
+                    "last_activity_date": 1544997787,
+                    "last_edit_date": 1544997787,
+                    "creation_date": 1518031749,
+                    "answer_id": 48671822,
+                    "question_id": 20297317,
+                    "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/48671822#48671822",
+                    "body": "<p>If there are multiple columns with identical names, the solutions given here so far will remove all of the columns,  which may not be what one is looking for. This may be the case if one is trying to remove duplicate columns except one instance. The example below clarifies this situation:</p>\n\n<pre><code># make a df with duplicate columns 'x'\ndf = pd.DataFrame({'x': range(5) , 'x':range(5), 'y':range(6, 11)}, columns = ['x', 'x', 'y']) \n\n\ndf\nOut[495]: \n   x  x   y\n0  0  0   6\n1  1  1   7\n2  2  2   8\n3  3  3   9\n4  4  4  10\n\n# attempting to drop the first column according to the solution offered so far     \ndf.drop(df.columns[0], axis = 1) \n   y\n0  6\n1  7\n2  8\n3  9\n4  10\n</code></pre>\n\n<p>As you can see, both Xs columns were dropped.\nAlternative solution:</p>\n\n<pre><code>column_numbers = [x for x in range(df.shape[1])]  # list of columns' integer indices\n\ncolumn_numbers .remove(0) #removing column integer index 0\ndf.iloc[:, column_numbers] #return all columns except the 0th column\n\n   x  y\n0  0  6\n1  1  7\n2  2  8\n3  3  9\n4  4  10\n</code></pre>\n\n<p>As you can see, this truly removed only the 0th column (first 'x').</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 82860,
+                        "reputation": 10686,
+                        "user_id": 232687,
+                        "user_type": "registered",
+                        "accept_rate": 70,
+                        "display_name": "Thunder"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -2,
+                    "last_activity_date": 1546939037,
+                    "creation_date": 1546939037,
+                    "answer_id": 54088613,
+                    "question_id": 20297317,
+                    "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/54088613#54088613",
+                    "body": "<p>Since there can be multiple columns with same name , we should first rename the columns.\nHere is code for the solution.</p>\n\n<pre><code>df.columns=list(range(0,len(df.columns)))\ndf.drop(columns=[1,2])#drop second and third columns\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 15410447,
+                        "reputation": 41,
+                        "user_id": 11117310,
+                        "user_type": "registered",
+                        "display_name": "Mojtaba Peyrovi"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1551156501,
+                    "last_edit_date": 1551156501,
+                    "creation_date": 1551156285,
+                    "answer_id": 54878577,
+                    "question_id": 20297317,
+                    "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/54878577#54878577",
+                    "body": "<p>You can use the following line to drop the first two columns (or any column you don't need):</p>\n\n<pre><code>df.drop([df.columns[0], df.columns[1]], axis=1)\n</code></pre>\n\n<p><a href=\"https://thispointer.com/python-pandas-drop-columns-in-dataframe-by-label-names-or-by-index-positions/\" rel=\"nofollow noreferrer\">Reference</a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 13384621,
+                        "reputation": 985,
+                        "user_id": 9658895,
+                        "user_type": "registered",
+                        "display_name": "sargupta"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 10,
+                    "last_activity_date": 1555601049,
+                    "creation_date": 1555601049,
+                    "answer_id": 55749196,
+                    "question_id": 20297317,
+                    "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/55749196#55749196",
+                    "body": "<p>You need to identify the columns based on their position in dataframe. For example, if you want to drop (del) column number 2,3 and 5, it will be,</p>\n\n<pre><code>df.drop(df.columns[[2,3,5]], axis = 1)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 15957687,
+                        "reputation": 1541,
+                        "user_id": 11515528,
+                        "user_type": "registered",
+                        "display_name": "Cam"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 12,
+                    "last_activity_date": 1582583802,
+                    "last_edit_date": 1582583802,
+                    "creation_date": 1579543531,
+                    "answer_id": 59828772,
+                    "question_id": 20297317,
+                    "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/59828772#59828772",
+                    "body": "<p>If you have two columns with the same name. One simple way is to manually rename the columns like this:-</p>\n\n<pre><code>df.columns = ['column1', 'column2', 'column3']\n</code></pre>\n\n<p>Then you can drop via column index as you requested, like this:-</p>\n\n<pre><code>df.drop(df.columns[1], axis=1, inplace=True)\n</code></pre>\n\n<p><code>df.column[1]</code> will drop index 1.</p>\n\n<p>Remember axis 1 = columns and axis 0 = rows.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1903699,
+                        "reputation": 333,
+                        "user_id": 1718983,
+                        "user_type": "registered",
+                        "display_name": "ranaalisaeed"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1598653605,
+                    "creation_date": 1598653605,
+                    "answer_id": 63641601,
+                    "question_id": 20297317,
+                    "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/63641601#63641601",
+                    "body": "<p>You can simply supply <code>columns</code> parameter to <code>df.drop</code> command so you don't to specify <code>axis</code> in that case, like so</p>\n<pre><code>columns_list = [1, 2, 4] # index numbers of columns you want to delete\ndf = df.drop(columns=df.columns[columns_list])\n</code></pre>\n<p>For reference see <code>columns</code> parameter here: <a href=\"https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.drop.html?highlight=drop#pandas.DataFrame.drop\" rel=\"noreferrer\">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.drop.html?highlight=drop#pandas.DataFrame.drop</a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 13931381,
+                        "reputation": 282,
+                        "user_id": 10059517,
+                        "user_type": "registered",
+                        "display_name": "voldr"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1624536627,
+                    "last_edit_date": 1624536627,
+                    "creation_date": 1624528574,
+                    "answer_id": 68113529,
+                    "question_id": 20297317,
+                    "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/68113529#68113529",
+                    "body": "<p>Good way to get the columns you want (doesn't matter duplicate names).</p>\n<p>For example you have the column indices you want to drop contained in a list-like variable</p>\n<pre><code>unnecessary_cols = [1, 4, 5, 6]\n</code></pre>\n<p>then</p>\n<pre><code>import numpy as np\ndf.iloc[:, np.setdiff1d(np.arange(len(df.columns)), unnecessary_cols)]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 10993995,
+                        "reputation": 671,
+                        "user_id": 8076871,
+                        "user_type": "registered",
+                        "display_name": "Elias Mi"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1650466565,
+                    "creation_date": 1650466565,
+                    "answer_id": 71941871,
+                    "question_id": 20297317,
+                    "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int/71941871#71941871",
+                    "body": "<p>Appreciate I'm very late to the party, but I had the same issue with a DataFrame that has a MultiIndex. Pandas <em>really</em> doesn't like non-unique multi indices, to a degree that most of the solutions above don't work in that setting (e.g. the <code>.drop</code> function just errors with a <code>ValueError: cannot handle a non-unique multi-index!</code>)</p>\n<p>The solution I got to was using <code>.iloc</code> instead. According to the <a href=\"https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.iloc.html\" rel=\"nofollow noreferrer\">documentation</a>, use can use iloc with a mask (= list of True/False values of which columns you want to keep):</p>\n<blockquote>\n<p>With a boolean array whose length matches the columns.</p>\n<p><code>df.iloc[:, [True, False, True, False]]</code></p>\n</blockquote>\n<p>Combined with <code>df.columns.duplicated()</code> to identify duplicated columns, you can do this in an efficient, pandas-native way:</p>\n<pre class=\"lang-py prettyprint-override\"><code>df = df.iloc[:, ~df.columns.duplicated()]\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 2014529,
+                "reputation": 15182,
+                "user_id": 1802143,
+                "user_type": "registered",
+                "accept_rate": 53,
+                "display_name": "user1802143"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "answer_count": 11,
+            "score": 242,
+            "last_activity_date": 1650466565,
+            "creation_date": 1385792831,
+            "last_edit_date": 1386224171,
+            "question_id": 20297317,
+            "link": "https://stackoverflow.com/questions/20297317/python-dataframe-pandas-drop-column-using-int",
+            "title": "python dataframe pandas drop column using int",
+            "body": "<p>I understand that to drop a column you use df.drop('column name', axis=1). Is there a way to drop a column using a numerical index instead of the column name?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5772
+}

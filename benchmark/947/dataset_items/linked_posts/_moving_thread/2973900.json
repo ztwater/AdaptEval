@@ -1,0 +1,123 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5295543,
+                                "reputation": 2005,
+                                "user_id": 4226806,
+                                "user_type": "registered",
+                                "accept_rate": 35,
+                                "display_name": "rubmz"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1528480932,
+                            "post_id": 2973911,
+                            "comment_id": 88539814,
+                            "link": "https://stackoverflow.com/questions/2973900/is-pythons-logging-module-thread-safe/2973911#comment88539814_2973911",
+                            "body": "Ohh so as for now still not fixed? I got the logging module go crazy ... behhh. Did not expect that."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 420476,
+                                "reputation": 206,
+                                "user_id": 798196,
+                                "user_type": "registered",
+                                "display_name": "lgylym"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1552051452,
+                            "post_id": 2973911,
+                            "comment_id": 96876185,
+                            "link": "https://stackoverflow.com/questions/2973900/is-pythons-logging-module-thread-safe/2973911#comment96876185_2973911",
+                            "body": "The bug is talking about &quot;fork&quot;, which involves processes rather than threads. So I guess the thread-safe statement still stands?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1082389,
+                                "reputation": 1528,
+                                "user_id": 1079014,
+                                "user_type": "registered",
+                                "display_name": "Pascal Rosin"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1559901750,
+                            "post_id": 2973911,
+                            "comment_id": 99573157,
+                            "link": "https://stackoverflow.com/questions/2973900/is-pythons-logging-module-thread-safe/2973911#comment99573157_2973911",
+                            "body": "Yes, the thread-safety stands @Iglym. Without forking the logging process, the bug mentioned by Ibolla will not happen. When thinking about this bug, it should be mentioned, that fixing the bug would not make logging process-safe. For logging from multiple processes take a look at the <a href=\"https://docs.python.org/3/howto/logging-cookbook.html#logging-to-a-single-file-from-multiple-processes\" rel=\"nofollow noreferrer\">Python Logging Cookbook</a>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 64585,
+                        "reputation": 864612,
+                        "user_id": 190597,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "unutbu"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": true,
+                    "score": 57,
+                    "last_activity_date": 1367761895,
+                    "last_edit_date": 1367761895,
+                    "creation_date": 1275653341,
+                    "answer_id": 2973911,
+                    "question_id": 2973900,
+                    "link": "https://stackoverflow.com/questions/2973900/is-pythons-logging-module-thread-safe/2973911#2973911",
+                    "body": "<p>The logging module is thread-safe; it handles the locking for you. See <a href=\"http://docs.python.org/2/library/logging.html#thread-safety\" rel=\"noreferrer\">the docs</a>.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 19915808,
+                        "reputation": 51,
+                        "user_id": 14593981,
+                        "user_type": "registered",
+                        "display_name": "Rosmontis"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1681470176,
+                    "last_edit_date": 1681470176,
+                    "creation_date": 1657270431,
+                    "answer_id": 72908971,
+                    "question_id": 2973900,
+                    "link": "https://stackoverflow.com/questions/2973900/is-pythons-logging-module-thread-safe/72908971#72908971",
+                    "body": "<p>If you call the same handler from different threads, it is thread safe. And I'll just extend a little bit for this question. In fact, it depends on how you use the <code>logging</code> module. There still are some not-thread-safe circumstances when logging in multiple threads.</p>\n<p>If multiple threads use different logger instances (e.g., calling the <code>logging.getLogger()</code> with different name in each threads), and those logger instances have their own <code>FileHandler</code> <strong>that points to the same file</strong>, it will result in a race condition and thus not thread-safe anymore.</p>\n<p>Also, if multiple logger instances in different threads hold their own <code>RotatingFileHandler</code> or <code>TimedRotatingFileHandler</code>, while they are pointing to the same file (i.e., giving the same file name when instantiating them), the logics they rotate the file are not thread safe, neither. When they need to rotate the file, something strange could happen. (You can refer to the question <a href=\"https://stackoverflow.com/questions/9975609/python-timedrotatingfilehandler-logs-are-missing/9993857#9993857\">Python TimedRotatingFileHandler - logs are missing</a>, which cause by a similar reason)</p>\n<p>Under the hood, in the <code>logging</code> module, each handler instance holds an <code>threading.RLock</code> instance, hence different loggers that hold different handlers will hold different <code>RLock</code>s, so those locks cannot avoid the race condition when loggers try to write to the same file in different threads -- loggers are still able to write bytes at the same time to the same file even they have acquired their own <code>RLock</code>.</p>\n<p>You can refer to the <a href=\"https://docs.python.org/3/howto/logging-cookbook.html#opening-the-same-log-file-multiple-times\" rel=\"nofollow noreferrer\">Logging Cookbook - Opening the same log file multiple times</a> part for more information.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 99595,
+                "reputation": 3933,
+                "user_id": 268936,
+                "user_type": "registered",
+                "accept_rate": 58,
+                "display_name": "Rhubarb"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 2973911,
+            "answer_count": 2,
+            "score": 50,
+            "last_activity_date": 1681470176,
+            "creation_date": 1275653208,
+            "question_id": 2973900,
+            "link": "https://stackoverflow.com/questions/2973900/is-pythons-logging-module-thread-safe",
+            "title": "Is Python&#39;s logging module thread safe?",
+            "body": "<p>If you call the same logging handler from two different python threads, is there a need for locking?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8233
+}

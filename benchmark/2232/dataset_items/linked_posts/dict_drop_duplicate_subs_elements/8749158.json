@@ -1,0 +1,618 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "dictionary",
+                "duplicates"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 281021,
+                        "reputation": 148953,
+                        "user_id": 577088,
+                        "user_type": "registered",
+                        "display_name": "senderle"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1325798888,
+                    "last_edit_date": 1325798888,
+                    "creation_date": 1325795672,
+                    "answer_id": 8749392,
+                    "question_id": 8749158,
+                    "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8749392#8749392",
+                    "body": "<p>One simple approach would be to create a reverse dictionary using the concatenation of the string data in each inner dictionary as a key. So say you have the above data in a dictionary, <code>d</code>:</p>\n\n<pre><code>&gt;&gt;&gt; import collections\n&gt;&gt;&gt; reverse_d = collections.defaultdict(list)\n&gt;&gt;&gt; for key, inner_d in d.iteritems():\n...     key_str = ''.join(inner_d[k][0] for k in ['dst', 'src', 'alias'] if k in inner_d)\n...     reverse_d[key_str].append(key)\n... \n&gt;&gt;&gt; duplicates = [keys for key_str, keys in reverse_d.iteritems() if len(keys) &gt; 1]\n&gt;&gt;&gt; duplicates\n[[112762853385, 112762853378]]\n</code></pre>\n\n<p>If you don't want a list of duplicates or anything like that, but just want to create a duplicate-less dict, you could just use a regular dictionary instead of a <code>defaultdict</code> and re-reverse it like so:</p>\n\n<pre><code>&gt;&gt;&gt; for key, inner_d in d.iteritems():\n...     key_str = ''.join(inner_d[k][0] for k in ['dst', 'src', 'alias'] if k in inner_d)\n...     reverse_d[key_str] = key\n&gt;&gt;&gt; new_d = dict((val, d[val]) for val in reverse_d.itervalues())\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 281021,
+                                "reputation": 148953,
+                                "user_id": 577088,
+                                "user_type": "registered",
+                                "display_name": "senderle"
+                            },
+                            "edited": false,
+                            "score": 17,
+                            "creation_date": 1325798624,
+                            "post_id": 8749473,
+                            "comment_id": 10901408,
+                            "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8749473#comment10901408_8749473",
+                            "body": "This is a good starting point, but I feel compelled to point out that it will be slow for large collections of data, because with every loop, it creates a new list of values and does a linear search over it."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1151261,
+                                "reputation": 942,
+                                "user_id": 1132921,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Bit Bucket"
+                            },
+                            "reply_to_user": {
+                                "account_id": 281021,
+                                "reputation": 148953,
+                                "user_id": 577088,
+                                "user_type": "registered",
+                                "display_name": "senderle"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1325798837,
+                            "post_id": 8749473,
+                            "comment_id": 10901483,
+                            "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8749473#comment10901483_8749473",
+                            "body": "@senderle: I appreciate your thought and comment regarding the speed and will take thin into consideration if necessary.  Do you care to expand on this answer to increase performance?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 166545,
+                                "reputation": 1299,
+                                "user_id": 390738,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "joel3000"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1325799947,
+                            "post_id": 8749473,
+                            "comment_id": 10901846,
+                            "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8749473#comment10901846_8749473",
+                            "body": "This doesn&#39;t answer the question as posed."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1076586,
+                                "reputation": 85547,
+                                "user_id": 1074592,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Brigand"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1325800461,
+                            "post_id": 8749473,
+                            "comment_id": 10902019,
+                            "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8749473#comment10902019_8749473",
+                            "body": "Looks fine to me Joel.  What&#39;s wrong with it? <i>edit:</i> I think I see where your concern is, but <code>in</code> will work fine here."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 166545,
+                                "reputation": 1299,
+                                "user_id": 390738,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "joel3000"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1076586,
+                                "reputation": 85547,
+                                "user_id": 1074592,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Brigand"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1325801913,
+                            "post_id": 8749473,
+                            "comment_id": 10902431,
+                            "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8749473#comment10902431_8749473",
+                            "body": "@FakeRainBrigand - it does not delete only the entries for which dst, src, and alias are duplicates. &#39;My goal is to remove all records where the dst, src, and alias have all been duplicated - regardless of the key.&#39;  My answer and some of the others below do that."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 264856,
+                                "reputation": 27195,
+                                "user_id": 551449,
+                                "user_type": "registered",
+                                "display_name": "eyquem"
+                            },
+                            "reply_to_user": {
+                                "account_id": 166545,
+                                "reputation": 1299,
+                                "user_id": 390738,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "joel3000"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1325812085,
+                            "post_id": 8749473,
+                            "comment_id": 10904744,
+                            "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8749473#comment10904744_8749473",
+                            "body": "@joel3000 I still don&#39;t see why Andrew Cow&#39;s doesn&#39;t make what is asked. It is not a good answer because of algorithm, as underlined by senderle, but it works correctly, I think. Your answer is as much complicated and suffering of bad performance, in my opinion."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 959813,
+                                "reputation": 118434,
+                                "user_id": 984421,
+                                "user_type": "registered",
+                                "display_name": "ekhumoro"
+                            },
+                            "reply_to_user": {
+                                "account_id": 264856,
+                                "reputation": 27195,
+                                "user_id": 551449,
+                                "user_type": "registered",
+                                "display_name": "eyquem"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1325815146,
+                            "post_id": 8749473,
+                            "comment_id": 10905337,
+                            "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8749473#comment10905337_8749473",
+                            "body": "@eyquem. The current solution given by joel3000, doesn&#39;t actually work at all. It tries to use lists as keys - but even if they are converted to tuples, the output is still completely wrong."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 264856,
+                                "reputation": 27195,
+                                "user_id": 551449,
+                                "user_type": "registered",
+                                "display_name": "eyquem"
+                            },
+                            "reply_to_user": {
+                                "account_id": 959813,
+                                "reputation": 118434,
+                                "user_id": 984421,
+                                "user_type": "registered",
+                                "display_name": "ekhumoro"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1325815511,
+                            "post_id": 8749473,
+                            "comment_id": 10905411,
+                            "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8749473#comment10905411_8749473",
+                            "body": "@ekhumoro OK, thank you. I didn&#39;t see that, I didn&#39;t execute his code and didn&#39;t go detailing his answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 166545,
+                                "reputation": 1299,
+                                "user_id": 390738,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "joel3000"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1326000606,
+                            "post_id": 8749473,
+                            "comment_id": 10940901,
+                            "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8749473#comment10940901_8749473",
+                            "body": "@ekhumoro- the question asks for this - &quot;My goal is to remove all records where the dst, src, and alias have all been duplicated - regardless of the key.&quot; That means the first two entries should be deleted and the only the last two shown. Andrew&#39;s does not do that. Mine does. I fixed the bug. FWIW."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 13798,
+                        "reputation": 10848,
+                        "user_id": 27907,
+                        "user_type": "registered",
+                        "display_name": "Andrew Cox"
+                    },
+                    "comment_count": 9,
+                    "is_accepted": true,
+                    "score": 53,
+                    "last_activity_date": 1325797078,
+                    "last_edit_date": 1325797078,
+                    "creation_date": 1325796028,
+                    "answer_id": 8749473,
+                    "question_id": 8749158,
+                    "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8749473#8749473",
+                    "body": "<p>You could go though each of the items (the key value pair) in the dictionary and add them into a result dictionary if the value was not already in the result dictionary.  </p>\n\n<pre><code>input_raw = {112762853378: \n   {'dst': ['10.121.4.136'], \n    'src': ['1.2.3.4'], \n    'alias': ['www.example.com']\n   },\n 112762853385: \n   {'dst': ['10.121.4.136'], \n    'src': ['1.2.3.4'], \n    'alias': ['www.example.com']\n   },\n 112760496444: \n   {'dst': ['10.121.4.136'], \n    'src': ['1.2.3.4']\n   },\n 112760496502: \n   {'dst': ['10.122.195.34'], \n    'src': ['4.3.2.1']\n   }\n}\n\nresult = {}\n\nfor key,value in input_raw.items():\n    if value not in result.values():\n        result[key] = value\n\nprint result\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 37811,
+                        "reputation": 105529,
+                        "user_id": 108205,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "jsbueno"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1325796373,
+                    "last_edit_date": 1325796373,
+                    "creation_date": 1325796058,
+                    "answer_id": 8749476,
+                    "question_id": 8749158,
+                    "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8749476#8749476",
+                    "body": "<p>Since the way to find uniqueness in correspondences is exactly to use a dictionary, with the desired unique value being the key, the way to go is to create a reversed dict, where your values are composed as the key - then recreate a \"de-reversed\" dictionary using the intermediate result.</p>\n\n<pre><code>dct = {112762853378: \n   {'dst': ['10.121.4.136'], \n    'src': ['1.2.3.4'], \n    'alias': ['www.example.com']\n   },\n 112762853385: \n   {'dst': ['10.121.4.136'], \n    'src': ['1.2.3.4'], \n    'alias': ['www.example.com']\n   },\n 112760496444: \n   {'dst': ['10.121.4.136'], \n    'src': ['1.2.3.4']\n   },\n 112760496502: \n   {'dst': ['10.122.195.34'], \n    'src': ['4.3.2.1']\n   },\n   }\n\ndef remove_dups (dct):\n    reversed_dct = {}\n    for key, val in dct.items():\n        new_key = tuple(val[\"dst\"]) + tuple(val[\"src\"]) + (tuple(val[\"alias\"]) if \"alias\" in val else (None,) ) \n        reversed_dct[new_key] = key\n    result_dct = {}\n    for key, val in reversed_dct.items():\n        result_dct[val] = dct[val]\n    return result_dct\n\nresult = remove_dups(dct)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 6618310,
+                                "reputation": 7779,
+                                "user_id": 5110870,
+                                "user_type": "registered",
+                                "accept_rate": 99,
+                                "display_name": "FaCoffee"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1525443411,
+                            "post_id": 8749508,
+                            "comment_id": 87371217,
+                            "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8749508#comment87371217_8749508",
+                            "body": "The complexity of this is O(n^3)!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1047643,
+                        "reputation": 9482,
+                        "user_id": 1052325,
+                        "user_type": "registered",
+                        "display_name": "reclosedev"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1325798709,
+                    "last_edit_date": 1325798709,
+                    "creation_date": 1325796182,
+                    "answer_id": 8749508,
+                    "question_id": 8749158,
+                    "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8749508#8749508",
+                    "body": "<pre><code>from collections import defaultdict\n\ndups = defaultdict(lambda : defaultdict(list))\n\nfor key, entry in data.iteritems():\n    dups[tuple(entry.keys())][tuple([v[0] for v in entry.values()])].append(key)\n\nfor dup_indexes in dups.values():\n    for keys in dup_indexes.values():\n        for key in keys[1:]:\n            if key in data:\n                del data[key]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 166545,
+                                "reputation": 1299,
+                                "user_id": 390738,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "joel3000"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1325799612,
+                            "post_id": 8749687,
+                            "comment_id": 10901724,
+                            "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8749687#comment10901724_8749687",
+                            "body": "Had to update this. Should work now, if I understand the question correctly."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 166545,
+                        "reputation": 1299,
+                        "user_id": 390738,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "joel3000"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1325821857,
+                    "last_edit_date": 1325821857,
+                    "creation_date": 1325797000,
+                    "answer_id": 8749687,
+                    "question_id": 8749158,
+                    "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8749687#8749687",
+                    "body": "<pre><code>dups={}\n\nfor key,val in dct.iteritems():\n    if val.get('alias') != None:\n        ref = \"%s%s%s\" % (val['dst'] , val['src'] ,val['alias'])# a simple hash\n        dups.setdefault(ref,[]) \n        dups[ref].append(key)\n\nfor k,v in dups.iteritems():\n    if len(v) &gt; 1:\n        for key in v:\n            del dct[key]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 264856,
+                                "reputation": 27195,
+                                "user_id": 551449,
+                                "user_type": "registered",
+                                "display_name": "eyquem"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1325813090,
+                            "post_id": 8749964,
+                            "comment_id": 10904919,
+                            "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8749964#comment10904919_8749964",
+                            "body": "Fine but complicated in my opinion"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 281021,
+                                "reputation": 148953,
+                                "user_id": 577088,
+                                "user_type": "registered",
+                                "display_name": "senderle"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1325835006,
+                            "post_id": 8749964,
+                            "comment_id": 10908604,
+                            "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8749964#comment10908604_8749964",
+                            "body": "Seems like this would count <code>{&#39;src&#39;:[&#39;1.2.3.4&#39;], &#39;dst&#39;:[&#39;10.121.3.1236&#39;]}</code> and <code>{&#39;src&#39;:[&#39;10.121.3.1236&#39;], &#39;dst&#39;:[&#39;1.2.3.4&#39;]}</code> as duplicates of one another..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 959813,
+                                "reputation": 118434,
+                                "user_id": 984421,
+                                "user_type": "registered",
+                                "display_name": "ekhumoro"
+                            },
+                            "reply_to_user": {
+                                "account_id": 281021,
+                                "reputation": 148953,
+                                "user_id": 577088,
+                                "user_type": "registered",
+                                "display_name": "senderle"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1325856035,
+                            "post_id": 8749964,
+                            "comment_id": 10913892,
+                            "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8749964#comment10913892_8749964",
+                            "body": "@senderle. Well spotted! Fixed that now, FWIW. I should probably also point out that this solution, although compact, is pretty inefficient compared to some of the others."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 959813,
+                        "reputation": 118434,
+                        "user_id": 984421,
+                        "user_type": "registered",
+                        "display_name": "ekhumoro"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1325855857,
+                    "last_edit_date": 1325855857,
+                    "creation_date": 1325798313,
+                    "answer_id": 8749964,
+                    "question_id": 8749158,
+                    "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8749964#8749964",
+                    "body": "<p>Another reverse dict variation:</p>\n\n<pre><code>&gt;&gt;&gt; import pprint\n&gt;&gt;&gt; \n&gt;&gt;&gt; data = {\n...   112762853378: \n...    {'dst': ['10.121.4.136'], \n...     'src': ['1.2.3.4'], \n...     'alias': ['www.example.com']\n...    },\n...  112762853385: \n...    {'dst': ['10.121.4.136'], \n...     'src': ['1.2.3.4'], \n...     'alias': ['www.example.com']\n...    },\n...  112760496444: \n...    {'dst': ['10.121.4.136'], \n...     'src': ['1.2.3.4']\n...    },\n...  112760496502: \n...    {'dst': ['10.122.195.34'], \n...     'src': ['4.3.2.1']\n...    },\n... }\n&gt;&gt;&gt; \n&gt;&gt;&gt; keep = set({repr(sorted(value.items())):key\n...             for key,value in data.iteritems()}.values())\n&gt;&gt;&gt; \n&gt;&gt;&gt; for key in data.keys():\n...     if key not in keep:\n...         del data[key]\n... \n&gt;&gt;&gt; \n&gt;&gt;&gt; pprint.pprint(data)\n{112760496444L: {'dst': ['10.121.4.136'], 'src': ['1.2.3.4']},\n 112760496502L: {'dst': ['10.122.195.34'], 'src': ['4.3.2.1']},\n 112762853378L: {'alias': ['www.example.com'],\n                 'dst': ['10.121.4.136'],\n                 'src': ['1.2.3.4']}}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 264856,
+                        "reputation": 27195,
+                        "user_id": 551449,
+                        "user_type": "registered",
+                        "display_name": "eyquem"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1325814014,
+                    "last_edit_date": 1325814014,
+                    "creation_date": 1325813449,
+                    "answer_id": 8752331,
+                    "question_id": 8749158,
+                    "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/8752331#8752331",
+                    "body": "<pre><code>input_raw = {112762853378:  {'dst': ['10.121.4.136'],\n                             'src': ['1.2.3.4'],\n                             'alias': ['www.example.com']    },\n             112762853385:  {'dst': ['10.121.4.136'],\n                             'src': ['1.2.3.4'],\n                             'alias': ['www.example.com']    },\n             112760496444:  {'dst': ['10.121.4.299'],\n                             'src': ['1.2.3.4']    },\n             112760496502:  {'dst': ['10.122.195.34'],\n                             'src': ['4.3.2.1']    },\n             112758601487:  {'src': ['1.2.3.4'],\n                             'alias': ['www.example.com'],\n                             'dst': ['10.121.4.136']},\n             112757412898:  {'dst': ['10.122.195.34'],\n                             'src': ['4.3.2.1']    },\n             112757354733:  {'dst': ['124.12.13.14'],\n                             'src': ['8.5.6.0']},             \n             }\n\nfor x in input_raw.iteritems():\n    print x\nprint '\\n---------------------------\\n'\n\nseen = []\n\nfor k,val in input_raw.items():\n    if val in seen:\n        del input_raw[k]\n    else:\n        seen.append(val)\n\n\nfor x in input_raw.iteritems():\n    print x\n</code></pre>\n\n<p>result</p>\n\n<pre><code>(112762853385L, {'src': ['1.2.3.4'], 'dst': ['10.121.4.136'], 'alias': ['www.example.com']})\n(112757354733L, {'src': ['8.5.6.0'], 'dst': ['124.12.13.14']})\n(112758601487L, {'src': ['1.2.3.4'], 'dst': ['10.121.4.136'], 'alias': ['www.example.com']})\n(112757412898L, {'src': ['4.3.2.1'], 'dst': ['10.122.195.34']})\n(112760496502L, {'src': ['4.3.2.1'], 'dst': ['10.122.195.34']})\n(112760496444L, {'src': ['1.2.3.4'], 'dst': ['10.121.4.299']})\n(112762853378L, {'src': ['1.2.3.4'], 'dst': ['10.121.4.136'], 'alias': ['www.example.com']})\n\n---------------------------\n\n(112762853385L, {'src': ['1.2.3.4'], 'dst': ['10.121.4.136'], 'alias': ['www.example.com']})\n(112757354733L, {'src': ['8.5.6.0'], 'dst': ['124.12.13.14']})\n(112757412898L, {'src': ['4.3.2.1'], 'dst': ['10.122.195.34']})\n(112760496444L, {'src': ['1.2.3.4'], 'dst': ['10.121.4.299']})\n</code></pre>\n\n<p>The facts that this solution creates first a list <strong>input_raw.iteritems()</strong> (as in Andrew's Cox's answer) and requires a growing list <strong>seen</strong> are drawbacks.<br>\nBut the first can't be avoided (using iteritems() doesn't work) and the second is less heavy than re-creating a list <strong>result.values()</strong> from growing list <strong>result</strong> for each turn of a loop.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 12164448,
+                                "reputation": 12179,
+                                "user_id": 8881141,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Mr. T"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1517402695,
+                            "post_id": 48542359,
+                            "comment_id": 84079945,
+                            "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/48542359#comment84079945_48542359",
+                            "body": "Please format your answer with the <code>{}</code> button, format matters in Python. And it is a very bad idea to modify lists or dictionaries, while iterating over them. Very bad."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9628370,
+                                "reputation": 3575,
+                                "user_id": 7147233,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "WhatsThePoint"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1517403508,
+                            "post_id": 48542359,
+                            "comment_id": 84080458,
+                            "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/48542359#comment84080458_48542359",
+                            "body": "Welcome to StackOverflow: if you post code, XML or data samples, please highlight those lines in the text editor and click on the &quot;code samples&quot; button ( { } ) on the editor toolbar or using Ctrl+K on your keyboard to nicely format and syntax highlight it!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 13802251,
+                                "reputation": 5830,
+                                "user_id": 9962007,
+                                "user_type": "registered",
+                                "display_name": "mirekphd"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1650468326,
+                            "post_id": 48542359,
+                            "comment_id": 127125010,
+                            "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/48542359#comment127125010_48542359",
+                            "body": "... and nested <code>for</code> loops in any scripting language is a bad idea... It is also time to move on from python 2.x"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 12602682,
+                        "reputation": 1,
+                        "user_id": 9293003,
+                        "user_type": "registered",
+                        "display_name": "chandresh thakor"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": -3,
+                    "last_activity_date": 1517407784,
+                    "last_edit_date": 1517407784,
+                    "creation_date": 1517402092,
+                    "answer_id": 48542359,
+                    "question_id": 8749158,
+                    "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/48542359#48542359",
+                    "body": "<pre><code>example = {\n    'id1':  {'name': 'jay','age':22,},\n    'id2': {'name': 'salman','age': 52,},\n    'id3': {'name':'Ranveer','age' :26,},\n    'id4': {'name': 'jay', 'age': 22,},\n}\nfor item in example:\n    for value in example:\n        if example[item] ==example[value]:\n            if item != value:\n                 key = value \n                 del example[key]\nprint \"example\",example         \n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5563975,
+                                "reputation": 301,
+                                "user_id": 4411932,
+                                "user_type": "registered",
+                                "accept_rate": 29,
+                                "display_name": "Barak Schoster"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1571828071,
+                            "post_id": 56655234,
+                            "comment_id": 103367692,
+                            "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/56655234#comment103367692_56655234",
+                            "body": "this might cause: TypeError: unhashable type: &#39;dict&#39;"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 16160055,
+                        "reputation": 127,
+                        "user_id": 11666412,
+                        "user_type": "registered",
+                        "display_name": "Joao Vitor Deon"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1560883726,
+                    "last_edit_date": 1560883726,
+                    "creation_date": 1560883500,
+                    "answer_id": 56655234,
+                    "question_id": 8749158,
+                    "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/56655234#56655234",
+                    "body": "<p>You can use </p>\n\n<pre><code>set(dictionary) \n</code></pre>\n\n<p>to solve your problem. </p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 16588052,
+                        "reputation": 16,
+                        "user_id": 11986875,
+                        "user_type": "registered",
+                        "display_name": "Matthew Lee"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1566962739,
+                    "creation_date": 1566962739,
+                    "answer_id": 57684629,
+                    "question_id": 8749158,
+                    "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/57684629#57684629",
+                    "body": "<p>I would just make a set of the list of keys then iterate over them into a new dict:</p>\n\n<pre><code>input_raw = {112762853378: \n   {'dst': ['10.121.4.136'], \n    'src': ['1.2.3.4'], \n    'alias': ['www.example.com']\n   },\n 112762853385: \n   {'dst': ['10.121.4.136'], \n    'src': ['1.2.3.4'], \n    'alias': ['www.example.com']\n   },\n 112760496444: \n   {'dst': ['10.121.4.136'], \n    'src': ['1.2.3.4']\n   },\n 112760496502: \n   {'dst': ['10.122.195.34'], \n    'src': ['4.3.2.1']\n   }\n}\n\nfilter = list(set(list(input_raw.keys())))\n\nfixedlist = {}\n\nfor i in filter:\n    fixedlist[i] = logins[i]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 13802251,
+                                "reputation": 5830,
+                                "user_id": 9962007,
+                                "user_type": "registered",
+                                "display_name": "mirekphd"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1650468098,
+                            "post_id": 60570331,
+                            "comment_id": 127124905,
+                            "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/60570331#comment127124905_60570331",
+                            "body": "But surely it removes <i>all</i> occurences of keys with duplicated values..."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 17920772,
+                        "reputation": 11,
+                        "user_id": 13020686,
+                        "user_type": "registered",
+                        "display_name": "Heriberto Ortiz Hernandez"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1583526527,
+                    "last_edit_date": 1583526527,
+                    "creation_date": 1583522361,
+                    "answer_id": 60570331,
+                    "question_id": 8749158,
+                    "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary/60570331#60570331",
+                    "body": "<p>I solved it using compressed dictionary method:</p>\n\n<pre><code>dic = {112762853378: \n    {'dst': ['10.121.4.136'], \n     'src': ['1.2.3.4'], \n     'alias': ['www.example.com']\n    },\n112762853385: \n    {'dst': ['10.121.4.136'], \n     'src': ['1.2.3.4'], \n     'alias': ['www.example.com']\n    },\n112760496444: \n    {'dst': ['10.121.4.136'], \n     'src': ['1.2.3.4']\n    },\n112760496502: \n    {'dst': ['10.122.195.34'], \n     'src': ['4.3.2.1']\n    }\n}\n\nresult = {k:v for k,v in dic.items() if list(dic.values()).count(v)==1}\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 1151261,
+                "reputation": 942,
+                "user_id": 1132921,
+                "user_type": "registered",
+                "accept_rate": 100,
+                "display_name": "Bit Bucket"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 8749473,
+            "answer_count": 11,
+            "score": 43,
+            "last_activity_date": 1583526527,
+            "creation_date": 1325794642,
+            "last_edit_date": 1480980818,
+            "question_id": 8749158,
+            "link": "https://stackoverflow.com/questions/8749158/removing-duplicates-from-dictionary",
+            "title": "Removing Duplicates From Dictionary",
+            "body": "<p>I have the following Python 2.7 dictionary data structure (I do not control source data - comes from another system as is):</p>\n\n<pre>\n{112762853378: \n   {'dst': ['10.121.4.136'], \n    'src': ['1.2.3.4'], \n    'alias': ['www.example.com']\n   },\n 112762853385: \n   {'dst': ['10.121.4.136'], \n    'src': ['1.2.3.4'], \n    'alias': ['www.example.com']\n   },\n 112760496444: \n   {'dst': ['10.121.4.136'], \n    'src': ['1.2.3.4']\n   },\n 112760496502: \n   {'dst': ['10.122.195.34'], \n    'src': ['4.3.2.1']\n   },\n 112765083670: ...\n}\n</pre>\n\n<p>The dictionary keys will always be unique.  Dst, src, and alias can be duplicates.  All records will always have a dst and src but not every record will necessarily have an alias as seen in the third record.</p>\n\n<p>In the sample data either of the first two records would be removed (doesn't matter to me which one).  The third record would be considered unique since although dst and src are the same it is missing alias.</p>\n\n<p>My goal is to remove all records where the dst, src, and alias have all been duplicated - regardless of the key.</p>\n\n<p>How does this <em>rookie</em> accomplish this?</p>\n\n<p>Also, my limited understanding of Python interprets the data structure as a dictionary with the values stored in dictionaries... a dict of dicts, is this correct?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5773
+}

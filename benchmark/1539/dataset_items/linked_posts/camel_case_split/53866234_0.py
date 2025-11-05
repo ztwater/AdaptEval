@@ -1,0 +1,16 @@
+def split_camel(text, char):
+    if len(text) <= 1: # To avoid adding a wrong space in the beginning
+        return text+char
+    if char.isupper() and text[-1].islower(): # Regular Camel case
+        return text + " " + char
+    elif text[-1].isupper() and char.islower() and text[-2] != " ": # Detect Camel case in case of abbreviations
+        return text[:-1] + " " + text[-1] + char
+    else: # Do nothing part
+        return text + char
+
+text = "PathURLFinder"
+text = reduce(split_camel, a, "")
+print text
+# prints "Path URL Finder"
+print text.split(" ")
+# prints "['Path', 'URL', 'Finder']"

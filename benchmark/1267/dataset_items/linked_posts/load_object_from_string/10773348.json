@@ -1,0 +1,92 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 161583,
+                        "reputation": 33920,
+                        "user_id": 382471,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "robert"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1338116043,
+                    "post_id": 10773348,
+                    "comment_id": 14008108,
+                    "link": "https://stackoverflow.com/questions/10773348/get-python-class-object-from-string#comment14008108_10773348",
+                    "body": "Do you want <code>authenticate()</code> called on the classes, or on objects of those classes?"
+                },
+                {
+                    "owner": {
+                        "account_id": 519195,
+                        "reputation": 1020,
+                        "user_id": 915035,
+                        "user_type": "registered",
+                        "accept_rate": 94,
+                        "display_name": "TC Fox"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1338122906,
+                    "post_id": 10773348,
+                    "comment_id": 14009203,
+                    "link": "https://stackoverflow.com/questions/10773348/get-python-class-object-from-string#comment14009203_10773348",
+                    "body": "Sorry, <code>authenticate()</code> is called on the classes, not the objects of the classes. Should have made that more clear sorry!"
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 372833,
+                        "reputation": 87951,
+                        "user_id": 722121,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Gareth Latty"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 45,
+                    "last_activity_date": 1338120040,
+                    "last_edit_date": 1338120040,
+                    "creation_date": 1338118772,
+                    "answer_id": 10773699,
+                    "question_id": 10773348,
+                    "link": "https://stackoverflow.com/questions/10773348/get-python-class-object-from-string/10773699#10773699",
+                    "body": "<p>You want to use <a href=\"http://docs.python.org/dev/library/importlib.html\" rel=\"noreferrer\">the <code>importlib</code> module</a> to handle loading of modules like this, then simply use <a href=\"http://docs.python.org/library/functions.html#getattr\" rel=\"noreferrer\"><code>getattr()</code></a> to get the classes.</p>\n\n<p>For example, say I have a module, <code>somemodule.py</code> which contains the class <code>Test</code>:</p>\n\n<pre><code>import importlib\n\ncls = \"somemodule.Test\"\nmodule_name, class_name = cls.split(\".\")\n\nsomemodule = importlib.import_module(module_name)\n\nprint(getattr(somemodule, class_name))\n</code></pre>\n\n<p>Gives me:</p>\n\n<pre><code>&lt;class 'somemodule.Test'&gt;\n</code></pre>\n\n<p>It's trivial to add in things like packages:</p>\n\n<pre><code>cls = \"test.somemodule.Test\"\nmodule_name, class_name = cls.rsplit(\".\", 1)\n\nsomemodule = importlib.import_module(module_name)\n</code></pre>\n\n<p>And it will not import a module/package if it's already been imported, so you can happily do this without keeping track of loading modules:</p>\n\n<pre><code>import importlib\n\nTWO_FACTOR_BACKENDS = (\n    'id.backends.AllowToBeDisabled', # Disable this to enforce Two Factor Authentication\n    'id.backends.TOTPBackend',\n    'id.backends.HOTPBackend',\n    #'id.backends.YubikeyBackend',\n    #'id.backends.OneTimePadBackend',\n    #'id.backends.EmailBackend',\n)\n\nbackends = [getattr(importlib.import_module(mod), cls) for (mod, cls) in (backend.rsplit(\".\", 1) for backend in TWO_FACTOR_BACKENDS)]\n</code></pre>\n\n<p>\u00a0       </p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 519195,
+                "reputation": 1020,
+                "user_id": 915035,
+                "user_type": "registered",
+                "accept_rate": 94,
+                "display_name": "TC Fox"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "closed_date": 1338266228,
+            "accepted_answer_id": 10773699,
+            "answer_count": 1,
+            "score": 13,
+            "last_activity_date": 1338120040,
+            "creation_date": 1338115622,
+            "last_edit_date": 1495540423,
+            "question_id": 10773348,
+            "link": "https://stackoverflow.com/questions/10773348/get-python-class-object-from-string",
+            "closed_reason": "exact duplicate",
+            "title": "Get python class object from string",
+            "body": "<blockquote>\n  <p><strong>Possible Duplicate:</strong><br>\n  <a href=\"https://stackoverflow.com/questions/301134/dynamic-module-import-in-python\">Dynamic module import in Python</a>  </p>\n</blockquote>\n\n\n\n<p>Probably a simple question! I need to iterate through a list of classes (as strings) passed from a settings file. The classes are listed like below:</p>\n\n<pre><code>TWO_FACTOR_BACKENDS = (\n    'id.backends.AllowToBeDisabled', # Disable this to enforce Two Factor Authentication\n    'id.backends.TOTPBackend',\n    'id.backends.HOTPBackend',\n    #'id.backends.YubikeyBackend',\n    #'id.backends.OneTimePadBackend',\n    #'id.backends.EmailBackend',\n)\n</code></pre>\n\n<p>I now need to call the <code>authenticate()</code> function on each of these classes (unless commented out, of course). I'm happily iterating through the list, I just need to know how to convert the strings to a Class object in my foreach loop so that I can call the <code>authenticate</code> method on it. Is there an easy way to do this?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7660
+}

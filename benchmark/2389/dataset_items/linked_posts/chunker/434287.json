@@ -1,0 +1,2240 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "list",
+                "loops",
+                "optimization",
+                "chunks"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 877290,
+                        "reputation": 1716,
+                        "user_id": 51164,
+                        "user_type": "registered",
+                        "accept_rate": 57,
+                        "display_name": "Pedro Henriques"
+                    },
+                    "edited": false,
+                    "score": 4,
+                    "creation_date": 1231729437,
+                    "post_id": 434287,
+                    "comment_id": 257287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks#comment257287_434287",
+                    "body": "Your code does not work if the list size is not a multiple of four."
+                },
+                {
+                    "owner": {
+                        "account_id": 19699,
+                        "reputation": 55828,
+                        "user_id": 46387,
+                        "user_type": "registered",
+                        "accept_rate": 84,
+                        "display_name": "Ben Blank"
+                    },
+                    "edited": false,
+                    "score": 6,
+                    "creation_date": 1231731884,
+                    "post_id": 434287,
+                    "comment_id": 257330,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks#comment257330_434287",
+                    "body": "I&#39;m extend()ing the list so that it&#39;s length is a multiple of four before it gets this far."
+                },
+                {
+                    "owner": {
+                        "account_id": 19699,
+                        "reputation": 55828,
+                        "user_id": 46387,
+                        "user_type": "registered",
+                        "accept_rate": 84,
+                        "display_name": "Ben Blank"
+                    },
+                    "edited": false,
+                    "score": 6,
+                    "creation_date": 1311272216,
+                    "post_id": 434287,
+                    "comment_id": 8044723,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks#comment8044723_434287",
+                    "body": "@\u03a4\u0396\u03a9\u03a4\u0396\u0399\u039f\u03a5 \u2014 The questions are very similar, but not quite duplicate.  It&#39;s &quot;split into any number of chunks of size N&quot; vs. &quot;split into N chunks of any size&quot;.  :-)"
+                },
+                {
+                    "owner": {
+                        "account_id": 579,
+                        "reputation": 167937,
+                        "user_id": 745,
+                        "user_type": "registered",
+                        "accept_rate": 90,
+                        "display_name": "dbr"
+                    },
+                    "edited": false,
+                    "score": 3,
+                    "creation_date": 1340465023,
+                    "post_id": 434287,
+                    "comment_id": 14653432,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks#comment14653432_434287",
+                    "body": "possible duplicate of <a href=\"http://stackoverflow.com/questions/312443/how-do-you-split-a-list-into-evenly-sized-chunks-in-python\">How do you split a list into evenly sized chunks in Python?</a>"
+                },
+                {
+                    "owner": {
+                        "account_id": 5868390,
+                        "reputation": 21419,
+                        "user_id": 4621513,
+                        "user_type": "registered",
+                        "accept_rate": 77,
+                        "display_name": "mkrieger1"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1649584686,
+                    "post_id": 434287,
+                    "comment_id": 126908386,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks#comment126908386_434287",
+                    "body": "Does this answer your question? <a href=\"https://stackoverflow.com/questions/312443/how-do-you-split-a-list-into-evenly-sized-chunks\">How do you split a list into evenly sized chunks?</a>"
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 809,
+                        "reputation": 179300,
+                        "user_id": 1057,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "Harley Holcombe"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -2,
+                    "last_activity_date": 1231729014,
+                    "creation_date": 1231729014,
+                    "answer_id": 434303,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434303#434303",
+                    "body": "<p>There doesn't seem to be a pretty way to do this.  <a href=\"http://code.activestate.com/recipes/425397/\" rel=\"nofollow noreferrer\">Here</a> is a page that has a number of methods, including:</p>\n\n<pre><code>def split_seq(seq, size):\n    newseq = []\n    splitsize = 1.0/size*len(seq)\n    for i in range(size):\n        newseq.append(seq[int(round(i*splitsize)):int(round((i+1)*splitsize))])\n    return newseq\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 680,
+                        "reputation": 973700,
+                        "user_id": 893,
+                        "user_type": "registered",
+                        "accept_rate": 84,
+                        "display_name": "Greg Hewgill"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1231729156,
+                    "creation_date": 1231729156,
+                    "answer_id": 434307,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434307#434307",
+                    "body": "<p>In your second method, I would advance to the next group of 4 by doing this:</p>\n\n<pre><code>ints = ints[4:]\n</code></pre>\n\n<p>However, I haven't done any performance measurement so I don't know which one might be more efficient.</p>\n\n<p>Having said that, I would usually choose the first method. It's not pretty, but that's often a consequence of interfacing with the outside world.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 13289,
+                                "reputation": 18433,
+                                "user_id": 26592,
+                                "user_type": "registered",
+                                "accept_rate": 95,
+                                "display_name": "Sergey Golovchenko"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1231730588,
+                            "post_id": 434314,
+                            "comment_id": 257300,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434314#comment257300_434314",
+                            "body": "+1 for using generators, seams like the most &quot;pythonic&quot; out of all suggested solutions"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 19841,
+                                "reputation": 14325,
+                                "user_id": 46848,
+                                "user_type": "registered",
+                                "display_name": "zenazn"
+                            },
+                            "edited": false,
+                            "score": 9,
+                            "creation_date": 1231732276,
+                            "post_id": 434314,
+                            "comment_id": 257344,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434314#comment257344_434314",
+                            "body": "It&#39;s rather long and clumsy for something so easy, which isn&#39;t very pythonic at all. I prefer S. Lott&#39;s version"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 118444,
+                                "reputation": 20824,
+                                "user_id": 309483,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "Janus Troelsen"
+                            },
+                            "reply_to_user": {
+                                "account_id": 19841,
+                                "reputation": 14325,
+                                "user_id": 46848,
+                                "user_type": "registered",
+                                "display_name": "zenazn"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1353864794,
+                            "post_id": 434314,
+                            "comment_id": 18565255,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434314#comment18565255_434314",
+                            "body": "@zenazn: this will work on generator instances, slicing won&#39;t"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2368363,
+                                "reputation": 93334,
+                                "user_id": 2073595,
+                                "user_type": "registered",
+                                "display_name": "dano"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1408480044,
+                            "post_id": 434314,
+                            "comment_id": 39603085,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434314#comment39603085_434314",
+                            "body": "In addition to working properly with generators and other non-sliceable iterators, the first solution also doesn&#39;t require a &quot;filler&quot; value if the final chunk is smaller than <code>size</code>, which is sometimes desirable."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 316911,
+                                "reputation": 3899,
+                                "user_id": 633310,
+                                "user_type": "registered",
+                                "accept_rate": 41,
+                                "display_name": "Cuadue"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1428688687,
+                            "post_id": 434314,
+                            "comment_id": 47285142,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434314#comment47285142_434314",
+                            "body": "Also +1 for generators. Other solutions require a <code>len</code> call and so don&#39;t work on other generators."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7993152,
+                                "reputation": 1337,
+                                "user_id": 6030424,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tom Myddeltyn"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1462486575,
+                            "post_id": 434314,
+                            "comment_id": 61669288,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434314#comment61669288_434314",
+                            "body": "I would throw a try: block around and catch the value error exception to handle the &lt;4 multiple issue."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 175099,
+                                "reputation": 3305,
+                                "user_id": 404861,
+                                "user_type": "registered",
+                                "accept_rate": 43,
+                                "display_name": "Yuval"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1496387923,
+                            "post_id": 434314,
+                            "comment_id": 75650922,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434314#comment75650922_434314",
+                            "body": "The first one is a good, simple version that doesn&#39;t use a <code>fillvalue</code> but still works on any iterable. Nice!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1035081,
+                                "reputation": 3004,
+                                "user_id": 1042595,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Milosz"
+                            },
+                            "reply_to_user": {
+                                "account_id": 19841,
+                                "reputation": 14325,
+                                "user_id": 46848,
+                                "user_type": "registered",
+                                "display_name": "zenazn"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1638268500,
+                            "post_id": 434314,
+                            "comment_id": 124037612,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434314#comment124037612_434314",
+                            "body": "Python 3.8 introduces assignment expressions, so we can now get even more terse: <code>while chunk := tuple(itertools.islice(it, size)): yield chunk</code>. Maybe this would also appease @zenazn? :D"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 11564,
+                        "reputation": 88083,
+                        "user_id": 22364,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Markus Jarderot"
+                    },
+                    "comment_count": 8,
+                    "is_accepted": false,
+                    "score": 31,
+                    "last_activity_date": 1231730044,
+                    "last_edit_date": 1231730044,
+                    "creation_date": 1231729379,
+                    "answer_id": 434314,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434314#434314",
+                    "body": "<pre><code>import itertools\ndef chunks(iterable,size):\n    it = iter(iterable)\n    chunk = tuple(itertools.islice(it,size))\n    while chunk:\n        yield chunk\n        chunk = tuple(itertools.islice(it,size))\n\n# though this will throw ValueError if the length of ints\n# isn't a multiple of four:\nfor x1,x2,x3,x4 in chunks(ints,4):\n    foo += x1 + x2 + x3 + x4\n\nfor chunk in chunks(ints,4):\n    foo += sum(chunk)\n</code></pre>\n\n<p>Another way:</p>\n\n<pre><code>import itertools\ndef chunks2(iterable,size,filler=None):\n    it = itertools.chain(iterable,itertools.repeat(filler,size-1))\n    chunk = tuple(itertools.islice(it,size))\n    while len(chunk) == size:\n        yield chunk\n        chunk = tuple(itertools.islice(it,size))\n\n# x2, x3 and x4 could get the value 0 if the length is not\n# a multiple of 4.\nfor x1,x2,x3,x4 in chunks2(ints,4,0):\n    foo += x1 + x2 + x3 + x4\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7499769,
+                                "reputation": 2018,
+                                "user_id": 5698626,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "PlsWork"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1550445322,
+                            "post_id": 434321,
+                            "comment_id": 96259611,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434321#comment96259611_434321",
+                            "body": "How does it behave if len(ints) is not a multiple of the chunkSize?"
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user3064538"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7499769,
+                                "reputation": 2018,
+                                "user_id": 5698626,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "PlsWork"
+                            },
+                            "edited": false,
+                            "score": 12,
+                            "creation_date": 1553540175,
+                            "post_id": 434321,
+                            "comment_id": 97414081,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434321#comment97414081_434321",
+                            "body": "@AnnaVopureta <code>chunk</code> will have 1, 2 or 3 elements for the last batch of elements. See this question about why <a href=\"https://stackoverflow.com/questions/9490058/why-substring-slicing-index-out-of-range-works-in-python\">slice indices can be out of bounds</a>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2151509,
+                                "reputation": 2420,
+                                "user_id": 1907765,
+                                "user_type": "registered",
+                                "accept_rate": 41,
+                                "display_name": "Lou"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1670082540,
+                            "post_id": 434321,
+                            "comment_id": 131792553,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434321#comment131792553_434321",
+                            "body": "Upvoted the solution that doesn&#39;t rely on itertools. It&#39;s nice to have a solution that works with Python out of the box."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6358,
+                        "reputation": 388728,
+                        "user_id": 10661,
+                        "user_type": "registered",
+                        "accept_rate": 91,
+                        "display_name": "S.Lott"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 226,
+                    "last_activity_date": 1619995039,
+                    "last_edit_date": 1619995039,
+                    "creation_date": 1231729569,
+                    "answer_id": 434321,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434321#434321",
+                    "body": "<pre><code>chunk_size = 4\nfor i in range(0, len(ints), chunk_size):\n    chunk = ints[i:i+chunk_size]\n    # process chunk of size &lt;= chunk_size\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3021,
+                                "reputation": 408304,
+                                "user_id": 4279,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "jfs"
+                            },
+                            "edited": false,
+                            "score": 21,
+                            "creation_date": 1231771177,
+                            "post_id": 434328,
+                            "comment_id": 258373,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434328#comment258373_434328",
+                            "body": "@Carlos Crasborn&#39;s version works for any iterable (not just sequences as the above code); it is concise and probably just as fast or even faster. Though it might be a bit obscure (unclear) for people unfamiliar with <code>itertools</code> module."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 19699,
+                                "reputation": 55828,
+                                "user_id": 46387,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "Ben Blank"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1231797800,
+                            "post_id": 434328,
+                            "comment_id": 259786,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434328#comment259786_434328",
+                            "body": "@J.F. Sebastian \u2014 Now that I&#39;ve gotten the chance to figure out <i>why</i> his code works, I feel compelled to change my accepted answer (which I <i>hate</i> doing). I love this answer, too, @nosklo, but that izip_longest trick seems tailor-made for my situation."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2882085,
+                                "reputation": 835,
+                                "user_id": 2472731,
+                                "user_type": "registered",
+                                "accept_rate": 59,
+                                "display_name": "RoboCop87"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1404402099,
+                            "post_id": 434328,
+                            "comment_id": 38035625,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434328#comment38035625_434328",
+                            "body": "I was having trouble using this, but it started working when I replaced the outside parens with square brackets. Is the syntax in the answer Python 3 only?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 340794,
+                                "reputation": 12611,
+                                "user_id": 671013,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "Dror"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1424768397,
+                            "post_id": 434328,
+                            "comment_id": 45674479,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434328#comment45674479_434328",
+                            "body": "Note that <code>chunker</code> returns a <code>generator</code>. Replace the return to: <code>return [...]</code> to get a list."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1339492,
+                                "reputation": 58094,
+                                "user_id": 1281485,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "Alfe"
+                            },
+                            "edited": false,
+                            "score": 16,
+                            "creation_date": 1460715749,
+                            "post_id": 434328,
+                            "comment_id": 60882464,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434328#comment60882464_434328",
+                            "body": "Instead of writing a function building and then returning a generator, you could also write a generator directly, using <code>yield</code>: <code>for pos in xrange(0, len(seq), size): yield seq[pos:pos + size]</code>.  I&#39;m not sure if internally this would be handled any differently in any relevant aspect, but it might be even a tiny bit clearer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 343071,
+                                "reputation": 147,
+                                "user_id": 674557,
+                                "user_type": "registered",
+                                "display_name": "apollov"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1513966647,
+                            "post_id": 434328,
+                            "comment_id": 82861161,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434328#comment82861161_434328",
+                            "body": "Note this works only for sequences that support items access by index and won&#39;t work for generic iterators, because they may not support <code>__getitem__</code> method."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 69533,
+                                "reputation": 33443,
+                                "user_id": 202229,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "smci"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1558766875,
+                            "post_id": 434328,
+                            "comment_id": 99216224,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434328#comment99216224_434328",
+                            "body": "I rewrote this as a generator. Could you please do that? It has all of the upside, none of the downside, and is more memory-efficient."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9315,
+                                "reputation": 220420,
+                                "user_id": 17160,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "nosklo"
+                            },
+                            "reply_to_user": {
+                                "account_id": 69533,
+                                "reputation": 33443,
+                                "user_id": 202229,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "smci"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1558782668,
+                            "post_id": 434328,
+                            "comment_id": 99219295,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434328#comment99219295_434328",
+                            "body": "@smci the <code>chunker()</code> function above <b>is a generator</b> - it returns a generator expression"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 69533,
+                                "reputation": 33443,
+                                "user_id": 202229,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "smci"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1558782758,
+                            "post_id": 434328,
+                            "comment_id": 99219317,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434328#comment99219317_434328",
+                            "body": "@nosklo: Ah ok, I rewrote it as a simple generator: <code>for i in range(0, len(seq), size): yield seq[i:i + size]</code> which seemed to me to be simpler."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9640511,
+                                "reputation": 4199,
+                                "user_id": 7154924,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "flow2k"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1627277972,
+                            "post_id": 434328,
+                            "comment_id": 121103365,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434328#comment121103365_434328",
+                            "body": "Note that <code>size</code> is the length of each split, not the size/number of splits/groups."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3116876,
+                                "reputation": 904,
+                                "user_id": 7290602,
+                                "user_type": "registered",
+                                "display_name": "otocan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1676559502,
+                            "post_id": 434328,
+                            "comment_id": 133164652,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434328#comment133164652_434328",
+                            "body": "I really feel like this should be a convenience method for all ordered containers. I&#39;m surprised it&#39;s not."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 9315,
+                        "reputation": 220420,
+                        "user_id": 17160,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "nosklo"
+                    },
+                    "comment_count": 11,
+                    "is_accepted": false,
+                    "score": 613,
+                    "last_activity_date": 1658904624,
+                    "last_edit_date": 1658904624,
+                    "creation_date": 1231729817,
+                    "answer_id": 434328,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434328#434328",
+                    "body": "<pre><code>def chunker(seq, size):\n    return (seq[pos:pos + size] for pos in range(0, len(seq), size))\n</code></pre>\n<p>Works with any sequence:</p>\n<pre><code>text = &quot;I am a very, very helpful text&quot;\n\nfor group in chunker(text, 7):\n   print(repr(group),)\n# 'I am a ' 'very, v' 'ery hel' 'pful te' 'xt'\n\nprint('|'.join(chunker(text, 10)))\n# I am a ver|y, very he|lpful text\n\nanimals = ['cat', 'dog', 'rabbit', 'duck', 'bird', 'cow', 'gnu', 'fish']\n\nfor group in chunker(animals, 3):\n    print(group)\n# ['cat', 'dog', 'rabbit']\n# ['duck', 'bird', 'cow']\n# ['gnu', 'fish']\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 10305,
+                                "reputation": 95798,
+                                "user_id": 19403,
+                                "user_type": "registered",
+                                "accept_rate": 59,
+                                "display_name": "Robert Rossney"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1231731630,
+                            "post_id": 434349,
+                            "comment_id": 257319,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434349#comment257319_434349",
+                            "body": "(I think that MizardX&#39;s itertools suggestion is functionally equivalent to this.)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 10305,
+                                "reputation": 95798,
+                                "user_id": 19403,
+                                "user_type": "registered",
+                                "accept_rate": 59,
+                                "display_name": "Robert Rossney"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1231733756,
+                            "post_id": 434349,
+                            "comment_id": 257372,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434349#comment257372_434349",
+                            "body": "(Actually, on reflection, no I don&#39;t.  itertools.islice returns an iterator, but it doesn&#39;t use an existing one.)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2739652,
+                                "reputation": 2123,
+                                "user_id": 2361465,
+                                "user_type": "registered",
+                                "display_name": "Valentas"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1538986970,
+                            "post_id": 434349,
+                            "comment_id": 92322700,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434349#comment92322700_434349",
+                            "body": "It is nice and simple, but for some reason even without conversion to tuple 4-7 times slower than the accepted grouper method on <code>iterable = range(100000000)</code> &amp; <code>chunksize</code> up to 10000."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2739652,
+                                "reputation": 2123,
+                                "user_id": 2361465,
+                                "user_type": "registered",
+                                "display_name": "Valentas"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1538992295,
+                            "post_id": 434349,
+                            "comment_id": 92325650,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434349#comment92325650_434349",
+                            "body": "However, in general I would recommend this method, because the accepted one can be extremely slow when checking for last item is slow <a href=\"https://docs.python.org/3/library/itertools.html#itertools.zip_longest\" rel=\"nofollow noreferrer\">docs.python.org/3/library/itertools.html#itertools.zip_longe&zwnj;&#8203;st</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 10305,
+                        "reputation": 95798,
+                        "user_id": 19403,
+                        "user_type": "registered",
+                        "accept_rate": 59,
+                        "display_name": "Robert Rossney"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1231733823,
+                    "last_edit_date": 1231733823,
+                    "creation_date": 1231730370,
+                    "answer_id": 434349,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434349#434349",
+                    "body": "<p>If the list is large, the highest-performing way to do this will be to use a generator:</p>\n\n<pre><code>def get_chunk(iterable, chunk_size):\n    result = []\n    for item in iterable:\n        result.append(item)\n        if len(result) == chunk_size:\n            yield tuple(result)\n            result = []\n    if len(result) &gt; 0:\n        yield tuple(result)\n\nfor x in get_chunk([1,2,3,4,5,6,7,8,9,10], 3):\n    print x\n\n(1, 2, 3)\n(4, 5, 6)\n(7, 8, 9)\n(10,)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 21873,
+                        "reputation": 25973,
+                        "user_id": 53495,
+                        "user_type": "registered",
+                        "display_name": "Brian Clapper"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1231731972,
+                    "creation_date": 1231731972,
+                    "answer_id": 434382,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434382#434382",
+                    "body": "<p>If the lists are the same size, you can combine them into lists of 4-tuples with <code>zip()</code>. For example:</p>\n\n<pre><code># Four lists of four elements each.\n\nl1 = range(0, 4)\nl2 = range(4, 8)\nl3 = range(8, 12)\nl4 = range(12, 16)\n\nfor i1, i2, i3, i4 in zip(l1, l2, l3, l4):\n    ...\n</code></pre>\n\n<p>Here's what the <code>zip()</code> function produces:</p>\n\n<pre><code>&gt;&gt;&gt; print l1\n[0, 1, 2, 3]\n&gt;&gt;&gt; print l2\n[4, 5, 6, 7]\n&gt;&gt;&gt; print l3\n[8, 9, 10, 11]\n&gt;&gt;&gt; print l4\n[12, 13, 14, 15]\n&gt;&gt;&gt; print zip(l1, l2, l3, l4)\n[(0, 4, 8, 12), (1, 5, 9, 13), (2, 6, 10, 14), (3, 7, 11, 15)]\n</code></pre>\n\n<p>If the lists are large, and you don't want to combine them into a bigger list, use <code>itertools.izip()</code>, which produces an iterator, rather than a list.</p>\n\n<pre><code>from itertools import izip\n\nfor i1, i2, i3, i4 in izip(l1, l2, l3, l4):\n    ...\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3021,
+                                "reputation": 408304,
+                                "user_id": 4279,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "jfs"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1231770590,
+                            "post_id": 434398,
+                            "comment_id": 258347,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434398#comment258347_434398",
+                            "body": "A readable way to do it is <a href=\"http://stackoverflow.com/questions/434287/what-is-the-most-pythonic-way-to-iterate-over-a-list-in-chunks#434411\" title=\"what is the most pythonic way to iterate over a list in chunks%23434411\">stackoverflow.com/questions/434287/&hellip;</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5013053,
+                                "reputation": 935,
+                                "user_id": 4028718,
+                                "user_type": "registered",
+                                "display_name": "mdmjsh"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1570733540,
+                            "post_id": 434398,
+                            "comment_id": 103016790,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434398#comment103016790_434398",
+                            "body": "Note that in python 3 <code>izip_longest</code> is replaced by <code>zip_longest</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 877290,
+                        "reputation": 1716,
+                        "user_id": 51164,
+                        "user_type": "registered",
+                        "accept_rate": 57,
+                        "display_name": "Pedro Henriques"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 12,
+                    "last_activity_date": 1231770816,
+                    "last_edit_date": 1231770816,
+                    "creation_date": 1231732580,
+                    "answer_id": 434398,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434398#434398",
+                    "body": "<pre><code>from itertools import izip_longest\n\ndef chunker(iterable, chunksize, filler):\n    return izip_longest(*[iter(iterable)]*chunksize, fillvalue=filler)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 19699,
+                                "reputation": 55828,
+                                "user_id": 46387,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "Ben Blank"
+                            },
+                            "edited": false,
+                            "score": 81,
+                            "creation_date": 1231797654,
+                            "post_id": 434411,
+                            "comment_id": 259776,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment259776_434411",
+                            "body": "Finally got a chance to play around with this in a python session. For those who are as confused as I was, this is feeding the same iterator to izip_longest multiple times, causing it to consume successive values of the same sequence rather than striped values from separate sequences. I love it!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 17166,
+                                "reputation": 39329,
+                                "user_id": 38140,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "gotgenes"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1251326924,
+                            "post_id": 434411,
+                            "comment_id": 1172652,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment1172652_434411",
+                            "body": "What&#39;s the best way to filter back out the fillvalue? ([item for item in items if item is not fillvalue] for items in grouper(iterable))?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 242714,
+                                "reputation": 4825,
+                                "user_id": 514429,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Utku Zihnioglu"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1297728078,
+                            "post_id": 434411,
+                            "comment_id": 5586265,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment5586265_434411",
+                            "body": "I am not sure if this is the most pythonic answer but it possibly is the best use of <code>[LIST]*n</code> structure."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 202111,
+                                "reputation": 5790,
+                                "user_id": 448970,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "David B."
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1311400784,
+                            "post_id": 434411,
+                            "comment_id": 8070568,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment8070568_434411",
+                            "body": "This works, but it seems interpreter implementation-dependent.  Does the itertools.izip_longest specification actually guarantee a striped access order for the iterators (e.g., with 3 iterators A,B, and C, the access ordering will be A,B,C,A,B,C,A,Fill,C and not something like A,A,B,B,C,C,A,Fill,C or A,B,C,C,B,A,A,Fill,C? I could see the latter orderings being useful for cache-line performance optimization.  If the single-striping access ordering is not guaranteed, this isn&#39;t a theoretically safe solution (although speaking practically, most implementations will single-step the iterators)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 365893,
+                                "reputation": 90060,
+                                "user_id": 711085,
+                                "user_type": "registered",
+                                "display_name": "ninjagecko"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1335624913,
+                            "post_id": 434411,
+                            "comment_id": 13356173,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment13356173_434411",
+                            "body": "You can combine this all into a short one-liner: <code>zip(*[iter(yourList)]*n)</code> (or <code>izip_longest</code> with fillvalue)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 85917,
+                                "reputation": 20283,
+                                "user_id": 239247,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "anatoly techtonik"
+                            },
+                            "edited": false,
+                            "score": 24,
+                            "creation_date": 1367161665,
+                            "post_id": 434411,
+                            "comment_id": 23273610,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment23273610_434411",
+                            "body": "I suspect that the performance of this grouper recipe for 256k sized chunks will be very poor, because <code>izip_longest</code> will be fed 256k arguments."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1160289,
+                                "reputation": 2485,
+                                "user_id": 1139935,
+                                "user_type": "registered",
+                                "display_name": "davidgoli"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1385433061,
+                            "post_id": 434411,
+                            "comment_id": 30131103,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment30131103_434411",
+                            "body": "What is an <code>izip_longest</code> object, why doesn&#39;t it behave like a list, and why is it returned from this? Why must I call <code>list()</code> on it, why doesn&#39;t it just return a new list?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3021,
+                                "reputation": 408304,
+                                "user_id": 4279,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "jfs"
+                            },
+                            "reply_to_user": {
+                                "account_id": 202111,
+                                "reputation": 5790,
+                                "user_id": 448970,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "David B."
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1398288384,
+                            "post_id": 434411,
+                            "comment_id": 35586434,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment35586434_434411",
+                            "body": "@DavidB.: the recipe is given as the example code in the officical documentation. Unless it is a bug; the behaviour is guaranteed"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 392235,
+                                "reputation": 2943,
+                                "user_id": 753382,
+                                "user_type": "registered",
+                                "display_name": "Suor"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1401912501,
+                            "post_id": 434411,
+                            "comment_id": 37074151,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment37074151_434411",
+                            "body": "To be efficient with large <code>n</code> you will need to manage a pool and feed it with <code>islice</code> like here <a href=\"https://github.com/Suor/funcy/blob/1.0.0/funcy/seqs.py#L293\" rel=\"nofollow noreferrer\">github.com/Suor/funcy/blob/1.0.0/funcy/seqs.py#L293</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2366166,
+                                "reputation": 76316,
+                                "user_id": 2071807,
+                                "user_type": "registered",
+                                "accept_rate": 68,
+                                "display_name": "LondonRob"
+                            },
+                            "edited": false,
+                            "score": 18,
+                            "creation_date": 1439535622,
+                            "post_id": 434411,
+                            "comment_id": 51910889,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment51910889_434411",
+                            "body": "In several places commenters say &quot;when I finally worked out how this worked....&quot; Maybe a bit of explanation is required. Particularly the list of iterators aspect."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 55190,
+                                "reputation": 63123,
+                                "user_id": 165216,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "PaulMcG"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1445093627,
+                            "post_id": 434411,
+                            "comment_id": 54181704,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment54181704_434411",
+                            "body": "I prefer putting the arguments in order of the size first followed by the sequence. This makes it easy to create partials for chunking by a certain amount, and then just passing different sequences to them."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3021,
+                                "reputation": 408304,
+                                "user_id": 4279,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "jfs"
+                            },
+                            "reply_to_user": {
+                                "account_id": 85917,
+                                "reputation": 20283,
+                                "user_id": 239247,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "anatoly techtonik"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1480721846,
+                            "post_id": 434411,
+                            "comment_id": 69096389,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment69096389_434411",
+                            "body": "@anatolytechtonik performance is judged by measurements on real data on real hardware, not   hypothetical &quot;logic&quot;. Over the years, I&#39;ve used the grouper() recipe many times. I&#39;ve encountered cases when you cannot use slicing because the input is  not a sequence. I don&#39;t remember a single case when I would replace the grouper()-like code with the chunker()-like code due to performance concerns (I might replace it for readability in the code for beginners). YMMV"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1801412,
+                                "reputation": 2391,
+                                "user_id": 1639671,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "flutefreak7"
+                            },
+                            "reply_to_user": {
+                                "account_id": 17166,
+                                "reputation": 39329,
+                                "user_id": 38140,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "gotgenes"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1522568407,
+                            "post_id": 434411,
+                            "comment_id": 86199098,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment86199098_434411",
+                            "body": "@gotgenes, <code>(filter(None, chunk) for chunk in zip_longest(*[iter(yourList)]*n)</code> will provide a chunk generator. Each chunk is itself a generator (using filter) which will skip the fill values."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2739652,
+                                "reputation": 2123,
+                                "user_id": 2361465,
+                                "user_type": "registered",
+                                "display_name": "Valentas"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1538992135,
+                            "post_id": 434411,
+                            "comment_id": 92325558,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment92325558_434411",
+                            "body": "if next() for exhausted iterator happens to be slow (eg. psycopg2 cursor), the last chunk of <code>zip_longest</code> is on average <code>n&#47;2</code> times slower than it should be."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 284667,
+                                "reputation": 6292,
+                                "user_id": 582917,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "CMCDragonkai"
+                            },
+                            "edited": false,
+                            "score": 13,
+                            "creation_date": 1544506310,
+                            "post_id": 434411,
+                            "comment_id": 94289609,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment94289609_434411",
+                            "body": "Is there a way to use this but without the <code>None</code> filling up the last chunk?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 203326,
+                                "reputation": 30907,
+                                "user_id": 450917,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "Gringo Suave"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1581540357,
+                            "post_id": 434411,
+                            "comment_id": 106473423,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment106473423_434411",
+                            "body": "This is less mem intensive/faster than it looks, presumably because the number of arguments and iterable are all pointers to the same object(s)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1864761,
+                                "reputation": 7373,
+                                "user_id": 1688590,
+                                "user_type": "registered",
+                                "display_name": "xbello"
+                            },
+                            "reply_to_user": {
+                                "account_id": 284667,
+                                "reputation": 6292,
+                                "user_id": 582917,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "CMCDragonkai"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1588250004,
+                            "post_id": 434411,
+                            "comment_id": 108829995,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment108829995_434411",
+                            "body": "@CMCDragonkai, you can filter the iterator with <code>(x for x in chunk if x)</code>, asuming your fillvalue is <code>None</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 143641,
+                                "reputation": 483,
+                                "user_id": 352115,
+                                "user_type": "registered",
+                                "display_name": "emazep"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1612673101,
+                            "post_id": 434411,
+                            "comment_id": 116838055,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment116838055_434411",
+                            "body": "I would not recommend this since it is based on the implementation details of <code>zip_longest</code>. Even if its behavior is guaranteed, this recipe still requires knowledge beyond the API to be read (and understood). However interesting as a Python exercise."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4212859,
+                                "reputation": 7193,
+                                "user_id": 4440675,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "Amit Tripathi"
+                            },
+                            "reply_to_user": {
+                                "account_id": 19699,
+                                "reputation": 55828,
+                                "user_id": 46387,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "Ben Blank"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1621714160,
+                            "post_id": 434411,
+                            "comment_id": 119580901,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment119580901_434411",
+                            "body": "Rephrasing @BenBlank&#39;s comment for more clarity:  &quot;This is feeding the list of same iterator of length=n to <code>zip_longest</code>. So internally next is called on each iterator element of the passed list. When iterator is exhausted(i.e. string size is not a multiple of n) filler value is pushed for the last element of the result tuple&quot;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 16272615,
+                                "reputation": 2455,
+                                "user_id": 11750716,
+                                "user_type": "registered",
+                                "display_name": "Jean Monet"
+                            },
+                            "reply_to_user": {
+                                "account_id": 17166,
+                                "reputation": 39329,
+                                "user_id": 38140,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "gotgenes"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1645305521,
+                            "post_id": 434411,
+                            "comment_id": 125837339,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment125837339_434411",
+                            "body": "@gotgenes <code>yield from ([n for n in t if n is not fillvalue] for t in zip_longest(*args, fillvalue = fillvalue))</code>, setting sentinel <code>fillvalue=object()</code>:  <code>[[0, 1], [2, 3], [4]]</code>.  Using an object sentinel allows <code>None</code> to be a valid element of the list outside fillvalue."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 248321,
+                                "reputation": 61328,
+                                "user_id": 523612,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Karl Knechtel"
+                            },
+                            "reply_to_user": {
+                                "account_id": 85917,
+                                "reputation": 20283,
+                                "user_id": 239247,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "anatoly techtonik"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1660269952,
+                            "post_id": 434411,
+                            "comment_id": 129498484,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#comment129498484_434411",
+                            "body": "@anatolytechtonik it&#39;s not as bad as you might expect. Python is designed to handle large numbers of arguments to functions. On my system, <code>python -m timeit &quot;(lambda *args: None)(*range(2**18))&quot;</code> runs smoothly and reports about <code>11.6 msec per loop</code>, compared to <code>7.28 msec per loop</code> for just building a list with <code>list(range(2**18))</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 20251,
+                        "reputation": 8198,
+                        "user_id": 48200,
+                        "user_type": "registered",
+                        "display_name": "Craz"
+                    },
+                    "comment_count": 21,
+                    "is_accepted": false,
+                    "score": 438,
+                    "last_activity_date": 1688104806,
+                    "last_edit_date": 1688104806,
+                    "creation_date": 1231733240,
+                    "answer_id": 434411,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/434411#434411",
+                    "body": "<p>Modified from the <a href=\"https://docs.python.org/library/itertools.html#itertools-recipes\" rel=\"noreferrer\">Recipes</a> section of Python's <a href=\"http://docs.python.org/library/itertools.html\" rel=\"noreferrer\"><code>itertools</code></a> docs:</p>\n<pre><code>from itertools import zip_longest\n\ndef grouper(iterable, n, fillvalue=None):\n    args = [iter(iterable)] * n\n    return zip_longest(*args, fillvalue=fillvalue)\n</code></pre>\n<p><strong>Example</strong></p>\n<pre><code>grouper('ABCDEFGHIJ', 3, 'x')  # --&gt; 'ABC' 'DEF' 'GHI' 'Jxx'\n</code></pre>\n<p><strong>Note:</strong> on Python 2 use <code>izip_longest</code> instead of <code>zip_longest</code>.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 8492091,
+                                "reputation": 8649,
+                                "user_id": 6378557,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "xenoid"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1680733041,
+                            "post_id": 435712,
+                            "comment_id": 133950309,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/435712#comment133950309_435712",
+                            "body": "This one is devilishly clever..."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3021,
+                        "reputation": 408304,
+                        "user_id": 4279,
+                        "user_type": "registered",
+                        "accept_rate": 94,
+                        "display_name": "jfs"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 11,
+                    "last_activity_date": 1231930839,
+                    "last_edit_date": 1495541894,
+                    "creation_date": 1231773221,
+                    "answer_id": 435712,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/435712#435712",
+                    "body": "<p>Since nobody's mentioned it yet here's a <code>zip()</code> solution:</p>\n\n<pre><code>&gt;&gt;&gt; def chunker(iterable, chunksize):\n...     return zip(*[iter(iterable)]*chunksize)\n</code></pre>\n\n<p>It works only if your sequence's length is always divisible by the chunk size or you don't care about a trailing chunk if it isn't.</p>\n\n<p>Example:</p>\n\n<pre><code>&gt;&gt;&gt; s = '1234567890'\n&gt;&gt;&gt; chunker(s, 3)\n[('1', '2', '3'), ('4', '5', '6'), ('7', '8', '9')]\n&gt;&gt;&gt; chunker(s, 4)\n[('1', '2', '3', '4'), ('5', '6', '7', '8')]\n&gt;&gt;&gt; chunker(s, 5)\n[('1', '2', '3', '4', '5'), ('6', '7', '8', '9', '0')]\n</code></pre>\n\n<p>Or using <a href=\"http://docs.python.org/library/itertools.html\" rel=\"noreferrer\">itertools.izip</a> to return an iterator instead of a list:</p>\n\n<pre><code>&gt;&gt;&gt; from itertools import izip\n&gt;&gt;&gt; def chunker(iterable, chunksize):\n...     return izip(*[iter(iterable)]*chunksize)\n</code></pre>\n\n<p>Padding can be fixed using <a href=\"https://stackoverflow.com/questions/312443/how-do-you-split-a-list-into-evenly-sized-chunks-in-python#312644\">@\u03a4\u0396\u03a9\u03a4\u0396\u0399\u039f\u03a5's answer</a>:</p>\n\n<pre><code>&gt;&gt;&gt; from itertools import chain, izip, repeat\n&gt;&gt;&gt; def chunker(iterable, chunksize, fillvalue=None):\n...     it   = chain(iterable, repeat(fillvalue, chunksize-1))\n...     args = [it] * chunksize\n...     return izip(*args)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 151071,
+                                "reputation": 150282,
+                                "user_id": 364696,
+                                "user_type": "registered",
+                                "display_name": "ShadowRanger"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1475285686,
+                            "post_id": 8312908,
+                            "comment_id": 66896418,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/8312908#comment66896418_8312908",
+                            "body": "This is better handled with <code>itertools.izip_longest</code> (Py2)/<code>itertools.zip_longest</code> (Py3); this use of <code>map</code> is doubly-deprecated, and not available in Py3 (you can&#39;t pass <code>None</code> as the mapper function, and it stops when the shortest iterable is exhausted, not the longest; it doesn&#39;t pad)."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 70307,
+                        "reputation": 6920,
+                        "user_id": 204011,
+                        "user_type": "registered",
+                        "display_name": "catwell"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1546295507,
+                    "last_edit_date": 1546295507,
+                    "creation_date": 1322578680,
+                    "answer_id": 8312908,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/8312908#8312908",
+                    "body": "<p>Using map() instead of zip() fixes the padding issue in J.F. Sebastian's answer:</p>\n\n<pre><code>&gt;&gt;&gt; def chunker(iterable, chunksize):\n...   return map(None,*[iter(iterable)]*chunksize)\n</code></pre>\n\n<p>Example:</p>\n\n<pre><code>&gt;&gt;&gt; s = '1234567890'\n&gt;&gt;&gt; chunker(s, 3)\n[('1', '2', '3'), ('4', '5', '6'), ('7', '8', '9'), ('0', None, None)]\n&gt;&gt;&gt; chunker(s, 4)\n[('1', '2', '3', '4'), ('5', '6', '7', '8'), ('9', '0', None, None)]\n&gt;&gt;&gt; chunker(s, 5)\n[('1', '2', '3', '4', '5'), ('6', '7', '8', '9', '0')]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 151071,
+                                "reputation": 150282,
+                                "user_id": 364696,
+                                "user_type": "registered",
+                                "display_name": "ShadowRanger"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1475198047,
+                            "post_id": 10791887,
+                            "comment_id": 66858562,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/10791887#comment66858562_10791887",
+                            "body": "You can reduce runtime for recipe #3 by ~10-15% by moving it to the C layer (omitting <code>itertools</code> imports; <code>map</code> must be Py3 <code>map</code> or <code>imap</code>): <code>def grouper(n, it): return takewhile(bool, map(tuple, starmap(islice, repeat((iter(it), n)))))</code>. Your final function can be made less brittle by using a sentinel: get rid of the <code>fillvalue</code> argument; add a first line <code>fillvalue = object()</code>, then change the <code>if</code> check to <code>if i[-1] is fillvalue:</code> and the line it controls to <code>yield tuple(v for v in i if v is not fillvalue)</code>. Guarantees no value in <code>iterable</code> can be mistaken for the filler value."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 151071,
+                                "reputation": 150282,
+                                "user_id": 364696,
+                                "user_type": "registered",
+                                "display_name": "ShadowRanger"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1475198762,
+                            "post_id": 10791887,
+                            "comment_id": 66858715,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/10791887#comment66858715_10791887",
+                            "body": "BTW, big thumbs up on #4. I was about to post my optimization of #3 as a better answer (performance-wise) than what had been posted so far, but with the tweak to make it reliable, resilient #4 runs over twice as fast as optimized #3; I did not expect a solution with Python level loops (and no theoretical algorithmic differences AFAICT) to win. I assume #3 loses due to the expense of constructing/iterating <code>islice</code> objects (#3 wins if <code>n</code> is relatively large, e.g. number of groups is small, but that&#39;s optimizing for an uncommon case), but I didn&#39;t expect it to be quite that extreme."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 223463,
+                                "reputation": 2408,
+                                "user_id": 482691,
+                                "user_type": "registered",
+                                "accept_rate": 98,
+                                "display_name": "Kumba"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1502744153,
+                            "post_id": 10791887,
+                            "comment_id": 78323752,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/10791887#comment78323752_10791887",
+                            "body": "For #4, the first branch of the conditional is only ever taken on the last iteration (the final tuple).  Instead of reconstituting the final tuple all over again, cache the modulo of the length of the original iterable at the top and use that to slice off the unwanted padding from <code>izip_longest</code> on the final tuple: <code>yield i[:modulo]</code>.  Also, for the <code>args</code> variable, tuple it instead of a list: <code>args = (iter(iterable),) * n</code>.  Shaves a few more clock cycles off.  Last, if we ignore fillvalue and assume <code>None</code>, the conditional can become <code>if None in i</code> for even more clock cycles."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 151071,
+                                "reputation": 150282,
+                                "user_id": 364696,
+                                "user_type": "registered",
+                                "display_name": "ShadowRanger"
+                            },
+                            "reply_to_user": {
+                                "account_id": 223463,
+                                "reputation": 2408,
+                                "user_id": 482691,
+                                "user_type": "registered",
+                                "accept_rate": 98,
+                                "display_name": "Kumba"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1510602179,
+                            "post_id": 10791887,
+                            "comment_id": 81495456,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/10791887#comment81495456_10791887",
+                            "body": "@Kumba: Your first suggestion assumes the input has known length. If it&#39;s an iterator/generator, not a collection with known length, there is nothing to cache. There&#39;s no real reason to use such an optimization anyway; you&#39;re optimizing the uncommon case (the last <code>yield</code>), while the common case is unaffected."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 16024,
+                        "reputation": 2453,
+                        "user_id": 34487,
+                        "user_type": "registered",
+                        "accept_rate": 57,
+                        "display_name": "rhettg"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 18,
+                    "last_activity_date": 1638457097,
+                    "last_edit_date": 1638457097,
+                    "creation_date": 1338252620,
+                    "answer_id": 10791887,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/10791887#10791887",
+                    "body": "<p>The ideal solution for this problem works with iterators (not just sequences). It should also be fast.</p>\n<p>This is the solution provided by the documentation for itertools:</p>\n<pre><code>def grouper(n, iterable, fillvalue=None):\n    #&quot;grouper(3, 'ABCDEFG', 'x') --&gt; ABC DEF Gxx&quot;\n    args = [iter(iterable)] * n\n    return itertools.izip_longest(fillvalue=fillvalue, *args)\n</code></pre>\n<p>Using ipython's <code>%timeit</code> on my mac book air, I get 47.5 us per loop.</p>\n<p>However, this really doesn't work for me since the results are padded to be even sized groups. A solution without the padding is slightly more complicated. The most naive solution might be:</p>\n<pre><code>def grouper(size, iterable):\n    i = iter(iterable)\n    while True:\n        out = []\n        try:\n            for _ in range(size):\n                out.append(i.next())\n        except StopIteration:\n            yield out\n            break\n        \n        yield out\n</code></pre>\n<p>Simple, but pretty slow: 693 us per loop</p>\n<p>The best solution I could come up with uses <code>islice</code> for the inner loop:</p>\n<pre><code>def grouper(size, iterable):\n    it = iter(iterable)\n    while True:\n        group = tuple(itertools.islice(it, None, size))\n        if not group:\n            break\n        yield group\n</code></pre>\n<p>With the same dataset, I get 305 us per loop.</p>\n<p>Unable to get a pure solution any faster than that, I provide the following solution with an important caveat: If your input data has instances of <code>filldata</code> in it, you could get wrong answer.</p>\n<pre><code>def grouper(n, iterable, fillvalue=None):\n    #&quot;grouper(3, 'ABCDEFG', 'x') --&gt; ABC DEF Gxx&quot;\n    args = [iter(iterable)] * n\n    # itertools.zip_longest on Python 3\n    for x in itertools.izip_longest(*args, fillvalue=fillvalue):\n        if x[-1] is fillvalue:\n            yield tuple(v for v in x if v is not fillvalue)\n        else:\n            yield x\n</code></pre>\n<p>I really don't like this answer, but it is significantly faster. 124 us per loop</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 323574,
+                        "reputation": 3434,
+                        "user_id": 643675,
+                        "user_type": "registered",
+                        "accept_rate": 69,
+                        "display_name": "elhefe"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1352686976,
+                    "last_edit_date": 1352686976,
+                    "creation_date": 1352668495,
+                    "answer_id": 13335525,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/13335525#13335525",
+                    "body": "<p>Yet another answer, the advantages of which are:</p>\n\n<p>1) Easily understandable<br>\n2) Works on any iterable, not just sequences (some of the above answers will choke on filehandles)<br>\n3) Does not load the chunk into memory all at once<br>\n4) Does not make a chunk-long list of references to the same iterator in memory<br>\n5) No padding of fill values at the end of the list</p>\n\n<p>That being said, I haven't timed it so it might be slower than some of the more clever methods, and some of the advantages may be irrelevant given the use case.</p>\n\n<pre><code>def chunkiter(iterable, size):\n  def inneriter(first, iterator, size):\n    yield first\n    for _ in xrange(size - 1): \n      yield iterator.next()\n  it = iter(iterable)\n  while True:\n    yield inneriter(it.next(), it, size)\n\nIn [2]: i = chunkiter('abcdefgh', 3)\nIn [3]: for ii in i:                                                \n          for c in ii:\n            print c,\n          print ''\n        ...:     \n        a b c \n        d e f \n        g h \n</code></pre>\n\n<p><strong>Update:</strong><br>\nA couple of drawbacks due to the fact the inner and outer loops are pulling values from the same iterator:<br>\n1) continue doesn't work as expected in the outer loop - it just continues on to the next item rather than skipping a chunk. However, this doesn't seem like a problem as there's nothing to test in the outer loop.<br>\n2) break doesn't work as expected in the inner loop - control will wind up in the inner loop again with the next item in the iterator. To skip whole chunks, either wrap the inner iterator (ii above) in a tuple, e.g. <code>for c in tuple(ii)</code>, or set a flag and exhaust the iterator.<br></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 8614021,
+                                "reputation": 138925,
+                                "user_id": 6451573,
+                                "user_type": "moderator",
+                                "accept_rate": 90,
+                                "display_name": "Jean-Fran&#231;ois Fabre"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1546295551,
+                            "post_id": 13735775,
+                            "comment_id": 94821417,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/13735775#comment94821417_13735775",
+                            "body": "can be improved with <code>zip(*([it]*4))</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 56249,
+                                "reputation": 23933,
+                                "user_id": 168465,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "kriss"
+                            },
+                            "reply_to_user": {
+                                "account_id": 8614021,
+                                "reputation": 138925,
+                                "user_id": 6451573,
+                                "user_type": "moderator",
+                                "accept_rate": 90,
+                                "display_name": "Jean-Fran&#231;ois Fabre"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1546392536,
+                            "post_id": 13735775,
+                            "comment_id": 94837548,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/13735775#comment94837548_13735775",
+                            "body": "@Jean-Fran&#231;ois Fabre: from a readability point of view I do not see it as an improvement. And it&#39;s also marginally slower. It&#39;s an improvement if you are golfing, which I&#39;m not."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8614021,
+                                "reputation": 138925,
+                                "user_id": 6451573,
+                                "user_type": "moderator",
+                                "accept_rate": 90,
+                                "display_name": "Jean-Fran&#231;ois Fabre"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1546420399,
+                            "post_id": 13735775,
+                            "comment_id": 94844135,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/13735775#comment94844135_13735775",
+                            "body": "no I&#39;m not golfing, but what if you have 10 arguments? I read that construct in some official page.but of course I can&#39;t seem to find it right now :)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 56249,
+                                "reputation": 23933,
+                                "user_id": 168465,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "kriss"
+                            },
+                            "reply_to_user": {
+                                "account_id": 8614021,
+                                "reputation": 138925,
+                                "user_id": 6451573,
+                                "user_type": "moderator",
+                                "accept_rate": 90,
+                                "display_name": "Jean-Fran&#231;ois Fabre"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1546428084,
+                            "post_id": 13735775,
+                            "comment_id": 94847448,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/13735775#comment94847448_13735775",
+                            "body": "@Jean-Fran&#231;ois Fabre: if I have 10 arguments, or a variable number of arguments, it&#39;s an option, but I&#39;d rather write: zip(*(it,)*10)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8614021,
+                                "reputation": 138925,
+                                "user_id": 6451573,
+                                "user_type": "moderator",
+                                "accept_rate": 90,
+                                "display_name": "Jean-Fran&#231;ois Fabre"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1546432557,
+                            "post_id": 13735775,
+                            "comment_id": 94849431,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/13735775#comment94849431_13735775",
+                            "body": "right! <i>that&#39;s</i> what I read. not the list stuff that I&#39;ve made up :)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 56249,
+                        "reputation": 23933,
+                        "user_id": 168465,
+                        "user_type": "registered",
+                        "accept_rate": 87,
+                        "display_name": "kriss"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": false,
+                    "score": 11,
+                    "last_activity_date": 1354758990,
+                    "creation_date": 1354758990,
+                    "answer_id": 13735775,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/13735775#13735775",
+                    "body": "<p>Similar to other proposals, but not exactly identical, I like doing it this way, because it's simple and easy to read:</p>\n\n<pre><code>it = iter([1, 2, 3, 4, 5, 6, 7, 8, 9])\nfor chunk in zip(it, it, it, it):\n    print chunk\n\n&gt;&gt;&gt; (1, 2, 3, 4)\n&gt;&gt;&gt; (5, 6, 7, 8)\n</code></pre>\n\n<p>This way you won't get the last partial chunk. If you want to get <code>(9, None, None, None)</code> as last chunk, just use <code>izip_longest</code> from <code>itertools</code>.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 302564,
+                                "reputation": 9142,
+                                "user_id": 611007,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "n611x007"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1398333442,
+                            "post_id": 15000147,
+                            "comment_id": 35604325,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/15000147#comment35604325_15000147",
+                            "body": "nice but no good for an indefinite stream which has no known <code>len</code>. you can do a test with <code>itertools.repeat</code> or <code>itertools.cycle</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 302564,
+                                "reputation": 9142,
+                                "user_id": 611007,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "n611x007"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1398333641,
+                            "post_id": 15000147,
+                            "comment_id": 35604461,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/15000147#comment35604461_15000147",
+                            "body": "Also, eats up memory because of using a <code>[...for...]</code> <a href=\"https://docs.python.org/2/reference/expressions.html#list-displays\" rel=\"nofollow noreferrer\">list comprehension</a> to physically  build a list instead of using a <code>(...for...)</code> <a href=\"https://docs.python.org/2/reference/expressions.html#generator-expressions\" rel=\"nofollow noreferrer\">generator expression</a> which would just care about the next element and spare memory"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 8670,
+                        "reputation": 75001,
+                        "user_id": 15721,
+                        "user_type": "registered",
+                        "accept_rate": 74,
+                        "display_name": "Will"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1361443210,
+                    "creation_date": 1361443210,
+                    "answer_id": 15000147,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/15000147#15000147",
+                    "body": "<p>Using little functions and things really doesn't appeal to me; I prefer to just use slices:</p>\n\n<pre><code>data = [...]\nchunk_size = 10000 # or whatever\nchunks = [data[i:i+chunk_size] for i in xrange(0,len(data),chunk_size)]\nfor chunk in chunks:\n    ...\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 105487,
+                        "reputation": 26337,
+                        "user_id": 281469,
+                        "user_type": "registered",
+                        "accept_rate": 94,
+                        "display_name": "bcoughlan"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 18,
+                    "last_activity_date": 1376522691,
+                    "creation_date": 1376522691,
+                    "answer_id": 18243990,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/18243990#18243990",
+                    "body": "<p>I needed a solution that would also work with sets and generators. I couldn't come up with anything very short and pretty, but it's quite readable at least.</p>\n\n<pre><code>def chunker(seq, size):\n    res = []\n    for el in seq:\n        res.append(el)\n        if len(res) == size:\n            yield res\n            res = []\n    if res:\n        yield res\n</code></pre>\n\n<p>List:</p>\n\n<pre><code>&gt;&gt;&gt; list(chunker([i for i in range(10)], 3))\n[[0, 1, 2], [3, 4, 5], [6, 7, 8], [9]]\n</code></pre>\n\n<p>Set:</p>\n\n<pre><code>&gt;&gt;&gt; list(chunker(set([i for i in range(10)]), 3))\n[[0, 1, 2], [3, 4, 5], [6, 7, 8], [9]]\n</code></pre>\n\n<p>Generator:</p>\n\n<pre><code>&gt;&gt;&gt; list(chunker((i for i in range(10)), 3))\n[[0, 1, 2], [3, 4, 5], [6, 7, 8], [9]]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 302564,
+                                "reputation": 9142,
+                                "user_id": 611007,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "n611x007"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1398333299,
+                            "post_id": 21906814,
+                            "comment_id": 35604236,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/21906814#comment35604236_21906814",
+                            "body": "+1 it omits padding ; yours and bcoughlan<a href=\"http://stackoverflow.com/a/18243990/611007\">&#39;s</a> is very similar"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 239842,
+                        "reputation": 30521,
+                        "user_id": 509706,
+                        "user_type": "registered",
+                        "accept_rate": 77,
+                        "display_name": "Wilfred Hughes"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1392896737,
+                    "creation_date": 1392896737,
+                    "answer_id": 21906814,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/21906814#21906814",
+                    "body": "<pre><code>def group_by(iterable, size):\n    \"\"\"Group an iterable into lists that don't exceed the size given.\n\n    &gt;&gt;&gt; group_by([1,2,3,4,5], 2)\n    [[1, 2], [3, 4], [5]]\n\n    \"\"\"\n    sublist = []\n\n    for index, item in enumerate(iterable):\n        if index &gt; 0 and index % size == 0:\n            yield sublist\n            sublist = []\n\n        sublist.append(item)\n\n    if sublist:\n        yield sublist\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 302564,
+                                "reputation": 9142,
+                                "user_id": 611007,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "n611x007"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1398333030,
+                            "post_id": 22049333,
+                            "comment_id": 35604069,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/22049333#comment35604069_22049333",
+                            "body": "preferable because you have the option to omit the padding!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 281021,
+                        "reputation": 148953,
+                        "user_id": 577088,
+                        "user_type": "registered",
+                        "display_name": "senderle"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1393437166,
+                    "last_edit_date": 1495542877,
+                    "creation_date": 1393437166,
+                    "answer_id": 22049333,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/22049333#22049333",
+                    "body": "<p>Another approach would be to use the two-argument form of <code>iter</code>: </p>\n\n<pre><code>from itertools import islice\n\ndef group(it, size):\n    it = iter(it)\n    return iter(lambda: tuple(islice(it, size)), ())\n</code></pre>\n\n<p>This can be adapted easily to use padding (this is similar to <a href=\"https://stackoverflow.com/a/434314/577088\">Markus Jarderot</a>\u2019s answer):</p>\n\n<pre><code>from itertools import islice, chain, repeat\n\ndef group_pad(it, size, pad=None):\n    it = chain(iter(it), repeat(pad))\n    return iter(lambda: tuple(islice(it, size)), (pad,) * size)\n</code></pre>\n\n<p>These can even be combined for optional padding:</p>\n\n<pre><code>_no_pad = object()\ndef group(it, size, pad=_no_pad):\n    if pad == _no_pad:\n        it = iter(it)\n        sentinel = ()\n    else:\n        it = chain(iter(it), repeat(pad))\n        sentinel = (pad,) * size\n    return iter(lambda: tuple(islice(it, size)), sentinel)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 392235,
+                        "reputation": 2943,
+                        "user_id": 753382,
+                        "user_type": "registered",
+                        "display_name": "Suor"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1401912803,
+                    "creation_date": 1401912803,
+                    "answer_id": 24046729,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/24046729#24046729",
+                    "body": "<p>You can use <a href=\"http://funcy.readthedocs.org/en/latest/seqs.html#partition\" rel=\"nofollow\">partition</a> or <a href=\"http://funcy.readthedocs.org/en/latest/seqs.html#chunks\" rel=\"nofollow\">chunks</a> function from <a href=\"https://github.com/Suor/funcy\" rel=\"nofollow\">funcy</a> library:</p>\n\n<pre><code>from funcy import partition\n\nfor a, b, c, d in partition(4, ints):\n    foo += a * b * c * d\n</code></pre>\n\n<p>These functions also has iterator versions <code>ipartition</code> and <code>ichunks</code>, which will be more efficient in this case.</p>\n\n<p>You can also peek at <a href=\"https://github.com/Suor/funcy/blob/1.0.0/funcy/seqs.py#L316\" rel=\"nofollow\">their implementation</a>.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 26667,
+                        "reputation": 726,
+                        "user_id": 69630,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Tutul"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1409575480,
+                    "creation_date": 1409575480,
+                    "answer_id": 25606173,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/25606173#25606173",
+                    "body": "<p>One-liner, adhoc solution to iterate over a list <code>x</code> in chunks of size <code>4</code> -</p>\n\n<pre><code>for a, b, c, d in zip(x[0::4], x[1::4], x[2::4], x[3::4]):\n    ... do something with a, b, c and d ...\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 55190,
+                                "reputation": 63123,
+                                "user_id": 165216,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "PaulMcG"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1445092411,
+                            "post_id": 26437863,
+                            "comment_id": 54181371,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/26437863#comment54181371_26437863",
+                            "body": "What if the list you are chunking is something other than a sequence of ascending integers?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 28189,
+                                "reputation": 51205,
+                                "user_id": 75033,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "John Mee"
+                            },
+                            "reply_to_user": {
+                                "account_id": 55190,
+                                "reputation": 63123,
+                                "user_id": 165216,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "PaulMcG"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1445230536,
+                            "post_id": 26437863,
+                            "comment_id": 54218218,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/26437863#comment54218218_26437863",
+                            "body": "@PaulMcGuire see <a href=\"https://docs.python.org/3/library/itertools.html#itertools.groupby\" rel=\"nofollow noreferrer\">groupby</a>; given a function to describe order then elements of the iterable can be anything, right?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 55190,
+                                "reputation": 63123,
+                                "user_id": 165216,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "PaulMcG"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1445290580,
+                            "post_id": 26437863,
+                            "comment_id": 54253269,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/26437863#comment54253269_26437863",
+                            "body": "Yes, I&#39;m familiar with groupby. But if messages were the letters &quot;ABCDEFG&quot;, then <code>groupby(messages, lambda x: x&#47;3)</code> would give you a TypeError (for trying to divide a string by an int), not 3-letter groupings. Now if you did <code>groupby(enumerate(messages), lambda x: x[0]&#47;3)</code> you might have something.  But you didn&#39;t say that in your post."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 28189,
+                        "reputation": 51205,
+                        "user_id": 75033,
+                        "user_type": "registered",
+                        "accept_rate": 76,
+                        "display_name": "John Mee"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1413622126,
+                    "last_edit_date": 1413622126,
+                    "creation_date": 1413621748,
+                    "answer_id": 26437863,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/26437863#26437863",
+                    "body": "<p>To avoid all conversions to a list <code>import itertools</code> and:</p>\n\n<pre><code>&gt;&gt;&gt; for k, g in itertools.groupby(xrange(35), lambda x: x/10):\n...     list(g)\n</code></pre>\n\n<p>Produces:</p>\n\n<pre><code>... \n0 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\n1 [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]\n2 [20, 21, 22, 23, 24, 25, 26, 27, 28, 29]\n3 [30, 31, 32, 33, 34]\n&gt;&gt;&gt; \n</code></pre>\n\n<p>I checked <code>groupby</code> and it doesn't convert to list or use <code>len</code> so I (think) this will delay resolution of each value until it is actually used.  Sadly none of the available answers (at this time) seemed to offer this variation.</p>\n\n<p>Obviously if you need to handle each item in turn nest a for loop over g:</p>\n\n<pre><code>for k,g in itertools.groupby(xrange(35), lambda x: x/10):\n    for i in g:\n       # do what you need to do with individual items\n    # now do what you need to do with the whole group\n</code></pre>\n\n<p>My specific interest in this was the need to consume a generator to submit changes in batches of up to 1000 to the gmail API:</p>\n\n<pre><code>    messages = a_generator_which_would_not_be_smart_as_a_list\n    for idx, batch in groupby(messages, lambda x: x/1000):\n        batch_request = BatchHttpRequest()\n        for message in batch:\n            batch_request.add(self.service.users().messages().modify(userId='me', id=message['id'], body=msg_labels))\n        http = httplib2.Http()\n        self.credentials.authorize(http)\n        batch_request.execute(http=http)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 43003,
+                        "reputation": 26116,
+                        "user_id": 125507,
+                        "user_type": "registered",
+                        "accept_rate": 69,
+                        "display_name": "endolith"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1416370178,
+                    "creation_date": 1416370178,
+                    "answer_id": 27008789,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/27008789#27008789",
+                    "body": "<p>With NumPy it's simple:</p>\n\n<pre><code>ints = array([1, 2, 3, 4, 5, 6, 7, 8])\nfor int1, int2 in ints.reshape(-1, 2):\n    print(int1, int2)\n</code></pre>\n\n<p>output:</p>\n\n<pre><code>1 2\n3 4\n5 6\n7 8\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4724813,
+                        "reputation": 5476,
+                        "user_id": 3821804,
+                        "user_type": "registered",
+                        "accept_rate": 91,
+                        "display_name": "GingerPlusPlus"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1417123130,
+                    "last_edit_date": 1417123130,
+                    "creation_date": 1416990064,
+                    "answer_id": 27144240,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/27144240#27144240",
+                    "body": "<p>At first, I designed it to split strings into substrings to parse string containing hex.<br>\nToday I turned it into complex, but still simple generator.</p>\n\n<pre><code>def chunker(iterable, size, reductor, condition):\n    it = iter(iterable)\n    def chunk_generator():\n        return (next(it) for _ in range(size))\n    chunk = reductor(chunk_generator())\n    while condition(chunk):\n        yield chunk\n        chunk = reductor(chunk_generator())\n</code></pre>\n\n<h1>Arguments:</h1>\n\n<h3>Obvious ones</h3>\n\n<ul>\n<li><code>iterable</code> is any iterable / iterator / generator containg / generating / iterating over input data,</li>\n<li><code>size</code> is, of course, size of chunk you want get,</li>\n</ul>\n\n<h3>More interesting</h3>\n\n<ul>\n<li><p><code>reductor</code> is a callable, which receives generator iterating over content of chunk.<br>\nI'd expect it to return sequence or string, but I don't demand that.</p>\n\n<p>You can pass as this argument for example <code>list</code>, <code>tuple</code>, <code>set</code>, <code>frozenset</code>,<br>\nor anything fancier. I'd pass this function, returning string<br>\n(provided that <code>iterable</code> contains / generates / iterates over strings):</p>\n\n<pre><code>def concatenate(iterable):\n    return ''.join(iterable)\n</code></pre>\n\n<p><sup>Note that <code>reductor</code> can cause closing generator by raising exception.</sup></p></li>\n<li><p><code>condition</code> is a callable which receives anything what <code>reductor</code> returned.<br>\nIt decides to approve &amp; yield it (by returning anything evaluating to <code>True</code>),<br>\nor to decline it &amp; finish generator's work (by returning anything other or raising exception).</p>\n\n<p>When number of elements in <code>iterable</code> is not divisible by <code>size</code>, when <code>it</code> gets exhausted, <code>reductor</code> will receive generator generating less elements than <code>size</code>.<br>\nLet's call these elements <em>lasts elements</em>.</p>\n\n<p>I invited two functions to pass as this argument:  </p>\n\n<ul>\n<li><p><code>lambda x:x</code> - the <em>lasts elements</em> will be yielded.</p></li>\n<li><p><code>lambda x: len(x)==&lt;size&gt;</code> - the <em>lasts elements</em> will be rejected.<br>\n<sup>replace <code>&lt;size&gt;</code> using number equal to <code>size</code></sup></p></li>\n</ul></li>\n</ul>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1339492,
+                                "reputation": 58094,
+                                "user_id": 1281485,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "Alfe"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1460716366,
+                            "post_id": 27257438,
+                            "comment_id": 60882850,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/27257438#comment60882850_27257438",
+                            "body": "Not a critique meant for you to change your answer, but rather a comment:  Code is a liability.  The more code you write the more space you create for bugs to hide.  From this point of view, rewriting <code>zip</code> instead of using the existing one seems not to be the best idea."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4724813,
+                        "reputation": 5476,
+                        "user_id": 3821804,
+                        "user_type": "registered",
+                        "accept_rate": 91,
+                        "display_name": "GingerPlusPlus"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1417548776,
+                    "last_edit_date": 1495541894,
+                    "creation_date": 1417548776,
+                    "answer_id": 27257438,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/27257438#27257438",
+                    "body": "<p>About solution gave by <code>J.F. Sebastian</code> <a href=\"https://stackoverflow.com/a/435712/3821804\">here</a>:</p>\n\n<pre><code>def chunker(iterable, chunksize):\n    return zip(*[iter(iterable)]*chunksize)\n</code></pre>\n\n<p>It's clever, but has one disadvantage - always return tuple. How to get string instead?<br>\nOf course you can write <code>''.join(chunker(...))</code>, but the temporary tuple is constructed anyway.</p>\n\n<p>You can get rid of the temporary tuple by writing own <code>zip</code>, like this:</p>\n\n<pre><code>class IteratorExhausted(Exception):\n    pass\n\ndef translate_StopIteration(iterable, to=IteratorExhausted):\n    for i in iterable:\n        yield i\n    raise to # StopIteration would get ignored because this is generator,\n             # but custom exception can leave the generator.\n\ndef custom_zip(*iterables, reductor=tuple):\n    iterators = tuple(map(translate_StopIteration, iterables))\n    while True:\n        try:\n            yield reductor(next(i) for i in iterators)\n        except IteratorExhausted: # when any of iterators get exhausted.\n            break\n</code></pre>\n\n<p>Then</p>\n\n<pre><code>def chunker(data, size, reductor=tuple):\n    return custom_zip(*[iter(data)]*size, reductor=reductor)\n</code></pre>\n\n<p>Example usage:</p>\n\n<pre><code>&gt;&gt;&gt; for i in chunker('12345', 2):\n...     print(repr(i))\n...\n('1', '2')\n('3', '4')\n&gt;&gt;&gt; for i in chunker('12345', 2, ''.join):\n...     print(repr(i))\n...\n'12'\n'34'\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 316911,
+                        "reputation": 3899,
+                        "user_id": 633310,
+                        "user_type": "registered",
+                        "accept_rate": 41,
+                        "display_name": "Cuadue"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1553080523,
+                    "last_edit_date": 1553080523,
+                    "creation_date": 1428689272,
+                    "answer_id": 29568040,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/29568040#29568040",
+                    "body": "<p>Here is a chunker without imports that supports generators:</p>\n\n<pre><code>def chunks(seq, size):\n    it = iter(seq)\n    while True:\n        ret = tuple(next(it) for _ in range(size))\n        if len(ret) == size:\n            yield ret\n        else:\n            raise StopIteration()\n</code></pre>\n\n<p>Example of use:</p>\n\n<pre><code>&gt;&gt;&gt; def foo():\n...     i = 0\n...     while True:\n...         i += 1\n...         yield i\n...\n&gt;&gt;&gt; c = chunks(foo(), 3)\n&gt;&gt;&gt; c.next()\n(1, 2, 3)\n&gt;&gt;&gt; c.next()\n(4, 5, 6)\n&gt;&gt;&gt; list(chunks('abcdefg', 2))\n[('a', 'b'), ('c', 'd'), ('e', 'f')]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 357120,
+                        "reputation": 896,
+                        "user_id": 1494986,
+                        "user_type": "registered",
+                        "display_name": "topkara"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1456406248,
+                    "last_edit_date": 1456406248,
+                    "creation_date": 1456369802,
+                    "answer_id": 35617489,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/35617489#35617489",
+                    "body": "<p>It is easy to make <code>itertools.groupby</code> work for you to get an iterable of iterables, without creating any temporary lists:</p>\n\n<pre><code>groupby(iterable, (lambda x,y: (lambda z: x.next()/y))(count(),100))\n</code></pre>\n\n<p>Don't get put off by the nested lambdas, outer lambda runs just once to put <code>count()</code> generator and the constant <code>100</code> into the scope of the inner lambda.</p>\n\n<p>I use this to send chunks of rows to mysql.</p>\n\n<pre><code>for k,v in groupby(bigdata, (lambda x,y: (lambda z: x.next()/y))(count(),100))):\n    cursor.executemany(sql, v)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 352992,
+                        "reputation": 22462,
+                        "user_id": 690430,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Kamil Sindi"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1553080498,
+                    "last_edit_date": 1553080498,
+                    "creation_date": 1456406754,
+                    "answer_id": 35628605,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/35628605#35628605",
+                    "body": "<pre><code>def chunker(iterable, n):\n    \"\"\"Yield iterable in chunk sizes.\n\n    &gt;&gt;&gt; chunks = chunker('ABCDEF', n=4)\n    &gt;&gt;&gt; chunks.next()\n    ['A', 'B', 'C', 'D']\n    &gt;&gt;&gt; chunks.next()\n    ['E', 'F']\n    \"\"\"\n    it = iter(iterable)\n    while True:\n        chunk = []\n        for i in range(n):\n            try:\n                chunk.append(next(it))\n            except StopIteration:\n                yield chunk\n                raise StopIteration\n        yield chunk\n\nif __name__ == '__main__':\n    import doctest\n\n    doctest.testmod()\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7198509,
+                        "reputation": 12131,
+                        "user_id": 5496433,
+                        "user_type": "registered",
+                        "accept_rate": 87,
+                        "display_name": "BallpointBen"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1498788312,
+                    "last_edit_date": 1498788312,
+                    "creation_date": 1497023426,
+                    "answer_id": 44461994,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/44461994#44461994",
+                    "body": "<p>I like this approach. It feels simple and not magical and supports all iterable types and doesn't require imports.</p>\n\n<pre><code>def chunk_iter(iterable, chunk_size):\nit = iter(iterable)\nwhile True:\n    chunk = tuple(next(it) for _ in range(chunk_size))\n    if not chunk:\n        break\n    yield chunk\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1051542,
+                        "reputation": 695,
+                        "user_id": 1055356,
+                        "user_type": "registered",
+                        "accept_rate": 70,
+                        "display_name": "Andrey Cizov"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1499379650,
+                    "creation_date": 1499379650,
+                    "answer_id": 44959767,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/44959767#44959767",
+                    "body": "<p>Quite pythonic here (you may also inline the body of the <code>split_groups</code> function)</p>\n\n<pre><code>import itertools\ndef split_groups(iter_in, group_size):\n    return ((x for _, x in item) for _, item in itertools.groupby(enumerate(iter_in), key=lambda x: x[0] // group_size))\n\nfor x, y, z, w in split_groups(range(16), 4):\n    foo += x * y + z * w\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1734438,
+                        "reputation": 36913,
+                        "user_id": 1587329,
+                        "user_type": "registered",
+                        "accept_rate": 94,
+                        "display_name": "serv-inc"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1499935408,
+                    "last_edit_date": 1499935408,
+                    "creation_date": 1499934460,
+                    "answer_id": 45075322,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/45075322#45075322",
+                    "body": "<p>This answer <strong>splits a list of strings</strong>, f.ex. to achieve PEP8-line length compliance:</p>\n\n<pre><code>def split(what, target_length=79):\n    '''splits list of strings into sublists, each \n    having string length at most 79'''\n    out = [[]]\n    while what:\n        if len(\"', '\".join(out[-1])) + len(what[0]) &lt; target_length:\n            out[-1].append(what.pop(0))\n        else:\n            if not out[-1]: # string longer than target_length\n                out[-1] = [what.pop(0)]\n            out.append([])\n    return out\n</code></pre>\n\n<p>Use as</p>\n\n<pre><code>&gt;&gt;&gt; split(['deferred_income', 'long_term_incentive', 'restricted_stock_deferred', 'shared_receipt_with_poi', 'loan_advances', 'from_messages', 'other', 'director_fees', 'bonus', 'total_stock_value', 'from_poi_to_this_person', 'from_this_person_to_poi', 'restricted_stock', 'salary', 'total_payments', 'exercised_stock_options'], 75)\n[['deferred_income', 'long_term_incentive', 'restricted_stock_deferred'], ['shared_receipt_with_poi', 'loan_advances', 'from_messages', 'other'], ['director_fees', 'bonus', 'total_stock_value', 'from_poi_to_this_person'], ['from_this_person_to_poi', 'restricted_stock', 'salary', 'total_payments'], ['exercised_stock_options']]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1076669,
+                        "reputation": 21,
+                        "user_id": 1074659,
+                        "user_type": "registered",
+                        "display_name": "frankish"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1500564006,
+                    "creation_date": 1500564006,
+                    "answer_id": 45218941,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/45218941#45218941",
+                    "body": "<p>I never want my chunks padded, so that requirement is essential.  I find that the ability to work on any iterable is also requirement.  Given that, I decided to extend on the accepted answer, <a href=\"https://stackoverflow.com/a/434411/1074659\">https://stackoverflow.com/a/434411/1074659</a>.  </p>\n\n<p>Performance takes a slight hit in this approach if padding is not wanted due to the need to compare and filter the padded values.  However, for large chunk sizes, this utility is very performant.</p>\n\n<pre><code>#!/usr/bin/env python3\nfrom itertools import zip_longest\n\n\n_UNDEFINED = object()\n\n\ndef chunker(iterable, chunksize, fillvalue=_UNDEFINED):\n    \"\"\"\n    Collect data into chunks and optionally pad it.\n\n    Performance worsens as `chunksize` approaches 1.\n\n    Inspired by:\n        https://docs.python.org/3/library/itertools.html#itertools-recipes\n\n    \"\"\"\n    args = [iter(iterable)] * chunksize\n    chunks = zip_longest(*args, fillvalue=fillvalue)\n    yield from (\n        filter(lambda val: val is not _UNDEFINED, chunk)\n        if chunk[-1] is _UNDEFINED\n        else chunk\n        for chunk in chunks\n    ) if fillvalue is _UNDEFINED else chunks\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4291626,
+                                "reputation": 451,
+                                "user_id": 3507825,
+                                "user_type": "registered",
+                                "display_name": "user3507825"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1669311795,
+                            "post_id": 46491020,
+                            "comment_id": 131620759,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/46491020#comment131620759_46491020",
+                            "body": "This module is great. Makes me feel like I&#39;m cheating as a programmer. Thanks for posting it here."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7040846,
+                        "reputation": 149720,
+                        "user_id": 5393381,
+                        "user_type": "registered",
+                        "accept_rate": 84,
+                        "display_name": "MSeifert"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 27,
+                    "last_activity_date": 1574023709,
+                    "last_edit_date": 1574023709,
+                    "creation_date": 1506695352,
+                    "answer_id": 46491020,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/46491020#46491020",
+                    "body": "<p>If you don't mind using an external package you could use <a href=\"https://iteration-utilities.readthedocs.io/en/latest/generated/grouper.html\" rel=\"noreferrer\"><code>iteration_utilities.grouper</code></a> from <a href=\"https://iteration-utilities.readthedocs.io/en/latest/installation.html\" rel=\"noreferrer\"><code>iteration_utilties</code></a> <sup>1</sup>. It supports all iterables (not just sequences):</p>\n\n<pre><code>from iteration_utilities import grouper\nseq = list(range(20))\nfor group in grouper(seq, 4):\n    print(group)\n</code></pre>\n\n<p>which prints:</p>\n\n<pre><code>(0, 1, 2, 3)\n(4, 5, 6, 7)\n(8, 9, 10, 11)\n(12, 13, 14, 15)\n(16, 17, 18, 19)\n</code></pre>\n\n<p>In case the length isn't a multiple of the groupsize it also supports filling (the incomplete last group) or truncating (discarding the incomplete last group) the last one:</p>\n\n<pre><code>from iteration_utilities import grouper\nseq = list(range(17))\nfor group in grouper(seq, 4):\n    print(group)\n# (0, 1, 2, 3)\n# (4, 5, 6, 7)\n# (8, 9, 10, 11)\n# (12, 13, 14, 15)\n# (16,)\n\nfor group in grouper(seq, 4, fillvalue=None):\n    print(group)\n# (0, 1, 2, 3)\n# (4, 5, 6, 7)\n# (8, 9, 10, 11)\n# (12, 13, 14, 15)\n# (16, None, None, None)\n\nfor group in grouper(seq, 4, truncate=True):\n    print(group)\n# (0, 1, 2, 3)\n# (4, 5, 6, 7)\n# (8, 9, 10, 11)\n# (12, 13, 14, 15)\n</code></pre>\n\n<hr>\n\n<h2>Benchmarks</h2>\n\n<p>I also decided to compare the run-time of a few of the mentioned approaches. It's a log-log plot grouping into groups of \"10\" elements based on a list of varying size. For qualitative results: Lower means faster:</p>\n\n<p><a href=\"https://i.stack.imgur.com/Rnz57.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/Rnz57.png\" alt=\"enter image description here\"></a></p>\n\n<p>At least in this benchmark the <code>iteration_utilities.grouper</code> performs best. Followed by the approach of <a href=\"https://stackoverflow.com/a/434411/5393381\">Craz</a>. </p>\n\n<p>The benchmark was created with <a href=\"https://github.com/MSeifert04/simple_benchmark\" rel=\"noreferrer\"><code>simple_benchmark</code></a><sup>1</sup>. The code used to run this benchmark was:</p>\n\n<pre><code>import iteration_utilities\nimport itertools\nfrom itertools import zip_longest\n\ndef consume_all(it):\n    return iteration_utilities.consume(it, None)\n\nimport simple_benchmark\nb = simple_benchmark.BenchmarkBuilder()\n\n@b.add_function()\ndef grouper(l, n):\n    return consume_all(iteration_utilities.grouper(l, n))\n\ndef Craz_inner(iterable, n, fillvalue=None):\n    args = [iter(iterable)] * n\n    return zip_longest(*args, fillvalue=fillvalue)\n\n@b.add_function()\ndef Craz(iterable, n, fillvalue=None):\n    return consume_all(Craz_inner(iterable, n, fillvalue))\n\ndef nosklo_inner(seq, size):\n    return (seq[pos:pos + size] for pos in range(0, len(seq), size))\n\n@b.add_function()\ndef nosklo(seq, size):\n    return consume_all(nosklo_inner(seq, size))\n\ndef SLott_inner(ints, chunk_size):\n    for i in range(0, len(ints), chunk_size):\n        yield ints[i:i+chunk_size]\n\n@b.add_function()\ndef SLott(ints, chunk_size):\n    return consume_all(SLott_inner(ints, chunk_size))\n\ndef MarkusJarderot1_inner(iterable,size):\n    it = iter(iterable)\n    chunk = tuple(itertools.islice(it,size))\n    while chunk:\n        yield chunk\n        chunk = tuple(itertools.islice(it,size))\n\n@b.add_function()\ndef MarkusJarderot1(iterable,size):\n    return consume_all(MarkusJarderot1_inner(iterable,size))\n\ndef MarkusJarderot2_inner(iterable,size,filler=None):\n    it = itertools.chain(iterable,itertools.repeat(filler,size-1))\n    chunk = tuple(itertools.islice(it,size))\n    while len(chunk) == size:\n        yield chunk\n        chunk = tuple(itertools.islice(it,size))\n\n@b.add_function()\ndef MarkusJarderot2(iterable,size):\n    return consume_all(MarkusJarderot2_inner(iterable,size))\n\n@b.add_arguments()\ndef argument_provider():\n    for exp in range(2, 20):\n        size = 2**exp\n        yield size, simple_benchmark.MultiArgument([[0] * size, 10])\n\nr = b.run()\n</code></pre>\n\n<hr>\n\n<p><sup>1</sup> Disclaimer: I'm the author of the libraries <code>iteration_utilities</code> and <code>simple_benchmark</code>.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1366037,
+                        "reputation": 2202,
+                        "user_id": 1302438,
+                        "user_type": "registered",
+                        "accept_rate": 74,
+                        "display_name": "Ben"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1543424587,
+                    "creation_date": 1543424587,
+                    "answer_id": 53524610,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/53524610#53524610",
+                    "body": "<p>I am hoping that by turning an iterator out of a list i am not simply copying a slice of the list. Generators can be sliced and they will automatically still be a generator, while lists will be sliced into huge chunks of 1000 entries, which is less efficient.    </p>\n\n<pre><code>def iter_group(iterable, batch_size:int):\n    length = len(iterable)\n    start = batch_size*-1\n    end = 0\n    while(end &lt; length):\n        start += batch_size\n        end += batch_size\n        if type(iterable) == list:\n            yield (iterable[i] for i in range(start,min(length-1,end)))\n        else:\n            yield iterable[start:end]\n</code></pre>\n\n<p>Usage:</p>\n\n<pre><code>items = list(range(1,1251))\n\nfor item_group in iter_group(items, 1000):\n    for item in item_group:\n        print(item)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 483535,
+                        "reputation": 4003,
+                        "user_id": 898649,
+                        "user_type": "registered",
+                        "accept_rate": 53,
+                        "display_name": "Alexey"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1553705734,
+                    "creation_date": 1553705734,
+                    "answer_id": 55382654,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/55382654#55382654",
+                    "body": "<p>Unless I misses something, the following simple solution with generator expressions has not been mentioned.  It assumes that <em>both the size and the number of chunks are known</em> (which is often the case), and that no padding is required:</p>\n\n<pre><code>def chunks(it, n, m):\n    \"\"\"Make an iterator over m first chunks of size n.\n    \"\"\"\n    it = iter(it)\n    # Chunks are presented as tuples.\n    return (tuple(next(it) for _ in range(n)) for _ in range(m))\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4167690,
+                        "reputation": 2804,
+                        "user_id": 3416302,
+                        "user_type": "registered",
+                        "accept_rate": 50,
+                        "display_name": "Mohammad Azim"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -2,
+                    "last_activity_date": 1557764108,
+                    "creation_date": 1557764108,
+                    "answer_id": 56116218,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/56116218#56116218",
+                    "body": "<p>Why not use list comprehension </p>\n\n<pre><code>l = [1 , 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]\nn = 4\nfiller = 0\nfills = len(l) % n\nchunks = ((l + [filler] * fills)[x * n:x * n + n] for x in range(int((len(l) + n - 1)/n)))\nprint(chunks)\n\n[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 0]]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3790561,
+                        "reputation": 797,
+                        "user_id": 3147247,
+                        "user_type": "registered",
+                        "display_name": "kafran"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 37,
+                    "last_activity_date": 1678706665,
+                    "last_edit_date": 1678706665,
+                    "creation_date": 1587874474,
+                    "answer_id": 61435714,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/61435714#61435714",
+                    "body": "<p>Since Python 3.8 you can use the walrus <code>:=</code> operator and <code>itertools.islice</code>.</p>\n<pre class=\"lang-py prettyprint-override\"><code>from itertools import islice\n\nlist_ = [i for i in range(10, 100)]\n\ndef chunker(it, size):\n    iterator = iter(it)\n    while chunk := list(islice(iterator, size)):\n        print(chunk)\n</code></pre>\n<pre class=\"lang-py prettyprint-override\"><code>In [2]: chunker(list_, 10)                                                         \n[10, 11, 12, 13, 14, 15, 16, 17, 18, 19]\n[20, 21, 22, 23, 24, 25, 26, 27, 28, 29]\n[30, 31, 32, 33, 34, 35, 36, 37, 38, 39]\n[40, 41, 42, 43, 44, 45, 46, 47, 48, 49]\n[50, 51, 52, 53, 54, 55, 56, 57, 58, 59]\n[60, 61, 62, 63, 64, 65, 66, 67, 68, 69]\n[70, 71, 72, 73, 74, 75, 76, 77, 78, 79]\n[80, 81, 82, 83, 84, 85, 86, 87, 88, 89]\n[90, 91, 92, 93, 94, 95, 96, 97, 98, 99]\n\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4642142,
+                        "reputation": 1024,
+                        "user_id": 8738113,
+                        "user_type": "registered",
+                        "display_name": "teekarna"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 19,
+                    "last_activity_date": 1605068140,
+                    "creation_date": 1605068140,
+                    "answer_id": 64780396,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/64780396#64780396",
+                    "body": "<p>The <a href=\"https://more-itertools.readthedocs.io/en/stable/index.html\" rel=\"noreferrer\">more-itertools</a> package has <a href=\"https://more-itertools.readthedocs.io/en/stable/api.html#more_itertools.chunked\" rel=\"noreferrer\">chunked</a> method which does exactly that:</p>\n<pre><code>import more_itertools\nfor s in more_itertools.chunked(range(9), 4):\n    print(s)\n</code></pre>\n<p>Prints</p>\n<pre><code>[0, 1, 2, 3]\n[4, 5, 6, 7]\n[8]\n</code></pre>\n<p><code>chunked</code> returns the items in a list. If you'd prefer iterables, use <a href=\"https://more-itertools.readthedocs.io/en/stable/api.html#more_itertools.ichunked\" rel=\"noreferrer\">ichunked</a>.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1005158,
+                        "reputation": 7366,
+                        "user_id": 1019129,
+                        "user_type": "registered",
+                        "accept_rate": 51,
+                        "display_name": "sten"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1624240454,
+                    "last_edit_date": 1624240454,
+                    "creation_date": 1624239740,
+                    "answer_id": 68061401,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/68061401#68061401",
+                    "body": "<p>here is my go works on lists,iters and range ... lazily :</p>\n<pre><code>def chunker(it,size):\n    rv = [] \n    for i,el in enumerate(it,1) :   \n        rv.append(el)\n        if i % size == 0 : \n            yield rv\n            rv = []\n    if rv : yield rv        \n</code></pre>\n<p>almost made it one-liner ;(</p>\n<pre><code>In [95]: list(chunker(range(9),2) )                                                                                                                                          \nOut[95]: [[0, 1], [2, 3], [4, 5], [6, 7], [8]]\n\nIn [96]: list(chunker([1,2,3,4,5],2) )                                                                                                                                       \nOut[96]: [[1, 2], [3, 4], [5]]\n\nIn [97]: list(chunker(iter(range(9)),2) )                                                                                                                                    \nOut[97]: [[0, 1], [2, 3], [4, 5], [6, 7], [8]]\n\nIn [98]: list(chunker(range(9),25) )                                                                                                                                         \nOut[98]: [[0, 1, 2, 3, 4, 5, 6, 7, 8]]\n\nIn [99]: list(chunker(range(9),1) )                                                                                                                                          \nOut[99]: [[0], [1], [2], [3], [4], [5], [6], [7], [8]]\n\nIn [101]: %timeit list(chunker(range(101),2) )                                                                                                                               \n11.3 \u00b5s \u00b1 68.2 ns per loop (mean \u00b1 std. dev. of 7 runs, 100000 loops each)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5259996,
+                        "reputation": 567,
+                        "user_id": 4201765,
+                        "user_type": "registered",
+                        "display_name": "Amir Pourmand"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1661431938,
+                    "creation_date": 1661431938,
+                    "answer_id": 73487860,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/73487860#73487860",
+                    "body": "<p>In my special case, I needed to pad the items to repeat the last element until it reaches the size, so I changed <a href=\"https://stackoverflow.com/a/21906814/4201765\">this</a> answer to suit my needs.</p>\n<p>Example of needed input output with size 4:</p>\n<pre class=\"lang-py prettyprint-override\"><code>Input = [1,2,3,4,5,6,7,8]\nOutput= [[1,2,3,4], [5,6,7,8]]\n\nInput = [[1,2,3,4,5,6,7]]\nOutput= [[1,2,3,4], [5,6,7,7]]\n\nInput = [1,2,3,4,5]\nOutput= [[1,2,3,4], [5,5,5,5]]\n</code></pre>\n<pre class=\"lang-py prettyprint-override\"><code>def chunker(seq, size):\n    res = []\n    for el in seq:\n        res.append(el)\n        if len(res) == size:\n            yield res\n            res = []\n    if res:\n        res = res + (size - len(res)) * [res[-1]] \n        yield res\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 19699,
+                                "reputation": 55828,
+                                "user_id": 46387,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "Ben Blank"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1681235909,
+                            "post_id": 75981543,
+                            "comment_id": 134022912,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/75981543#comment134022912_75981543",
+                            "body": "It&#39;s good to see this functionality coming to the standard library! I&#39;ll have to make this the accepted answer once 3.12 releases and starts becoming widely available. \ud83d\ude42"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 151071,
+                                "reputation": 150282,
+                                "user_id": 364696,
+                                "user_type": "registered",
+                                "display_name": "ShadowRanger"
+                            },
+                            "reply_to_user": {
+                                "account_id": 19699,
+                                "reputation": 55828,
+                                "user_id": 46387,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "Ben Blank"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1697739571,
+                            "post_id": 75981543,
+                            "comment_id": 136321069,
+                            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/75981543#comment136321069_75981543",
+                            "body": "@BenBlank: <a href=\"https://docs.python.org/3/library/itertools.html#itertools.batched\" rel=\"nofollow noreferrer\">It&#39;s released!</a> And it works as advertised! Happy they finally made this a built-in, it&#39;s hard to optimize well for the general case with other tools at the Python layer."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 151071,
+                        "reputation": 150282,
+                        "user_id": 364696,
+                        "user_type": "registered",
+                        "display_name": "ShadowRanger"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 19,
+                    "last_activity_date": 1684418194,
+                    "last_edit_date": 1684418194,
+                    "creation_date": 1681170978,
+                    "answer_id": 75981543,
+                    "question_id": 434287,
+                    "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks/75981543#75981543",
+                    "body": "<p>As of Python 3.12, <a href=\"https://docs.python.org/3.12/library/itertools.html#itertools.batched\" rel=\"noreferrer\">the <code>itertools</code> module gains a <code>batched</code> function</a> that specifically covers iterating over batches of an input iterable, where the final batch may be incomplete (each batch is a <code>tuple</code>). Per the example code given in the docs:</p>\n<pre><code>&gt;&gt;&gt; for batch in batched('ABCDEFG', 3):\n...     print(batch)\n...\n('A', 'B', 'C')\n('D', 'E', 'F')\n('G',)\n</code></pre>\n<hr />\n<p><strong>Performance notes:</strong></p>\n<p><a href=\"https://github.com/python/cpython/blob/cfa517d5a68bae24cbe8d9fe6b8e0d4935e507d2/Modules/itertoolsmodule.c#L184\" rel=\"noreferrer\">The implementation of <code>batched</code></a>, like all <code>itertools</code> functions to date, is at the C layer, so it's capable of optimizations Python level code cannot match, e.g.</p>\n<ul>\n<li>On each pull of a new batch, it proactively allocates a <code>tuple</code> of precisely the correct size (for all but the last batch), instead of building the <code>tuple</code> up element by element with amortized growth causing multiple reallocations (the way a solution calling <code>tuple</code> on an <code>islice</code> does)</li>\n<li>It only needs to look up the <code>.__next__</code> function of the underlying iterator once per batch, not <code>n</code> times per batch (the way a <code>zip_longest((iter(iterable),) * n)</code>-based approach does)</li>\n<li>The check for the end case is a simple C level <code>NULL</code> check (trivial, and required to handle possible exceptions anyway)</li>\n<li>Handling the end case is a C <code>goto</code> followed by a direct <code>realloc</code> (no making a copy into a smaller <code>tuple</code>) down to the already known final size, since it's tracking how many elements it has successfully pulled (no complex &quot;create sentinel for use as <code>fillvalue</code> and do Python level <code>if</code>/<code>else</code> checks for each batch to see if it's empty, with the final batch requiring a search for where the <code>fillvalue</code> appeared last, to create the cut-down <code>tuple</code>&quot; required by <code>zip_longest</code>-based solutions).</li>\n</ul>\n<p>Between all these advantages, it should <em>massively</em> outperform any Python-level solution (even <a href=\"https://stackoverflow.com/a/34935239/364696\">highly optimized ones that push most or all of the per-item work to the C layer</a>), regardless of whether the input iterable is long or short, and regardless of whether the batch size and the size of the final (possibly incomplete) batch (<a href=\"https://stackoverflow.com/a/34935239/364696\"><code>zip_longest</code>-based solutions using guaranteed unique <code>fillvalue</code>s for safety</a> are the best possible solution for almost all cases when <code>itertools.batched</code> is not available, but they can suffer in pathological cases of &quot;few large batches, with final batch mostly, not completely, filled&quot;, especially pre-3.10 when <code>bisect</code> can't be used to optimize slicing off the <code>fillvalue</code>s from <code>O(n)</code> linear search down to <code>O(log n)</code> binary search, but <code>batched</code> avoids that search entirely, so it won't experience pathological cases at all).</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 19699,
+                "reputation": 55828,
+                "user_id": 46387,
+                "user_type": "registered",
+                "accept_rate": 84,
+                "display_name": "Ben Blank"
+            },
+            "comment_count": 5,
+            "is_answered": true,
+            "accepted_answer_id": 75981543,
+            "answer_count": 40,
+            "score": 699,
+            "last_activity_date": 1705021332,
+            "creation_date": 1231728502,
+            "last_edit_date": 1705021332,
+            "question_id": 434287,
+            "link": "https://stackoverflow.com/questions/434287/how-to-iterate-over-a-list-in-chunks",
+            "title": "How to iterate over a list in chunks",
+            "body": "<p>I have a Python script which takes as input a list of integers, which I need to work with four integers at a time.  Unfortunately, I don't have control of the input, or I'd have it passed in as a list of four-element tuples.  Currently, I'm iterating over it this way:</p>\n<pre><code>for i in range(0, len(ints), 4):\n    # dummy op for example code\n    foo += ints[i] * ints[i + 1] + ints[i + 2] * ints[i + 3]\n</code></pre>\n<p>It looks a lot like &quot;C-think&quot;, though, which makes me suspect there's a more pythonic way of dealing with this situation.  The list is discarded after iterating, so it needn't be preserved.  Perhaps something like this would be better?</p>\n<pre><code>while ints:\n    foo += ints[0] * ints[1] + ints[2] * ints[3]\n    ints[0:4] = []\n</code></pre>\n<p>Still doesn't quite &quot;feel&quot; right, though.  :-/</p>\n<p><strong>Update:</strong> With the release of Python 3.12, I've changed the accepted answer. For anyone who has not (or cannot) make the jump to Python 3.12 yet, I encourage you to check out the <a href=\"https://stackoverflow.com/questions/434287#answer-434411\">previous accepted answer</a> or any of the other excellent, backwards-compatible answers below.</p>\n<p>Related question: <a href=\"https://stackoverflow.com/questions/312443/how-do-you-split-a-list-into-evenly-sized-chunks-in-python\">How do you split a list into evenly sized chunks in Python?</a></p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5375
+}

@@ -1,0 +1,364 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "json",
+                "tuples"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5167519,
+                                "reputation": 10847,
+                                "user_id": 4137061,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Thomas Kimber"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1541693693,
+                            "post_id": 15721401,
+                            "comment_id": 93311450,
+                            "link": "https://stackoverflow.com/questions/15721363/preserve-python-tuples-with-json/15721401#comment93311450_15721401",
+                            "body": "The <code>repr</code>/<code>ast.literal_eval</code> seems like <i>such</i> a good solution, I&#39;m surprised it doesn&#39;t have some recognised shorthand - such a tuple-enabled dialect deserves its own name - pyson (pson) perhaps?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1891677,
+                                "reputation": 148638,
+                                "user_id": 1709587,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Mark Amery"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5167519,
+                                "reputation": 10847,
+                                "user_id": 4137061,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Thomas Kimber"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1541696355,
+                            "post_id": 15721401,
+                            "comment_id": 93312947,
+                            "link": "https://stackoverflow.com/questions/15721363/preserve-python-tuples-with-json/15721401#comment93312947_15721401",
+                            "body": "@ThomasKimber Heh. Given that JSON is short for &quot;JavaScript object notation&quot;, <i>PyON</i> (short for &quot;Python Object Notation&quot;) seems like it&#39;d be a better name - your &quot;PSON&quot; suggestion makes it sound like there&#39;s some language named PythonScript. If I could snap my fingers and make PyON a recognised term, I would, but unfortunately I do not have the same influence as thought leaders like Crockford. ;)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1891677,
+                        "reputation": 148638,
+                        "user_id": 1709587,
+                        "user_type": "registered",
+                        "accept_rate": 71,
+                        "display_name": "Mark Amery"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 30,
+                    "last_activity_date": 1611002382,
+                    "last_edit_date": 1611002382,
+                    "creation_date": 1364664724,
+                    "answer_id": 15721401,
+                    "question_id": 15721363,
+                    "link": "https://stackoverflow.com/questions/15721363/preserve-python-tuples-with-json/15721401#15721401",
+                    "body": "<p>Nope, it's not possible. There is no concept of a tuple in the JSON format (see <a href=\"http://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example\" rel=\"noreferrer\">here</a> for a concise breakdown of what types exist in JSON). Python's <code>json</code> module converts Python tuples to JSON lists because that's the closest thing in JSON to a tuple.</p>\n<p>You haven't given much detail of your use case here, but if you need to store string representations of data structures that include tuples, a few possibilities immediately come to mind, which may or may not be appropriate depending upon your situation:</p>\n<ol>\n<li>Create your own encoding and decoding functions</li>\n<li>Use <a href=\"http://docs.python.org/3/library/pickle.html\" rel=\"noreferrer\">pickle</a> (careful; <code>pickle.loads</code> isn't safe to use on user-provided input).</li>\n<li>Use <a href=\"http://docs.python.org/3/library/functions.html#repr\" rel=\"noreferrer\"><code>repr</code></a> and <a href=\"http://docs.python.org/3/library/ast.html#ast.literal_eval\" rel=\"noreferrer\"><code>ast.literal_eval</code></a> instead of <code>json.dumps</code> and <code>json.loads</code>. <code>repr</code> will give you output reasonably similar in appearance to <code>json.dumps</code>, but <code>repr</code> will not convert tuples to lists. <code>ast.literal_eval</code> is a less powerful, more secure version of <a href=\"http://docs.python.org/3/library/functions.html#eval\" rel=\"noreferrer\"><code>eval</code></a> which will only decode strings, numbers, tuples, lists, dicts, booleans, and <code>None</code>.</li>\n</ol>\n<p>Option 3 is probably the easiest and simplest solution for you.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 965649,
+                                "reputation": 213496,
+                                "user_id": 989121,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "georg"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1364670527,
+                            "post_id": 15721641,
+                            "comment_id": 22333598,
+                            "link": "https://stackoverflow.com/questions/15721363/preserve-python-tuples-with-json/15721641#comment22333598_15721641",
+                            "body": "Nice. Quite similar to what <a href=\"https://github.com/mongodb/mongo-python-driver/blob/master/bson/json_util.py\" rel=\"nofollow noreferrer\">pymongo</a> does. To be complete, there should be also <code>dict</code> branch in <code>encode</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 440448,
+                                "reputation": 61912,
+                                "user_id": 830012,
+                                "user_type": "registered",
+                                "display_name": "Pavel Anossov"
+                            },
+                            "reply_to_user": {
+                                "account_id": 965649,
+                                "reputation": 213496,
+                                "user_id": 989121,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "georg"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1364671352,
+                            "post_id": 15721641,
+                            "comment_id": 22333857,
+                            "link": "https://stackoverflow.com/questions/15721363/preserve-python-tuples-with-json/15721641#comment22333857_15721641",
+                            "body": "That why it&#39;s specialized :) OP&#39;s arrays don&#39;t seem to have dicts in them."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2372800,
+                                "reputation": 3486,
+                                "user_id": 2077015,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "mrKelley"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1364745417,
+                            "post_id": 15721641,
+                            "comment_id": 22349602,
+                            "link": "https://stackoverflow.com/questions/15721363/preserve-python-tuples-with-json/15721641#comment22349602_15721641",
+                            "body": "Thanks!  It took me a minute to read the code, but I get it and that&#39;s exactly what I needed.  That&#39;s the same way that I&#39;m doing recursion on the multi-d arrays.  I&#39;m doing hooks &quot;outside of&quot; json right now though, so maybe I should read up on <code>object_hook</code>s."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4183801,
+                                "reputation": 604,
+                                "user_id": 3468663,
+                                "user_type": "registered",
+                                "display_name": "user189"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1444918789,
+                            "post_id": 15721641,
+                            "comment_id": 54111450,
+                            "link": "https://stackoverflow.com/questions/15721363/preserve-python-tuples-with-json/15721641#comment54111450_15721641",
+                            "body": "Doesn&#39;t seem to work on ((1, 2), 3) for instance. Replace <code>return {&#39;__tuple__&#39;: True, &#39;items&#39;: item}</code> with <code>return {&#39;__tuple__&#39;: True, &#39;items&#39;: tuple(hint_tuples(e) for e in item)}</code> maybe?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1589784,
+                                "reputation": 6089,
+                                "user_id": 1601580,
+                                "user_type": "registered",
+                                "accept_rate": 47,
+                                "display_name": "Charlie Parker"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1468647600,
+                            "post_id": 15721641,
+                            "comment_id": 64224527,
+                            "link": "https://stackoverflow.com/questions/15721363/preserve-python-tuples-with-json/15721641#comment64224527_15721641",
+                            "body": "does this mean if you insert a tuple inside a dictionary and then try to save it as json, it won&#39;t work?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 454252,
+                                "reputation": 12944,
+                                "user_id": 851699,
+                                "user_type": "registered",
+                                "accept_rate": 41,
+                                "display_name": "Peter"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1566942366,
+                            "post_id": 15721641,
+                            "comment_id": 101811663,
+                            "link": "https://stackoverflow.com/questions/15721363/preserve-python-tuples-with-json/15721641#comment101811663_15721641",
+                            "body": "Shouldn&#39;t the &quot;tuple hinting&quot; line be <code>return {&#39;__tuple__&#39;: True, &#39;items&#39;: [hint_tuples(e) for e in item]}</code> ?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 16084822,
+                                "reputation": 804,
+                                "user_id": 11609834,
+                                "user_type": "registered",
+                                "display_name": "philosofool"
+                            },
+                            "reply_to_user": {
+                                "account_id": 454252,
+                                "reputation": 12944,
+                                "user_id": 851699,
+                                "user_type": "registered",
+                                "accept_rate": 41,
+                                "display_name": "Peter"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1690999811,
+                            "post_id": 15721641,
+                            "comment_id": 135432595,
+                            "link": "https://stackoverflow.com/questions/15721363/preserve-python-tuples-with-json/15721641#comment135432595_15721641",
+                            "body": "@Peter Yes, I just checked. Without that, this will not serialize nested tuples."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 440448,
+                        "reputation": 61912,
+                        "user_id": 830012,
+                        "user_type": "registered",
+                        "display_name": "Pavel Anossov"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": true,
+                    "score": 46,
+                    "last_activity_date": 1523995924,
+                    "last_edit_date": 1523995924,
+                    "creation_date": 1364666304,
+                    "answer_id": 15721641,
+                    "question_id": 15721363,
+                    "link": "https://stackoverflow.com/questions/15721363/preserve-python-tuples-with-json/15721641#15721641",
+                    "body": "<p>You can write a highly-specialzed encoder and a decoder hook:</p>\n\n<pre><code>import json\n\nclass MultiDimensionalArrayEncoder(json.JSONEncoder):\n    def encode(self, obj):\n        def hint_tuples(item):\n            if isinstance(item, tuple):\n                return {'__tuple__': True, 'items': item}\n            if isinstance(item, list):\n                return [hint_tuples(e) for e in item]\n            if isinstance(item, dict):\n                return {key: hint_tuples(value) for key, value in item.items()}\n            else:\n                return item\n\n        return super(MultiDimensionalArrayEncoder, self).encode(hint_tuples(obj))\n\ndef hinted_tuple_hook(obj):\n    if '__tuple__' in obj:\n        return tuple(obj['items'])\n    else:\n        return obj\n\n\nenc = MultiDimensionalArrayEncoder()\njsonstring =  enc.encode([1, 2, (3, 4), [5, 6, (7, 8)]])\n\nprint jsonstring\n\n# [1, 2, {\"items\": [3, 4], \"__tuple__\": true}, [5, 6, {\"items\": [7, 8], \"__tuple__\": true}]]\n\nprint json.loads(jsonstring, object_hook=hinted_tuple_hook)\n\n# [1, 2, (3, 4), [5, 6, (7, 8)]]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 631723,
+                                "reputation": 2290,
+                                "user_id": 1046421,
+                                "user_type": "registered",
+                                "accept_rate": 55,
+                                "display_name": "Urhixidur"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1523379603,
+                            "post_id": 25294767,
+                            "comment_id": 86533327,
+                            "link": "https://stackoverflow.com/questions/15721363/preserve-python-tuples-with-json/25294767#comment86533327_25294767",
+                            "body": "&quot;The principle difference&quot; --&gt; &quot;The principal difference&quot; &quot;while its in text form&quot; --&gt; &quot;while it&#39;s in text form&quot;"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2257383,
+                        "reputation": 91,
+                        "user_id": 1988282,
+                        "user_type": "registered",
+                        "display_name": "rhoark"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1558761805,
+                    "last_edit_date": 1558761805,
+                    "creation_date": 1407958912,
+                    "answer_id": 25294767,
+                    "question_id": 15721363,
+                    "link": "https://stackoverflow.com/questions/15721363/preserve-python-tuples-with-json/25294767#25294767",
+                    "body": "<p>The principal difference between python lists and tuples is mutability, which is irrelevant to JSON representations, as long as you're not contemplating modifying the internal members of the JSON list while it's in text form. You can just turn the lists you get back into tuples. If you're not using any custom object decoders, the only structured datatypes you have to consider are JSON objects and arrays, which come out as python dicts and lists.</p>\n\n<pre><code>def tuplify(listything):\n    if isinstance(listything, list): return tuple(map(tuplify, listything))\n    if isinstance(listything, dict): return {k:tuplify(v) for k,v in listything.items()}\n    return listything\n</code></pre>\n\n<p>If you are specializing the decoding, or want some JSON arrays to be python lists and others to be python tuples, you'll need to wrap data items in a dict or tuple that annotates type information. This in itself is a better way to influence an algorithm's control flow than branching based on whether something is a list or tuple (or some other iterable type).</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 34687,
+                        "reputation": 3223,
+                        "user_id": 98080,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "fgregg"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1430186961,
+                    "creation_date": 1430186961,
+                    "answer_id": 29909091,
+                    "question_id": 15721363,
+                    "link": "https://stackoverflow.com/questions/15721363/preserve-python-tuples-with-json/29909091#29909091",
+                    "body": "<p>It is with simplejson</p>\n\n<pre><code>import simplejson\n\ndef _to_json(python_object) :\n    if isinstance(python_object, tuple) :\n        python_object = {'__class__': 'tuple',\n                         '__value__': list(python_object)}\n    else :\n        raise TypeError(repr(python_object) + ' is not JSON serializable') \n\n    return python_object\n\ndef _from_json(json_object):                                   \n    if json_object['__class__'] == 'tuple':\n        return tuple(json_object['__value__'])\n    return json_object\n\n\njsn = simplejson.dumps((1,2,3), \n                       default=_to_json, \n                       tuple_as_array=False)\n\ntpl = simplejson.loads(jsn, object_hook=_from_json)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 8054586,
+                                "reputation": 117,
+                                "user_id": 6072151,
+                                "user_type": "registered",
+                                "display_name": "Steve"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1631195058,
+                            "post_id": 63860104,
+                            "comment_id": 122161710,
+                            "link": "https://stackoverflow.com/questions/15721363/preserve-python-tuples-with-json/63860104#comment122161710_63860104",
+                            "body": "This is great, but I think the point of using json is for output to be consistent and human readable. This makes for pretty unreadable json"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4477943,
+                        "reputation": 31,
+                        "user_id": 3642562,
+                        "user_type": "registered",
+                        "display_name": "Yevgeny Streltsov"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1599912161,
+                    "creation_date": 1599912161,
+                    "answer_id": 63860104,
+                    "question_id": 15721363,
+                    "link": "https://stackoverflow.com/questions/15721363/preserve-python-tuples-with-json/63860104#63860104",
+                    "body": "<p>Pavel Anossov answered the question well.  To encode objects such as tuples the code works.  Having tuples as Python dict keys is also useful, and the code above does not handle tuples as dict keys.  To manage tuples as keys, a boolean flag signifying if tuple is a dict key can be used and tuple gets wrapped in a layer of json.dumps(...) output; during decode, json gets taken care of by recursion.</p>\n<p>Solution can allow to pass data structures of tuple vs value that enables easier hashing.  Python <code>def __hash__(self):</code> frequently returns the hash of tuple of items in an object, and sometimes it is useful to have simpler data structures not wrapped in classes.</p>\n<ol>\n<li>hint_tuples can have a named argument dict_key -- flag for tuple being a dict key.\nPython dict type cannot be a key to dict, better to turn it to a string with json.dumps(...), during decoding this should be restored to dict and recursion should take care of it being turned into tuple.</li>\n<li>optionally <code>__tuple__</code> can be obfuscated so that in case someone encodes a string <code>__tuple__</code> as part of dict key it can pass through encoder / decoder.</li>\n</ol>\n<p>Code below is what I came up with to take care of encoding tuples in Python dict keys.  A couple of basic tests are included as part of <code>__main__</code> to demonstrate the solution.  Readability of encoding output is forgone to increase the number of cases that pass through the solution.</p>\n<pre><code>    # Pavel Anossov's solution hinted this:\n    \n    import json\n    tuple_signifier = '__tuple__s_i_g_n_i_f_i_e_r__'\n    \n    class StreamTuple(dict):\n         def __hash__(self):\n             return hash(str(self))\n    \n    class MultiDimensionalArrayEncoder(json.JSONEncoder):\n        def encode(self, obj):\n            def hint_tuples(item, dict_key=False):\n                global tuple_signifier\n                ret_val = None\n                if isinstance(item, tuple):\n                    if dict_key:\n                        ret_val = json.dumps(dict(\n                            [(\n                                tuple_signifier,\n                                json.dumps(hint_tuples(list(item))),\n                            ),],\n                        ))\n                    else:\n                        ret_val = dict(\n                            [(\n                                tuple_signifier,\n                                json.dumps(hint_tuples(list(item))),\n                            ),],\n                        )\n    \n                elif isinstance(item, list):\n                    ret_val = [hint_tuples(e) for e in item]\n                elif isinstance(item, dict):\n                    ret_val = dict([\n                        (hint_tuples(key, dict_key=True), hint_tuples(value))\n                        for key, value in item.items()\n                    ])\n                else:\n                    ret_val = item\n                return ret_val\n            return super(MultiDimensionalArrayEncoder, self).\\\n                         encode(hint_tuples(obj))\n    \n    \n    def hinted_tuple_hook(obj):\n        global tuple_signifier\n    \n        ret_val = {}\n        if tuple_signifier in obj:\n            ret_val = tuple(json.loads(obj[tuple_signifier], object_hook=hinted_tuple_hook,))\n        else:\n            for k, v in obj.items():\n                inner_k = k\n                inner_v = v\n                if isinstance(k, str) and tuple_signifier in k:\n                    inner_k = json.loads(k, object_hook=hinted_tuple_hook,)\n                if isinstance(v, str) and tuple_signifier in v:\n                    inner_v = json.loads(v, object_hook=hinted_tuple_hook,)\n                ret_val[inner_k] = inner_v\n        return ret_val\n    \n    #\n    # Some tests that show how to use the above hinted tuple hook to encode \n    # / decode Python tuples.\n    #\n    if __name__ == '__main__':\n        enc = MultiDimensionalArrayEncoder()\n        test_input_1 = (2,)\n        test_input_2 = {(2,): 'a'}\n        test_input_3 = {'a': {(2,): {1:'a'}}}\n        print('test_input_1 encoded:', enc.encode(test_input_1), test_input_1)\n        print('test_input_1 decoded:',\n            json.loads(enc.encode(test_input_1),\n                object_hook=hinted_tuple_hook,)\n        )\n    #&quot;&quot;&quot;\n        print('test_input_2 encoded:', enc.encode(test_input_2))\n        print('test_input_2 decoded:',\n            json.loads(enc.encode(test_input_2),\n                object_hook=hinted_tuple_hook,)\n        )\n    \n        print('\\n' * 3)\n        print('test_input_3 encoded:', enc.encode(test_input_3))\n        print('test_input_3 decoded:',\n            json.loads(enc.encode(test_input_3),\n                object_hook=hinted_tuple_hook,)\n        )\n    \n        print('\\n' * 3)\n        test_input_4 = {'a': 'b'}\n        print('test_input_4  encoded:', enc.encode(test_input_4))\n        print('test_input_4 decoded:',\n            json.loads(enc.encode(test_input_4),\n                object_hook=hinted_tuple_hook,)\n        )\n    \n        #&quot;&quot;&quot;\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 38857,
+                        "reputation": 4145,
+                        "user_id": 111804,
+                        "user_type": "registered",
+                        "accept_rate": 73,
+                        "display_name": "Tudor"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1703159226,
+                    "creation_date": 1703159226,
+                    "answer_id": 77697759,
+                    "question_id": 15721363,
+                    "link": "https://stackoverflow.com/questions/15721363/preserve-python-tuples-with-json/77697759#77697759",
+                    "body": "<p>How about this example:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import json\n\ndef serialize(obj):\n    if isinstance(obj, tuple):\n        return {'__tuple__': True, 'items': list(obj)}\n    elif isinstance(obj, list):\n        return [serialize(item) for item in obj]\n    elif isinstance(obj, dict):\n        return {key: serialize(value) for key, value in obj.items()}\n    else:\n        return obj\n\ndef deserialize(obj):\n    if isinstance(obj, list):\n        return [deserialize(item) for item in obj]\n    elif isinstance(obj, dict):\n        if '__tuple__' in obj:\n            return tuple(obj['items'])\n        else:\n            return {key: deserialize(value) for key, value in obj.items()}\n    else:\n        return obj\n\noriginal_dict = {'tuple_key': [(1, 2, 3), 4], 'nested': {'key': (5, 6, 7)}}\n\njson_data = json.dumps(serialize(original_dict))\n\ndecoded_dict = deserialize(json.loads(json_data))\n\n# Print the results\n</code></pre>\n<pre><code>Original Dictionary: {'tuple_key': [(1, 2, 3), 4], 'nested': {'key': (5, 6, 7)}}\nSerialized JSON Data: {&quot;tuple_key&quot;: {&quot;__tuple__&quot;: true, &quot;items&quot;: [1, 2, 3]}, &quot;nested&quot;: {&quot;key&quot;: {&quot;__tuple__&quot;: true, &quot;items&quot;: [5, 6, 7]}}}\nDecoded Dictionary: {'tuple_key': [(1, 2, 3), 4], 'nested': {'key': (5, 6, 7)}}\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 2372800,
+                "reputation": 3486,
+                "user_id": 2077015,
+                "user_type": "registered",
+                "accept_rate": 88,
+                "display_name": "mrKelley"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 15721641,
+            "answer_count": 6,
+            "score": 66,
+            "last_activity_date": 1703159226,
+            "creation_date": 1364664536,
+            "question_id": 15721363,
+            "link": "https://stackoverflow.com/questions/15721363/preserve-python-tuples-with-json",
+            "title": "Preserve Python tuples with JSON",
+            "body": "<p>I'm still a little new to this, so I might not know all the conventional terms for things:</p>\n\n<p>Is it possible to preserve Python tuples when encoding with JSON?  Right now <code>json.loads(json.dumps(tuple))</code> gives me a list back.  I don't want to convert my tuples to lists, but I want to use JSON.  So, are there options?</p>\n\n<p>The reason why:\nI'm creating an app that uses multi-dimensional arrays, not always the same shape.  I've got some class methods that use recursion to probe the arrays and cast the endpoints as a string or int.  I recently realized that (based on how my recursion works) I can use tuples to prevent deeper recursive searching of arrays (Python rawks).  This could come in handy in situations where I know I for sure I won't need to be probing any deeper into my data structures.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8243
+}

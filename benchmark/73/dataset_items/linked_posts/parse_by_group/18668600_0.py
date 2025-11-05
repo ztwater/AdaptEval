@@ -1,0 +1,6 @@
+parser = argparse.ArgumentParser()
+parser.add_argument('--foo')
+breakfast = parser.add_argument_group('breakfast')
+breakfast.add_argument('--spam')
+breakfast.add_argument('--eggs')
+args = parser.parse_args()

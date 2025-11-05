@@ -1,0 +1,1 @@
+python myprogram.py > nul

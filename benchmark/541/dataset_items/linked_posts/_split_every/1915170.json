@@ -1,0 +1,865 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "iterator",
+                "split"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 3021,
+                        "reputation": 408304,
+                        "user_id": 4279,
+                        "user_type": "registered",
+                        "accept_rate": 94,
+                        "display_name": "jfs"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1274464388,
+                    "post_id": 1915170,
+                    "comment_id": 2931850,
+                    "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery#comment2931850_1915170",
+                    "body": "related &quot;What is the most \u201cpythonic\u201d way to iterate over a list in chunks?&quot; <a href=\"http://stackoverflow.com/questions/434287/what-is-the-most-pythonic-way-to-iterate-over-a-list-in-chunks\" title=\"what is the most pythonic way to iterate over a list in chunks\">stackoverflow.com/questions/434287/&hellip;</a>"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 23075,
+                                "reputation": 4295,
+                                "user_id": 57557,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "James Brooks"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1260976277,
+                            "post_id": 1915220,
+                            "comment_id": 1820613,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/1915220#comment1820613_1915220",
+                            "body": "That was actually what I meant with my <code>splitEvery_2</code> function. It doesn&#39;t work if you input a generator expression. I think I will probably just convert my generator to a list to make things simple, but the answer will still bug me."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7423,
+                                "reputation": 20680,
+                                "user_id": 12892,
+                                "user_type": "registered",
+                                "display_name": "Cristian Ciupitu"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1282666719,
+                            "post_id": 1915220,
+                            "comment_id": 3729263,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/1915220#comment3729263_1915220",
+                            "body": "Iterators don&#39;t support the <code>len</code> function, although a list or a tuple would. For example <code>len(itertools.imap(lambda x:x*2, range(3)))</code> will fail."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 59702,
+                        "reputation": 29763,
+                        "user_id": 178560,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "Johannes Charra"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1260975978,
+                    "creation_date": 1260975978,
+                    "answer_id": 1915220,
+                    "question_id": 1915170,
+                    "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/1915220#1915220",
+                    "body": "<p>Why not do it like this? Looks almost like your <code>splitEvery_2</code> function.</p>\n\n<pre><code>def splitEveryN(n, it):\n    return [it[i:i+n] for i in range(0, len(it), n)]\n</code></pre>\n\n<p>Actually it only takes away the unnecessary step interval from the slice in your solution. :)</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 82386,
+                        "reputation": 10636,
+                        "user_id": 231677,
+                        "user_type": "registered",
+                        "accept_rate": 76,
+                        "display_name": "Hamish Grubijan"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1260976548,
+                    "creation_date": 1260976548,
+                    "answer_id": 1915274,
+                    "question_id": 1915170,
+                    "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/1915274#1915274",
+                    "body": "<p>Here is how you deal with list vs iterator:</p>\n\n<pre><code>def isList(L): # Implement it somehow - returns True or false\n...\nreturn (list, lambda x:x)[int(islist(L))](result)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 236101,
+                                "reputation": 5255,
+                                "user_id": 503377,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "Elliot Cameron"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1396892375,
+                            "post_id": 1915307,
+                            "comment_id": 34982773,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/1915307#comment34982773_1915307",
+                            "body": "See my answer for a stateless, one-liner version based on this one."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 44205,
+                                "reputation": 9828,
+                                "user_id": 129600,
+                                "user_type": "registered",
+                                "display_name": "acushner"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1481988445,
+                            "post_id": 1915307,
+                            "comment_id": 69599561,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/1915307#comment69599561_1915307",
+                            "body": "check out my answer for an even simpler one-liner (python 3) and 2-liner in python 2"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1051542,
+                                "reputation": 695,
+                                "user_id": 1055356,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "Andrey Cizov"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1499358007,
+                            "post_id": 1915307,
+                            "comment_id": 76883680,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/1915307#comment76883680_1915307",
+                            "body": "Check out my one-liner solution that could also be inlined."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 201805,
+                                "reputation": 15290,
+                                "user_id": 448474,
+                                "user_type": "registered",
+                                "display_name": "hynekcer"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1508681827,
+                            "post_id": 1915307,
+                            "comment_id": 80697075,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/1915307#comment80697075_1915307",
+                            "body": "+1 All &quot;one-liners&quot; in the comments above make an infinite loop if a sequence is passed, .e.g. range(), or they are not one-liners more if the problem has been fixed. This seems still the best answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 201805,
+                                "reputation": 15290,
+                                "user_id": 448474,
+                                "user_type": "registered",
+                                "display_name": "hynekcer"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1508681845,
+                            "post_id": 1915307,
+                            "comment_id": 80697081,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/1915307#comment80697081_1915307",
+                            "body": "A notable solution is Ashley Waite, important for huge <code>n</code>. She is the only who accepted the requirement: &quot;if there is a generator as an input it should return a generator as an output!&quot;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4757969,
+                                "reputation": 10405,
+                                "user_id": 3846213,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "Eli Korvigo"
+                            },
+                            "reply_to_user": {
+                                "account_id": 236101,
+                                "reputation": 5255,
+                                "user_id": 503377,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "Elliot Cameron"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1514919669,
+                            "post_id": 1915307,
+                            "comment_id": 83105983,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/1915307#comment83105983_1915307",
+                            "body": "@ElliotCameron your original solution is not exactly &quot;stateless&quot; because it takes and consumes an iterator, a stateful object."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7555,
+                        "reputation": 32761,
+                        "user_id": 13169,
+                        "user_type": "registered",
+                        "accept_rate": 89,
+                        "display_name": "Roberto Bonvallet"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": true,
+                    "score": 73,
+                    "last_activity_date": 1260977295,
+                    "last_edit_date": 1260977295,
+                    "creation_date": 1260976865,
+                    "answer_id": 1915307,
+                    "question_id": 1915170,
+                    "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/1915307#1915307",
+                    "body": "<pre><code>from itertools import islice\n\ndef split_every(n, iterable):\n    i = iter(iterable)\n    piece = list(islice(i, n))\n    while piece:\n        yield piece\n        piece = list(islice(i, n))\n</code></pre>\n\n<p>Some tests:</p>\n\n<pre><code>&gt;&gt;&gt; list(split_every(5, range(9)))\n[[0, 1, 2, 3, 4], [5, 6, 7, 8]]\n\n&gt;&gt;&gt; list(split_every(3, (x**2 for x in range(20))))\n[[0, 1, 4], [9, 16, 25], [36, 49, 64], [81, 100, 121], [144, 169, 196], [225, 256, 289], [324, 361]]\n\n&gt;&gt;&gt; [''.join(s) for s in split_every(6, 'Hello world')]\n['Hello ', 'world']\n\n&gt;&gt;&gt; list(split_every(100, []))\n[]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 23075,
+                                "reputation": 4295,
+                                "user_id": 57557,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "James Brooks"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1260977874,
+                            "post_id": 1915367,
+                            "comment_id": 1820839,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/1915367#comment1820839_1915367",
+                            "body": "It is similar, and I <i>do</i> still want the last chunk. I just want it to work with generators as well as lists."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 37416,
+                                "reputation": 75151,
+                                "user_id": 106979,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "fortran"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1260977956,
+                            "post_id": 1915367,
+                            "comment_id": 1820852,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/1915367#comment1820852_1915367",
+                            "body": "oh, sorry, I misunderstood that part then... I&#39;ll fix it"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 23075,
+                                "reputation": 4295,
+                                "user_id": 57557,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "James Brooks"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1260978953,
+                            "post_id": 1915367,
+                            "comment_id": 1820971,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/1915367#comment1820971_1915367",
+                            "body": "I did think about this but I thought there had to be a simpler way than <code>hasattr</code>. Roberto Bonvallet posted it so he gets the answer. That said yours appears to work +1."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8057574,
+                                "reputation": 1190,
+                                "user_id": 6074177,
+                                "user_type": "registered",
+                                "display_name": "Ryan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1626880721,
+                            "post_id": 1915367,
+                            "comment_id": 121011264,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/1915367#comment121011264_1915367",
+                            "body": "Note that the first code example will never terminate"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 37416,
+                        "reputation": 75151,
+                        "user_id": 106979,
+                        "user_type": "registered",
+                        "accept_rate": 82,
+                        "display_name": "fortran"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1260978362,
+                    "last_edit_date": 1495541901,
+                    "creation_date": 1260977356,
+                    "answer_id": 1915367,
+                    "question_id": 1915170,
+                    "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/1915367#1915367",
+                    "body": "<p>I think <a href=\"https://stackoverflow.com/questions/434287/what-is-the-most-pythonic-way-to-iterate-over-a-list-in-chunks\">those</a> <a href=\"https://stackoverflow.com/questions/312443/how-do-you-split-a-list-into-evenly-sized-chunks-in-python\">questions</a> are almost equal</p>\n\n<p>Changing a little bit to crop the last, I think a good solution for the generator case would be:</p>\n\n<pre><code>from itertools import *\ndef iter_grouper(n, iterable):\n    it = iter(iterable)\n    item = itertools.islice(it, n)\n    while item:\n        yield item\n        item = itertools.islice(it, n)\n</code></pre>\n\n<p>for the object that supports slices (lists, strings, tuples), we can do:</p>\n\n<pre><code>def slice_grouper(n, sequence):\n   return [sequence[i:i+n] for i in range(0, len(sequence), n)]\n</code></pre>\n\n<p>now it's just a matter of dispatching the correct method:</p>\n\n<pre><code>def grouper(n, iter_or_seq):\n    if hasattr(iter_or_seq, \"__getslice__\"):\n        return slice_grouper(n, iter_or_seq)\n    elif hasattr(iter_or_seq, \"__iter__\"):\n        return iter_grouper(n, iter_or_seq)\n</code></pre>\n\n<p>I think you could polish it a little bit more :-)</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 316105,
+                        "reputation": 16821,
+                        "user_id": 632088,
+                        "user_type": "registered",
+                        "accept_rate": 87,
+                        "display_name": "Rusty Rob"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1329108827,
+                    "creation_date": 1329108827,
+                    "answer_id": 9255766,
+                    "question_id": 1915170,
+                    "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/9255766#9255766",
+                    "body": "<pre><code>def chunks(iterable,n):\n    \"\"\"assumes n is an integer&gt;0\n    \"\"\"\n    iterable=iter(iterable)\n    while True:\n        result=[]\n        for i in range(n):\n            try:\n                a=next(iterable)\n            except StopIteration:\n                break\n            else:\n                result.append(a)\n        if result:\n            yield result\n        else:\n            break\n\ng1=(i*i for i in range(10))\ng2=chunks(g1,3)\nprint g2\n'&lt;generator object chunks at 0x0337B9B8&gt;'\nprint list(g2)\n'[[0, 1, 4], [9, 16, 25], [36, 49, 64], [81]]'\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 226344,
+                                "reputation": 348761,
+                                "user_id": 487339,
+                                "user_type": "registered",
+                                "display_name": "DSM"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1342754358,
+                            "post_id": 11572276,
+                            "comment_id": 15310144,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/11572276#comment15310144_11572276",
+                            "body": "The OP was already aware of zip.  But this doesn&#39;t work with generators and doesn&#39;t include the last element of odd-size iterables which the OP said he wanted."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7555,
+                                "reputation": 32761,
+                                "user_id": 13169,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "Roberto Bonvallet"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1397057233,
+                            "post_id": 11572276,
+                            "comment_id": 35068594,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/11572276#comment35068594_11572276",
+                            "body": "Arbitrary iterables don&#39;t suport slicing (e.g.: <code>xrange(10)[::2]</code> is an error)."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 413135,
+                        "reputation": 9137,
+                        "user_id": 786593,
+                        "user_type": "registered",
+                        "display_name": "hostingutilities.com"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1343521164,
+                    "last_edit_date": 1343521164,
+                    "creation_date": 1342753521,
+                    "answer_id": 11572276,
+                    "question_id": 1915170,
+                    "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/11572276#11572276",
+                    "body": "<p>this will do the trick</p>\n\n<pre><code>from itertools import izip_longest\nizip_longest(it[::2], it[1::2])\n</code></pre>\n\n<p>where *it* is some iterable</p>\n\n<hr>\n\n<p>Example:</p>\n\n<pre><code>izip_longest('abcdef'[::2], 'abcdef'[1::2]) -&gt; ('a', 'b'), ('c', 'd'), ('e', 'f')\n</code></pre>\n\n<p>Let's break this down</p>\n\n<pre><code>'abcdef'[::2] -&gt; 'ace'\n'abcdef'[1::2] -&gt; 'bdf'\n</code></pre>\n\n<p>As you can see the last number in the slice is specifying the interval that will be used to pick up items. You can read more about using extended slices <a href=\"http://docs.python.org/release/2.3.5/whatsnew/section-slices.html\" rel=\"nofollow\">here</a>.</p>\n\n<p>The <a href=\"http://docs.python.org/dev/library/functions.html#zip\" rel=\"nofollow\">zip</a> function takes the first item from the first iterable and combines it with the first item with the second iterable. The zip function then does the same thing for the second and third items until one of the iterables runs out of values.</p>\n\n<p>The result is an iterator. If you want a list use the list() function on the result.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 481873,
+                                "reputation": 9029,
+                                "user_id": 895932,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "justhalf"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1398998093,
+                            "post_id": 22919323,
+                            "comment_id": 35889718,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/22919323#comment35889718_22919323",
+                            "body": "Hereby I give you the [Revival] badge! =p"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3503093,
+                                "reputation": 4626,
+                                "user_id": 2929337,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "cfh"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1491553784,
+                            "post_id": 22919323,
+                            "comment_id": 73614572,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/22919323#comment73614572_22919323",
+                            "body": "Why the use of a lambda instead of just <code>def split_every(n, it):</code> ?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 236101,
+                                "reputation": 5255,
+                                "user_id": 503377,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "Elliot Cameron"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1491693525,
+                            "post_id": 22919323,
+                            "comment_id": 73668080,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/22919323#comment73668080_22919323",
+                            "body": "The goal was to be a &quot;one-liner&quot; but I ended up putting it on two on SO to prevent scrolling."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 201805,
+                                "reputation": 15290,
+                                "user_id": 448474,
+                                "user_type": "registered",
+                                "display_name": "hynekcer"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1508677036,
+                            "post_id": 22919323,
+                            "comment_id": 80695597,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/22919323#comment80695597_22919323",
+                            "body": "This makes an infinite loop with a sequence, e.g. with range()/xrange()."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4757969,
+                                "reputation": 10405,
+                                "user_id": 3846213,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "Eli Korvigo"
+                            },
+                            "reply_to_user": {
+                                "account_id": 201805,
+                                "reputation": 15290,
+                                "user_id": 448474,
+                                "user_type": "registered",
+                                "display_name": "hynekcer"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1514919372,
+                            "post_id": 22919323,
+                            "comment_id": 83105862,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/22919323#comment83105862_22919323",
+                            "body": "@hynekcer I&#39;ve uploaded an updated solution that doesn&#39;t"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 236101,
+                                "reputation": 5255,
+                                "user_id": 503377,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "Elliot Cameron"
+                            },
+                            "reply_to_user": {
+                                "account_id": 201805,
+                                "reputation": 15290,
+                                "user_id": 448474,
+                                "user_type": "registered",
+                                "display_name": "hynekcer"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1515105590,
+                            "post_id": 22919323,
+                            "comment_id": 83184883,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/22919323#comment83184883_22919323",
+                            "body": "@hynekcer You need to call <code>iter</code> on the range first. However, @EliKorvigo&#39;s updated version doesn&#39;t have this pitfall which I like."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 236101,
+                                "reputation": 5255,
+                                "user_id": 503377,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "Elliot Cameron"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4757969,
+                                "reputation": 10405,
+                                "user_id": 3846213,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "Eli Korvigo"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1515105820,
+                            "post_id": 22919323,
+                            "comment_id": 83184965,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/22919323#comment83184965_22919323",
+                            "body": "@EliKorvigo I like your version better so I&#39;ve updated mine."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 236101,
+                        "reputation": 5255,
+                        "user_id": 503377,
+                        "user_type": "registered",
+                        "accept_rate": 90,
+                        "display_name": "Elliot Cameron"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": false,
+                    "score": 23,
+                    "last_activity_date": 1515105775,
+                    "last_edit_date": 1515105775,
+                    "creation_date": 1396892215,
+                    "answer_id": 22919323,
+                    "question_id": 1915170,
+                    "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/22919323#22919323",
+                    "body": "<p>Here's a quick one-liner version. Like Haskell's, it is lazy.</p>\n\n<pre><code>from itertools import islice, takewhile, repeat\nsplit_every = (lambda n, it:\n    takewhile(bool, (list(islice(it, n)) for _ in repeat(None))))\n</code></pre>\n\n<p>This requires that you use <code>iter</code> <strong>before</strong> calling <code>split_every</code>.</p>\n\n<p>Example:</p>\n\n<pre><code>list(split_every(5, iter(xrange(9))))\n[[0, 1, 2, 3, 4], [5, 6, 7, 8]]\n</code></pre>\n\n<p>Although not a one-liner, the version below doesn't require that you call <code>iter</code> which can be a common pitfall.</p>\n\n<pre><code>from itertools import islice, takewhile, repeat\n\ndef split_every(n, iterable):\n    \"\"\"\n    Slice an iterable into chunks of n elements\n    :type n: int\n    :type iterable: Iterable\n    :rtype: Iterator\n    \"\"\"\n    iterator = iter(iterable)\n    return takewhile(bool, (list(islice(iterator, n)) for _ in repeat(None)))\n</code></pre>\n\n<p>(Thanks to @eli-korvigo for improvements.)</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 481873,
+                        "reputation": 9029,
+                        "user_id": 895932,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "justhalf"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1398999517,
+                    "creation_date": 1398999517,
+                    "answer_id": 23420050,
+                    "question_id": 1915170,
+                    "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/23420050#23420050",
+                    "body": "<p>This is an answer that works for both list and generator:</p>\n\n<pre><code>from itertools import count, groupby\ndef split_every(size, iterable):\n    c = count()\n    for k, g in groupby(iterable, lambda x: next(c)//size):\n        yield list(g) # or yield g if you want to output a generator\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 201805,
+                                "reputation": 15290,
+                                "user_id": 448474,
+                                "user_type": "registered",
+                                "display_name": "hynekcer"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1508677388,
+                            "post_id": 28562419,
+                            "comment_id": 80695705,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/28562419#comment80695705_28562419",
+                            "body": "This solution makes an infinite loop with a sequence, e.g. with range()/xrange()."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1051542,
+                        "reputation": 695,
+                        "user_id": 1055356,
+                        "user_type": "registered",
+                        "accept_rate": 70,
+                        "display_name": "Andrey Cizov"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1499379080,
+                    "last_edit_date": 1499379080,
+                    "creation_date": 1424178918,
+                    "answer_id": 28562419,
+                    "question_id": 1915170,
+                    "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/28562419#28562419",
+                    "body": "<p>A one-liner, inlineable solution to this (supports v2/v3, iterators, uses standard library and a single generator comprehension):</p>\n\n<pre><code>import itertools\ndef split_groups(iter_in, group_size):\n     return ((x for _, x in item) for _, item in itertools.groupby(enumerate(iter_in), key=lambda x: x[0] // group_size))\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 940905,
+                        "reputation": 1037,
+                        "user_id": 968999,
+                        "user_type": "registered",
+                        "display_name": "Carl"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1481031193,
+                    "last_edit_date": 1481031193,
+                    "creation_date": 1481025954,
+                    "answer_id": 40995001,
+                    "question_id": 1915170,
+                    "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/40995001#40995001",
+                    "body": "<p>If you want a solution that</p>\n\n<ul>\n<li>uses generators only (no intermediate lists or tuples),</li>\n<li>works for very long (or infinite) iterators,</li>\n<li>works for very large batch sizes,</li>\n</ul>\n\n<p>this does the trick:</p>\n\n<pre><code>def one_batch(first_value, iterator, batch_size):\n    yield first_value\n    for i in xrange(1, batch_size):\n        yield iterator.next()\n\ndef batch_iterator(iterator, batch_size):\n    iterator = iter(iterator)\n    while True:\n        first_value = iterator.next()  # Peek.\n        yield one_batch(first_value, iterator, batch_size)\n</code></pre>\n\n<p>It works by peeking at the next value in the iterator and passing that as the first value to a generator (<code>one_batch()</code>) that will yield it, along with the rest of the batch.</p>\n\n<p>The peek step will raise <code>StopIteration</code> exactly when the input iterator is exhausted and there are no more batches. Since this is the correct time to raise <code>StopIteration</code> in the <code>batch_iterator()</code> method, there is no need to catch the exception.</p>\n\n<p>This will process lines from stdin in batches:</p>\n\n<pre><code>for input_batch in batch_iterator(sys.stdin, 10000):\n    for line in input_batch:\n        process(line)\n    finalise()\n</code></pre>\n\n<p>I've found this useful for processing lots of data and uploading the results in batches to an external store.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 201805,
+                                "reputation": 15290,
+                                "user_id": 448474,
+                                "user_type": "registered",
+                                "display_name": "hynekcer"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1508674734,
+                            "post_id": 41200105,
+                            "comment_id": 80694910,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/41200105#comment80694910_41200105",
+                            "body": "It is not for a general iterable. It works on a generator, but makes an infinite loop on a sequence."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 44205,
+                                "reputation": 9828,
+                                "user_id": 129600,
+                                "user_type": "registered",
+                                "display_name": "acushner"
+                            },
+                            "reply_to_user": {
+                                "account_id": 201805,
+                                "reputation": 15290,
+                                "user_id": 448474,
+                                "user_type": "registered",
+                                "display_name": "hynekcer"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1508679645,
+                            "post_id": 41200105,
+                            "comment_id": 80696351,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/41200105#comment80696351_41200105",
+                            "body": "@hynekcer good call. edited it to make it not loop infinitely on non-generators."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 201805,
+                                "reputation": 15290,
+                                "user_id": 448474,
+                                "user_type": "registered",
+                                "display_name": "hynekcer"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1508680360,
+                            "post_id": 41200105,
+                            "comment_id": 80696568,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/41200105#comment80696568_41200105",
+                            "body": "OK. It is not easy to write a readable one-liner, but it&#39;s interesting usage of <code>iter</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 44205,
+                                "reputation": 9828,
+                                "user_id": 129600,
+                                "user_type": "registered",
+                                "display_name": "acushner"
+                            },
+                            "reply_to_user": {
+                                "account_id": 201805,
+                                "reputation": 15290,
+                                "user_id": 448474,
+                                "user_type": "registered",
+                                "display_name": "hynekcer"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1671218304,
+                            "post_id": 41200105,
+                            "comment_id": 132059629,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/41200105#comment132059629_41200105",
+                            "body": "a few years back i did manage to make this a one-liner: <code>iter(lambda it=iter(iterable): list(islice(it, n)), [])</code> it&#39;s just kinda gross"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 44205,
+                        "reputation": 9828,
+                        "user_id": 129600,
+                        "user_type": "registered",
+                        "display_name": "acushner"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 16,
+                    "last_activity_date": 1508679624,
+                    "last_edit_date": 1508679624,
+                    "creation_date": 1481988332,
+                    "answer_id": 41200105,
+                    "question_id": 1915170,
+                    "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/41200105#41200105",
+                    "body": "<p>building off of the accepted answer and employing a lesser-known use of <code>iter</code> (that, when passed a second arg, it calls the first until it receives the second), you can do this really easily:</p>\n\n<p>python3:</p>\n\n<pre><code>from itertools import islice\n\ndef split_every(n, iterable):\n    iterable = iter(iterable)\n    yield from iter(lambda: list(islice(iterable, n)), [])\n</code></pre>\n\n<p>python2:</p>\n\n<pre><code>def split_every(n, iterable):\n    iterable = iter(iterable)\n    for chunk in iter(lambda: list(islice(iterable, n)), []):\n        yield chunk\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5737711,
+                        "reputation": 42841,
+                        "user_id": 4531270,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "pylang"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 20,
+                    "last_activity_date": 1525200562,
+                    "last_edit_date": 1525200562,
+                    "creation_date": 1494665132,
+                    "answer_id": 43951092,
+                    "question_id": 1915170,
+                    "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/43951092#43951092",
+                    "body": "<p><a href=\"https://github.com/erikrose/more-itertools\" rel=\"noreferrer\"><code>more_itertools</code></a> has a <a href=\"https://more-itertools.readthedocs.io/en/latest/api.html#more_itertools.chunked\" rel=\"noreferrer\"><code>chunked</code></a> function:</p>\n\n<pre><code>import more_itertools as mit\n\n\nlist(mit.chunked(range(9), 5))\n# [[0, 1, 2, 3, 4], [5, 6, 7, 8]]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 201805,
+                                "reputation": 15290,
+                                "user_id": 448474,
+                                "user_type": "registered",
+                                "display_name": "hynekcer"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1508681310,
+                            "post_id": 44320132,
+                            "comment_id": 80696872,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/44320132#comment80696872_44320132",
+                            "body": "+1: This is really the best solution for huge <code>n</code> when the result should be an iterator of generators. It is required in the question and nobody except you accepted it: &quot;if there is a generator as an input it should return a generator as an output!&quot;:"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 199652,
+                                "reputation": 700,
+                                "user_id": 9681577,
+                                "user_type": "registered",
+                                "display_name": "dawid"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1651857031,
+                            "post_id": 44320132,
+                            "comment_id": 127472341,
+                            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/44320132#comment127472341_44320132",
+                            "body": "I added now a similar answer in functionality, including some checking, but not succint."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 10287666,
+                        "reputation": 106,
+                        "user_id": 7590368,
+                        "user_type": "registered",
+                        "display_name": "Ashley Waite"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1496372610,
+                    "creation_date": 1496372610,
+                    "answer_id": 44320132,
+                    "question_id": 1915170,
+                    "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/44320132#44320132",
+                    "body": "<p>I came across this as I'm trying to chop up batches too, but doing it on a generator from a stream, so most of the solutions here aren't applicable, or don't work in python 3.</p>\n\n<p>For people still stumbling upon this, here's a general solution using itertools:</p>\n\n<pre><code>from itertools import islice, chain\n\ndef iter_in_slices(iterator, size=None):\n    while True:\n        slice_iter = islice(iterator, size)\n        # If no first object this is how StopIteration is triggered\n        peek = next(slice_iter)\n        # Put the first object back and return slice\n        yield chain([peek], slice_iter)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 199652,
+                        "reputation": 700,
+                        "user_id": 9681577,
+                        "user_type": "registered",
+                        "display_name": "dawid"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1651858111,
+                    "last_edit_date": 1651858111,
+                    "creation_date": 1651857101,
+                    "answer_id": 72145185,
+                    "question_id": 1915170,
+                    "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/72145185#72145185",
+                    "body": "<p>A fully lazy solution for input/output of generators, including some checking.</p>\n<pre><code>def chunks(items, binsize):\n    consumed = [0]\n    sent = [0]\n    it = iter(items)\n\n    def g():\n        c = 0\n        while c &lt; binsize:\n            try:\n                val = next(it)\n            except StopIteration:\n                sent[0] = None\n                return\n            consumed[0] += 1\n            yield val\n            c += 1\n\n    while consumed[0] &lt;= sent[0]:\n        if consumed[0] &lt; sent[0]:\n            raise Exception(&quot;Cannot traverse a chunk before the previous is consumed.&quot;, consumed[0], sent[0])\n        yield g()\n        if sent[0] is None:\n            return\n        sent[0] += binsize\n\n\ndef g():\n    for item in [1, 2, 3, 4, 5, 6, 7]:\n        sleep(1)\n        print(f&quot;accessed:{item}\u2192\\t&quot;, end=&quot;&quot;)\n        yield item\n\n\nfor chunk in chunks(g(), 3):\n    for x in chunk:\n        print(f&quot;x:{x}\\t\\t\\t&quot;, end=&quot;&quot;)\n    print()\n\n&quot;&quot;&quot;\nOutput:\n\naccessed:1\u2192 x:1         accessed:2\u2192 x:2         accessed:3\u2192 x:3         \naccessed:4\u2192 x:4         accessed:5\u2192 x:5         accessed:6\u2192 x:6         \naccessed:7\u2192 x:7 \n&quot;&quot;&quot;\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 19814788,
+                        "reputation": 161,
+                        "user_id": 14512759,
+                        "user_type": "registered",
+                        "display_name": "schl&#246;pp"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1696530415,
+                    "creation_date": 1696530415,
+                    "answer_id": 77239715,
+                    "question_id": 1915170,
+                    "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery/77239715#77239715",
+                    "body": "<h1>3.12 - itertools.batched</h1>\n<p>Python 3.12, released October 2nd, offers this as a built-in feature in the <code>itertools</code> module: <a href=\"https://docs.python.org/3/library/itertools.html#itertools.batched\" rel=\"nofollow noreferrer\"><code>itertools.batched</code></a></p>\n<pre class=\"lang-py prettyprint-override\"><code>from itertools import batched\nbatched(&quot;ABCDEFG&quot;, 2)  # --&gt; ((&quot;A&quot;, &quot;B&quot;), (&quot;C&quot;, &quot;D&quot;), (&quot;E&quot;,))\nbatched(range(8), 3)  # --&gt; ((1, 2, 3), (4, 5, 6), (7, 8))\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 23075,
+                "reputation": 4295,
+                "user_id": 57557,
+                "user_type": "registered",
+                "accept_rate": 100,
+                "display_name": "James Brooks"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 1915307,
+            "answer_count": 15,
+            "score": 46,
+            "last_activity_date": 1696530415,
+            "creation_date": 1260975508,
+            "last_edit_date": 1609906988,
+            "question_id": 1915170,
+            "link": "https://stackoverflow.com/questions/1915170/split-a-generator-iterable-every-n-items-in-python-splitevery",
+            "title": "split a generator/iterable every n items in python (splitEvery)",
+            "body": "<p>I'm trying to write the Haskell function 'splitEvery' in Python. Here is it's definition:</p>\n<pre><code>splitEvery :: Int -&gt; [e] -&gt; [[e]]\n    @'splitEvery' n@ splits a list into length-n pieces.  The last\n    piece will be shorter if @n@ does not evenly divide the length of\n    the list.\n</code></pre>\n<p>The basic version of this works fine, but I want a version that works with generator expressions, lists, and iterators. <em>And</em>, if there is a generator as an input it should return a generator as an output!</p>\n<h2>Tests</h2>\n<pre><code># should not enter infinite loop with generators or lists\nsplitEvery(itertools.count(), 10)\nsplitEvery(range(1000), 10)\n\n# last piece must be shorter if n does not evenly divide\nassert splitEvery(5, range(9)) == [[0, 1, 2, 3, 4], [5, 6, 7, 8]]\n\n# should give same correct results with generators\ntmp = itertools.islice(itertools.count(), 10)\nassert list(splitEvery(5, tmp)) == [[0, 1, 2, 3, 4], [5, 6, 7, 8]]\n</code></pre>\n<h2>Current Implementation</h2>\n<p>Here is the code I currently have but it doesn't work with a simple list.</p>\n<pre><code>def splitEvery_1(n, iterable):\n    res = list(itertools.islice(iterable, n))\n    while len(res) != 0:\n        yield res\n        res = list(itertools.islice(iterable, n))\n</code></pre>\n<p>This one doesn't work with a generator expression (thanks to jellybean for fixing it):</p>\n<pre><code>def splitEvery_2(n, iterable): \n    return [iterable[i:i+n] for i in range(0, len(iterable), n)]\n</code></pre>\n<p>There has to be a simple piece of code that does the splitting. I know I could just have different functions but it seems like it should be and easy thing to do. I'm probably getting stuck on an unimportant problem but it's really bugging me.</p>\n<hr />\n<p>It is similar to grouper from <a href=\"http://docs.python.org/library/itertools.html#itertools.groupby\" rel=\"noreferrer\">http://docs.python.org/library/itertools.html#itertools.groupby</a> but I don't want it to fill extra values.</p>\n<pre><code>def grouper(n, iterable, fillvalue=None):\n    &quot;grouper(3, 'ABCDEFG', 'x') --&gt; ABC DEF Gxx&quot;\n    args = [iter(iterable)] * n\n    return izip_longest(fillvalue=fillvalue, *args)\n</code></pre>\n<p>It does mention a method that truncates the last value. This isn't what I want either.</p>\n<blockquote>\n<p>The left-to-right evaluation order of the iterables is guaranteed. This makes possible an idiom for clustering a data series into n-length groups using izip(*[iter(s)]*n).</p>\n</blockquote>\n<pre><code>list(izip(*[iter(range(9))]*5)) == [[0, 1, 2, 3, 4]]\n# should be [[0, 1, 2, 3, 4], [5, 6, 7, 8]]\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9071
+}

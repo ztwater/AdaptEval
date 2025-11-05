@@ -1,0 +1,110 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "python-unittest",
+                "test-suite"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 10445,
+                        "reputation": 2606,
+                        "user_id": 19741,
+                        "user_type": "registered",
+                        "accept_rate": 76,
+                        "display_name": "daniel"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1404064846,
+                    "creation_date": 1404064846,
+                    "answer_id": 24478754,
+                    "question_id": 24478727,
+                    "link": "https://stackoverflow.com/questions/24478727/how-to-list-available-tests-with-python/24478754#24478754",
+                    "body": "<p>You could do something like:</p>\n\n<pre><code>from your_tests import TestSequenceFunctions\nprint('\\n'.join([f.__name__ for f in dir(TestSequenceFunctions) if f.__name__.startswith('test_')]))\n</code></pre>\n\n<p>I'm not sure if there is an exposed method for this via <code>unittest.main</code>.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 383912,
+                                "reputation": 5549,
+                                "user_id": 740067,
+                                "user_type": "registered",
+                                "accept_rate": 66,
+                                "display_name": "xliiv"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1409584882,
+                            "post_id": 24478809,
+                            "comment_id": 40004890,
+                            "link": "https://stackoverflow.com/questions/24478727/how-to-list-available-tests-with-python/24478809#comment40004890_24478809",
+                            "body": "I couldn&#39;t find email to @vaultah so i&#39;m writing here. I&#39;ve updated license and attribution. I hope you&#39;ll forgive my initial innocence :). I also want to thank BoltClock for calm explaining my mistakes."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8553676,
+                                "reputation": 360,
+                                "user_id": 9149359,
+                                "user_type": "registered",
+                                "display_name": "Sebastian"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1592391954,
+                            "post_id": 24478809,
+                            "comment_id": 110407092,
+                            "link": "https://stackoverflow.com/questions/24478727/how-to-list-available-tests-with-python/24478809#comment110407092_24478809",
+                            "body": "where to put code from @vaultah solution? in unit tests folder <b>main</b>.py?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2662014,
+                        "reputation": 45632,
+                        "user_id": 2301450,
+                        "user_type": "registered",
+                        "accept_rate": 93,
+                        "display_name": "vaultah"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 25,
+                    "last_activity_date": 1404067727,
+                    "last_edit_date": 1404067727,
+                    "creation_date": 1404065378,
+                    "answer_id": 24478809,
+                    "question_id": 24478727,
+                    "link": "https://stackoverflow.com/questions/24478727/how-to-list-available-tests-with-python/24478809#24478809",
+                    "body": "<p>Command line command <code>discover</code> is implemented using <a href=\"https://docs.python.org/3/library/unittest.html?highlight=discover#unittest.TestLoader\"><code>unittest.TestLoader</code></a>. Here's the somewhat elegant solution</p>\n\n<pre><code>import unittest\n\ndef print_suite(suite):\n    if hasattr(suite, '__iter__'):\n        for x in suite:\n            print_suite(x)\n    else:\n        print(suite)\n\nprint_suite(unittest.defaultTestLoader.discover('.'))\n</code></pre>\n\n<p>Running example:</p>\n\n<pre><code>In [5]: print_suite(unittest.defaultTestLoader.discover('.'))\ntest_accounts (tests.TestAccounts)\ntest_counters (tests.TestAccounts)\n# More of this ...\ntest_full (tests.TestImages)\n</code></pre>\n\n<p>This works because <a href=\"https://docs.python.org/3/library/unittest.html?highlight=discover#unittest.TestLoader.discover\"><code>TestLoader.discover</code></a>  returns <code>TestSuite</code> objects, that implement <code>__iter__</code> method and therefore are iterable.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 383912,
+                "reputation": 5549,
+                "user_id": 740067,
+                "user_type": "registered",
+                "accept_rate": 66,
+                "display_name": "xliiv"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 24478809,
+            "answer_count": 2,
+            "score": 12,
+            "last_activity_date": 1409495958,
+            "creation_date": 1404064639,
+            "last_edit_date": 1406967529,
+            "question_id": 24478727,
+            "link": "https://stackoverflow.com/questions/24478727/how-to-list-available-tests-with-python",
+            "title": "How to list available tests with python?",
+            "body": "<p>How to just list all discovered tests?\nI found this command:</p>\n\n<pre><code>python3.4 -m unittest discover -s .\n</code></pre>\n\n<p>But it's not exactly what I want, because the above command executes tests. I mean let's have a project with a lot of tests. Execution time is a few minutes. This force me to wait until tests are finished.</p>\n\n<p>What I want is something like this (above command's output)</p>\n\n<pre><code>test_choice (test.TestSequenceFunctions) ... ok\ntest_sample (test.TestSequenceFunctions) ... ok\ntest_shuffle (test.TestSequenceFunctions) ... ok\n</code></pre>\n\n<p>or even better, something more like this (after editing above):</p>\n\n<pre><code>test.TestSequenceFunctions.test_choice\ntest.TestSequenceFunctions.test_sample\ntest.TestSequenceFunctions.test_shuffle\n</code></pre>\n\n<p>but without execution, only printing tests \"paths\" for copy&amp;paste purpose.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8442
+}

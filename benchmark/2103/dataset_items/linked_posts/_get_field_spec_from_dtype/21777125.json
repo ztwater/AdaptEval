@@ -1,0 +1,112 @@
+{
+    "items": [
+        {
+            "tags": [
+                "list",
+                "dictionary",
+                "numpy",
+                "recarray"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 266047,
+                        "reputation": 32181,
+                        "user_id": 553404,
+                        "user_type": "registered",
+                        "accept_rate": 95,
+                        "display_name": "YXD"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1392375315,
+                    "post_id": 21777125,
+                    "comment_id": 32946451,
+                    "link": "https://stackoverflow.com/questions/21777125/how-to-output-dtype-to-a-list-or-dict#comment32946451_21777125",
+                    "body": "Could you post a <a href=\"http://stackoverflow.com/help/mcve\">minimal example</a> of your problem?"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 253080,
+                                "reputation": 77,
+                                "user_id": 531525,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "user531525"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1392404599,
+                            "post_id": 21787116,
+                            "comment_id": 32964455,
+                            "link": "https://stackoverflow.com/questions/21777125/how-to-output-dtype-to-a-list-or-dict/21787116#comment32964455_21787116",
+                            "body": "OK, that was simple. That&#39;s for the help."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 300328,
+                        "reputation": 112936,
+                        "user_id": 1217358,
+                        "user_type": "registered",
+                        "display_name": "Warren Weckesser"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": true,
+                    "score": 11,
+                    "last_activity_date": 1585852979,
+                    "last_edit_date": 1585852979,
+                    "creation_date": 1392403338,
+                    "answer_id": 21787116,
+                    "question_id": 21777125,
+                    "link": "https://stackoverflow.com/questions/21777125/how-to-output-dtype-to-a-list-or-dict/21787116#21787116",
+                    "body": "<p>The <a href=\"http://docs.scipy.org/doc/numpy/reference/generated/numpy.dtype.fields.html\" rel=\"nofollow noreferrer\"><code>fields</code></a> attribute of the dtype of a structured array acts like a dictionary.  The field names are the keys, and the values are tuples holding the field's type and offset.</p>\n\n<p>For example:</p>\n\n<pre><code>In [22]: a\nOut[22]: \narray([(1., 2., 99), (3., 4., 75)], \n      dtype=[('x', '&lt;f4'), ('y', '&lt;f4'), ('code', '&lt;i8')])\n\nIn [23]: a.dtype.fields\nOut[23]: \nmappingproxy({'x': (dtype('float32'), 0),\n              'y': (dtype('float32'), 4),\n              'code': (dtype('int64'), 8)})\n\nIn [24]: for name, typ in a.dtype.fields.items():\n   ....:     print(\"%-12s %-20s  %d\" % (name, typ[0], typ[1]))\n   ....:     \ny            float32               0\nx            float32               4\ncode         int64                 8\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4049421,
+                        "reputation": 3529,
+                        "user_id": 3329564,
+                        "user_type": "registered",
+                        "accept_rate": 72,
+                        "display_name": "J.J"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1446555075,
+                    "creation_date": 1446555075,
+                    "answer_id": 33499616,
+                    "question_id": 21777125,
+                    "link": "https://stackoverflow.com/questions/21777125/how-to-output-dtype-to-a-list-or-dict/33499616#33499616",
+                    "body": "<p>To answer the OPs specific question:</p>\n\n<p><strong>Dictionary (unsorted):</strong></p>\n\n<pre><code>{x:str(y[0]) for x,y in yourArray.dtype.fields.items()}\n</code></pre>\n\n<p><strong>List (sorted by column):</strong></p>\n\n<pre><code>[(x,str(y[0])) for x,y in sorted(yourArray.dtype.fields.items(),key=lambda k: k[1])]\n</code></pre>\n\n<p>Big thanks to Warren Weckesser who's answer of the dtype.fields is how I came to the above in the first place :)</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 253080,
+                "reputation": 77,
+                "user_id": 531525,
+                "user_type": "registered",
+                "accept_rate": 50,
+                "display_name": "user531525"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 21787116,
+            "answer_count": 2,
+            "score": 4,
+            "last_activity_date": 1585852979,
+            "creation_date": 1392374541,
+            "question_id": 21777125,
+            "link": "https://stackoverflow.com/questions/21777125/how-to-output-dtype-to-a-list-or-dict",
+            "title": "How to output dtype to a list or Dict",
+            "body": "<p>I just want to get a list or dict from dtype out of a numpy array. Thought it would be a easy but it is not itterable. I looked other places but could not find answer. \njn is a recarray</p>\n\n<pre><code>[OrderedDict(row) for i, row in jn.iterrows()]\njn.index.dtype\ndtype('object')\njn.to_records()\n#this put out record dtype\njn.to_records().dtype\n\ndtype([('index', '&lt;i8'), ('scalerank', 'O'), ('featurecla', 'O'), ('labelrank', 'O'), ('sovereignt', 'O'), ('sov_a3', 'O'), ('adm0_dif', 'O'), ('level', 'O'), ('type', 'O'), ('admin', 'O'), ('adm0_a3', 'O'), ('geou_dif', 'O'), ('geounit', 'O'), ('gu_a3', 'O'), ('su_dif', 'O'), ('subunit', 'O'), ('su_a3', 'O'), ('brk_diff', 'O'), ('name', 'O'), ('name_long', 'O'), ('brk_a3', 'O'), ('brk_name', 'O'), ('brk_group', 'O'), ('abbrev', 'O'), ('postal', 'O'), ('formal_en', 'O'), ('formal_fr', 'O'), ('note_adm0', 'O'), ('note_brk', 'O'), ('name_sort', 'O'), ('name_alt', 'O'), ('mapcolor7', 'O'), ('mapcolor8', 'O'), ('mapcolor9', 'O'), ('mapcolor13', 'O'), ('pop_est', 'O'), ('gdp_md_est', 'O'), ('pop_year', 'O'), ('lastcensus', 'O'), ('gdp_year', 'O'), ('economy', 'O'), ('income_grp', 'O'), ('wikipedia', 'O'), ('fips_10', 'O'), ('iso_a2', 'O'), ('iso_a3', 'O'), ('iso_n3', '&lt;i4'), ('un_a3', 'O'), ('wb_a2', 'O'), ('wb_a3', 'O'), ('woe_id', 'O'), ('adm0_a3_is', 'O'), ('adm0_a3_us', 'O'), ('adm0_a3_un', 'O'), ('adm0_a3_wb', 'O'), ('continent', 'O'), ('region_un', 'O'), ('subregion', 'O'), ('region_wb', 'O'), ('name_len', 'O'), ('long_len', 'O'), ('abbrev_len', 'O'), ('tiny', 'O'), ('homepart', 'O'), ('Country', 'O'), ('Index', '&lt;i8'), ('A2', 'O'), ('A3', 'O'), ('Code', '&lt;i4'), ('1', '&lt;f8'), ('730', '&lt;f8'), ('1000', '&lt;f8'), ('1150', '&lt;f8'), ('1280', '&lt;f8'), ('1300', '&lt;f8'), ('1348', '&lt;f8'), ('1400', '&lt;f8'), ('1450', '&lt;f8'), ('1500', '&lt;f8'), ('1550', '&lt;f8'), ('1570', '&lt;f8'), ('1600', '&lt;f8'), ('1650', '&lt;f8'), ('1700', '&lt;f8'), ('1720', '&lt;f8'), ('1750', '&lt;f8'), ('1775', '&lt;f8'), ('1800', '&lt;f8'), ('1820', '&lt;f8'), ('1850', '&lt;f8'), ('1870', '&lt;f8'), ('1890', '&lt;f8'), ('1913', '&lt;f8'), ('1929', '&lt;f8'), ('1950', '&lt;f8'), ('1960', '&lt;f8'), ('1973', '&lt;f8'), ('1980', '&lt;f8'), ('1990', '&lt;f8'), ('2000', '&lt;f8'), ('2008', '&lt;f8')])\n\n\nkd = jn.to_records().dtype\nprint kd\ngsc = []\nfrom itertools import chain\ngsc = list(chain(kd))\nerror\n\n5 gsc = list(chain(kd))\n</code></pre>\n\n<p>TypeError: 'numpy.dtype' object is not iterable</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6017
+}

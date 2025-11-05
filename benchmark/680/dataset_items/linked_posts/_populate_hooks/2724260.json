@@ -1,0 +1,128 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "python-import"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 19336,
+                                "reputation": 2391,
+                                "user_id": 45224,
+                                "user_type": "registered",
+                                "display_name": "ieure"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1272396801,
+                            "post_id": 2724300,
+                            "comment_id": 2750968,
+                            "link": "https://stackoverflow.com/questions/2724260/why-does-pythons-import-require-fromlist/2724300#comment2750968_2724300",
+                            "body": "Saying &quot;that&#39;s just how the implementation works&quot; doesn&#39;t answer my question. Why does it work that way?  Saying &quot;to emulate the from name import \u2026&quot; form is closer, but under what circumstances would you need that? The fromlist doesn&#39;t make a whit of difference to how <b>import</b> actually works, so I don&#39;t see where there&#39;s a case where you&#39;d need to pass it to emulate anything, except what should be the obvious behavior of the function."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 14130,
+                                "reputation": 405557,
+                                "user_id": 28804,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "mipadi"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1272400303,
+                            "post_id": 2724300,
+                            "comment_id": 2751473,
+                            "link": "https://stackoverflow.com/questions/2724260/why-does-pythons-import-require-fromlist/2724300#comment2751473_2724300",
+                            "body": "You&#39;re right, it is begging the question. I updated my answer to give a more relevant reply."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 14130,
+                        "reputation": 405557,
+                        "user_id": 28804,
+                        "user_type": "registered",
+                        "accept_rate": 74,
+                        "display_name": "mipadi"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1272400276,
+                    "last_edit_date": 1272400276,
+                    "creation_date": 1272396031,
+                    "answer_id": 2724300,
+                    "question_id": 2724260,
+                    "link": "https://stackoverflow.com/questions/2724260/why-does-pythons-import-require-fromlist/2724300#2724300",
+                    "body": "<p>The answer can found found in the documentation for <code>__import__</code>:</p>\n\n<blockquote>\n  <p>The fromlist should be a list of names to emulate <code>from name import ...</code>, or an empty list to emulate <code>import name</code>.</p>\n  \n  <p>When importing a module from a package, note that <code>__import__('A.B', ...)</code> returns package A when fromlist is empty, but its submodule B when fromlist is not empty.</p>\n</blockquote>\n\n<p>So basically, that's just how the implementation of <code>__import__</code> works: if you want the submodule, you pass a <code>fromlist</code> containing something you want to import from the submodule, and the implementation if <code>__import__</code> is such that the submodule is returned.</p>\n\n<p><strong>Further explanation</strong></p>\n\n<p>I think the semantics exist so that the most relevant module is returned. In other words, say I have a package <code>foo</code> containing module <code>bar</code> with function <code>baz</code>. If I:</p>\n\n<pre><code>import foo.bar\n</code></pre>\n\n<p>Then I refer to <code>baz</code> as</p>\n\n<pre><code>foo.bar.baz()\n</code></pre>\n\n<p>This is like <code>__import__(\"foo.bar\", fromlist=[])</code>.</p>\n\n<p>If instead I import with:</p>\n\n<pre><code>from foo import bar\n</code></pre>\n\n<p>Then I refer to <code>baz</code> as\n    bar.baz()</p>\n\n<p>Which would be similar to <code>__imoort__(\"foo.bar\", fromlist=[\"something\"])</code>.</p>\n\n<p>If I do:</p>\n\n<pre><code>from foo.bar import baz\n</code></pre>\n\n<p>Then I refer to <code>baz</code> as</p>\n\n<pre><code>baz()\n</code></pre>\n\n<p>Which is like <code>__import__(\"foo.bar\", fromlist=[\"baz\"])</code>.</p>\n\n<p>So in the first case, I'd have to use the fully-qualified name, hence <code>__import__</code> returns the first module name you'd use to refer to the imported elements, that being <code>foo</code>. In the last case, <code>bar</code> is the most specific module containing the imported elements, so it makes sense that <code>__import__</code> would return the <code>foo.bar</code> module.</p>\n\n<p>The second case is a little weird, but I am guessing it was written that way to support importing a module using the <code>from &lt;package&gt; import &lt;module&gt;</code> syntax, and in that case <code>bar</code> is still the most specific module to return.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 9516,
+                        "reputation": 131749,
+                        "user_id": 17624,
+                        "user_type": "registered",
+                        "display_name": "Thomas Wouters"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 140,
+                    "last_activity_date": 1272413111,
+                    "last_edit_date": 1272413111,
+                    "creation_date": 1272407986,
+                    "answer_id": 2725668,
+                    "question_id": 2724260,
+                    "link": "https://stackoverflow.com/questions/2724260/why-does-pythons-import-require-fromlist/2725668#2725668",
+                    "body": "<p>In fact, the behaviour of <code>__import__()</code> is entirely because of the implementation of the <code>import</code> statement, which calls <code>__import__()</code>. There's basically five slightly different ways <code>__import__()</code> can be called by <code>import</code> (with two main categories):</p>\n\n<pre><code>import pkg\nimport pkg.mod\nfrom pkg import mod, mod2\nfrom pkg.mod import func, func2\nfrom pkg.mod import submod\n</code></pre>\n\n<p>In the first <em>and</em> the second case, the <code>import</code> statement should assign the \"left-most\" module object to the \"left-most\" name: <code>pkg</code>. After <code>import pkg.mod</code> you can do <code>pkg.mod.func()</code> because the <code>import</code> statement introduced the local name <code>pkg</code>, which is a module object that has a <code>mod</code> attribute. So, the <code>__import__()</code> function has to return the \"left-most\" module object so it can be assigned to <code>pkg</code>. Those two import statements thus translate into:</p>\n\n<pre><code>pkg = __import__('pkg')\npkg = __import__('pkg.mod')\n</code></pre>\n\n<p>In the third, fourth and fifth case, the <code>import</code> statement has to do more work: it has to assign to (potentially) multiple names, which it has to get from the module object. The <code>__import__()</code> function can only return one object, and there's no real reason to make it retrieve each of those names from the module object (and it would make the implementation a lot more complicated.) So the simple approach would be something like (for the third case):</p>\n\n<pre><code>tmp = __import__('pkg')\nmod = tmp.mod\nmod2 = tmp.mod2\n</code></pre>\n\n<p>However, that won't work if <code>pkg</code> is a package and <code>mod</code> or <code>mod2</code> are modules in that package <em>that are not already imported</em>, as they are in the third and fifth case. The <code>__import__()</code> function needs to know that <code>mod</code> and <code>mod2</code> are names that the <code>import</code> statement will want to have accessible, so that it can see if they are modules and try to import them too. So the call is closer to:</p>\n\n<pre><code>tmp = __import__('pkg', fromlist=['mod', 'mod2'])\nmod = tmp.mod\nmod2 = tmp.mod2\n</code></pre>\n\n<p>which causes <code>__import__()</code> to try and load <code>pkg.mod</code> and <code>pkg.mod2</code> as well as <code>pkg</code> (but if <code>mod</code> or <code>mod2</code> don't exist, it's not an error in the <code>__import__()</code> call; producing an error is left to the <code>import</code> statement.) But that still isn't the right thing for the fourth and fifth example, because if the call were so:</p>\n\n<pre><code>tmp = __import__('pkg.mod', fromlist=['submod'])\nsubmod = tmp.submod\n</code></pre>\n\n<p>then <code>tmp</code> would end up being <code>pkg</code>, as before, and not the <code>pkg.mod</code> module you want to get the <code>submod</code> attribute from. The implementation could have decided to make it so the <code>import</code> statement does extra work, splitting the package name on <code>.</code> like the <code>__import__()</code> function already does and traversing the names, but this would have meant duplicating some of the effort. So, instead, the implementation made <code>__import__()</code> return the <em>right-most</em> module instead of the <em>left-most</em> one <strong>if and only if</strong> fromlist is passed and not empty.</p>\n\n<p>(The <code>import pkg as p</code> and <code>from pkg import mod as m</code> syntax doesn't change anything about this story except which local names get assigned to -- the <code>__import__()</code> function sees nothing different when <code>as</code> is used, it all remains in the <code>import</code> statement implementation.)</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 245367,
+                        "reputation": 245,
+                        "user_id": 518813,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "zhkzyth"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1371562537,
+                    "last_edit_date": 1371562537,
+                    "creation_date": 1365563712,
+                    "answer_id": 15916303,
+                    "question_id": 2724260,
+                    "link": "https://stackoverflow.com/questions/2724260/why-does-pythons-import-require-fromlist/15916303#15916303",
+                    "body": "<p>I still feel weird when I read the answer, so I tried the below code samples.</p>\n\n<p>First, try to build below file structure:</p>\n\n<pre><code>tmpdir\n  |A\n     |__init__.py\n     | B.py\n     | C.py\n</code></pre>\n\n<p>Now A is a <code>package</code>, and <code>B</code> or <code>C</code> is a <code>module</code>.  So when we try some code like these in ipython:</p>\n\n<p>Second, run the sample code in ipython:</p>\n\n<pre><code>  In [2]: kk = __import__('A',fromlist=['B'])\n\n  In [3]: dir(kk)\n  Out[3]: \n  ['B',\n   '__builtins__',\n   '__doc__',\n   '__file__',\n   '__name__',\n   '__package__',\n   '__path__']\n</code></pre>\n\n<p>It seems like the fromlist works as we expected. But things become wired when we try to do the same things on a <code>module</code>. Suppose we have a module called C.py and code in it:</p>\n\n<pre><code>  handlers = {}\n\n  def hello():\n      print \"hello\"\n\n  test_list = []\n</code></pre>\n\n<p>So now we try to do the same thing on it.</p>\n\n<pre><code>  In [1]: ls\n  C.py\n\n  In [2]: kk = __import__('C')\n\n  In [3]: dir(kk)\n  Out[3]: \n  ['__builtins__',\n   '__doc__',\n   '__file__',\n   '__name__',\n   '__package__',\n   'handlers',\n   'hello',\n   'test_list']\n</code></pre>\n\n<p>So when we just want to import the test_list, does it work?</p>\n\n<pre><code>  In [1]: kk = __import__('C',fromlist=['test_list'])\n\n  In [2]: dir(kk)\n  Out[2]: \n  ['__builtins__',\n   '__doc__',\n   '__file__',\n   '__name__',\n   '__package__',\n   'handlers',\n   'hello',\n   'test_list']\n</code></pre>\n\n<p>As the result shows, when we try to use fromlist on a <code>module</code> rather than a <code>package</code>, the fromlist param doesn't help at all because <code>module</code> has been compiled. Once it is imported, there is no way to ignore the other ones.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 19336,
+                "reputation": 2391,
+                "user_id": 45224,
+                "user_type": "registered",
+                "display_name": "ieure"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 2725668,
+            "answer_count": 3,
+            "score": 85,
+            "last_activity_date": 1407857624,
+            "creation_date": 1272395722,
+            "last_edit_date": 1407857624,
+            "question_id": 2724260,
+            "link": "https://stackoverflow.com/questions/2724260/why-does-pythons-import-require-fromlist",
+            "title": "Why does Python&#39;s __import__ require fromlist?",
+            "body": "<p>In Python, if you want to programmatically import a module, you can do:</p>\n\n<pre><code>module = __import__('module_name')\n</code></pre>\n\n<p>If you want to import a submodule, you would think it would be a simple matter of:</p>\n\n<pre><code>module = __import__('module_name.submodule')\n</code></pre>\n\n<p>Of course, this doesn't work; you just get <code>module_name</code> again. You have to do:</p>\n\n<pre><code>module = __import__('module_name.submodule', fromlist=['blah'])\n</code></pre>\n\n<p><strong>Why?</strong> The actual value of <code>fromlist</code> don't seem to matter at all, as long as it's non-empty. What is the point of requiring an argument, then ignoring its values?</p>\n\n<p>Most stuff in Python seems to be done for good reason, but for the life of me, I can't come up with any reasonable explanation for this behavior to exist.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8800
+}

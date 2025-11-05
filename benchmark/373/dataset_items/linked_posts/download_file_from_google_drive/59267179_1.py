@@ -1,0 +1,1 @@
+curl_gdrive 153bpzybhfqDspyO_gdbcG5CMlI19ASba imagenet.tar

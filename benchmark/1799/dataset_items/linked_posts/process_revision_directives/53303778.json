@@ -1,0 +1,336 @@
+{
+    "items": [
+        {
+            "tags": [
+                "sqlalchemy",
+                "database-migration",
+                "alembic"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3242040,
+                                "reputation": 509,
+                                "user_id": 2734790,
+                                "user_type": "registered",
+                                "display_name": "John Christopher Jones"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1563323346,
+                            "post_id": 53311805,
+                            "comment_id": 100658740,
+                            "link": "https://stackoverflow.com/questions/53303778/is-there-any-way-to-generate-sequential-revision-ids-in-alembic/53311805#comment100658740_53311805",
+                            "body": "This was fantastic information. Thank you. This helped me make it easier to fix a recurring problem we have. If someone forgets to downgrade before checking out another feature branch, <code>alembic history -i</code> will explode when its unable to find the head. Prefixing the date makes it easier to locate the culprit. A built-in way to timestamp the revid is still the dream, since that&#39;s what actually goes into alembic_version. We&#39;d taken up using <code>--rev-id $(date -u +&quot;%Y%m%dT%H%M%SZ&quot;)</code> with <code>alembic revision</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 73171,
+                                "reputation": 7777,
+                                "user_id": 210867,
+                                "user_type": "registered",
+                                "accept_rate": 46,
+                                "display_name": "odigity"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1673467998,
+                            "post_id": 53311805,
+                            "comment_id": 132508541,
+                            "link": "https://stackoverflow.com/questions/53303778/is-there-any-way-to-generate-sequential-revision-ids-in-alembic/53311805#comment132508541_53311805",
+                            "body": "Note:  v1.8 added <code>%%(epoch)s</code> to the list of <code>file_template</code> tokens"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 73171,
+                                "reputation": 7777,
+                                "user_id": 210867,
+                                "user_type": "registered",
+                                "accept_rate": 46,
+                                "display_name": "odigity"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1673468031,
+                            "post_id": 53311805,
+                            "comment_id": 132508555,
+                            "link": "https://stackoverflow.com/questions/53303778/is-there-any-way-to-generate-sequential-revision-ids-in-alembic/53311805#comment132508555_53311805",
+                            "body": "It&#39;s a shame there&#39;s not a built-in option for simple auto-incrementing integers starting at 1."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 8774986,
+                        "reputation": 10470,
+                        "user_id": 6560549,
+                        "user_type": "registered",
+                        "display_name": "SuperShoot"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": true,
+                    "score": 83,
+                    "last_activity_date": 1554201015,
+                    "last_edit_date": 1554201015,
+                    "creation_date": 1542250961,
+                    "answer_id": 53311805,
+                    "question_id": 53303778,
+                    "link": "https://stackoverflow.com/questions/53303778/is-there-any-way-to-generate-sequential-revision-ids-in-alembic/53311805#53311805",
+                    "body": "<p>By the sounds of it, you are more interested in sequentially listed revision files rather than sequentially ordered revision ids. The former can be achieved without any change to how the revision ids are generated.</p>\n\n<p>The <a href=\"https://alembic.zzzcomputing.com/en/latest/tutorial.html#editing-the-ini-file\" rel=\"noreferrer\"><code>alembic.ini</code></a> file that is generated when you run <code>alembic init alembic</code> has a section that configures the naming of the revision files:</p>\n\n<pre><code># template used to generate migration files\n# file_template = %%(rev)s_%%(slug)s\n</code></pre>\n\n<p>And here is the explanation from the docs:</p>\n\n<blockquote>\n  <p>file_template - this is the naming scheme used to generate new\n  migration files. The value present is the default, so is commented\n  out. Tokens available include:</p>\n  \n  <ul>\n  <li>%%(rev)s - revision id </li>\n  <li>%%(slug)s - a truncated string derived from the revision message</li>\n  <li>%%(year)d, %%(month).2d, %%(day).2d, %%(hour).2d, %%(minute).2d, %%(second).2d - components of the create date, by default datetime.datetime.now() unless the timezone configuration option is also used.</li>\n  </ul>\n</blockquote>\n\n<p>So adding <code>file_template = %%(year)d-%%(month).2d-%%(day).2d_%%(rev)s_%%(slug)s</code> to <code>alembic.ini</code> would name your revision like <code>2018-11-15_xxxxxxxxxxxx_adding_a_column.py</code>.</p>\n\n<p>I found this issue: <a href=\"https://bitbucket.org/zzzeek/alembic/issues/371/add-unixtime-stamp-to-start-of-versions\" rel=\"noreferrer\">https://bitbucket.org/zzzeek/alembic/issues/371/add-unixtime-stamp-to-start-of-versions</a> which pointed me in the right direction.</p>\n\n<p><a href=\"https://bitbucket.org/zzzeek/alembic/issues/371/add-unixtime-stamp-to-start-of-versions#comment-27478063\" rel=\"noreferrer\">A comment from from that issue</a>:</p>\n\n<blockquote>\n  <p>timestamps don't necessarily tell you which file is the most \"recent\",\n  since branching is allowed. \"alembic history\" is meant to be the best\n  source of truth on this.</p>\n</blockquote>\n\n<p>So, the file naming solution will not guarantee that migrations are ordered logically in the directory (but will help IMO). The same argument could be made against having sequential ids.</p>\n\n<p>If you do want to specify your own revision identifier, use the <a href=\"https://alembic.zzzcomputing.com/en/latest/api/commands.html#alembic.command.revision.params.rev_id\" rel=\"noreferrer\"><code>--rev-id</code></a> flag on the command line.</p>\n\n<p>E.g.:</p>\n\n<p><code>alembic revision -m 'a message' --rev-id=1</code></p>\n\n<p>Generated a file called <code>1_a_message.py</code>:</p>\n\n<pre><code>\"\"\"a message\n\nRevision ID: 1\nRevises:\nCreate Date: 2018-11-15 13:40:31.228888\n\n\"\"\"\nfrom alembic import op\nimport sqlalchemy as sa\n\n\n# revision identifiers, used by Alembic.\nrevision = '1'\ndown_revision = None\nbranch_labels = None\ndepends_on = None\n\n\ndef upgrade():\n    pass\n\n\ndef downgrade():\n    pass\n</code></pre>\n\n<p>So you can definitely manage the revision identifiers yourself. It would be trivial to write a bash script to trigger your revision generation, automatically passing a datetime based <code>rev_id</code>, e.g. <code>--rev-id=&lt;current datetime&gt;</code> to govern order listed in the directory.</p>\n\n<p>If the revision id isn't specified, the function <code>rev_id()</code> found at <a href=\"https://github.com/sqlalchemy/alembic/blob/d46de05b8b3281a85e6b107ef3f3407e232eb9e9/alembic/util/langhelpers.py#L175\" rel=\"noreferrer\"><code>alembic.util.langhelpers</code></a> is called:</p>\n\n<pre><code>def rev_id():\n    return uuid.uuid4().hex[-12:]\n</code></pre>\n\n<p>Function calls to <code>rev_id()</code> are hard-coded in the alembic source, so short of monkey-patching the function, it will be difficult to override the behavior. You could create a fork of the library and redefine that function or make the function that it calls for id generation configurable.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7094431,
+                                "reputation": 171,
+                                "user_id": 5428561,
+                                "user_type": "registered",
+                                "display_name": "Abhishek Kumar"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1713202849,
+                            "post_id": 60975967,
+                            "comment_id": 138094052,
+                            "link": "https://stackoverflow.com/questions/53303778/is-there-any-way-to-generate-sequential-revision-ids-in-alembic/60975967#comment138094052_60975967",
+                            "body": "This works, I used a little modified script"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 98493,
+                        "reputation": 20121,
+                        "user_id": 266564,
+                        "user_type": "registered",
+                        "accept_rate": 85,
+                        "display_name": "chriscauley"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1585759255,
+                    "creation_date": 1585759255,
+                    "answer_id": 60975967,
+                    "question_id": 53303778,
+                    "link": "https://stackoverflow.com/questions/53303778/is-there-any-way-to-generate-sequential-revision-ids-in-alembic/60975967#60975967",
+                    "body": "<p>I made a script to autoincrement the revision number based off of how many migrations already exist maching the <code>####_</code> pattern. Here's a TLDR version. I you save this as migrations.sh and change the path in line 2</p>\n\n<pre class=\"lang-sh prettyprint-override\"><code>#!/usr/bin/env bash\nNEXT_ID=`ls kennel/db/versions/* | grep -P '/\\d{4}_.*\\.py$' | wc -l`\nalembic revision -m $@ --rev-id=`printf \"%04d\" ${NEXT_ID}`\n</code></pre>\n\n<p>Then you can use it like:</p>\n\n<pre class=\"lang-sh prettyprint-override\"><code>./migrations.sh migration_name\n# or \n./migrations.sh migration_name --autogenerate\n</code></pre>\n\n<p>The full script has documentation and uses defaults to <code>--autogenerate</code> which can be disabled using an <code>--empty</code> flag.\n<a href=\"https://gist.github.com/chriscauley/cf0b038d055076a2a30de43526d4150e\" rel=\"noreferrer\">https://gist.github.com/chriscauley/cf0b038d055076a2a30de43526d4150e</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 10238183,
+                                "reputation": 1270,
+                                "user_id": 7556397,
+                                "user_type": "registered",
+                                "display_name": "Lionel Hamayon"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1622727954,
+                            "post_id": 67398484,
+                            "comment_id": 119879376,
+                            "link": "https://stackoverflow.com/questions/53303778/is-there-any-way-to-generate-sequential-revision-ids-in-alembic/67398484#comment119879376_67398484",
+                            "body": "Great answer. To prepend the revision number and keep the original uuid from alembic, I have modified your function like this: <code>last_rev_id = int(head_revision[:4].lstrip(&quot;0&quot;))</code> and <code>migration_script.rev_id = f&quot;{new_rev_id:04}_{uuid.uuid4().hex[-12:]}&quot;</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1162643,
+                                "reputation": 1076,
+                                "user_id": 1141842,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "rmehlinger"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1666992712,
+                            "post_id": 67398484,
+                            "comment_id": 131073913,
+                            "link": "https://stackoverflow.com/questions/53303778/is-there-any-way-to-generate-sequential-revision-ids-in-alembic/67398484#comment131073913_67398484",
+                            "body": "quick note, to get <code>ScriptDirectory</code> do the following:  <code>from alembic.script import ScriptDirectory</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1069956,
+                                "reputation": 7323,
+                                "user_id": 1069494,
+                                "user_type": "registered",
+                                "accept_rate": 55,
+                                "display_name": "Levi"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1678437115,
+                            "post_id": 67398484,
+                            "comment_id": 133535635,
+                            "link": "https://stackoverflow.com/questions/53303778/is-there-any-way-to-generate-sequential-revision-ids-in-alembic/67398484#comment133535635_67398484",
+                            "body": "Great answer! The <code>lstrip(&#39;0&#39;)</code> is not needed"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2315738,
+                                "reputation": 2987,
+                                "user_id": 2032848,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Groosha"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1679654698,
+                            "post_id": 67398484,
+                            "comment_id": 133763710,
+                            "link": "https://stackoverflow.com/questions/53303778/is-there-any-way-to-generate-sequential-revision-ids-in-alembic/67398484#comment133763710_67398484",
+                            "body": "Also if you have multiple <code>context.configure</code>, you should add to all of them"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7138090,
+                        "reputation": 181,
+                        "user_id": 8324474,
+                        "user_type": "registered",
+                        "display_name": "Dima Boger"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 18,
+                    "last_activity_date": 1620206406,
+                    "creation_date": 1620206406,
+                    "answer_id": 67398484,
+                    "question_id": 53303778,
+                    "link": "https://stackoverflow.com/questions/53303778/is-there-any-way-to-generate-sequential-revision-ids-in-alembic/67398484#67398484",
+                    "body": "<p>I found how to do it in my case without additional bash scripts, just some mutation magic in env.py. Maybe it will help somebody.</p>\n<p>Alembic has a powerful feature with <a href=\"https://alembic.sqlalchemy.org/en/latest/api/autogenerate.html#customizing-revision-generation\" rel=\"noreferrer\">customizing generated revisions</a> so we can write override at this level:</p>\n<pre class=\"lang-py prettyprint-override\"><code># env.py\ndef process_revision_directives(context, revision, directives):\n    # extract Migration\n    migration_script = directives[0]\n    # extract current head revision\n    head_revision = ScriptDirectory.from_config(context.config).get_current_head()\n    \n    if head_revision is None:\n        # edge case with first migration\n        new_rev_id = 1\n    else:\n        # default branch with incrementation\n        last_rev_id = int(head_revision.lstrip('0'))\n        new_rev_id = last_rev_id + 1\n    # fill zeros up to 4 digits: 1 -&gt; 0001\n    migration_script.rev_id = '{0:04}'.format(new_rev_id)\n\n...\n# then use it context.configure\ncontext.configure(\n  ...\n  process_revision_directives=process_revision_directives,\n)\n</code></pre>\n<p>If you also want to use it for revisions created without <code>--autogenerate</code> you should set <code>revision_environment</code> to true in <code>alembic.ini</code></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4955209,
+                                "reputation": 1354,
+                                "user_id": 3988037,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "DeusXMachina"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1634079688,
+                            "post_id": 69118284,
+                            "comment_id": 122928828,
+                            "link": "https://stackoverflow.com/questions/53303778/is-there-any-way-to-generate-sequential-revision-ids-in-alembic/69118284#comment122928828_69118284",
+                            "body": "This is fantastic. I was able to use this, and batch-rename my old version files as well, and it seemed like alembic was still able to migrate just fine."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 280583,
+                                "reputation": 848,
+                                "user_id": 576372,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "jkulak"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4955209,
+                                "reputation": 1354,
+                                "user_id": 3988037,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "DeusXMachina"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1666048352,
+                            "post_id": 69118284,
+                            "comment_id": 130838803,
+                            "link": "https://stackoverflow.com/questions/53303778/is-there-any-way-to-generate-sequential-revision-ids-in-alembic/69118284#comment130838803_69118284",
+                            "body": "@DeusXMachina &quot;batch-rename&quot;? Sounds good. Does alembic give such an option/tool?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4955209,
+                                "reputation": 1354,
+                                "user_id": 3988037,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "DeusXMachina"
+                            },
+                            "reply_to_user": {
+                                "account_id": 280583,
+                                "reputation": 848,
+                                "user_id": 576372,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "jkulak"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1666048528,
+                            "post_id": 69118284,
+                            "comment_id": 130838829,
+                            "link": "https://stackoverflow.com/questions/53303778/is-there-any-way-to-generate-sequential-revision-ids-in-alembic/69118284#comment130838829_69118284",
+                            "body": "@jkulak Negative, I had to write something myself to do that. I basically used a python script and some bash to get all the git commit times of each of the files, and use that to rename the file to the git commit date (which is a close enough proxy). I then manually cleaned up any collisions."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6795037,
+                        "reputation": 15469,
+                        "user_id": 5230702,
+                        "user_type": "registered",
+                        "display_name": "Anand Tripathi"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1631190899,
+                    "creation_date": 1631190899,
+                    "answer_id": 69118284,
+                    "question_id": 53303778,
+                    "link": "https://stackoverflow.com/questions/53303778/is-there-any-way-to-generate-sequential-revision-ids-in-alembic/69118284#69118284",
+                    "body": "<h1>Yeah but by using date and time</h1>\n<p>Below are the dynamic variables that are available in alembic</p>\n<p><code>file_template</code> - this is the naming scheme used to generate new migration files. The value present is the default, so is commented out.</p>\n<p><strong>Tokens available include:</strong></p>\n<blockquote>\n<p><code>%%(rev)s</code> - revision id <br>\n<code>%%(slug)s</code> - a truncated string derived from the revision message<br>\n<code>%%(year)d, %%(month).2d, %%(day).2d, %%(hour).2d, %%(minute).2d, %%(second).2d</code> - components of the create date as returned by datetime.datetime.now()</p>\n</blockquote>\n<p>So for example you can use the below configuration for sequential filenames</p>\n<pre><code># template used to generate migration files\nfile_template = %%(year)d-%%(month).2d-%%(day).2d-%%(hour).2d-%%(minute).2d-%%(second).2d_%%(rev)s_%%(slug)s\n</code></pre>\n<p>This will generate the following output</p>\n<pre><code>YYYY-mm-dd-HH-MM-SS_&lt;rev&gt;_&lt;message_slug&gt;\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 17214897,
+                        "reputation": 197,
+                        "user_id": 12463197,
+                        "user_type": "registered",
+                        "display_name": "mani"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1638891838,
+                    "last_edit_date": 1638891838,
+                    "creation_date": 1633000037,
+                    "answer_id": 69391128,
+                    "question_id": 53303778,
+                    "link": "https://stackoverflow.com/questions/53303778/is-there-any-way-to-generate-sequential-revision-ids-in-alembic/69391128#69391128",
+                    "body": "<p>while i don't need migration branching i use this</p>\n<pre><code>@writer.rewrites(ops.MigrationScript)\ndef revid_increment(ctx: migration.MigrationContext, revisions: tuple, op: ops.MigrationScript):\n    op.rev_id = '{0:04}'.format(len(tuple(ctx.script.walk_revisions())) + 1)\n    return op\n</code></pre>\n<p>it makes it easy to replace the current <code>rev_id</code> naming scheme, add timestamp, date, whatever ...</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 3753,
+                "reputation": 9697,
+                "user_id": 5454,
+                "user_type": "registered",
+                "accept_rate": 75,
+                "display_name": "soapergem"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 53311805,
+            "answer_count": 5,
+            "score": 51,
+            "last_activity_date": 1638891838,
+            "creation_date": 1542209876,
+            "question_id": 53303778,
+            "link": "https://stackoverflow.com/questions/53303778/is-there-any-way-to-generate-sequential-revision-ids-in-alembic",
+            "title": "Is there any way to generate sequential Revision IDs in Alembic?",
+            "body": "<p>I'm using Alembic as a database migration tool for a Python project. When I run a command like this:</p>\n\n<pre><code>alembic revision -m \"adding a column\"\n</code></pre>\n\n<p>...it will add a new file called <code>alembic/versions/xxxxxxxxxxxx_adding_a_column.py</code> where <code>xxxxxxxxxxxx</code> is a randomly generated, 12-digit hash.</p>\n\n<p>From the perspective of making things human-readable, this is a little bit problematic, because it means that when looking at the <code>alembic/versions</code> directory, all the files will appear in random order, rather than in sequential / chronological order.</p>\n\n<p>Are there any options in Alembic to ensure these prefix revision IDs are sequential? I suppose I could rename the files manually and then update the references, but I'm wondering if there's already a feature like that baked in.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6621
+}

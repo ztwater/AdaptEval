@@ -1,0 +1,896 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "regex",
+                "validation",
+                "hostname",
+                "fqdn"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "Roger Pate"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1269758641,
+                            "post_id": 2532059,
+                            "comment_id": 2531212,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532059#comment2531212_2532059",
+                            "body": "<code>return all(x and not disallowed.search(x) for x in hostname.split(&quot;.&quot;))</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 10108,
+                                "reputation": 532737,
+                                "user_id": 18936,
+                                "user_type": "registered",
+                                "display_name": "bobince"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1269774621,
+                            "post_id": 2532059,
+                            "comment_id": 2531854,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532059#comment2531854_2532059",
+                            "body": "A trailing <code>.</code> on the end of a hostname is valid. Oh, and much more work to do if you want to support IDN, of course..."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 36833,
+                        "reputation": 6280,
+                        "user_id": 105137,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "kostmo"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": -2,
+                    "last_activity_date": 1634799969,
+                    "last_edit_date": 1634799969,
+                    "creation_date": 1269756106,
+                    "answer_id": 2532059,
+                    "question_id": 2532053,
+                    "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532059#2532059",
+                    "body": "<p>Process each DNS label individually by excluding invalid characters and ensuring nonzero length.</p>\n<pre><code>def isValidHostname(hostname):\n    disallowed = re.compile(&quot;[^a-zA-Z\\d\\-]&quot;)\n    return all(map(lambda x: len(x) and not disallowed.search(x), hostname.split(&quot;.&quot;)))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 10108,
+                                "reputation": 532737,
+                                "user_id": 18936,
+                                "user_type": "registered",
+                                "display_name": "bobince"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1269774597,
+                            "post_id": 2532344,
+                            "comment_id": 2531851,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532344#comment2531851_2532344",
+                            "body": "Hostname labels should also not end with a hyphen."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 88931,
+                                "reputation": 69471,
+                                "user_id": 245706,
+                                "user_type": "registered",
+                                "accept_rate": 72,
+                                "display_name": "AndiDog"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1269777768,
+                            "post_id": 2532344,
+                            "comment_id": 2532013,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532344#comment2532013_2532344",
+                            "body": "You&#39;re using <code>re.match</code> incorrectly - mind that <code>re.match(&quot;a+&quot;, &quot;ab&quot;)</code> is a match whereas <code>re.match(&quot;a+$&quot;, &quot;ab&quot;)</code> isn&#39;t. Your function also does not allow for a single dot at the end of the hostname."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 10843,
+                                "reputation": 332931,
+                                "user_id": 20670,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim Pietzcker"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1269778937,
+                            "post_id": 2532344,
+                            "comment_id": 2532093,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532344#comment2532093_2532344",
+                            "body": "I had been under the impression that <code>re.match</code> needs to match the entire string, therefore making the end-of-string anchor unnecessary. But as I now found out (thanks!) it only binds the match to the start of the string. I corrected my regex accordingly. I don&#39;t get your second point, however. Is it legal to end a hostname in a dot? The Wikipedia article linked in the question appears to say no."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 76599,
+                                "reputation": 75567,
+                                "user_id": 219162,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "Daniel Stutzbach"
+                            },
+                            "reply_to_user": {
+                                "account_id": 10843,
+                                "reputation": 332931,
+                                "user_id": 20670,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim Pietzcker"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1269782219,
+                            "post_id": 2532344,
+                            "comment_id": 2532279,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532344#comment2532279_2532344",
+                            "body": "@Tim Pietzcker Yes, a single dot at the end is legal.  It marks the name as a fully-qualified domain name, which lets the DNS system know that it shouldn&#39;t try appending the local domain to it."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 107672,
+                                "reputation": 5712,
+                                "user_id": 286182,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Romuald Brunet"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1269782359,
+                            "post_id": 2532344,
+                            "comment_id": 2532286,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532344#comment2532286_2532344",
+                            "body": "Note that there&#39;s also a 63 character limit for each segment. And a global 255 character for the whole hostname."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3053728,
+                                "reputation": 5150,
+                                "user_id": 2587816,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "Jiminion"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1374779542,
+                            "post_id": 2532344,
+                            "comment_id": 26087031,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532344#comment26087031_2532344",
+                            "body": "Just wondering, why isn&#39;t it named isValidFQDN(fqdn) ?  There seems to be some grumbling that &quot;domain name&quot; is in the term, but hostname can have other connotations as well, and this is obviously tuned the the FQDN designation.  (Great little module, BTW, I appreciate the effort!)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 10843,
+                                "reputation": 332931,
+                                "user_id": 20670,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim Pietzcker"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3053728,
+                                "reputation": 5150,
+                                "user_id": 2587816,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "Jiminion"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1374779841,
+                            "post_id": 2532344,
+                            "comment_id": 26087220,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532344#comment26087220_2532344",
+                            "body": "@Jim: Oh, I don&#39;t know the RFCs well enough for this. Feel free to edit the post to rename the function; if the community deems that a valid edit, it will be approved - if not, there is no harm done."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 291103,
+                                "reputation": 17789,
+                                "user_id": 593047,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "ron rothman"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1392319462,
+                            "post_id": 2532344,
+                            "comment_id": 32922048,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532344#comment32922048_2532344",
+                            "body": "Nitpick: This will raise an exception when passed an empty string <code>&#39;&#39;</code>.  For robustness, probably want to avoid that with an additional check."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2531675,
+                                "reputation": 24405,
+                                "user_id": 2199852,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "User"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1409100692,
+                            "post_id": 2532344,
+                            "comment_id": 39836035,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532344#comment39836035_2532344",
+                            "body": "Works good. Only exception I&#39;ve come across is when there&#39;s a line break in the middle of the domain, it still passes. It will happen, for those of you who are also checking millions of domains."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 51051,
+                                "reputation": 10910,
+                                "user_id": 152439,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "andreas-h"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1459325071,
+                            "post_id": 2532344,
+                            "comment_id": 60229998,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532344#comment60229998_2532344",
+                            "body": "Another nitpick:  this will return True for a hostname ending in more than two dots. edited the function accordingly"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 10843,
+                                "reputation": 332931,
+                                "user_id": 20670,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim Pietzcker"
+                            },
+                            "reply_to_user": {
+                                "account_id": 51051,
+                                "reputation": 10910,
+                                "user_id": 152439,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "andreas-h"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1459332945,
+                            "post_id": 2532344,
+                            "comment_id": 60235352,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532344#comment60235352_2532344",
+                            "body": "@andreas-h: No, it doesn&#39;t. If there are two or more dots at the end, only the last one will be removed; then the <code>split()</code> will result in one or more empty strings, and empty strings fail the regex because of the <code>{1,63}</code> quantifier."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2482635,
+                                "reputation": 309,
+                                "user_id": 2161791,
+                                "user_type": "registered",
+                                "display_name": "Panagiotis"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1476454918,
+                            "post_id": 2532344,
+                            "comment_id": 67366974,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532344#comment67366974_2532344",
+                            "body": "Regardless of RFC 1035, a label in the hostname can start and end with a hyphen perfectly fine.  For example <code>dig @8.8.8.8 &quot;www-.---example-.kintis.net&quot;</code>. There are registrars that even allow domain registration with hyphens in the beginning or the end!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7974145,
+                                "reputation": 13075,
+                                "user_id": 6017840,
+                                "user_type": "registered",
+                                "display_name": "mootmoot"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1491317594,
+                            "post_id": 2532344,
+                            "comment_id": 73493007,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532344#comment73493007_2532344",
+                            "body": "Underscore is also part of valid chracter <a href=\"http://stackoverflow.com/questions/2180465/can-domain-name-subdomains-have-an-underscore-in-it\" title=\"can domain name subdomains have an underscore in it\">stackoverflow.com/questions/2180465/&hellip;</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 10843,
+                                "reputation": 332931,
+                                "user_id": 20670,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim Pietzcker"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7974145,
+                                "reputation": 13075,
+                                "user_id": 6017840,
+                                "user_type": "registered",
+                                "display_name": "mootmoot"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1491319723,
+                            "post_id": 2532344,
+                            "comment_id": 73494763,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532344#comment73494763_2532344",
+                            "body": "@mootmoot: Isn&#39;t that about domain names as opposed to host names?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7974145,
+                                "reputation": 13075,
+                                "user_id": 6017840,
+                                "user_type": "registered",
+                                "display_name": "mootmoot"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1491321200,
+                            "post_id": 2532344,
+                            "comment_id": 73495742,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532344#comment73495742_2532344",
+                            "body": "At the moment, underscore is valid for both domain name and hostname.  Except the domain registrar make the underscore unapplicable during registration. In addition, IDN domain name is going to break your code.  So I just add an answer to add extra step to convert hostname to punycode before feed into your program."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6124395,
+                                "reputation": 93,
+                                "user_id": 4776888,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Sanjeev singh"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1589654923,
+                            "post_id": 2532344,
+                            "comment_id": 109381928,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532344#comment109381928_2532344",
+                            "body": "Using this reges working fine in my case  <code>.  regex = &quot;^((?!-)[A-Za-z0-9-]{1,63}(?&lt;!-)\\\\.)+[A-Za-z]{2,6}$&quot;   </code>  Ref : <a href=\"https://www.geeksforgeeks.org/how-to-validate-a-domain-name-using-regular-expression/\" rel=\"nofollow noreferrer\">geeksforgeeks.org/&hellip;</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 13795134,
+                                "reputation": 3020,
+                                "user_id": 10440128,
+                                "user_type": "registered",
+                                "display_name": "milahu"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1609403962,
+                            "post_id": 2532344,
+                            "comment_id": 115834192,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532344#comment115834192_2532344",
+                            "body": "this implements <a href=\"https://tools.ietf.org/html/rfc1123#page-13\" rel=\"nofollow noreferrer\">RFC1123</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 10843,
+                        "reputation": 332931,
+                        "user_id": 20670,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Tim Pietzcker"
+                    },
+                    "comment_count": 17,
+                    "is_accepted": true,
+                    "score": 58,
+                    "last_activity_date": 1382964175,
+                    "last_edit_date": 1382964175,
+                    "creation_date": 1269766371,
+                    "answer_id": 2532344,
+                    "question_id": 2532053,
+                    "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532344#2532344",
+                    "body": "<pre><code>import re\ndef is_valid_hostname(hostname):\n    if len(hostname) &gt; 255:\n        return False\n    if hostname[-1] == \".\":\n        hostname = hostname[:-1] # strip exactly one dot from the right, if present\n    allowed = re.compile(\"(?!-)[A-Z\\d-]{1,63}(?&lt;!-)$\", re.IGNORECASE)\n    return all(allowed.match(x) for x in hostname.split(\".\"))\n</code></pre>\n\n<p>ensures that each segment</p>\n\n<ul>\n<li>contains at least one character and a maximum of 63 characters</li>\n<li>consists only of allowed characters</li>\n<li>doesn't begin or end with a hyphen.</li>\n</ul>\n\n<p>It also avoids double negatives (<code>not disallowed</code>), and if <code>hostname</code> ends in a <code>.</code>, that's OK, too. It will (and should) fail if <code>hostname</code> ends in more than one dot.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 10843,
+                                "reputation": 332931,
+                                "user_id": 20670,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim Pietzcker"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1269779141,
+                            "post_id": 2532763,
+                            "comment_id": 2532104,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532763#comment2532104_2532763",
+                            "body": "And what if he wants to find out if a hostname that does not yet exist will be a legal one? The RFC appears to be quite straightforward, so I don&#39;t see why a regex wouldn&#39;t work."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 114848,
+                                "reputation": 135951,
+                                "user_id": 301832,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "Donal Fellows"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1269784878,
+                            "post_id": 2532763,
+                            "comment_id": 2532436,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532763#comment2532436_2532763",
+                            "body": "Depends on what you&#39;re trying to show. If the name doesn&#39;t resolve then who knows what it \u201cmeans\u201d; the true means of validation require information that a regular expression cannot have (i.e., access to DNS). It&#39;s easier to just try it and handle the failure. And when thinking about names that are potentially legal but not yet, the only people who actually need to care about that are the registrars. Everyone else should leave these things to the code that is designed to have genuine expertise in the area. As JWZ notes, applying an RE turns a problem into two problems. (Well, mostly\u2026)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 93755,
+                                "reputation": 3654,
+                                "user_id": 256361,
+                                "user_type": "registered",
+                                "accept_rate": 45,
+                                "display_name": "flow"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1269790673,
+                            "post_id": 2532763,
+                            "comment_id": 2532789,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532763#comment2532789_2532763",
+                            "body": "i do not agree. there are two separate concerns, and both are valid concerns: (1)&#176;argue whether a given string can serve, technically and plausibly, as a, say, valid email address, hostname, such things; (2)&#176;demonstrate that a given name is taken, or likely free. (1) is purely a syntactical consideration. since (2) happens over the network, there is a modicum of doubt: a host that is up now can be down in a second, a domain i order now can be taken when my mail arrives."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 36833,
+                                "reputation": 6280,
+                                "user_id": 105137,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "kostmo"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1269808184,
+                            "post_id": 2532763,
+                            "comment_id": 2533963,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532763#comment2533963_2532763",
+                            "body": "This approach has been proposed in a similar question (<a href=\"http://stackoverflow.com/questions/399932/can-i-improve-this-regex-check-for-valid-domain-names/401132#401132\" title=\"can i improve this regex check for valid domain names\">stackoverflow.com/questions/399932/&hellip;</a>), and there is even a Python project to facilitate this (<a href=\"http://code.google.com/p/python-public-suffix-list/\" rel=\"nofollow noreferrer\">code.google.com/p/python-public-suffix-list</a>). I&#39;ve modified the question title slightly, since I&#39;m not interested in a solution that requires network lookups."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 114848,
+                        "reputation": 135951,
+                        "user_id": 301832,
+                        "user_type": "registered",
+                        "accept_rate": 60,
+                        "display_name": "Donal Fellows"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": -2,
+                    "last_activity_date": 1269777098,
+                    "creation_date": 1269777098,
+                    "answer_id": 2532763,
+                    "question_id": 2532053,
+                    "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2532763#2532763",
+                    "body": "<p>If you're looking to validate the name of an existing host, the best way is to try to resolve it. You'll never write a regular expression to provide that level of validation.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 10843,
+                                "reputation": 332931,
+                                "user_id": 20670,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim Pietzcker"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1269842955,
+                            "post_id": 2534561,
+                            "comment_id": 2535931,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2534561#comment2535931_2534561",
+                            "body": "You don&#39;t need the backslashes as line continuators - they are implicit in the enclosing parentheses."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 88287,
+                                "reputation": 146724,
+                                "user_id": 244297,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "Eugene Yarmash"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1445262130,
+                            "post_id": 2534561,
+                            "comment_id": 54235899,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2534561#comment54235899_2534561",
+                            "body": "This returns <code>True</code> for &quot;1.1.1.1&quot; (and any other all-numeric hostname)."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 36833,
+                        "reputation": 6280,
+                        "user_id": 105137,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "kostmo"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1277320221,
+                    "last_edit_date": 1277320221,
+                    "creation_date": 1269810411,
+                    "answer_id": 2534561,
+                    "question_id": 2532053,
+                    "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/2534561#2534561",
+                    "body": "<p>I like the thoroughness of Tim Pietzcker's answer, but I prefer to offload some of the logic from regular expressions for readability. Honestly, I had to look up the meaning of those <code>(?</code> \"extension notation\" parts. Additionally, I feel the \"double-negative\" approach is more obvious in that it limits the responsibility of the regular expression to just finding any invalid character. I do like that re.IGNORECASE allows the regex to be shortened.</p>\n\n<p>So here's another shot; it's longer but it reads kind of like prose. I suppose \"readable\" is somewhat at odds with \"concise\". I believe all of the validation constraints mentioned in the thread so far are covered:</p>\n\n<pre><code>\ndef isValidHostname(hostname):\n    if len(hostname) > 255:\n        return False\n    if hostname.endswith(\".\"): # A single trailing dot is legal\n        hostname = hostname[:-1] # strip exactly one dot from the right, if present\n    disallowed = re.compile(\"[^A-Z\\d-]\", re.IGNORECASE)\n    return all( # Split by labels and verify individually\n        (label and len(label) &lt;= 63 # length is within proper range\n         and not label.startswith(\"-\") and not label.endswith(\"-\") # no bordering hyphens\n         and not disallowed.search(label)) # contains only legal characters\n        for label in hostname.split(\".\"))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 14652,
+                                "reputation": 1265,
+                                "user_id": 30368,
+                                "user_type": "registered",
+                                "display_name": "kaleissin"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1363864380,
+                            "post_id": 6329953,
+                            "comment_id": 22026876,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/6329953#comment22026876_6329953",
+                            "body": "What&#39;s this, obfuscated python? Why the magic with maybe making a regexp an attribute on the function?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 41566,
+                                "reputation": 1855,
+                                "user_id": 120871,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "btubbs"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1447959980,
+                            "post_id": 6329953,
+                            "comment_id": 55390047,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/6329953#comment55390047_6329953",
+                            "body": "It&#39;s so the re.compile only has to be done once, instead of every time the function is called.  Probably only matters if you&#39;re calling this function many times per second."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1230306,
+                                "reputation": 5935,
+                                "user_id": 1195050,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "itsafire"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1453899257,
+                            "post_id": 6329953,
+                            "comment_id": 57800256,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/6329953#comment57800256_6329953",
+                            "body": "@imbolc +1 for implementing idna encoding."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 173533,
+                                "reputation": 9745,
+                                "user_id": 402281,
+                                "user_type": "registered",
+                                "accept_rate": 58,
+                                "display_name": "Feuermurmel"
+                            },
+                            "reply_to_user": {
+                                "account_id": 41566,
+                                "reputation": 1855,
+                                "user_id": 120871,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "btubbs"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1468255153,
+                            "post_id": 6329953,
+                            "comment_id": 64040666,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/6329953#comment64040666_6329953",
+                            "body": "@btubbs Python already <a href=\"https://docs.python.org/3/library/re.html?highlight=re#re.compile\" rel=\"nofollow noreferrer\">caches results of <code>re.compile()</code></a>, unless you use are using a lot of different patterns. I agree with @kaleissin that this code is rather obfuscated. Just plug the compiled expression in a private variable in the same scope as <code>is_valid_host()</code>. You can still only calculate it on the first call and save it into the variable."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 418960,
+                        "reputation": 1710,
+                        "user_id": 795856,
+                        "user_type": "registered",
+                        "accept_rate": 42,
+                        "display_name": "imbolc"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1307965362,
+                    "creation_date": 1307965362,
+                    "answer_id": 6329953,
+                    "question_id": 2532053,
+                    "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/6329953#6329953",
+                    "body": "<pre><code>def is_valid_host(host):\n    '''IDN compatible domain validator'''\n    host = host.encode('idna').lower()\n    if not hasattr(is_valid_host, '_re'):\n        import re\n        is_valid_host._re = re.compile(r'^([0-9a-z][-\\w]*[0-9a-z]\\.)+[a-z0-9\\-]{2,15}$')\n    return bool(is_valid_host._re.match(host))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 304291,
+                                "reputation": 4276,
+                                "user_id": 613702,
+                                "user_type": "registered",
+                                "accept_rate": 40,
+                                "display_name": "Minras"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1480344184,
+                            "post_id": 33214423,
+                            "comment_id": 68910556,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/33214423#comment68910556_33214423",
+                            "body": "According to RFC 3936 ( <a href=\"https://tools.ietf.org/html/rfc3696#section-2\" rel=\"nofollow noreferrer\">tools.ietf.org/html/rfc3696#section-2</a> ), only TLD should not be numeric, so I&#39;d say that the last condition should look like <code>if re.match(r&quot;\\.(\\d+)$&quot;, hostname):</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 455860,
+                                "reputation": 3067,
+                                "user_id": 854286,
+                                "user_type": "registered",
+                                "display_name": "bbak"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1556814186,
+                            "post_id": 33214423,
+                            "comment_id": 98564928,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/33214423#comment98564928_33214423",
+                            "body": "This assumes a TLD is just the last label in the FQDN. That is not correct. There are man TLDs that are made up of 2 or 3 labels (i.e. co.uk).  Here&#39;s a good source for public suffixes: <a href=\"https://github.com/publicsuffix/list/blob/master/public_suffix_list.dat\" rel=\"nofollow noreferrer\">github.com/publicsuffix/list/blob/master/public_suffix_list.&zwnj;&#8203;dat</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 88287,
+                                "reputation": 146724,
+                                "user_id": 244297,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "Eugene Yarmash"
+                            },
+                            "reply_to_user": {
+                                "account_id": 455860,
+                                "reputation": 3067,
+                                "user_id": 854286,
+                                "user_type": "registered",
+                                "display_name": "bbak"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1556867279,
+                            "post_id": 33214423,
+                            "comment_id": 98580470,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/33214423#comment98580470_33214423",
+                            "body": "@bbak Did you just randomly downvote my answer? This is still a stricter validation than suggested in other answers here, including the <a href=\"https://stackoverflow.com/a/2532344/244297\">accepted</a> one."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 88287,
+                        "reputation": 146724,
+                        "user_id": 244297,
+                        "user_type": "registered",
+                        "accept_rate": 94,
+                        "display_name": "Eugene Yarmash"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 13,
+                    "last_activity_date": 1480353841,
+                    "last_edit_date": 1495540925,
+                    "creation_date": 1445257753,
+                    "answer_id": 33214423,
+                    "question_id": 2532053,
+                    "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/33214423#33214423",
+                    "body": "<p>Here's a bit stricter version of <a href=\"https://stackoverflow.com/a/2532344/244297\">Tim Pietzcker's answer</a> with the following improvements:</p>\n\n<ul>\n<li>Limit the length of the hostname to 253 characters (after stripping the optional trailing dot).</li>\n<li>Limit the character set to ASCII (i.e. use <code>[0-9]</code> instead of <code>\\d</code>).</li>\n<li>Check that the TLD is not all-numeric.</li>\n</ul>\n\n\n\n<pre><code>import re\n\ndef is_valid_hostname(hostname):\n    if hostname[-1] == \".\":\n        # strip exactly one dot from the right, if present\n        hostname = hostname[:-1]\n    if len(hostname) &gt; 253:\n        return False\n\n    labels = hostname.split(\".\")\n\n    # the TLD must be not all-numeric\n    if re.match(r\"[0-9]+$\", labels[-1]):\n        return False\n\n    allowed = re.compile(r\"(?!-)[a-z0-9-]{1,63}(?&lt;!-)$\", re.IGNORECASE)\n    return all(allowed.match(label) for label in labels)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 20270,
+                        "reputation": 1660,
+                        "user_id": 48251,
+                        "user_type": "registered",
+                        "accept_rate": 60,
+                        "display_name": "solidsnack"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1713279719,
+                    "last_edit_date": 1713279719,
+                    "creation_date": 1447554750,
+                    "answer_id": 33715765,
+                    "question_id": 2532053,
+                    "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/33715765#33715765",
+                    "body": "<p>Per <a href=\"https://devblogs.microsoft.com/oldnewthing/20120412-00/?p=7873\" rel=\"nofollow noreferrer\">The Old New Thing</a>, the maximum length of a DNS name is 253 characters. (One is allowed up to 255 octets, but 2 of those are consumed by the encoding.)</p>\n<pre><code>import re\n\ndef validate_fqdn(dn):\n    if dn.endswith('.'):\n        dn = dn[:-1]\n    if len(dn) &lt; 1 or len(dn) &gt; 253:\n        return False\n    ldh_re = re.compile('^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$',\n                        re.IGNORECASE)\n    return all(ldh_re.match(x) for x in dn.split('.'))\n</code></pre>\n<p>One could argue for accepting empty domain names, or not, depending on one's purpose.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 234626,
+                                "reputation": 2785,
+                                "user_id": 500902,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Marvin"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1568386491,
+                            "post_id": 43211062,
+                            "comment_id": 102269400,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/43211062#comment102269400_43211062",
+                            "body": "Underscore is NOT valid - see <a href=\"https://stackoverflow.com/a/2183140/500902\">stackoverflow.com/a/2183140/500902</a> and its linked IETF specs.  Many things work fine when an _ is in a hostname, but various correctly conforming software may fail, when, e.g. parsing a URL where the hostname has an &#39;_&#39;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11662371,
+                                "reputation": 311,
+                                "user_id": 8540230,
+                                "user_type": "registered",
+                                "display_name": "HumbleEngineer"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1612867789,
+                            "post_id": 43211062,
+                            "comment_id": 116894681,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/43211062#comment116894681_43211062",
+                            "body": "Thanks for pointing out <code>encode(&quot;idna&quot;)</code>, though.  If it wasn&#39;t for the <code>:</code> I&#39;d upvote - the original question didn&#39;t mention anything about that."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7974145,
+                        "reputation": 13075,
+                        "user_id": 6017840,
+                        "user_type": "registered",
+                        "display_name": "mootmoot"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1586608955,
+                    "last_edit_date": 1586608955,
+                    "creation_date": 1491318538,
+                    "answer_id": 43211062,
+                    "question_id": 2532053,
+                    "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/43211062#43211062",
+                    "body": "<p>Complimentary to the @TimPietzcker answer. \n<a href=\"https://stackoverflow.com/questions/2180465/can-domain-name-subdomains-have-an-underscore-in-it\">Underscore </a>is a valid hostname character (but not for domain name) . While double dash is commonly found for IDN punycode domain(e.g. xn--). Port number should be stripped. This is the cleanup of the code.</p>\n\n<pre><code>import re\ndef is_valid_hostname(hostname):\n    if len(hostname) &gt; 255:\n        return False\n    hostname = hostname.rstrip(\".\")\n    allowed = re.compile(\"(?!-)[A-Z\\d\\-\\_]{1,63}(?&lt;!-)$\", re.IGNORECASE)\n    return all(allowed.match(x) for x in hostname.split(\".\"))\n\n# convert your unicode hostname to punycode (python 3 ) \n# Remove the port number from hostname\nnormalise_host = hostname.encode(\"idna\").decode().split(\":\")[0]\nis_valid_hostname(normalise_host )\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2697666,
+                                "reputation": 1568,
+                                "user_id": 2329264,
+                                "user_type": "registered",
+                                "display_name": "MofX"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1565349882,
+                            "post_id": 57428744,
+                            "comment_id": 101335902,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/57428744#comment101335902_57428744",
+                            "body": "Please tell us why this is better than any of the other answers"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1087725,
+                                "reputation": 399,
+                                "user_id": 1083054,
+                                "user_type": "registered",
+                                "display_name": "FirefighterBlu3"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2697666,
+                                "reputation": 1568,
+                                "user_id": 2329264,
+                                "user_type": "registered",
+                                "display_name": "MofX"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1577813977,
+                            "post_id": 57428744,
+                            "comment_id": 105263069,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/57428744#comment105263069_57428744",
+                            "body": "@MofX while this regex is inaccurate, it highlights a particular point others have usually ignored; a hostname part may include some glyphs in the middle but not at the beginning or end. specifically, hostnames must not start with a digit or hyphen, and must not end with a hyphen.  and, while not always enforced, the _ is found rather commonly in hostnames when it should only be used to prefix a domain key or service record. it is still valid, however, to attempt to resolve a hostname that consists entirely of an _. i.e. _.example.com is legitimate and applies for RFC 7816."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 468289,
+                                "reputation": 183001,
+                                "user_id": 874188,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "tripleee"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1634796401,
+                            "post_id": 57428744,
+                            "comment_id": 123122820,
+                            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/57428744#comment123122820_57428744",
+                            "body": "DNS does in fact allow labels to start with and even consist entirely of numbers (although it originally didn&#39;t; anecdotally it was changed because 411.com or a similar service requested it)."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 10891809,
+                        "reputation": 9,
+                        "user_id": 8007327,
+                        "user_type": "registered",
+                        "display_name": "Shubham"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1565348669,
+                    "creation_date": 1565348669,
+                    "answer_id": 57428744,
+                    "question_id": 2532053,
+                    "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string/57428744#57428744",
+                    "body": "<p>I think this regex might help in Python:\n'^([a-zA-Z0-9]+(\\.|\\-))*[a-zA-Z0-9]+$'</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 36833,
+                "reputation": 6280,
+                "user_id": 105137,
+                "user_type": "registered",
+                "accept_rate": 75,
+                "display_name": "kostmo"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 2532344,
+            "answer_count": 9,
+            "score": 32,
+            "last_activity_date": 1713279719,
+            "creation_date": 1269755932,
+            "last_edit_date": 1495542738,
+            "question_id": 2532053,
+            "link": "https://stackoverflow.com/questions/2532053/validate-a-hostname-string",
+            "title": "Validate a hostname string",
+            "body": "<p>Following up to <a href=\"https://stackoverflow.com/questions/106179/regular-expression-to-match-hostname-or-ip-address\">Regular expression to match hostname or IP Address?</a>\nand using <a href=\"http://en.wikipedia.org/wiki/Hostname#Restrictions_on_valid_host_names\" rel=\"noreferrer\">Restrictions on valid host names</a> as a reference, what is the most readable, concise way to match/validate a hostname/fqdn (fully qualified domain name) in Python?  I've answered with my attempt below, improvements welcome.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6632
+}

@@ -1,0 +1,3 @@
+@ring.lru(expire=60*60)  # seconds
+def cached_function(keys):
+    return ...

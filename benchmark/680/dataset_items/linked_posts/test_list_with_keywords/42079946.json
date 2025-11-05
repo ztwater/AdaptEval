@@ -1,0 +1,70 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "keyword",
+                "pytest",
+                "backslash"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 3304985,
+                        "reputation": 598,
+                        "user_id": 2780081,
+                        "user_type": "registered",
+                        "display_name": "c-garcia"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1518722562,
+                    "creation_date": 1518722562,
+                    "answer_id": 48814787,
+                    "question_id": 42079946,
+                    "link": "https://stackoverflow.com/questions/42079946/pytest-when-using-the-keyword-option-k-a-directory-style-string-is-not-handl/48814787#48814787",
+                    "body": "<p>I am working with a very similar setup and I have been able to reproduce the behavior you are describing (<code>pytest 3.4.0</code>, <code>python 3.6.4</code>).</p>\n\n<p>I have found a workaround that might be useful to you depending on your exact layout). Basically, I am using <code>and</code> instead of the path separator. </p>\n\n<p>Therefore <code>py.test -k \"not (root/dir1 or dir2)\"</code> becomes <code>py.test -k \"not ((root and dir1) or dir2)\"</code>. If you do not have any more <code>dir1</code> path elements under <code>root/dir1</code>, both expressions should be equivalent.</p>\n\n<p>Since the behavior of expressions including <code>/</code> seems somewhat inconsistent (<code>py.test -k root/dir1</code> works as expected), it might make sense to file a bug.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1002305,
+                        "reputation": 363,
+                        "user_id": 1016905,
+                        "user_type": "registered",
+                        "display_name": "Aphid"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1519610112,
+                    "creation_date": 1519610112,
+                    "answer_id": 48980418,
+                    "question_id": 42079946,
+                    "link": "https://stackoverflow.com/questions/42079946/pytest-when-using-the-keyword-option-k-a-directory-style-string-is-not-handl/48980418#48980418",
+                    "body": "<p>Why not save yourself the workarounds and just use unique markers for your different test groups, and use </p>\n\n<pre><code>py.test -m \"not extended\" \n</code></pre>\n\n<p>This way test/directory/module names can change and nothing breaks. </p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 10193484,
+                "reputation": 51,
+                "user_id": 7526072,
+                "user_type": "registered",
+                "display_name": "Mark"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "answer_count": 2,
+            "score": 5,
+            "last_activity_date": 1519610112,
+            "creation_date": 1486429154,
+            "question_id": 42079946,
+            "link": "https://stackoverflow.com/questions/42079946/pytest-when-using-the-keyword-option-k-a-directory-style-string-is-not-handl",
+            "title": "pytest: When using the keyword option (-k) a directory style string is not handled",
+            "body": "<p>I am currently using pytest to automate my test suite. I have tests spread over several directories like below:</p>\n\n<pre><code>|-Root\n|   |-Dir1\n|   |   |-Test1\n|   |   |-Test2\n|   |   |-Test3\n|   |-Dir2\n|   |   |-Testa\n|   |   |-Testb\n|   |   |-Testc\n|   |-Dir3\n|   |   |-TestI\n|   |   |-TestII\n|   |   |-TestIII\n</code></pre>\n\n<p>I would like to be able to run tests in a set of directories by excluding others. Some of the directories have similar names like \"test_set_1\" and \"test_set_1_extended\". I'd like to exclude \"test_set_1\" but keep \"test_set_1_extended\" so I'd need to use the full path as a keyword. I've noticed when using the keywords (-k option) that pytest doesn't handle directory structure strings as an argument well.  For instance, if I try windows style</p>\n\n<pre><code>py.test -k \"not (root\\dir1 or dir2)\"\n</code></pre>\n\n<p>I get a syntax error:</p>\n\n<p>SyntaxError: unexpected character after line continuation character</p>\n\n<p>On the other hand if I try unix style</p>\n\n<pre><code>py.test -k \"not (root/dir1 or dir2)\" \n</code></pre>\n\n<p>I get a ZeroDivisionError:</p>\n\n<p>ZeroDivisionError: integer division or modulo by zero</p>\n\n<p>Things I've tried include:\nEnclosing the directory string in single or double quotes:</p>\n\n<pre><code>py.test -k \"not ('root/dir1' or dir2)\"\npy.test -k \"not (\"root/dir1' or dir2)\"\n</code></pre>\n\n<p>Using separate '-k's':</p>\n\n<pre><code>py.test -k \"not root/dir1\" -k not dir2)\n</code></pre>\n\n<p>Using a current directory '.'</p>\n\n<pre><code>py.test -k \"not (./root/dir1 or dir2)\"\n</code></pre>\n\n<p>Escaping the slash:</p>\n\n<pre><code>py.test -k \"not (root\\\\dir1 or dir2)\"\npy.test -k \"not (root\\/dir1 or dir2)\"\n</code></pre>\n\n<p>None of these have solved the problem. Does anyone have any suggestions on how to get pytest to handle my path string correctly?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8794
+}

@@ -1,0 +1,528 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 35417,
+                        "reputation": 1089182,
+                        "user_id": 100297,
+                        "user_type": "moderator",
+                        "display_name": "Martijn Pieters"
+                    },
+                    "edited": false,
+                    "score": 5,
+                    "creation_date": 1345058838,
+                    "post_id": 11975781,
+                    "comment_id": 15964557,
+                    "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals#comment15964557_11975781",
+                    "body": "Now do this: <code>setattr(a, &#39;b.c&#39;, 2)</code>. What should <code>getattr(a, &#39;b.c&#39;)</code> return now? What if there was no <code>c</code> on <code>b</code> before? You are allowed to use a <code>.</code> in attribute names, so you can&#39;t expect <code>getattr</code> to be able to traverse over objects like this."
+                },
+                {
+                    "owner": {
+                        "account_id": 7193217,
+                        "reputation": 1457,
+                        "user_id": 5492820,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "WloHu"
+                    },
+                    "reply_to_user": {
+                        "account_id": 35417,
+                        "reputation": 1089182,
+                        "user_id": 100297,
+                        "user_type": "moderator",
+                        "display_name": "Martijn Pieters"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1541754066,
+                    "post_id": 11975781,
+                    "comment_id": 93332049,
+                    "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals#comment93332049_11975781",
+                    "body": "@MartijnPieters Sadly, it&#39;s impossible to accept your great comment as solution/answer and I almost missed it. I will exted that. <code>get&#47;setattr</code> are mapped to magic methods which have single purpose as @ThaneBrimhall said it&#39;s the dictionary lookup. For me this is JavaScript related thing where <code>.</code> operator is just syntax sugar for <code>obj[&#39;@ttr1but3&#39;]</code> (<code>obj</code> doesn&#39;t have to be a mapping). Python&#39; equivalent of this is <code>getattr</code>. Read about <code>__dict__</code> and try to override <code>__getattribute__</code> to grasp it yourself."
+                },
+                {
+                    "owner": {
+                        "account_id": 35417,
+                        "reputation": 1089182,
+                        "user_id": 100297,
+                        "user_type": "moderator",
+                        "display_name": "Martijn Pieters"
+                    },
+                    "reply_to_user": {
+                        "account_id": 7193217,
+                        "reputation": 1457,
+                        "user_id": 5492820,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "WloHu"
+                    },
+                    "edited": false,
+                    "score": 2,
+                    "creation_date": 1541778442,
+                    "post_id": 11975781,
+                    "comment_id": 93344628,
+                    "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals#comment93344628_11975781",
+                    "body": "@JCode: <code>getattr()</code> and <code>setattr()</code> are <b>not</b> mapped to magic methods, not directly. The <code>__getattribute__</code>, <code>__getattr__</code> and <code>__setattr__</code> special methods are <i>hooks</i> that, if defined, Python will call for attribute access. <code>getattr()</code> and <code>setattr()</code> are translations of the <code>object.attr</code> expression and <code>object.attr = ...</code> assignment statements that incidentally let you go beyond Python identifiers in the attribute name. And not all Python objects have a <code>__dict__</code> mapping either, so to say it&#39;s a straightforward dictionary lookup is also too simplistic."
+                },
+                {
+                    "owner": {
+                        "account_id": 7193217,
+                        "reputation": 1457,
+                        "user_id": 5492820,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "WloHu"
+                    },
+                    "reply_to_user": {
+                        "account_id": 35417,
+                        "reputation": 1089182,
+                        "user_id": 100297,
+                        "user_type": "moderator",
+                        "display_name": "Martijn Pieters"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1542115182,
+                    "post_id": 11975781,
+                    "comment_id": 93445372,
+                    "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals#comment93445372_11975781",
+                    "body": "@MartijnPieters Thanks for clarification! I indeed went overboard by forgetting about <code>__slots__</code>. Mentioning magic methods as <i>hooks</i> really improved my understanding."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 19794,
+                                "reputation": 22439,
+                                "user_id": 46690,
+                                "user_type": "registered",
+                                "accept_rate": 20,
+                                "display_name": "Rob Cowie"
+                            },
+                            "edited": false,
+                            "score": 13,
+                            "creation_date": 1345058889,
+                            "post_id": 11975810,
+                            "comment_id": 15964586,
+                            "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/11975810#comment15964586_11975810",
+                            "body": "The OP has realised that... I think he&#39;s asking why. Not an unreasonable question given that operator.attrgetter(&#39;a.b&#39;)(obj) <i>will</i> resolve dotted notation"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1306956,
+                                "reputation": 9415,
+                                "user_id": 1255748,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Thane Brimhall"
+                            },
+                            "reply_to_user": {
+                                "account_id": 19794,
+                                "reputation": 22439,
+                                "user_id": 46690,
+                                "user_type": "registered",
+                                "accept_rate": 20,
+                                "display_name": "Rob Cowie"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1345062508,
+                            "post_id": 11975810,
+                            "comment_id": 15966193,
+                            "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/11975810#comment15966193_11975810",
+                            "body": "Thanks for pointing that out. Clarified my response to hopefully explain better what I meant."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 298017,
+                                "reputation": 3149,
+                                "user_id": 603819,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Bobort"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1476975300,
+                            "post_id": 11975810,
+                            "comment_id": 67584522,
+                            "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/11975810#comment67584522_11975810",
+                            "body": "This is a very good and simple solution to a troubling problem.  The answers below are not as concise.  This answer does not try to implement something that Python already did, which makes it good."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089182,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1541780066,
+                            "post_id": 11975810,
+                            "comment_id": 93345594,
+                            "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/11975810#comment93345594_11975810",
+                            "body": "<b>Note</b>: <code>getattr()</code> is <b><i>not just</i></b> as simple as a direct dictionary lookup! Attribute lookup is a bit more complex than this; attribute lookup also allows for <a href=\"https://docs.python.org/3/howto/descriptor.html\" rel=\"nofollow noreferrer\">descriptor object binding</a>, for example, and there can be a MRO traversal of a class hierarchy (involving multiple dictionaries)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1306956,
+                                "reputation": 9415,
+                                "user_id": 1255748,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Thane Brimhall"
+                            },
+                            "reply_to_user": {
+                                "account_id": 35417,
+                                "reputation": 1089182,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1541782054,
+                            "post_id": 11975810,
+                            "comment_id": 93346687,
+                            "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/11975810#comment93346687_11975810",
+                            "body": "@MartijnPieters Good point! I&#39;ll update the answer to explain the nuance."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8687130,
+                                "reputation": 3702,
+                                "user_id": 6501190,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "java-addict301"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1698682767,
+                            "post_id": 11975810,
+                            "comment_id": 136433313,
+                            "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/11975810#comment136433313_11975810",
+                            "body": "can&#39;t we just have a null coalescing operator and be done with it? Python is &gt; 30 years old."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4804127,
+                                "reputation": 1051,
+                                "user_id": 3879805,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "Shreyans"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1705853774,
+                            "post_id": 11975810,
+                            "comment_id": 137254348,
+                            "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/11975810#comment137254348_11975810",
+                            "body": "@ThaneBrimhall the complexity of getattr (beyond a simple dictionary lookup) is NOT an implementation detail. It is very much part of the language specification, and many advanced features (Martijn mentioned descriptors above) depend on it. If anyone wants to look under the hood: <a href=\"https://snarky.ca/unravelling-attribute-access-in-python/\" rel=\"nofollow noreferrer\">snarky.ca/unravelling-attribute-access-in-python</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1306956,
+                        "reputation": 9415,
+                        "user_id": 1255748,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Thane Brimhall"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": true,
+                    "score": 109,
+                    "last_activity_date": 1541782343,
+                    "last_edit_date": 1541782343,
+                    "creation_date": 1345058639,
+                    "answer_id": 11975810,
+                    "question_id": 11975781,
+                    "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/11975810#11975810",
+                    "body": "<p>You can't put a period in the getattr function because getattr is like accessing the dictionary lookup of the object (but is a little bit more complex than that, due to subclassing and other Python implementation details).</p>\n\n<p>If you use the 'dir' function on a, you'll see the dictionary keys that correspond to your object's attributes. In this case, the string \"b.c\" <em>isn't</em> in the set of dictionary keys.</p>\n\n<p>The only way to do this with <code>getattr</code> is to nest calls:</p>\n\n<pre><code>getattr(getattr(a, \"b\"), \"c\")\n</code></pre>\n\n<p>Luckily, the standard library has a better solution!</p>\n\n<pre><code>import operator\noperator.attrgetter(\"b.c\")(a)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 415066,
+                        "reputation": 40114,
+                        "user_id": 789649,
+                        "user_type": "registered",
+                        "display_name": "Rostyslav Dzinko"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1345058769,
+                    "creation_date": 1345058769,
+                    "answer_id": 11975841,
+                    "question_id": 11975781,
+                    "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/11975841#11975841",
+                    "body": "<p>Because <code>getattr</code> doesn't work that way. <code>getattr</code> gets attribute of a given object (first argument) with a given name (second argument). So your code:</p>\n\n<pre><code>getattr(a, \"b.c\") # this raises an AttributeError\n</code></pre>\n\n<p>means: <em>Access \"b.c\" attribute of object referenced by \"a\"</em>. Obviously your object doesn't have attribute called \"<code>b.c</code>\".</p>\n\n<p>To get \"c\" attribute you must use two <code>getattr</code> calls:</p>\n\n<pre><code>getattr(getattr(a, \"b\"), \"c\")\n</code></pre>\n\n<p>Let's unwrap it for better understanding:</p>\n\n<pre><code>b = getattr(a, \"b\")\nc = getattr(b, \"c\")\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 83809,
+                        "reputation": 10263,
+                        "user_id": 234745,
+                        "user_type": "registered",
+                        "accept_rate": 57,
+                        "display_name": "Vladimir"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1345059246,
+                    "creation_date": 1345059246,
+                    "answer_id": 11975968,
+                    "question_id": 11975781,
+                    "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/11975968#11975968",
+                    "body": "<p>What should return <code>getattr('a.b', {'a': None}, 'default-value'}</code>? Should it raise <code>AttributeError</code> or just return <code>'default-value'</code>? That's why complex keys if introduced in <code>getattr</code> would make it obscure to use.</p>\n\n<p>So, it's more natural to view <code>getattr(..)</code> function as <code>get</code> method of dictionary of object attributes.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 348370,
+                        "reputation": 25882,
+                        "user_id": 683020,
+                        "user_type": "registered",
+                        "accept_rate": 73,
+                        "display_name": "Silas Ray"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1366290495,
+                    "last_edit_date": 1366290495,
+                    "creation_date": 1345060247,
+                    "answer_id": 11976205,
+                    "question_id": 11975781,
+                    "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/11976205#11976205",
+                    "body": "<p>I think your confusion arises from the fact that straight dot notation (ex <code>a.b.c</code>) accesses the same parameters as <code>getattr()</code>, but the parsing logic is different.  While they both essentially key in to an object's <code>__dict__</code> attribute, <code>getattr()</code> is not bound to the more stringent requirements on dot-accessible attributes.  For instance</p>\n\n<pre><code>setattr(foo, 'Big fat ugly string.  But you can hash it.', 2)\n</code></pre>\n\n<p>Is valid, since that string just becomes a hash key in <code>foo.__dict__</code>, but</p>\n\n<pre><code>foo.Big fat ugly string.  But you can hash it. = 2\n</code></pre>\n\n<p>and</p>\n\n<pre><code>foo.'Big fat ugly string.  But you can hash it.' = 2\n</code></pre>\n\n<p>are syntax errors because now you are asking the interpreter to parse these things as raw code, and that doesn't work.</p>\n\n<p>The flip side of this is that while <code>foo.b.c</code> is equivalent to <code>foo.__dict__['b'].__dict__['c']</code>, <code>getattr(foo, 'b.c')</code> is equivalent to <code>foo.__dict__['b.c']</code>.  That's why <code>getattr</code> doesn't work as you are expecting.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1321705,
+                                "reputation": 5915,
+                                "user_id": 1267398,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "SleepyCal"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1394640958,
+                            "post_id": 14324459,
+                            "comment_id": 33982488,
+                            "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/14324459#comment33982488_14324459",
+                            "body": "This should be the accepted answer imho, the answer from Thane is next to useless."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1306956,
+                                "reputation": 9415,
+                                "user_id": 1255748,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Thane Brimhall"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1394643324,
+                            "post_id": 14324459,
+                            "comment_id": 33984221,
+                            "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/14324459#comment33984221_14324459",
+                            "body": "I&#39;m all for a good answer, and this gets the job done. But this answer doesn&#39;t give the OP what he was looking for - the <i>reason why</i> it doesn&#39;t work."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 422891,
+                                "reputation": 2727,
+                                "user_id": 801926,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Patrick Yan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1399040177,
+                            "post_id": 14324459,
+                            "comment_id": 35908527,
+                            "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/14324459#comment35908527_14324459",
+                            "body": "The accepted answer doesn&#39;t solve the original problem. Assuming that you are only given the string <code>&#39;b.c&#39;</code>, this is the only answer that solves the problem."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1306956,
+                                "reputation": 9415,
+                                "user_id": 1255748,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Thane Brimhall"
+                            },
+                            "edited": false,
+                            "score": 9,
+                            "creation_date": 1400620904,
+                            "post_id": 14324459,
+                            "comment_id": 36552999,
+                            "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/14324459#comment36552999_14324459",
+                            "body": "Once again, I&#39;ll just say that the point of the question is <i>&quot;why?&quot;</i>, not <i>&quot;how can I?&quot;</i>. This answer doesn&#39;t answer the original question. In addition, this is a very long-winded solution that could otherwise have been done using the standard library: <code>operator.attrgetter(&#39;a.b&#39;)(obj)</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 24885,
+                                "reputation": 31173,
+                                "user_id": 63550,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Peter Mortensen"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1474497142,
+                            "post_id": 14324459,
+                            "comment_id": 66560628,
+                            "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/14324459#comment66560628_14324459",
+                            "body": "Related: <i><a href=\"http://meta.stackoverflow.com/questions/334948\">Should I flag this answer for suspicious activity or am I just crazy?</a></i>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 298017,
+                                "reputation": 3149,
+                                "user_id": 603819,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Bobort"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1476975597,
+                            "post_id": 14324459,
+                            "comment_id": 67584748,
+                            "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/14324459#comment67584748_14324459",
+                            "body": "I found Thane&#39;s answer to be extremely useful.  It uses a function from the standard library.  And in Python 3, you have to import <code>reduce</code> anyway."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8272280,
+                                "reputation": 3254,
+                                "user_id": 6219628,
+                                "user_type": "registered",
+                                "accept_rate": 29,
+                                "display_name": "Romain Vincent"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1527544595,
+                            "post_id": 14324459,
+                            "comment_id": 88157141,
+                            "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/14324459#comment88157141_14324459",
+                            "body": "Please don&#39;t bring java in python ... gosh ... Thane&#39;s answer definitely preferable."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15124467,
+                                "reputation": 1680,
+                                "user_id": 10914284,
+                                "user_type": "registered",
+                                "display_name": "010011100101"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1572890956,
+                            "post_id": 14324459,
+                            "comment_id": 103694108,
+                            "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/14324459#comment103694108_14324459",
+                            "body": "This had just what I was looking for. Thanks!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1173060,
+                        "reputation": 1830,
+                        "user_id": 1149774,
+                        "user_type": "registered",
+                        "display_name": "respondcreate"
+                    },
+                    "comment_count": 8,
+                    "is_accepted": false,
+                    "score": 51,
+                    "last_activity_date": 1394643134,
+                    "last_edit_date": 1394643134,
+                    "creation_date": 1358188640,
+                    "answer_id": 14324459,
+                    "question_id": 11975781,
+                    "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/14324459#14324459",
+                    "body": "<p><a href=\"http://docs.python.org/2/library/functions.html#reduce\">Python's built-in <code>reduce</code> function</a> enables the functionality you're looking for. Here's a simple little helper function that will get the job done:</p>\n\n<pre><code>class NoDefaultProvided(object):\n    pass\n\ndef getattrd(obj, name, default=NoDefaultProvided):\n    \"\"\"\n    Same as getattr(), but allows dot notation lookup\n    Discussed in:\n    http://stackoverflow.com/questions/11975781\n    \"\"\"\n\n    try:\n        return reduce(getattr, name.split(\".\"), obj)\n    except AttributeError, e:\n        if default != NoDefaultProvided:\n            return default\n        raise\n</code></pre>\n\n<p>Test proof;</p>\n\n<pre><code>&gt;&gt;&gt; getattrd(int, 'a')\nAttributeError: type object 'int' has no attribute 'a'\n\n&gt;&gt;&gt; getattr(int, 'a')\nAttributeError: type object 'int' has no attribute 'a'\n\n&gt;&gt;&gt; getattrd(int, 'a', None)\nNone\n\n&gt;&gt;&gt; getattr(int, 'a', None)\nNone\n\n&gt;&gt;&gt; getattrd(int, 'a', None)\nNone\n\n&gt;&gt;&gt; getattrd(int, '__class__.__name__')\ntype\n\n&gt;&gt;&gt; getattrd(int, '__class__')\n&lt;type 'type'&gt;\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6378471,
+                        "reputation": 549,
+                        "user_id": 4948707,
+                        "user_type": "registered",
+                        "display_name": "Kshitiz Lohia"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1463396750,
+                    "creation_date": 1463396750,
+                    "answer_id": 37252431,
+                    "question_id": 11975781,
+                    "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/37252431#37252431",
+                    "body": "<p>You can call the multiple getattr without calling a function within function by splitting the dot operators and performing a getattr() for each dot operator</p>\n\n<pre><code>def multi_getattr(self,obj, attr, default = None):\n          attributes = attr.split(\".\")\n          for i in attributes:\n              try:\n                  obj = getattr(obj, i)\n              except AttributeError:\n                  if default:\n                      return default\n                  else:\n                      raise\n          return obj\n</code></pre>\n\n<p>If suppose you wish to call a.b.c.d you can do it via a.multi_getattr('b.c.d'). This will generalise the operation without worrying about the count of dot operation one has in the string.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 83763,
+                        "reputation": 16798,
+                        "user_id": 234645,
+                        "user_type": "registered",
+                        "accept_rate": 94,
+                        "display_name": "David Neale"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1471945612,
+                    "creation_date": 1471945612,
+                    "answer_id": 39097778,
+                    "question_id": 11975781,
+                    "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals/39097778#39097778",
+                    "body": "<p>I think the most straight forward way to achieve what you want is to use <a href=\"https://docs.python.org/2/library/operator.html#operator.attrgetter\" rel=\"noreferrer\"><code>operator.attrgetter</code></a>.</p>\n\n<pre><code>&gt;&gt;&gt; import operator\n&gt;&gt;&gt; class B():\n...   c = 'foo'\n... \n&gt;&gt;&gt; class A():\n...   b = B()\n... \n&gt;&gt;&gt; a = A()\n&gt;&gt;&gt; operator.attrgetter('b.c')(a)\n'foo'\n</code></pre>\n\n<p>If the attribute doesn't exist then you'll get an <code>AttributeError</code></p>\n\n<pre><code>&gt;&gt;&gt; operator.attrgetter('b.d')(a)\nTraceback (most recent call last):\n  File \"&lt;stdin&gt;\", line 1, in &lt;module&gt;\nAttributeError: B instance has no attribute 'd'\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 136284,
+                "reputation": 9745,
+                "user_id": 339681,
+                "user_type": "registered",
+                "accept_rate": 75,
+                "display_name": "cammil"
+            },
+            "comment_count": 4,
+            "is_answered": true,
+            "accepted_answer_id": 11975810,
+            "answer_count": 7,
+            "score": 51,
+            "last_activity_date": 1541782343,
+            "creation_date": 1345058541,
+            "question_id": 11975781,
+            "link": "https://stackoverflow.com/questions/11975781/why-does-getattr-not-support-consecutive-attribute-retrievals",
+            "title": "Why does `getattr` not support consecutive attribute retrievals?",
+            "body": "<pre><code>class A(): pass\n\na = A()\nb = A()\n\na.b = b\nb.c = 1\n\na.b     # this is b\ngetattr(a, \"b\") # so is this\n\na.b.c   # this is 1   \ngetattr(a, \"b.c\") # this raises an AttributeError\n</code></pre>\n\n<p>It seemed very natural to me to assume the latter. I'm sure there is a good reason for this. What is it? </p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7630
+}

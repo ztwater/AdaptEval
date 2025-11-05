@@ -1,0 +1,148 @@
+{
+    "items": [
+        {
+            "tags": [
+                "image-processing",
+                "distortion"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 433981,
+                                "reputation": 250,
+                                "user_id": 819640,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "user819640"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1443516143,
+                            "post_id": 6227310,
+                            "comment_id": 53513728,
+                            "link": "https://stackoverflow.com/questions/6199636/formulas-for-barrel-pincushion-distortion/6227310#comment53513728_6227310",
+                            "body": "When recreating this code in openGL without trimming (like you have in the 1st 2 pictures) the image looked disjointed. I had more success using this algorithm <a href=\"http://www.geeks3d.com/20140213/glsl-shader-library-fish-eye-and-dome-and-barrel-distortion-post-processing-filters/2/\" rel=\"nofollow noreferrer\">geeks3d.com/20140213/&hellip;</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1848449,
+                                "reputation": 1033,
+                                "user_id": 1675589,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "Michel Rouzic"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1492371817,
+                            "post_id": 6227310,
+                            "comment_id": 73939571,
+                            "link": "https://stackoverflow.com/questions/6199636/formulas-for-barrel-pincushion-distortion/6227310#comment73939571_6227310",
+                            "body": "Your transform is only valid for turning a rectilinear image into a distorted image, to reverse that distortion you need the inverse function which is <code>p1 = cbrt(2 &#47; (3 * a)); \tp2 = cbrt( sqrt(3*a) * sqrt( 27*a*x*x + 4 ) - 9*a*x ); \tp3 = cbrt(2) * pow(3*a, 2&#47;3);  \treturn p1&#47;p2 - p2&#47;p3;</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 144393,
+                        "reputation": 60818,
+                        "user_id": 353410,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Dr. belisarius"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 25,
+                    "last_activity_date": 1307361378,
+                    "last_edit_date": 1307361378,
+                    "creation_date": 1307105450,
+                    "answer_id": 6227310,
+                    "question_id": 6199636,
+                    "link": "https://stackoverflow.com/questions/6199636/formulas-for-barrel-pincushion-distortion/6227310#6227310",
+                    "body": "<p>Section 2 of <a href=\"http://sprg.massey.ac.nz/pdfs/2003_IVCNZ_408.pdf\" rel=\"noreferrer\"><strong>this paper</strong></a> explains the transformation. Basically:  </p>\n\n<p><img src=\"https://i.stack.imgur.com/3tSYq.png\" alt=\"enter image description here\"></p>\n\n<p>Here I made an example in <a href=\"http://www.wolfram.com/mathematica/\" rel=\"noreferrer\">Mathematica</a>: </p>\n\n<p><a href=\"https://i.stack.imgur.com/5hpGS.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/5hpGS.png\" alt=\"enter image description here\"></a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1211489,
+                        "reputation": 20913,
+                        "user_id": 1179925,
+                        "user_type": "registered",
+                        "accept_rate": 47,
+                        "display_name": "mrgloom"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1343741821,
+                    "creation_date": 1343741821,
+                    "answer_id": 11741396,
+                    "question_id": 6199636,
+                    "link": "https://stackoverflow.com/questions/6199636/formulas-for-barrel-pincushion-distortion/11741396#11741396",
+                    "body": "<p>simple barrel\\pincushion distortion in opencv c++</p>\n\n<pre><code>IplImage* barrel_pincusion_dist(IplImage* img, double Cx,double Cy,double kx,double ky)\n{\n    IplImage* mapx = cvCreateImage( cvGetSize(img), IPL_DEPTH_32F, 1 );\n    IplImage* mapy = cvCreateImage( cvGetSize(img), IPL_DEPTH_32F, 1 );\n\n    int w= img-&gt;width;\n    int h= img-&gt;height;\n\n    float* pbuf = (float*)mapx-&gt;imageData;\n    for (int y = 0; y &lt; h; y++)\n    {\n        for (int x = 0; x &lt; w; x++)\n        {         \n            float u= Cx+(x-Cx)*(1+kx*((x-Cx)*(x-Cx)+(y-Cy)*(y-Cy)));\n            *pbuf = u;\n            ++pbuf;\n        }\n    }\n\n    pbuf = (float*)mapy-&gt;imageData;\n    for (int y = 0;y &lt; h; y++)\n    {\n        for (int x = 0; x &lt; w; x++) \n        {\n            *pbuf = Cy+(y-Cy)*(1+ky*((x-Cx)*(x-Cx)+(y-Cy)*(y-Cy)));\n            ++pbuf;\n        }\n    }\n\n    /*float* pbuf = (float*)mapx-&gt;imageData;\n    for (int y = 0; y &lt; h; y++)\n    {\n        int ty= y-Cy;\n        for (int x = 0; x &lt; w; x++)\n        {\n            int tx= x-Cx;\n            int rt= tx*tx+ty*ty;\n\n            *pbuf = (float)(tx*(1+kx*rt)+Cx);\n            ++pbuf;\n        }\n    }\n\n    pbuf = (float*)mapy-&gt;imageData;\n    for (int y = 0;y &lt; h; y++)\n    {\n        int ty= y-Cy;\n        for (int x = 0; x &lt; w; x++) \n        {\n            int tx= x-Cx;\n            int rt= tx*tx+ty*ty;\n\n            *pbuf = (float)(ty*(1+ky*rt)+Cy);\n            ++pbuf;\n        }\n    }*/\n\n    IplImage* temp = cvCloneImage(img);\n    cvRemap( temp, img, mapx, mapy ); \n    cvReleaseImage(&amp;temp);\n    cvReleaseImage(&amp;mapx);\n    cvReleaseImage(&amp;mapy);\n\n    return img;\n}\n</code></pre>\n\n<p>more complicated form\n<a href=\"http://opencv.willowgarage.com/documentation/camera_calibration_and_3d_reconstruction.html\" rel=\"nofollow\">http://opencv.willowgarage.com/documentation/camera_calibration_and_3d_reconstruction.html</a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 344866,
+                        "reputation": 43332,
+                        "user_id": 1938163,
+                        "user_type": "registered",
+                        "accept_rate": 97,
+                        "display_name": "Marco A."
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1468397955,
+                    "last_edit_date": 1468397955,
+                    "creation_date": 1452599709,
+                    "answer_id": 34743020,
+                    "question_id": 6199636,
+                    "link": "https://stackoverflow.com/questions/6199636/formulas-for-barrel-pincushion-distortion/34743020#34743020",
+                    "body": "<p>An approximation of the polynomial radial distortion model you can find in <code>Fitzgibbon, 2001</code> is</p>\n\n<p><a href=\"https://i.stack.imgur.com/ybNQH.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/ybNQH.png\" alt=\"enter image description here\"></a></p>\n\n<p>where rd and ru are the distances from the center of distortion. This is also used to filter the distortion out of a wide-angle camera image for computer vision and image processing purposes.</p>\n\n<p>You can find a more detailed explanation of the principle and the shader code to implement the undistortion filtering (and also the forward transformation) here: <a href=\"http://marcodiiga.github.io/radial-lens-undistortion-filtering\" rel=\"nofollow noreferrer\">http://marcodiiga.github.io/radial-lens-undistortion-filtering</a></p>\n\n<p>I'm also posting the papers you should take a look at if you want to know the mathematical details for the method I posted</p>\n\n<ul>\n<li>Zhang Z. (1999). Flexible camera calibration by viewing a plane from unknown orientation</li>\n<li>Andrew W. Fitzgibbon (2001). Simultaneous linear estimation of multiple view geometry and lens distortion</li>\n</ul>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1047018,
+                        "reputation": 1687,
+                        "user_id": 1051805,
+                        "user_type": "registered",
+                        "accept_rate": 42,
+                        "display_name": "Phil Rosenberg"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1527501318,
+                    "creation_date": 1527501318,
+                    "answer_id": 50563653,
+                    "question_id": 6199636,
+                    "link": "https://stackoverflow.com/questions/6199636/formulas-for-barrel-pincushion-distortion/50563653#50563653",
+                    "body": "<p>According to Wikipedia, there can also be an r to the power 4 term too. The signs of the two constants (for the r to the 2 and r to the 4 terms) can be opposite giving handlebar distortion where the centre of the image has barrel distortion and the edge has pincushion distortion giving straight lines the appearance of a handlebar moustache.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 362850,
+                "reputation": 613,
+                "user_id": 706261,
+                "user_type": "registered",
+                "accept_rate": 44,
+                "display_name": "breethe"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 6227310,
+            "answer_count": 4,
+            "score": 18,
+            "last_activity_date": 1527501318,
+            "creation_date": 1306923675,
+            "question_id": 6199636,
+            "link": "https://stackoverflow.com/questions/6199636/formulas-for-barrel-pincushion-distortion",
+            "title": "Formulas for Barrel/Pincushion distortion",
+            "body": "<p>Can't understand how to get (x', y') of original (x, y) in image, for  Barrel/Pincushion distortion.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7659
+}

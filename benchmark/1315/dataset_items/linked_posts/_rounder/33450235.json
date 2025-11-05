@@ -1,0 +1,149 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "algorithm",
+                "numpy"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3526709,
+                                "reputation": 16461,
+                                "user_id": 2947592,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "wvdz"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1446310507,
+                            "post_id": 33450307,
+                            "comment_id": 54694876,
+                            "link": "https://stackoverflow.com/questions/33450235/rounding-a-list-of-values-to-the-nearest-value-from-another-list-in-python/33450307#comment54694876_33450307",
+                            "body": "There was a small bug in my original answer which is fixed now."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3526709,
+                        "reputation": 16461,
+                        "user_id": 2947592,
+                        "user_type": "registered",
+                        "accept_rate": 71,
+                        "display_name": "wvdz"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1446310936,
+                    "last_edit_date": 1446310936,
+                    "creation_date": 1446285675,
+                    "answer_id": 33450307,
+                    "question_id": 33450235,
+                    "link": "https://stackoverflow.com/questions/33450235/rounding-a-list-of-values-to-the-nearest-value-from-another-list-in-python/33450307#33450307",
+                    "body": "<p>I don't know Numpy, but I don't think knowledge of Numpy is needed to be able to answer this question. Assuming that an array can be iterated and modified in the same way as a list, the following code solves your problem by using a nested loop to find the closest value.</p>\n\n<pre><code>for i in range(len(b)):\n    for k in range(len(b[i])):\n        closest = a[0]\n        for j in range(1, len(a)):\n            if abs(a[j] - b[i][k]) &lt; abs(closest - b[i][k]):\n                closest = a[j]\n        b[i][k] = closest\n</code></pre>\n\n<p>Disclaimer: a more pythonic approach may exist.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2456564,
+                        "reputation": 178824,
+                        "user_id": 2141635,
+                        "user_type": "registered",
+                        "accept_rate": 69,
+                        "display_name": "Padraic Cunningham"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1446317568,
+                    "last_edit_date": 1446317568,
+                    "creation_date": 1446316444,
+                    "answer_id": 33455153,
+                    "question_id": 33450235,
+                    "link": "https://stackoverflow.com/questions/33450235/rounding-a-list-of-values-to-the-nearest-value-from-another-list-in-python/33455153#33455153",
+                    "body": "<p>If you sort <code>a</code> you can use bisect to find the index in array <code>a</code> where each element from the sub arrays of array b would land:</p>\n\n<pre><code>import numpy as np\nfrom bisect import bisect\n\n\na = np.random.normal(size=(5,))\n\nb = np.random.normal(size=(10, 10))\na.sort()\nsize = a.size\n\n\nfor sub in b:\n    for ind2, ele in enumerate(sub):\n        i = bisect(a, ele, hi=size-1)\n        i1, i2 = a[i], a[i-1]\n        sub[ind2] = i1 if abs(i1 - ele) &lt; abs(i2 - ele) else i2\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 15417569,
+                                "reputation": 3357,
+                                "user_id": 11122513,
+                                "user_type": "registered",
+                                "display_name": "igorkf"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1632948217,
+                            "post_id": 51226167,
+                            "comment_id": 122634655,
+                            "link": "https://stackoverflow.com/questions/33450235/rounding-a-list-of-values-to-the-nearest-value-from-another-list-in-python/51226167#comment122634655_51226167",
+                            "body": "Awesome...thank you."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3638699,
+                        "reputation": 2123,
+                        "user_id": 3033441,
+                        "user_type": "registered",
+                        "accept_rate": 62,
+                        "display_name": "lakshayg"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1530990203,
+                    "creation_date": 1530990203,
+                    "answer_id": 51226167,
+                    "question_id": 33450235,
+                    "link": "https://stackoverflow.com/questions/33450235/rounding-a-list-of-values-to-the-nearest-value-from-another-list-in-python/51226167#51226167",
+                    "body": "<p>Here is something you can try</p>\n\n<pre><code>import numpy as np\n\ndef rounder(values):\n    def f(x):\n        idx = np.argmin(np.abs(values - x))\n        return values[idx]\n    return np.frompyfunc(f, 1, 1)\n\na = np.random.normal(size=(5,))\nb = np.random.normal(size=(10,10))\nrounded = rounder(a)(b)\nprint(rounded)\n</code></pre>\n\n<p>The <code>rounder</code> function takes the values which we want to round to. It creates a  function which takes a scalar and returns the closest element from the <code>values</code> array. We then transform this function to a broadcast-able function using <a href=\"https://docs.scipy.org/doc/numpy/reference/generated/numpy.frompyfunc.html#numpy.frompyfunc\" rel=\"noreferrer\"><code>numpy.frompyfunc</code></a>. This way you are not limited to using this on 2d arrays, numpy automatically does broadcasting for you without any loops.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3921016,
+                        "reputation": 3720,
+                        "user_id": 3243159,
+                        "user_type": "registered",
+                        "display_name": "Jurgen Strydom"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1603953781,
+                    "creation_date": 1603953781,
+                    "answer_id": 64586191,
+                    "question_id": 33450235,
+                    "link": "https://stackoverflow.com/questions/33450235/rounding-a-list-of-values-to-the-nearest-value-from-another-list-in-python/64586191#64586191",
+                    "body": "<p>Assuming <code>a</code> will always be 1 dimensional, and that <code>b</code> can have any dimension in this solution.</p>\n<p>Create two temporary arrays tiling <code>a</code> and <code>b</code> into the dimensions of the other (here both will now have a shape of <code>(5,10,10)</code>).</p>\n<pre><code>at = np.tile(np.reshape(a, (-1, *list(np.ones(len(b.shape)).astype(int)))), (1, *b.shape))\nbt = np.tile(b, (a.size, *list(np.ones(len(b.shape)).astype(int))))\n</code></pre>\n<p>For the nearest operation, you can take the absolute value of the difference between the two. The minimum value of that operation in the first dimension (dimension 0) gives the index in the <code>a</code> array.</p>\n<pre><code>idx = np.argmin(np.abs(at-bt),axis=0)\n</code></pre>\n<p>All that is left is to select the values from array a using the index, which will return an array in the shape of <code>b</code> with the nearest values from <code>a</code>.</p>\n<pre><code>ans = a[idx]\n</code></pre>\n<p>This method can also be used (modifying how the index is calculated) to do other operations, such as a floor, ceil, etc.</p>\n<p>Note that this solution can be memory intensive, which is not much of an issue with small arrays. A looping solution could be less memory intensive at the cost of speed.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 165511,
+                "reputation": 1123,
+                "user_id": 389028,
+                "user_type": "registered",
+                "accept_rate": 62,
+                "display_name": "zeta"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "answer_count": 4,
+            "score": 10,
+            "last_activity_date": 1603953781,
+            "creation_date": 1446285244,
+            "last_edit_date": 1530988074,
+            "question_id": 33450235,
+            "link": "https://stackoverflow.com/questions/33450235/rounding-a-list-of-values-to-the-nearest-value-from-another-list-in-python",
+            "title": "Rounding a list of values to the nearest value from another list in python",
+            "body": "<p>Suppose I have the following two arrays:</p>\n\n<pre><code>&gt;&gt;&gt; a = np.random.normal(size=(5,))\n&gt;&gt;&gt; a\narray([ 1.42185826,  1.85726088, -0.18968258,  0.55150255, -1.04356681])\n\n&gt;&gt;&gt; b = np.random.normal(size=(10,10))\n&gt;&gt;&gt; b\narray([[ 0.64207828, -1.08930317,  0.22795289,  0.13990505, -0.9936441 ,\n         1.07150754,  0.1701072 ,  0.83970818, -0.63938211, -0.76914925],\n       [ 0.07776129, -0.37606964, -0.54082077,  0.33910246,  0.79950839,\n         0.33353221,  0.00967273,  0.62224009, -0.2007335 , -0.3458876 ],\n       [ 2.08751603, -0.52128218,  1.54390634,  0.96715102,  0.799938  ,\n         0.03702108,  0.36095493, -0.13004965, -1.12163463,  0.32031951],\n       [-2.34856521,  0.11583369, -0.0056261 ,  0.80155082,  0.33421475,\n        -1.23644508, -1.49667424, -1.01799365, -0.58232326,  0.404464  ],\n       [-0.6289335 ,  0.63654201, -1.28064055, -1.01977467,  0.86871352,\n         0.84909353,  0.33036771,  0.2604609 , -0.21102014,  0.78748329],\n       [ 1.44763687,  0.84205291,  0.76841512,  1.05214051,  2.11847126,\n        -0.7389102 ,  0.74964783, -1.78074088, -0.57582084, -0.67956203],\n       [-1.00599479, -0.93125754,  1.43709533,  1.39308038,  1.62793589,\n        -0.2744919 , -0.52720952, -0.40644809,  0.14809867, -1.49267633],\n       [-1.8240385 , -0.5416585 ,  1.10750423,  0.56598464,  0.73927224,\n        -0.54362927,  0.84243497, -0.56753587,  0.70591902, -0.26271302],\n       [-1.19179547, -1.38993415, -1.99469983, -1.09749452,  1.28697997,\n        -0.74650318,  1.76384156,  0.33938808,  0.61647274, -0.42166111],\n       [-0.14147554, -0.96192206,  0.14434349,  1.28437894, -0.38865447,\n        -1.42540195,  0.93105528,  0.28993325, -1.16119916, -0.58244758]])\n</code></pre>\n\n<p>I have to find a way to round all values from <code>b</code> to the nearest value found in <code>a</code>.</p>\n\n<p>Does anyone know of a good way to do this with python? I am at a total loss myself.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7573
+}

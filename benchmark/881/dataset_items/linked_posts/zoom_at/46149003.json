@@ -1,0 +1,97 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "python-2.7",
+                "zooming",
+                "python-imaging-library"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 4807424,
+                        "reputation": 5135,
+                        "user_id": 3881984,
+                        "user_type": "registered",
+                        "accept_rate": 79,
+                        "display_name": "McLawrence"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1505111788,
+                    "post_id": 46149003,
+                    "comment_id": 79260510,
+                    "link": "https://stackoverflow.com/questions/46149003/pil-zoom-into-image-at-a-particular-point#comment79260510_46149003",
+                    "body": "What do you mean by the size should remain the same? if you zoom digitally, you are just cropping the image around the particular point you are giving. Thus, the number of pixels has to shrink."
+                },
+                {
+                    "owner": {
+                        "account_id": 2047045,
+                        "reputation": 2567,
+                        "user_id": 1826912,
+                        "user_type": "registered",
+                        "accept_rate": 79,
+                        "display_name": "Rohit Pandey"
+                    },
+                    "reply_to_user": {
+                        "account_id": 4807424,
+                        "reputation": 5135,
+                        "user_id": 3881984,
+                        "user_type": "registered",
+                        "accept_rate": 79,
+                        "display_name": "McLawrence"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1505112104,
+                    "post_id": 46149003,
+                    "comment_id": 79260646,
+                    "link": "https://stackoverflow.com/questions/46149003/pil-zoom-into-image-at-a-particular-point#comment79260646_46149003",
+                    "body": "Right, I mean literally &quot;im.size&quot;. Just like when we zoom into a map, the size of the window itself doesn&#39;t change. Also, ideally, this method would (if possible) guess the intermediate pixels, so the total number of pixels wouldn&#39;t have to shrink then."
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 5304262,
+                        "reputation": 106,
+                        "user_id": 8516847,
+                        "user_type": "registered",
+                        "display_name": "Douwe Osinga"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1527349895,
+                    "creation_date": 1527349895,
+                    "answer_id": 50544520,
+                    "question_id": 46149003,
+                    "link": "https://stackoverflow.com/questions/46149003/pil-zoom-into-image-at-a-particular-point/50544520#50544520",
+                    "body": "<p>I think you mean this:</p>\n\n<pre><code>def zoom_at(img, x, y, zoom):\n    w, h = img.size\n    zoom2 = zoom * 2\n    img = img.crop((x - w / zoom2, y - h / zoom2, \n                    x + w / zoom2, y + h / zoom2))\n    return img.resize((w, h), Image.LANCZOS)\n</code></pre>\n\n<p>This will crop the image around the point where you zoom into and then upscale the resulting image to the original size. </p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 2047045,
+                "reputation": 2567,
+                "user_id": 1826912,
+                "user_type": "registered",
+                "accept_rate": 79,
+                "display_name": "Rohit Pandey"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "answer_count": 1,
+            "score": 5,
+            "last_activity_date": 1527349895,
+            "creation_date": 1505109130,
+            "question_id": 46149003,
+            "link": "https://stackoverflow.com/questions/46149003/pil-zoom-into-image-at-a-particular-point",
+            "title": "PIL zoom into image at a particular point",
+            "body": "<p>I'm creating some images with python imaging library (PIL). Now, like we zoom into a map at a particular location, I want to similarly zoom into my image at a specified point. Note that this is different from resizing the image. I want the size to remain the same. I couldn't find any inbuilt method in the documentation that does this. Is anyone aware of a method that might achieve this. I'd ideally like to do this without other dependencies like openCV.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8312
+}

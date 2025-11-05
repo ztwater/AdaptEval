@@ -1,0 +1,7 @@
+assert string_to_pairs("") == []
+assert string_to_pairs("123") == [("", 123)]
+assert string_to_pairs("abc") == [("abc", 0)]
+assert string_to_pairs("123abc") == [("", 123), ("abc", 0)]
+assert string_to_pairs("abc123") == [("abc", 123)]
+assert string_to_pairs("123abc456") == [("", 123), ("abc", 456)]
+assert string_to_pairs("abc123efg") == [("abc", 123), ("efg", 0)]

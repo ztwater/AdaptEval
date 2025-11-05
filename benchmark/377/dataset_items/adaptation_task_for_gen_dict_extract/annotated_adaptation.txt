@@ -1,0 +1,97 @@
+[
+    {
+        "id": 0,
+        "type": "Refactoring.Ins_Ann",
+        "description": "Add type annotations to the function parameters and return type for better type checking and readability.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": [
+                "typing.Iterator"
+            ]
+        },
+        "associated_tests": [
+            "test_annotations"
+        ]
+    },
+    {
+        "id": 1,
+        "type": "Method_Signature.Upd_Param",
+        "description": "Change parameter names from 'var' to 'dict_' and 'keys' to 'key_', which only supports searching the value of a single key in the dict. The order of parameters should be 'key_, dict_'.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_parameter_renaming"
+        ]
+    },
+    {
+        "id": 2,
+        "type": "Logic.Del_Cond",
+        "description": "Remove the for statement that iterates 'keys' because of the parameter change.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_for_removing"
+        ]
+    },
+    {
+        "id": 3,
+        "type": "Logic.Upd_Call",
+        "description": "Change the recursive call of 'gen_dict_extract' by removing the list wrapper around 'key' and changing the argument order.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_nested_dict",
+            "test_list_of_dicts"
+        ]
+    }
+]

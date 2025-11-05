@@ -1,0 +1,279 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "numpy"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 485561,
+                        "reputation": 227434,
+                        "user_id": 901925,
+                        "user_type": "registered",
+                        "display_name": "hpaulj"
+                    },
+                    "edited": false,
+                    "score": 3,
+                    "creation_date": 1601277180,
+                    "post_id": 64097426,
+                    "comment_id": 113345633,
+                    "link": "https://stackoverflow.com/questions/64097426/is-there-unstack-in-numpy#comment113345633_64097426",
+                    "body": "Look at the code for <code>np.stack</code>.  It expands the dimension of all inputs, and does a concatenate.  <code>np.split</code> might do what you want; I haven&#39;t used it much."
+                },
+                {
+                    "owner": {
+                        "account_id": 906817,
+                        "reputation": 15954,
+                        "user_id": 941531,
+                        "user_type": "registered",
+                        "display_name": "Arty"
+                    },
+                    "reply_to_user": {
+                        "account_id": 485561,
+                        "reputation": 227434,
+                        "user_id": 901925,
+                        "user_type": "registered",
+                        "display_name": "hpaulj"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1601281313,
+                    "post_id": 64097426,
+                    "comment_id": 113347398,
+                    "link": "https://stackoverflow.com/questions/64097426/is-there-unstack-in-numpy#comment113347398_64097426",
+                    "body": "@hpaulj Thanks, <a href=\"https://numpy.org/doc/stable/reference/generated/numpy.split.html\" rel=\"nofollow noreferrer\">np.split</a> helped."
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 906817,
+                        "reputation": 15954,
+                        "user_id": 941531,
+                        "user_type": "registered",
+                        "display_name": "Arty"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1624705977,
+                    "last_edit_date": 1624705977,
+                    "creation_date": 1601279143,
+                    "answer_id": 64097936,
+                    "question_id": 64097426,
+                    "link": "https://stackoverflow.com/questions/64097426/is-there-unstack-in-numpy/64097936#64097936",
+                    "body": "<p>Thanks to <a href=\"https://stackoverflow.com/questions/64097426/is-there-unstack-in-numpy/64097936#comment113345633_64097426\">suggestion</a> of @hpaulj solved task efficiently using <a href=\"https://numpy.org/doc/stable/reference/generated/numpy.split.html\" rel=\"nofollow noreferrer\">np.split</a>.</p>\n<p><a href=\"https://repl.it/@moytrage/StackOverflow64097426#main.py\" rel=\"nofollow noreferrer\">Try it online!</a></p>\n<pre><code>import numpy as np\n\ndef unstack(a, axis = 0):\n    return [np.squeeze(e, axis) for e in np.split(a, a.shape[axis], axis = axis)]\n\na = [np.array([[1,2,3],[4,5,6]]), np.array([[7,8,9],[10,11,12]])]\n\nfor axis in range(len(a[0].shape) + 1):\n    b = np.stack(a, axis)\n    c = unstack(b, axis)\n    # Check that we have same &quot;c&quot; as input &quot;a&quot;\n    assert len(c) == len(a) and all(np.all(sc == sa) for sc, sa in zip(c, a)), (c, a)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 906817,
+                        "reputation": 15954,
+                        "user_id": 941531,
+                        "user_type": "registered",
+                        "display_name": "Arty"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1601283074,
+                    "creation_date": 1601283074,
+                    "answer_id": 64098879,
+                    "question_id": 64097426,
+                    "link": "https://stackoverflow.com/questions/64097426/is-there-unstack-in-numpy/64098879#64098879",
+                    "body": "<p>Can also be solved using <a href=\"https://numpy.org/doc/stable/reference/generated/numpy.take.html\" rel=\"nofollow noreferrer\">np.take</a>.</p>\n<p>It is a simpler than <a href=\"https://stackoverflow.com/a/64097936/941531\">this</a> solution but could be a bit less efficient, needs timing measurement for different inputs.</p>\n<p><a href=\"https://repl.it/@moytrage/StackOverflow64097426var3#main.py\" rel=\"nofollow noreferrer\">Try it online!</a></p>\n<pre><code>import numpy as np\n\ndef unstack(a, axis = 0):\n    return [np.take(a, i, axis = axis) for i in range(a.shape[axis])]\n\na = [np.array([[1,2,3],[4,5,6]]), np.array([[7,8,9],[10,11,12]])]\n\nfor axis in range(len(a[0].shape) + 1):\n    b = np.stack(a, axis)\n    c = unstack(b, axis)\n    # Check that we have same &quot;c&quot; as input &quot;a&quot;\n    assert len(c) == len(a) and all(np.all(sc == sa) for sc, sa in zip(c, a)), (c, a)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 906817,
+                                "reputation": 15954,
+                                "user_id": 941531,
+                                "user_type": "registered",
+                                "display_name": "Arty"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1624704783,
+                            "post_id": 68141297,
+                            "comment_id": 120434074,
+                            "link": "https://stackoverflow.com/questions/64097426/is-there-unstack-in-numpy/68141297#comment120434074_68141297",
+                            "body": "The question was to make an opposite of <code>np.stack</code> and np.stack joins a python list of arrays along new axis. So the opposite should return a python list of arrays, not single array. That&#39;s why other answers are a bit verbose and more slowly - because they produce a list. But thanks for nice try! UpVoting your answer. If you extend your answer to produce a list and do timings with list version then it would be nice and exactly what np.unstack is about."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 906817,
+                                "reputation": 15954,
+                                "user_id": 941531,
+                                "user_type": "registered",
+                                "display_name": "Arty"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1624704960,
+                            "post_id": 68141297,
+                            "comment_id": 120434115,
+                            "link": "https://stackoverflow.com/questions/64097426/is-there-unstack-in-numpy/68141297#comment120434115_68141297",
+                            "body": "Also your timings are not very correct. You include into timing both importing numpy module and creating array of meshgrid. For correct timings you should split out this part into separate preparation stage, and leave only unstacking function inside timing code. And do more iterations."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 906817,
+                                "reputation": 15954,
+                                "user_id": 941531,
+                                "user_type": "registered",
+                                "display_name": "Arty"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1624705776,
+                            "post_id": 68141297,
+                            "comment_id": 120434322,
+                            "link": "https://stackoverflow.com/questions/64097426/is-there-unstack-in-numpy/68141297#comment120434322_68141297",
+                            "body": "Actually I think that having non-list variant is also nice. Just to be precise and fair in your timings compared to other functions you have to timeit all variants with list conversion. Just do <code>list(unstack(...))</code> for your function in you timings and you&#39;ll get what&#39;s needed."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 236373,
+                                "reputation": 160,
+                                "user_id": 503822,
+                                "user_type": "registered",
+                                "display_name": "Ivorius"
+                            },
+                            "reply_to_user": {
+                                "account_id": 906817,
+                                "reputation": 15954,
+                                "user_id": 941531,
+                                "user_type": "registered",
+                                "display_name": "Arty"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1624720314,
+                            "post_id": 68141297,
+                            "comment_id": 120437682,
+                            "link": "https://stackoverflow.com/questions/64097426/is-there-unstack-in-numpy/68141297#comment120437682_68141297",
+                            "body": "If you want a list, feel free to call list(unstack(...)) or do it in the function. I do prefer getting back a numpy array."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 236373,
+                                "reputation": 160,
+                                "user_id": 503822,
+                                "user_type": "registered",
+                                "display_name": "Ivorius"
+                            },
+                            "reply_to_user": {
+                                "account_id": 906817,
+                                "reputation": 15954,
+                                "user_id": 941531,
+                                "user_type": "registered",
+                                "display_name": "Arty"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1624720616,
+                            "post_id": 68141297,
+                            "comment_id": 120437768,
+                            "link": "https://stackoverflow.com/questions/64097426/is-there-unstack-in-numpy/68141297#comment120437768_68141297",
+                            "body": "You&#39;re right about the timings - I updated to include a setup step."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 906817,
+                                "reputation": 15954,
+                                "user_id": 941531,
+                                "user_type": "registered",
+                                "display_name": "Arty"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1634703247,
+                            "post_id": 68141297,
+                            "comment_id": 123093148,
+                            "link": "https://stackoverflow.com/questions/64097426/is-there-unstack-in-numpy/68141297#comment123093148_68141297",
+                            "body": "Changed just now Accepted answer from my to yours, because your solution works much faster than my, and also looks much more simple (and has more UpVotes)! Thanks!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 236373,
+                        "reputation": 160,
+                        "user_id": 503822,
+                        "user_type": "registered",
+                        "display_name": "Ivorius"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": true,
+                    "score": 12,
+                    "last_activity_date": 1650553402,
+                    "last_edit_date": 1650553402,
+                    "creation_date": 1624702314,
+                    "answer_id": 68141297,
+                    "question_id": 64097426,
+                    "link": "https://stackoverflow.com/questions/64097426/is-there-unstack-in-numpy/68141297#68141297",
+                    "body": "<p>Coming across this late, here is a much simpler answer:</p>\n<pre><code>def unstack(a, axis=0):\n    return np.moveaxis(a, axis, 0)\n#    return list(np.moveaxis(a, axis, 0))\n</code></pre>\n<p>As a bonus, the result is still a numpy array. The unwrapping happens if you just python-unwrap it:</p>\n<pre><code>A, B, = unstack([[1, 2], [3, 4]], axis=1)\nassert list(A) == [1, 3]\nassert list(B) == [2, 4]\n</code></pre>\n<p>Unsurprisingly, it is also the fastest:</p>\n<pre><code># np.squeeze\n\u276f python -m timeit -s &quot;import numpy as np; a=np.array(np.meshgrid(np.arange(1000), np.arange(1000)));&quot; &quot;C = [np.squeeze(e, 1) for e in np.split(a, a.shape[1], axis = 1)]&quot;\n100 loops, best of 5: 2.64 msec per loop\n    \n# np.take\n\u276f python -m timeit -s &quot;import numpy as np; a=np.array(np.meshgrid(np.arange(1000), np.arange(1000)));&quot; &quot;C = [np.take(a, i, axis = 1) for i in range(a.shape[1])]&quot;       \n50 loops, best of 5: 5.08 msec per loop\n\n# np.moveaxis\n\u276f python -m timeit -s &quot;import numpy as np; a=np.array(np.meshgrid(np.arange(1000), np.arange(1000)));&quot; &quot;C = np.moveaxis(a, 1, 0)&quot;\n100000 loops, best of 5: 3.89 usec per loop\n\n# list(np.moveaxis)\n\u276f python -m timeit -s &quot;import numpy as np; a=np.array(np.meshgrid(np.arange(1000), np.arange(1000)));&quot; &quot;C = list(np.moveaxis(a, 1, 0))&quot;\n1000 loops, best of 5: 205 usec per loop\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 19680946,
+                        "reputation": 31,
+                        "user_id": 14408078,
+                        "user_type": "registered",
+                        "display_name": "Gabriel Barbosa"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1631199793,
+                    "creation_date": 1631199793,
+                    "answer_id": 69120571,
+                    "question_id": 64097426,
+                    "link": "https://stackoverflow.com/questions/64097426/is-there-unstack-in-numpy/69120571#69120571",
+                    "body": "<p>it's simple like:</p>\n<pre><code>list(array)\n</code></pre>\n<p>it will iterate over the first axis.</p>\n<p>an example:</p>\n<pre><code>a = np.array([1,2,3])\nb = np.array([4,5,6])\nc = np.stack([a,b])\nd = list(c)\n</code></pre>\n<p>Output of <code>c</code></p>\n<pre><code>array([[1, 2, 3],\n       [4, 5, 6]])\n</code></pre>\n<p>Output of <code>d</code></p>\n<pre><code>[array([1,2,3]), array([4,5,6])]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 35314,
+                        "reputation": 32670,
+                        "user_id": 99989,
+                        "user_type": "registered",
+                        "accept_rate": 94,
+                        "display_name": "Neil G"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1715104979,
+                    "creation_date": 1715104979,
+                    "answer_id": 78444326,
+                    "question_id": 64097426,
+                    "link": "https://stackoverflow.com/questions/64097426/is-there-unstack-in-numpy/78444326#78444326",
+                    "body": "<p><code>unstack</code> has now been added to the Array API and will be in Numpy as <code>numpy.array_api.unstack</code>.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 906817,
+                "reputation": 15954,
+                "user_id": 941531,
+                "user_type": "registered",
+                "display_name": "Arty"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "accepted_answer_id": 68141297,
+            "answer_count": 5,
+            "score": 10,
+            "last_activity_date": 1715104979,
+            "creation_date": 1601276941,
+            "question_id": 64097426,
+            "link": "https://stackoverflow.com/questions/64097426/is-there-unstack-in-numpy",
+            "title": "Is there unstack in NumPy?",
+            "body": "<p>There is <a href=\"https://numpy.org/doc/stable/reference/generated/numpy.stack.html\" rel=\"noreferrer\">np.stack</a> in <a href=\"https://numpy.org/\" rel=\"noreferrer\">NumPy</a>, but is there an opposite <code>np.unstack</code> same as <a href=\"https://www.tensorflow.org/api_docs/python/tf/unstack\" rel=\"noreferrer\">tf.unstack</a>?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6022
+}

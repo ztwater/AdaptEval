@@ -1,0 +1,193 @@
+[
+    {
+        "id": 0,
+        "type": "Method_Signature.Rename_Func",
+        "description": "Change the method name from `minimum_bounding_rectangle` to `get_minimum_bounding_rectangle` for better naming convention",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_func_name_change"
+        ]
+    },
+    {
+        "id": 1,
+        "type": "Refactoring.Rename_Param",
+        "description": "Rename the parameter from 'point' to 'building_nodes' to represent the input of a geopandas GeoDataFrame corresponding to building footprints.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_update_parameter"
+        ]
+    },
+    {
+        "id": 2,
+        "type": "Logic.Ins_Cond",
+        "description": "Handle the input as a list of arrays from geospatial coordinates, transforming how the convex hull points are gathered.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": [
+                "geopandas.GeoDataFrame.convex_hull.exterior",
+                "numpy.array"
+            ]
+        },
+        "associated_tests": [
+            "test_modify_input_handling"
+        ]
+    },
+    {
+        "id": 3,
+        "type": "Logic.Ins_Cond",
+        "description": "Iterate all convex hull points to calculate vectors between each point (edges) and angles between vectors. The results are stored in lists.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_iterative_calculation"
+        ]
+    },
+    {
+        "id": 4,
+        "type": "Logic.Init_Var",
+        "description": "Initialize a list `mbr_list` to store multiple minimum bounding rectangles for each building footprint.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_mbr_list_init"
+        ]
+    },
+    {
+        "id": 5,
+        "type": "Logic.Ins_Cond",
+        "description": "Add a loop to process each angle and corresponding hull coordinates alone with function returning multiple minimum bounding rectangles",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_add_loop"
+        ]
+    },
+    {
+        "id": 6,
+        "type": "Logic.Upd_Call",
+        "description": "Append the calculated minimum bounding rectangle as a Shapely Polygon to the `mbr_list`, instead of numpy.array.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": [
+                "shapely.Polygon"
+            ]
+        },
+        "associated_tests": [
+            "test_list_append"
+        ]
+    },
+    {
+        "id": 7,
+        "type": "Logic.Upd_Call",
+        "description": "Append the resulting minimum bounding rectangles to a list instead of returning a single result, to support multiple geometries.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": [
+                "shapely.Polygon"
+            ]
+        },
+        "associated_tests": [
+            "test_adapt_output"
+        ]
+    }
+]

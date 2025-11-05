@@ -1,0 +1,207 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "multithreading"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 1936524,
+                        "reputation": 673,
+                        "user_id": 1743863,
+                        "user_type": "registered",
+                        "accept_rate": 50,
+                        "display_name": "Hawkwing"
+                    },
+                    "edited": false,
+                    "score": 2,
+                    "creation_date": 1376490753,
+                    "post_id": 18234469,
+                    "comment_id": 26733289,
+                    "link": "https://stackoverflow.com/questions/18234469/python-multithreaded-print-statements-delayed-until-all-threads-complete-executi#comment26733289_18234469",
+                    "body": "Just thought I&#39;d point out that this is a <a href=\"http://stackoverflow.com/questions/12622365/problems-mixing-threads-processes-in-python\">duplicate</a> of another (unanswered) question asked here on SO, but much less cluttered."
+                },
+                {
+                    "owner": {
+                        "account_id": 1151597,
+                        "reputation": 15990,
+                        "user_id": 1133179,
+                        "user_type": "registered",
+                        "accept_rate": 90,
+                        "display_name": "luk32"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1376490891,
+                    "post_id": 18234469,
+                    "comment_id": 26733392,
+                    "link": "https://stackoverflow.com/questions/18234469/python-multithreaded-print-statements-delayed-until-all-threads-complete-executi#comment26733392_18234469",
+                    "body": "Do you mean, all prints go at once, or their expected order is actually reversed? If they go all at once its probably system buffering. If the order is inversed it&#39;s more interesting."
+                },
+                {
+                    "owner": {
+                        "account_id": 1936524,
+                        "reputation": 673,
+                        "user_id": 1743863,
+                        "user_type": "registered",
+                        "accept_rate": 50,
+                        "display_name": "Hawkwing"
+                    },
+                    "reply_to_user": {
+                        "account_id": 1151597,
+                        "reputation": 15990,
+                        "user_id": 1133179,
+                        "user_type": "registered",
+                        "accept_rate": 90,
+                        "display_name": "luk32"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1376491019,
+                    "post_id": 18234469,
+                    "comment_id": 26733491,
+                    "link": "https://stackoverflow.com/questions/18234469/python-multithreaded-print-statements-delayed-until-all-threads-complete-executi#comment26733491_18234469",
+                    "body": "Both things, actually. Print statements occur all at once after &#39;finshed&#39; is printed."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1151597,
+                                "reputation": 15990,
+                                "user_id": 1133179,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "luk32"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1376491230,
+                            "post_id": 18234593,
+                            "comment_id": 26733649,
+                            "link": "https://stackoverflow.com/questions/18234469/python-multithreaded-print-statements-delayed-until-all-threads-complete-executi/18234593#comment26733649_18234593",
+                            "body": "Buffering should not change the expected order of prints I believe."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1936524,
+                                "reputation": 673,
+                                "user_id": 1743863,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "Hawkwing"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1376491391,
+                            "post_id": 18234593,
+                            "comment_id": 26733771,
+                            "link": "https://stackoverflow.com/questions/18234469/python-multithreaded-print-statements-delayed-until-all-threads-complete-executi/18234593#comment26733771_18234593",
+                            "body": "Tested. Adding sys.stdout.flush() after the print statement both causes them to output before &#39;finished&#39; as well as to print as each individual thread completes, instead of waiting until the end.  Plus, its a very clean solution! Accepting."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6102374,
+                                "reputation": 499,
+                                "user_id": 4760987,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Alexander Leon VI"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1447975820,
+                            "post_id": 18234593,
+                            "comment_id": 55398375,
+                            "link": "https://stackoverflow.com/questions/18234469/python-multithreaded-print-statements-delayed-until-all-threads-complete-executi/18234593#comment55398375_18234593",
+                            "body": "This doesn&#39;t work to me :( . It looks like my print queue cannot be handled"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 138133,
+                        "reputation": 11998,
+                        "user_id": 342859,
+                        "user_type": "registered",
+                        "accept_rate": 89,
+                        "display_name": "Yossi"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": true,
+                    "score": 26,
+                    "last_activity_date": 1376490786,
+                    "last_edit_date": 1495535492,
+                    "creation_date": 1376490786,
+                    "answer_id": 18234593,
+                    "question_id": 18234469,
+                    "link": "https://stackoverflow.com/questions/18234469/python-multithreaded-print-statements-delayed-until-all-threads-complete-executi/18234593#18234593",
+                    "body": "<p>This happens due to stdout buffering. You still can flush the buffers:</p>\n\n<pre><code>import sys\n\nprint 'starting'\nsys.stdout.flush()\n</code></pre>\n\n<p>You can find more info on this issue <a href=\"https://stackoverflow.com/questions/107705/python-output-buffering\">here</a> and <a href=\"https://stackoverflow.com/questions/230751/how-to-flush-output-of-python-print\">here</a>.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3005786,
+                        "reputation": 13490,
+                        "user_id": 2550354,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Or Duan"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 44,
+                    "last_activity_date": 1493722815,
+                    "creation_date": 1493722815,
+                    "answer_id": 43736208,
+                    "question_id": 18234469,
+                    "link": "https://stackoverflow.com/questions/18234469/python-multithreaded-print-statements-delayed-until-all-threads-complete-executi/43736208#43736208",
+                    "body": "<p><strong>For python 3</strong> you can now use the <code>flush</code> param like that:</p>\n\n<p><code>print('Your text', flush=True)</code></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5751511,
+                        "reputation": 17738,
+                        "user_id": 4541045,
+                        "user_type": "registered",
+                        "display_name": "ti7"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1594398771,
+                    "last_edit_date": 1594398771,
+                    "creation_date": 1567701089,
+                    "answer_id": 57809668,
+                    "question_id": 18234469,
+                    "link": "https://stackoverflow.com/questions/18234469/python-multithreaded-print-statements-delayed-until-all-threads-complete-executi/57809668#57809668",
+                    "body": "<p>Having run into plenty of issues around this and garbled outputs (especially under Windows when adding colours to the output..), my solution has been to have an exclusive printing thread which consumes a queue</p>\n<p>If this <em>still</em> doesn't work, also add <code>flush=True</code> to your print statement(s) as suggested by <strong>@Or Duan</strong></p>\n<p>Further, you may find the &quot;most correct&quot;, but a heavy-handed approach to displaying messages with threading is to use the <code>logging</code> library which can <a href=\"https://docs.python.org/3/howto/logging-cookbook.html#dealing-with-handlers-that-block\" rel=\"nofollow noreferrer\">wrap a queue</a> (and write to many places asynchronously, including stdout) or <a href=\"https://stackoverflow.com/a/8971114/4541045\">write to a system-level queue</a> (outside Python; availability depends greatly on OS support)</p>\n<pre class=\"lang-py prettyprint-override\"><code>import threading\nfrom queue import Queue\n\ndef display_worker(display_queue):\n    while True:\n        line = display_queue.get()\n        if line is None:  # simple termination logic, other sentinels can be used\n            break\n        print(line, flush=True)  # remove flush if slow or using Python2\n\n\ndef some_other_worker(display_queue, other_args):\n    # NOTE accepts queue reference as an argument, though it could be a global\n    display_queue.put(&quot;something which should be printed from this thread&quot;)\n\n\ndef main():\n    display_queue = Queue()  # synchronizes console output\n    screen_printing_thread = threading.Thread(\n        target=display_worker,\n        args=(display_queue,),\n    )\n    screen_printing_thread.start()\n\n    ### other logic ###\n\n    display_queue.put(None)  # end screen_printing_thread\n    screen_printing_thread.stop()\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 1936524,
+                "reputation": 673,
+                "user_id": 1743863,
+                "user_type": "registered",
+                "accept_rate": 50,
+                "display_name": "Hawkwing"
+            },
+            "comment_count": 3,
+            "is_answered": true,
+            "accepted_answer_id": 18234593,
+            "answer_count": 3,
+            "score": 38,
+            "last_activity_date": 1594398771,
+            "creation_date": 1376490458,
+            "last_edit_date": 1376490901,
+            "question_id": 18234469,
+            "link": "https://stackoverflow.com/questions/18234469/python-multithreaded-print-statements-delayed-until-all-threads-complete-executi",
+            "title": "Python multithreaded print statements delayed until all threads complete execution",
+            "body": "<p>I have a piece of code below that creates a few threads to perform a task, which works perfectly well on its own. However I'm struggling to understand why the print statements I call in my function do not execute until all threads complete and the <code>print 'finished'</code> statement is called. I would expect them to be called as the thread executes. Is there any simple way to accomplish this, and why does this work this way in the first place?</p>\n\n<pre><code>def func(param):\n    time.sleep(.25)\n    print param*2\n\nif __name__ == '__main__':\n    print 'starting execution'\n    launchTime = time.clock()\n    params = range(10)\n    pool=multiprocessing.Pool(processes=100) #use N processes to download the data\n    _=pool.map(func,params)\n    print 'finished'\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7783
+}

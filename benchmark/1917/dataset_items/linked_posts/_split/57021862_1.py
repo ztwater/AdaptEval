@@ -1,0 +1,5 @@
+b = bytearray(b'\x01\x02\x03\x04\x05\x06\x07\x08')
+>>> chunkify(b,3)
+[bytearray(b'\x01\x02\x03'), bytearray(b'\x04\x05\x06'), bytearray(b'\x07\x08')]
+>>> chunkify(b,4)
+[bytearray(b'\x01\x02\x03\x04'), bytearray(b'\x05\x06\x07\x08')]

@@ -1,0 +1,297 @@
+[
+    {
+        "id": 0,
+        "type": "Method_Signature.Upd_Type",
+        "description": "Change the method to a standalone function and remove the 'self' parameter for simplicity.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_change_function_type"
+        ]
+    },
+    {
+        "id": 1,
+        "type": "Refactoring.Ins_Ann",
+        "description": "Add type annotations to the function parameters for better type checking and readability.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_add_type_annotations"
+        ]
+    },
+    {
+        "id": 2,
+        "type": "Method_Signature.Upd_Param",
+        "description": "Set a default value 'True' for the 'first_run' parameter to ensure the function can be called without specifying this argument.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_set_default_param_value"
+        ]
+    },
+    {
+        "id": 3,
+        "type": "Logic.Upd_Call",
+        "description": "Directly use the function including `get_desktop_environment()`, `get_config_dir()` and `get_home_dir()` instead of a method call within a class.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": [
+                    "get_config_dir",
+                    "get_home_dir",
+                    "get_desktop_environment"
+                ]
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_change_func_calls"
+        ]
+    },
+    {
+        "id": 4,
+        "type": "Logic.Upd_Call",
+        "description": "Use Pathlib to create a URI for the wallpaper file to be used with Gnome desktop environments instead of string creation.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": [
+                "Path",
+                "Path.as_uri"
+            ]
+        },
+        "associated_tests": [
+            "test_uri_handling"
+        ]
+    },
+    {
+        "id": 5,
+        "type": "Logic.Ins_Import",
+        "description": "Import Gio, ConfigParser library locally for efficient load and better modularity.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": [
+                "gi.repository.Gio.Settings",
+                "configparser.ConfigParser"
+            ]
+        },
+        "associated_tests": [
+            "test_local_import"
+        ]
+    },
+    {
+        "id": 6,
+        "type": "Logic.Upd_Call",
+        "description": "Add a setting and its fallback for the dark mode background to accommodate themes that use different wallpapers for light and dark modes.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": [
+                "Gio.Settings",
+                "subprocess.Popen"
+            ]
+        },
+        "associated_tests": [
+            "test_gnome_dark_mode"
+        ]
+    },
+    {
+        "id": 7,
+        "type": "Refactoring.Upd_Api_Ref",
+        "description": "Change the `subprocess.Popen` command to set the wallpaper by using a list format for the arguments, improving compatibility.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_update_wallpaper_setting_command"
+        ]
+    },
+    {
+        "id": 8,
+        "type": "Refactoring.Upd_Api_Ref",
+        "description": "Replace the `codecs.open` method with `open` to improve the conciseness.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_change_api_name"
+        ]
+    },
+    {
+        "id": 9,
+        "type": "Logic.Ins_Call",
+        "description": "Add functionality to set the wallpaper on Windows desktop environments using ctypes.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": [
+                "ctypes.windll.user32.SystemParametersInfoW"
+            ]
+        },
+        "associated_tests": [
+            "test_windows_environment"
+        ]
+    },
+    {
+        "id": 10,
+        "type": "Logic.Ins_Cond",
+        "description": "Add support for setting wallpapers on MacOS using appscript, and a safer osascript subprocess call to prevent command injection.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": [
+                "sys.platform",
+                "appscript.app",
+                "appscript.mactypes.File"
+            ]
+        },
+        "associated_tests": [
+            "test_mac_environment"
+        ]
+    },
+    {
+        "id": 11,
+        "type": "Refactoring.Ins_Tmp_Var",
+        "description": "Unify exception handling to catch any Exception instead of the bare except command during the wallpaper setting process for robustness.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_general_exception_handling"
+        ]
+    }
+]

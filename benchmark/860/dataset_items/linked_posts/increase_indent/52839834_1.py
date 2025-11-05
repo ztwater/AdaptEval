@@ -1,0 +1,7 @@
+name: foo
+my_list:
+  - foo: test
+    bar: test2
+  - foo: test3
+    bar: test4
+hello: world

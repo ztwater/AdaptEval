@@ -1,0 +1,391 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 3325,
+                        "reputation": 55469,
+                        "user_id": 4794,
+                        "user_type": "registered",
+                        "accept_rate": 94,
+                        "display_name": "Don Kirkby"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1543213653,
+                    "post_id": 897941,
+                    "comment_id": 93821569,
+                    "link": "https://stackoverflow.com/questions/897941/python-equivalent-of-phps-memory-get-usage#comment93821569_897941",
+                    "body": "Possible duplicate of <a href=\"https://stackoverflow.com/questions/938733/total-memory-used-by-python-process\">Total memory used by Python process?</a>"
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 32251,
+                        "reputation": 115541,
+                        "user_id": 89266,
+                        "user_type": "registered",
+                        "accept_rate": 91,
+                        "display_name": "dfa"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1243000622,
+                    "creation_date": 1243000622,
+                    "answer_id": 897965,
+                    "question_id": 897941,
+                    "link": "https://stackoverflow.com/questions/897941/python-equivalent-of-phps-memory-get-usage/897965#897965",
+                    "body": "<p>try <a href=\"http://guppy-pe.sourceforge.net/#Heapy\" rel=\"nofollow noreferrer\">heapy</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 8348,
+                                "reputation": 12498,
+                                "user_id": 15004,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "Shabbyrobe"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1243043922,
+                            "post_id": 898406,
+                            "comment_id": 708349,
+                            "link": "https://stackoverflow.com/questions/897941/python-equivalent-of-phps-memory-get-usage/898406#comment708349_898406",
+                            "body": "is the peak/resident in kb or bytes?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 38406,
+                                "reputation": 73398,
+                                "user_id": 110204,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Martin Geisler"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1243070214,
+                            "post_id": 898406,
+                            "comment_id": 708910,
+                            "link": "https://stackoverflow.com/questions/897941/python-equivalent-of-phps-memory-get-usage/898406#comment708910_898406",
+                            "body": "Good question -- it&#39;s in kilobytes, I&#39;ve added that information to the original answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8348,
+                                "reputation": 12498,
+                                "user_id": 15004,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "Shabbyrobe"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1243257267,
+                            "post_id": 898406,
+                            "comment_id": 714362,
+                            "link": "https://stackoverflow.com/questions/897941/python-equivalent-of-phps-memory-get-usage/898406#comment714362_898406",
+                            "body": "Thanks heaps for the great answer. As an aside, would you have any idea why the peak ends up above 80mb(!!!) if I spawn a bunch of threads, even though the resident stays relatively low? Also, do you have any clues as to how to do this on Win32?"
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user4805123"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1516641914,
+                            "post_id": 898406,
+                            "comment_id": 83761624,
+                            "link": "https://stackoverflow.com/questions/897941/python-equivalent-of-phps-memory-get-usage/898406#comment83761624_898406",
+                            "body": "Not to pick but is it positively Kilo (1000) or Kiki (1024) bytes?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 38406,
+                        "reputation": 73398,
+                        "user_id": 110204,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Martin Geisler"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": true,
+                    "score": 31,
+                    "last_activity_date": 1243070188,
+                    "last_edit_date": 1243070188,
+                    "creation_date": 1243005278,
+                    "answer_id": 898406,
+                    "question_id": 897941,
+                    "link": "https://stackoverflow.com/questions/897941/python-equivalent-of-phps-memory-get-usage/898406#898406",
+                    "body": "<p>A simple solution for Linux and other systems with <code>/proc/self/status</code> is the following code, which I use in a project of mine:</p>\n\n<pre><code>def memory_usage():\n    \"\"\"Memory usage of the current process in kilobytes.\"\"\"\n    status = None\n    result = {'peak': 0, 'rss': 0}\n    try:\n        # This will only work on systems with a /proc file system\n        # (like Linux).\n        status = open('/proc/self/status')\n        for line in status:\n            parts = line.split()\n            key = parts[0][2:-1].lower()\n            if key in result:\n                result[key] = int(parts[1])\n    finally:\n        if status is not None:\n            status.close()\n    return result\n</code></pre>\n\n<p>It returns the current and peak resident memory size (which is probably what people mean when they talk about how much RAM an application is using). It is easy to extend it to grab other pieces of information from the <code>/proc/self/status</code> file.</p>\n\n<p>For the curious: the full output of <code>cat /proc/self/status</code> looks like this:</p>\n\n<pre><code>% cat /proc/self/status\nName:   cat\nState:  R (running)\nTgid:   4145\nPid:    4145\nPPid:   4103\nTracerPid:      0\nUid:    1000    1000    1000    1000\nGid:    1000    1000    1000    1000\nFDSize: 32\nGroups: 20 24 25 29 40 44 46 100 1000 \nVmPeak:     3580 kB\nVmSize:     3580 kB\nVmLck:         0 kB\nVmHWM:       472 kB\nVmRSS:       472 kB\nVmData:      160 kB\nVmStk:        84 kB\nVmExe:        44 kB\nVmLib:      1496 kB\nVmPTE:        16 kB\nThreads:        1\nSigQ:   0/16382\nSigPnd: 0000000000000000\nShdPnd: 0000000000000000\nSigBlk: 0000000000000000\nSigIgn: 0000000000000000\nSigCgt: 0000000000000000\nCapInh: 0000000000000000\nCapPrm: 0000000000000000\nCapEff: 0000000000000000\nCapBnd: ffffffffffffffff\nCpus_allowed:   03\nCpus_allowed_list:      0-1\nMems_allowed:   1\nMems_allowed_list:      0\nvoluntary_ctxt_switches:        0\nnonvoluntary_ctxt_switches:     0\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 14314,
+                                "reputation": 36530,
+                                "user_id": 29347,
+                                "user_type": "registered",
+                                "accept_rate": 73,
+                                "display_name": "Kit Sunde"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1344245295,
+                            "post_id": 7669279,
+                            "comment_id": 15720940,
+                            "link": "https://stackoverflow.com/questions/897941/python-equivalent-of-phps-memory-get-usage/7669279#comment15720940_7669279",
+                            "body": "My OSX (lion) gives: <code>35819520</code> on a process I&#39;m running which I&#39;m pretty sure is <code>35MB</code> rather than <code>35GB</code>, so it would seem to be bytes. :)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1266956,
+                                "reputation": 3287,
+                                "user_id": 1224076,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "Phani"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1345217881,
+                            "post_id": 7669279,
+                            "comment_id": 16019495,
+                            "link": "https://stackoverflow.com/questions/897941/python-equivalent-of-phps-memory-get-usage/7669279#comment16019495_7669279",
+                            "body": "On my Ubuntu 11.10 machine, I get resource.getrusage() to be a value that is much closer to the the peak value of memory_usage() rather than the rss. Are you sure that ru_maxrss refers to the current memory usage and not the peak memory usage?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 25964,
+                                "reputation": 1062,
+                                "user_id": 67184,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Chris Conley"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1266956,
+                                "reputation": 3287,
+                                "user_id": 1224076,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "Phani"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1358890194,
+                            "post_id": 7669279,
+                            "comment_id": 20154628,
+                            "link": "https://stackoverflow.com/questions/897941/python-equivalent-of-phps-memory-get-usage/7669279#comment20154628_7669279",
+                            "body": "@Phani It seems like it&#39;s peak usage to me as well. More info about ru_maxrss in this answer: <a href=\"http://stackoverflow.com/a/12050966/67184\">stackoverflow.com/a/12050966/67184</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 238397,
+                                "reputation": 493,
+                                "user_id": 507272,
+                                "user_type": "registered",
+                                "display_name": "Emaad Ahmed Manzoor"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1385143590,
+                            "post_id": 7669279,
+                            "comment_id": 30036195,
+                            "link": "https://stackoverflow.com/questions/897941/python-equivalent-of-phps-memory-get-usage/7669279#comment30036195_7669279",
+                            "body": "Note that the <code>ru_idrss</code> field that provides the current resident set size is currently unmaintained (Linux 3.10.7-2), so it&#39;ll return 0. This <a href=\"http://stackoverflow.com/questions/7205806/is-getrusage-broken-in-linux-2-6-30\">answer</a> has more details."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8031,
+                                "reputation": 25187,
+                                "user_id": 14193,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "Neil"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1386373934,
+                            "post_id": 7669279,
+                            "comment_id": 30527555,
+                            "link": "https://stackoverflow.com/questions/897941/python-equivalent-of-phps-memory-get-usage/7669279#comment30527555_7669279",
+                            "body": "Mac OS definitely returns the RSS in bytes, Linux returns it in kilobytes."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 164512,
+                        "reputation": 5259,
+                        "user_id": 387306,
+                        "user_type": "registered",
+                        "display_name": "Nathan Craike"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": false,
+                    "score": 18,
+                    "last_activity_date": 1546277077,
+                    "last_edit_date": 1546277077,
+                    "creation_date": 1317861681,
+                    "answer_id": 7669279,
+                    "question_id": 897941,
+                    "link": "https://stackoverflow.com/questions/897941/python-equivalent-of-phps-memory-get-usage/7669279#7669279",
+                    "body": "<p>You could also use the <code>getrusage()</code> function from the standard library module <code>resource</code>. The resulting object has the attribute <code>ru_maxrss</code>, which gives total peak memory usage for the calling process:</p>\n\n<pre><code>&gt;&gt;&gt; import resource\n&gt;&gt;&gt; resource.getrusage(resource.RUSAGE_SELF).ru_maxrss\n2656\n</code></pre>\n\n<p>The <a href=\"http://docs.python.org/library/resource.html#resource-usage\" rel=\"nofollow noreferrer\">Python docs</a> aren't clear on what the units are exactly, but the <a href=\"http://developer.apple.com/library/mac/#documentation/darwin/reference/manpages/man2/getrusage.2.html\" rel=\"nofollow noreferrer\">Mac OS X man page</a>   for <code>getrusage(2)</code> describes the units as kilobytes.</p>\n\n<p>The Linux man page isn't clear, but it seems to be equivalent to the <code>/proc/self/status</code> information (i.e. kilobytes) described in the accepted answer. For the same process as above,  running on Linux, the function listed in the accepted answer gives:</p>\n\n<pre><code>&gt;&gt;&gt; memory_usage()                                    \n{'peak': 6392, 'rss': 2656}\n</code></pre>\n\n<p>This may not be quite as easy to use as the <code>/proc/self/status</code> solution, but it is standard library, so (provided the units are standard) it should be cross-platform, and usable on systems which lack <code>/proc/</code> (eg Mac OS X and other Unixes, maybe Windows).</p>\n\n<p>Also, <code>getrusage()</code> function can also be given <code>resource.RUSAGE_CHILDREN</code> to get the usage for child processes, and (on some systems) <code>resource.RUSAGE_BOTH</code> for total (self and child) process usage.</p>\n\n<p>This will cover the <code>memory_get_usage()</code> case, but doesn't include peak usage. I'm unsure if any other functions from the <code>resource</code> module can give peak usage. </p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 197921,
+                                "reputation": 31257,
+                                "user_id": 442284,
+                                "user_type": "registered",
+                                "accept_rate": 55,
+                                "display_name": "CashCow"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1354267694,
+                            "post_id": 12912618,
+                            "comment_id": 18715725,
+                            "link": "https://stackoverflow.com/questions/897941/python-equivalent-of-phps-memory-get-usage/12912618#comment18715725_12912618",
+                            "body": "Yours is my accepted answer but I wasn&#39;t the one who asked the question so the best I can give you is an upvote."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 291373,
+                                "reputation": 17763,
+                                "user_id": 593487,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "johndodo"
+                            },
+                            "reply_to_user": {
+                                "account_id": 197921,
+                                "reputation": 31257,
+                                "user_id": 442284,
+                                "user_type": "registered",
+                                "accept_rate": 55,
+                                "display_name": "CashCow"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1354523344,
+                            "post_id": 12912618,
+                            "comment_id": 18778828,
+                            "link": "https://stackoverflow.com/questions/897941/python-equivalent-of-phps-memory-get-usage/12912618#comment18778828_12912618",
+                            "body": "Thanks! I have found <a href=\"http://packages.python.org/Pympler/muppy.html\" rel=\"nofollow noreferrer\">muppy</a> to be even better in some ways, and also very nicely documented - it&#39;s worth checking out if you have memory leak problems."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 980449,
+                                "reputation": 11034,
+                                "user_id": 1959808,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "0 _"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1449366306,
+                            "post_id": 12912618,
+                            "comment_id": 55975916,
+                            "link": "https://stackoverflow.com/questions/897941/python-equivalent-of-phps-memory-get-usage/12912618#comment55975916_12912618",
+                            "body": "For specifics, see the (almost same) answer: <a href=\"http://stackoverflow.com/a/21632554/1959808\">stackoverflow.com/a/21632554/1959808</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 291373,
+                        "reputation": 17763,
+                        "user_id": 593487,
+                        "user_type": "registered",
+                        "accept_rate": 81,
+                        "display_name": "johndodo"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 11,
+                    "last_activity_date": 1450715784,
+                    "last_edit_date": 1450715784,
+                    "creation_date": 1350383209,
+                    "answer_id": 12912618,
+                    "question_id": 897941,
+                    "link": "https://stackoverflow.com/questions/897941/python-equivalent-of-phps-memory-get-usage/12912618#12912618",
+                    "body": "<p>Accepted answer rules, but it might be easier (and more portable) to use <a href=\"https://github.com/giampaolo/psutil\" rel=\"nofollow noreferrer\">psutil</a>. It does the same and a lot more.</p>\n\n<p>UPDATE: <a href=\"http://packages.python.org/Pympler/muppy.html\" rel=\"nofollow noreferrer\">muppy</a> is also very convenient (and much better documented than guppy/heapy).</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 794804,
+                        "reputation": 24367,
+                        "user_id": 2072035,
+                        "user_type": "registered",
+                        "display_name": "saaj"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1477563393,
+                    "last_edit_date": 1477563393,
+                    "creation_date": 1477558921,
+                    "answer_id": 40280434,
+                    "question_id": 897941,
+                    "link": "https://stackoverflow.com/questions/897941/python-equivalent-of-phps-memory-get-usage/40280434#40280434",
+                    "body": "<p><a href=\"http://man7.org/linux/man-pages/man5/proc.5.html\" rel=\"nofollow\"><code>/proc/self/status</code></a> has the following relevant keys:</p>\n\n<ul>\n<li><em>VmPeak</em>: Peak virtual memory size.</li>\n<li><em>VmSize</em>: Virtual memory size.</li>\n<li><em>VmHWM</em>: Peak resident set size (\"high water mark\").</li>\n<li><em>VmRSS</em>: Resident set size.  </li>\n</ul>\n\n<p>So if the concern is resident memory, the following code can me used to retrieve it:</p>\n\n<pre><code>def get_proc_status(keys = None):\n    with open('/proc/self/status') as f:\n        data = dict(map(str.strip, line.split(':', 1)) for line in f)\n\n    return tuple(data[k] for k in keys) if keys else data\n\npeak, current = get_proc_status(('VmHWM', 'VmRSS'))\nprint(peak, current)  # outputs: 14280 kB 13696 kB\n</code></pre>\n\n<p>Here's an <a href=\"http://fa.bianp.net/blog/2013/different-ways-to-get-memory-consumption-or-lessons-learned-from-memory_profiler/\" rel=\"nofollow\">article by <em>memory_profiler</em>'s author</a> that explains that <code>getrusage</code>'s <code>ru_maxrss</code> isn't always a practical measure. Also note that, <code>VmHWM</code> may differ from <code>ru_maxrss</code> (what I see in some cases <code>ru_maxrss</code> is greater). But in the simple case they are the same:</p>\n\n<pre><code>import resource\n\n\ndef report():\n    maxrss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss\n    peak, current = get_proc_status(('VmHWM', 'VmRSS'))\n    print(current, peak, maxrss)\n\n\nreport()\n\ns = ' ' * 2 ** 28  # 256MiB\nreport()\n\ns = None\nreport()\n</code></pre>\n\n<p>In addition here's a very comprehensible yet informative <a href=\"http://www.atoptool.nl/download/case_leakage.pdf\" rel=\"nofollow\">case study by <em>atop</em> authors</a> which explains what is kernel, virtual and resident memory, and how they are interdependent.  </p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3325,
+                        "reputation": 55469,
+                        "user_id": 4794,
+                        "user_type": "registered",
+                        "accept_rate": 94,
+                        "display_name": "Don Kirkby"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1546282768,
+                    "last_edit_date": 1546282768,
+                    "creation_date": 1543255905,
+                    "answer_id": 53486808,
+                    "question_id": 897941,
+                    "link": "https://stackoverflow.com/questions/897941/python-equivalent-of-phps-memory-get-usage/53486808#53486808",
+                    "body": "<p>The same kind of data that's in <code>/proc/self/status</code> is also in <code>/proc/self/statm</code>. However, it's easier to parse, because it's just a space delimited list of several <a href=\"http://man7.org/linux/man-pages/man5/proc.5.html\" rel=\"nofollow noreferrer\">statistics</a>. I haven't been able to tell if both files are always present.</p>\n\n<blockquote>\n  <p>/proc/[pid]/statm</p>\n  \n  <p>Provides information about memory usage, measured in pages.\n                The columns are:</p>\n  \n  <ul>\n  <li>size       (1) total program size\n                           (same as VmSize in /proc/[pid]/status)</li>\n  <li>resident   (2) resident set size\n                           (same as VmRSS in /proc/[pid]/status)</li>\n  <li>shared     (3) number of resident shared pages (i.e., backed by a file)\n                           (same as RssFile+RssShmem in /proc/[pid]/status)</li>\n  <li>text       (4) text (code)</li>\n  <li>lib        (5) library (unused since Linux 2.6; always 0)</li>\n  <li>data       (6) data + stack</li>\n  <li>dt         (7) dirty pages (unused since Linux 2.6; always 0)</li>\n  </ul>\n</blockquote>\n\n<p>Here's a simple example:</p>\n\n<pre><code>from pathlib import Path\nfrom resource import getpagesize\n\nPAGESIZE = getpagesize()\nPATH = Path('/proc/self/statm')\n\n\ndef get_resident_set_size() -&gt; int:\n    \"\"\"Return the current resident set size in bytes.\"\"\"\n    # statm columns are: size resident shared text lib data dt\n    statm = PATH.read_text()\n    fields = statm.split()\n    return int(fields[1]) * PAGESIZE\n\n\ndata = []\nstart_memory = get_resident_set_size()\nfor _ in range(10):\n    data.append('X' * 100000)\n    print(get_resident_set_size() - start_memory)\n</code></pre>\n\n<p>That produces a list that looks something like this:</p>\n\n<pre><code>0\n0\n368640\n368640\n368640\n638976\n638976\n909312\n909312\n909312\n</code></pre>\n\n<p>You can see that it jumps by about 300,000 bytes after roughly 3 allocations of 100,000 bytes.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 8348,
+                "reputation": 12498,
+                "user_id": 15004,
+                "user_type": "registered",
+                "accept_rate": 81,
+                "display_name": "Shabbyrobe"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 898406,
+            "answer_count": 6,
+            "score": 24,
+            "last_activity_date": 1546282768,
+            "creation_date": 1243000181,
+            "last_edit_date": 1495541908,
+            "question_id": 897941,
+            "link": "https://stackoverflow.com/questions/897941/python-equivalent-of-phps-memory-get-usage",
+            "title": "Python equivalent of PHP&#39;s memory_get_usage()?",
+            "body": "<p>I've already <a href=\"https://stackoverflow.com/questions/110259/python-memory-profiler\">found the following question</a>, but I was wondering if there was a quicker and dirtier way of grabbing an estimate of how much memory the python interpreter is currently using for my script that doesn't rely on external libraries.</p>\n\n<p>I'm coming from PHP and used to use <a href=\"http://au.php.net/memory_get_usage\" rel=\"nofollow noreferrer\">memory_get_usage()</a> and <a href=\"http://au.php.net/memory_get_peak_usage\" rel=\"nofollow noreferrer\">memory_get_peak_usage()</a> a lot for this purpose and I was hoping to find an equivalent.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7499
+}

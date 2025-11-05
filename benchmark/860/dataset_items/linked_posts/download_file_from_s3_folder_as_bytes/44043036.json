@@ -1,0 +1,510 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "matplotlib",
+                "amazon-s3",
+                "boto3"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4968485,
+                                "reputation": 1145,
+                                "user_id": 3997052,
+                                "user_type": "registered",
+                                "display_name": "NoamG"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1503580990,
+                            "post_id": 44045097,
+                            "comment_id": 78683802,
+                            "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/44045097#comment78683802_44045097",
+                            "body": "This should work fine, but under the hood, a real file is created and will be destroyed as soon as it is closed."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3456665,
+                                "reputation": 309,
+                                "user_id": 2895025,
+                                "user_type": "registered",
+                                "display_name": "Hyeungshik Jung"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4968485,
+                                "reputation": 1145,
+                                "user_id": 3997052,
+                                "user_type": "registered",
+                                "display_name": "NoamG"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1507616634,
+                            "post_id": 44045097,
+                            "comment_id": 80268217,
+                            "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/44045097#comment80268217_44045097",
+                            "body": "@NoamG Thanks! I was misunderstanding how <code>tempfile</code> module works. Updated my answers."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2522168,
+                                "reputation": 700,
+                                "user_id": 2192313,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Hawkins"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1557923791,
+                            "post_id": 44045097,
+                            "comment_id": 98928365,
+                            "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/44045097#comment98928365_44045097",
+                            "body": "That a file is made at all even if temporarily is important for AWS Lambda users concerned about downloading files larger than 512 MB, since lambda limits users to 512 MB in /tmp"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3456665,
+                        "reputation": 309,
+                        "user_id": 2895025,
+                        "user_type": "registered",
+                        "display_name": "Hyeungshik Jung"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 24,
+                    "last_activity_date": 1532058005,
+                    "last_edit_date": 1532058005,
+                    "creation_date": 1495102897,
+                    "answer_id": 44045097,
+                    "question_id": 44043036,
+                    "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/44045097#44045097",
+                    "body": "<h2>Greg Merritt's answer below is better method.</h2>\n\n<p>I'd like to suggest using Python's <a href=\"https://docs.python.org/3/library/tempfile.html#tempfile.NamedTemporaryFile\" rel=\"noreferrer\">NamedTemporaryFile</a> in <code>tempfile</code> module. It creates temporary files that will be deleted as file is closed (Thanks to @NoamG)</p>\n\n<pre><code>import matplotlib.pyplot as plt\nimport matplotlib.image as mpimg\nimport numpy as np\nimport boto3\nimport tempfile\n\ns3 = boto3.resource('s3', region_name='us-east-2')\nbucket = s3.Bucket('sentinel-s2-l1c')\nobject = bucket.Object('tiles/10/S/DG/2015/12/7/0/B01.jp2')\ntmp = tempfile.NamedTemporaryFile()\n\nwith open(tmp.name, 'wb') as f:\n    object.download_fileobj(f)\n    img=mpimg.imread(tmp.name)\n    # ...Do jobs using img\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 9494938,
+                                "reputation": 68,
+                                "user_id": 7058373,
+                                "user_type": "registered",
+                                "display_name": "Shivam Batra"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1538126779,
+                            "post_id": 47910352,
+                            "comment_id": 92043269,
+                            "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/47910352#comment92043269_47910352",
+                            "body": "object.download_fileobj(file_stream) gives me an error, TypeError: unicode argument expected, got &#39;str&#39;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 960660,
+                                "reputation": 4793,
+                                "user_id": 985088,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "Hephaestus"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1543008832,
+                            "post_id": 47910352,
+                            "comment_id": 93778845,
+                            "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/47910352#comment93778845_47910352",
+                            "body": "I get the same error: TypeError: string argument expected, got &#39;bytes&#39;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2522168,
+                                "reputation": 700,
+                                "user_id": 2192313,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Hawkins"
+                            },
+                            "edited": false,
+                            "score": 11,
+                            "creation_date": 1554116530,
+                            "post_id": 47910352,
+                            "comment_id": 97620721,
+                            "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/47910352#comment97620721_47910352",
+                            "body": "If &quot;string argument expected, got bytes&quot; is your error, remember to try <code>io.BytesIO()</code> instead of <code>io.StringIO()</code>. For boto3 and python 3, that&#39;s the key"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4091426,
+                                "reputation": 756,
+                                "user_id": 3359310,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "Neeleshkumar S"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1556623405,
+                            "post_id": 47910352,
+                            "comment_id": 98493492,
+                            "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/47910352#comment98493492_47910352",
+                            "body": "I am getting a <code>read past end of file</code> error when I am executing the last line of the code"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2671139,
+                                "reputation": 61,
+                                "user_id": 2308536,
+                                "user_type": "registered",
+                                "display_name": "Tom"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4091426,
+                                "reputation": 756,
+                                "user_id": 3359310,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "Neeleshkumar S"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1557261125,
+                            "post_id": 47910352,
+                            "comment_id": 98703731,
+                            "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/47910352#comment98703731_47910352",
+                            "body": "@NeeleshkumarSrinivasanMannur I get the same error. Did you find a solution?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1468947,
+                                "reputation": 1326,
+                                "user_id": 1380994,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "FlyingZebra1"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1595466472,
+                            "post_id": 47910352,
+                            "comment_id": 111487418,
+                            "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/47910352#comment111487418_47910352",
+                            "body": "Any advice on how to clear out the image from memory, once uploaded?  For some reason, when iterated hundreds of times * numerous threads - the memory fills up :("
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6643241,
+                                "reputation": 896,
+                                "user_id": 5128288,
+                                "user_type": "registered",
+                                "display_name": "Greg Merritt"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1468947,
+                                "reputation": 1326,
+                                "user_id": 1380994,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "FlyingZebra1"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1595514645,
+                            "post_id": 47910352,
+                            "comment_id": 111507260,
+                            "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/47910352#comment111507260_47910352",
+                            "body": "@FlyingZebra1 memory issues like that are always tricky. In general the python gc should be doing its job, so I&#39;d make sure variables are properly scoped. You could also try an explicit <code>gc.collect()</code>, though I doubt that&#39;d be helpful if the memory is truly never releasing."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7443174,
+                                "reputation": 6688,
+                                "user_id": 5660284,
+                                "user_type": "registered",
+                                "display_name": "Equinox"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1602180853,
+                            "post_id": 47910352,
+                            "comment_id": 113646692,
+                            "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/47910352#comment113646692_47910352",
+                            "body": "You can use <code>del variable name</code> and python will delete it from memory"
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user13067694"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1636025996,
+                            "post_id": 47910352,
+                            "comment_id": 123450532,
+                            "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/47910352#comment123450532_47910352",
+                            "body": "Can you take a look here? <a href=\"https://stackoverflow.com/questions/69838643/read-s3-file-into-a-buffer\" title=\"read s3 file into a buffer\">stackoverflow.com/questions/69838643/read-s3-file-into-a-buf&zwnj;&#8203;fer</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15997654,
+                                "reputation": 291,
+                                "user_id": 11545193,
+                                "user_type": "registered",
+                                "display_name": "Heavy Hammer"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1638816612,
+                            "post_id": 47910352,
+                            "comment_id": 124183526,
+                            "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/47910352#comment124183526_47910352",
+                            "body": "How to download more than one band for a certain area using this code?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6643241,
+                        "reputation": 896,
+                        "user_id": 5128288,
+                        "user_type": "registered",
+                        "display_name": "Greg Merritt"
+                    },
+                    "comment_count": 10,
+                    "is_accepted": true,
+                    "score": 76,
+                    "last_activity_date": 1513786788,
+                    "creation_date": 1513786788,
+                    "answer_id": 47910352,
+                    "question_id": 44043036,
+                    "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/47910352#47910352",
+                    "body": "<p>I would suggest using <a href=\"https://docs.python.org/3.6/library/io.html\" rel=\"noreferrer\">io module</a> to read the file directly in to memory, without having to use a temporary file at all.</p>\n\n<p>For example:</p>\n\n<pre><code>import matplotlib.pyplot as plt\nimport matplotlib.image as mpimg\nimport numpy as np\nimport boto3\nimport io\n\ns3 = boto3.resource('s3', region_name='us-east-2')\nbucket = s3.Bucket('sentinel-s2-l1c')\nobject = bucket.Object('tiles/10/S/DG/2015/12/7/0/B01.jp2')\n\nfile_stream = io.StringIO()\nobject.download_fileobj(file_stream)\nimg = mpimg.imread(file_stream)\n# whatever you need to do\n</code></pre>\n\n<p>You could also use <code>io.BytesIO</code> if your data is binary.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5988441,
+                                "reputation": 8584,
+                                "user_id": 4705262,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "GrumpyCrouton"
+                            },
+                            "edited": false,
+                            "score": 14,
+                            "creation_date": 1517927444,
+                            "post_id": 48645328,
+                            "comment_id": 84287592,
+                            "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/48645328#comment84287592_48645328",
+                            "body": "Thank you for this code snippet, which may provide some immediate help. A proper explanation <a href=\"https://meta.stackexchange.com/q/114762\">would greatly improve</a> its educational value by showing why this is a good solution to the problem, and would make it more useful to future readers with similar, but not identical, questions. Please edit your answer to add an explanation, and give an indication of what limitations and assumptions apply."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7612451,
+                        "reputation": 51,
+                        "user_id": 5772907,
+                        "user_type": "registered",
+                        "display_name": "Evgeniy"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1517927315,
+                    "creation_date": 1517927315,
+                    "answer_id": 48645328,
+                    "question_id": 44043036,
+                    "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/48645328#48645328",
+                    "body": "<pre><code>object = bucket.Object('tiles/10/S/DG/2015/12/7/0/B01.jp2')\nimg_data = object.get().get('Body').read()\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 8291339,
+                        "reputation": 306,
+                        "user_id": 6232870,
+                        "user_type": "registered",
+                        "display_name": "Adrian Tofting"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 13,
+                    "last_activity_date": 1526407968,
+                    "last_edit_date": 1526407968,
+                    "creation_date": 1518133625,
+                    "answer_id": 48696641,
+                    "question_id": 44043036,
+                    "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/48696641#48696641",
+                    "body": "<p>Streaming the image is possible by specifying the file format in <code>imread()</code>.</p>\n\n<pre><code>import boto3\nfrom io import BytesIO\nimport matplotlib.image as mpimg\nimport matplotlib.pyplot as plt\n\nresource = boto3.resource('s3', region_name='us-east-2')\nbucket = resource.Bucket('sentinel-s2-l1c')\n\nimage_object = bucket.Object('tiles/10/S/DG/2015/12/7/0/B01.jp2')\nimage = mpimg.imread(BytesIO(image_object.get()['Body'].read()), 'jp2')\n\nplt.figure(0)\nplt.imshow(image)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user13067694"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1636026064,
+                            "post_id": 56341457,
+                            "comment_id": 123450558,
+                            "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/56341457#comment123450558_56341457",
+                            "body": "<a href=\"https://stackoverflow.com/questions/69838643/read-s3-file-into-a-buffer\" title=\"read s3 file into a buffer\">stackoverflow.com/questions/69838643/read-s3-file-into-a-buf&zwnj;&#8203;fer</a> Can you take a look here?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3032042,
+                        "reputation": 1730,
+                        "user_id": 2570842,
+                        "user_type": "registered",
+                        "display_name": "beahacker"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 39,
+                    "last_activity_date": 1559058889,
+                    "last_edit_date": 1559058889,
+                    "creation_date": 1559043647,
+                    "answer_id": 56341457,
+                    "question_id": 44043036,
+                    "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/56341457#56341457",
+                    "body": "<p>Further development from Greg Merritt's answer to solve all errors in the comment section, using <code>BytesIO</code> instead of <code>StringIO</code>, using PIL <code>Image</code> instead of <code>matplotlib.image</code>.</p>\n\n<p>The following function works for <code>python3</code> and <code>boto3</code>. Similarly, <code>write_image_to_s3</code> function is a bonus.</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>from PIL import Image\nfrom io import BytesIO\nimport numpy as np\n\ndef read_image_from_s3(bucket, key, region_name='ap-southeast-1'):\n    \"\"\"Load image file from s3.\n\n    Parameters\n    ----------\n    bucket: string\n        Bucket name\n    key : string\n        Path in s3\n\n    Returns\n    -------\n    np array\n        Image array\n    \"\"\"\n    s3 = boto3.resource('s3', region_name='ap-southeast-1')\n    bucket = s3.Bucket(bucket)\n    object = bucket.Object(key)\n    response = object.get()\n    file_stream = response['Body']\n    im = Image.open(file_stream)\n    return np.array(im)\n\ndef write_image_to_s3(img_array, bucket, key, region_name='ap-southeast-1'):\n    \"\"\"Write an image array into S3 bucket\n\n    Parameters\n    ----------\n    bucket: string\n        Bucket name\n    key : string\n        Path in s3\n\n    Returns\n    -------\n    None\n    \"\"\"\n    s3 = boto3.resource('s3', region_name)\n    bucket = s3.Bucket(bucket)\n    object = bucket.Object(key)\n    file_stream = BytesIO()\n    im = Image.fromarray(img_array)\n    im.save(file_stream, format='jpeg')\n    object.put(Body=file_stream.getvalue())\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6822152,
+                        "reputation": 31,
+                        "user_id": 5248979,
+                        "user_type": "registered",
+                        "display_name": "Kai"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1578320509,
+                    "creation_date": 1578320509,
+                    "answer_id": 59613732,
+                    "question_id": 44043036,
+                    "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/59613732#59613732",
+                    "body": "<p>The temporary file solution by Hyeungshik Jung looks good, but I noticed that the file somehow seem to be downloaded in a lazy fashion. This leads to a behavior that if you call <code>img.shape()</code> and you'll get an empty dimension tuple as a return value <code>()</code> even after you called <code>object.download_fileobj(f)</code>. I resolved this issue by applying a <code>f.seek(0,2)</code> to the file descriptor - then all following operations work properly, e.g. returning all proper dimensions <code>(704, 1024)</code>.</p>\n\n<pre><code>...\ntmp = tempfile.NamedTemporaryFile()\n\nwith open(tmp.name, 'wb') as f:\n    object.download_fileobj(f)\n    f.seek(0,2) \n    img=mpimg.imread(tmp.name)\n    print (img.shape)\n\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1008778,
+                                "reputation": 8128,
+                                "user_id": 1021819,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "jtlz2"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1664134342,
+                            "post_id": 62830721,
+                            "comment_id": 130396604,
+                            "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/62830721#comment130396604_62830721",
+                            "body": "This highlights the absolutely critical point - once the data have been downloaded to the buffer object, <code>seek()</code> back to <code>0</code> before onward processing!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4568788,
+                        "reputation": 1146,
+                        "user_id": 3709062,
+                        "user_type": "registered",
+                        "display_name": "GStav"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 10,
+                    "last_activity_date": 1594371394,
+                    "creation_date": 1594371394,
+                    "answer_id": 62830721,
+                    "question_id": 44043036,
+                    "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/62830721#62830721",
+                    "body": "<p>Slightly different approach using client:</p>\n<pre><code>import boto3\nimport io\nfrom matplotlib import pyplot as plt\n\nclient = boto3.client(&quot;s3&quot;)\n\nbucket='my_bucket'\nkey= 'my_key'\n\noutfile = io.BytesIO()\nclient.download_fileobj(bucket, key, outfile)\noutfile.seek(0)\nimg = plt.imread(outfile)\n\nplt.imshow(img)\nplt.show()\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4706224,
+                        "reputation": 4971,
+                        "user_id": 3808276,
+                        "user_type": "registered",
+                        "display_name": "Abu Shoeb"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1642932798,
+                    "creation_date": 1642932798,
+                    "answer_id": 70821015,
+                    "question_id": 44043036,
+                    "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/70821015#70821015",
+                    "body": "<p>I see a lot of good answers here. Here is my code snippet with AWS Config if you quickly test out the solution. Please note that it's not recommended to put your AWS credentials in the code body, rather it should come from the .env file or from the AWS Keystore.</p>\n<pre><code>import os\nimport boto3\nfrom PIL import Image\nimport io\n\nAWS_ACCESS_KEY_ID = 'your-aws-access-key'\nAWS_SECRET_ACCESS_KEY = 'your-aws-secret'\n\ns3 = boto3.resource('s3',\n                    aws_access_key_id=AWS_ACCESS_KEY_ID,\n                    aws_secret_access_key=AWS_SECRET_ACCESS_KEY)\n\ndef image_from_s3(bucket, key):\n    bucket = s3.Bucket(bucket)\n    image = bucket.Object(key)\n    img_data = image.get().get('Body').read()\n    return Image.open(io.BytesIO(img_data))\n\n# call the function\nimage_from_s3(&quot;your-aws-bucket-name&quot;, &quot;file-path&quot;)\n\n# example\nimage_from_s3(&quot;my-images&quot;, &quot;profile/2022/123.png&quot;)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1107684,
+                        "reputation": 579,
+                        "user_id": 1098761,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "user1098761"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1649826039,
+                    "creation_date": 1649826039,
+                    "answer_id": 71852107,
+                    "question_id": 44043036,
+                    "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/71852107#71852107",
+                    "body": "<p>Make sure that you will read a byte type data from S3 but Tensorflow needs a string tensor to convert to uint8 image. And this method doesn't need Pillow.</p>\n<pre><code>import boto3\nimport tensorflow as tf\n\ncredentials = boto3.Session(botocore_session=boto3.setup_default_session(), \n                                region_name=&quot;us-east-1&quot;).get_credentials()\n    \n\ns3 = boto3.Session(aws_access_key_id=credentials.access_key,\n                      aws_secret_access_key=credentials.secret_key).client('s3') \n\n#file_on_s3 : 's3://mybucket/data/sample.jpg'\nbucket_name = 'mybucket'\nfile_key = 'data/sample.jpg'\n\n\nfile_obj = s3.get_object(Bucket=bucket_name, Key=file_key)\n\n# reading the file content in bytes\nfile_content = file_obj[&quot;Body&quot;].read()  \n\n\nimg =  tf.io.decode_image(tf.convert_to_tensor(file_content, dtype=tf.string), \n                                channels=3, \n                                dtype=tf.dtypes.uint8, \n                                name=None, \n                                expand_animations=False)\n\nimg = tf.cast(img, tf.float32)\nimg_array = tf.image.resize(img, \n                            size=(224, 224),\n                            method=tf.image.ResizeMethod.NEAREST_NEIGHBOR) \n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 14355390,
+                        "reputation": 363,
+                        "user_id": 10369457,
+                        "user_type": "registered",
+                        "display_name": "Samuel Tosan Ayo"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1670232002,
+                    "creation_date": 1670232002,
+                    "answer_id": 74685847,
+                    "question_id": 44043036,
+                    "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory/74685847#74685847",
+                    "body": "<p>You can achieve this using pillow, ssl and urblib inn python3<br />\nfrom PIL import Image\nimport requests\nimport ssl\nimport urllib.request</p>\n<pre><code>img=&quot;https://{bucket}.s3.amazonaws.com/{folder}/&quot;\ncontext = ssl._create_unverified_context()\nfor i in range(1100,1102):\n    image_url=img+str(i)+&quot;.png&quot;\n    im = Image.open(urllib.request.urlopen(image_url,context=context))\n    im.show()`\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 94736,
+                "reputation": 49403,
+                "user_id": 258483,
+                "user_type": "registered",
+                "accept_rate": 46,
+                "display_name": "Dims"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 47910352,
+            "answer_count": 10,
+            "score": 66,
+            "last_activity_date": 1670232002,
+            "creation_date": 1495097614,
+            "question_id": 44043036,
+            "link": "https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory",
+            "title": "How to read image file from S3 bucket directly into memory?",
+            "body": "<p>I have the following code</p>\n\n<pre><code>import matplotlib.pyplot as plt\nimport matplotlib.image as mpimg\nimport numpy as np\nimport boto3\ns3 = boto3.resource('s3', region_name='us-east-2')\nbucket = s3.Bucket('sentinel-s2-l1c')\nobject = bucket.Object('tiles/10/S/DG/2015/12/7/0/B01.jp2')\nobject.download_file('B01.jp2')\nimg=mpimg.imread('B01.jp2')\nimgplot = plt.imshow(img)\nplt.show(imgplot)\n</code></pre>\n\n<p>and it works. But the problem it downloads file into current directory first. Is it possible to read file and decode it as image directly in RAM?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8365
+}

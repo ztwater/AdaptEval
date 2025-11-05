@@ -1,0 +1,213 @@
+{
+    "items": [
+        {
+            "tags": [
+                "openai-api"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 21522255,
+                        "reputation": 1181,
+                        "user_id": 15863196,
+                        "user_type": "registered",
+                        "display_name": "Masoud Gheisari"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1679902955,
+                    "post_id": 75824798,
+                    "comment_id": 133797532,
+                    "link": "https://stackoverflow.com/questions/75824798/how-to-get-token-usage-for-each-openai-chatcompletion-api-call-in-streaming-mode#comment133797532_75824798",
+                    "body": "can you add the code you use to call the api?"
+                },
+                {
+                    "owner": {
+                        "account_id": 224297,
+                        "reputation": 3700,
+                        "user_id": 484025,
+                        "user_type": "registered",
+                        "accept_rate": 66,
+                        "display_name": "Demiro-FE-Architect"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1681920253,
+                    "post_id": 75824798,
+                    "comment_id": 134135834,
+                    "link": "https://stackoverflow.com/questions/75824798/how-to-get-token-usage-for-each-openai-chatcompletion-api-call-in-streaming-mode#comment134135834_75824798",
+                    "body": "Heya, were you finally able to get it? I am struggling to get it in streaming mode as well (but using node, not python"
+                },
+                {
+                    "owner": {
+                        "account_id": 9517474,
+                        "reputation": 10360,
+                        "user_id": 7073340,
+                        "user_type": "registered",
+                        "accept_rate": 96,
+                        "display_name": "Jayendran"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1691400838,
+                    "post_id": 75824798,
+                    "comment_id": 135481344,
+                    "link": "https://stackoverflow.com/questions/75824798/how-to-get-token-usage-for-each-openai-chatcompletion-api-call-in-streaming-mode#comment135481344_75824798",
+                    "body": "I&#39;m also facing the same issue; one difference is I&#39;m trying Azure open-ai and I&#39;m not a consumer using SDK I&#39;m more like a platform team to enable this to a large team - who is the ideal consumer"
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 28338614,
+                        "reputation": 1,
+                        "user_id": 21671988,
+                        "user_type": "registered",
+                        "display_name": "Min-Ch"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1681817603,
+                    "creation_date": 1681817603,
+                    "answer_id": 76044069,
+                    "question_id": 75824798,
+                    "link": "https://stackoverflow.com/questions/75824798/how-to-get-token-usage-for-each-openai-chatcompletion-api-call-in-streaming-mode/76044069#76044069",
+                    "body": "<p>you can use <a href=\"https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb\" rel=\"nofollow noreferrer\">tiktoken</a></p>\n<p><code>pip install tiktoken</code></p>\n<pre class=\"lang-py prettyprint-override\"><code>import tiktoken\n\ndef num_tokens_from_messages(messages, model=&quot;gpt-3.5-turbo-0301&quot;):\n    &quot;&quot;&quot;Returns the number of tokens used by a list of messages.&quot;&quot;&quot;\n    try:\n        encoding = tiktoken.encoding_for_model(model)\n    except KeyError:\n        print(&quot;Warning: model not found. Using cl100k_base encoding.&quot;)\n        encoding = tiktoken.get_encoding(&quot;cl100k_base&quot;)\n    if model == &quot;gpt-3.5-turbo&quot;:\n        print(&quot;Warning: gpt-3.5-turbo may change over time. Returning num tokens assuming gpt-3.5-turbo-0301.&quot;)\n        return num_tokens_from_messages(messages, model=&quot;gpt-3.5-turbo-0301&quot;)\n    elif model == &quot;gpt-4&quot;:\n        print(&quot;Warning: gpt-4 may change over time. Returning num tokens assuming gpt-4-0314.&quot;)\n        return num_tokens_from_messages(messages, model=&quot;gpt-4-0314&quot;)\n    elif model == &quot;gpt-3.5-turbo-0301&quot;:\n        tokens_per_message = 4  # every message follows &lt;|start|&gt;{role/name}\\n{content}&lt;|end|&gt;\\n\n        tokens_per_name = -1  # if there's a name, the role is omitted\n    elif model == &quot;gpt-4-0314&quot;:\n        tokens_per_message = 3\n        tokens_per_name = 1\n    else:\n        raise NotImplementedError(f&quot;&quot;&quot;num_tokens_from_messages() is not implemented for model {model}. See https://github.com/openai/openai-python/blob/main/chatml.md for information on how messages are converted to tokens.&quot;&quot;&quot;)\n    num_tokens = 0\n\n    if type(messages) == &quot;list&quot;:\n        for message in messages:\n            num_tokens += tokens_per_message\n            for key, value in message.items():\n                num_tokens += len(encoding.encode(value))\n                if key == &quot;name&quot;:\n                    num_tokens += tokens_per_name\n        num_tokens += 3  # every reply is primed with &lt;|start|&gt;assistant&lt;|message|&gt;\n    elif type(messages) == &quot;str&quot;:\n        num_tokens += len(encoding.encode(messages))\n    return num_tokens\n</code></pre>\n<pre class=\"lang-py prettyprint-override\"><code>import openai\n\nresult = []\n\nfor chunk in openai.ChatCompletion.create(\n    model=&quot;gpt-3.5-turbo&quot;,\n    messages=[\n        {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;You are a helpful assistant.&quot;},\n        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Who won the world series in 2020?&quot;},\n        {&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: &quot;The Los Angeles Dodgers won the World Series in 2020.&quot;},\n        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Where was it played?&quot;}\n    ], # this is prompt_tokens ex) prompt_tokens=num_tokens_from_messages(messages)\n    stream=True\n):\n    content = chunk[&quot;choices&quot;][0].get(&quot;delta&quot;, {}).get(&quot;content&quot;)\n    if content:\n        result.append(content)\n\n\n# Usage of completion_tokens\ncompletion_tokens = num_tokens_from_messages(&quot;&quot;.join(result))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1794128,
+                                "reputation": 1852,
+                                "user_id": 1633924,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "mcont"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1690201938,
+                            "post_id": 76631033,
+                            "comment_id": 135316076,
+                            "link": "https://stackoverflow.com/questions/75824798/how-to-get-token-usage-for-each-openai-chatcompletion-api-call-in-streaming-mode/76631033#comment135316076_76631033",
+                            "body": "That doesn&#39;t work with streaming, which is the question here."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 28964599,
+                        "reputation": 1,
+                        "user_id": 22186366,
+                        "user_type": "registered",
+                        "display_name": "Nick Luo"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1688662587,
+                    "creation_date": 1688662587,
+                    "answer_id": 76631033,
+                    "question_id": 75824798,
+                    "link": "https://stackoverflow.com/questions/75824798/how-to-get-token-usage-for-each-openai-chatcompletion-api-call-in-streaming-mode/76631033#76631033",
+                    "body": "<p>you can also use get_openai_callback() if you use Lagchain</p>\n<pre><code>from langchain.callbacks import get_openai_callback\n\n        with get_openai_callback() as cb:\n            response = qa({&quot;question&quot;: prompt, &quot;chat_history&quot;: chat_history})\n\n            print(f&quot;Prompt Tokens: {cb.prompt_tokens}&quot;)\n            print(f&quot;Completion Tokens: {cb.completion_tokens}&quot;)\n            print(f&quot;Total Cost (USD): ${cb.total_cost}&quot;)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 183820,
+                        "reputation": 11234,
+                        "user_id": 419448,
+                        "user_type": "registered",
+                        "accept_rate": 59,
+                        "display_name": "Prasanna"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1704792644,
+                    "creation_date": 1704792644,
+                    "answer_id": 77785666,
+                    "question_id": 75824798,
+                    "link": "https://stackoverflow.com/questions/75824798/how-to-get-token-usage-for-each-openai-chatcompletion-api-call-in-streaming-mode/77785666#77785666",
+                    "body": "<p>It is possible to count the <code>prompt_tokens</code> and <code>completion_tokens</code> manually and add them up to get the total usage count.</p>\n<p><strong>Measuring <code>prompt_tokens</code>:</strong></p>\n<p>Using any of the <a href=\"https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb\" rel=\"nofollow noreferrer\">tokenizer</a> it is possible to count the <code>prompt_tokens</code> in the request body.</p>\n<p><strong>Measuring the <code>completion_tokens</code>:</strong></p>\n<p>You need to have an intermittent service (a proxy), that can pass on  the SSE(server sent events) to the client applications post counting the tokens in each response.</p>\n<p>A sample architecture is present here: <a href=\"https://medium.com/microsoftazure/when-invoking-apis-hosted-by-azure-api-management-configured-azure-openai-service-as-a-backend-bd8f2648cfa5\" rel=\"nofollow noreferrer\">https://medium.com/microsoftazure/when-invoking-apis-hosted-by-azure-api-management-configured-azure-openai-service-as-a-backend-bd8f2648cfa5</a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 9517474,
+                        "reputation": 10360,
+                        "user_id": 7073340,
+                        "user_type": "registered",
+                        "accept_rate": 96,
+                        "display_name": "Jayendran"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1705295300,
+                    "creation_date": 1705295300,
+                    "answer_id": 77817767,
+                    "question_id": 75824798,
+                    "link": "https://stackoverflow.com/questions/75824798/how-to-get-token-usage-for-each-openai-chatcompletion-api-call-in-streaming-mode/77817767#77817767",
+                    "body": "<p>All the provided answers have the core solution which is we have to use some kind of proxy to handle the token calculation(i.e,tiktoken) using our custom way. Here, with my answer I would like to share the implementation way of Azure OpenAI</p>\n<p>The logic here is to build a reverse-proxy <a href=\"https://github.com/microsoft/reverse-proxy\" rel=\"nofollow noreferrer\">(yarp-ms reverse proxy)</a>. You can find the full project from <a href=\"https://github.com/Azure/enterprise-azureai/tree/main/src/dotnet/AzureAI.Proxy\" rel=\"nofollow noreferrer\">Enterprise-azureai-proxy</a></p>\n<p>The below is one major part of the solution of handling the stream</p>\n<pre><code>\ufeffusing AsyncAwaitBestPractices;\nusing Azure.Core;\nusing AzureAI.Proxy.Models;\nusing AzureAI.Proxy.OpenAIHandlers;\nusing AzureAI.Proxy.Services;\nusing System.Text;\nusing System.Text.Json;\nusing System.Text.Json.Nodes;\nusing Yarp.ReverseProxy.Transforms;\nusing Yarp.ReverseProxy.Transforms.Builder;\n\nnamespace AzureAI.Proxy.ReverseProxy;\n\ninternal class OpenAIChargebackTransformProvider : ITransformProvider\n{\n   \n    private readonly IConfiguration _config;\n    private readonly IManagedIdentityService _managedIdentityService;\n    private readonly ILogIngestionService _logIngestionService;\n   \n    private string accessToken = &quot;&quot;;\n\n    private TokenCredential _managedIdentityCredential;\n\n    public OpenAIChargebackTransformProvider(\n        IConfiguration config, \n        IManagedIdentityService managedIdentityService,\n        ILogIngestionService logIngestionService)\n    {\n        _config = config;\n        _managedIdentityService = managedIdentityService;\n        _logIngestionService = logIngestionService;\n               \n        _managedIdentityCredential = _managedIdentityService.GetTokenCredential();\n\n    }\n\n    public void ValidateRoute(TransformRouteValidationContext context) { return; }\n\n    public void ValidateCluster(TransformClusterValidationContext context) { return; }\n    \n    public void Apply(TransformBuilderContext context)\n    {\n        context.AddRequestTransform(async requestContext =&gt; {\n            //enable buffering allows us to read the requestbody twice (one for forwarding, one for analysis)\n            requestContext.HttpContext.Request.EnableBuffering();\n\n            //check accessToken before replacing the Auth Header\n            if (String.IsNullOrEmpty(accessToken) || OpenAIAccessToken.IsTokenExpired(accessToken, _config[&quot;EntraId:TenantId&quot;]))\n            {\n                accessToken = await OpenAIAccessToken.GetAccessTokenAsync(_managedIdentityCredential, CancellationToken.None);\n            }\n\n            //replace auth header with the accesstoken of the managed indentity of the proxy\n            requestContext.ProxyRequest.Headers.Remove(&quot;api-key&quot;);\n            requestContext.ProxyRequest.Headers.Remove(&quot;Authorization&quot;);\n            requestContext.ProxyRequest.Headers.Add(&quot;Authorization&quot;, $&quot;Bearer {accessToken}&quot;);\n\n        });\n        context.AddResponseTransform(async responseContext =&gt;\n        {\n            var originalStream = await responseContext.ProxyResponse.Content.ReadAsStreamAsync();\n            string capturedBody = &quot;&quot;;\n\n            // Buffer for reading chunks\n            byte[] buffer = new byte[8192];\n            int bytesRead;\n\n            // Read, inspect, and write the data in chunks - this is especially needed for streaming content\n            while ((bytesRead = await originalStream.ReadAsync(buffer, 0, buffer.Length)) &gt; 0)\n            {\n                // Convert the chunk to a string for inspection\n                var chunk = Encoding.UTF8.GetString(buffer, 0, bytesRead);\n\n                capturedBody += chunk;\n\n                // Write the unmodified chunk back to the response\n                await responseContext.HttpContext.Response.Body.WriteAsync(buffer, 0, bytesRead);\n            }\n\n            //flush any remaining content to the client\n            await responseContext.HttpContext.Response.CompleteAsync();\n\n            //now perform the analysis and create a log record\n            var record = new LogAnalyticsRecord();\n            record.TimeGenerated = DateTime.UtcNow;\n            \n            if (responseContext.HttpContext.Request.Headers[&quot;X-Consumer&quot;].ToString() != &quot;&quot;)\n            {\n                record.Consumer = responseContext.HttpContext.Request.Headers[&quot;X-Consumer&quot;].ToString();\n            }\n            else\n            {\n                record.Consumer = &quot;Unknown Consumer&quot;;\n            }\n           \n            bool firstChunck = true;\n            var chunks = capturedBody.Split(&quot;data:&quot;);\n            foreach (var chunk in chunks)\n            {\n                var trimmedChunck = chunk.Trim();\n                if (trimmedChunck != &quot;&quot; &amp;&amp; trimmedChunck != &quot;[DONE]&quot;)\n                {\n\n                    JsonNode jsonNode = JsonSerializer.Deserialize&lt;JsonNode&gt;(trimmedChunck);\n                    if (jsonNode[&quot;error&quot;] is not null)\n                    {\n                        Error.Handle(jsonNode);\n                    }\n                    else\n                    {\n                        string objectValue = jsonNode[&quot;object&quot;].ToString();\n\n                        switch (objectValue)\n                        {\n                            case &quot;chat.completion&quot;:\n                                Usage.Handle(jsonNode, ref record);\n                                record.ObjectType = objectValue;\n                                break;\n                            case &quot;chat.completion.chunk&quot;:\n                                if (firstChunck)\n                                {\n                                    record = Tokens.CalculateChatInputTokens(responseContext.HttpContext.Request, record);\n                                    record.ObjectType = objectValue;\n                                    firstChunck = false;\n                                }\n                                ChatCompletionChunck.Handle(jsonNode, ref record);\n                                break;\n                            case &quot;list&quot;:\n                                if (jsonNode[&quot;data&quot;][0][&quot;object&quot;].ToString() == &quot;embedding&quot;)\n                                {\n                                    record.ObjectType = jsonNode[&quot;data&quot;][0][&quot;object&quot;].ToString();\n                                    //it's an embedding\n                                    Usage.Handle(jsonNode, ref record);\n                                }\n                                break;\n                            default:\n                                break;\n                        }\n                    }\n                }\n\n            }\n\n            record.TotalTokens = record.InputTokens + record.OutputTokens;\n            _logIngestionService.LogAsync(record).SafeFireAndForget();\n        });\n    }\n}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5129356,
+                        "reputation": 2467,
+                        "user_id": 4110122,
+                        "user_type": "registered",
+                        "display_name": "Mohamad Hamouday"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1711967266,
+                    "creation_date": 1711967266,
+                    "answer_id": 78254910,
+                    "question_id": 75824798,
+                    "link": "https://stackoverflow.com/questions/75824798/how-to-get-token-usage-for-each-openai-chatcompletion-api-call-in-streaming-mode/78254910#78254910",
+                    "body": "<p>You can retrieve the total number of tokens from the response by checking <code>response.usage.total_tokens</code>.</p>\n<p>Example:</p>\n<pre><code>response = openai_client.embeddings.create(model= &quot;text-embedding-3-large&quot;, input=&quot;test text&quot;, encoding_format=&quot;float&quot;)\nif response.data:\n    embedding = response.data[0].embedding\n    \n    total_tokens = response.usage.total_tokens\n    print (&quot;Total tokens: &quot;, total_tokens)\n</code></pre>\n<p>To get total token before embedding use Tiktoken:</p>\n<pre><code>def get_number_of_tokens(string: str) -&gt; int:\n    encoding = tiktoken.encoding_for_model(&quot;text-embedding-3-large&quot;)\n    num_tokens = len(encoding.encode(string))\n    return num_tokens\n\ntotal_token = get_number_of_tokens('test text')\nprint total_token\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 18210791,
+                        "reputation": 73,
+                        "user_id": 14271686,
+                        "user_type": "registered",
+                        "display_name": "Hinson Chan"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1713245035,
+                    "last_edit_date": 1713245035,
+                    "creation_date": 1713236084,
+                    "answer_id": 78331889,
+                    "question_id": 75824798,
+                    "link": "https://stackoverflow.com/questions/75824798/how-to-get-token-usage-for-each-openai-chatcompletion-api-call-in-streaming-mode/78331889#78331889",
+                    "body": "<p>I finally found a solution I'm happy with after hours of scouring documentation, so hopefully this helps someone out. If you find a mismatch between stream/normal usage counts, please let me know.</p>\n<p>Unfortunately, they do not give an option to query for usage information by ID, or even just returning usage somehow; that would've been the easier solution. Instead, here's my implementation. It involves:</p>\n<ul>\n<li>Counting tokens for images with the new gpt-4-turbo/vision models</li>\n<li>The scuffed and varied additional tokens that get added in with openai's api</li>\n<li>Wrapping the returned Stream generator, appending any tokens to a list before yielding, and finally processing the list as the <code>output message</code></li>\n</ul>\n<p>Implementation of the CountStreamTokens class (types are slightly scuffed, and I didn't include them in the SO code, but I included it in my actual project if you need all the types)</p>\n<p>Implementation in my project for reference; check the chain.py functions: <a href=\"https://github.com/flatypus/flowchat/blob/main/flowchat/private/_private_helpers.py\" rel=\"nofollow noreferrer\">https://github.com/flatypus/flowchat/blob/main/flowchat/private/_private_helpers.py</a></p>\n<p>Code:</p>\n<pre class=\"lang-py prettyprint-override\"><code>from io import BytesIO\nfrom math import ceil\nfrom PIL import Image\nfrom requests import get\nfrom typing import Callable, List, Dict\nimport base64\nimport tiktoken\n\nclass CalculateImageTokens:\n    def __init__(self, image: str):\n        self.image = image\n\n    def _get_image_dimensions(self):\n        if self.image.startswith(&quot;data:image&quot;):\n            image = self.image.split(&quot;,&quot;)[1]\n            image = base64.b64decode(image)\n            image = Image.open(BytesIO(image))\n            return image.size\n        else:\n            response = get(self.image)\n            image = Image.open(BytesIO(response.content))\n            return image.size\n\n    def _openai_resize(self, width: int, height: int):\n        if width &gt; 1024 or height &gt; 1024:\n            if width &gt; height:\n                height = int(height * 1024 / width)\n                width = 1024\n            else:\n                width = int(width * 1024 / height)\n                height = 1024\n        return width, height\n\n    def count_image_tokens(self):\n        width, height = self._get_image_dimensions()\n        width, height = self._openai_resize(width, height)\n        h = ceil(height / 512)\n        w = ceil(width / 512)\n        total = 85 + 170 * h * w\n        return total\n\n\nclass CountStreamTokens:\n    def __init__(self, model: str, messages: List[Message]):\n        self.collect_tokens: List[str] = []\n        self.messages = messages\n        self.model = model\n        self._get_model(model)\n        self.tokens_per_message = 3\n        self.tokens_per_name = 1\n\n    def _get_model(self, model: str):\n        &quot;&quot;&quot;Picks the right model and sets the additional tokens. See https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb&quot;&quot;&quot;\n        try:\n            self.encoding = tiktoken.encoding_for_model(model)\n        except KeyError:\n            self.encoding = tiktoken.get_encoding(&quot;cl100k_base&quot;)\n\n        if model in {\n            &quot;gpt-3.5-turbo-0613&quot;,\n            &quot;gpt-3.5-turbo-16k-0613&quot;,\n            &quot;gpt-4-0314&quot;,\n            &quot;gpt-4-32k-0314&quot;,\n            &quot;gpt-4-0613&quot;,\n            &quot;gpt-4-32k-0613&quot;,\n        }:\n            self.tokens_per_message = 3\n            self.tokens_per_name = 1\n\n        elif model == &quot;gpt-3.5-turbo-0301&quot;:\n            # every message follows &lt;|start|&gt;{role/name}\\n{content}&lt;|end|&gt;\\n\n            self.tokens_per_message = 4\n            self.tokens_per_name = -1  # if there's a name, the role is omitted\n        elif &quot;gpt-3.5-turbo&quot; in model:\n            self._get_model(&quot;gpt-3.5-turbo-0613&quot;)\n        elif &quot;gpt-4&quot; in model:\n            self._get_model(&quot;gpt-4-0613&quot;)\n\n    def _count_text_tokens(self, message: Message) -&gt; int:\n        &quot;&quot;&quot;Return the number of tokens used by a list of messages. See above link for context&quot;&quot;&quot;\n        num_tokens = self.tokens_per_message\n        for key, value in message.items():\n            num_tokens += len(self.encoding.encode(str(value)))\n            if key == &quot;name&quot;:\n                num_tokens += self.tokens_per_name\n\n        return num_tokens\n\n    def _count_input_tokens(self):\n        tokens = 0\n        text_messages: List[Message] = []\n        image_messages: List[Dict[str, Any]] = []\n\n        for message in self.messages:\n            content = message[&quot;content&quot;]\n            role = message[&quot;role&quot;]\n            if isinstance(content, str):\n                text_messages.append({&quot;role&quot;: role, &quot;content&quot;: content})\n            else:\n                for item in content:\n                    if item[&quot;type&quot;] == &quot;text&quot;:\n                        text_messages.append(\n                            {&quot;role&quot;: role, &quot;content&quot;: item[&quot;text&quot;]})\n                    else:\n                        image_messages.append(item)\n\n        for message in text_messages:\n            tokens += self._count_text_tokens(message)\n\n        for message in image_messages:\n            image = message[&quot;image_url&quot;]\n            detail = image.get(&quot;detail&quot;, &quot;high&quot;)\n            if detail == &quot;low&quot;:\n                tokens += 85\n            else:\n                tokens += (\n                    CalculateImageTokens(message[&quot;image_url&quot;][&quot;url&quot;])\n                    .count_image_tokens()\n                )\n\n        tokens += 3  # every reply is primed with &lt;|start|&gt;assistant&lt;|message|&gt;\n\n        return tokens\n\n    def _count_output_tokens(self, message: str):\n        return len(self.encoding.encode(message))\n\n    def wrap_stream_and_count(self, generator: StreamChatCompletion, callback: Callable[[int, int, str], None]):\n        for response in generator:\n            content = response.choices[0].delta.content\n            yield response\n\n            if content is None:\n                output_message = &quot;&quot;.join(self.collect_tokens)\n                prompt_tokens = self._count_input_tokens()\n                completion_tokens = self._count_output_tokens(output_message)\n                callback(prompt_tokens, completion_tokens, self.model)\n                continue\n\n            self.collect_tokens.append(content)\n\n# ============= YOUR CODE =============\n\ndef add_token_count(self, prompt_tokens: int, completion_tokens: int, model: str) -&gt; None:\n        # I append the tokens to a running total here. This will be called after the calculation is finished, as a callback. \n        # You can choose to do anything here with the numbers.\n        self.detailed_usage.append({\n            &quot;model&quot;: model,\n            &quot;usage&quot;: {&quot;prompt_tokens&quot;: prompt_tokens, &quot;completion_tokens&quot;: completion_tokens},\n            &quot;time&quot;: datetime.now()\n        })\n\ncompletion = openai.chat.completions.create(messages=messages, stream=True, **params)\n\n# completion is now a generator, or a 'stream' object. \n# CountStreamTokens is a custom class that is initialized with the model you use, and the messages you want to query with. \n# These are saved as class attributes for use in the .wrap_stream_and_count() function.\n# The .wrap_stream_and_count() returns another generator, yielding all the same tokens as OpenAI provides, \n# but simultaneously collecting the output tokens.\n# When the generator detects a None (ending) token in the stream, \n# it yields the final token and begins counting tokens (as to keep the stream running)\n\nreturn CountStreamTokens(model, messages).wrap_stream_and_count(completion, add_token_count)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 2918331,
+                "reputation": 111,
+                "user_id": 2501096,
+                "user_type": "registered",
+                "display_name": "user2501096"
+            },
+            "comment_count": 3,
+            "is_answered": false,
+            "answer_count": 6,
+            "score": 7,
+            "last_activity_date": 1713245035,
+            "creation_date": 1679584499,
+            "question_id": 75824798,
+            "link": "https://stackoverflow.com/questions/75824798/how-to-get-token-usage-for-each-openai-chatcompletion-api-call-in-streaming-mode",
+            "title": "How to get token usage for each openAI ChatCompletion API call in streaming mode?",
+            "body": "<p>According to openAI's documentation,\n<a href=\"https://platform.openai.com/docs/guides/chat/chat-vs-completions\" rel=\"noreferrer\">https://platform.openai.com/docs/guides/chat/chat-vs-completions</a>\nyou should get token usage from the response. However, I am currently working making the API call with stream set to True. The response doesn't seem to contain usage property?</p>\n<p>So how can I get the token usage in this case?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8539
+}

@@ -1,0 +1,75 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "function",
+                "file",
+                "python-requests",
+                "tqdm"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 31227,
+                        "reputation": 13833,
+                        "user_id": 85615,
+                        "user_type": "registered",
+                        "accept_rate": 83,
+                        "display_name": "daniel kullmann"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1647193093,
+                    "post_id": 71459213,
+                    "comment_id": 126304364,
+                    "link": "https://stackoverflow.com/questions/71459213/requests-tqdm-to-a-variable#comment126304364_71459213",
+                    "body": "Of course, instead of calling <code>file.write(data)</code>, you could do something else.."
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 21309,
+                        "reputation": 161619,
+                        "user_id": 51685,
+                        "user_type": "registered",
+                        "display_name": "AKX"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 0,
+                    "last_activity_date": 1647203430,
+                    "last_edit_date": 1647203430,
+                    "creation_date": 1647193223,
+                    "answer_id": 71459251,
+                    "question_id": 71459213,
+                    "link": "https://stackoverflow.com/questions/71459213/requests-tqdm-to-a-variable/71459251#71459251",
+                    "body": "<p>Well, you could just return a tqdm iterator, and do whatever you like with the chunks:</p>\n<pre><code>import requests\nimport tqdm\nimport io\n\ndef download(url: str):\n    resp = requests.get(url, stream=True)\n    total = int(resp.headers.get('content-length', 0))\n    with tqdm.tqdm(\n        desc=url,\n        total=total,\n        unit='b',\n        unit_scale=True,\n        unit_divisor=1024,\n    ) as bar:\n        for chunk in resp.iter_content(chunk_size=65536):\n            bar.update(len(chunk))\n            yield chunk\n\nbio = io.BytesIO()\n\nfor chunk in download('http://...'):\n    # Do something with the chunk; this just stores it in memory.\n    bio.write(chunk)\n\ncontent = bio.getvalue()  # Get the contents of the BytesIO() as a bytes.\n</code></pre>\n<p>Of course you can then refactor this to</p>\n<pre><code>import requests\nimport tqdm\nimport io\n\n\ndef download_as_bytes_with_progress(url: str) -&gt; bytes:\n    resp = requests.get(url, stream=True)\n    total = int(resp.headers.get('content-length', 0))\n    bio = io.BytesIO()\n    with tqdm.tqdm(\n        desc=url,\n        total=total,\n        unit='b',\n        unit_scale=True,\n        unit_divisor=1024,\n    ) as bar:\n        for chunk in resp.iter_content(chunk_size=65536):\n            bar.update(len(chunk))\n            bio.write(chunk)\n    return bio.getvalue()\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 24542399,
+                "reputation": 29,
+                "user_id": 18452661,
+                "user_type": "registered",
+                "display_name": "SRK7Kyros"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 71459251,
+            "answer_count": 1,
+            "score": 0,
+            "last_activity_date": 1647203430,
+            "creation_date": 1647192869,
+            "last_edit_date": 1647192979,
+            "question_id": 71459213,
+            "link": "https://stackoverflow.com/questions/71459213/requests-tqdm-to-a-variable",
+            "title": "Requests + Tqdm to a variable",
+            "body": "<p>I got this function right here from this <a href=\"https://stackoverflow.com/questions/15644964/python-progress-bar-and-downloads\" title=\"Answer I got the function from\">question</a> (ctrl+ f for &quot;There is an answer with requests and tqdm&quot;):</p>\n<pre class=\"lang-py prettyprint-override\"><code>import requests\nfrom tqdm import tqdm\ndef download(url: str, fname: str):\n    resp = requests.get(url, stream=True)\n    total = int(resp.headers.get('content-length', 0))\n    with open(fname, 'wb') as file, tqdm(\n        desc=fname,\n        total=total,\n        unit='b',\n        unit_scale=True,\n        unit_divisor=1024,\n    ) as bar:\n        for data in resp.iter_content(chunk_size=1024):\n            size = file.write(data)\n            bar.update(size)\n</code></pre>\n<p>Basically it downloads a file and writes it to a file, and I wanted it to return a variable that rapresents the downloaded file, so I made this:</p>\n<pre class=\"lang-py prettyprint-override\"><code>def download(url: str, fname: str):\n    import requests\n    from tqdm import tqdm\n    import os\n    resp = requests.get(url, stream=True)\n    total = int(resp.headers.get('content-length', 0))\n    with open(fname, 'wb') as file, tqdm(\n        desc=fname,\n        total=total,\n        unit='b',\n        unit_scale=True,\n        unit_divisor=1024,\n    ) as bar:\n        for data in resp.iter_content(chunk_size=1024):\n            size = file.write(data)\n            bar.update(size)\n    with open(fname, &quot;rb&quot;) as f:\n        returned = f.read()\n    os.remove(fname)\n    return returned\n</code></pre>\n<p>Now it saves the file, reads it and saves it to a variable, deletes the file and returns the variable.\nIs there a way I can save it directly to a variable?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7078
+}

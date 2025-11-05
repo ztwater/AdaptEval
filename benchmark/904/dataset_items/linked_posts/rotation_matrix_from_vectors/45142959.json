@@ -1,0 +1,338 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "python-2.7",
+                "numpy",
+                "3d",
+                "rotational-matrices"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 1294209,
+                        "reputation": 2387,
+                        "user_id": 1245694,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "anishtain4"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1560280837,
+                    "post_id": 45142959,
+                    "comment_id": 99682631,
+                    "link": "https://stackoverflow.com/questions/45142959/calculate-rotation-matrix-to-align-two-vectors-in-3d-space#comment99682631_45142959",
+                    "body": "You could also rotate 180 degrees around the average vector, it doesn&#39;t need the cross or inner product."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 8795728,
+                                "reputation": 798,
+                                "user_id": 6573679,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Mark"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1500295399,
+                            "post_id": 45143836,
+                            "comment_id": 77257875,
+                            "link": "https://stackoverflow.com/questions/45142959/calculate-rotation-matrix-to-align-two-vectors-in-3d-space/45143836#comment77257875_45143836",
+                            "body": "Thanks- this fixes it! As I&#39;m using numpy &lt; 1.10 I used np.dot(k,k) instead of matmul. I am going to implement the edge cases, just needed to get the base case working first. :)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5587627,
+                        "reputation": 14159,
+                        "user_id": 4427777,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Daniel F"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": true,
+                    "score": 7,
+                    "last_activity_date": 1500293490,
+                    "last_edit_date": 1500293490,
+                    "creation_date": 1500293033,
+                    "answer_id": 45143836,
+                    "question_id": 45142959,
+                    "link": "https://stackoverflow.com/questions/45142959/calculate-rotation-matrix-to-align-two-vectors-in-3d-space/45143836#45143836",
+                    "body": "<p>Problem is here:</p>\n\n<pre><code>r = I + k + np.square(k) * ((1 -c)/(s**2))\n</code></pre>\n\n<p><code>np.square(k)</code> squares each element of the matrix.  You want <code>np.matmul(k,k)</code> or <code>k @ k</code> which is the matrix multiplied by itself.  </p>\n\n<p>I'd also implement the side cases (especially <code>s=0</code>) mentioned in the comments of that answer or you will end up with errors for quite a few cases.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2230482,
+                                "reputation": 798,
+                                "user_id": 1968203,
+                                "user_type": "registered",
+                                "accept_rate": 58,
+                                "display_name": "Alexander Cska"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1595247491,
+                            "post_id": 59204638,
+                            "comment_id": 111399107,
+                            "link": "https://stackoverflow.com/questions/45142959/calculate-rotation-matrix-to-align-two-vectors-in-3d-space/59204638#comment111399107_59204638",
+                            "body": "this is not a right hand rule, isn&#39;t it? <code>[1,0,0]</code> and <code>[0,0,1]</code>, which is a rotation by +90 degree (counterclockwise) around the y, axis gives <code>[[ 0.,  0., -1.],[ 0.,  1.,  0.],[ 1.,  0.,  0.]]</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1595174,
+                                "reputation": 346,
+                                "user_id": 1477518,
+                                "user_type": "registered",
+                                "display_name": "Kevin R."
+                            },
+                            "reply_to_user": {
+                                "account_id": 2230482,
+                                "reputation": 798,
+                                "user_id": 1968203,
+                                "user_type": "registered",
+                                "accept_rate": 58,
+                                "display_name": "Alexander Cska"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1622426815,
+                            "post_id": 59204638,
+                            "comment_id": 119781651,
+                            "link": "https://stackoverflow.com/questions/45142959/calculate-rotation-matrix-to-align-two-vectors-in-3d-space/59204638#comment119781651_59204638",
+                            "body": "@AlexanderCska i think this convention doesn&#39;t matter since the translation matrix is a set of influence factors from one vector to another. The selected answer does have the correct definition for rotation matrix."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 454252,
+                        "reputation": 12944,
+                        "user_id": 851699,
+                        "user_type": "registered",
+                        "accept_rate": 41,
+                        "display_name": "Peter"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 21,
+                    "last_activity_date": 1575587978,
+                    "creation_date": 1575587978,
+                    "answer_id": 59204638,
+                    "question_id": 45142959,
+                    "link": "https://stackoverflow.com/questions/45142959/calculate-rotation-matrix-to-align-two-vectors-in-3d-space/59204638#59204638",
+                    "body": "<p>Based on Daniel F's correction, here is a function that does what you want: </p>\n\n<pre><code>import numpy as np\n\ndef rotation_matrix_from_vectors(vec1, vec2):\n    \"\"\" Find the rotation matrix that aligns vec1 to vec2\n    :param vec1: A 3d \"source\" vector\n    :param vec2: A 3d \"destination\" vector\n    :return mat: A transform matrix (3x3) which when applied to vec1, aligns it with vec2.\n    \"\"\"\n    a, b = (vec1 / np.linalg.norm(vec1)).reshape(3), (vec2 / np.linalg.norm(vec2)).reshape(3)\n    v = np.cross(a, b)\n    c = np.dot(a, b)\n    s = np.linalg.norm(v)\n    kmat = np.array([[0, -v[2], v[1]], [v[2], 0, -v[0]], [-v[1], v[0], 0]])\n    rotation_matrix = np.eye(3) + kmat + kmat.dot(kmat) * ((1 - c) / (s ** 2))\n    return rotation_matrix\n</code></pre>\n\n<p>Test:</p>\n\n<pre><code>vec1 = [2, 3, 2.5]\nvec2 = [-3, 1, -3.4]\n\nmat = rotation_matrix_from_vectors(vec1, vec2)\nvec1_rot = mat.dot(vec1)\nassert np.allclose(vec1_rot/np.linalg.norm(vec1_rot), vec2/np.linalg.norm(vec2))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 102233,
+                                "reputation": 31890,
+                                "user_id": 274535,
+                                "user_type": "registered",
+                                "accept_rate": 96,
+                                "display_name": "Yan Sklyarenko"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1595316834,
+                            "post_id": 63009219,
+                            "comment_id": 111424495,
+                            "link": "https://stackoverflow.com/questions/45142959/calculate-rotation-matrix-to-align-two-vectors-in-3d-space/63009219#comment111424495_63009219",
+                            "body": "This sounds more like a comment than the answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7973051,
+                                "reputation": 43,
+                                "user_id": 6017056,
+                                "user_type": "registered",
+                                "display_name": "weeshin"
+                            },
+                            "reply_to_user": {
+                                "account_id": 102233,
+                                "reputation": 31890,
+                                "user_id": 274535,
+                                "user_type": "registered",
+                                "accept_rate": 96,
+                                "display_name": "Yan Sklyarenko"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1595317827,
+                            "post_id": 63009219,
+                            "comment_id": 111424960,
+                            "link": "https://stackoverflow.com/questions/45142959/calculate-rotation-matrix-to-align-two-vectors-in-3d-space/63009219#comment111424960_63009219",
+                            "body": "sorry, I cannot make a comment because of low reputation :("
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7973051,
+                        "reputation": 43,
+                        "user_id": 6017056,
+                        "user_type": "registered",
+                        "display_name": "weeshin"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1595315482,
+                    "creation_date": 1595315482,
+                    "answer_id": 63009219,
+                    "question_id": 45142959,
+                    "link": "https://stackoverflow.com/questions/45142959/calculate-rotation-matrix-to-align-two-vectors-in-3d-space/63009219#63009219",
+                    "body": "<p>I think if you do not have rotation axis, the rotation matrix is not unique.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1595174,
+                        "reputation": 346,
+                        "user_id": 1477518,
+                        "user_type": "registered",
+                        "display_name": "Kevin R."
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1622426692,
+                    "creation_date": 1622426692,
+                    "answer_id": 67767180,
+                    "question_id": 45142959,
+                    "link": "https://stackoverflow.com/questions/45142959/calculate-rotation-matrix-to-align-two-vectors-in-3d-space/67767180#67767180",
+                    "body": "<p>Based off of @Peter and @Daniel F's work. The above function worked for me, except for in cases of the same direction vector, where <code>v</code> would be a zero vector. I catch this here, and return the identity vector instead.</p>\n<pre><code>def rotation_matrix_from_vectors(vec1, vec2):\n    &quot;&quot;&quot; Find the rotation matrix that aligns vec1 to vec2\n    :param vec1: A 3d &quot;source&quot; vector\n    :param vec2: A 3d &quot;destination&quot; vector\n    :return mat: A transform matrix (3x3) which when applied to vec1, aligns it with vec2.\n    &quot;&quot;&quot;\n    a, b = (vec1 / numpy.linalg.norm(vec1)).reshape(3), (vec2 / numpy.linalg.norm(vec2)).reshape(3)\n    v = numpy.cross(a, b)\n    if any(v): #if not all zeros then \n        c = numpy.dot(a, b)\n        s = numpy.linalg.norm(v)\n        kmat = numpy.array([[0, -v[2], v[1]], [v[2], 0, -v[0]], [-v[1], v[0], 0]])\n        return numpy.eye(3) + kmat + kmat.dot(kmat) * ((1 - c) / (s ** 2))\n\n    else:\n        return numpy.eye(3) #cross of all zeros only occurs on identical directions\n\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4431844,
+                                "reputation": 2395,
+                                "user_id": 3608824,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "xue"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1665671848,
+                            "post_id": 69911892,
+                            "comment_id": 130758345,
+                            "link": "https://stackoverflow.com/questions/45142959/calculate-rotation-matrix-to-align-two-vectors-in-3d-space/69911892#comment130758345_69911892",
+                            "body": "Thanks for pointing out this but I wouldn&#39;t recommend use this to align 2 vectors, this function &#39;Estimate a rotation to optimally align two sets of vectors.&#39; When tried it, sometimes it give me warning &#39;UserWarning: Optimal rotation is not uniquely or poorly defined for the given sets of vectors&#39; and a not good align."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5237507,
+                                "reputation": 384,
+                                "user_id": 7827119,
+                                "user_type": "registered",
+                                "display_name": "Markus Kaukonen"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4431844,
+                                "reputation": 2395,
+                                "user_id": 3608824,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "xue"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1665824548,
+                            "post_id": 69911892,
+                            "comment_id": 130792388,
+                            "link": "https://stackoverflow.com/questions/45142959/calculate-rotation-matrix-to-align-two-vectors-in-3d-space/69911892#comment130792388_69911892",
+                            "body": "@XueYu can you give an example when it fails?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4431844,
+                                "reputation": 2395,
+                                "user_id": 3608824,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "xue"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1666018008,
+                            "post_id": 69911892,
+                            "comment_id": 130829584,
+                            "link": "https://stackoverflow.com/questions/45142959/calculate-rotation-matrix-to-align-two-vectors-in-3d-space/69911892#comment130829584_69911892",
+                            "body": "I might be wrong about the alignment. Because I never really see the assert line goes wrong.  You can set vec1 = np.random.rand(3), vec2 = np.random.rand(3), and run a few times you&#39;ll see the warning. For example: vec1 = np.array([0.08067752,0.86080858,0.19369599]), vec2 = np.array([0.7616154, 0.17332016, 0.09992052])."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5237507,
+                                "reputation": 384,
+                                "user_id": 7827119,
+                                "user_type": "registered",
+                                "display_name": "Markus Kaukonen"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4431844,
+                                "reputation": 2395,
+                                "user_id": 3608824,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "xue"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1666461943,
+                            "post_id": 69911892,
+                            "comment_id": 130944778,
+                            "link": "https://stackoverflow.com/questions/45142959/calculate-rotation-matrix-to-align-two-vectors-in-3d-space/69911892#comment130944778_69911892",
+                            "body": "Yes, you are right, there is warning with your numbers (but the resulting rotated unit vector is correct with 6 digits). Maybe it is a good idea to accept the rotation matrix after checking. Maybe someone with more knowledge in maths could comment the warning..."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5237507,
+                        "reputation": 384,
+                        "user_id": 7827119,
+                        "user_type": "registered",
+                        "display_name": "Markus Kaukonen"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1636541226,
+                    "creation_date": 1636541226,
+                    "answer_id": 69911892,
+                    "question_id": 45142959,
+                    "link": "https://stackoverflow.com/questions/45142959/calculate-rotation-matrix-to-align-two-vectors-in-3d-space/69911892#69911892",
+                    "body": "<p>One can use scipy for this, reproducing here @Peter answer with scipy Rotation see:\n<a href=\"https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.transform.Rotation.html?highlight=scipy%20spatial%20transform%20rotation#scipy.spatial.transform.Rotation\" rel=\"noreferrer\">https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.transform.Rotation.html?highlight=scipy%20spatial%20transform%20rotation#scipy.spatial.transform.Rotation</a></p>\n<pre><code>from scipy.spatial.transform import Rotation as R\nimport numpy as np\n\ndef get_rotation_matrix(vec2, vec1=np.array([1, 0, 0])):\n    &quot;&quot;&quot;get rotation matrix between two vectors using scipy&quot;&quot;&quot;\n    vec1 = np.reshape(vec1, (1, -1))\n    vec2 = np.reshape(vec2, (1, -1))\n    r = R.align_vectors(vec2, vec1)\n    return r[0].as_matrix()\n\n\nvec1 = np.array([2, 3, 2.5])\nvec2 = np.array([-3, 1, -3.4])\n\nmat = get_rotation_matrix(vec1=vec1, vec2=vec2)\nprint(mat)\nvec1_rot = mat.dot(vec1)\nassert np.allclose(vec1_rot / np.linalg.norm(vec1_rot), vec2 / np.linalg.norm(vec2))\n</code></pre>\n<p>terveisin, Markus</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 8795728,
+                "reputation": 798,
+                "user_id": 6573679,
+                "user_type": "registered",
+                "accept_rate": 100,
+                "display_name": "Mark"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 45143836,
+            "answer_count": 5,
+            "score": 12,
+            "last_activity_date": 1636541226,
+            "creation_date": 1500290568,
+            "question_id": 45142959,
+            "link": "https://stackoverflow.com/questions/45142959/calculate-rotation-matrix-to-align-two-vectors-in-3d-space",
+            "title": "Calculate rotation matrix to align two vectors in 3D space?",
+            "body": "<p>I have two separate vectors of 3D data points that represent curves and I'm plotting these as scatter data in a 3D plot with matplotlib.</p>\n\n<p>Both the vectors start at the origin, and both are of unit length. The curves are similar to each other, however, there is typically a rotation between the two curves (for test purposes, I've actually being using one curve and applying a rotation matrix to it to create the second curve).</p>\n\n<p>I want to align the two curves so that they line up in 3D e.g. rotate curve b, so that its start and end points line up with curve a. I've been trying to do this by subtracting the final point from the first, to get a direction vector representing the straight line from the start to the end of each curve, converting these to unit vectors and then calculating the cross and dot products and using the methodology outlined in this answer (<a href=\"https://math.stackexchange.com/a/476311/357495\">https://math.stackexchange.com/a/476311/357495</a>) to calculate a rotation matrix.</p>\n\n<p>However, when I do this, the calculated rotation matrix is wrong and I'm not sure why?</p>\n\n<p>My code is below (I'm using Python 2.7):</p>\n\n<pre><code># curve_1, curve_2 are arrays of 3D points, of the same length (both start at the origin) \n\ncurve_vec_1 = (curve_1[0] - curve_1[-1]).reshape(3,1)\ncurve_vec_2 = (curve_2[index][0] - curve_2[index][-1]).reshape(3,1)\na,b = (curve_vec_1/ np.linalg.norm(curve_vec_1)).reshape(3), (curve_vec_2/ np.linalg.norm(curve_vec_2)).reshape(3)\nv = np.cross(a,b)\nc = np.dot(a,b)\ns = np.linalg.norm(v)\nI = np.identity(3)\nvXStr = '{} {} {}; {} {} {}; {} {} {}'.format(0, -v[2], v[1], v[2], 0, -v[0], -v[1], v[0], 0)\nk = np.matrix(vXStr)\nr = I + k + np.square(k) * ((1 -c)/(s**2))\n\nfor i in xrange(item.shape[0]):\n    item[i] = (np.dot(r, item[i]).reshape(3,1)).reshape(3)\n</code></pre>\n\n<p>In my test case, curve 2 is simply curve 1 with the following rotation matrix applied:</p>\n\n<pre><code>[[1  0       0    ]\n[ 0  0.5     0.866]\n[ 0  -0.866  0.5  ]]\n</code></pre>\n\n<p>(just a 60 degree rotation around the x axis).</p>\n\n<p>The rotation matrix computed by my code to align the two vectors again is:</p>\n\n<pre><code>[[ 1.         -0.32264329  0.27572962]  \n [ 0.53984249  1.         -0.35320293]\n [-0.20753816  0.64292975  1.        ]]\n</code></pre>\n\n<p>The plot of the direction vectors for the two original curves (a and b in blue and green respectively) and the result of b transformed with the computed rotation matrix (red) is below. I'm trying to compute the rotation matrix to align the green vector to the blue.<a href=\"https://i.stack.imgur.com/UiaJ6.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/UiaJ6.png\" alt=\"Curve plot\"></a></p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8290
+}

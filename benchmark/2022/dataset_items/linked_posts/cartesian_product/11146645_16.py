@@ -1,0 +1,5 @@
+In [13]: x, y = numpy.arange(100), numpy.arange(100)
+In [14]: %timeit cartesian([x, y])
+215 µs ± 4.75 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+In [15]: %timeit dstack_product(x, y)
+65.7 µs ± 1.15 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)

@@ -1,0 +1,158 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "yaml",
+                "indentation"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "user_type": "does_not_exist",
+                        "display_name": "user395760"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1407096356,
+                    "post_id": 25108581,
+                    "comment_id": 39074330,
+                    "link": "https://stackoverflow.com/questions/25108581/python-yaml-dump-bad-indentation#comment39074330_25108581",
+                    "body": "Both versions are correct, so at worst this is an aesthetic concern."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1592734,
+                                "reputation": 2674,
+                                "user_id": 1475706,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "orodbhen"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1504231138,
+                            "post_id": 39681672,
+                            "comment_id": 78944661,
+                            "link": "https://stackoverflow.com/questions/25108581/python-yaml-dump-bad-indentation/39681672#comment78944661_39681672",
+                            "body": "I ran into this problem generating data files for <code>OpenCV</code>. The <code>OpenCV</code> YAML parser requires the extra indent. Otherwise it throws an exception. This solution fixes it. I do wish <code>PyYAML</code> didn&#39;t require so much sub-classing to make things work. JSON is much less complex, except there&#39;s no built-in OpenCV parser for it."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 38389,
+                                "reputation": 11180,
+                                "user_id": 110151,
+                                "user_type": "registered",
+                                "display_name": "Marius Gedminas"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1599722945,
+                            "post_id": 39681672,
+                            "comment_id": 112862797,
+                            "link": "https://stackoverflow.com/questions/25108581/python-yaml-dump-bad-indentation/39681672#comment112862797_39681672",
+                            "body": "That sounds like an OpenCV bug, because unindented lists (while ugly) are valid YAML."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7164377,
+                                "reputation": 320,
+                                "user_id": 7960716,
+                                "user_type": "registered",
+                                "display_name": "Gordon Fogus"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1672357519,
+                            "post_id": 39681672,
+                            "comment_id": 132275887,
+                            "link": "https://stackoverflow.com/questions/25108581/python-yaml-dump-bad-indentation/39681672#comment132275887_39681672",
+                            "body": "It is important to NOT rename <code>increase_indent()</code> in the above code."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 189910,
+                        "reputation": 12185,
+                        "user_id": 429533,
+                        "user_type": "registered",
+                        "accept_rate": 91,
+                        "display_name": "Jace Browning"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 84,
+                    "last_activity_date": 1536225708,
+                    "last_edit_date": 1536225708,
+                    "creation_date": 1474757463,
+                    "answer_id": 39681672,
+                    "question_id": 25108581,
+                    "link": "https://stackoverflow.com/questions/25108581/python-yaml-dump-bad-indentation/39681672#39681672",
+                    "body": "<p><a href=\"https://web.archive.org/web/20170903201521/https://pyyaml.org/ticket/64\" rel=\"noreferrer\">This ticket</a> suggests the current implementation correctly follows <a href=\"http://yaml.org/spec/1.2/spec.html#id2777534\" rel=\"noreferrer\">the spec</a>:</p>\n\n<blockquote>\n  <p>The \u201c-\u201d, \u201c?\u201d and \u201c:\u201d characters used to denote block collection entries are perceived by people to be part of the indentation. This is handled on a case-by-case basis by the relevant productions.</p>\n</blockquote>\n\n<p>On the same thread, there is also <a href=\"https://web.archive.org/web/20170903201521/https://pyyaml.org/ticket/64#comment:5\" rel=\"noreferrer\">this code snippet</a> (modified to fit your example) to get the behavior you are looking for:</p>\n\n<pre><code>import yaml\n\nclass MyDumper(yaml.Dumper):\n\n    def increase_indent(self, flow=False, indentless=False):\n        return super(MyDumper, self).increase_indent(flow, False)\n\nfoo = {\n    'name': 'foo',\n    'my_list': [\n        {'foo': 'test', 'bar': 'test2'},\n        {'foo': 'test3', 'bar': 'test4'}],\n    'hello': 'world',\n}\n\nprint yaml.dump(foo, Dumper=MyDumper, default_flow_style=False)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 418148,
+                                "reputation": 4095,
+                                "user_id": 794539,
+                                "user_type": "registered",
+                                "display_name": "blubberdiblub"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1567835279,
+                            "post_id": 52839834,
+                            "comment_id": 102091605,
+                            "link": "https://stackoverflow.com/questions/25108581/python-yaml-dump-bad-indentation/52839834#comment102091605_52839834",
+                            "body": "While on a whole I do agree with you and I do prefer using <i>ruamel.yaml</i> in my own projects (often with a fallback to <i>PyYAML</i>), the <code>print()</code> call can still easily be corrected to not output an extra linefeed: <code>print(something, end=&#39;&#39;)</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1373414,
+                        "reputation": 73747,
+                        "user_id": 1307905,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "Anthon"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 14,
+                    "last_activity_date": 1539706584,
+                    "creation_date": 1539706584,
+                    "answer_id": 52839834,
+                    "question_id": 25108581,
+                    "link": "https://stackoverflow.com/questions/25108581/python-yaml-dump-bad-indentation/52839834#52839834",
+                    "body": "<p>Your output, as shown, is incomplete as <code>print(yaml.dump())</code> gives you\nan extra empty line after <code>name: foo</code>. It is also slower and uses more\nmemory than directly streaming to <code>sys.stdout</code>.</p>\n\n<p>You are probably using PyYAML and, apart from only supporting the outdated YAML 1.1 specification, \nit is very limited in control over the dumped YAML.</p>\n\n<p>I suggest you use <code>ruamel.yaml</code> (disclaimer: I am the author of that package), where you can\nspecify identation separately for mappings and sequences and also indicate how far\nto offset the dash within the indent before the sequence element:</p>\n\n<pre><code>import sys\nimport ruamel.yaml\n\nfoo = {\n    'name': 'foo',\n    'my_list': [{'foo': 'test', 'bar': 'test2'}, {'foo': 'test3', 'bar': 'test4'}],\n    'hello': 'world'\n}\n\n\nyaml = ruamel.yaml.YAML()\nyaml.indent(sequence=4, offset=2)\nyaml.dump(foo, sys.stdout)\n</code></pre>\n\n<p>which gives:</p>\n\n<pre><code>name: foo\nmy_list:\n  - foo: test\n    bar: test2\n  - foo: test3\n    bar: test4\nhello: world\n</code></pre>\n\n<p>Please note that the order of the keys is implementation dependent\n(but can be controlled, as <code>ruamel.yaml</code> can round-trip the above\nwithout changes).</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 960362,
+                "reputation": 7244,
+                "user_id": 984868,
+                "user_type": "registered",
+                "accept_rate": 36,
+                "display_name": "fj123x"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "answer_count": 2,
+            "score": 53,
+            "last_activity_date": 1539706658,
+            "creation_date": 1407096043,
+            "last_edit_date": 1539706658,
+            "question_id": 25108581,
+            "link": "https://stackoverflow.com/questions/25108581/python-yaml-dump-bad-indentation",
+            "title": "python yaml.dump bad indentation",
+            "body": "<p>I'm executing the following python code:</p>\n\n<pre><code>import yaml\n\n\nfoo = {\n    'name': 'foo',\n    'my_list': [{'foo': 'test', 'bar': 'test2'}, {'foo': 'test3', 'bar': 'test4'}],\n    'hello': 'world'\n}\n\nprint(yaml.dump(foo, default_flow_style=False))\n</code></pre>\n\n<p>but is printing:</p>\n\n<pre><code>hello: world\nmy_list:\n- bar: test2\n  foo: test\n- bar: test4\n  foo: test3\nname: foo\n</code></pre>\n\n<p>instead of:</p>\n\n<pre><code>hello: world\nmy_list:\n  - bar: test2\n    foo: test\n  - bar: test4\n    foo: test3\nname: foo\n</code></pre>\n\n<p>How can I indent the <code>my_list</code> elements this way?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8361
+}

@@ -1,0 +1,3 @@
+@redirect_output("somewhere.log")
+def foo():
+    ....

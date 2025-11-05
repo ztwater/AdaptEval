@@ -1,0 +1,10 @@
+def updateicon(self):
+    size = QSize(100, 100)
+    CM = np.random.random((10,10))
+    ax = plt.imshow(CM)
+    colours = (ax.cmap(ax.norm( CM )) * 255).astype(np.uint8)
+    im = colours[:, :, :3].copy()
+    image = QImage(im.data, im.shape[1], im.shape[0], im.strides[0], QImage.Format_RGB888)
+    pixmap = QPixmap(image)
+    self.B.setIcon(QIcon(pixmap.scaled(size)))
+    self.B.setIconSize(size)

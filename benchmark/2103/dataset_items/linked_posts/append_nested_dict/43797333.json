@@ -1,0 +1,184 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "dictionary"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 6482621,
+                        "reputation": 10944,
+                        "user_id": 5019169,
+                        "user_type": "registered",
+                        "accept_rate": 64,
+                        "display_name": "Ahasanul Haque"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1493963262,
+                    "creation_date": 1493963262,
+                    "answer_id": 43797380,
+                    "question_id": 43797333,
+                    "link": "https://stackoverflow.com/questions/43797333/how-to-merge-two-nested-dict-in-python/43797380#43797380",
+                    "body": "<p>You can just update the inner dictionary.</p>\n\n<pre><code>&gt;&gt;&gt; dict1 = {'employee':{'dev1': 'Roy'}}\n&gt;&gt;&gt; dict2 = {'employee':{'dev2': 'Biswas'}}\n&gt;&gt;&gt; \n&gt;&gt;&gt; for key in dict1:\n...     if key in dict2:\n...         dict1[key].update(dict2[key])\n... \n&gt;&gt;&gt; dict1\n{'employee': {'dev2': 'Biswas', 'dev1': 'Roy'}}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1755733,
+                        "reputation": 8532,
+                        "user_id": 1603840,
+                        "user_type": "registered",
+                        "display_name": "Karin"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1493963380,
+                    "creation_date": 1493963380,
+                    "answer_id": 43797403,
+                    "question_id": 43797333,
+                    "link": "https://stackoverflow.com/questions/43797333/how-to-merge-two-nested-dict-in-python/43797403#43797403",
+                    "body": "<p>Here's a solution that should work even if both dictionaries have different keys, and you want to keep them all.</p>\n\n<pre><code>from collections import defaultdict\n\ndict1 = {'employee': {'dev1': 'Roy'}, 'aKeyNotInDict2': {}}\ndict2 = {'employee': {'dev2': 'Biswas'}, 'aKeyNotInDict1': {}}\nmerged_dict = defaultdict(dict)\n\nmerged_dict.update(dict1)\nfor key, nested_dict in dict2.items():\n    merged_dict[key].update(nested_dict)\n\nprint(dict(merged_dict))\n</code></pre>\n\n<p>Output:</p>\n\n<pre><code>{\n  'employee': {'dev2': 'Biswas', 'dev1': 'Roy'},\n  'aKeyNotInDict2': {},\n  'aKeyNotInDict1': {}\n}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 338800,
+                        "reputation": 19817,
+                        "user_id": 667883,
+                        "user_type": "registered",
+                        "accept_rate": 82,
+                        "display_name": "Allen Qin"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1493964216,
+                    "last_edit_date": 1493964216,
+                    "creation_date": 1493963440,
+                    "answer_id": 43797418,
+                    "question_id": 43797333,
+                    "link": "https://stackoverflow.com/questions/43797333/how-to-merge-two-nested-dict-in-python/43797418#43797418",
+                    "body": "<pre><code>#use a dict comprehension. Adding {} in get() is to set a default return value if the key doesn't exist in dict1\n\n{k:dict(dict1.get(k,{}).items() + v.items()) for k,v in dict2.items()}\nOut[689]: {'employee': {'dev1': 'Roy', 'dev2': 'Biswas'}}\n\n#Alternatively, a less readable way to merge the dicts using the dict constructor.\n\n{k:dict(dict1.get(k,{}), **v) for k,v in dict2.items()}\nOut[690]: {'employee': {'dev1': 'Roy', 'dev2': 'Biswas'}}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 9296711,
+                        "reputation": 440,
+                        "user_id": 6903390,
+                        "user_type": "registered",
+                        "display_name": "jin"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1549287505,
+                    "last_edit_date": 1549287505,
+                    "creation_date": 1493969518,
+                    "answer_id": 43799061,
+                    "question_id": 43797333,
+                    "link": "https://stackoverflow.com/questions/43797333/how-to-merge-two-nested-dict-in-python/43799061#43799061",
+                    "body": "<pre><code>[key1 == key2 and dict1.get(key1).update(dict2.get(key2)) \n for key1, key2 in zip(dict1, dict2)]\nprint dict1\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2888564,
+                                "reputation": 347,
+                                "user_id": 2477854,
+                                "user_type": "registered",
+                                "display_name": "JV conseil"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1639488539,
+                            "post_id": 58742155,
+                            "comment_id": 124356765,
+                            "link": "https://stackoverflow.com/questions/43797333/how-to-merge-two-nested-dict-in-python/58742155#comment124356765_58742155",
+                            "body": "Elaborating on the &quot;intuitive&quot; approach, check also this elegant solution by <a href=\"https://stackoverflow.com/users/3799759/samwise\">Samwise</a>: <a href=\"https://stackoverflow.com/a/70310511/2477854\">How to merge nested dictionaries?</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 9371182,
+                        "reputation": 1757,
+                        "user_id": 7264980,
+                        "user_type": "registered",
+                        "display_name": "Anatoliy R"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 9,
+                    "last_activity_date": 1573113223,
+                    "last_edit_date": 1573113223,
+                    "creation_date": 1573102306,
+                    "answer_id": 58742155,
+                    "question_id": 43797333,
+                    "link": "https://stackoverflow.com/questions/43797333/how-to-merge-two-nested-dict-in-python/58742155#58742155",
+                    "body": "<p>This code is to support slightly different meaning of \"merge\". Let's say we have a nested dictionary:</p>\n\n<pre><code>dict1 = {'employee':{'devs':{'python':{'dev1':'Roy'}}}}\ndict2 = {'employee':{'devs':{'cpp':{'dev1':'Biswas'}}}}\n</code></pre>\n\n<p>In this case the simple loop solution returns:</p>\n\n<pre><code>{'employee': {'devs': {'cpp': {'dev1': 'Biswas'}}}}\n</code></pre>\n\n<p>While the \"intuitive\" answer should be:</p>\n\n<pre><code>{'employee': {'devs': {'python': {'dev1': 'Roy'}, 'cpp': {'dev1': 'Biswas'}}}}\n</code></pre>\n\n<p>This is just a simple example, the real example may be much more complex.</p>\n\n<p>Below is my attempt for such a nested dictionary. It works for nested data using recursion. And it also has some restrictions. For example if dict1 and dict2 have the same value which is not dictionary, dict2 has priority. On the other hand if dict1 contains dictionary and dict2 contains value with the same key, the priority is upon dict1 and dict2 is ignored. Other restrictions will require code changes.</p>\n\n<pre><code>def merge_dict(dict1, dict2):\n    for key, val in dict1.items():\n        if type(val) == dict:\n            if key in dict2 and type(dict2[key] == dict):\n                merge_dict(dict1[key], dict2[key])\n        else:\n            if key in dict2:\n                dict1[key] = dict2[key]\n\n    for key, val in dict2.items():\n        if not key in dict1:\n            dict1[key] = val\n\n    return dict1\n\ndict1 = merge_dict(dict1, dict2)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 19155709,
+                        "reputation": 1,
+                        "user_id": 13992572,
+                        "user_type": "registered",
+                        "display_name": "eiphy"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1667618287,
+                    "last_edit_date": 1667618287,
+                    "creation_date": 1667618208,
+                    "answer_id": 74324837,
+                    "question_id": 43797333,
+                    "link": "https://stackoverflow.com/questions/43797333/how-to-merge-two-nested-dict-in-python/74324837#74324837",
+                    "body": "<p>Maybe you can try naapc package as follows:</p>\n<pre><code>&gt;&gt;&gt; from naapc import NDict\n&gt;&gt;&gt; dict1 = NDict({'employee':{'dev1': 'Roy'}})\n&gt;&gt;&gt; dict2 = {'employee':{'dev2': 'Biswas'}}\n&gt;&gt;&gt; dict1.update(dict2)\n&gt;&gt;&gt; print(dict1)\n{\n  &quot;employee&quot;: {\n    &quot;dev1&quot;: &quot;Roy&quot;,\n    &quot;dev2&quot;: &quot;Biswas&quot;\n  }\n}\n</code></pre>\n<p>In case you want a normal dict:</p>\n<pre><code>normal_dict = deepcopy(dict1.raw_dict)\n</code></pre>\n<p>To install:\n<code>pip install naapc</code></p>\n<p>doc in: <code>https://github.com/eiphy/naapc</code></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 8004185,
+                        "reputation": 1527,
+                        "user_id": 6037956,
+                        "user_type": "registered",
+                        "display_name": "Soudipta Dutta"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1671557307,
+                    "last_edit_date": 1671557307,
+                    "creation_date": 1671367381,
+                    "answer_id": 74841414,
+                    "question_id": 43797333,
+                    "link": "https://stackoverflow.com/questions/43797333/how-to-merge-two-nested-dict-in-python/74841414#74841414",
+                    "body": "<pre><code>def m3(a,b):\n    if not isinstance(a,dict) and not isinstance(b,dict):return b\n    for k in b:\n        if k in a :\n            a[k] = m3(a[k], b[k])\n        else: a[k] = b[k] \n    return a       \n            \nd1 = {1:{&quot;a&quot;:&quot;A&quot;}, 2:{&quot;b&quot;:&quot;B&quot;}}\n\nd2 = {2:{&quot;c&quot;:&quot;C&quot;}, 3:{&quot;d&quot;:&quot;D&quot;}}\nd3 = {1:{&quot;a&quot;:{1}}, 2:{&quot;b&quot;:{2}}}\n\nd4 = {2:{&quot;c&quot;:{222}}, 3:{&quot;d&quot;:{3}}}\nd5 = {'employee':{'dev1': 'Roy'}}\nd6 = {'employee':{'dev2': 'Biswas'}}\n\nprint(m3(d1,d2))\n\nprint(m3(d3,d4))\nprint(m3(d5,d6))\n\n&quot;&quot;&quot;\nOutput :\n{1: {'a': 'A'}, 2: {'b': 'B', 'c': 'C'}, 3: {'d': 'D'}}\n{1: {'a': {1}}, 2: {'b': {2}, 'c': {222}}, 3: {'d': {3}}}\n{'employee': {'dev1': 'Roy', 'dev2': 'Biswas'}}\n\n&quot;&quot;&quot;\n</code></pre>\n<p>Explanation:</p>\n<ol>\n<li><p>If a and b are not dictionaries, return b</p>\n</li>\n<li><p>For each key in b, if the key is in a, then merge the values of the key in a and b.</p>\n</li>\n<li><p>If the key is not in a, then add the key and value to a.</p>\n</li>\n<li><p>Return a.</p>\n</li>\n</ol>\n<p>But yes, The best and shortest way is this:</p>\n<pre><code>def m4(a,b):\n    for k in a:\n      a.get(k).update(b.get(k, {})) \n    return a\n</code></pre>\n<p>Explanation:</p>\n<ol>\n<li><p>The function m4 takes two dictionaries as input.</p>\n</li>\n<li><p>The function iterates through the first dictionary\nand updates the values of the first dictionary with\nthe values of the second dictionary.</p>\n</li>\n<li><p>The function returns the first dictionary.</p>\n</li>\n</ol>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 4743769,
+                "reputation": 1621,
+                "user_id": 3835621,
+                "user_type": "registered",
+                "accept_rate": 34,
+                "display_name": "Arijit Panda"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "answer_count": 7,
+            "score": 10,
+            "last_activity_date": 1671557307,
+            "creation_date": 1493963025,
+            "question_id": 43797333,
+            "link": "https://stackoverflow.com/questions/43797333/how-to-merge-two-nested-dict-in-python",
+            "title": "How to merge two nested dict in python?",
+            "body": "<p>I have two nested dictionary data. I want to merge them to create one dictionary in python.\nDictionary data :</p>\n\n<pre><code>dict1 = {'employee':{'dev1': 'Roy'}}\ndict2 = {'employee':{'dev2': 'Biswas'}}\n</code></pre>\n\n<p>Now I trying to create a dictionary like bellow from them.<strong>Required Output</strong> </p>\n\n<pre><code>dict_output = {'employee':{\n                    'dev1': 'Roy',\n                    'dev2': 'Biswas'\n                    }\n\n       }\n</code></pre>\n\n<p><strong>my try:</strong> </p>\n\n<pre><code>import json\n\ndict1 = {'employee':{'dev1': 'Roy'}}\ndict2 = {'employee':{'dev2': 'Biswas'}}\n\ndict1.update(dict2)\nprint(json.dumps(dict1, indent=2))\n</code></pre>\n\n<p>Output: </p>\n\n<pre><code>{\n  \"employee\": {\n    \"dev2\": \"Biswas\"\n  }\n}\n</code></pre>\n\n<p>I am unable to merge both the dictionary.Need help to merge them</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6021
+}

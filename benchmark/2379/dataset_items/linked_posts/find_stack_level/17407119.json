@@ -1,0 +1,112 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "introspection",
+                "inspect"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 327078,
+                                "reputation": 2681,
+                                "user_id": 649230,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "dpitch40"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1372690584,
+                            "post_id": 17407257,
+                            "comment_id": 25277094,
+                            "link": "https://stackoverflow.com/questions/17407119/python-inspect-stack-is-slow/17407257#comment25277094_17407257",
+                            "body": "That cut down the time spent in the inspect.stack method by a factor of about 5. From there I think I&#39;ll just work to reduce the number of debug messages logged (or combine them). Thanks for the info."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 35417,
+                        "reputation": 1089212,
+                        "user_id": 100297,
+                        "user_type": "moderator",
+                        "display_name": "Martijn Pieters"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": true,
+                    "score": 24,
+                    "last_activity_date": 1372690249,
+                    "last_edit_date": 1372690249,
+                    "creation_date": 1372689941,
+                    "answer_id": 17407257,
+                    "question_id": 17407119,
+                    "link": "https://stackoverflow.com/questions/17407119/python-inspect-stack-is-slow/17407257#17407257",
+                    "body": "<p><code>inspect.stack()</code> does two things:</p>\n\n<ul>\n<li><p>collect the stack by asking the interpreter for the stack frame from the caller (<code>sys._getframe(1)</code>) then following all the <code>.f_back</code> references. This is cheap.</p></li>\n<li><p>per frame, collect the filename, linenumber, and source file context (the source file line plus some extra lines around it if requested). The latter requires reading the source file for each stack frame. <em>This is the expensive step</em>.</p></li>\n</ul>\n\n<p>To switch off the file context loading, set the <code>context</code> parameter to <code>0</code>:</p>\n\n<pre><code>inspect.stack(0)\n</code></pre>\n\n<p>Even <em>with</em> context set to 0, you still incur some filesystem access per frame as the filename is determined and verified to exist for each frame.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 441885,
+                        "reputation": 60711,
+                        "user_id": 832230,
+                        "user_type": "registered",
+                        "display_name": "Asclepius"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 24,
+                    "last_activity_date": 1512240819,
+                    "last_edit_date": 1512240819,
+                    "creation_date": 1488837024,
+                    "answer_id": 42636264,
+                    "question_id": 17407119,
+                    "link": "https://stackoverflow.com/questions/17407119/python-inspect-stack-is-slow/42636264#42636264",
+                    "body": "<p><code>inspect.stack(0)</code> can be faster than <code>inspect.stack()</code>. Even so, it is fastest to avoid calling it altogether, and perhaps use a pattern such as this instead:</p>\n\n<pre><code>frame = inspect.currentframe()\nwhile frame:\n    if has_what_i_want(frame):  # customize\n        return what_i_want(frame)  # customize\n    frame = frame.f_back\n</code></pre>\n\n<p>Note that the last <code>frame.f_back</code> <em>is</em> <code>None</code>, and the loop will then end.</p>\n\n<p><code>sys._getframe(1)</code> should obviously not be used because it is an internal method.</p>\n\n<p>As an alternative, <code>inspect.getouterframes(inspect.currentframe())</code> can be looped over, but this is expected to be slower than the above approach.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 11329,
+                        "reputation": 4228,
+                        "user_id": 21784,
+                        "user_type": "registered",
+                        "accept_rate": 69,
+                        "display_name": "kgriffs"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1669852253,
+                    "creation_date": 1669852253,
+                    "answer_id": 74635438,
+                    "question_id": 17407119,
+                    "link": "https://stackoverflow.com/questions/17407119/python-inspect-stack-is-slow/74635438#74635438",
+                    "body": "<p>Here's a concrete example building on the other answers, showing how to efficiently walk back up the stack to find the typical caller information (filename, line number, function name) incorporated into debug messages.</p>\n<pre class=\"lang-py prettyprint-override\"><code>import sys\nfrom collections import namedtuple\n\n\nFrameInfo = namedtuple('FrameInfo', ['filename', 'lineno', 'function'])\n\n\ndef frame_info(walkback=0):\n    # NOTE: sys._getframe() is a tiny bit faster than inspect.currentframe()\n    #   Although the function name is prefixed with an underscore, it is\n    #   documented and fine to use assuming we are running under CPython:\n    #\n    #   https://docs.python.org/3/library/sys.html#sys._getframe\n    #\n    frame = sys._getframe().f_back\n\n    for __ in range(walkback):\n        f_back = frame.f_back\n        if not f_back:\n            break\n\n        frame = f_back\n\n    return FrameInfo(frame.f_code.co_filename, frame.f_lineno, frame.f_code.co_name)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 327078,
+                "reputation": 2681,
+                "user_id": 649230,
+                "user_type": "registered",
+                "accept_rate": 93,
+                "display_name": "dpitch40"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 17407257,
+            "answer_count": 3,
+            "score": 12,
+            "last_activity_date": 1669852253,
+            "creation_date": 1372689531,
+            "last_edit_date": 1488836382,
+            "question_id": 17407119,
+            "link": "https://stackoverflow.com/questions/17407119/python-inspect-stack-is-slow",
+            "title": "Python inspect.stack is slow",
+            "body": "<p>I was just profiling my Python program to see why it seemed to be rather slow. I discovered that the majority of its running time was spent in the <code>inspect.stack()</code> method (for outputting debug messages with modules and line numbers), at 0.005 seconds per call. This seems rather high; is <code>inspect.stack</code> really this slow, or could something be wrong with my program?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5420
+}

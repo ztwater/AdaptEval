@@ -1,0 +1,590 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "pytest"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 1478562,
+                        "reputation": 6377,
+                        "user_id": 1388392,
+                        "user_type": "registered",
+                        "display_name": "m.wasowski"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1429015071,
+                    "post_id": 29627341,
+                    "comment_id": 47397956,
+                    "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data#comment47397956_29627341",
+                    "body": "Look at it from point of view of developer, who has a TC failure and needs to debug it. He has a name of test case, so he goes to the function of this name.  If you keep expected data separately, you force him to jump to and fro to compare it. Whenever you can keep test input and expected input inside a test case or as near it as possible, IMHO."
+                },
+                {
+                    "owner": {
+                        "account_id": 5090371,
+                        "reputation": 3877,
+                        "user_id": 4103796,
+                        "user_type": "registered",
+                        "accept_rate": 37,
+                        "display_name": "Glueon"
+                    },
+                    "reply_to_user": {
+                        "account_id": 1478562,
+                        "reputation": 6377,
+                        "user_id": 1388392,
+                        "user_type": "registered",
+                        "display_name": "m.wasowski"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1429021072,
+                    "post_id": 29627341,
+                    "comment_id": 47402297,
+                    "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data#comment47402297_29627341",
+                    "body": "@m.wasowski so what is your suggestion? To keep large chunks of data inside the body of a test function? What if it is binary one for example?.."
+                },
+                {
+                    "owner": {
+                        "account_id": 1478562,
+                        "reputation": 6377,
+                        "user_id": 1388392,
+                        "user_type": "registered",
+                        "display_name": "m.wasowski"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1429025448,
+                    "post_id": 29627341,
+                    "comment_id": 47405481,
+                    "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data#comment47405481_29627341",
+                    "body": "binary does not read well, anyway, so it is different story. I am just saying, that in tests keeping data near use is at least as much important than DRY. It all depends on the case. For sure I suggest you indent your data... this <code>return</code> you wrote is really ugly and hard to understand."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5090371,
+                                "reputation": 3877,
+                                "user_id": 4103796,
+                                "user_type": "registered",
+                                "accept_rate": 37,
+                                "display_name": "Glueon"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1429020667,
+                            "post_id": 29628396,
+                            "comment_id": 47401992,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29628396#comment47401992_29628396",
+                            "body": "I thought about all these ideas. If I take a small piece of config as a fixture I am not fully testing the function, because there can be pieces in the non included part of config that will break my function. For example if I have duplicate template tags then the test will pass, but with the real config I will fail, because it will substitute only the first appearance of a tag. Yes, Jinja is good, but the problem with it is that config files like dovecot or exim use reserved Jinja keywords, so it usually fails with &quot;syntax invalid&quot;."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3231675,
+                                "reputation": 933,
+                                "user_id": 2726783,
+                                "user_type": "registered",
+                                "display_name": "Mykhaylo Kopytonenko"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5090371,
+                                "reputation": 3877,
+                                "user_id": 4103796,
+                                "user_type": "registered",
+                                "accept_rate": 37,
+                                "display_name": "Glueon"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1429021374,
+                            "post_id": 29628396,
+                            "comment_id": 47402489,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29628396#comment47402489_29628396",
+                            "body": "You might consider about splitting your generation method into 2 parts: generating only config values and producing the whole config from the values and template. The config values may be returned as a dictionary or just a list.  Before refactoring your method, first write a test with simple comparison of full expected config file. Write two new methods for values generation and template rendering, using large parts of the original method. Unit test individual produced values. Then replace your old method with calls to the two new methods. All tests must still pass."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5090371,
+                                "reputation": 3877,
+                                "user_id": 4103796,
+                                "user_type": "registered",
+                                "accept_rate": 37,
+                                "display_name": "Glueon"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1429021931,
+                            "post_id": 29628396,
+                            "comment_id": 47402941,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29628396#comment47402941_29628396",
+                            "body": "In the end I&#39;ll end up with untested <code>combine_chunks</code> function or if I try to test it I&#39;ll have problems like I have now - where to store the final config, how to load it, etc. I do not know how to break the generation into 2 parts if a function does a regex search for a line in file and then appends something."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3231675,
+                        "reputation": 933,
+                        "user_id": 2726783,
+                        "user_type": "registered",
+                        "display_name": "Mykhaylo Kopytonenko"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1429017462,
+                    "creation_date": 1429017462,
+                    "answer_id": 29628396,
+                    "question_id": 29627341,
+                    "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29628396#29628396",
+                    "body": "<p>Think if the whole contents of the config file really needs to be tested.</p>\n\n<p>If only several values or substrings must be checked, prepare an expected template for that config. The tested places will be marked as \"variables\" with some special syntax. Then prepare a separate expected list of the values for the variables in the template. This expected list can be stored as a separate file or directly in the source code.</p>\n\n<p>Example for the template:</p>\n\n<pre><code>ALLOWED_HOSTS = ['{host}']\nDEBUG = {debug}\nDEFAULT_FROM_EMAIL = '{email}'\n</code></pre>\n\n<p>Here, the template variables are placed inside curly braces.</p>\n\n<p>The expected values can look like:</p>\n\n<pre><code>host = www.example.com\ndebug = False\nemail = webmaster@example.com\n</code></pre>\n\n<p>or even as a simple comma-separated list:</p>\n\n<pre><code>www.example.com, False, webmaster@example.com\n</code></pre>\n\n<p>Then your testing code can produce the expected file from the template by replacing the variables with the expected values. And the expected file is compared with the actual one.</p>\n\n<p>Maintaining the template and expected values separately has and advantage that you can have many testing data sets using the same template.</p>\n\n<p><strong>Testing only variables</strong></p>\n\n<p>An even better approach is that the config generation method produces only needed values for the config file. These values can be easily inserted into the template by another method. But the advantage is that the testing code can directly compare all config variables separately and in clear way.</p>\n\n<p><strong>Templates</strong></p>\n\n<p>While it is easy to replace the variables with needed values in the template, there are ready template libraries, which allow to do it only in one line. Here are just a few examples: <a href=\"https://docs.djangoproject.com/en/1.6/topics/templates/\" rel=\"nofollow\">Django</a>, <a href=\"http://jinja.pocoo.org/\" rel=\"nofollow\">Jinja</a>, <a href=\"http://www.makotemplates.org/\" rel=\"nofollow\">Mako</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5090371,
+                                "reputation": 3877,
+                                "user_id": 4103796,
+                                "user_type": "registered",
+                                "accept_rate": 37,
+                                "display_name": "Glueon"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1429020974,
+                            "post_id": 29628517,
+                            "comment_id": 47402220,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29628517#comment47402220_29628517",
+                            "body": "Well when i use string literals I almost always run into problem with the right formating. If some command from a <code>subprocess</code> returns a result  which I want to use it will contain special symbols which go away when I just copy-paste it as string literal. I&#39;ll take a look at your code. Thank you. Unfortunately that looks like a wheel reinvention. Like nobody had the same issue before."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 463249,
+                                "reputation": 40040,
+                                "user_id": 866026,
+                                "user_type": "registered",
+                                "display_name": "Waylan"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5090371,
+                                "reputation": 3877,
+                                "user_id": 4103796,
+                                "user_type": "registered",
+                                "accept_rate": 37,
+                                "display_name": "Glueon"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1429024023,
+                            "post_id": 29628517,
+                            "comment_id": 47404494,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29628517#comment47404494_29628517",
+                            "body": "What kind of special characters are you referring to? Wouldn&#39;t those differences exist with a external file as well? Not sure how that is a factor."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5090371,
+                                "reputation": 3877,
+                                "user_id": 4103796,
+                                "user_type": "registered",
+                                "accept_rate": 37,
+                                "display_name": "Glueon"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1429035960,
+                            "post_id": 29628517,
+                            "comment_id": 47411685,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29628517#comment47411685_29628517",
+                            "body": "Usually it&#39;s a mixture of tabs instead of spaces. So when a copy the output of console tool to the string literal and then compare they differ. I tried to add <code>\\t</code> to the string going back and forth and finally just serialized the output string. This could be also bad if data is of binary type or has a weird encoding."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 463249,
+                        "reputation": 40040,
+                        "user_id": 866026,
+                        "user_type": "registered",
+                        "display_name": "Waylan"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1429017781,
+                    "creation_date": 1429017781,
+                    "answer_id": 29628517,
+                    "question_id": 29627341,
+                    "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29628517#29628517",
+                    "body": "<p>If you only have a few tests, then why not include the data as a string literal:</p>\n\n<pre><code>expected_data = \"\"\"\nYour data here...\n\"\"\"\n</code></pre>\n\n<p>If you have a handful, or the expected data is really long, I think your use of fixtures makes sense. </p>\n\n<p>However, if you have many, then perhaps a different solution would be better. In fact, for one project I have over one hundred input and expected-output files. So I built my own testing framework (more or less). I used Nose, but PyTest would work as well. I created a test generator which walked the directory of test files. For each input file, a test was yielded which compared the actual output with the expected output (PyTest calls it <a href=\"http://pytest.readthedocs.org/en/2.1.0/example/parametrize.html\" rel=\"nofollow\">parametrizing</a>). Then I documented my framework so others could use it. To review and/or edit the tests, you only edit the input and/or expected output files and never need to look at the python test file. To enable different input files to to have different options defined, I also crated a YAML config file for each directory (JSON would work as well to keep the dependencies down). The YAML data consists of a dictionary where each key is the name of the input file and the value is a dictionary of keywords that will get passed to the function being tested along with the input file. If you're interested, here is the <a href=\"https://github.com/waylan/Python-Markdown/blob/master/tests/__init__.py#L137\" rel=\"nofollow\">source code</a> and <a href=\"https://pythonhosted.org/Markdown/test_suite.html#markdown-syntax-tests\" rel=\"nofollow\">documentation</a>. I recently played with the idea of defining the options as Unittests <a href=\"https://gist.github.com/waylan/ec8ddb2664e21782ec4f\" rel=\"nofollow\">here</a> (requires only the built-in unittest lib) but I'm not sure if I like it.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 69691,
+                                "reputation": 14482,
+                                "user_id": 202645,
+                                "user_type": "registered",
+                                "display_name": "Bruno Oliveira"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1429026546,
+                            "post_id": 29631801,
+                            "comment_id": 47406264,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29631801#comment47406264_29631801",
+                            "body": "This has the added benefit that tests can&#39;t interfere with each other, as each test will have a copy of the data files."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4779012,
+                                "reputation": 1239,
+                                "user_id": 3861355,
+                                "user_type": "registered",
+                                "display_name": "Fabio Menegazzo"
+                            },
+                            "reply_to_user": {
+                                "account_id": 69691,
+                                "reputation": 14482,
+                                "user_id": 202645,
+                                "user_type": "registered",
+                                "display_name": "Bruno Oliveira"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1429026919,
+                            "post_id": 29631801,
+                            "comment_id": 47406495,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29631801#comment47406495_29631801",
+                            "body": "That&#39;s right. This way you can run tests using multiple cores without worrying about concurrency of resources (in this case the expected files)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5090371,
+                                "reputation": 3877,
+                                "user_id": 4103796,
+                                "user_type": "registered",
+                                "accept_rate": 37,
+                                "display_name": "Glueon"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1429036221,
+                            "post_id": 29631801,
+                            "comment_id": 47411848,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29631801#comment47411848_29631801",
+                            "body": "Good solution. It does not solve the problem of huge and ugly lists/dictionaries but as I see it is impossible to solve that the other way."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4779012,
+                                "reputation": 1239,
+                                "user_id": 3861355,
+                                "user_type": "registered",
+                                "display_name": "Fabio Menegazzo"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1429036963,
+                            "post_id": 29631801,
+                            "comment_id": 47412297,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29631801#comment47412297_29631801",
+                            "body": "Actually you can serialize these lists/dictionaries into files (using JSON, maybe) and still keep using the <code>datadir</code> fixture. Then you can make use of these information as input or comparison data."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5090371,
+                                "reputation": 3877,
+                                "user_id": 4103796,
+                                "user_type": "registered",
+                                "accept_rate": 37,
+                                "display_name": "Glueon"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1429092236,
+                            "post_id": 29631801,
+                            "comment_id": 47434568,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29631801#comment47434568_29631801",
+                            "body": "Yes, probably I will do that, but I thought that maybe that is too clumsy. Btw I didn&#39;t get the resource concur ency thing. Files are read only, what could go wrong?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4779012,
+                                "reputation": 1239,
+                                "user_id": 3861355,
+                                "user_type": "registered",
+                                "display_name": "Fabio Menegazzo"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1429183662,
+                            "post_id": 29631801,
+                            "comment_id": 47484163,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29631801#comment47484163_29631801",
+                            "body": "You are right. For read-only files everything should work just fine unless such files get locked for some reason. Concurrency issues will happen frequently when creating or changing files used by more than one test."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 141464,
+                                "reputation": 7590,
+                                "user_id": 348501,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "ARF"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1484480534,
+                            "post_id": 29631801,
+                            "comment_id": 70519755,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29631801#comment70519755_29631801",
+                            "body": "On python 3 <code>dir_util.copy_tree(test_dir, str(tmpdir))</code> is required to make this work."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6277879,
+                                "reputation": 10029,
+                                "user_id": 4880003,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Nathan"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1550773453,
+                            "post_id": 29631801,
+                            "comment_id": 96404165,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29631801#comment96404165_29631801",
+                            "body": "There&#39;s a pytest plugin (<a href=\"https://github.com/omarkohl/pytest-datafiles\" rel=\"nofollow noreferrer\">github.com/omarkohl/pytest-datafiles</a>) which does something very similar to this except, instead of copying files in a directory whose name matches the test, there&#39;s a decorator for the test to specify which files/dirs to copy over."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2419355,
+                                "reputation": 3825,
+                                "user_id": 2112722,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "Sarah Messer"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1623269370,
+                            "post_id": 29631801,
+                            "comment_id": 120034653,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29631801#comment120034653_29631801",
+                            "body": "Information on adapting this code for python&#39;s unittest package and TestCase class can be found at <a href=\"https://docs.pytest.org/en/reorganize-docs/unittest.html#autouse-fixtures-and-accessing-other-fixtures\" rel=\"nofollow noreferrer\">docs.pytest.org/en/reorganize-docs/&hellip;</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 14270808,
+                                "reputation": 327,
+                                "user_id": 10308337,
+                                "user_type": "registered",
+                                "display_name": "John"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1660888384,
+                            "post_id": 29631801,
+                            "comment_id": 129644242,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29631801#comment129644242_29631801",
+                            "body": "Why would one worry about the data files are modified if he just reads and does not write?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1646676,
+                                "reputation": 4210,
+                                "user_id": 1518100,
+                                "user_type": "registered",
+                                "accept_rate": 96,
+                                "display_name": "Lei Yang"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1682493795,
+                            "post_id": 29631801,
+                            "comment_id": 134223011,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29631801#comment134223011_29631801",
+                            "body": "i think copying files around when testing is wasting disk io, linking the correct file names are enough."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 20988898,
+                                "reputation": 327,
+                                "user_id": 15422118,
+                                "user_type": "registered",
+                                "display_name": "UnusualWays"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1699621154,
+                            "post_id": 29631801,
+                            "comment_id": 136558262,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29631801#comment136558262_29631801",
+                            "body": "Thank you for your work! Note that <code>distutils</code> ist deprecated and the used function <code>copy_tree</code> can be replaced with <code>shutil.copytree</code>. Furthermore, according to the <a href=\"https://docs.pytest.org/en/latest/how-to/tmp_path.html#the-tmpdir-and-tmpdir-factory-fixtures\" rel=\"nofollow noreferrer\">pytest documentation</a>, <code>tmp_path</code> is preferred over <code>tmpdir</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4779012,
+                        "reputation": 1239,
+                        "user_id": 3861355,
+                        "user_type": "registered",
+                        "display_name": "Fabio Menegazzo"
+                    },
+                    "comment_count": 12,
+                    "is_accepted": true,
+                    "score": 71,
+                    "last_activity_date": 1590431897,
+                    "last_edit_date": 1590431897,
+                    "creation_date": 1429026376,
+                    "answer_id": 29631801,
+                    "question_id": 29627341,
+                    "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/29631801#29631801",
+                    "body": "<p>I had a similar problem once, where I have to test configuration file against an expected file. That's how I fixed it:</p>\n\n<ol>\n<li><p>Create a folder with the same name of your test module and at the same location. Put all your expected files inside that folder.</p>\n\n<pre><code>test_foo/\n    expected_config_1.ini\n    expected_config_2.ini\ntest_foo.py\n</code></pre></li>\n<li><p>Create a fixture responsible for moving the contents of this folder to a temporary file. I did use of <code>tmpdir</code> fixture for this matter.</p>\n\n<pre><code>from __future__ import unicode_literals\nfrom distutils import dir_util\nfrom pytest import fixture\nimport os\n\n\n@fixture\ndef datadir(tmpdir, request):\n    '''\n    Fixture responsible for searching a folder with the same name of test\n    module and, if available, moving all contents to a temporary directory so\n    tests can use them freely.\n    '''\n    filename = request.module.__file__\n    test_dir, _ = os.path.splitext(filename)\n\n    if os.path.isdir(test_dir):\n        dir_util.copy_tree(test_dir, bytes(tmpdir))\n\n    return tmpdir\n</code></pre>\n\n<p><strong>Important:</strong> If you are using Python 3, replace <code>dir_util.copy_tree(test_dir, bytes(tmpdir))</code> with <code>dir_util.copy_tree(test_dir, str(tmpdir))</code>.</p></li>\n<li><p>Use your new fixture.</p>\n\n<pre><code>def test_foo(datadir):\n    expected_config_1 = datadir.join('expected_config_1.ini')\n    expected_config_2 = datadir.join('expected_config_2.ini')\n</code></pre></li>\n</ol>\n\n<p>Remember: <code>datadir</code> is just the same as <code>tmpdir</code> fixture, plus the ability of working with your expected files placed into the a folder with the very name of test module.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3698885,
+                                "reputation": 2152,
+                                "user_id": 3079302,
+                                "user_type": "registered",
+                                "display_name": "iled"
+                            },
+                            "edited": false,
+                            "score": 14,
+                            "creation_date": 1589831601,
+                            "post_id": 60723209,
+                            "comment_id": 109444909,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/60723209#comment109444909_60723209",
+                            "body": "From the linked PyPi entry: Note about maintenance: This project is maintained and bug reports or pull requests will be addressed. There is little activity because it simply works and no changes are required."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 16962779,
+                                "reputation": 721,
+                                "user_id": 12269508,
+                                "user_type": "registered",
+                                "display_name": "rdmolony"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1623919169,
+                            "post_id": 60723209,
+                            "comment_id": 120215941,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/60723209#comment120215941_60723209",
+                            "body": "There&#39;s also <a href=\"https://github.com/gabrielcnr/pytest-datadir\" rel=\"nofollow noreferrer\">pytest-datadir</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 14270808,
+                                "reputation": 327,
+                                "user_id": 10308337,
+                                "user_type": "registered",
+                                "display_name": "John"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1660887509,
+                            "post_id": 60723209,
+                            "comment_id": 129644083,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/60723209#comment129644083_60723209",
+                            "body": "As a benefit of pytest-datafiles, why would one worry about the data files are modified if he just reads and does not write?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2785336,
+                                "reputation": 1061,
+                                "user_id": 2396907,
+                                "user_type": "registered",
+                                "display_name": "vintprox"
+                            },
+                            "reply_to_user": {
+                                "account_id": 16962779,
+                                "reputation": 721,
+                                "user_id": 12269508,
+                                "user_type": "registered",
+                                "display_name": "rdmolony"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1679864084,
+                            "post_id": 60723209,
+                            "comment_id": 133792886,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/60723209#comment133792886_60723209",
+                            "body": "@rdmolony Thank you! <code>pytest-datadir</code> seems to fit my needs better, as it can compute adjacent data directory path instead of me having to come up with it. The way to do that is to request a fixture called <code>datadir</code>(which is <code>pathlib.Path</code> object) in my test arguments, and voila!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4779012,
+                                "reputation": 1239,
+                                "user_id": 3861355,
+                                "user_type": "registered",
+                                "display_name": "Fabio Menegazzo"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2785336,
+                                "reputation": 1061,
+                                "user_id": 2396907,
+                                "user_type": "registered",
+                                "display_name": "vintprox"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1691081776,
+                            "post_id": 60723209,
+                            "comment_id": 135446683,
+                            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/60723209#comment135446683_60723209",
+                            "body": "@vintprox <code>pytest-datadir</code> was written by a friend after I show him the solution published here (we used to work at the same company at the time). It does exactly the same plus some minor features."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 340794,
+                        "reputation": 12611,
+                        "user_id": 671013,
+                        "user_type": "registered",
+                        "accept_rate": 50,
+                        "display_name": "Dror"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1584450948,
+                    "creation_date": 1584450948,
+                    "answer_id": 60723209,
+                    "question_id": 29627341,
+                    "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data/60723209#60723209",
+                    "body": "<p>I believe <a href=\"https://pypi.org/project/pytest-datafiles/\" rel=\"noreferrer\">pytest-datafiles</a> can be of great help. Unfortunately, it seems not to be maintained much anymore. For the time being, it's working nicely.</p>\n\n<p>Here's a simple example taken from the docs:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>import os\nimport pytest\n\n@pytest.mark.datafiles('/opt/big_files/film1.mp4')\ndef test_fast_forward(datafiles):\n    path = str(datafiles)  # Convert from py.path object to path (str)\n    assert len(os.listdir(path)) == 1\n    assert os.path.isfile(os.path.join(path, 'film1.mp4'))\n    #assert some_operation(os.path.join(path, 'film1.mp4')) == expected_result\n\n    # Using py.path syntax\n    assert len(datafiles.listdir()) == 1\n    assert (datafiles / 'film1.mp4').check(file=1)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 5090371,
+                "reputation": 3877,
+                "user_id": 4103796,
+                "user_type": "registered",
+                "accept_rate": 37,
+                "display_name": "Glueon"
+            },
+            "comment_count": 3,
+            "is_answered": true,
+            "accepted_answer_id": 29631801,
+            "answer_count": 4,
+            "score": 77,
+            "last_activity_date": 1664253075,
+            "creation_date": 1429014482,
+            "last_edit_date": 1429142315,
+            "question_id": 29627341,
+            "link": "https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data",
+            "title": "Pytest where to store expected data",
+            "body": "<p>Testing function I need to pass parameters and see the output matches the expected output.   </p>\n\n<p>It is easy when function's response is just a small array or a one-line string which can be defined inside the test function, but suppose function I test modifies a config file which can be huge. Or the resulting array is something 4 lines long if I define it explicitly. Where do I store that so my tests remain clean and easy to maintain?</p>\n\n<p>Right now if that is string I just put a file near the <code>.py</code> test and do <code>open()</code> it inside the test:</p>\n\n<pre><code>def test_if_it_works():\n    with open('expected_asnwer_from_some_function.txt') as res_file:\n        expected_data = res_file.read()\n    input_data = ... # Maybe loaded from a file as well\n    assert expected_data == if_it_works(input_data)\n</code></pre>\n\n<p>I see many problems with such approach, like the problem of maintaining this file up to date. It looks bad as well.\nI can make things probably better moving this to a fixture:</p>\n\n<pre><code>@pytest.fixture\ndef expected_data()\n    with open('expected_asnwer_from_some_function.txt') as res_file:\n        expected_data = res_file.read()\n    return expected_data\n\n@pytest.fixture\ndef input_data()\n    return '1,2,3,4'\n\ndef test_if_it_works(input_data, expected_data):\n    assert expected_data == if_it_works(input_data)\n</code></pre>\n\n<p>That just moves the problem to another place and usually I need to test if function works in case of empty input, input with a single item or multiple items, so I should create one big fixture including all three cases or multiple fixtures. In the end code gets quite messy.</p>\n\n<p>If a function expects a complicated dictionary as an input or gives back the dictionary of the same huge size test code becomes ugly:</p>\n\n<pre><code> @pytest.fixture\n def input_data():\n     # It's just an example\n     return {['one_value': 3, 'one_value': 3, 'one_value': 3,\n     'anotherky': 3, 'somedata': 'somestring'], \n      ['login': 3, 'ip_address': 32, 'value': 53, \n      'one_value': 3], ['one_vae': 3, 'password': 13, 'lue': 3]}\n</code></pre>\n\n<p>It's quite hard to read tests with such fixtures and keep them up to date.</p>\n\n<h3>Update</h3>\n\n<p>After searching a while I found a library which solved a part of a problem when instead of big config files I had large HTML responses. It's <a href=\"https://github.com/sigmavirus24/betamax\" rel=\"noreferrer\">betamax</a>.</p>\n\n<p>For easier usage I created a fixture:</p>\n\n<pre><code>from betamax import Betamax\n\n@pytest.fixture\ndef session(request):\n    session = requests.Session()\n    recorder = Betamax(session)\n    recorder.use_cassette(os.path.join(os.path.dirname(__file__), 'fixtures', request.function.__name__)\n    recorder.start()\n    request.addfinalizer(recorder.stop)\n    return session\n</code></pre>\n\n<p>So now in my tests I just use the <code>session</code> fixture and every request I make is being serialized automatically to the <code>fixtures/test_name.json</code> file so the next time I execute the test instead of doing a real HTTP request library loads it from the filesystem:</p>\n\n<pre><code>def test_if_response_is_ok(session):\n   r = session.get(\"http://google.com\")\n</code></pre>\n\n<p>It's quite handy because in order to keep these fixtures up to date I just need to clean the <code>fixtures</code> folder and rerun my tests.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8463
+}

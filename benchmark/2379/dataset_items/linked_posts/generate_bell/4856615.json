@@ -1,0 +1,88 @@
+{
+    "items": [
+        {
+            "tags": [
+                "recursion",
+                "permutation",
+                "pascal"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 144393,
+                        "reputation": 60818,
+                        "user_id": 353410,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Dr. belisarius"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1296511342,
+                    "post_id": 4856615,
+                    "comment_id": 5395784,
+                    "link": "https://stackoverflow.com/questions/4856615/recursive-permutation#comment5395784_4856615",
+                    "body": "There are MANY questions about generating permutations already in SO with very good answers (see the &quot;Related&quot; column to your left)"
+                },
+                {
+                    "owner": {
+                        "account_id": 288502,
+                        "reputation": 4050,
+                        "user_id": 588948,
+                        "user_type": "registered",
+                        "display_name": "Kevin A. Naud&#233;"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1296511602,
+                    "post_id": 4856615,
+                    "comment_id": 5395855,
+                    "link": "https://stackoverflow.com/questions/4856615/recursive-permutation#comment5395855_4856615",
+                    "body": "Can you write out some examples of output you are expecting?  (I don&#39;t see aspects of the code that will actually create permutations.  Note also that you aren&#39;t using the array.  The examples may clarify things.)"
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 160288,
+                        "reputation": 530,
+                        "user_id": 380236,
+                        "user_type": "registered",
+                        "display_name": "Anders"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 2,
+                    "last_activity_date": 1296514120,
+                    "creation_date": 1296514120,
+                    "answer_id": 4857018,
+                    "question_id": 4856615,
+                    "link": "https://stackoverflow.com/questions/4856615/recursive-permutation/4857018#4857018",
+                    "body": "<p>Here is the code in Prolog</p>\n\n<pre><code>permutate(As,[B|Cs]) :- select(B, As, Bs), permutate(Bs, Cs).\nselect(A, [A|As], As).\nselect(A, [B|Bs], [B|Cs]) :- select(A, Bs, Cs).\n\n?- permutate([a,b,c], P).\n</code></pre>\n\n<p>Pascal is much harder.</p>\n\n<p>Here is an usefull algorithm, you might want to use.  But it is not tested, so you have to debug it yourself.  So you have to know how the algorithm works.</p>\n\n<p>The Bell Permutation algorithm: <a href=\"http://programminggeeks.com/bell-algorithm-for-permutation/\" rel=\"nofollow\">http://programminggeeks.com/bell-algorithm-for-permutation/</a></p>\n\n<pre><code>procedure permutate(var numbers: array [1..100] of integer; size: integer; \n                    var pos, dir: integer)\nbegin\n  if pos &gt;= size then\n  begin\n     dir = -1 * dir;\n     swap(numbers, 1, 2);\n  end\n  else if pos &lt; 1 then \n  begin\n     dir = -1 * dir;\n     swap(numbers, size-1, size);\n  end\n  else\n  begin\n     swap(numbers, pos, pos+1);\n  end;\n  pos = pos + dir;\nend;\n\nbegin\n    var a, b: integer;\n    a = 1; b = 1;\n    while true do\n    begin\n       permutate(A, 5, a, b);\n       printArray(A, 5);\n    end;\nend.\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 267353,
+                "reputation": 4315,
+                "user_id": 555479,
+                "user_type": "registered",
+                "accept_rate": 61,
+                "display_name": "Marijus"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "accepted_answer_id": 4857018,
+            "answer_count": 1,
+            "score": 2,
+            "last_activity_date": 1296514120,
+            "creation_date": 1296511043,
+            "question_id": 4856615,
+            "link": "https://stackoverflow.com/questions/4856615/recursive-permutation",
+            "title": "Recursive permutation",
+            "body": "<p>So I'm trying to permute all possible n digit long numbers out of x long array/set of elements. I've come up with a code that does that, however the digits are the same, how do I prevent that from happening. Here's my come(Pascal):</p>\n\n<pre><code>program Noname10;\n\nvar stop : boolean;\n    A : array[1..100] of integer;\n\n\n\nfunction check( n : integer ) : boolean;\nbegin\n    if n = 343 // sets the limit when to stop.\n        then check := true\n        else check := false;\nend;\n\n\nprocedure permute(p,result : integer);\n    var i : integer;\nbegin\n    if not stop\n        then if p = 0  then\n            begin\n\n                WriteLn(result);\n\n                if check(result)\n                    then stop := true\n            end\n\n\n        else for i := 1 to 9 do\n            begin\n                permute(p - 1, 10*result+i);\n            end;\n\n\nend;\n\n\nbegin\n  stop := false;\n  permute(3,0);\n  readln;\nend.\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5403
+}

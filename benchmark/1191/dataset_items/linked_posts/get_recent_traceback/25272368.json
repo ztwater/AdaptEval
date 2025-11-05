@@ -1,0 +1,115 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "traceback"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1834441,
+                                "reputation": 1804,
+                                "user_id": 1665093,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "sk11"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2456564,
+                                "reputation": 178824,
+                                "user_id": 2141635,
+                                "user_type": "registered",
+                                "accept_rate": 69,
+                                "display_name": "Padraic Cunningham"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1407873181,
+                            "post_id": 25272779,
+                            "comment_id": 39381511,
+                            "link": "https://stackoverflow.com/questions/25272368/hide-file-from-traceback/25272779#comment39381511_25272779",
+                            "body": "@PadraicCunningham - I updated the answer with a minimal example. Why do think it doesn&#39;t work?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2456564,
+                                "reputation": 178824,
+                                "user_id": 2141635,
+                                "user_type": "registered",
+                                "accept_rate": 69,
+                                "display_name": "Padraic Cunningham"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1407873426,
+                            "post_id": 25272779,
+                            "comment_id": 39381638,
+                            "link": "https://stackoverflow.com/questions/25272368/hide-file-from-traceback/25272779#comment39381638_25272779",
+                            "body": "you need to raise the error, the OP is not catching an exception. Look at the expected output"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1834441,
+                        "reputation": 1804,
+                        "user_id": 1665093,
+                        "user_type": "registered",
+                        "accept_rate": 60,
+                        "display_name": "sk11"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1407873118,
+                    "last_edit_date": 1407873118,
+                    "creation_date": 1407872561,
+                    "answer_id": 25272779,
+                    "question_id": 25272368,
+                    "link": "https://stackoverflow.com/questions/25272368/hide-file-from-traceback/25272779#25272779",
+                    "body": "<p>Not so straightforward but you can use <a href=\"https://docs.python.org/2/library/traceback.html\" rel=\"nofollow\">traceback</a> module to filter out the traceback.</p>\n\n<pre><code>try:\n    # something which throws\nexcept Exception as expt:\n    import traceback\n    trace_lines = traceback.format.exc().splitlines()\n    # tracelines contains all the lines from the traceback\n    # Accordingly filter for e.g. check for lines containing File and then extract only the filename from the complete path and print it\n</code></pre>\n\n<p>For e.g. <code>trace_lines[0]</code> will be <code>Traceback (most recent call last):</code></p>\n\n<p>I tried this:</p>\n\n<pre><code>try:\n    a = 1/0\nexcept Exception as e:\n    lines = traceback.format_exc().splitlines()\n    print (lines)\n</code></pre>\n\n<p>This prints:</p>\n\n<pre><code>['Traceback (most recent call last):', '  File \"&lt;stdin&gt;\", line 2, in &lt;module&gt;', 'ZeroDivisionError: integer division or modulo by zero']\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4725944,
+                        "reputation": 6574,
+                        "user_id": 3822577,
+                        "user_type": "registered",
+                        "display_name": "Jeremy Allen"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1407882702,
+                    "creation_date": 1407882702,
+                    "answer_id": 25275161,
+                    "question_id": 25272368,
+                    "link": "https://stackoverflow.com/questions/25272368/hide-file-from-traceback/25275161#25275161",
+                    "body": "<p>While you cannot tweak the Python interpreter's output you can <strong>mimic</strong> it using the <a href=\"https://docs.python.org/2/library/traceback.html\" rel=\"nofollow\">traceback module</a>.</p>\n\n<p>You can wrap your entire application in a try..except statement and print out your own messages from there.</p>\n\n<p>The <a href=\"https://docs.python.org/2/library/traceback.html#traceback.format_exc\" rel=\"nofollow\"><code>traceback.format_exec</code></a> function will give you a multiline string that you can then modify and print to suit your needs.</p>\n\n<pre><code>def main():\n    #Your application code\n\nif __name__ == \"__main__\":\n    try:\n        main()\n    except BaseException:\n        lines = traceback.format_exc().splitlines()\n        for line in lines:\n            print re.sub(r'File \".*[\\\\/]([^\\\\/]+.py)\"', r'File \"\\1\"', line)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 3075913,
+                "reputation": 1444,
+                "user_id": 2605251,
+                "user_type": "registered",
+                "accept_rate": 55,
+                "display_name": "Leandro Poblet"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "answer_count": 2,
+            "score": 3,
+            "last_activity_date": 1407882702,
+            "creation_date": 1407871228,
+            "question_id": 25272368,
+            "link": "https://stackoverflow.com/questions/25272368/hide-file-from-traceback",
+            "title": "Hide file from traceback",
+            "body": "<p>I have this <strong>try/except</strong>:</p>\n\n<pre><code>try:\n    return dispatcher.dispatch(path, method, params)\nexcept Exception as expt:\n    webApp.logger.error(str(expt))\n    raise ValueError('Imposible conectarse')\n</code></pre>\n\n<p>And let's say that, for example, I get this error:</p>\n\n<pre><code>Traceback (most recent call last):\n  File \"/home/leandro/.virtualenvs/DesktopProxyV2/local/lib/python2.7/site-packages/eventlet/wsgi.py\", line 389, in handle_one_response\n    result = self.application(self.environ, start_response)\n  File \"/home/leandro/Desarrollo/desktop_proxy/modulos/proxy/webproxy.py\", line 60, in request_handler\n    raise ValueError('Imposible conectarse')\nValueError: Imposible conectarse\n</code></pre>\n\n<p>Is there a way to show or customize it like this:</p>\n\n<pre><code>Traceback (most recent call last):\n  File \"wsgi.py\", line 389, in handle_one_response\n    result = self.application(self.environ, start_response)\n  File \"webproxy.py\", line 60, in request_handler\n    raise ValueError('Imposible conectarse')\n</code></pre>\n\n<p>Without it showing the file route?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7787
+}

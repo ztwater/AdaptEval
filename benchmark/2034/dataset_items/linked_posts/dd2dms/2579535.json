@@ -1,0 +1,632 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "angle",
+                "degrees",
+                "format-conversion",
+                "unit-conversion"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 7405,
+                        "reputation": 313805,
+                        "user_id": 12855,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "SilentGhost"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1270485957,
+                    "post_id": 2579535,
+                    "comment_id": 2586223,
+                    "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python#comment2586223_2579535",
+                    "body": "@David: it&#39;s a matter of multiplying decimal part by 60. What do you need beyond that?"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 186937,
+                                "reputation": 3847,
+                                "user_id": 424632,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "musiphil"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1433198689,
+                            "post_id": 2579617,
+                            "comment_id": 49238683,
+                            "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/2579617#comment49238683_2579617",
+                            "body": "You probably meant <code>math.modf</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 114848,
+                        "reputation": 135951,
+                        "user_id": 301832,
+                        "user_type": "registered",
+                        "accept_rate": 60,
+                        "display_name": "Donal Fellows"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1270486287,
+                    "creation_date": 1270486287,
+                    "answer_id": 2579617,
+                    "question_id": 2579535,
+                    "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/2579617#2579617",
+                    "body": "<p>Use <code>fmod</code> and rounding to get the degrees and fraction separated. Multiply the fraction by 60 and repeat to get minutes and a remainder. Then multiply that last part by 60 again to get the number of seconds.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 34048,
+                        "reputation": 869830,
+                        "user_id": 95810,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "Alex Martelli"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1270490162,
+                    "creation_date": 1270490162,
+                    "answer_id": 2580001,
+                    "question_id": 2579535,
+                    "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/2580001#2580001",
+                    "body": "<p>Just a couple of <code>* 60</code> multiplications and a couple of <code>int</code> truncations, i.e.:</p>\n\n<pre><code>&gt;&gt;&gt; decdegrees = 31.125\n&gt;&gt;&gt; degrees = int(decdegrees)\n&gt;&gt;&gt; temp = 60 * (decdegrees - degrees)\n&gt;&gt;&gt; minutes = int(temp)\n&gt;&gt;&gt; seconds = 60 * (temp - minutes)\n&gt;&gt;&gt; print degrees, minutes, seconds\n31 7 30.0\n&gt;&gt;&gt; \n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 22509,
+                                "reputation": 1154,
+                                "user_id": 55588,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Erik L"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1335204986,
+                            "post_id": 2580236,
+                            "comment_id": 13233001,
+                            "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/2580236#comment13233001_2580236",
+                            "body": "It doesn&#39;t work with negative. -122.442 returns (-123,33,28.8). Should be (-122,26,31.12)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 55190,
+                                "reputation": 63123,
+                                "user_id": 165216,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "PaulMcG"
+                            },
+                            "reply_to_user": {
+                                "account_id": 22509,
+                                "reputation": 1154,
+                                "user_id": 55588,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Erik L"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1340565591,
+                            "post_id": 2580236,
+                            "comment_id": 14670302,
+                            "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/2580236#comment14670302_2580236",
+                            "body": "@baens - do you mean <code>(-122, -26, -31.12)</code>?  I think <code>-123 + 33&#47;60 + 28.8&#47;3600</code> does in fact equal <code>-122.442</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 186937,
+                                "reputation": 3847,
+                                "user_id": 424632,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "musiphil"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1433198652,
+                            "post_id": 2580236,
+                            "comment_id": 49238674,
+                            "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/2580236#comment49238674_2580236",
+                            "body": "A multiplication by 3600, followed by 2 divisions by 60, doesn&#39;t look as efficient as possible."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1225425,
+                                "reputation": 1057,
+                                "user_id": 1191068,
+                                "user_type": "registered",
+                                "accept_rate": 57,
+                                "display_name": "John Smith"
+                            },
+                            "reply_to_user": {
+                                "account_id": 22509,
+                                "reputation": 1154,
+                                "user_id": 55588,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Erik L"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1653644379,
+                            "post_id": 2580236,
+                            "comment_id": 127905866,
+                            "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/2580236#comment127905866_2580236",
+                            "body": "As said by @erik-l it gives wrong results for negative angles and must be corrected"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 55190,
+                                "reputation": 63123,
+                                "user_id": 165216,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "PaulMcG"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1653697912,
+                            "post_id": 2580236,
+                            "comment_id": 127921612,
+                            "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/2580236#comment127921612_2580236",
+                            "body": "Only took 10 years, but here is a solution where all values are positive or negative, not mixed."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 55190,
+                        "reputation": 63123,
+                        "user_id": 165216,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "PaulMcG"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": false,
+                    "score": 28,
+                    "last_activity_date": 1653697761,
+                    "last_edit_date": 1653697761,
+                    "creation_date": 1270492322,
+                    "answer_id": 2580236,
+                    "question_id": 2579535,
+                    "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/2580236#2580236",
+                    "body": "<p>This is exactly what <code>divmod</code> was invented for:</p>\n<pre><code>def decdeg2dms(dd):\n    mult = -1 if dd &lt; 0 else 1\n    mnt,sec = divmod(abs(dd)*3600, 60)\n    deg,mnt = divmod(mnt, 60)\n    return mult*deg, mult*mnt, mult*sec\n\ndd = 45 + 30/60 + 1/3600\nprint(decdeg2dms(dd))\n\n# negative value returns all negative elements\nprint(decdeg2dms(-122.442))\n</code></pre>\n<p>Prints:</p>\n<pre><code>(45.0, 30.0, 1.0)\n(-122.0, -26.0, -31.199999999953434)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 55190,
+                                "reputation": 63123,
+                                "user_id": 165216,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "PaulMcG"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1653698011,
+                            "post_id": 10286690,
+                            "comment_id": 127921626,
+                            "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/10286690#comment127921626_10286690",
+                            "body": "<code>minutes</code> and <code>seconds</code> also need to be negated if <code>is_positive</code> is False."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 22509,
+                        "reputation": 1154,
+                        "user_id": 55588,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "Erik L"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 17,
+                    "last_activity_date": 1335208067,
+                    "creation_date": 1335208067,
+                    "answer_id": 10286690,
+                    "question_id": 2579535,
+                    "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/10286690#10286690",
+                    "body": "<p>Here is my updated version based upon Paul McGuire's. This one should handle negatives correctly.</p>\n\n<pre><code>def decdeg2dms(dd):\n   is_positive = dd &gt;= 0\n   dd = abs(dd)\n   minutes,seconds = divmod(dd*3600,60)\n   degrees,minutes = divmod(minutes,60)\n   degrees = degrees if is_positive else -degrees\n   return (degrees,minutes,seconds)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 894013,
+                        "reputation": 179,
+                        "user_id": 931700,
+                        "user_type": "registered",
+                        "display_name": "iamed2"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 14,
+                    "last_activity_date": 1349396826,
+                    "creation_date": 1349396826,
+                    "answer_id": 12737895,
+                    "question_id": 2579535,
+                    "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/12737895#12737895",
+                    "body": "<p>If you want to handle negatives properly, the first non-zero measure is set negative. It is counter to common practice to specify all of degrees, minutes and seconds as negative (<a href=\"http://en.wikipedia.org/wiki/Geographic_coordinate_conversion\" rel=\"noreferrer\">Wikipedia</a> shows 40\u00b0 26.7717, -79\u00b0 56.93172 as a valid example of degrees-minutes notation, in which degrees are negative and minutes have no sign), and setting degrees as negative does not have any effect if the degrees portion is 0. Here is a function that adequately handles this, based on Paul McGuire's and baens' functions: </p>\n\n<pre><code>def decdeg2dms(dd):\n    negative = dd &lt; 0\n    dd = abs(dd)\n    minutes,seconds = divmod(dd*3600,60)\n    degrees,minutes = divmod(minutes,60)\n    if negative:\n        if degrees &gt; 0:\n            degrees = -degrees\n        elif minutes &gt; 0:\n            minutes = -minutes\n        else:\n            seconds = -seconds\n    return (degrees,minutes,seconds)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 186937,
+                                "reputation": 3847,
+                                "user_id": 424632,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "musiphil"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1433199105,
+                            "post_id": 29576278,
+                            "comment_id": 49238814,
+                            "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/29576278#comment49238814_29576278",
+                            "body": "Using <code>Decimal</code> as a variable name may conflict with <code>decimal.Decimal</code> and is not a good idea."
+                        }
+                    ],
+                    "owner": {
+                        "user_type": "does_not_exist",
+                        "display_name": "user4776653"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1580929261,
+                    "last_edit_date": 1580929261,
+                    "creation_date": 1428744706,
+                    "answer_id": 29576278,
+                    "question_id": 2579535,
+                    "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/29576278#29576278",
+                    "body": "<p>This is my Python code:</p>\n\n<pre><code>def DecimaltoDMS(Decimal):\n    d = int(Decimal)\n    m = int((Decimal - d) * 60)\n    s = (Decimal - d - m/60) * 3600.00\n    z= round(s, 2)\n    if d &gt;= 0:\n        print (\"N \", abs(d), \"\u00ba \", abs(m), \"' \", abs(z), '\" ')\n    else:\n        print (\"S \", abs(d), \"\u00ba \", abs(m), \"' \", abs(z), '\" ')\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 186937,
+                        "reputation": 3847,
+                        "user_id": 424632,
+                        "user_type": "registered",
+                        "accept_rate": 56,
+                        "display_name": "musiphil"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1433198970,
+                    "creation_date": 1433198970,
+                    "answer_id": 30584601,
+                    "question_id": 2579535,
+                    "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/30584601#30584601",
+                    "body": "<p>The sign has better be returned separately, so that it can be used to choose from <code>('N', 'S')</code> or <code>('E', 'W')</code>, for example.</p>\n\n<pre><code>import math\n\ndef dd_to_dms(degs):\n    neg = degs &lt; 0\n    degs = (-1) ** neg * degs\n    degs, d_int = math.modf(degs)\n    mins, m_int = math.modf(60 * degs)\n    secs        =           60 * mins\n    return neg, d_int, m_int, secs\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1870917,
+                        "reputation": 483,
+                        "user_id": 1693189,
+                        "user_type": "registered",
+                        "display_name": "Gustavo Gon&#231;alves"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1537201012,
+                    "creation_date": 1537201012,
+                    "answer_id": 52371976,
+                    "question_id": 2579535,
+                    "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/52371976#52371976",
+                    "body": "<p>Improving @chqrlie answer:</p>\n\n<pre><code>    def deg_to_dms(deg, type='lat'):\n        decimals, number = math.modf(deg)\n        d = int(number)\n        m = int(decimals * 60)\n        s = (deg - d - m / 60) * 3600.00\n        compass = {\n            'lat': ('N','S'),\n            'lon': ('E','W')\n        }\n        compass_str = compass[type][0 if d &gt;= 0 else 1]\n        return '{}\u00ba{}\\'{:.2f}\"{}'.format(abs(d), abs(m), abs(s), compass_str)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 198155,
+                                "reputation": 1414,
+                                "user_id": 3185563,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "user3185563"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1608373476,
+                            "post_id": 60652542,
+                            "comment_id": 115567462,
+                            "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/60652542#comment115567462_60652542",
+                            "body": "The version you linked is only tested to Python 2.7. There is a newer version, but even that one is only tested to Python 3.6 <a href=\"https://pypi.org/project/latlon3\" rel=\"nofollow noreferrer\">pypi.org/project/latlon3</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 17959464,
+                                "reputation": 1,
+                                "user_id": 13050761,
+                                "user_type": "registered",
+                                "display_name": "Sungsoo Lim"
+                            },
+                            "reply_to_user": {
+                                "account_id": 198155,
+                                "reputation": 1414,
+                                "user_id": 3185563,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "user3185563"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1608482763,
+                            "post_id": 60652542,
+                            "comment_id": 115591961,
+                            "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/60652542#comment115591961_60652542",
+                            "body": "Hi, what I am using now is LatLon23 in my Python 3.7.4 <a href=\"https://pypi.org/project/LatLon23/#description\" rel=\"nofollow noreferrer\">pypi.org/project/LatLon23/#description</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 198155,
+                                "reputation": 1414,
+                                "user_id": 3185563,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "user3185563"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1608550461,
+                            "post_id": 60652542,
+                            "comment_id": 115609352,
+                            "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/60652542#comment115609352_60652542",
+                            "body": "That&#39;s great. It seems to be working with 3.9 as well. It&#39;s more straightforward than Geographiclib,  which is what I ended up with."
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user6743474"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1658198468,
+                            "post_id": 60652542,
+                            "comment_id": 128986026,
+                            "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/60652542#comment128986026_60652542",
+                            "body": "Just a note for users following the documentation that says that you import the module using the syntax <code>import latlon</code>   You need to use the following <code>from latlon import LatLon</code> to make these examples work.  Note the case"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 17959464,
+                        "reputation": 1,
+                        "user_id": 13050761,
+                        "user_type": "registered",
+                        "display_name": "Sungsoo Lim"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1584010220,
+                    "creation_date": 1584010220,
+                    "answer_id": 60652542,
+                    "question_id": 2579535,
+                    "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/60652542#60652542",
+                    "body": "<p>Now we can use LatLon library...</p>\n\n<p><a href=\"https://pypi.org/project/LatLon/\" rel=\"nofollow noreferrer\">https://pypi.org/project/LatLon/</a></p>\n\n<pre><code>&gt;&gt; palmyra = LatLon(Latitude(5.8833), Longitude(-162.0833)) # Location of Palmyra Atoll in decimal degrees\n&gt;&gt; palmyra = LatLon(5.8833, -162.0833) # Same thing but simpler! \n&gt;&gt; palmyra = LatLon(Latitude(degree = 5, minute = 52, second = 59.88),\n                     Longitude(degree = -162, minute = -4.998) # or more complicated!\n&gt;&gt; print palmyra.to_string('d% %m% %S% %H') # Print coordinates to degree minute second\n('5 52 59.88 N', '162 4 59.88 W')`\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3528368,
+                        "reputation": 81,
+                        "user_id": 2948775,
+                        "user_type": "registered",
+                        "display_name": "user2948775"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1608223658,
+                    "creation_date": 1608223658,
+                    "answer_id": 65344901,
+                    "question_id": 2579535,
+                    "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/65344901#65344901",
+                    "body": "<p>Here's my slightly different approach that works the same as on my HP Prime for positive and negative decimal degrees...</p>\n<pre><code>def dms(deg):\n    f,d = math.modf(deg)\n    s,m = math.modf(abs(f) * 60)\n    return (d,m,s * 60)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 16981203,
+                        "reputation": 235,
+                        "user_id": 12283084,
+                        "user_type": "registered",
+                        "display_name": "victoria55"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1614059923,
+                    "creation_date": 1614059923,
+                    "answer_id": 66327823,
+                    "question_id": 2579535,
+                    "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/66327823#66327823",
+                    "body": "<p>You can use the function <a href=\"https://docs.dataprep.ai/user_guide/clean/clean_lat_long.html\" rel=\"nofollow noreferrer\"><code>clean_lat_long()</code></a> from the library <a href=\"https://dataprep.ai/\" rel=\"nofollow noreferrer\">DataPrep</a> if your data is in a DataFrame. Install DataPrep with <code>pip install dataprep</code>.</p>\n<pre class=\"lang-py prettyprint-override\"><code>from dataprep.clean import clean_lat_long\ndf = pd.DataFrame({&quot;coord&quot;: [(45.5003, -122.4420), (5.8833, -162.0833)]})\n\ndf2 = clean_lat_long(df, &quot;coord&quot;, output_format=&quot;dms&quot;)\n# print(df2)\n                 coord                        coord_clean\n0  (45.5003, -122.442)  45\u00b0 30\u2032 1.08\u2033 N, 122\u00b0 26\u2032 31.2\u2033 W\n1  (5.8833, -162.0833)  5\u00b0 52\u2032 59.88\u2033 N, 162\u00b0 4\u2032 59.88\u2033 W\n</code></pre>\n<p>Or if latitude and longitude are in separate columns:</p>\n<pre class=\"lang-py prettyprint-override\"><code>df = pd.DataFrame({&quot;latitude&quot;: [45.5003, 5.8833], &quot;longitude&quot;: [-122.4420, -162.0833]})\n\ndf2 = clean_lat_long(df, lat_col=&quot;latitude&quot;, long_col=&quot;longitude&quot;, output_format=&quot;dms&quot;)\n# print(df2)\n   latitude  longitude                 latitude_longitude\n0   45.5003  -122.4420  45\u00b0 30\u2032 1.08\u2033 N, 122\u00b0 26\u2032 31.2\u2033 W\n1    5.8833  -162.0833  5\u00b0 52\u2032 59.88\u2033 N, 162\u00b0 4\u2032 59.88\u2033 W\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 25903228,
+                        "reputation": 1,
+                        "user_id": 19628727,
+                        "user_type": "unregistered",
+                        "display_name": "Codex"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1659268635,
+                    "last_edit_date": 1659268635,
+                    "creation_date": 1658876590,
+                    "answer_id": 73130608,
+                    "question_id": 2579535,
+                    "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/73130608#73130608",
+                    "body": "<pre class=\"lang-py prettyprint-override\"><code># Program to convert degree to Degree, Minutes and Seconds\n# Using try and except for int data validations\ntry:\n\n    # Requesting input degree from user\n    print (&quot;degree to Degree Minutes seconds converter &quot;. upper ())\n    degree = float(input (&quot;\\nEnter Degree: &quot;))\n    \n    # Casting input from float to int \n    degree_d = int(degree)\n    \n    # Working on minutes\n    minute =60 * (degree - degree_d)\n    minutes = int(minute)\n    \n    # Working on seconds\n    second = 60 * (minute - minutes)\n    # Rounding seconds to whole number \n    seconds= round(second)\n    \n    # print \n    print (f&quot;\\nThe Answer In Degree-Minutes-Seconds are: \\n{degree_d}\u00b0{minutes}'{seconds}\\&quot;  \u2713\\n &quot;) \n\n\n#Except\n\nexcept ValueError:\n    print (&quot;Wrong Input &quot;)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": -1,
+                                "reputation": 1,
+                                "user_id": -1,
+                                "user_type": "moderator",
+                                "display_name": "Community"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1687211845,
+                            "post_id": 76498721,
+                            "comment_id": 134902337,
+                            "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/76498721#comment134902337_76498721",
+                            "body": "Your answer could be improved with additional supporting information. Please <a href=\"https://stackoverflow.com/posts/76498721/edit\">edit</a> to add further details, such as citations or documentation, so that others can confirm that your answer is correct. You can find more information on how to write good answers <a href=\"/help/how-to-answer\">in the help center</a>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1377732,
+                                "reputation": 585,
+                                "user_id": 1311387,
+                                "user_type": "registered",
+                                "display_name": "DarkStar"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1687808536,
+                            "post_id": 76498721,
+                            "comment_id": 134985756,
+                            "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/76498721#comment134985756_76498721",
+                            "body": "Testing with math.degrees(1.777036) and rounding set to 1 decimal place on seconds you get (101 48 60.0) -- any simplistic conversion that rounds will have this kind of issue."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 28058847,
+                        "reputation": 21,
+                        "user_id": 21559962,
+                        "user_type": "registered",
+                        "display_name": "Maksym"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1687051655,
+                    "creation_date": 1687051655,
+                    "answer_id": 76498721,
+                    "question_id": 2579535,
+                    "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/76498721#76498721",
+                    "body": "<p>My approach:</p>\n<pre><code>import sys\nimport math\n\ndd = float(sys.argv[1])\nf,d = math.modf(dd)\nf,m = math.modf(60*f)\ns = round(60*f, 6)\n\nprint(int(d), int(m), s)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1377732,
+                        "reputation": 585,
+                        "user_id": 1311387,
+                        "user_type": "registered",
+                        "display_name": "DarkStar"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1687884146,
+                    "creation_date": 1687884146,
+                    "answer_id": 76566990,
+                    "question_id": 2579535,
+                    "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/76566990#76566990",
+                    "body": "<p>This is a numpy version of PaulMcG's answer with the addition that it will round to tenths of a second (you can change second argument to round function) and it returns the sign (-1 or 1) as a separate value (this made it easier for me to handle as latitude/longitude values). Main difference here is that you can pass in an array of decimal_degrees or a single double value (note if you pass a list you get a list-of-lists back).  Before using please make sure you are happy with the rounding behavior or you can remove it.</p>\n<pre><code>def to_dms(decimal_degrees):\n    # convert degrees into dms and a sign indicator\n    degrees = np.array(decimal_degrees)\n    sign = np.where(degrees &lt; 0, -1, 1)\n    r, s = np.divmod(np.round(np.abs(degrees) * 3600, 1), 60)\n    d, m = np.divmod(r, 60)\n    # np.transpose([d, m, s]*sign)  # if you wanted signed results\n    return np.transpose([d, m, s, sign])\n\n# print(&quot;array test:&quot;, to_dms([101.816652, -101.816653]))\n# array test: [[101. 48. 59.9000000000232831 1.] [101. 49. 0. -1.]]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 29046144,
+                                "reputation": 1,
+                                "user_id": 22249951,
+                                "user_type": "unregistered",
+                                "display_name": "S.M.Saifullah"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1689740006,
+                            "post_id": 76717883,
+                            "comment_id": 135254405,
+                            "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/76717883#comment135254405_76717883",
+                            "body": "A Python function to Convert degree minutes seconds to degree decimal for both positive and negative numbers. Check Example in Usage."
+                        },
+                        {
+                            "owner": {
+                                "account_id": -1,
+                                "reputation": 1,
+                                "user_id": -1,
+                                "user_type": "moderator",
+                                "display_name": "Community"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1690123585,
+                            "post_id": 76717883,
+                            "comment_id": 135306342,
+                            "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/76717883#comment135306342_76717883",
+                            "body": "As it\u2019s currently written, your answer is unclear. Please <a href=\"https://stackoverflow.com/posts/76717883/edit\">edit</a> to add additional details that will help others understand how this addresses the question asked. You can find more information on how to write good answers <a href=\"/help/how-to-answer\">in the help center</a>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 29046144,
+                        "reputation": 1,
+                        "user_id": 22249951,
+                        "user_type": "unregistered",
+                        "display_name": "S.M.Saifullah"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1690174822,
+                    "last_edit_date": 1690174822,
+                    "creation_date": 1689738862,
+                    "answer_id": 76717883,
+                    "question_id": 2579535,
+                    "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python/76717883#76717883",
+                    "body": "<pre class=\"lang-py prettyprint-override\"><code>def dms_to_deg(dms):\n    import math\n    import numpy as np\n    a=math.fabs(dms)\n    d=a//10000\n    m=(a-d*10000)//100\n    s=(a-d*10000-m*100)\n    deg=(d+m/60+s/3600)*np.sign(dms)\n    return deg\n\n#---Usage\nr1=dms_to_deg(243055.25)\nr2=dms_to_deg(-243055.25)\nprint(r1,r2)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 604494,
+                "reputation": 251,
+                "user_id": 309352,
+                "user_type": "unregistered",
+                "display_name": "David"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "answer_count": 15,
+            "score": 25,
+            "last_activity_date": 1690174822,
+            "creation_date": 1270485160,
+            "last_edit_date": 1537058736,
+            "question_id": 2579535,
+            "link": "https://stackoverflow.com/questions/2579535/convert-dd-decimal-degrees-to-dms-degrees-minutes-seconds-in-python",
+            "title": "Convert DD (decimal degrees) to DMS (degrees minutes seconds) in Python?",
+            "body": "<p>How do you convert Decimal Degrees to Degrees Minutes Seconds In Python? Is there a Formula already written?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6157
+}

@@ -1,0 +1,89 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "with-statement",
+                "contextmanager"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 35417,
+                        "reputation": 1089172,
+                        "user_id": 100297,
+                        "user_type": "moderator",
+                        "display_name": "Martijn Pieters"
+                    },
+                    "edited": false,
+                    "score": 6,
+                    "creation_date": 1494623279,
+                    "post_id": 43946416,
+                    "comment_id": 74925809,
+                    "link": "https://stackoverflow.com/questions/43946416/return-value-of-exit#comment74925809_43946416",
+                    "body": "That&#39;s a confusing <code>return</code> statement on more than one level. Never use <code>== None</code> when you can use <code>is None</code> instead. But yes, just remove that <code>return</code> line altogether for all that it is worth."
+                },
+                {
+                    "owner": {
+                        "account_id": 3759231,
+                        "reputation": 23070,
+                        "user_id": 3124746,
+                        "user_type": "registered",
+                        "accept_rate": 85,
+                        "display_name": "vishes_shell"
+                    },
+                    "edited": false,
+                    "score": 4,
+                    "creation_date": 1494629251,
+                    "post_id": 43946416,
+                    "comment_id": 74927650,
+                    "link": "https://stackoverflow.com/questions/43946416/return-value-of-exit#comment74927650_43946416",
+                    "body": "It&#39;s also confusing when you name method argument <code>type</code>. Because <code>type</code> is already build-in keyword. it&#39;s better to use <code>exc_type</code> as it don&#39;t confuse and not shadows build-in keyword."
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 35417,
+                        "reputation": 1089172,
+                        "user_id": 100297,
+                        "user_type": "moderator",
+                        "display_name": "Martijn Pieters"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 40,
+                    "last_activity_date": 1494623102,
+                    "creation_date": 1494623102,
+                    "answer_id": 43946444,
+                    "question_id": 43946416,
+                    "link": "https://stackoverflow.com/questions/43946416/return-value-of-exit/43946444#43946444",
+                    "body": "<p>Yes, that return statement is redundant. Only when <code>type</code> is <strong>not</strong> <code>None</code>  does the return value matter.</p>\n\n<p>From the <a href=\"https://docs.python.org/3/reference/datamodel.html#object.__exit__\" rel=\"noreferrer\"><code>object.__exit__()</code> documentation</a>:</p>\n\n<blockquote>\n  <p>If an exception is supplied, and the method wishes to suppress the exception (i.e., prevent it from being propagated), it should return a true value. Otherwise, the exception will be processed normally upon exit from this method.</p>\n</blockquote>\n\n<p>Note that a <em>true value</em> will suppress the exception; so <code>1</code> or <code>\"Handled!\"</code> would also work, not just <code>True</code>.</p>\n\n<p>Removing that <code>return</code> line would result in <code>None</code> being returned instead, and the functionality would remain unchanged. Readability would be improved however, because that <code>return type == None</code> statement is just confusing on multiple levels (why not use <code>type is None</code> for example?).</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 4870650,
+                "reputation": 14430,
+                "user_id": 3927314,
+                "user_type": "registered",
+                "accept_rate": 100,
+                "display_name": "kgf3JfUtW"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "accepted_answer_id": 43946444,
+            "answer_count": 1,
+            "score": 37,
+            "last_activity_date": 1494623296,
+            "creation_date": 1494622937,
+            "last_edit_date": 1494623296,
+            "question_id": 43946416,
+            "link": "https://stackoverflow.com/questions/43946416/return-value-of-exit",
+            "title": "Return value of __exit__",
+            "body": "<p>I understand that</p>\n\n<ul>\n<li><p><code>__enter__</code> and <code>__exit__</code> are used to implement a context manager. </p></li>\n<li><p>if an exception occurs in a <code>with</code> statement, the exception's type, value and traceback are passed to the <code>__exit__</code> method.</p></li>\n<li><p><code>__exit__</code> can handle the exception:</p>\n\n<ol>\n<li>Returning <code>True</code>: the exception is gracefully handled.</li>\n<li>Returning anything else: the <code>with</code> statement raises the exception</li>\n</ol></li>\n</ul>\n\n<hr>\n\n<p><strong>I came across the following <code>__exit__</code> method. Is the return statement  redundant?</strong> </p>\n\n<pre><code>def __exit__(self, type, value, traceback):\n    self.close()\n    return type == None\n</code></pre>\n\n<p>since it seems to me that,</p>\n\n<ul>\n<li>If no exception occurred, <code>type</code> will naturally be <code>None</code>, so <code>__exit__</code> returns true. Nothing is raised.</li>\n<li>If an exception did occur, <code>type</code> is set to the actual exception type, so <code>__exit__</code> returns false. The exception is raised as is.</li>\n</ul>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8451
+}

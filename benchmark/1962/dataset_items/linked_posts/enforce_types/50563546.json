@@ -1,0 +1,507 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "type-hinting",
+                "python-typing",
+                "python-dataclasses"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 1265583,
+                        "reputation": 41759,
+                        "user_id": 1222951,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "Aran-Fey"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1527501565,
+                    "post_id": 50563546,
+                    "comment_id": 88137701,
+                    "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses#comment88137701_50563546",
+                    "body": "The obvious solution would be <code>if not isinstance(actual_type, field_def.type):</code>... but of course the obvious solution doesn&#39;t work: <code>TypeError: Parameterized generics cannot be used with class or instance checks</code>."
+                },
+                {
+                    "owner": {
+                        "account_id": 932653,
+                        "reputation": 19030,
+                        "user_id": 962190,
+                        "user_type": "registered",
+                        "accept_rate": 94,
+                        "display_name": "Arne"
+                    },
+                    "reply_to_user": {
+                        "account_id": 1265583,
+                        "reputation": 41759,
+                        "user_id": 1222951,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "Aran-Fey"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1527501781,
+                    "post_id": 50563546,
+                    "comment_id": 88137851,
+                    "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses#comment88137851_50563546",
+                    "body": "That made me find <code>ty.List.__origin__</code> though, which gives <code>&lt;class &#39;list&#39;&gt;</code>. That won&#39;t let me check the inner type, but at least it won&#39;t crash on me any more"
+                },
+                {
+                    "owner": {
+                        "account_id": 1265583,
+                        "reputation": 41759,
+                        "user_id": 1222951,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "Aran-Fey"
+                    },
+                    "edited": false,
+                    "score": 2,
+                    "creation_date": 1527501872,
+                    "post_id": 50563546,
+                    "comment_id": 88137908,
+                    "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses#comment88137908_50563546",
+                    "body": "I found <a href=\"https://stackoverflow.com/q/42027923/1222951\">this</a> similar question, but it doesn&#39;t really have a solution. If you&#39;re down for checking the type manually, you&#39;ll find these two links useful: <a href=\"//stackoverflow.com/q/49171189\">What&#39;s the correct way to check if an object is a typing.Generic?</a> and <a href=\"//stackoverflow.com/q/48572831\">How to access the type arguments of typing.Generic?</a>"
+                },
+                {
+                    "owner": {
+                        "account_id": 932653,
+                        "reputation": 19030,
+                        "user_id": 962190,
+                        "user_type": "registered",
+                        "accept_rate": 94,
+                        "display_name": "Arne"
+                    },
+                    "reply_to_user": {
+                        "account_id": 1265583,
+                        "reputation": 41759,
+                        "user_id": 1222951,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "Aran-Fey"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1527504476,
+                    "post_id": 50563546,
+                    "comment_id": 88139363,
+                    "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses#comment88139363_50563546",
+                    "body": "@Aran-Fey Those were some really interesting reads!"
+                },
+                {
+                    "owner": {
+                        "account_id": 251932,
+                        "reputation": 38711,
+                        "user_id": 529630,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "Dunes"
+                    },
+                    "edited": false,
+                    "score": 4,
+                    "creation_date": 1527580088,
+                    "post_id": 50563546,
+                    "comment_id": 88167102,
+                    "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses#comment88167102_50563546",
+                    "body": "This is a lost cause. Trying to enforce this would encur prohibative runtime costs. What is the list is a million items long? Do you want to iterate over every item checking its type? What if I do <code>struct.a_str_list[24] = 1</code> -- you&#39;d have no way of knowing. You&#39;d have to write a specialised subclass of list  that introspects its items and only allow that class rather than <code>list</code> in your structure. This is a lot fo runtime overhead and more easily prevented by using guards at the API level, and type annotations with linting elsewhere."
+                },
+                {
+                    "owner": {
+                        "account_id": 932653,
+                        "reputation": 19030,
+                        "user_id": 962190,
+                        "user_type": "registered",
+                        "accept_rate": 94,
+                        "display_name": "Arne"
+                    },
+                    "reply_to_user": {
+                        "account_id": 251932,
+                        "reputation": 38711,
+                        "user_id": 529630,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "Dunes"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1527581038,
+                    "post_id": 50563546,
+                    "comment_id": 88167675,
+                    "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses#comment88167675_50563546",
+                    "body": "@Dunes That&#39;s what I was afraid of, or rather, I wouldn&#39;t have known how to work around my problem while avoiding the pitfalls you describe. Lost cause it is then, plus then bandaid of learning <code>__origin__</code> at least lets me use <code>typing</code>."
+                },
+                {
+                    "owner": {
+                        "account_id": 1265583,
+                        "reputation": 41759,
+                        "user_id": 1222951,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "Aran-Fey"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1554326075,
+                    "post_id": 50563546,
+                    "comment_id": 97714873,
+                    "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses#comment97714873_50563546",
+                    "body": "Related: <a href=\"//stackoverflow.com/q/55503673\">How do I check if a value matches a type in python?</a>"
+                },
+                {
+                    "owner": {
+                        "account_id": 1540375,
+                        "reputation": 969,
+                        "user_id": 2177312,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Greg0ry"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1628283149,
+                    "post_id": 50563546,
+                    "comment_id": 121388112,
+                    "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses#comment121388112_50563546",
+                    "body": "I&#39;ll just add for future adventurers, that you need to avoid using <code>from __future__ import annotations</code> if you want typing to work as described in accepted answer."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 6556480,
+                                "reputation": 4116,
+                                "user_id": 5069029,
+                                "user_type": "registered",
+                                "display_name": "301_Moved_Permanently"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1265583,
+                                "reputation": 41759,
+                                "user_id": 1222951,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "Aran-Fey"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1527842671,
+                            "post_id": 50622643,
+                            "comment_id": 88288863,
+                            "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses/50622643#comment88288863_50622643",
+                            "body": "Let us <a href=\"https://chat.stackoverflow.com/rooms/172211/discussion-between-mathias-ettinger-and-aran-fey\">continue this discussion in chat</a>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 932653,
+                                "reputation": 19030,
+                                "user_id": 962190,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "Arne"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1528191300,
+                            "post_id": 50622643,
+                            "comment_id": 88402692,
+                            "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses/50622643#comment88402692_50622643",
+                            "body": "Thanks a lot for this great answer! =) I finally got around to understand and test it, and it solved my problems as well as taught me a lot about <code>typing</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3726852,
+                                "reputation": 7099,
+                                "user_id": 3100523,
+                                "user_type": "registered",
+                                "display_name": "Jundiaius"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1574430799,
+                            "post_id": 50622643,
+                            "comment_id": 104241607,
+                            "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses/50622643#comment104241607_50622643",
+                            "body": "There is a <a href=\"https://pypi.org/project/enforce-typing/\" rel=\"nofollow noreferrer\">library</a> inspired by this answer available."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 28446,
+                                "reputation": 4689,
+                                "user_id": 76024,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "Philipp"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3726852,
+                                "reputation": 7099,
+                                "user_id": 3100523,
+                                "user_type": "registered",
+                                "display_name": "Jundiaius"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1588240246,
+                            "post_id": 50622643,
+                            "comment_id": 108825191,
+                            "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses/50622643#comment108825191_50622643",
+                            "body": "@301_Moved_Permanently the library indicated by @Jundiaius above suffers from all the shortcomings you mention in your answer. Notably, checking <code>Optional[List[str]]</code> results in an error. Would you be interested to contribute to that library to cover the corner cases? It would be much appreciated."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6556480,
+                                "reputation": 4116,
+                                "user_id": 5069029,
+                                "user_type": "registered",
+                                "display_name": "301_Moved_Permanently"
+                            },
+                            "reply_to_user": {
+                                "account_id": 28446,
+                                "reputation": 4689,
+                                "user_id": 76024,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "Philipp"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1588286772,
+                            "post_id": 50622643,
+                            "comment_id": 108848963,
+                            "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses/50622643#comment108848963_50622643",
+                            "body": "@Philipp You made me contribute to SO again after I wanted to depart with it, shame on you ;)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 13039071,
+                                "reputation": 3236,
+                                "user_id": 9423009,
+                                "user_type": "registered",
+                                "display_name": "Richard"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1606521907,
+                            "post_id": 50622643,
+                            "comment_id": 114994016,
+                            "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses/50622643#comment114994016_50622643",
+                            "body": "Thanks for the awesome answer. ....helped me hugely!  My question is the above will handle cases of <code>Optional[List[str]]</code> by return a type of <code>&#39;list&#39;</code>.  But in this case a list of anything will match.  ...So is there a way (module?) to also check the contents of the list (in my example, are they all strings) against the hint, with the exception of moving to pydantic or equivalent?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6556480,
+                                "reputation": 4116,
+                                "user_id": 5069029,
+                                "user_type": "registered",
+                                "display_name": "301_Moved_Permanently"
+                            },
+                            "reply_to_user": {
+                                "account_id": 13039071,
+                                "reputation": 3236,
+                                "user_id": 9423009,
+                                "user_type": "registered",
+                                "display_name": "Richard"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1606645279,
+                            "post_id": 50622643,
+                            "comment_id": 115018124,
+                            "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses/50622643#comment115018124_50622643",
+                            "body": "@Richard As stated at the beginning of the answer, I&#39;m not focusing on validating types inside of collections. As hinted by <a href=\"https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses/50622643#comment88167102_50563546\">Dunes</a>, this is hard to do right; especially the case of generators : should we exhaust them for type-checking? How to store the values? What if we don&#39;t use evrything? What if it is infifnite? <code>pydantic</code> allows such checks for simple cases but I don&#39;t think you&#39;ll find a generic answer anywhere."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1540375,
+                                "reputation": 969,
+                                "user_id": 2177312,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Greg0ry"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1628283262,
+                            "post_id": 50622643,
+                            "comment_id": 121388145,
+                            "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses/50622643#comment121388145_50622643",
+                            "body": "Note to future adventurers - if you have <code>from __future__ import annotations</code> then types will not work the way as it&#39;s described in this answer."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6556480,
+                        "reputation": 4116,
+                        "user_id": 5069029,
+                        "user_type": "registered",
+                        "display_name": "301_Moved_Permanently"
+                    },
+                    "comment_count": 8,
+                    "is_accepted": true,
+                    "score": 101,
+                    "last_activity_date": 1633526896,
+                    "last_edit_date": 1633526896,
+                    "creation_date": 1527764059,
+                    "answer_id": 50622643,
+                    "question_id": 50563546,
+                    "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses/50622643#50622643",
+                    "body": "<p>Instead of checking for type equality, you should use <code>isinstance</code>. But you cannot use a parametrized generic type (<code>typing.List[int]</code>) to do so, you must use the &quot;generic&quot; version (<code>typing.List</code>). So you will be able to check for the container type but not the contained types. Parametrized generic types define an <code>__origin__</code> attribute that you can use for that.</p>\n<p>Contrary to Python 3.6, in Python 3.7 most type hints have a useful <code>__origin__</code> attribute. Compare:</p>\n<pre><code># Python 3.6\n&gt;&gt;&gt; import typing\n&gt;&gt;&gt; typing.List.__origin__\n&gt;&gt;&gt; typing.List[int].__origin__\ntyping.List\n</code></pre>\n<p>and</p>\n<pre><code># Python 3.7\n&gt;&gt;&gt; import typing\n&gt;&gt;&gt; typing.List.__origin__\n&lt;class 'list'&gt;\n&gt;&gt;&gt; typing.List[int].__origin__\n&lt;class 'list'&gt;\n</code></pre>\n<p>Python 3.8 introduce even better support with the <a href=\"https://docs.python.org/3/library/typing.html#typing.get_origin\" rel=\"noreferrer\"><code>typing.get_origin()</code></a> introspection function:</p>\n<pre><code># Python 3.8\n&gt;&gt;&gt; import typing\n&gt;&gt;&gt; typing.get_origin(typing.List)\n&lt;class 'list'&gt;\n&gt;&gt;&gt; typing.get_origin(typing.List[int])\n&lt;class 'list'&gt;\n</code></pre>\n<p>Notable exceptions being <code>typing.Any</code>, <code>typing.Union</code> and <code>typing.ClassVar</code>\u2026 Well, anything that is a <code>typing._SpecialForm</code> does not define <code>__origin__</code>. Fortunately:</p>\n<pre><code>&gt;&gt;&gt; isinstance(typing.Union, typing._SpecialForm)\nTrue\n&gt;&gt;&gt; isinstance(typing.Union[int, str], typing._SpecialForm)\nFalse\n&gt;&gt;&gt; typing.get_origin(typing.Union[int, str])\ntyping.Union\n</code></pre>\n<p>But parametrized types define an <code>__args__</code> attribute that store their parameters as a tuple; Python 3.8 introduce the <a href=\"https://docs.python.org/3/library/typing.html#typing.get_args\" rel=\"noreferrer\"><code>typing.get_args()</code></a> function to retrieve them:</p>\n<pre><code># Python 3.7\n&gt;&gt;&gt; typing.Union[int, str].__args__\n(&lt;class 'int'&gt;, &lt;class 'str'&gt;)\n\n# Python 3.8\n&gt;&gt;&gt; typing.get_args(typing.Union[int, str])\n(&lt;class 'int'&gt;, &lt;class 'str'&gt;)\n</code></pre>\n<p>So we can improve type checking a bit:</p>\n<pre><code>for field_name, field_def in self.__dataclass_fields__.items():\n    if isinstance(field_def.type, typing._SpecialForm):\n        # No check for typing.Any, typing.Union, typing.ClassVar (without parameters)\n        continue\n    try:\n        actual_type = field_def.type.__origin__\n    except AttributeError:\n        # In case of non-typing types (such as &lt;class 'int'&gt;, for instance)\n        actual_type = field_def.type\n    # In Python 3.8 one would replace the try/except with\n    # actual_type = typing.get_origin(field_def.type) or field_def.type\n    if isinstance(actual_type, typing._SpecialForm):\n        # case of typing.Union[\u2026] or typing.ClassVar[\u2026]\n        actual_type = field_def.type.__args__\n\n    actual_value = getattr(self, field_name)\n    if not isinstance(actual_value, actual_type):\n        print(f&quot;\\t{field_name}: '{type(actual_value)}' instead of '{field_def.type}'&quot;)\n        ret = False\n</code></pre>\n<p>This is not perfect as it won't account for <code>typing.ClassVar[typing.Union[int, str]]</code> or <code>typing.Optional[typing.List[int]]</code> for instance, but it should get things started.</p>\n<hr />\n<p>Next is the way to apply this check.</p>\n<p>Instead of using <code>__post_init__</code>, I would go the decorator route: this could be used on anything with type hints, not only <code>dataclasses</code>:</p>\n<pre><code>import inspect\nimport typing\nfrom contextlib import suppress\nfrom functools import wraps\n\n\ndef enforce_types(callable):\n    spec = inspect.getfullargspec(callable)\n\n    def check_types(*args, **kwargs):\n        parameters = dict(zip(spec.args, args))\n        parameters.update(kwargs)\n        for name, value in parameters.items():\n            with suppress(KeyError):  # Assume un-annotated parameters can be any type\n                type_hint = spec.annotations[name]\n                if isinstance(type_hint, typing._SpecialForm):\n                    # No check for typing.Any, typing.Union, typing.ClassVar (without parameters)\n                    continue\n                try:\n                    actual_type = type_hint.__origin__\n                except AttributeError:\n                    # In case of non-typing types (such as &lt;class 'int'&gt;, for instance)\n                    actual_type = type_hint\n                # In Python 3.8 one would replace the try/except with\n                # actual_type = typing.get_origin(type_hint) or type_hint\n                if isinstance(actual_type, typing._SpecialForm):\n                    # case of typing.Union[\u2026] or typing.ClassVar[\u2026]\n                    actual_type = type_hint.__args__\n\n                if not isinstance(value, actual_type):\n                    raise TypeError('Unexpected type for \\'{}\\' (expected {} but found {})'.format(name, type_hint, type(value)))\n\n    def decorate(func):\n        @wraps(func)\n        def wrapper(*args, **kwargs):\n            check_types(*args, **kwargs)\n            return func(*args, **kwargs)\n        return wrapper\n\n    if inspect.isclass(callable):\n        callable.__init__ = decorate(callable.__init__)\n        return callable\n\n    return decorate(callable)\n</code></pre>\n<p>Usage being:</p>\n<pre><code>@enforce_types\n@dataclasses.dataclass\nclass Point:\n    x: float\n    y: float\n\n@enforce_types\ndef foo(bar: typing.Union[int, str]):\n    pass\n</code></pre>\n<p>Appart from validating some type hints as suggested in the previous section, this approach still have some drawbacks:</p>\n<ul>\n<li><p>type hints using strings (<code>class Foo: def __init__(self: 'Foo'): pass</code>) are not taken into account by <code>inspect.getfullargspec</code>: you may want to use <a href=\"https://docs.python.org/3/library/typing.html#typing.get_type_hints\" rel=\"noreferrer\"><code>typing.get_type_hints</code></a> and <a href=\"https://docs.python.org/3/library/inspect.html#inspect.signature\" rel=\"noreferrer\"><code>inspect.signature</code></a> instead;</p>\n</li>\n<li><p>a default value which is not the appropriate type is not validated:</p>\n<pre><code> @enforce_type\n def foo(bar: int = None):\n     pass\n\n foo()\n</code></pre>\n<p>does not raise any <code>TypeError</code>. You may want to use <a href=\"https://docs.python.org/3/library/inspect.html#inspect.Signature.bind\" rel=\"noreferrer\"><code>inspect.Signature.bind</code></a> in conjuction with <a href=\"https://docs.python.org/3/library/inspect.html#inspect.BoundArguments.apply_defaults\" rel=\"noreferrer\"><code>inspect.BoundArguments.apply_defaults</code></a> if you want to account for that (and thus forcing you to define <code>def foo(bar: typing.Optional[int] = None)</code>);</p>\n</li>\n<li><p>variable number of arguments can't be validated as you would have to define something like <code>def foo(*args: typing.Sequence, **kwargs: typing.Mapping)</code> and, as said at the beginning, we can only validate containers and not contained objects.</p>\n</li>\n</ul>\n<hr />\n<h3>Update</h3>\n<p>After this answer got some popularity and a <a href=\"https://pypi.org/project/enforce-typing/\" rel=\"noreferrer\">library</a> heavily inspired by it got released, the need to lift the shortcomings mentioned above is becoming a reality. So I played a bit more with the <code>typing</code> module and will propose a few findings and a new approach here.</p>\n<p>For starter, <code>typing</code> is doing a great job in finding when an argument is optional:</p>\n<pre><code>&gt;&gt;&gt; def foo(a: int, b: str, c: typing.List[str] = None):\n...   pass\n... \n&gt;&gt;&gt; typing.get_type_hints(foo)\n{'a': &lt;class 'int'&gt;, 'b': &lt;class 'str'&gt;, 'c': typing.Union[typing.List[str], NoneType]}\n</code></pre>\n<p>This is pretty neat and definitely an improvement over <code>inspect.getfullargspec</code>, so better use that instead as it can also properly handle strings as type hints. But <code>typing.get_type_hints</code> will bail out for other kind of default values:</p>\n<pre><code>&gt;&gt;&gt; def foo(a: int, b: str, c: typing.List[str] = 3):\n...   pass\n... \n&gt;&gt;&gt; typing.get_type_hints(foo)\n{'a': &lt;class 'int'&gt;, 'b': &lt;class 'str'&gt;, 'c': typing.List[str]}\n</code></pre>\n<p>So you may still need extra strict checking, even though such cases feels very fishy.</p>\n<p>Next is the case of <code>typing</code> hints used as arguments for <code>typing._SpecialForm</code>, such as <code>typing.Optional[typing.List[str]]</code> or <code>typing.Final[typing.Union[typing.Sequence, typing.Mapping]]</code>. Since the <code>__args__</code> of these <code>typing._SpecialForm</code>s is always a tuple, it is possible to recursively find the <code>__origin__</code> of the hints contained in that tuple. Combined with the above checks, we will then need to filter any <code>typing._SpecialForm</code> left.</p>\n<p>Proposed improvements:</p>\n<pre><code>import inspect\nimport typing\nfrom functools import wraps\n\n\ndef _find_type_origin(type_hint):\n    if isinstance(type_hint, typing._SpecialForm):\n        # case of typing.Any, typing.ClassVar, typing.Final, typing.Literal,\n        # typing.NoReturn, typing.Optional, or typing.Union without parameters\n        return\n\n    actual_type = typing.get_origin(type_hint) or type_hint  # requires Python 3.8\n    if isinstance(actual_type, typing._SpecialForm):\n        # case of typing.Union[\u2026] or typing.ClassVar[\u2026] or \u2026\n        for origins in map(_find_type_origin, typing.get_args(type_hint)):\n            yield from origins\n    else:\n        yield actual_type\n\n\ndef _check_types(parameters, hints):\n    for name, value in parameters.items():\n        type_hint = hints.get(name, typing.Any)\n        actual_types = tuple(_find_type_origin(type_hint))\n        if actual_types and not isinstance(value, actual_types):\n            raise TypeError(\n                    f&quot;Expected type '{type_hint}' for argument '{name}'&quot;\n                    f&quot; but received type '{type(value)}' instead&quot;\n            )\n\n\ndef enforce_types(callable):\n    def decorate(func):\n        hints = typing.get_type_hints(func)\n        signature = inspect.signature(func)\n\n        @wraps(func)\n        def wrapper(*args, **kwargs):\n            parameters = dict(zip(signature.parameters, args))\n            parameters.update(kwargs)\n            _check_types(parameters, hints)\n\n            return func(*args, **kwargs)\n        return wrapper\n\n    if inspect.isclass(callable):\n        callable.__init__ = decorate(callable.__init__)\n        return callable\n\n    return decorate(callable)\n\n\ndef enforce_strict_types(callable):\n    def decorate(func):\n        hints = typing.get_type_hints(func)\n        signature = inspect.signature(func)\n\n        @wraps(func)\n        def wrapper(*args, **kwargs):\n            bound = signature.bind(*args, **kwargs)\n            bound.apply_defaults()\n            parameters = dict(zip(signature.parameters, bound.args))\n            parameters.update(bound.kwargs)\n            _check_types(parameters, hints)\n\n            return func(*args, **kwargs)\n        return wrapper\n\n    if inspect.isclass(callable):\n        callable.__init__ = decorate(callable.__init__)\n        return callable\n\n    return decorate(callable)\n</code></pre>\n<hr />\n<p><sub>Thanks to <a href=\"https://stackoverflow.com/users/1222951/aran-fey\">@Aran-Fey</a> that helped me improve this answer.</sub></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 13311988,
+                                "reputation": 8380,
+                                "user_id": 9609843,
+                                "user_type": "registered",
+                                "display_name": "sanyassh"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1556622283,
+                            "post_id": 55910982,
+                            "comment_id": 98492957,
+                            "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses/55910982#comment98492957_55910982",
+                            "body": "Can you please provide more details how to use <code>pydantic</code>? Maybe with code examples."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1098379,
+                                "reputation": 14760,
+                                "user_id": 1091466,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Marco Acierno"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1587119111,
+                            "post_id": 55910982,
+                            "comment_id": 108388808,
+                            "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses/55910982#comment108388808_55910982",
+                            "body": "The question is talking typinh with generics, does pydantic support it? Does it validate <code>typing.List[str]</code> correctly? Thanks :)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 13039071,
+                                "reputation": 3236,
+                                "user_id": 9423009,
+                                "user_type": "registered",
+                                "display_name": "Richard"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1606522187,
+                            "post_id": 55910982,
+                            "comment_id": 114994071,
+                            "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses/55910982#comment114994071_55910982",
+                            "body": "@SColvin ....I&#39;d second Marco&#39;s question above!  Will it also handle <code>Optional[List[str]]</code> correctly (ie either None or a list of only strings)?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 915658,
+                        "reputation": 12424,
+                        "user_id": 949890,
+                        "user_type": "registered",
+                        "accept_rate": 67,
+                        "display_name": "Samuel Colvin"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 67,
+                    "last_activity_date": 1558621423,
+                    "last_edit_date": 1558621423,
+                    "creation_date": 1556572912,
+                    "answer_id": 55910982,
+                    "question_id": 50563546,
+                    "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses/55910982#55910982",
+                    "body": "<p>Just found this question.</p>\n\n<p><a href=\"https://pydantic-docs.helpmanual.io\" rel=\"noreferrer\">pydantic</a> can do full type validation for dataclasses out of the box. (admission: I built pydantic)</p>\n\n<p>Just use pydantic's version of the decorator, the resulting dataclass is completely vanilla.</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>from datetime import datetime\nfrom pydantic.dataclasses import dataclass\n\n@dataclass\nclass User:\n    id: int\n    name: str = 'John Doe'\n    signup_ts: datetime = None\n\nprint(User(id=42, signup_ts='2032-06-21T12:00'))\n\"\"\"\nUser(id=42, name='John Doe', signup_ts=datetime.datetime(2032, 6, 21, 12, 0))\n\"\"\"\n\nUser(id='not int', signup_ts='2032-06-21T12:00')\n</code></pre>\n\n<p>The last line will give:</p>\n\n<pre><code>    ...\npydantic.error_wrappers.ValidationError: 1 validation error\nid\n  value is not a valid integer (type=type_error.integer)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6980292,
+                        "reputation": 673,
+                        "user_id": 5353484,
+                        "user_type": "registered",
+                        "display_name": "Evgeniy_Burdin"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1588493066,
+                    "creation_date": 1588493066,
+                    "answer_id": 61571360,
+                    "question_id": 50563546,
+                    "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses/61571360#61571360",
+                    "body": "<p>For typing aliases, you must separately check the annotation.\nI did like this:\n<a href=\"https://github.com/EvgeniyBurdin/validated_dc\" rel=\"nofollow noreferrer\">https://github.com/EvgeniyBurdin/validated_dc</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 261453,
+                                "reputation": 9186,
+                                "user_id": 545637,
+                                "user_type": "registered",
+                                "accept_rate": 73,
+                                "display_name": "Apalala"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1612619238,
+                            "post_id": 66030167,
+                            "comment_id": 116825946,
+                            "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses/66030167#comment116825946_66030167",
+                            "body": "That simple library is the only one that seems to be working for me. I think there are some cases it still doesn&#39;t get (like <code>x:MyEnum = &#39;&#39;</code>), but for the rest it&#39;s working fine."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 13920602,
+                        "reputation": 3245,
+                        "user_id": 10051099,
+                        "user_type": "registered",
+                        "display_name": "tamuhey"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1612364590,
+                    "creation_date": 1612364590,
+                    "answer_id": 66030167,
+                    "question_id": 50563546,
+                    "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses/66030167#66030167",
+                    "body": "<p>I created a tiny Python library for this purpose: <a href=\"https://github.com/tamuhey/dataclass_utils\" rel=\"nofollow noreferrer\">https://github.com/tamuhey/dataclass_utils</a></p>\n<p>This library can be applied for such dataclass that holds another dataclass (nested dataclass), and nested container type (like <code>Tuple[List[Dict...</code>)</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 932653,
+                "reputation": 19030,
+                "user_id": 962190,
+                "user_type": "registered",
+                "accept_rate": 94,
+                "display_name": "Arne"
+            },
+            "comment_count": 8,
+            "is_answered": true,
+            "accepted_answer_id": 50622643,
+            "answer_count": 4,
+            "score": 94,
+            "last_activity_date": 1657128825,
+            "creation_date": 1527501007,
+            "last_edit_date": 1645709051,
+            "question_id": 50563546,
+            "link": "https://stackoverflow.com/questions/50563546/validating-detailed-types-in-python-dataclasses",
+            "title": "Validating detailed types in python dataclasses",
+            "body": "<p>Python 3.7 was released a while ago, and I wanted to test some of the fancy new <code>dataclass</code>+typing features. Getting hints to work right is easy enough, with both native types and those from the <code>typing</code> module:</p>\n<pre><code>&gt;&gt;&gt; import dataclasses\n&gt;&gt;&gt; import typing as ty\n&gt;&gt;&gt; \n... @dataclasses.dataclass\n... class Structure:\n...     a_str: str\n...     a_str_list: ty.List[str]\n...\n&gt;&gt;&gt; my_struct = Structure(a_str='test', a_str_list=['t', 'e', 's', 't'])\n&gt;&gt;&gt; my_struct.a_str_list[0].  # IDE suggests all the string methods :)\n</code></pre>\n<p>But one other thing that I wanted to try was forcing the type hints as conditions during runtime, i.e. it should not be possible for a <code>dataclass</code> with incorrect types to exist. It can be implemented nicely with <a href=\"https://www.python.org/dev/peps/pep-0557/#post-init-processing\" rel=\"noreferrer\"><code>__post_init__</code></a>:</p>\n<pre><code>&gt;&gt;&gt; @dataclasses.dataclass\n... class Structure:\n...     a_str: str\n...     a_str_list: ty.List[str]\n...     \n...     def validate(self):\n...         ret = True\n...         for field_name, field_def in self.__dataclass_fields__.items():\n...             actual_type = type(getattr(self, field_name))\n...             if actual_type != field_def.type:\n...                 print(f&quot;\\t{field_name}: '{actual_type}' instead of '{field_def.type}'&quot;)\n...                 ret = False\n...         return ret\n...     \n...     def __post_init__(self):\n...         if not self.validate():\n...             raise ValueError('Wrong types')\n</code></pre>\n<p>This kind of <code>validate</code> function works for native types and custom classes, but not those specified by the <code>typing</code> module:</p>\n<pre><code>&gt;&gt;&gt; my_struct = Structure(a_str='test', a_str_list=['t', 'e', 's', 't'])\nTraceback (most recent call last):\n  a_str_list: '&lt;class 'list'&gt;' instead of 'typing.List[str]'\n  ValueError: Wrong types\n</code></pre>\n<p>Is there a better approach to validate an untyped list with a <code>typing</code>-typed one? Preferably one that doesn't include checking the types of all elements in any <code>list</code>, <code>dict</code>, <code>tuple</code>, or <code>set</code> that is a <code>dataclass</code>' attribute.</p>\n<hr />\n<p>Revisiting this question after a couple of years, I've now moved to use <a href=\"https://pydantic-docs.helpmanual.io/\" rel=\"noreferrer\"><code>pydantic</code></a> in cases where I want to validate classes that I'd normally just define a dataclass for. I'll leave my mark with the currently accepted answer though, since it correctly answers the original question and has outstanding educational value.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6318
+}

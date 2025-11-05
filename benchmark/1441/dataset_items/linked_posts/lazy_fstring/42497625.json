@@ -1,0 +1,1280 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "string-formatting",
+                "string-interpolation",
+                "f-string"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 182043,
+                        "reputation": 181970,
+                        "user_id": 416467,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "kindall"
+                    },
+                    "edited": false,
+                    "score": 8,
+                    "creation_date": 1488238735,
+                    "post_id": 42497625,
+                    "comment_id": 72134685,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings#comment72134685_42497625",
+                    "body": "You can&#39;t do that with an <code>f</code> string. An <code>f</code> string is not data, and it&#39;s certainly not a string; it&#39;s code. (Check it with the <code>dis</code> module.) If you want code to be evaluated at a later time, you use a function."
+                },
+                {
+                    "owner": {
+                        "account_id": 386425,
+                        "reputation": 56219,
+                        "user_id": 744178,
+                        "user_type": "registered",
+                        "display_name": "jwodder"
+                    },
+                    "edited": false,
+                    "score": 19,
+                    "creation_date": 1488240150,
+                    "post_id": 42497625,
+                    "comment_id": 72135142,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings#comment72135142_42497625",
+                    "body": "FYI, <a href=\"https://www.python.org/dev/peps/pep-0501/\" rel=\"nofollow noreferrer\">PEP 501</a> proposed a feature close to your first ideal, but it&#39;s currently &quot;deferred pending further experience with [f-strings].&quot;"
+                },
+                {
+                    "owner": {
+                        "account_id": 69533,
+                        "reputation": 33443,
+                        "user_id": 202229,
+                        "user_type": "registered",
+                        "accept_rate": 74,
+                        "display_name": "smci"
+                    },
+                    "reply_to_user": {
+                        "account_id": 182043,
+                        "reputation": 181970,
+                        "user_id": 416467,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "kindall"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1539553044,
+                    "post_id": 42497625,
+                    "comment_id": 92532767,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings#comment92532767_42497625",
+                    "body": "A template is a static string, but an f-string is not a string, it&#39;s a code object, as @kindall said. I think an f-string is bound against variables immediately when it&#39;s instantiated (in Python 3.6,7), not when it&#39;s eventually used. So f-string may be less useful than your ugly old <code>.format(**locals())</code>, although cosmetically nicer. Until PEP-501 is implemented."
+                },
+                {
+                    "owner": {
+                        "account_id": 3343278,
+                        "reputation": 10053,
+                        "user_id": 2809027,
+                        "user_type": "registered",
+                        "display_name": "Cecil Curry"
+                    },
+                    "edited": false,
+                    "score": 8,
+                    "creation_date": 1600238352,
+                    "post_id": 42497625,
+                    "comment_id": 113020376,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings#comment113020376_42497625",
+                    "body": "Guido save us, but <a href=\"https://www.python.org/dev/peps/pep-0498/\" rel=\"nofollow noreferrer\">PEP 498 <i>really</i> botched it</a>. The deferred evaluation described by <a href=\"https://www.python.org/dev/peps/pep-0501/\" rel=\"nofollow noreferrer\">PEP 501</a> absolutely should have been baked into the core f-string implementation. Now we&#39;re left haggling between a less featureful, extremely slow <code>str.format()</code> method supporting deferred evaluation on the one hand and a more featureful, extremely fast f-string syntax <i>not</i> supporting deferred evaluation on the other. So we still need both and Python still has no standard string formatter. <b>Insert xkcd standards meme.</b>"
+                },
+                {
+                    "owner": {
+                        "account_id": 10392540,
+                        "reputation": 167,
+                        "user_id": 7663296,
+                        "user_type": "registered",
+                        "display_name": "Ed_"
+                    },
+                    "reply_to_user": {
+                        "account_id": 3343278,
+                        "reputation": 10053,
+                        "user_id": 2809027,
+                        "user_type": "registered",
+                        "display_name": "Cecil Curry"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1701632225,
+                    "post_id": 42497625,
+                    "comment_id": 136797133,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings#comment136797133_42497625",
+                    "body": "Yeah @CecilCurry it&#39;s a royal mess.  6 years later the same awfulness still persists.  On top of that, there&#39;s the craziness of requiring the eminently missable f character on your strings.  Missed one f in your code 5 years ago?  Now when your code triggers that ultra-rare, ultra hard to reproduce exception, your debug message just says &quot;{ environ = }&quot;.  No debug info for you!  Come back 5 years! &lt;/seinfeld&gt;  Remember kids, it&#39;s a BAD idea when language designers enforce premature optimization and make you impersonate a compiler instead of doing their own job properly.  Say F to fstrings."
+                },
+                {
+                    "owner": {
+                        "account_id": 248321,
+                        "reputation": 61329,
+                        "user_id": 523612,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Karl Knechtel"
+                    },
+                    "reply_to_user": {
+                        "account_id": 3343278,
+                        "reputation": 10053,
+                        "user_id": 2809027,
+                        "user_type": "registered",
+                        "display_name": "Cecil Curry"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1711414327,
+                    "post_id": 42497625,
+                    "comment_id": 137904241,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings#comment137904241_42497625",
+                    "body": "@CecilCurry it&#39;s fixed in 3.12; see PEP 701."
+                },
+                {
+                    "owner": {
+                        "account_id": 4272643,
+                        "reputation": 3163,
+                        "user_id": 3494126,
+                        "user_type": "registered",
+                        "display_name": "Ufos"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1714729663,
+                    "post_id": 42497625,
+                    "comment_id": 138259266,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings#comment138259266_42497625",
+                    "body": "Came here looking for an answer, accepted the question as the best answer."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 10348273,
+                                "reputation": 5411,
+                                "user_id": 7632481,
+                                "user_type": "registered",
+                                "display_name": "JDAnders"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1488238467,
+                            "post_id": 42497694,
+                            "comment_id": 72134590,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42497694#comment72134590_42497694",
+                            "body": "That does allow the template to be defined elsewhere, but not as a string. One way I do templates is as a file full of <code>{format}</code> markers. Can this solution be adapted to a case where the template is coming from an <code>open(&#39;file&#39;).read()</code> (without actually re-reading the file every time, hopefully)? I&#39;ll edit the question to clarify."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9717573,
+                                "reputation": 52603,
+                                "user_id": 7207392,
+                                "user_type": "registered",
+                                "accept_rate": 73,
+                                "display_name": "Paul Panzer"
+                            },
+                            "reply_to_user": {
+                                "account_id": 10348273,
+                                "reputation": 5411,
+                                "user_id": 7632481,
+                                "user_type": "registered",
+                                "display_name": "JDAnders"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1488266444,
+                            "post_id": 42497694,
+                            "comment_id": 72143061,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42497694#comment72143061_42497694",
+                            "body": "@JDAnders Please have a look at the latest and greatest version which I&#39;d say implements your &quot;Ideal 2&quot; to the comma."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 10348273,
+                                "reputation": 5411,
+                                "user_id": 7632481,
+                                "user_type": "registered",
+                                "display_name": "JDAnders"
+                            },
+                            "edited": false,
+                            "score": 27,
+                            "creation_date": 1488312095,
+                            "post_id": 42497694,
+                            "comment_id": 72172262,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42497694#comment72172262_42497694",
+                            "body": "I&#39;m going to accept this as the answer, though I don&#39;t think I&#39;ll ever actually use it in code because of the extreme cleverness. Well maybe never :). Maybe the python people can use it for the implementation of <a href=\"https://www.python.org/dev/peps/pep-0501/\" rel=\"nofollow noreferrer\">PEP 501</a>.  If my questions was &quot;how should I handle this scenario&quot; the answer would be &quot;just keep using the .format() function and wait for PEP 501 to resolve.&quot; Thanks for figuring out how to do what shouldn&#39;t be done, @PaulPanzer"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1902248,
+                                "reputation": 7917,
+                                "user_id": 1878788,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "bli"
+                            },
+                            "edited": false,
+                            "score": 10,
+                            "creation_date": 1517849409,
+                            "post_id": 42497694,
+                            "comment_id": 84251816,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42497694#comment84251816_42497694",
+                            "body": "This does not work when the template includes something more complex than simple variable names. For instance: <code>template = &quot;The beginning of the name is {name[:4]}&quot;</code> (-&gt; <code>TypeError: string indices must be integers</code>)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9717573,
+                                "reputation": 52603,
+                                "user_id": 7207392,
+                                "user_type": "registered",
+                                "accept_rate": 73,
+                                "display_name": "Paul Panzer"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1902248,
+                                "reputation": 7917,
+                                "user_id": 1878788,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "bli"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1517849865,
+                            "post_id": 42497694,
+                            "comment_id": 84252119,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42497694#comment84252119_42497694",
+                            "body": "@bli Interesting, seems to be a limitation of <code>str.format</code>. I used to think f-strings are just syntactic sugar for something like <code>str.format(**locals(), **globals())</code> but obviously I was wrong."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 905105,
+                                "reputation": 14810,
+                                "user_id": 940158,
+                                "user_type": "registered",
+                                "accept_rate": 57,
+                                "display_name": "alexandernst"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1546684614,
+                            "post_id": 42497694,
+                            "comment_id": 94936692,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42497694#comment94936692_42497694",
+                            "body": "Please don&#39;t use that in production. <code>inspect</code> is a red flag."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 79320,
+                                "reputation": 27325,
+                                "user_id": 225020,
+                                "user_type": "registered",
+                                "accept_rate": 95,
+                                "display_name": "Jab"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1550296422,
+                            "post_id": 42497694,
+                            "comment_id": 96225620,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42497694#comment96225620_42497694",
+                            "body": "I have 2 questions, why is inspect a &quot;red flag&quot; for production would a case such as this be an exception or would there be more viable workarounds? And is there something against the use of <code>__slots__</code> here for the reduced memory usage?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 71838,
+                                "reputation": 66456,
+                                "user_id": 207661,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "Shital Shah"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1586325751,
+                            "post_id": 42497694,
+                            "comment_id": 108083567,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42497694#comment108083567_42497694",
+                            "body": "This is much better answer: <a href=\"https://stackoverflow.com/a/54701045/207661\">stackoverflow.com/a/54701045/207661</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 137512,
+                                "reputation": 495,
+                                "user_id": 341742,
+                                "user_type": "registered",
+                                "display_name": "Will Ware"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1665662888,
+                            "post_id": 42497694,
+                            "comment_id": 130755068,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42497694#comment130755068_42497694",
+                            "body": "Thanks for this, it was helpful for something I wanted to do: <a href=\"https://gist.github.com/wware/c5b97bdb6b458a4f2ff54d68cb6884f6\" rel=\"nofollow noreferrer\">gist.github.com/wware/c5b97bdb6b458a4f2ff54d68cb6884f6</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 9717573,
+                        "reputation": 52603,
+                        "user_id": 7207392,
+                        "user_type": "registered",
+                        "accept_rate": 73,
+                        "display_name": "Paul Panzer"
+                    },
+                    "comment_count": 9,
+                    "is_accepted": true,
+                    "score": 52,
+                    "last_activity_date": 1573573709,
+                    "last_edit_date": 1573573709,
+                    "creation_date": 1488238203,
+                    "answer_id": 42497694,
+                    "question_id": 42497625,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42497694#42497694",
+                    "body": "<p>Here's a complete \"Ideal 2\".</p>\n\n<p>It's not an f-string\u2014it doesn't even use f-strings\u2014but it does as requested. Syntax exactly as specified. No security headaches since we are not using <code>eval()</code>.</p>\n\n<p>It uses a little class and implements <code>__str__</code> which is automatically called by print. To escape the limited scope of the class we use the <code>inspect</code> module to hop one frame up and see the variables the caller has access to.</p>\n\n<pre><code>import inspect\n\nclass magic_fstring_function:\n    def __init__(self, payload):\n        self.payload = payload\n    def __str__(self):\n        vars = inspect.currentframe().f_back.f_globals.copy()\n        vars.update(inspect.currentframe().f_back.f_locals)\n        return self.payload.format(**vars)\n\ntemplate = \"The current name is {name}\"\n\ntemplate_a = magic_fstring_function(template)\n\n# use it inside a function to demonstrate it gets the scoping right\ndef new_scope():\n    names = [\"foo\", \"bar\"]\n    for name in names:\n        print(template_a)\n\nnew_scope()\n# The current name is foo\n# The current name is bar\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 240600,
+                                "reputation": 100697,
+                                "user_id": 510937,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Bakuriu"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1488265769,
+                            "post_id": 42497936,
+                            "comment_id": 72142731,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42497936#comment72142731_42497936",
+                            "body": "I really see no advantage in your snippet of code. I mean, you can always write just <code>The current name is {name}</code> inside the <code>template.txt</code> file and then use <code>print(template_a.format(name=name))</code> (or <code>.format(**locals())</code>). The code is about 10 characters longer, but it doesn&#39;t introduce any possible security issues due to <code>eval</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3090974,
+                                "reputation": 48928,
+                                "user_id": 2617068,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "TigerhawkT3"
+                            },
+                            "reply_to_user": {
+                                "account_id": 240600,
+                                "reputation": 100697,
+                                "user_id": 510937,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Bakuriu"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1488269047,
+                            "post_id": 42497936,
+                            "comment_id": 72144394,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42497936#comment72144394_42497936",
+                            "body": "@Bakuriu - Yes; like I said, although <code>eval</code> does allow us to write <code>f&#39;{name}&#39;</code> and delay the evaluation of <code>name</code> until desired, it is inferior to simply creating a regular template string and then calling <code>format</code> on it, as the OP was already doing."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2616517,
+                                "reputation": 636,
+                                "user_id": 2265468,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "philh"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1501099704,
+                            "post_id": 42497936,
+                            "comment_id": 77634941,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42497936#comment77634941_42497936",
+                            "body": "&quot;An f-string is simply a more concise way of creating a formatted string, replacing .format(**names) with f.&quot; Not quite - they use different syntax. I don&#39;t have a recent-enough python3 to check with, but for example I believe f&#39;{a+b}&#39; works, while &#39;{a+b}&#39;.format(a=a, b=b) raises KeyError. .format() is probably fine in many contexts, but it&#39;s not a drop-in replacement."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1902248,
+                                "reputation": 7917,
+                                "user_id": 1878788,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "bli"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2616517,
+                                "reputation": 636,
+                                "user_id": 2265468,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "philh"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1517848595,
+                            "post_id": 42497936,
+                            "comment_id": 84251253,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42497936#comment84251253_42497936",
+                            "body": "@philh I think I just encountered an example where <code>.format</code> is not equivalent to an f-string, that can support you comment: <code>DNA = &quot;TATTCGCGGAAAATATTTTGA&quot;; fragment = f&quot;{DNA[2:8]}&quot;; failed_fragment = &quot;{DNA[2:8]}&quot;.format(**locals())</code>. The attempt to create <code>failed_fragment</code> results in <code>TypeError: string indices must be integers</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3090974,
+                        "reputation": 48928,
+                        "user_id": 2617068,
+                        "user_type": "registered",
+                        "accept_rate": 50,
+                        "display_name": "TigerhawkT3"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 14,
+                    "last_activity_date": 1488239632,
+                    "creation_date": 1488239632,
+                    "answer_id": 42497936,
+                    "question_id": 42497625,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42497936#42497936",
+                    "body": "<p>An f-string is simply a more concise way of creating a formatted string, replacing <code>.format(**names)</code> with <code>f</code>. If you don't want a string to be immediately evaluated in such a manner, don't make it an f-string. Save it as an ordinary string literal, and then call <code>format</code> on it later when you want to perform the interpolation, as you have been doing.</p>\n\n<p>Of course, there is an alternative with <code>eval</code>.</p>\n\n<p><code>template.txt</code>:</p>\n\n<blockquote>\n  <p>f'The current name is {name}'</p>\n</blockquote>\n\n<p>Code:</p>\n\n<pre><code>&gt;&gt;&gt; template_a = open('template.txt').read()\n&gt;&gt;&gt; names = 'foo', 'bar'\n&gt;&gt;&gt; for name in names:\n...     print(eval(template_a))\n...\nThe current name is foo\nThe current name is bar\n</code></pre>\n\n<p>But then all you've managed to do is replace <code>str.format</code> with <code>eval</code>, which is surely not worth it. Just keep using regular strings with a <code>format</code> call.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 9717573,
+                                "reputation": 52603,
+                                "user_id": 7207392,
+                                "user_type": "registered",
+                                "accept_rate": 73,
+                                "display_name": "Paul Panzer"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1488260046,
+                            "post_id": 42499891,
+                            "comment_id": 72140195,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42499891#comment72140195_42499891",
+                            "body": "Funny, I had precisely the same snippet posted. But I retracted it because of scoping limitations. (Try wrapping the for loop in a function.)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6383531,
+                                "reputation": 156744,
+                                "user_id": 4952130,
+                                "user_type": "registered",
+                                "accept_rate": 95,
+                                "display_name": "Dimitris Fasarakis Hilliard"
+                            },
+                            "reply_to_user": {
+                                "account_id": 9717573,
+                                "reputation": 52603,
+                                "user_id": 7207392,
+                                "user_type": "registered",
+                                "accept_rate": 73,
+                                "display_name": "Paul Panzer"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1488260282,
+                            "post_id": 42499891,
+                            "comment_id": 72140274,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42499891#comment72140274_42499891",
+                            "body": "@PaulPanzer do you maybe want to edit the question and re-include it? I wouldn&#39;t mind deleting the answer. This is a viable alternative for OP&#39;s case, It isn&#39;t a viable alternative for <i>all</i> cases, it&#39;s being sneaky."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9717573,
+                                "reputation": 52603,
+                                "user_id": 7207392,
+                                "user_type": "registered",
+                                "accept_rate": 73,
+                                "display_name": "Paul Panzer"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1488260937,
+                            "post_id": 42499891,
+                            "comment_id": 72140544,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42499891#comment72140544_42499891",
+                            "body": "No, it&#39;s fine, keep it. I&#39;m much happier with my new solution. But I can see your point that this one is viable if you are aware of its limitations. Maybe you could add a little warning to your post so nobody can shoot their foot by using it wrong?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6383531,
+                        "reputation": 156744,
+                        "user_id": 4952130,
+                        "user_type": "registered",
+                        "accept_rate": 95,
+                        "display_name": "Dimitris Fasarakis Hilliard"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 34,
+                    "last_activity_date": 1667842406,
+                    "last_edit_date": 1667842406,
+                    "creation_date": 1488253983,
+                    "answer_id": 42499891,
+                    "question_id": 42497625,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42499891#42499891",
+                    "body": "<blockquote>\n<p>This means the template is a static string with formatting tags in it</p>\n</blockquote>\n<p>Yes, that's exactly why we have literals with replacement fields and <code>.format</code>, so we can replace the fields whenever we like by calling <code>format</code> on it.</p>\n<blockquote>\n<p>Something would have to happen to the string to tell the interpreter to interpret the string as a new f-string</p>\n</blockquote>\n<p>That's the prefix <code>f/F</code>. You could wrap it in a function and postpone the evaluation during call time but of course that incurs extra overhead:</p>\n<pre><code>def template_a():\n    return f&quot;The current name is {name}&quot;\n\nnames = [&quot;foo&quot;, &quot;bar&quot;]\nfor name in names:\n    print(template_a())\n</code></pre>\n<p>Which prints out:</p>\n<pre class=\"lang-none prettyprint-override\"><code>The current name is foo\nThe current name is bar\n</code></pre>\n<p>but feels wrong and is limited by the fact that you can only peek at the global namespace in your replacements. Trying to use it in a situation which requires local names will fail miserably unless passed to the string as arguments (which totally beats the point).</p>\n<blockquote>\n<p>Is there any way to bring in a string and have it interpreted as an f-string to avoid using the <code>.format(**locals())</code> call?</p>\n</blockquote>\n<p>Other than a function (limitations included), nope, so might as well stick with <code>.format</code>.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1902248,
+                                "reputation": 7917,
+                                "user_id": 1878788,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "bli"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1517848930,
+                            "post_id": 42595520,
+                            "comment_id": 84251482,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42595520#comment84251482_42595520",
+                            "body": "This does not work in all cases. Example: <code>fun = &quot;{DNA[2:8]}&quot;.format; DNA = &quot;TATTCGCGGAAAATATTTTGA&quot;; fun(DNA=DNA)</code>. -&gt; <code>TypeError: string indices must be integers</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 40126,
+                                "reputation": 427,
+                                "user_id": 116153,
+                                "user_type": "registered",
+                                "display_name": "msztolcman"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1902248,
+                                "reputation": 7917,
+                                "user_id": 1878788,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "bli"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1517937053,
+                            "post_id": 42595520,
+                            "comment_id": 84294317,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42595520#comment84294317_42595520",
+                            "body": "But it doesn&#39;t work also in normal usage, please look at answer <a href=\"https://stackoverflow.com/questions/14072810/slicing-strings-in-str-format\" title=\"slicing strings in str format\">stackoverflow.com/questions/14072810/&hellip;</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 40126,
+                        "reputation": 427,
+                        "user_id": 116153,
+                        "user_type": "registered",
+                        "display_name": "msztolcman"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 10,
+                    "last_activity_date": 1488627359,
+                    "creation_date": 1488627359,
+                    "answer_id": 42595520,
+                    "question_id": 42497625,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/42595520#42595520",
+                    "body": "<p>Or maybe do not use f-strings, just format:</p>\n\n<pre><code>fun = \"The curent name is {name}\".format\nnames = [\"foo\", \"bar\"]\nfor name in names:\n    print(fun(name=name))\n</code></pre>\n\n<p>In version without names:</p>\n\n<pre><code>fun = \"The curent name is {}\".format\nnames = [\"foo\", \"bar\"]\nfor name in names:\n    print(fun(name))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 481873,
+                                "reputation": 9029,
+                                "user_id": 895932,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "justhalf"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1566923876,
+                            "post_id": 49884004,
+                            "comment_id": 101804763,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/49884004#comment101804763_49884004",
+                            "body": "Agree with this answer wholeheartedly. This use case is what I was thinking about when searching for this question."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1989422,
+                                "reputation": 580,
+                                "user_id": 1783801,
+                                "user_type": "registered",
+                                "display_name": "Jaleks"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1596051532,
+                            "post_id": 49884004,
+                            "comment_id": 111689633,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/49884004#comment111689633_49884004",
+                            "body": "This is the correct answer. Some timings:  <code>%timeit log.finfo(f&quot;{bar=}&quot;) 91.9 &#181;s &#177; 7.45 &#181;s per loop %timeit log.info(f&quot;{bar=}&quot;) 56.2 &#181;s &#177; 630 ns per loop (mean &#177; std. dev. of 7 runs, 10000 loops each)   log.setLevel(logging.CRITICAL) %timeit log.finfo(&quot;{bar=}&quot;) 575 ns &#177; 2.9 ns per loop %timeit log.info(f&quot;{bar=}&quot;) 480 ns &#177; 9.37 ns per loop  %timeit log.finfo(&quot;&quot;) 571 ns &#177; 2.66 ns per loop %timeit log.info(f&quot;&quot;) 380 ns &#177; 0.92 ns per loop %timeit log.info(&quot;&quot;) 367 ns &#177; 1.65 ns per loop  (mean &#177; std. dev. of 7 runs, 1000000 loops each)  </code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 394252,
+                                "reputation": 2370,
+                                "user_id": 756589,
+                                "user_type": "registered",
+                                "accept_rate": 95,
+                                "display_name": "admirabilis"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1612883865,
+                            "post_id": 49884004,
+                            "comment_id": 116901643,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/49884004#comment116901643_49884004",
+                            "body": "<i>&quot;if there&#39;s a bug in the string converter...&quot;</i> -- the bug is it doesn&#39;t accept double quotes in the string. <code>f_string.replace(&#39;&quot;&#39;, &#39;\\\\&quot;&#39;)</code> works for escaping quotes, but not for already escaped quotes (eg. if you&#39;re logging outputs)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 394252,
+                                "reputation": 2370,
+                                "user_id": 756589,
+                                "user_type": "registered",
+                                "accept_rate": 95,
+                                "display_name": "admirabilis"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1612884717,
+                            "post_id": 49884004,
+                            "comment_id": 116902023,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/49884004#comment116902023_49884004",
+                            "body": "Can&#39;t edit my comment: using <code>&#39;f&quot;&quot;&quot;&#39; + fstr + &#39;&quot;&quot;&quot;&#39;</code> instead helps."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3686271,
+                                "reputation": 582,
+                                "user_id": 3069988,
+                                "user_type": "registered",
+                                "display_name": "Kochise"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1631112345,
+                            "post_id": 49884004,
+                            "comment_id": 122136895,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/49884004#comment122136895_49884004",
+                            "body": "Interesting approach, where is <code>args</code> used in <code>__deferred_flog()</code> ? Btw, could it be embedded into a proxy class that would supersede the original <code>.debug()</code> to <code>.critical()</code> functions ? And that would work globally across several modules as well ?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3686271,
+                                "reputation": 582,
+                                "user_id": 3069988,
+                                "user_type": "registered",
+                                "display_name": "Kochise"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1989422,
+                                "reputation": 580,
+                                "user_id": 1783801,
+                                "user_type": "registered",
+                                "display_name": "Jaleks"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1631112875,
+                            "post_id": 49884004,
+                            "comment_id": 122137131,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/49884004#comment122137131_49884004",
+                            "body": "@Jaleks It looks like <code>finfo()</code> is always evaluated regardless of <code>setLevel()</code> and also always slower. Could you confirm ?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 312775,
+                        "reputation": 12266,
+                        "user_id": 627042,
+                        "user_type": "registered",
+                        "accept_rate": 0,
+                        "display_name": "Erik Aronesty"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": false,
+                    "score": 18,
+                    "last_activity_date": 1689803459,
+                    "last_edit_date": 1689803459,
+                    "creation_date": 1523985645,
+                    "answer_id": 49884004,
+                    "question_id": 42497625,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/49884004#49884004",
+                    "body": "<p>Using .format is not a correct answer to this question.   Python f-strings are very different from str.format() templates ... they can contain code or other expensive operations - hence the need for deferral.</p>\n<p>Here's an example of a deferred logger.   This uses the normal preamble of logging.getLogger, but then adds new functions that interpret the f-string only if the log level is correct.</p>\n<pre><code>log = logging.getLogger(__name__)\n\ndef __deferred_flog(log, fstr, level, *args):\n    if log.isEnabledFor(level):\n        import inspect\n        frame = inspect.currentframe().f_back.f_back\n        try:\n            fstr = 'f&quot;&quot;&quot;' + fstr + '&quot;&quot;&quot;'\n            log.log(level, eval(fstr, frame.f_globals, frame.f_locals))\n        finally:\n            del frame\nlog.fdebug = lambda fstr, *args: __deferred_flog(log, fstr, logging.DEBUG, *args)\nlog.finfo = lambda fstr, *args: __deferred_flog(log, fstr, logging.INFO, *args)\n</code></pre>\n<p>This has the advantage of being able to do things like:  <code>log.fdebug(&quot;{obj.dump()}&quot;)</code> .... without dumping the object unless debugging is enabled.</p>\n<p>IMHO: This should have been the <em>default</em> operation of f-strings, however <em>now it's too late</em>.   F-string evaluation can have massive and unintended side-effects, and having that happen in a deferred manner will change program execution.</p>\n<p>In order to make f-strings properly deferred, python would need some way of explicitly switching behavior.   Maybe use the letter 'g'? ;)</p>\n<p>It has been pointed out that deferred logging shouldn't crash if there's a bug in the string converter.   The above solution can do this as well, change the <code>finally:</code> to <code>except:</code>, and stick a <code>log.exception</code> in there.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4839535,
+                        "reputation": 11,
+                        "user_id": 4241810,
+                        "user_type": "registered",
+                        "display_name": "Ron Lawhorn"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1528177401,
+                    "last_edit_date": 1528177401,
+                    "creation_date": 1528173921,
+                    "answer_id": 50692204,
+                    "question_id": 42497625,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/50692204#50692204",
+                    "body": "<p>A suggestion that uses f-strings. Do your evaluation on the\nlogical level where the templating is occurring and pass it as a generator.\nYou can unwind it at whatever point you choose, using f-strings</p>\n\n<pre><code>In [46]: names = (i for i in ('The CIO, Reed', 'The homeless guy, Arnot', 'The security guard Spencer'))\n\nIn [47]: po = (f'Strangely, {next(names)} has a nice {i}' for i in (\" nice house\", \" fast car\", \" big boat\"))\n\nIn [48]: while True:  \n...:     try:  \n...:         print(next(po))  \n...:     except StopIteration:  \n...:         break  \n...:       \nStrangely, The CIO, Reed has a nice  nice house  \nStrangely, The homeless guy, Arnot has a nice  fast car  \nStrangely, The security guard Spencer has a nice  big boat  \n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3868542,
+                                "reputation": 350,
+                                "user_id": 3204459,
+                                "user_type": "registered",
+                                "display_name": "user3204459"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1557928675,
+                            "post_id": 53671539,
+                            "comment_id": 98931589,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/53671539#comment98931589_53671539",
+                            "body": "by far the best answer! how did they not include this simple implementation as a built-in feature when they introduced f-strings?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 312775,
+                                "reputation": 12266,
+                                "user_id": 627042,
+                                "user_type": "registered",
+                                "accept_rate": 0,
+                                "display_name": "Erik Aronesty"
+                            },
+                            "edited": false,
+                            "score": 9,
+                            "creation_date": 1560520208,
+                            "post_id": 53671539,
+                            "comment_id": 99775031,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/53671539#comment99775031_53671539",
+                            "body": "nope, that loses scope.   the only reason that works is because <code>name</code> is global.   f-strings <i>should</i> be deferred in evaluation, but the class FString needs to create a list of references to the scoped arguments by looking at the callers locals and globals... and then evaluate the string when used."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 145428,
+                                "reputation": 121960,
+                                "user_id": 355230,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "martineau"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3868542,
+                                "reputation": 350,
+                                "user_id": 3204459,
+                                "user_type": "registered",
+                                "display_name": "user3204459"
+                            },
+                            "edited": false,
+                            "score": 9,
+                            "creation_date": 1573574287,
+                            "post_id": 53671539,
+                            "comment_id": 103921479,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/53671539#comment103921479_53671539",
+                            "body": "@user3204459: Because being able to execute arbitrary strings is inherently a security hazard \u2014 which is why the use of <code>eval()</code> is generally discouraged."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3868542,
+                                "reputation": 350,
+                                "user_id": 3204459,
+                                "user_type": "registered",
+                                "display_name": "user3204459"
+                            },
+                            "reply_to_user": {
+                                "account_id": 145428,
+                                "reputation": 121960,
+                                "user_id": 355230,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "martineau"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1573589636,
+                            "post_id": 53671539,
+                            "comment_id": 103928640,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/53671539#comment103928640_53671539",
+                            "body": "@martineau  it should have been a feature of python so that you don&#39;t need to use eval... plus, f-string has the same risks as eval() since you can put anything in curly brackets including malicious code so if that&#39;s a concern then don&#39;t use f-strings"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 282595,
+                                "reputation": 6902,
+                                "user_id": 579590,
+                                "user_type": "registered",
+                                "display_name": "huelbois"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3868542,
+                                "reputation": 350,
+                                "user_id": 3204459,
+                                "user_type": "registered",
+                                "display_name": "user3204459"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1583911348,
+                            "post_id": 53671539,
+                            "comment_id": 107267045,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/53671539#comment107267045_53671539",
+                            "body": "@user3204459 That&#39;s different risk: eval allows to run an arbitrary code from a string from any - unreliable - source (file, command line, webservice, form field, etc). The f-string enclosed code can only come from the source code itself. It can still do harm of course (e.g. if you write something like f&#39;result is { os.system( userSuppliedCommand ) }&#39; ), but I find it easier to write safer code with it than with eval."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3186857,
+                                "reputation": 495,
+                                "user_id": 2692263,
+                                "user_type": "registered",
+                                "display_name": "user2692263"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1596967112,
+                            "post_id": 53671539,
+                            "comment_id": 111975636,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/53671539#comment111975636_53671539",
+                            "body": "This is exactly what I was looking for, ducking for &#39;fstr postpone&quot;. Eval seems no worse than the use of fstrings in general, as they, i guess, both possess the same power:      f&quot;{eval(&#39;print(42)&#39;)}&quot;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4867352,
+                                "reputation": 4127,
+                                "user_id": 3925120,
+                                "user_type": "registered",
+                                "display_name": "Max Shenfield"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1613422930,
+                            "post_id": 53671539,
+                            "comment_id": 117065719,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/53671539#comment117065719_53671539",
+                            "body": "A small extension to this answer - you can use <code>f&#39;f&quot;&quot;&quot;{template}&quot;&quot;&quot;&#39;</code> to handle templates with newlines in them.  With the current implementation you&#39;ll get something like <code>SyntaxError: EOL while scanning string literal</code> if your template has a newline character."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1332325,
+                                "reputation": 1075,
+                                "user_id": 1275942,
+                                "user_type": "registered",
+                                "display_name": "Kaia"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3186857,
+                                "reputation": 495,
+                                "user_id": 2692263,
+                                "user_type": "registered",
+                                "display_name": "user2692263"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1712954300,
+                            "post_id": 53671539,
+                            "comment_id": 138073947,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/53671539#comment138073947_53671539",
+                            "body": "@user2692263 Fstrings have a bit of a protection against foot-gunning yourself, since they have to be literals. If a project makes heavy use of this <code>fstr</code> function, it&#39;s only a matter of time until somebody isn&#39;t thinking and does the equivalent of <code>fstr(input(&quot;enter your query: &quot;))</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1689091,
+                        "reputation": 8451,
+                        "user_id": 1551810,
+                        "user_type": "registered",
+                        "display_name": "kadee"
+                    },
+                    "comment_count": 8,
+                    "is_accepted": false,
+                    "score": 57,
+                    "last_activity_date": 1544194526,
+                    "last_edit_date": 1544194526,
+                    "creation_date": 1544192942,
+                    "answer_id": 53671539,
+                    "question_id": 42497625,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/53671539#53671539",
+                    "body": "<p>A concise way to have a string evaluated as an f-string (with its full capabilities) is using following function:</p>\n\n<pre><code>def fstr(template):\n    return eval(f\"f'{template}'\")\n</code></pre>\n\n<p>Then you can do:</p>\n\n<pre><code>template_a = \"The current name is {name}\"\nnames = [\"foo\", \"bar\"]\nfor name in names:\n    print(fstr(template_a))\n# The current name is foo\n# The current name is bar\n</code></pre>\n\n<p>And, in contrast to many other proposed solutions, you can also do:</p>\n\n<pre><code>template_b = \"The current name is {name.upper() * 2}\"\nfor name in names:\n    print(fstr(template_b))\n# The current name is FOOFOO\n# The current name is BARBAR\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3868542,
+                        "reputation": 350,
+                        "user_id": 3204459,
+                        "user_type": "registered",
+                        "display_name": "user3204459"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 9,
+                    "last_activity_date": 1578368104,
+                    "last_edit_date": 1578368104,
+                    "creation_date": 1557931791,
+                    "answer_id": 56152200,
+                    "question_id": 42497625,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/56152200#56152200",
+                    "body": "<p>inspired by the <a href=\"https://stackoverflow.com/a/53671539/3204459\">answer by kadee</a>, the following can be used to define a deferred-f-string class.</p>\n\n<pre><code>class FStr:\n    def __init__(self, s):\n        self._s = s\n    def __repr__(self):\n        return eval(f\"f'{self._s}'\")\n\n...\n\ntemplate_a = FStr('The current name is {name}')\n\nnames = [\"foo\", \"bar\"]\nfor name in names:\n    print (template_a)\n</code></pre>\n\n<p>which is exactly what the question asked for</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 18437,
+                                "reputation": 31942,
+                                "user_id": 42223,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "dreftymac"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1655896871,
+                            "post_id": 57632793,
+                            "comment_id": 128439452,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/57632793#comment128439452_57632793",
+                            "body": "this workaround still does not address the fundamental limitation. for example, it still does not allow use of external code defined in a configuration file, as specified in the original question <code>magic_fstring_function(open(&#39;template.txt&#39;).read())</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 145428,
+                                "reputation": 121960,
+                                "user_id": 355230,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "martineau"
+                            },
+                            "reply_to_user": {
+                                "account_id": 18437,
+                                "reputation": 31942,
+                                "user_id": 42223,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "dreftymac"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1655932188,
+                            "post_id": 57632793,
+                            "comment_id": 128452230,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/57632793#comment128452230_57632793",
+                            "body": "@dreftymac: A regular f-string does not support passing the contents of a text file to it like that \u2014 so it&#39;s unclear exactly what point you&#39;re trying to make\u2026"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 18437,
+                                "reputation": 31942,
+                                "user_id": 42223,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "dreftymac"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1655941755,
+                            "post_id": 57632793,
+                            "comment_id": 128454140,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/57632793#comment128454140_57632793",
+                            "body": "No point in particular, just noting that the ideal case requested in the original question is not satisfied by this approach. This will save time for anyone who reads this answer with the mistaken impression that it addresses that facet of the question."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5737561,
+                                "reputation": 743,
+                                "user_id": 4531164,
+                                "user_type": "registered",
+                                "display_name": "Jacob Pavlock"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1661939518,
+                            "post_id": 57632793,
+                            "comment_id": 129889220,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/57632793#comment129889220_57632793",
+                            "body": "&quot;doesn&#39;t require using eval()&quot; how is this any safer than <a href=\"https://stackoverflow.com/a/56152200/4531164\">user3204459&#39;s answer</a> which uses <code>eval()</code>?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 145428,
+                        "reputation": 121960,
+                        "user_id": 355230,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "martineau"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 11,
+                    "last_activity_date": 1649955678,
+                    "last_edit_date": 1649955678,
+                    "creation_date": 1566592973,
+                    "answer_id": 57632793,
+                    "question_id": 42497625,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/57632793#57632793",
+                    "body": "<p>What you want appears to be being considered as a Python <a href=\"https://github.com/python/cpython/issues/77135\" rel=\"nofollow noreferrer\">enhancement</a>.</p>\n<p>Meanwhile \u2014 from the linked discussion \u2014 the following seems like it would be a reasonable workaround that doesn't require using <code>eval()</code>:</p>\n<pre><code>class FL:\n    def __init__(self, func):\n        self.func = func\n    def __str__(self):\n        return self.func()\n\n\ntemplate_a = FL(lambda: f&quot;The current name, number is {name!r}, {number+1}&quot;)\nnames = &quot;foo&quot;, &quot;bar&quot;\nnumbers = 40, 41\nfor name, number in zip(names, numbers):\n    print(template_a)\n</code></pre>\n<p>Output:</p>\n<pre class=\"lang-none prettyprint-override\"><code>The current name, number is 'foo', 41\nThe current name, number is 'bar', 42\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3512730,
+                                "reputation": 1142,
+                                "user_id": 2936673,
+                                "user_type": "registered",
+                                "display_name": "Denis"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1651150501,
+                            "post_id": 62937663,
+                            "comment_id": 127298485,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/62937663#comment127298485_62937663",
+                            "body": "But looks like you can&#39;t defer computation, e.g.: <code>&#39;2 * {x} = {2 * x}&#39;.format(x=2)</code>, can you? =&gt; <code>KeyError: &#39;2 * x&#39;</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1877929,
+                                "reputation": 7843,
+                                "user_id": 1698736,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "cowlinator"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1658805358,
+                            "post_id": 62937663,
+                            "comment_id": 129136712,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/62937663#comment129136712_62937663",
+                            "body": "You can, it&#39;s just not as pretty. <code>&#39;2 * {x} = {y}&#39;.format(x = 2, y = 2 * x)</code> or <code>&#39;2 * {} = {}&#39;.format(x, 2 * x)</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3512730,
+                        "reputation": 1142,
+                        "user_id": 2936673,
+                        "user_type": "registered",
+                        "display_name": "Denis"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 28,
+                    "last_activity_date": 1594911788,
+                    "creation_date": 1594911788,
+                    "answer_id": 62937663,
+                    "question_id": 42497625,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/62937663#62937663",
+                    "body": "<p>How about:</p>\n<pre class=\"lang-py prettyprint-override\"><code>s = 'Hi, {foo}!'\n\ns\n&gt; 'Hi, {foo}!'\n\ns.format(foo='Bar')\n&gt; 'Hi, Bar!'\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 703628,
+                                "reputation": 14902,
+                                "user_id": 595305,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "mike rodent"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1626537914,
+                            "post_id": 68120749,
+                            "comment_id": 120922474,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/68120749#comment120922474_68120749",
+                            "body": "Wow, super. Works out of the box. Hats off to that 11-rep man! Like your list of differences, inspires confidence. Any gotchas you encountered? I see you developed with a (small) test suite. To be honest I have no idea what you are doing in your c file (_cfyeah.c) there ... but it looks like you know what you&#39;re doing."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 16599799,
+                                "reputation": 51,
+                                "user_id": 11995800,
+                                "user_type": "registered",
+                                "display_name": "ucodery"
+                            },
+                            "reply_to_user": {
+                                "account_id": 703628,
+                                "reputation": 14902,
+                                "user_id": 595305,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "mike rodent"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1626740669,
+                            "post_id": 68120749,
+                            "comment_id": 120969340,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/68120749#comment120969340_68120749",
+                            "body": "Hey thanks! Definitely tried to make it easy to use, so that&#39;s good to hear. the _cfyeah.c is exposing the native CPython fstring eval, which is not part of the public Python API. It&#39;s not necessary to the package, but provides a large speedup if used compared to compiling a string every time."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 446396,
+                                "reputation": 1375,
+                                "user_id": 839411,
+                                "user_type": "registered",
+                                "display_name": "alex.forencich"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1636445161,
+                            "post_id": 68120749,
+                            "comment_id": 123551934,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/68120749#comment123551934_68120749",
+                            "body": "<code>return eval(f&quot;&quot;&quot;f&#39;&#39;&#39;{the_string}&#39;&#39;&#39;&quot;&quot;&quot;)</code> would solve some of the issues"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 17656643,
+                                "reputation": 374,
+                                "user_id": 12816081,
+                                "user_type": "registered",
+                                "display_name": "Indiana Bones"
+                            },
+                            "reply_to_user": {
+                                "account_id": 446396,
+                                "reputation": 1375,
+                                "user_id": 839411,
+                                "user_type": "registered",
+                                "display_name": "alex.forencich"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1650489041,
+                            "post_id": 68120749,
+                            "comment_id": 127132128,
+                            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/68120749#comment127132128_68120749",
+                            "body": "@alex.forencich Thanks for this. It solved my problem using a multiline string."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 16599799,
+                        "reputation": 51,
+                        "user_id": 11995800,
+                        "user_type": "registered",
+                        "display_name": "ucodery"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1624557959,
+                    "creation_date": 1624557959,
+                    "answer_id": 68120749,
+                    "question_id": 42497625,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/68120749#68120749",
+                    "body": "<p>Most of these answers will get you something that behaves sort of like f-strings some of the time, but they will all go wrong in some cases.\nThere is a package on pypi <code>f-yeah</code> that does all this, only costing you two extra characters! (full disclosure, I am the author)</p>\n<pre><code>from fyeah import f\n\nprint(f(&quot;&quot;&quot;'{'&quot;all&quot; the quotes'}'&quot;&quot;&quot;))\n</code></pre>\n<p>There are a lot of differences between f-strings and format calls, here is a probably incomplete list</p>\n<ul>\n<li>f-strings allow for arbitrary eval of python code</li>\n<li>f-strings cannot contain a backslash in the expression (since formatted strings don't have an expression, so I suppose you could say this isn't a difference, but it does differ from what a raw eval() can do)</li>\n<li>dict lookups in formatted strings must not be quoted. dict lookups in f-strings can be quoted, and so non-string keys can also be looked up</li>\n<li>f-strings have a debug format that format() does not: <code>f&quot;The argument is {spam=}&quot;</code></li>\n<li>f-string expressions cannot be empty</li>\n</ul>\n<p>The suggestions to use eval will get you full f-string format support, but they don't work on all string types.</p>\n<pre><code>def f_template(the_string):\n    return eval(f&quot;f'{the_string}'&quot;)\n\nprint(f_template('some &quot;quoted&quot; string'))\nprint(f_template(&quot;some 'quoted' string&quot;))\n</code></pre>\n<pre><code>some &quot;quoted&quot; string\nTraceback (most recent call last):\n  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;\n  File &quot;&lt;stdin&gt;&quot;, line 2, in f_template\n  File &quot;&lt;string&gt;&quot;, line 1\n    f'some 'quoted' string'\n            ^\nSyntaxError: invalid syntax\n</code></pre>\n<p>This example will also get variable scoping wrong in some cases.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1694836,
+                        "reputation": 1036,
+                        "user_id": 1556435,
+                        "user_type": "registered",
+                        "accept_rate": 43,
+                        "display_name": "user1556435"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1643558362,
+                    "creation_date": 1643558362,
+                    "answer_id": 70916392,
+                    "question_id": 42497625,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/70916392#70916392",
+                    "body": "<p>There's a lot of talk about using <code>str.format()</code>, but as noted it doesn't allow most of the expressions that are allowed in f-strings such as arithmetic or slices. Using <code>eval()</code> obviously also has it's downsides.</p>\n<p>I'd recommend looking into a templating language such as Jinja. For my use-case it works quite well. See the example below where I have overridden the variable annotation syntax with a single curly brace to match the f-string syntax. I didn't fully review the differences between f-strings and Jinja invoked like this.</p>\n<pre class=\"lang-py prettyprint-override\"><code>from jinja2 import Environment, BaseLoader\n\na, b, c = 1, 2, &quot;345&quot;\ntempl = &quot;{a or b}{c[1:]}&quot;\n\nenv = Environment(loader=BaseLoader, variable_start_string=&quot;{&quot;, variable_end_string=&quot;}&quot;)\nenv.from_string(templ).render(**locals())\n</code></pre>\n<p>results in</p>\n<pre><code>'145'\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2319562,
+                        "reputation": 341,
+                        "user_id": 2035732,
+                        "user_type": "registered",
+                        "display_name": "Alireza815"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1658304512,
+                    "creation_date": 1658304512,
+                    "answer_id": 73048042,
+                    "question_id": 42497625,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/73048042#73048042",
+                    "body": "<p>to do that I prefer to use fstring inside a lambda function like:</p>\n<pre><code>s = lambda x: f'this is your string template to embed {x} in it.'\nn = ['a' , 'b' , 'c']\nfor i in n:\n   print( s(i) )\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4030991,
+                        "reputation": 25340,
+                        "user_id": 3357935,
+                        "user_type": "registered",
+                        "accept_rate": 82,
+                        "display_name": "Stevoisiak"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1661270099,
+                    "last_edit_date": 1661270099,
+                    "creation_date": 1661269117,
+                    "answer_id": 73461511,
+                    "question_id": 42497625,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/73461511#73461511",
+                    "body": "<p>You could use a <code>.format</code> styled replacement and explicitly define the replaced variable name:</p>\n<pre><code>template_a = &quot;The current name is {name}&quot;\nnames = [&quot;foo&quot;, &quot;bar&quot;]\nfor name in names:\n    print (template_a.format(name=name))\n</code></pre>\n<p>Output</p>\n<pre class=\"lang-none prettyprint-override\"><code>The current name is foo\nThe current name is bar\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 19826989,
+                        "reputation": 391,
+                        "user_id": 14522393,
+                        "user_type": "registered",
+                        "display_name": "Evgeniy Blinov"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1681887008,
+                    "creation_date": 1681887008,
+                    "answer_id": 76051499,
+                    "question_id": 42497625,
+                    "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings/76051499#76051499",
+                    "body": "<p>I found this problem quite interesting and wrote my own <a href=\"https://github.com/pomponchik/fazy\" rel=\"nofollow noreferrer\">library</a> implementing lazy f-strings.</p>\n<p>Install it:</p>\n<pre><code>pip install fazy\n</code></pre>\n<p>And use:</p>\n<pre><code>import f\n\nnumber = 33\nprint(f('{number} kittens drink milk'))\n</code></pre>\n<p>This solution is well suited, for example, for logging. Read more about the features and limitations in the documentation at the link.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 10348273,
+                "reputation": 5411,
+                "user_id": 7632481,
+                "user_type": "registered",
+                "display_name": "JDAnders"
+            },
+            "comment_count": 7,
+            "is_answered": true,
+            "accepted_answer_id": 42497694,
+            "answer_count": 15,
+            "score": 199,
+            "last_activity_date": 1711414360,
+            "creation_date": 1488237842,
+            "last_edit_date": 1711414360,
+            "question_id": 42497625,
+            "link": "https://stackoverflow.com/questions/42497625/how-to-postpone-defer-the-evaluation-of-f-strings",
+            "title": "How to postpone/defer the evaluation of f-strings?",
+            "body": "<p>I am using template strings to generate some files and I love the conciseness of the new f-strings for this purpose, for reducing my previous template code from something like this:</p>\n<pre><code>template_a = &quot;The current name is {name}&quot;\nnames = [&quot;foo&quot;, &quot;bar&quot;]\nfor name in names:\n    print (template_a.format(**locals()))\n</code></pre>\n<p>Now I can do this, directly replacing variables:</p>\n<pre><code>names = [&quot;foo&quot;, &quot;bar&quot;]\nfor name in names:\n    print (f&quot;The current name is {name}&quot;)\n</code></pre>\n<p>However, sometimes it makes sense to have the template defined elsewhere \u2014 higher up in the code, or imported from a file or something. This means the template is a static string with formatting tags in it. Something would have to happen to the string to tell the interpreter to interpret the string as a new f-string, but I don't know if there is such a thing.</p>\n<p><strong>Is there any way to bring in a string and have it interpreted as an f-string to avoid using the <code>.format(**locals())</code> call?</strong></p>\n<p>Ideally I want to be able to code like this... (where <code>magic_fstring_function</code> is where the part I don't understand comes in):</p>\n<pre><code>template_a = f&quot;The current name is {name}&quot;\n# OR [Ideal2] template_a = magic_fstring_function(open('template.txt').read())\nnames = [&quot;foo&quot;, &quot;bar&quot;]\nfor name in names:\n    print (template_a)\n</code></pre>\n<p>...with this desired output (without reading the file twice):</p>\n<pre class=\"lang-none prettyprint-override\"><code>The current name is foo\nThe current name is bar\n</code></pre>\n<p>...but the actual output I get is:</p>\n<pre class=\"lang-none prettyprint-override\"><code>The current name is {name}\nThe current name is {name}\n</code></pre>\n<hr />\n<p><sub>See also: <a href=\"https://stackoverflow.com/questions/54351740\">How can I use f-string with a variable, not with a string literal?</a> </sub></p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7264
+}

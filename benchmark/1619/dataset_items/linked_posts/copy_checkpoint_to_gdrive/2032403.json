@@ -1,0 +1,618 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "compression",
+                "zip",
+                "tarfile"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 10930,
+                        "reputation": 788903,
+                        "user_id": 20862,
+                        "user_type": "registered",
+                        "accept_rate": 50,
+                        "display_name": "Ignacio Vazquez-Abrams"
+                    },
+                    "edited": false,
+                    "score": 28,
+                    "creation_date": 1263014390,
+                    "post_id": 2032403,
+                    "comment_id": 1956385,
+                    "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python#comment1956385_2032403",
+                    "body": "tar doesn&#39;t compress data, it just packs the files together. It&#39;s gzip that does the actual compression."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 660089,
+                                "reputation": 7781,
+                                "user_id": 472610,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "Jonathan H"
+                            },
+                            "edited": false,
+                            "score": 27,
+                            "creation_date": 1489425357,
+                            "post_id": 2032433,
+                            "comment_id": 72654704,
+                            "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/2032433#comment72654704_2032433",
+                            "body": "You should really use <code>with tarfile.open( ..</code> in Python, instead of calling <code>open</code> and <code>close</code> manually. This is also the case when opening regular files."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6430310,
+                                "reputation": 191,
+                                "user_id": 4983790,
+                                "user_type": "registered",
+                                "display_name": "thach.nv92"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1614826749,
+                            "post_id": 2032433,
+                            "comment_id": 117505830,
+                            "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/2032433#comment117505830_2032433",
+                            "body": "@CNBorn I just want to compress to sample.gz.  import tarfile tar = tarfile.open(&quot;sample.gz&quot;, &quot;r:gz&quot;) for name in [&quot;file1&quot;, &quot;file2&quot;, &quot;file3&quot;]:     tar.add(name) tar.close()  It&#39;s Ok?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 57198,
+                        "reputation": 1348,
+                        "user_id": 171316,
+                        "user_type": "registered",
+                        "display_name": "CNBorn"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 114,
+                    "last_activity_date": 1263014971,
+                    "last_edit_date": 1263014971,
+                    "creation_date": 1263014264,
+                    "answer_id": 2032433,
+                    "question_id": 2032403,
+                    "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/2032433#2032433",
+                    "body": "<pre><code>import tarfile\ntar = tarfile.open(\"sample.tar.gz\", \"w:gz\")\nfor name in [\"file1\", \"file2\", \"file3\"]:\n    tar.add(name)\ntar.close()\n</code></pre>\n\n<p>If you want to create a tar.bz2 compressed file, just replace file extension name with \".tar.bz2\" and \"w:gz\" with \"w:bz2\".</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 10930,
+                                "reputation": 788903,
+                                "user_id": 20862,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "Ignacio Vazquez-Abrams"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1263014596,
+                            "post_id": 2032439,
+                            "comment_id": 1956392,
+                            "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/2032439#comment1956392_2032439",
+                            "body": "Just a quick note that the filename for bzip2-compressed tarballs should end with &quot;.tar.bz2&quot;."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 34048,
+                        "reputation": 869830,
+                        "user_id": 95810,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "Alex Martelli"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 35,
+                    "last_activity_date": 1263014347,
+                    "creation_date": 1263014347,
+                    "answer_id": 2032439,
+                    "question_id": 2032403,
+                    "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/2032439#2032439",
+                    "body": "<p>You call <a href=\"http://docs.python.org/library/tarfile.html#tarfile.open\" rel=\"noreferrer\">tarfile.open</a> with <code>mode='w:gz'</code>, meaning \"Open for gzip compressed writing.\"</p>\n\n<p>You'll probably want to end the filename (the <code>name</code> argument to <code>open</code>) with <code>.tar.gz</code>, but that doesn't affect compression abilities.</p>\n\n<p>BTW, you usually get better compression with a mode of <code>'w:bz2'</code>, just like <code>tar</code> can usually compress even better with <code>bzip2</code> than it can compress with <code>gzip</code>.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3547111,
+                                "reputation": 4587,
+                                "user_id": 2962794,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "Br\u014dtsyorfuzthr\u0101x"
+                            },
+                            "edited": false,
+                            "score": 55,
+                            "creation_date": 1454136610,
+                            "post_id": 17081026,
+                            "comment_id": 57919065,
+                            "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/17081026#comment57919065_17081026",
+                            "body": "Just as a note to readers, if you leave out <code>arcname=os.path.basename(source_dir)</code> then it&#39;ll give you the entire path structure of <code>source_dir</code> in the tar file (in most situations, that&#39;s probably inconvenient)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 660089,
+                                "reputation": 7781,
+                                "user_id": 472610,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "Jonathan H"
+                            },
+                            "edited": false,
+                            "score": 33,
+                            "creation_date": 1490144739,
+                            "post_id": 17081026,
+                            "comment_id": 72978579,
+                            "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/17081026#comment72978579_17081026",
+                            "body": "A second note; using <code>arcname=os.path.basename(source_dir)</code> still means that the archive contains a folder which contains the contents of <code>source_dir</code>. If you want the root of the archive to contain the contents themselves, and not contents within a folder, use <code>arcname=os.path.sep</code> instead."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1824689,
+                                "reputation": 4392,
+                                "user_id": 1657819,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "The Godfather"
+                            },
+                            "reply_to_user": {
+                                "account_id": 660089,
+                                "reputation": 7781,
+                                "user_id": 472610,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "Jonathan H"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1549015808,
+                            "post_id": 17081026,
+                            "comment_id": 95761420,
+                            "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/17081026#comment95761420_17081026",
+                            "body": "@Sheljohn unfortunately, this is not fully correct, because if one uses <code>os.path.sep</code>, then the archive will contain service &quot;.&quot; or &quot;/&quot; folder which is not a problem usually, but sometimes it can be an issue if you later process this archive programmatically. It seems the only real clean way is to do <code>os.walk</code> and add files individually"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7102019,
+                                "reputation": 1132,
+                                "user_id": 7717871,
+                                "user_type": "registered",
+                                "display_name": "edthrn"
+                            },
+                            "edited": false,
+                            "score": 9,
+                            "creation_date": 1565989184,
+                            "post_id": 17081026,
+                            "comment_id": 101528177,
+                            "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/17081026#comment101528177_17081026",
+                            "body": "To get rid of all the directory structure, just use <code>arcname=&#39;.&#39;</code>. No need to use <code>os.walk</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 230333,
+                                "reputation": 191,
+                                "user_id": 2921123,
+                                "user_type": "registered",
+                                "display_name": "jrp"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1625590083,
+                            "post_id": 17081026,
+                            "comment_id": 120665204,
+                            "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/17081026#comment120665204_17081026",
+                            "body": "If I generate this tarfile on Linux, will this open successfully on other platforms say, Windows &amp; Mac?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 430793,
+                                "reputation": 1567,
+                                "user_id": 814422,
+                                "user_type": "registered",
+                                "display_name": "kbolino"
+                            },
+                            "reply_to_user": {
+                                "account_id": 230333,
+                                "reputation": 191,
+                                "user_id": 2921123,
+                                "user_type": "registered",
+                                "display_name": "jrp"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1660092682,
+                            "post_id": 17081026,
+                            "comment_id": 129449647,
+                            "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/17081026#comment129449647_17081026",
+                            "body": "@jrp creating it on Linux is not important, what will matter is what <code>format</code> you select (or don&#39;t select, as the case may be); the default before Python 3.8 was <code>GNU_FORMAT</code> which may not be readable by all tools, though the default as of Python 3.8 is <code>PAX_FORMAT</code> which is a standard format and also a conservative/compatible extension of the much older standard <code>USTAR_FORMAT</code> which is widely supported"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4275,
+                        "reputation": 16133,
+                        "user_id": 6364,
+                        "user_type": "registered",
+                        "accept_rate": 25,
+                        "display_name": "George V. Reilly"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": true,
+                    "score": 311,
+                    "last_activity_date": 1577828744,
+                    "last_edit_date": 1577828744,
+                    "creation_date": 1371106725,
+                    "answer_id": 17081026,
+                    "question_id": 2032403,
+                    "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/17081026#17081026",
+                    "body": "<p>To build a <code>.tar.gz</code> (aka <code>.tgz</code>) for an entire directory tree:</p>\n\n<pre><code>import tarfile\nimport os.path\n\ndef make_tarfile(output_filename, source_dir):\n    with tarfile.open(output_filename, \"w:gz\") as tar:\n        tar.add(source_dir, arcname=os.path.basename(source_dir))\n</code></pre>\n\n<p>This will create a gzipped tar archive containing a single top-level folder with the same name and contents as <code>source_dir</code>.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4275,
+                                "reputation": 16133,
+                                "user_id": 6364,
+                                "user_type": "registered",
+                                "accept_rate": 25,
+                                "display_name": "George V. Reilly"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1684516633,
+                            "post_id": 57112016,
+                            "comment_id": 134533804,
+                            "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/57112016#comment134533804_57112016",
+                            "body": "To get significant speedups for very large tarballs on multicore machines, you can invoke an external <i>parallel compressor</i> like <a href=\"https://zlib.net/pigz/\" rel=\"nofollow noreferrer\">pigz</a> or <a href=\"https://github.com/kjn/lbzip2\" rel=\"nofollow noreferrer\">lbzip2</a>:  <code>subprocess.check_call((&quot;tar&quot;, &quot;-I&quot;, &quot;lbzip2 --fast&quot;, &quot;-cf&quot;, output_filename, file_to_archive))</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 8656670,
+                        "reputation": 1367,
+                        "user_id": 6480695,
+                        "user_type": "registered",
+                        "accept_rate": 90,
+                        "display_name": "Aleksandr Tukallo"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 24,
+                    "last_activity_date": 1574527585,
+                    "last_edit_date": 1574527585,
+                    "creation_date": 1563537309,
+                    "answer_id": 57112016,
+                    "question_id": 2032403,
+                    "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/57112016#57112016",
+                    "body": "<p>Previous answers advise using the <code>tarfile</code> Python module for creating a <code>.tar.gz</code> file in Python. That's obviously a good and Python-style solution, but it has serious drawback in speed of the archiving. <a href=\"https://stackoverflow.com/questions/45621476/python-tarfile-slow-than-linux-command\">This question</a> mentions that <code>tarfile</code> is approximately two times slower than the <code>tar</code> utility in Linux. According to my experience this estimation is pretty correct.</p>\n\n<p>So for faster archiving you can use the <code>tar</code> command using <code>subprocess</code> module:</p>\n\n<pre><code>subprocess.call(['tar', '-czf', output_filename, file_to_archive])\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 16657407,
+                                "reputation": 151,
+                                "user_id": 12038380,
+                                "user_type": "registered",
+                                "display_name": "THAVASI.T"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1609252399,
+                            "post_id": 57844351,
+                            "comment_id": 115790193,
+                            "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/57844351#comment115790193_57844351",
+                            "body": "import tarfile package"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 16657407,
+                        "reputation": 151,
+                        "user_id": 12038380,
+                        "user_type": "registered",
+                        "display_name": "THAVASI.T"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1636381522,
+                    "last_edit_date": 1636381522,
+                    "creation_date": 1567964554,
+                    "answer_id": 57844351,
+                    "question_id": 2032403,
+                    "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/57844351#57844351",
+                    "body": "<p>In this\ntar.gz file compress in open view directory\nIn solve use os.path.basename(file_directory)</p>\n<pre><code>import tarfile\n\nwith tarfile.open(&quot;save.tar.gz&quot;,&quot;w:gz&quot;) as tar:\n      for file in [&quot;a.txt&quot;,&quot;b.log&quot;,&quot;c.png&quot;]:\n           tar.add(os.path.basename(file))\n</code></pre>\n<p>its use in tar.gz file compress in directory</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2792643,
+                        "reputation": 3245,
+                        "user_id": 2402577,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "alper"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1584312853,
+                    "last_edit_date": 1584312853,
+                    "creation_date": 1584312168,
+                    "answer_id": 60698410,
+                    "question_id": 2032403,
+                    "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/60698410#60698410",
+                    "body": "<p>In addition to @Aleksandr Tukallo's answer, you could also obtain the output and error message (if occurs). Compressing a folder using <code>tar</code> is explained pretty well on the <a href=\"https://unix.stackexchange.com/a/46971/198423\">following answer</a>.</p>\n\n<pre><code>import traceback\nimport subprocess\n\ntry:\n    cmd = ['tar', 'czfj', output_filename, file_to_archive]\n    output = subprocess.check_output(cmd).decode(\"utf-8\").strip() \n    print(output)          \nexcept Exception:       \n    print(f\"E: {traceback.format_exc()}\")       \n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2451938,
+                                "reputation": 18464,
+                                "user_id": 2137996,
+                                "user_type": "registered",
+                                "accept_rate": 77,
+                                "display_name": "Alex Reinking"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1620107879,
+                            "post_id": 67377765,
+                            "comment_id": 119095840,
+                            "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/67377765#comment119095840_67377765",
+                            "body": "You should consider expanding this answer to include detail about what was wrong with the other answer and explain why this snippet works."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 15415745,
+                        "reputation": 1,
+                        "user_id": 11121277,
+                        "user_type": "registered",
+                        "display_name": "ZappedC64"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1620225403,
+                    "last_edit_date": 1620225403,
+                    "creation_date": 1620092630,
+                    "answer_id": 67377765,
+                    "question_id": 2032403,
+                    "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/67377765#67377765",
+                    "body": "<p>Minor correction to @THAVASI.T's answer which omits showing the import of the 'tarfile' library, and does not define the 'tar' object which is used in the third line.</p>\n<pre><code>import tarfile\n\nwith tarfile.open(&quot;save.tar.gz&quot;,&quot;w:gz&quot;) as tar:\n    for file in [&quot;a.txt&quot;,&quot;b.log&quot;,&quot;c.png&quot;]:\n        tar.add(os.path.basename(file))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2044733,
+                                "reputation": 3428,
+                                "user_id": 1825094,
+                                "user_type": "registered",
+                                "display_name": "Max Truxa"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1649669836,
+                            "post_id": 68924421,
+                            "comment_id": 126926188,
+                            "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/68924421#comment126926188_68924421",
+                            "body": "The &quot;perfect answer&quot; is vulnerable to shell injections. Please read the <a href=\"https://docs.python.org/3/library/subprocess.html#security-considerations\" rel=\"nofollow noreferrer\">security considerations</a> from the docs. Never pass unescaped strings to <code>subprocess.run</code>, <code>subprocess.call</code>, etc. if <code>shell=True</code>. Use <code>shlex.quote</code> to escape (Unix shells only)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3371583,
+                                "reputation": 3378,
+                                "user_id": 2830676,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Yitzchak"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2044733,
+                                "reputation": 3428,
+                                "user_id": 1825094,
+                                "user_type": "registered",
+                                "display_name": "Max Truxa"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1649763899,
+                            "post_id": 68924421,
+                            "comment_id": 126953725,
+                            "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/68924421#comment126953725_68924421",
+                            "body": "Thanks @MaxTruxa for the important information.."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3371583,
+                                "reputation": 3378,
+                                "user_id": 2830676,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Yitzchak"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2044733,
+                                "reputation": 3428,
+                                "user_id": 1825094,
+                                "user_type": "registered",
+                                "display_name": "Max Truxa"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1659003044,
+                            "post_id": 68924421,
+                            "comment_id": 129194372,
+                            "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/68924421#comment129194372_68924421",
+                            "body": "I&#39;m keeping getting downvotes for this - but I can&#39;t delete this answer since it was very hard to get it working perfectly - and for local usage (not a deployed script) it&#39;s 100% safe - I really believe it will help me in the future!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5432112,
+                                "reputation": 8575,
+                                "user_id": 4510421,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Keiku"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1659588591,
+                            "post_id": 68924421,
+                            "comment_id": 129331181,
+                            "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/68924421#comment129331181_68924421",
+                            "body": "I would like you to reduce the font size. Since it&#39;s not a Perfect answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3371583,
+                                "reputation": 3378,
+                                "user_id": 2830676,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Yitzchak"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5432112,
+                                "reputation": 8575,
+                                "user_id": 4510421,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Keiku"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1659704380,
+                            "post_id": 68924421,
+                            "comment_id": 129364004,
+                            "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/68924421#comment129364004_68924421",
+                            "body": "@Keiku , ok I got it. Better now?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5432112,
+                                "reputation": 8575,
+                                "user_id": 4510421,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Keiku"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1659928017,
+                            "post_id": 68924421,
+                            "comment_id": 129403307,
+                            "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/68924421#comment129403307_68924421",
+                            "body": "@Yitzchak Thank you for your response. It hurts me too when I get negative votes. let&#39;s do our best."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3371583,
+                        "reputation": 3378,
+                        "user_id": 2830676,
+                        "user_type": "registered",
+                        "accept_rate": 83,
+                        "display_name": "Yitzchak"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": false,
+                    "score": -5,
+                    "last_activity_date": 1659704344,
+                    "last_edit_date": 1659704344,
+                    "creation_date": 1629900340,
+                    "answer_id": 68924421,
+                    "question_id": 2032403,
+                    "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/68924421#68924421",
+                    "body": "<p>best performance and without the <code>.</code> and <code>..</code> in compressed file! <strong>See vulnerability warning below:</strong></p>\n<blockquote>\n<p><strong>NOTICE</strong> (thanks MaxTruxa):</p>\n<p>this answer is vulnerable to shell injections. Please read the <a href=\"https://docs.python.org/3/library/subprocess.html#security-considerations\" rel=\"nofollow noreferrer\">security considerations</a> from the docs. Never pass unescaped strings to <code>subprocess.run</code>, <code>subprocess.call</code>, etc. if <code>shell=True</code>. Use <code>shlex.quote</code> to escape (Unix shells only).</p>\n<p><strong>I'm using it locally</strong> - so it's good for my needs.</p>\n</blockquote>\n<pre><code>subprocess.call(f'tar -cvzf {output_filename} *', cwd=source_dir, shell=True)\n</code></pre>\n<p>the <code>cwd</code> argument changes directory before compressing - which solves the issue with the dots.</p>\n<p>the <code>shell=True</code> allows wildcard usage (<code>*</code>)</p>\n<blockquote>\n<p><strong>WORKS also for a directory recursively</strong></p>\n</blockquote>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7177660,
+                        "reputation": 139,
+                        "user_id": 5482942,
+                        "user_type": "registered",
+                        "display_name": "nyxgear"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1658828497,
+                    "creation_date": 1658828497,
+                    "answer_id": 73121102,
+                    "question_id": 2032403,
+                    "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/73121102#73121102",
+                    "body": "<p><a href=\"https://docs.python.org/3/library/shutil.html#shutil.make_archive\" rel=\"noreferrer\">shutil.make_archive</a> is very convenient for both files and directories (contents recursively added to the archive):</p>\n<pre><code>import shutil\n\ncompressed_file = shutil.make_archive(\n        base_name='archive',   # archive file name w/o extension\n        format='gztar',        # available formats: zip, gztar, bztar, xztar, tar\n        root_dir='path/to/dir' # directory to compress\n)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2331367,
+                        "reputation": 2165,
+                        "user_id": 3223785,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Eduardo Lucio"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1672617479,
+                    "creation_date": 1672617479,
+                    "answer_id": 74978118,
+                    "question_id": 2032403,
+                    "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/74978118#74978118",
+                    "body": "<p>Just restating @George V. Reilly 's excellent answer, but in a clearer form...</p>\n<pre><code>import tarfile\n\n\nfd_path=&quot;/some/folder/path/&quot;\nfl_name=&quot;some_file_name.ext&quot;\ntargz_fd_path_n_fl_name=&quot;/some/folder/path/some_file_name.tar.gz&quot;\n\nwith tarfile.open(targz_fd_path_n_fl_name, &quot;w:gz&quot;) as tar:\n    tar.add(fd_path + fl_name, fl_name)\n</code></pre>\n<p>As @Br\u014dtsyorfuzthr\u0101x pointed out (but in another way) if you leave the &quot;add&quot; method second argument then it'll give you the entire path structure of <code>fd_path + fl_name</code> in the tar file.</p>\n<p>Of course you can use...</p>\n<pre><code>import tarfile\nimport os\n\nfd_path_n_fl_name=&quot;/some/folder/path/some_file_name.ext&quot;\ntargz_fd_path_n_fl_name=&quot;/some/folder/path/some_file_name.tar.gz&quot;\n\nwith tarfile.open(targz_fd_path_n_fl_name, &quot;w:gz&quot;) as tar:\n    tar.add(fd_path_n_fl_name, os.path.basename(fd_path_n_fl_name))\n</code></pre>\n<p>... if you don't want to use or don't have the folder path and file name separated.</p>\n<p><strong>Thanks!\ud83e\udd17</strong></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 29914170,
+                        "reputation": 1,
+                        "user_id": 22924767,
+                        "user_type": "registered",
+                        "display_name": "hau"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1710209298,
+                    "creation_date": 1710209298,
+                    "answer_id": 78144319,
+                    "question_id": 2032403,
+                    "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python/78144319#78144319",
+                    "body": "<p>I am using this to generate tar.gz file without containing the main folder.</p>\n<pre><code>import tarfile\nimport os.path\n\nsource_location = r'C:\\Users\\username\\Desktop\\New folder'\noutput_name = r'C:\\Users\\username\\Desktop\\new.tar.gz'\n\n# ---------------------------------------------------\n#  --- output new.tar.gz with 'New folder' inside ---\n#  -&gt; new.tar.gz/New folder/aaaa/a.txt \n#  -&gt; new.tar.gz/New folder/bbbb/b.txt\n# ---------------------------------------------------\n# def make_tarfile(output_filename, source_dir):\n#     with tarfile.open(output_filename, &quot;w:gz&quot;) as tar:\n#         # tar.add(source_dir, arcname=os.path.basename(source_dir))\n#         tar.add(source_dir, arcname=os.path.sep(source_dir))\n\n\n# ---------------------------------------------------\n#  --- output new.tar.gz without 'New folder' inside ---\n#  -&gt; new.tar.gz/aaaa/a.txt \n#  -&gt; new.tar.gz/bbbb/b.txt\n# ---------------------------------------------------\ndef make_tarfile(output_filename, source_dir):\n    with tarfile.open(output_filename, &quot;w:gz&quot;) as tar:\n        for root, _, files in os.walk(source_dir):\n            for file in files:\n                file_path = os.path.join(root, file)\n                arcname = os.path.relpath(file_path, source_dir)\n                tar.add(file_path, arcname=arcname)\n\ntry:\n    make_tarfile(output_name, source_location)\n\nexcept Exception as e:\n    print(f&quot;Error: {e}&quot;)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 48581,
+                "reputation": 14105,
+                "user_id": 144408,
+                "user_type": "registered",
+                "accept_rate": 72,
+                "display_name": "shahjapan"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 17081026,
+            "answer_count": 11,
+            "score": 185,
+            "last_activity_date": 1710209298,
+            "creation_date": 1263013177,
+            "last_edit_date": 1486295020,
+            "question_id": 2032403,
+            "link": "https://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python",
+            "title": "How to create full compressed tar file using Python?",
+            "body": "<p>How can I create a .tar.gz file with compression in Python?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6886
+}

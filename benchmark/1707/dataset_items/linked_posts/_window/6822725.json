@@ -1,0 +1,1696 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "algorithm"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 1556429,
+                        "reputation": 173894,
+                        "user_id": 3923281,
+                        "user_type": "registered",
+                        "display_name": "Alex Riley"
+                    },
+                    "edited": false,
+                    "score": 5,
+                    "creation_date": 1524312464,
+                    "post_id": 6822725,
+                    "comment_id": 86927530,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator#comment86927530_6822725",
+                    "body": "If you&#39;re looking to perform some kind of operation on each window as you iterate (e.g.  <code>sum()</code> or <code>max()</code>) it is worth bearing in mind that there are efficient algorithms to compute the new value for each window in <i>constant</i> time (irrespective of window size). I have collected some of these algorithms together in a Python library: <a href=\"https://github.com/ajcr/rolling\" rel=\"nofollow noreferrer\">rolling</a>."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 202111,
+                                "reputation": 5790,
+                                "user_id": 448970,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "David B."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1311630971,
+                            "post_id": 6822761,
+                            "comment_id": 8105806,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822761#comment8105806_6822761",
+                            "body": "I almost included the <code>collections.deque</code> idea in the original question as an example of a possible improvement.  Using pop(0) and append(...) (or &#39;+&#39;) is, of course, much better.  The version in my question seems to indicate that I think lists are arrays..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 182043,
+                                "reputation": 181970,
+                                "user_id": 416467,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "kindall"
+                            },
+                            "reply_to_user": {
+                                "account_id": 202111,
+                                "reputation": 5790,
+                                "user_id": 448970,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "David B."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1311631528,
+                            "post_id": 6822761,
+                            "comment_id": 8105930,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822761#comment8105930_6822761",
+                            "body": "Actually, on further reflection, it&#39;s <i>possible</i> that the method call overhead from <code>append()</code> and <code>pop()</code> would be slower than the slicing, especially for small values. This overhead can be reduced by assigning a local variable to point to these methods."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 182043,
+                                "reputation": 181970,
+                                "user_id": 416467,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "kindall"
+                            },
+                            "reply_to_user": {
+                                "account_id": 202111,
+                                "reputation": 5790,
+                                "user_id": 448970,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "David B."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1311802622,
+                            "post_id": 6822761,
+                            "comment_id": 8146969,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822761#comment8146969_6822761",
+                            "body": "Wrote you a deque-based implementation and did a little profiling of the various solutions posted here."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 182043,
+                                "reputation": 181970,
+                                "user_id": 416467,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "kindall"
+                            },
+                            "reply_to_user": {
+                                "account_id": 202111,
+                                "reputation": 5790,
+                                "user_id": 448970,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "David B."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1311802857,
+                            "post_id": 6822761,
+                            "comment_id": 8147040,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822761#comment8147040_6822761",
+                            "body": "Also, looks as though <code>append()</code> and <code>pop()</code> are marginally faster than the slicing, at least in some cases, for lists."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 202111,
+                                "reputation": 5790,
+                                "user_id": 448970,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "David B."
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1311805921,
+                            "post_id": 6822761,
+                            "comment_id": 8147695,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822761#comment8147695_6822761",
+                            "body": "Premature optimization is the root of evil, but when I&#39;m building functions for my personal library I don&#39;t mind prematurely optimizing when I&#39;m having fun doing so! Getting <code>collections.deque</code>-like O(1) inserts with array-like O(1) lookups isn&#39;t too hard using a circular array--- store the window in a array, but keep a &#39;head&#39; index that points to the front of the sequence. Reading out the stored sequence requires wrapping around from the back to the front of the array.  Sequence indices are translated to array indices  by addition of the &#39;head&#39; index modulo the array length."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 202111,
+                                "reputation": 5790,
+                                "user_id": 448970,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "David B."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1311806174,
+                            "post_id": 6822761,
+                            "comment_id": 8147750,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822761#comment8147750_6822761",
+                            "body": "I&#39;m surprised the <code>tee</code> version was faster (for small windows and large iterators) in your tests.  It should require constructing a new tuple for each value returned and calling next() on multiple (albeit small for tiny windows) <code>tee</code>-d iterators. The yield version does one next() and one deque append (with internal delete from the front of the deque)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 182043,
+                                "reputation": 181970,
+                                "user_id": 416467,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "kindall"
+                            },
+                            "reply_to_user": {
+                                "account_id": 202111,
+                                "reputation": 5790,
+                                "user_id": 448970,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "David B."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1311827623,
+                            "post_id": 6822761,
+                            "comment_id": 8150741,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822761#comment8150741_6822761",
+                            "body": "I thought this was fun, too, and I love learning more about how Python works internally. If I get a chance I might try the circular list idea -- I have a feeling that having to reorder it will be expensive, though."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1163045,
+                                "reputation": 24600,
+                                "user_id": 1142167,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "Joel Cornett"
+                            },
+                            "edited": false,
+                            "score": 14,
+                            "creation_date": 1362598806,
+                            "post_id": 6822761,
+                            "comment_id": 21517170,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822761#comment21517170_6822761",
+                            "body": "<code>yield win</code> should be <code>yield tuple(win)</code> or <code>yield list(win)</code> to prevent returning an iterator of references to the same <code>deque</code> object."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 182043,
+                                "reputation": 181970,
+                                "user_id": 416467,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "kindall"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1362610801,
+                            "post_id": 6822761,
+                            "comment_id": 21523558,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822761#comment21523558_6822761",
+                            "body": "That&#39;s not necessarily a bug. The deque always has the most recent <code>n</code> items in it, after all. If you want a permanent copy, you can do that outside of the iterator."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1252466,
+                                "reputation": 81149,
+                                "user_id": 1212596,
+                                "user_type": "registered",
+                                "accept_rate": 52,
+                                "display_name": "Paul Draper"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1163045,
+                                "reputation": 24600,
+                                "user_id": 1142167,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "Joel Cornett"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1387180081,
+                            "post_id": 6822761,
+                            "comment_id": 30833627,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822761#comment30833627_6822761",
+                            "body": "I like it. I would have upvoted, but I had the same concern as @JoelCornett."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 176493,
+                                "reputation": 277,
+                                "user_id": 407226,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "Avery Richardson"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1393227406,
+                            "post_id": 6822761,
+                            "comment_id": 33310516,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822761#comment33310516_6822761",
+                            "body": "I submitted this <a href=\"https://pypi.python.org/pypi/sliding_window\" rel=\"nofollow noreferrer\">to PyPI</a>.  Install with <code>pip install sliding_window</code>, and run with <code>from sliding_window import window</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 450468,
+                                "reputation": 3331,
+                                "user_id": 845800,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "Paul"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1455828430,
+                            "post_id": 6822761,
+                            "comment_id": 58676821,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822761#comment58676821_6822761",
+                            "body": "You&#39;re in for a shock if you think <code>list(window(range(10)))</code> should produce something like [[0,1],[1,2],[2,3],...]"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 182043,
+                                "reputation": 181970,
+                                "user_id": 416467,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "kindall"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1455832577,
+                            "post_id": 6822761,
+                            "comment_id": 58679103,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822761#comment58679103_6822761",
+                            "body": "It obviously won&#39;t; you&#39;d need to do something like <code>list(list(x) for x in window(range(10)))</code> or else add that to the iterator. For some applications this will matter, for others not, and since I was going for speed I elected <i>not</i> and put the onus on the caller to copy the window if needed."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 450468,
+                                "reputation": 3331,
+                                "user_id": 845800,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "Paul"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1455891086,
+                            "post_id": 6822761,
+                            "comment_id": 58705404,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822761#comment58705404_6822761",
+                            "body": "Understood. The previous comment is meant as a simple, explicit cautionary note for casual users who are less familiar with the Python object system."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3521950,
+                                "reputation": 2685,
+                                "user_id": 2943985,
+                                "user_type": "registered",
+                                "display_name": "kawing-chiu"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1488609007,
+                            "post_id": 6822761,
+                            "comment_id": 72317428,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822761#comment72317428_6822761",
+                            "body": "If you add back the needed <code>tuple()</code> before yield, this method does not have any advantage over the others."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 182043,
+                        "reputation": 181970,
+                        "user_id": 416467,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "kindall"
+                    },
+                    "comment_count": 15,
+                    "is_accepted": false,
+                    "score": 58,
+                    "last_activity_date": 1311802592,
+                    "last_edit_date": 1311802592,
+                    "creation_date": 1311630379,
+                    "answer_id": 6822761,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822761#6822761",
+                    "body": "<p>This seems tailor-made for a <code>collections.deque</code> since you essentially have a FIFO (add to one end, remove from the other). However, even if you use a <code>list</code> you shouldn't be slicing twice; instead, you should probably just <code>pop(0)</code> from the list and <code>append()</code> the new item.</p>\n\n<p>Here is an optimized deque-based implementation patterned after your original:</p>\n\n<pre><code>from collections import deque\n\ndef window(seq, n=2):\n    it = iter(seq)\n    win = deque((next(it, None) for _ in xrange(n)), maxlen=n)\n    yield win\n    append = win.append\n    for e in it:\n        append(e)\n        yield win\n</code></pre>\n\n<p>In my tests it handily beats everything else posted here most of the time, though pillmuncher's <code>tee</code> version beats it for large iterables and small windows. On larger windows, the <code>deque</code> pulls ahead again in raw speed.</p>\n\n<p>Access to individual items in the <code>deque</code> may be faster or slower than with lists or tuples. (Items near the beginning are faster, or items near the end if you use a negative index.) I put a <code>sum(w)</code> in the body of my loop; this plays to the deque's strength (iterating from one item to the next is fast, so this loop ran a a full 20% faster than the next fastest method, pillmuncher's).  When I changed it to individually look up and add items in a window of ten, the tables turned and the <code>tee</code> method was 20% faster. I was able to recover some speed by using negative indexes for the last five terms in the addition, but <code>tee</code> was still a little faster. Overall I would estimate that either one is plenty fast for most uses and if you need a little more performance, profile and pick the one that works best.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 25542,
+                                "reputation": 154497,
+                                "user_id": 65696,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "SingleNegationElimination"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1311631343,
+                            "post_id": 6822773,
+                            "comment_id": 8105894,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822773#comment8105894_6822773",
+                            "body": "Nice answer, but (and I know you&#39;re just reproducing the recipe as linked), I wonder why the default window size should be 2?  Should it have a default at all?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 182043,
+                                "reputation": 181970,
+                                "user_id": 416467,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "kindall"
+                            },
+                            "edited": false,
+                            "score": 19,
+                            "creation_date": 1311723713,
+                            "post_id": 6822773,
+                            "comment_id": 8127267,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822773#comment8127267_6822773",
+                            "body": "@TakenMacGuy: I dunno what the author of that recipe&#39;s reasoning is, but I&#39;d also choose 2. 2 is the smallest useful window size (otherwise you&#39;re just iterating and don&#39;t need the window), and it is also common to need to know the previous (or next) item, arguably more so than any other specific n."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 342731,
+                                "reputation": 351046,
+                                "user_id": 674039,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "wim"
+                            },
+                            "edited": false,
+                            "score": 33,
+                            "creation_date": 1366038622,
+                            "post_id": 6822773,
+                            "comment_id": 22847578,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822773#comment22847578_6822773",
+                            "body": "Does anyone know why this example was removed from the docs?  Was there something wrong with it, or there is an easier alternative now?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 36797,
+                                "reputation": 28409,
+                                "user_id": 105043,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "second"
+                            },
+                            "edited": false,
+                            "score": 14,
+                            "creation_date": 1466179429,
+                            "post_id": 6822773,
+                            "comment_id": 63226396,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822773#comment63226396_6822773",
+                            "body": "got curious about the example removal and found <a href=\"https://github.com/python/cpython/commit/83d953dc955ef9e948812fefb3f489728f219470#diff-7e59aecf5eb9159dee8fe29ba5d8683f\" rel=\"nofollow noreferrer\">rhettinger committed on Oct 26, 2003: Replace the window() example with pairwise() which demonstrates tee().</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 151071,
+                                "reputation": 150282,
+                                "user_id": 364696,
+                                "user_type": "registered",
+                                "display_name": "ShadowRanger"
+                            },
+                            "reply_to_user": {
+                                "account_id": 36797,
+                                "reputation": 28409,
+                                "user_id": 105043,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "second"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1480696476,
+                            "post_id": 6822773,
+                            "comment_id": 69085224,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822773#comment69085224_6822773",
+                            "body": "@second: That said, the <code>pairwise</code> recipe could be extended with the <code>consume</code> recipe to reproduce the <code>window</code> recipe. <a href=\"http://stackoverflow.com/a/11249883/364696\">MrDrFenner&#39;s answer</a> is doing roughly that in the first <code>tee</code> using version, though it&#39;s slightly less efficient, since it leaves the iterators wrapped in <code>islice</code> objects instead of using <code>islice</code> to consume values, then using the original partially consumed iterators (which has the mild cost of making each iteration have to pass through <code>islice</code>&#39;s wrapper)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 151071,
+                                "reputation": 150282,
+                                "user_id": 364696,
+                                "user_type": "registered",
+                                "display_name": "ShadowRanger"
+                            },
+                            "reply_to_user": {
+                                "account_id": 36797,
+                                "reputation": 28409,
+                                "user_id": 105043,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "second"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1480697052,
+                            "post_id": 6822773,
+                            "comment_id": 69085603,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822773#comment69085603_6822773",
+                            "body": "@second: And just for demonstration, I added <a href=\"http://stackoverflow.com/a/40937024/364696\">an answer that&#39;s explicitly reusing the <code>consume</code> recipe</a>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 342731,
+                                "reputation": 351046,
+                                "user_id": 674039,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "wim"
+                            },
+                            "reply_to_user": {
+                                "account_id": 36797,
+                                "reputation": 28409,
+                                "user_id": 105043,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "second"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1503552146,
+                            "post_id": 6822773,
+                            "comment_id": 78664827,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822773#comment78664827_6822773",
+                            "body": "@second  Raymond seems to have replaced the more general recipe <code>window</code> with one of its special cases <code>pairwise</code>.  Questionable.  It&#39;s a shame the commit message didn&#39;t say anything about the motivation for the decision."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 326993,
+                                "reputation": 3207,
+                                "user_id": 649090,
+                                "user_type": "registered",
+                                "accept_rate": 27,
+                                "display_name": "Kashif"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1515780747,
+                            "post_id": 6822773,
+                            "comment_id": 83446008,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822773#comment83446008_6822773",
+                            "body": "When would one enter the <code>for elem in it</code> loop?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 10050068,
+                                "reputation": 1780,
+                                "user_id": 7430165,
+                                "user_type": "registered",
+                                "display_name": "ykaner"
+                            },
+                            "reply_to_user": {
+                                "account_id": 326993,
+                                "reputation": 3207,
+                                "user_id": 649090,
+                                "user_type": "registered",
+                                "accept_rate": 27,
+                                "display_name": "Kashif"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1530523662,
+                            "post_id": 6822773,
+                            "comment_id": 89250310,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822773#comment89250310_6822773",
+                            "body": "@Glassjawed, this loop runs every time the <code>seq</code> is longer than <code>n</code> Since <code>yield</code> is not like <code>return</code> and will continue moving the window up to the end of <code>it</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5769,
+                        "reputation": 55906,
+                        "user_id": 9453,
+                        "user_type": "registered",
+                        "display_name": "Daniel DiPaolo"
+                    },
+                    "comment_count": 9,
+                    "is_accepted": true,
+                    "score": 176,
+                    "last_activity_date": 1635085134,
+                    "last_edit_date": 1635085134,
+                    "creation_date": 1311630430,
+                    "answer_id": 6822773,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822773#6822773",
+                    "body": "<p>There's one in an old version of the Python docs with <a href=\"http://docs.python.org/release/2.3.5/lib/itertools-example.html\" rel=\"noreferrer\"><code>itertools</code> examples</a>:</p>\n<pre><code>from itertools import islice\n\ndef window(seq, n=2):\n    &quot;Returns a sliding window (of width n) over data from the iterable&quot;\n    &quot;   s -&gt; (s0,s1,...s[n-1]), (s1,s2,...,sn), ...                   &quot;\n    it = iter(seq)\n    result = tuple(islice(it, n))\n    if len(result) == n:\n        yield result\n    for elem in it:\n        result = result[1:] + (elem,)\n        yield result\n</code></pre>\n<p>The one from the docs is a little more succinct and uses <code>itertools</code> to greater effect I imagine.</p>\n<hr />\n<p><strong>If your iterator is a simple list/tuple</strong> a simple way to slide through it with a specified window size would be:</p>\n<pre><code>seq = [0, 1, 2, 3, 4, 5]\nwindow_size = 3\n\nfor i in range(len(seq) - window_size + 1):\n    print(seq[i: i + window_size])\n</code></pre>\n<p>Output:</p>\n<pre><code>[0, 1, 2]\n[1, 2, 3]\n[2, 3, 4]\n[3, 4, 5]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 202111,
+                                "reputation": 5790,
+                                "user_id": 448970,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "David B."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1311635706,
+                            "post_id": 6822907,
+                            "comment_id": 8106801,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822907#comment8106801_6822907",
+                            "body": "From my quick <code>timeit</code> tests, this is much slower than Daniel DePaolo&#39;s (by about a 2:1 ratio) and doesn&#39;t feel much &quot;nicer&quot;."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 169315,
+                                "reputation": 10152,
+                                "user_id": 395321,
+                                "user_type": "registered",
+                                "display_name": "pillmuncher"
+                            },
+                            "reply_to_user": {
+                                "account_id": 202111,
+                                "reputation": 5790,
+                                "user_id": 448970,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "David B."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1311637365,
+                            "post_id": 6822907,
+                            "comment_id": 8107061,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822907#comment8107061_6822907",
+                            "body": "@David B.: On my box it&#39;s only about 8% slower than Daniel DePaolo&#39;s."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 202111,
+                                "reputation": 5790,
+                                "user_id": 448970,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "David B."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1311640163,
+                            "post_id": 6822907,
+                            "comment_id": 8107428,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822907#comment8107428_6822907",
+                            "body": "@pillmuncher: Python 2.7 or 3.x?  I was using 2.7.  The ratio is also fairly sensitive to the value of <code>size</code>. If you increase it (e.g., if the iterable is 100000 elements long, make the window size 1000), you may see an increase."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 169315,
+                                "reputation": 10152,
+                                "user_id": 395321,
+                                "user_type": "registered",
+                                "display_name": "pillmuncher"
+                            },
+                            "reply_to_user": {
+                                "account_id": 202111,
+                                "reputation": 5790,
+                                "user_id": 448970,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "David B."
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1311641168,
+                            "post_id": 6822907,
+                            "comment_id": 8107561,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822907#comment8107561_6822907",
+                            "body": "@David B.: What you say makes sense. In my code the setup time for <code>iters</code> is O(size!), and calling <code>next()</code> many times (in <code>izip()</code>) is probably a lot more time consuming than copying a tuple twice. I was using Python 2.6.5, BTW."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 202111,
+                                "reputation": 5790,
+                                "user_id": 448970,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "David B."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1311799874,
+                            "post_id": 6822907,
+                            "comment_id": 8146105,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822907#comment8146105_6822907",
+                            "body": "@pillmuncher: You mean, setup time for <code>iters</code>is O(size^2), right?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 169315,
+                                "reputation": 10152,
+                                "user_id": 395321,
+                                "user_type": "registered",
+                                "display_name": "pillmuncher"
+                            },
+                            "reply_to_user": {
+                                "account_id": 202111,
+                                "reputation": 5790,
+                                "user_id": 448970,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "David B."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1311801522,
+                            "post_id": 6822907,
+                            "comment_id": 8146650,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822907#comment8146650_6822907",
+                            "body": "@David B.: Yeah, O(size^2) it is."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 106793,
+                                "reputation": 19103,
+                                "user_id": 284318,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Danilo Bargen"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1358457837,
+                            "post_id": 6822907,
+                            "comment_id": 20015092,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822907#comment20015092_6822907",
+                            "body": "Python docs say: &quot;This itertool may require significant auxiliary storage (depending on how much temporary data needs to be stored). In general, if one iterator uses most or all of the data before another iterator starts, it is faster to use list() instead of tee().&quot;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1252466,
+                                "reputation": 81149,
+                                "user_id": 1212596,
+                                "user_type": "registered",
+                                "accept_rate": 52,
+                                "display_name": "Paul Draper"
+                            },
+                            "reply_to_user": {
+                                "account_id": 106793,
+                                "reputation": 19103,
+                                "user_id": 284318,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Danilo Bargen"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1387179907,
+                            "post_id": 6822907,
+                            "comment_id": 30833550,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822907#comment30833550_6822907",
+                            "body": "@DaniloBargen, but then using <code>list</code> would not work for infinite iterables."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 261453,
+                                "reputation": 9186,
+                                "user_id": 545637,
+                                "user_type": "registered",
+                                "accept_rate": 73,
+                                "display_name": "Apalala"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1495840264,
+                            "post_id": 6822907,
+                            "comment_id": 75434786,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822907#comment75434786_6822907",
+                            "body": "You can use <code>islice()</code> for an <b>O(size)</b> setup."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 17476274,
+                                "reputation": 27050,
+                                "user_id": 12671057,
+                                "user_type": "registered",
+                                "display_name": "Kelly Bundy"
+                            },
+                            "reply_to_user": {
+                                "account_id": 261453,
+                                "reputation": 9186,
+                                "user_id": 545637,
+                                "user_type": "registered",
+                                "accept_rate": 73,
+                                "display_name": "Apalala"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1671643540,
+                            "post_id": 6822907,
+                            "comment_id": 132144692,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822907#comment132144692_6822907",
+                            "body": "@Apalala No, it would still be quadratic."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 169315,
+                        "reputation": 10152,
+                        "user_id": 395321,
+                        "user_type": "registered",
+                        "display_name": "pillmuncher"
+                    },
+                    "comment_count": 10,
+                    "is_accepted": false,
+                    "score": 41,
+                    "last_activity_date": 1311632350,
+                    "last_edit_date": 1311632350,
+                    "creation_date": 1311631377,
+                    "answer_id": 6822907,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/6822907#6822907",
+                    "body": "<p>I like <code>tee()</code>:</p>\n\n<pre><code>from itertools import tee, izip\n\ndef window(iterable, size):\n    iters = tee(iterable, size)\n    for i in xrange(1, size):\n        for each in iters[i:]:\n            next(each, None)\n    return izip(*iters)\n\nfor each in window(xrange(6), 3):\n    print list(each)\n</code></pre>\n\n<p>gives:</p>\n\n<pre><code>[0, 1, 2]\n[1, 2, 3]\n[2, 3, 4]\n[3, 4, 5]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 202111,
+                                "reputation": 5790,
+                                "user_id": 448970,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "David B."
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1332789800,
+                            "post_id": 9878083,
+                            "comment_id": 12598189,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/9878083#comment12598189_9878083",
+                            "body": "The main drawback here is the <code>len(sequence)</code> call.  This won&#39;t work if <code>sequence</code> is an iterator or generator.  When the input does fit in memory, this does offer a more readable solution than with iterators."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 204149,
+                                "reputation": 721,
+                                "user_id": 452186,
+                                "user_type": "registered",
+                                "accept_rate": 40,
+                                "display_name": "Gus"
+                            },
+                            "reply_to_user": {
+                                "account_id": 202111,
+                                "reputation": 5790,
+                                "user_id": 448970,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "David B."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1332793143,
+                            "post_id": 9878083,
+                            "comment_id": 12599439,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/9878083#comment12599439_9878083",
+                            "body": "Yes, you&#39;re right.  This particular case was originally meant for scanning DNA sequences which are usually represented as strings.  It certainly DOES have the limitation you mention.  If you wanted you could simply test each slice to make sure its still the right length and then forget about having to know the length of the whole sequence.  But it would add a bit more overhead (a len() test every iteration)."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 204149,
+                        "reputation": 721,
+                        "user_id": 452186,
+                        "user_type": "registered",
+                        "accept_rate": 40,
+                        "display_name": "Gus"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1332788482,
+                    "creation_date": 1332788482,
+                    "answer_id": 9878083,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/9878083#9878083",
+                    "body": "<p>I use the following code as a simple sliding window that uses generators to drastically increase readability.  Its speed has so far been sufficient for use in bioinformatics sequence analysis in my experience.</p>\n\n<p>I include it here because I didn't see this method used yet.  Again, I make no claims about its compared performance.</p>\n\n<pre><code>def slidingWindow(sequence,winSize,step=1):\n\"\"\"Returns a generator that will iterate through\nthe defined chunks of input sequence. Input sequence\nmust be sliceable.\"\"\"\n\n    # Verify the inputs\n    if not ((type(winSize) == type(0)) and (type(step) == type(0))):\n        raise Exception(\"**ERROR** type(winSize) and type(step) must be int.\")\n    if step &gt; winSize:\n        raise Exception(\"**ERROR** step must not be larger than winSize.\")\n    if winSize &gt; len(sequence):\n        raise Exception(\"**ERROR** winSize must not be larger than sequence length.\")\n\n    # Pre-compute number of chunks to emit\n    numOfChunks = ((len(sequence)-winSize)/step)+1\n\n    # Do the work\n    for i in range(0,numOfChunks*step,step):\n        yield sequence[i:i+winSize]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 77701,
+                        "reputation": 1120,
+                        "user_id": 221602,
+                        "user_type": "registered",
+                        "display_name": "MrDrFenner"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 12,
+                    "last_activity_date": 1348809127,
+                    "last_edit_date": 1348809127,
+                    "creation_date": 1340904504,
+                    "answer_id": 11249883,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/11249883#11249883",
+                    "body": "<p>Just a quick contribution.</p>\n\n<p>Since the current python docs don't have \"window\" in the itertool examples  (i.e., at the bottom of <a href=\"http://docs.python.org/library/itertools.html\" rel=\"noreferrer\">http://docs.python.org/library/itertools.html</a>), here's an snippet based on the \ncode for grouper which is one of the examples given:</p>\n\n<pre><code>import itertools as it\ndef window(iterable, size):\n    shiftedStarts = [it.islice(iterable, s, None) for s in xrange(size)]\n    return it.izip(*shiftedStarts)\n</code></pre>\n\n<p>Basically, we create a series of sliced iterators, each with a starting point one spot further forward.  Then, we zip these together.  Note, this function returns a generator (it is not directly a generator itself).</p>\n\n<p>Much like the appending-element and advancing-iterator versions above, the performance (i.e., which is best) varies with list size and window size.  I like this one because it is a two-liner (it could be a one-liner, but I prefer naming concepts).</p>\n\n<p>It turns out that the above code is <em>wrong</em>.  It works if the parameter passed to <em>iterable</em> is a sequence but not if it is an iterator.  If it is an iterator, the same iterator is shared (but not tee'd) among the islice calls and this breaks things badly.  </p>\n\n<p>Here is some fixed code:</p>\n\n<pre><code>import itertools as it\ndef window(iterable, size):\n    itrs = it.tee(iterable, size)\n    shiftedStarts = [it.islice(anItr, s, None) for s, anItr in enumerate(itrs)]\n    return it.izip(*shiftedStarts)\n</code></pre>\n\n<p>Also, one more version for the books.  Instead of copying an iterator and then advancing copies many times, this version makes pairwise copies of each iterator as we move the starting position forward.  Thus, iterator t provides both the \"complete\" iterator with starting point at t and also the basis for creating iterator t + 1:</p>\n\n<pre><code>import itertools as it\ndef window4(iterable, size):\n    complete_itr, incomplete_itr = it.tee(iterable, 2)\n    iters = [complete_itr]\n    for i in xrange(1, size):\n        incomplete_itr.next()\n        complete_itr, incomplete_itr = it.tee(incomplete_itr, 2)\n        iters.append(complete_itr)\n    return it.izip(*iters)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3021,
+                        "reputation": 408304,
+                        "user_id": 4279,
+                        "user_type": "registered",
+                        "accept_rate": 94,
+                        "display_name": "jfs"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 20,
+                    "last_activity_date": 1480923158,
+                    "last_edit_date": 1495540982,
+                    "creation_date": 1353023252,
+                    "answer_id": 13408251,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/13408251#13408251",
+                    "body": "<p>Here's a generalization that adds support for <code>step</code>, <code>fillvalue</code> parameters:</p>\n\n<pre><code>from collections import deque\nfrom itertools import islice\n\ndef sliding_window(iterable, size=2, step=1, fillvalue=None):\n    if size &lt; 0 or step &lt; 1:\n        raise ValueError\n    it = iter(iterable)\n    q = deque(islice(it, size), maxlen=size)\n    if not q:\n        return  # empty iterable or size == 0\n    q.extend(fillvalue for _ in range(size - len(q)))  # pad to size\n    while True:\n        yield iter(q)  # iter() to avoid accidental outside modifications\n        try:\n            q.append(next(it))\n        except StopIteration: # Python 3.5 pep 479 support\n            return\n        q.extend(next(it, fillvalue) for _ in range(step - 1))\n</code></pre>\n\n<p>It yields in chunks <code>size</code> items at a time rolling <code>step</code> positions per iteration padding each chunk with <code>fillvalue</code> if necessary. Example for <code>size=4, step=3, fillvalue='*'</code>:</p>\n\n<pre><code> [a b c d]e f g h i j k l m n o p q r s t u v w x y z\n  a b c[d e f g]h i j k l m n o p q r s t u v w x y z\n  a b c d e f[g h i j]k l m n o p q r s t u v w x y z\n  a b c d e f g h i[j k l m]n o p q r s t u v w x y z\n  a b c d e f g h i j k l[m n o p]q r s t u v w x y z\n  a b c d e f g h i j k l m n o[p q r s]t u v w x y z\n  a b c d e f g h i j k l m n o p q r[s t u v]w x y z\n  a b c d e f g h i j k l m n o p q r s t u[v w x y]z\n  a b c d e f g h i j k l m n o p q r s t u v w x[y z * *]\n</code></pre>\n\n<p>For an example of use case for the <code>step</code> parameter, see <a href=\"https://stackoverflow.com/q/13401601/4279\">Processing a large .txt file in python efficiently</a>.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 32131,
+                        "reputation": 9109,
+                        "user_id": 88814,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "Dmitry Avtonomov"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1386234133,
+                    "last_edit_date": 1386234133,
+                    "creation_date": 1374626029,
+                    "answer_id": 17823312,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/17823312#17823312",
+                    "body": "<p>a slightly modified version of the deque window, to make it a true rolling window. So that it starts being populated with just one element, then grows to it's maximum window size, and then shrinks as it's left edge comes near the end:</p>\n\n<pre><code>from collections import deque\ndef window(seq, n=2):\n    it = iter(seq)\n    win = deque((next(it, None) for _ in xrange(1)), maxlen=n)\n    yield win\n    append = win.append\n    for e in it:\n        append(e)\n        yield win\n    for _ in xrange(len(win)-1):\n        win.popleft()\n        yield win\n\nfor wnd in window(range(5), n=3):\n    print(list(wnd))\n</code></pre>\n\n<p>this gives</p>\n\n<pre><code>[0]\n[0, 1]\n[0, 1, 2]\n[1, 2, 3]\n[2, 3, 4]\n[3, 4]\n[4]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1433328,
+                        "reputation": 11646,
+                        "user_id": 1355221,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "dansalmo"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1374628073,
+                    "creation_date": 1374628073,
+                    "answer_id": 17823553,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/17823553#17823553",
+                    "body": "<pre><code>&gt;&gt;&gt; n, m = 6, 3\n&gt;&gt;&gt; k = n - m+1\n&gt;&gt;&gt; print ('{}\\n'*(k)).format(*[range(i, i+m) for i in xrange(k)])\n[0, 1, 2]\n[1, 2, 3]\n[2, 3, 4]\n[3, 4, 5]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1496767,
+                                "reputation": 1189,
+                                "user_id": 1402511,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "jameh"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1382939161,
+                            "post_id": 19485712,
+                            "comment_id": 29139824,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/19485712#comment29139824_19485712",
+                            "body": "note: the stagger step is O(n^2) where n is the size of the window, and only happens on the first call. It could be optimized down to O(n), but it would make the code a little messier :P"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1496767,
+                        "reputation": 1189,
+                        "user_id": 1402511,
+                        "user_type": "registered",
+                        "accept_rate": 70,
+                        "display_name": "jameh"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1382330415,
+                    "last_edit_date": 1592644375,
+                    "creation_date": 1382325345,
+                    "answer_id": 19485712,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/19485712#19485712",
+                    "body": "<h1>Multiple iterators!</h1>\n<pre><code>def window(seq, size, step=1):\n    # initialize iterators\n    iters = [iter(seq) for i in range(size)]\n    # stagger iterators (without yielding)\n    [next(iters[i]) for j in range(size) for i in range(-1, -j-1, -1)]\n    while(True):\n        yield [next(i) for i in iters]\n        # next line does nothing for step = 1 (skips iterations for step &gt; 1)\n        [next(i) for i in iters for j in range(step-1)]\n</code></pre>\n<p><code>next(it)</code> raises <code>StopIteration</code> when the sequence is finished, and for some cool reason that's beyond me, the yield statement here excepts it and the function returns, ignoring the leftover values that don't form a full window.</p>\n<p>Anyway, this is the least-lines solution yet whose only requirement is that <code>seq</code> implement either <code>__iter__</code> or <code>__getitem__</code> and doesn't rely on <code>itertools</code> or <code>collections</code> besides @dansalmo's solution :)</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 8015275,
+                                "reputation": 18993,
+                                "user_id": 6045800,
+                                "user_type": "registered",
+                                "display_name": "Tomerikoo"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1635084623,
+                            "post_id": 26109541,
+                            "comment_id": 123195345,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/26109541#comment123195345_26109541",
+                            "body": "<code>[list[i+o] for o in range(degree)]</code> is equivalent to <code>list[i:i+degree]</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2692690,
+                        "reputation": 31,
+                        "user_id": 2325589,
+                        "user_type": "registered",
+                        "display_name": "yazdmich"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1412028848,
+                    "last_edit_date": 1412028848,
+                    "creation_date": 1412027657,
+                    "answer_id": 26109541,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/26109541#26109541",
+                    "body": "<pre><code>def rolling_window(list, degree):\n    for i in range(len(list)-degree+1):\n        yield [list[i+o] for o in range(degree)]\n</code></pre>\n\n<p>Made this for a rolling average function</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2442474,
+                        "reputation": 4473,
+                        "user_id": 2130573,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "WeiChing \u6797\u7152\u6e05"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1419727047,
+                    "last_edit_date": 1419727047,
+                    "creation_date": 1419672464,
+                    "answer_id": 27665967,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/27665967#27665967",
+                    "body": "<p>why not</p>\n\n<pre><code>def pairwise(iterable):\n    \"s -&gt; (s0,s1), (s1,s2), (s2, s3), ...\"\n    a, b = tee(iterable)\n    next(b, None)\n    return zip(a, b)\n</code></pre>\n\n<p>It is documented in Python <a href=\"https://docs.python.org/3/library/itertools.html\" rel=\"nofollow\">doc</a> .\nYou can easily extend it to wider window. </p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1486311,
+                                "reputation": 4661,
+                                "user_id": 1394513,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "Shejo284"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1493191397,
+                            "post_id": 36451366,
+                            "comment_id": 74303596,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/36451366#comment74303596_36451366",
+                            "body": "@ keocra what does zip(*t) mean? Where can I find some documentation on that kind of statement?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2298796,
+                                "reputation": 623,
+                                "user_id": 2019601,
+                                "user_type": "registered",
+                                "display_name": "keocra"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1486311,
+                                "reputation": 4661,
+                                "user_id": 1394513,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "Shejo284"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1493191841,
+                            "post_id": 36451366,
+                            "comment_id": 74303884,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/36451366#comment74303884_36451366",
+                            "body": "Python 2.7: <a href=\"https://docs.python.org/2/library/functions.html#zip\" rel=\"nofollow noreferrer\">docs.python.org/2/library/functions.html#zip</a>, the star unpacks the list and provide the individual elements as input to zip (<a href=\"https://docs.python.org/3/tutorial/controlflow.html#unpacking-argument-lists\" rel=\"nofollow noreferrer\">unpacking arguments</a>)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2298796,
+                        "reputation": 623,
+                        "user_id": 2019601,
+                        "user_type": "registered",
+                        "display_name": "keocra"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1459946529,
+                    "last_edit_date": 1459946529,
+                    "creation_date": 1459946176,
+                    "answer_id": 36451366,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/36451366#36451366",
+                    "body": "<p>How about using the following:</p>\n\n<pre><code>mylist = [1, 2, 3, 4, 5, 6, 7]\n\ndef sliding_window(l, window_size=2):\n    if window_size &gt; len(l):\n        raise ValueError(\"Window size must be smaller or equal to the number of elements in the list.\")\n\n    t = []\n    for i in xrange(0, window_size):\n        t.append(l[i:])\n\n    return zip(*t)\n\nprint sliding_window(mylist, 3)\n</code></pre>\n\n<p>Output:</p>\n\n<pre><code>[(1, 2, 3), (2, 3, 4), (3, 4, 5), (4, 5, 6), (5, 6, 7)]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 350511,
+                                "reputation": 749,
+                                "user_id": 3142913,
+                                "user_type": "registered",
+                                "display_name": "Mark Lawrence"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1488563877,
+                            "post_id": 38626832,
+                            "comment_id": 72303309,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/38626832#comment72303309_38626832",
+                            "body": "The instant you see &quot;range(len&quot; in Python it&#39;s a code smell."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1914531,
+                                "reputation": 26686,
+                                "user_id": 1727392,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "duhaime"
+                            },
+                            "reply_to_user": {
+                                "account_id": 350511,
+                                "reputation": 749,
+                                "user_id": 3142913,
+                                "user_type": "registered",
+                                "display_name": "Mark Lawrence"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1516566795,
+                            "post_id": 38626832,
+                            "comment_id": 83729712,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/38626832#comment83729712_38626832",
+                            "body": "@MarkLawrence What makes you think <code>range(len</code> is a bad pattern in python?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 8905795,
+                        "reputation": 101,
+                        "user_id": 6647656,
+                        "user_type": "registered",
+                        "display_name": "heyyou482"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 10,
+                    "last_activity_date": 1469678094,
+                    "creation_date": 1469678094,
+                    "answer_id": 38626832,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/38626832#38626832",
+                    "body": "<pre><code>def GetShiftingWindows(thelist, size):\n    return [ thelist[x:x+size] for x in range( len(thelist) - size + 1 ) ]\n\n&gt;&gt; a = [1, 2, 3, 4, 5]\n&gt;&gt; GetShiftingWindows(a, 3)\n[ [1, 2, 3], [2, 3, 4], [3, 4, 5] ]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 151071,
+                                "reputation": 150282,
+                                "user_id": 364696,
+                                "user_type": "registered",
+                                "display_name": "ShadowRanger"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1480702229,
+                            "post_id": 40937024,
+                            "comment_id": 69088363,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/40937024#comment69088363_40937024",
+                            "body": "Obviously, this is less efficient than it could be; <code>consume</code> is general purpose (including the ability to do a complete <code>consume</code>) and thus needs an extra import and a per-use test for <code>n is None</code>. In real code, if and only if I&#39;d determined performance was a problem, or I really needed more concise code, I&#39;d consider inlining the <code>else</code> case of <code>consume</code> into <code>window</code>, assuming I wasn&#39;t using <code>consume</code> for anything else. But if performance hasn&#39;t been shown to be an issue, I&#39;d keep the separate definitions; the named <code>consume</code> function makes the operation less magical/self-documenting."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 151071,
+                        "reputation": 150282,
+                        "user_id": 364696,
+                        "user_type": "registered",
+                        "display_name": "ShadowRanger"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 9,
+                    "last_activity_date": 1480708541,
+                    "last_edit_date": 1495540486,
+                    "creation_date": 1480696828,
+                    "answer_id": 40937024,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/40937024#40937024",
+                    "body": "<p>Just to show how you can combine <a href=\"https://docs.python.org/3/library/itertools.html#itertools-recipes\" rel=\"noreferrer\"><code>itertools</code> recipes</a>, I'm extending the <code>pairwise</code> recipe as directly as possible back into the <code>window</code> recipe using the <code>consume</code> recipe:</p>\n\n<pre><code>def consume(iterator, n):\n    \"Advance the iterator n-steps ahead. If n is none, consume entirely.\"\n    # Use functions that consume iterators at C speed.\n    if n is None:\n        # feed the entire iterator into a zero-length deque\n        collections.deque(iterator, maxlen=0)\n    else:\n        # advance to the empty slice starting at position n\n        next(islice(iterator, n, n), None)\n\ndef window(iterable, n=2):\n    \"s -&gt; (s0, ...,s(n-1)), (s1, ...,sn), (s2, ..., s(n+1)), ...\"\n    iters = tee(iterable, n)\n    # Could use enumerate(islice(iters, 1, None), 1) to avoid consume(it, 0), but that's\n    # slower for larger window sizes, while saving only small fixed \"noop\" cost\n    for i, it in enumerate(iters):\n        consume(it, i)\n    return zip(*iters)\n</code></pre>\n\n<p>The <code>window</code> recipe is the same as for <code>pairwise</code>, it just replaces the single element \"consume\" on the second <code>tee</code>-ed iterator with progressively increasing consumes on <code>n - 1</code> iterators. Using <code>consume</code> instead of wrapping each iterator in <code>islice</code> is marginally faster (for sufficiently large iterables) since you only pay the <code>islice</code> wrapping overhead during the <code>consume</code> phase, not during the process of extracting each window-ed value (so it's bounded by <code>n</code>, not the number of items in <code>iterable</code>).</p>\n\n<p>Performance-wise, compared to some other solutions, this is pretty good (and better than any of the other solutions I tested as it scales). Tested on Python 3.5.0, Linux x86-64, using <code>ipython</code> <code>%timeit</code> magic.</p>\n\n<p><a href=\"https://stackoverflow.com/a/6822761/364696\">kindall's the <code>deque</code> solution</a>, tweaked for performance/correctness by using <code>islice</code> instead of a home-rolled generator expression and testing the resulting length so it doesn't yield results when the iterable is shorter than the window, as well as passing the <code>maxlen</code> of the <code>deque</code> positionally instead of by keyword (makes a surprising difference for smaller inputs):</p>\n\n<pre><code>&gt;&gt;&gt; %timeit -r5 deque(windowkindall(range(10), 3), 0)\n100000 loops, best of 5: 1.87 \u03bcs per loop\n&gt;&gt;&gt; %timeit -r5 deque(windowkindall(range(1000), 3), 0)\n10000 loops, best of 5: 72.6 \u03bcs per loop\n&gt;&gt;&gt; %timeit -r5 deque(windowkindall(range(1000), 30), 0)\n1000 loops, best of 5: 71.6 \u03bcs per loop\n</code></pre>\n\n<p>Same as previous adapted kindall solution, but with each <code>yield win</code> changed to <code>yield tuple(win)</code> so storing results from the generator works without all stored results really being a view of the most recent result (all other reasonable solutions are safe in this scenario), and adding <code>tuple=tuple</code> to the function definition to move use of <code>tuple</code> from the <code>B</code> in <code>LEGB</code> to the <code>L</code>:</p>\n\n<pre><code>&gt;&gt;&gt; %timeit -r5 deque(windowkindalltupled(range(10), 3), 0)\n100000 loops, best of 5: 3.05 \u03bcs per loop\n&gt;&gt;&gt; %timeit -r5 deque(windowkindalltupled(range(1000), 3), 0)\n10000 loops, best of 5: 207 \u03bcs per loop\n&gt;&gt;&gt; %timeit -r5 deque(windowkindalltupled(range(1000), 30), 0)\n1000 loops, best of 5: 348 \u03bcs per loop\n</code></pre>\n\n<p><code>consume</code>-based solution shown above:</p>\n\n<pre><code>&gt;&gt;&gt; %timeit -r5 deque(windowconsume(range(10), 3), 0)\n100000 loops, best of 5: 3.92 \u03bcs per loop\n&gt;&gt;&gt; %timeit -r5 deque(windowconsume(range(1000), 3), 0)\n10000 loops, best of 5: 42.8 \u03bcs per loop\n&gt;&gt;&gt; %timeit -r5 deque(windowconsume(range(1000), 30), 0)\n1000 loops, best of 5: 232 \u03bcs per loop\n</code></pre>\n\n<p>Same as <code>consume</code>, but inlining <code>else</code> case of <code>consume</code> to avoid function call and <code>n is None</code> test to reduce runtime, particularly for small inputs where the setup overhead is a meaningful part of the work:</p>\n\n<pre><code>&gt;&gt;&gt; %timeit -r5 deque(windowinlineconsume(range(10), 3), 0)\n100000 loops, best of 5: 3.57 \u03bcs per loop\n&gt;&gt;&gt; %timeit -r5 deque(windowinlineconsume(range(1000), 3), 0)\n10000 loops, best of 5: 40.9 \u03bcs per loop\n&gt;&gt;&gt; %timeit -r5 deque(windowinlineconsume(range(1000), 30), 0)\n1000 loops, best of 5: 211 \u03bcs per loop\n</code></pre>\n\n<p>(Side-note: A variant on <code>pairwise</code> that uses <code>tee</code> with the default argument of 2 repeatedly to make nested <code>tee</code> objects, so any given iterator is only advanced once, not independently consumed an increasing number of times, similar to <a href=\"https://stackoverflow.com/a/11249883/364696\">MrDrFenner's answer</a> is similar to non-inlined <code>consume</code> and slower than the inlined <code>consume</code> on all tests, so I've omitted it those results for brevity).</p>\n\n<p>As you can see, <strong>if you don't care about the possibility of the caller needing to store results, my optimized version of kindall's solution wins most of the time, except in the \"large iterable, small window size case\"</strong> (where inlined <code>consume</code> wins); it degrades quickly as the iterable size increases, while not degrading at all as the window size increases (every other solution degrades more slowly for iterable size increases, but also degrades for window size increases). It can even be adapted for the \"need tuples\" case by wrapping in <code>map(tuple, ...)</code>, which runs ever so slightly slower than putting the tupling in the function, but it's trivial (takes 1-5% longer) and lets you keep the flexibility of running faster when you can tolerate repeatedly returning the same value.</p>\n\n<p><strong>If you need safety against returns being stored, inlined <code>consume</code> wins on all but the smallest input sizes</strong> (with non-inlined <code>consume</code> being slightly slower but scaling similarly). The <code>deque</code> &amp; tupling based solution wins only for the smallest inputs, due to smaller setup costs, and the gain is small; it degrades badly as the iterable gets longer.</p>\n\n<p>For the record, the adapted version of kindall's solution that <code>yield</code>s <code>tuple</code>s I used was:</p>\n\n<pre><code>def windowkindalltupled(iterable, n=2, tuple=tuple):\n    it = iter(iterable)\n    win = deque(islice(it, n), n)\n    if len(win) &lt; n:\n        return\n    append = win.append\n    yield tuple(win)\n    for e in it:\n        append(e)\n        yield tuple(win)\n</code></pre>\n\n<p>Drop the caching of <code>tuple</code> in the function definition line and the use of <code>tuple</code> in each <code>yield</code> to get the faster but less safe version.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4843925,
+                        "reputation": 7620,
+                        "user_id": 3908170,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "DarkCygnus"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1490310784,
+                    "creation_date": 1490310784,
+                    "answer_id": 42988667,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/42988667#42988667",
+                    "body": "<p>This is an old question but for those still interested there is a great implementation of a window slider using generators in <a href=\"http://www.pyimagesearch.com/2015/03/23/sliding-windows-for-object-detection-with-python-and-opencv/\" rel=\"nofollow noreferrer\">this</a> page (by Adrian Rosebrock). </p>\n\n<p>It is an implementation for OpenCV however you can easily use it for any other purpose. For the eager ones i'll paste the code here but to understand it better I recommend visiting the original page. </p>\n\n<pre><code>def sliding_window(image, stepSize, windowSize):\n    # slide a window across the image\n    for y in xrange(0, image.shape[0], stepSize):\n        for x in xrange(0, image.shape[1], stepSize):\n            # yield the current window\n            yield (x, y, image[y:y + windowSize[1], x:x + windowSize[0]])\n</code></pre>\n\n<p><strong>Tip:</strong> You can check the <code>.shape</code> of the window when iterating the generator to discard those that do not meet your requirements</p>\n\n<p>Cheers</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4667746,
+                                "reputation": 4363,
+                                "user_id": 3780389,
+                                "user_type": "registered",
+                                "display_name": "teichert"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1562443325,
+                            "post_id": 46412374,
+                            "comment_id": 100377162,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/46412374#comment100377162_46412374",
+                            "body": "<code>step=3</code> should actually be removed to match the OP&#39;s request: <code>list(more_itertools.windowed(range(6), 3))</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 124226,
+                                "reputation": 8036,
+                                "user_id": 2251840,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "SmallChess"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1646327890,
+                            "post_id": 46412374,
+                            "comment_id": 126101560,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/46412374#comment126101560_46412374",
+                            "body": "But it returned a list of tuples."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 206944,
+                                "reputation": 11114,
+                                "user_id": 456550,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Christian Long"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1665501847,
+                            "post_id": 46412374,
+                            "comment_id": 130713051,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/46412374#comment130713051_46412374",
+                            "body": "Another way of doing what this answer does (getting non-overlapping chunks) is more_itertools.chunked. <code>list(more_itertools.chunked([1,2,3,4,5,6,7,8,9,10,11,12,13,1&zwnj;&#8203;4,15],n=3))</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 192991,
+                        "reputation": 2185,
+                        "user_id": 434448,
+                        "user_type": "registered",
+                        "display_name": "Nikolay Frick"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 32,
+                    "last_activity_date": 1506365923,
+                    "creation_date": 1506365923,
+                    "answer_id": 46412374,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/46412374#46412374",
+                    "body": "<p>There is a library which does exactly what you need:</p>\n\n<pre><code>import more_itertools\nlist(more_itertools.windowed([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],n=3, step=3))\n\nOut: [(1, 2, 3), (4, 5, 6), (7, 8, 9), (10, 11, 12), (13, 14, 15)]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 9938274,
+                        "reputation": 474,
+                        "user_id": 8083313,
+                        "user_type": "registered",
+                        "display_name": "shouldsee"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1530396787,
+                    "last_edit_date": 1530396787,
+                    "creation_date": 1529424010,
+                    "answer_id": 50932553,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/50932553#50932553",
+                    "body": "<p>Modified <a href=\"https://stackoverflow.com/a/6822773/8083313\">DiPaolo's answer</a> to allow arbitrary fill and variable step size</p>\n\n<pre><code>import itertools\ndef window(seq, n=2,step=1,fill=None,keep=0):\n    \"Returns a sliding window (of width n) over data from the iterable\"\n    \"   s -&gt; (s0,s1,...s[n-1]), (s1,s2,...,sn), ...                   \"\n    it = iter(seq)\n    result = tuple(itertools.islice(it, n))    \n    if len(result) == n:\n        yield result\n    while True:        \n#         for elem in it:        \n        elem = tuple( next(it, fill) for _ in range(step))\n        result = result[step:] + elem        \n        if elem[-1] is fill:\n            if keep:\n                yield result\n            break\n        yield result\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 9955384,
+                                "reputation": 2353,
+                                "user_id": 8108407,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "jrswgtr"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1533219237,
+                            "post_id": 51655160,
+                            "comment_id": 90275146,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/51655160#comment90275146_51655160",
+                            "body": "Please write some text about your answer."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 13654139,
+                        "reputation": 21,
+                        "user_id": 9851161,
+                        "user_type": "registered",
+                        "display_name": "FAYAZ"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1533217966,
+                    "last_edit_date": 1533217966,
+                    "creation_date": 1533217238,
+                    "answer_id": 51655160,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/51655160#51655160",
+                    "body": "<pre><code>#Importing the numpy library\nimport numpy as np\narr = np.arange(6) #Sequence\nwindow_size = 3\nnp.lib.stride_tricks.as_strided(arr, shape= (len(arr) - window_size +1, window_size), \nstrides = arr.strides*2)\n\n\"\"\"Example output:\n\n  [0, 1, 2]\n  [1, 2, 3]\n  [2, 3, 4]\n  [3, 4, 5]\n</code></pre>\n\n<p>\"\"\"</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 11895012,
+                        "reputation": 341,
+                        "user_id": 8704691,
+                        "user_type": "registered",
+                        "display_name": "Gram"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1549354938,
+                    "last_edit_date": 1549354938,
+                    "creation_date": 1547036496,
+                    "answer_id": 54110047,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/54110047#54110047",
+                    "body": "<p>Let's make it lazy!</p>\n\n<pre><code>from itertools import islice, tee\n\ndef window(iterable, size): \n    iterators = tee(iterable, size) \n    iterators = [islice(iterator, i, None) for i, iterator in enumerate(iterators)]  \n    yield from zip(*iterators)\n\nlist(window(range(5), 3))\n# [(0, 1, 2), (1, 2, 3), (2, 3, 4)]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 446597,
+                                "reputation": 23231,
+                                "user_id": 839733,
+                                "user_type": "registered",
+                                "accept_rate": 69,
+                                "display_name": "Abhijit Sarkar"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1577043824,
+                            "post_id": 58492693,
+                            "comment_id": 105077584,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/58492693#comment105077584_58492693",
+                            "body": "Please add some explanatory text with your answer. Not everyone stumbling across this thread is a Python Ninja."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 424683,
+                                "reputation": 61,
+                                "user_id": 804816,
+                                "user_type": "registered",
+                                "display_name": "G&#246;sta Forsum"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1588253018,
+                            "post_id": 58492693,
+                            "comment_id": 108831761,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/58492693#comment108831761_58492693",
+                            "body": "that is off by 2, this works: zip(*[seq[i:(len(seq) - n + 1 + i)] for i in range(n)])"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5303087,
+                        "reputation": 1608,
+                        "user_id": 4231985,
+                        "user_type": "registered",
+                        "accept_rate": 38,
+                        "display_name": "kkawabat"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1703276930,
+                    "last_edit_date": 1703276930,
+                    "creation_date": 1571684757,
+                    "answer_id": 58492693,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/58492693#58492693",
+                    "body": "<p>here is a one liner. I timed it and it's comprable to the performance of the top answer and gets progressively better with larger seq from 20% slower with len(seq) = 20 and 7% slower with len(seq) = 10000</p>\n<pre><code>zip(*[seq[i:(len(seq) - n + 1 + i)] for i in range(n)])\n</code></pre>\n<p>which is equivalent to:</p>\n<pre class=\"lang-py prettyprint-override\"><code>win_list = []\nfor win_start_idx in range(n):\n    win_end_idx = (len(seq) - n + 1 + i)\n    win_list.append(seq[win_start_idx:win_end_idx])\nwin_list = zip(*win_list)  # transpose rows of columns to columns of rows\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5060531,
+                        "reputation": 336,
+                        "user_id": 4062301,
+                        "user_type": "registered",
+                        "display_name": "Paras Mishra"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1586206747,
+                    "creation_date": 1586206747,
+                    "answer_id": 61068873,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/61068873#61068873",
+                    "body": "<p>Trying my part, simple, one liner, pythonic way using islice. But, may not be optimally efficient.</p>\n\n<pre><code>from itertools import islice\narray = range(0, 10)\nwindow_size = 4\nmap(lambda i: list(islice(array, i, i + window_size)), range(0, len(array) - window_size + 1))\n# output = [[0, 1, 2, 3], [1, 2, 3, 4], [2, 3, 4, 5], [3, 4, 5, 6], [4, 5, 6, 7], [5, 6, 7, 8], [6, 7, 8, 9]]\n</code></pre>\n\n<p>Explanation: \nCreate window by using islice of window_size and iterate this operation using map over all array.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 10664433,
+                                "reputation": 13139,
+                                "user_id": 7851470,
+                                "user_type": "registered",
+                                "display_name": "Georgy"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1590263805,
+                            "post_id": 61977295,
+                            "comment_id": 109618138,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/61977295#comment109618138_61977295",
+                            "body": "Looks similar to the first solution from this answer: <a href=\"https://stackoverflow.com/a/11249883/7851470\">stackoverflow.com/a/11249883/7851470</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5525367,
+                                "reputation": 182,
+                                "user_id": 4386995,
+                                "user_type": "registered",
+                                "display_name": "Ryan Codrai"
+                            },
+                            "reply_to_user": {
+                                "account_id": 10664433,
+                                "reputation": 13139,
+                                "user_id": 7851470,
+                                "user_type": "registered",
+                                "display_name": "Georgy"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1590351099,
+                            "post_id": 61977295,
+                            "comment_id": 109642090,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/61977295#comment109642090_61977295",
+                            "body": "@georgy I think I skipped over that answer because it was written in Python2 but I agree, it&#39;s essentially the same!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5525367,
+                        "reputation": 182,
+                        "user_id": 4386995,
+                        "user_type": "registered",
+                        "display_name": "Ryan Codrai"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1656934239,
+                    "last_edit_date": 1656934239,
+                    "creation_date": 1590260884,
+                    "answer_id": 61977295,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/61977295#61977295",
+                    "body": "<p>I tested a few solutions along with the one I came up with. I found the one I came up with to be the fastest so I thought I would share my python3 implementation.</p>\n<pre><code>import itertools\nimport sys\n\ndef windowed(l, stride):\n    return zip(*[itertools.islice(l, i, sys.maxsize) for i in range(stride)])\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 11185529,
+                        "reputation": 4608,
+                        "user_id": 8208006,
+                        "user_type": "registered",
+                        "display_name": "Naga kiran"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1604646562,
+                    "last_edit_date": 1604646562,
+                    "creation_date": 1594707144,
+                    "answer_id": 62889059,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/62889059#62889059",
+                    "body": "<p>Optimized Function for sliding window data in Deep learning</p>\n<pre><code>def SlidingWindow(X, window_length, stride):\n    indexer = np.arange(window_length)[None, :] + stride*np.arange(int(len(X)/stride)-window_length+4)[:, None]\n    return X.take(indexer)\n</code></pre>\n<p>to apply on multidimensional array</p>\n<pre><code>import numpy as np\ndef SlidingWindow(X, window_length, stride1):\n    stride=  X.shape[1]*stride1\n    window_length = window_length*X.shape[1]\n    indexer = np.arange(window_length)[None, :] + stride1*np.arange(int(len(X)/stride1)-window_length-1)[:, None]\n    return X.take(indexer)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 14802686,
+                        "reputation": 154,
+                        "user_id": 11185460,
+                        "user_type": "registered",
+                        "display_name": "Sailist"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1618202457,
+                    "creation_date": 1618202457,
+                    "answer_id": 67052761,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/67052761#67052761",
+                    "body": "<p>my two versions of <code>window</code> implementation</p>\n<pre class=\"lang-py prettyprint-override\"><code>from typing import Sized, Iterable\n\ndef window(seq: Sized, n: int, strid: int = 1, drop_last: bool = False):\n    for i in range(0, len(seq), strid):\n        res = seq[i:i + n]\n        if drop_last and len(res) &lt; n:\n            break\n        yield res\n\n\ndef window2(seq: Iterable, n: int, strid: int = 1, drop_last: bool = False):\n    it = iter(seq)\n    result = []\n    step = 0\n    for i, ele in enumerate(it):\n        result.append(ele)\n        result = result[-n:]\n        if len(result) == n:\n            if step % strid == 0:\n                yield result\n            step += 1\n    if not drop_last:\n        yield result\n\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 12505022,
+                        "reputation": 1,
+                        "user_id": 9102128,
+                        "user_type": "registered",
+                        "display_name": "pankaj raj"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1622274305,
+                    "creation_date": 1622274305,
+                    "answer_id": 67748976,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/67748976#67748976",
+                    "body": "<p>Another simple way to generate window of fixed length from a list</p>\n<pre><code>from collections import deque\n\ndef window(ls,window_size=3):\n    window = deque(maxlen=window_size)\n\n    for element in ls:\n        \n        if len(window)==window_size:\n            yield list(window)\n        window.append(element)\n\nls = [0,1,2,3,4,5]\n\nfor w in window(ls):\n    print(w)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5131094,
+                        "reputation": 642,
+                        "user_id": 4111268,
+                        "user_type": "registered",
+                        "display_name": "campkeith"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1625171287,
+                    "last_edit_date": 1625171287,
+                    "creation_date": 1625167308,
+                    "answer_id": 68215877,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/68215877#68215877",
+                    "body": "<p>My (keep it simple) solution that I ended up using:</p>\n<pre><code>def sliding_window(items, size):\n    return [items[start:end] for start, end\n            in zip(range(0, len(items) - size + 1), range(size, len(items) + 1))]\n</code></pre>\n<p>Needless to say, the <code>items</code> sequence needs to be sliceable. Working with indices is not ideal, but it seems to be the least bad option given the alternatives... This can also easily be changed to a generator: just replace <code>[...]</code> with <code>(...)</code>.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1135172,
+                        "reputation": 16724,
+                        "user_id": 1120370,
+                        "user_type": "registered",
+                        "accept_rate": 72,
+                        "display_name": "W.P. McNeill"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1644779714,
+                    "creation_date": 1644779714,
+                    "answer_id": 71104041,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/71104041#71104041",
+                    "body": "<p>The <a href=\"https://github.com/pytoolz/toolz\" rel=\"nofollow noreferrer\">toolz</a>/<a href=\"https://github.com/pytoolz/cytoolz\" rel=\"nofollow noreferrer\">cytoolz</a> package has a sliding_window function.</p>\n<pre><code>&gt;&gt;&gt; from cytoolz import sliding_window\n&gt;&gt;&gt; list(sliding_window(3, range(6))) # returns [(0, 1, 2), (1, 2, 3), (2, 3, 4), (3, 4, 5)]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 248321,
+                                "reputation": 61329,
+                                "user_id": 523612,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Karl Knechtel"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1673232760,
+                            "post_id": 72946978,
+                            "comment_id": 132444875,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/72946978#comment132444875_72946978",
+                            "body": "This was covered by existing answers (e.g. <a href=\"https://stackoverflow.com/a/27665967\">WeiChing&#39;s</a>), and also this special case is addressed in more detail at <a href=\"https://stackoverflow.com/questions/5434891/\">How can I iterate over overlapping (current, next) pairs of values from a list?</a>. The code shown here doesn&#39;t meet the complete specification, since it is limited to a fixed window size of 2."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 10595597,
+                        "reputation": 304,
+                        "user_id": 7804439,
+                        "user_type": "registered",
+                        "display_name": "Jw C"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1657599378,
+                    "creation_date": 1657599378,
+                    "answer_id": 72946978,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/72946978#72946978",
+                    "body": "<p>In Python 3.10, we have the <code>itertools.pairwise(iterable)</code> function to slide a window with two elements:</p>\n<p>Here's the <a href=\"https://docs.python.org/3.10/library/itertools.html#itertools.pairwise\" rel=\"nofollow noreferrer\">doc</a> :</p>\n<blockquote>\n<p>Return successive overlapping pairs taken from the input iterable.</p>\n<p>The number of 2-tuples in the output iterator will be one fewer than the number of inputs. It will be empty if the input iterable has fewer than two values.</p>\n<p>Roughly equivalent to:</p>\n<pre class=\"lang-py prettyprint-override\"><code>def pairwise(iterable):\n    # pairwise('ABCDEFG') --&gt; AB BC CD DE EF FG\n    a, b = tee(iterable)\n    next(b, None)\n    return zip(a, b)\n</code></pre>\n</blockquote>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 17476274,
+                                "reputation": 27050,
+                                "user_id": 12671057,
+                                "user_type": "registered",
+                                "display_name": "Kelly Bundy"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1671644750,
+                            "post_id": 74100932,
+                            "comment_id": 132145087,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/74100932#comment132145087_74100932",
+                            "body": "<a href=\"https://stackoverflow.com/a/38626832/12671057\">This</a> is a list comprehension posted years before yours, identical to yours except without your pointless <code>min</code> part."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 17476274,
+                                "reputation": 27050,
+                                "user_id": 12671057,
+                                "user_type": "registered",
+                                "display_name": "Kelly Bundy"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1671711341,
+                            "post_id": 74100932,
+                            "comment_id": 132159343,
+                            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/74100932#comment132159343_74100932",
+                            "body": "You wouldn&#39;t get an <code>IndexError</code> anyway, for example <code>l[3:666]</code> gives you <code>[3, 4]</code> without error."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3451051,
+                        "reputation": 14175,
+                        "user_id": 2890724,
+                        "user_type": "registered",
+                        "accept_rate": 55,
+                        "display_name": "Raydel Miranda"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1671709977,
+                    "last_edit_date": 1671709977,
+                    "creation_date": 1666027234,
+                    "answer_id": 74100932,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/74100932#74100932",
+                    "body": "<h1>Update</h1>\n<p>This is a duplicated answer here, as Kelly find out. But I am leaving this here as a counter-example since I include a pointless <code>min</code>.</p>\n<p>So if you feel tempted to use min to avoid <code>IndexError</code> don't, there is no need, <code>range</code> will handle that case for you.</p>\n<hr />\n<h3>Old answer</h3>\n<p>Curiously the following handle automatically when <code>n &gt; len(l)</code> returning <code>[]</code> which is semantically correct.</p>\n<pre><code>&gt;&gt;&gt; l = [0, 1, 2, 3, 4]\n\n&gt;&gt;&gt; n = 2\n&gt;&gt;&gt; [l[i: i + min(n, len(l)-i)] for i in range(len(l)-n+1)]\n&gt;&gt;&gt; [[0, 1], [1, 2], [2, 3], [3, 4]]\n&gt;&gt;&gt;\n&gt;&gt;&gt; n = 3\n&gt;&gt;&gt; [l[i: i + min(n, len(l)-i)] for i in range(len(l)-n+1)]\n&gt;&gt;&gt; [[0, 1, 2], [1, 2, 3], [2, 3, 4]]\n&gt;&gt;&gt;\n&gt;&gt;&gt; n = 4\n&gt;&gt;&gt; [l[i: i + min(n, len(l)-i)] for i in range(len(l)-n+1)]\n&gt;&gt;&gt; [[0, 1, 2, 3], [1, 2, 3, 4]]\n&gt;&gt;&gt;\n&gt;&gt;&gt; n = 5\n&gt;&gt;&gt; [l[i: i + min(n, len(l)-i)] for i in range(len(l)-n+1)]\n&gt;&gt;&gt; [[0, 1, 2, 3, 4]]\n&gt;&gt;&gt;\n&gt;&gt;&gt; n = 10 # n &gt; len(l)\n&gt;&gt;&gt; [l[i: i + min(n, len(l)-i)] for i in range(len(l)-n+1)]\n&gt;&gt;&gt; []\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 10465036,
+                        "reputation": 1632,
+                        "user_id": 7714681,
+                        "user_type": "registered",
+                        "display_name": "Emil"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1678089194,
+                    "last_edit_date": 1678089194,
+                    "creation_date": 1677891853,
+                    "answer_id": 75633039,
+                    "question_id": 6822725,
+                    "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator/75633039#75633039",
+                    "body": "<p>I find this solution more elegant than using built-in functions.</p>\n<pre><code>words = [&quot;this&quot;, &quot;is&quot;, &quot;an&quot;, &quot;example&quot;]\n\ndef get_sliding_windows(doc, sliding_window, padded=False):\n    all_windows = []\n    for i in range(sliding_window):\n        front = sliding_window-i\n        all_windows.append(front*['']+doc+i*[''])\n    if padded:\n        return np.array(all_windows).transpose()[1:]\n    else:\n        return np.array(all_windows).transpose()[sliding_window:-1]\n\n&gt;&gt;&gt; get_sliding_windows(words,3)\n&gt;&gt;&gt; array([['this', 'is', 'an'],\n       ['is', 'an', 'example'],\n       ['an', 'example', '']], dtype='&lt;U7')\n\n&gt;&gt;&gt; get_padded_sliding_windows(words,3, True)\n&gt;&gt;&gt; array([['', '', 'this'],\n       ['', 'this', 'is'],\n       ['this', 'is', 'an'],\n       ['is', 'an', 'example'],\n       ['an', 'example', ''],\n       ['example', '', '']], dtype='&lt;U7')\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 202111,
+                "reputation": 5790,
+                "user_id": 448970,
+                "user_type": "registered",
+                "accept_rate": 90,
+                "display_name": "David B."
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 6822773,
+            "answer_count": 30,
+            "score": 218,
+            "last_activity_date": 1703276930,
+            "creation_date": 1311630118,
+            "last_edit_date": 1673232607,
+            "question_id": 6822725,
+            "link": "https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator",
+            "title": "Rolling or sliding window iterator?",
+            "body": "<p>I need a rolling window (aka sliding window) iterable over a sequence/iterator/generator.  (Default Python iteration could be considered a special case, where the window length is 1.)  I'm currently using the following code. How can I do it more elegantly and/or efficiently?</p>\n<pre><code>def rolling_window(seq, window_size):\n    it = iter(seq)\n    win = [it.next() for cnt in xrange(window_size)] # First window\n    yield win\n    for e in it: # Subsequent windows\n        win[:-1] = win[1:]\n        win[-1] = e\n        yield win\n\nif __name__==&quot;__main__&quot;:\n    for w in rolling_window(xrange(6), 3):\n        print w\n\n&quot;&quot;&quot;Example output:   \n   [0, 1, 2]\n   [1, 2, 3]\n   [2, 3, 4]\n   [3, 4, 5]\n&quot;&quot;&quot;\n</code></pre>\n<hr />\n<p><sub>For the <em>specific</em> case of <code>window_size == 2</code> (i.e., iterating over adjacent, overlapping pairs in a sequence), see also <a href=\"https://stackoverflow.com/questions/5434891/\">How can I iterate over overlapping (current, next) pairs of values from a list?</a>.</sub></p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6732
+}

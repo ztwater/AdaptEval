@@ -1,0 +1,55 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "matplotlib",
+                "mouseevent",
+                "double-click"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 1273526,
+                        "reputation": 1819,
+                        "user_id": 1354930,
+                        "user_type": "registered",
+                        "accept_rate": 66,
+                        "display_name": "dthor"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1438113825,
+                    "last_edit_date": 1495542380,
+                    "creation_date": 1438113825,
+                    "answer_id": 31686041,
+                    "question_id": 28416662,
+                    "link": "https://stackoverflow.com/questions/28416662/distinguish-between-single-and-double-click-with-matplotlib/31686041#31686041",
+                    "body": "<p>You need a software debouncer.</p>\n\n<p>Basically, you start a timer on the 1st click. If the timer runs out, then you proceed to process the single-click event. If a 2nd click is detected within the timer, process a double-click event. </p>\n\n<p>This can actually be expanded to n-clicks if needed. I've found some uses for triple-click events.</p>\n\n<p><a href=\"https://stackoverflow.com/a/20992288/1354930\">Here</a> is one implemented in wxPython. Should be relatively easy to port to matplotlib.</p>\n\n<hr>\n\n<p>Also, if you're on Windows, I would recommend using the user's double-click speed for your timer (Control Panel: Mouse). You can access it with:</p>\n\n<pre><code>get_double_click_time():\n    \"\"\" Gets the Windows double click time in ms \"\"\"\n    from ctypes import windll\n    return int(windll.user32.GetDoubleClickTime())\n</code></pre>\n\n<p>I haven't yet figured out how to grab the dclick time from Mac or Linux (but I also don't have a need to).</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 5746346,
+                "reputation": 176,
+                "user_id": 4537483,
+                "user_type": "registered",
+                "display_name": "dayoda"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "answer_count": 1,
+            "score": 3,
+            "last_activity_date": 1438113825,
+            "creation_date": 1423506213,
+            "last_edit_date": 1495535489,
+            "question_id": 28416662,
+            "link": "https://stackoverflow.com/questions/28416662/distinguish-between-single-and-double-click-with-matplotlib",
+            "title": "Distinguish between single and double click with matplotlib",
+            "body": "<p>I'm trying to catch single clicks and double clicks on my figure.</p>\n\n<p>As stated in another <a href=\"https://stackoverflow.com/a/17753195/4537483\">answer</a>, the <code>event</code> contains <code>event.dblclick</code> which is False or True, at least in Version 1.4.2, so double clicks can be got.</p>\n\n<p>The only problem is that it's not easy to distinguish between a single click and a double click because when double-clicking the event gets fired twice. The first time it's with <code>event.dblclick=False</code> and the second time it's with <code>event.dblclick=True</code>.</p>\n\n<p>Is there any solution to this? I saw that the same problem regarding qt is discussed <a href=\"https://stackoverflow.com/questions/4627347/distinguish-between-single-and-double-click-events-in-qt\">here</a>.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8111
+}

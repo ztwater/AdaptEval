@@ -1,0 +1,1 @@
+SELECT count(*) FROM (SELECT 1 FROM token LIMIT 500000) t;

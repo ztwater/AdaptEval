@@ -1,0 +1,173 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "regex",
+                "yaml",
+                "pyyaml"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 192592,
+                        "reputation": 21921,
+                        "user_id": 433814,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "Marcello DeSales"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1496695237,
+                    "post_id": 33490870,
+                    "comment_id": 75755619,
+                    "link": "https://stackoverflow.com/questions/33490870/parsing-yaml-in-python-detect-duplicated-keys#comment75755619_33490870",
+                    "body": "Their implementation sucks! I agree with you, they should have added the option in the constructor. Did you find a way to verify documents programmatically?"
+                },
+                {
+                    "owner": {
+                        "account_id": 3580374,
+                        "reputation": 111083,
+                        "user_id": 2988730,
+                        "user_type": "registered",
+                        "accept_rate": 96,
+                        "display_name": "Mad Physicist"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1691250287,
+                    "post_id": 33490870,
+                    "comment_id": 135468069,
+                    "link": "https://stackoverflow.com/questions/33490870/parsing-yaml-in-python-detect-duplicated-keys#comment135468069_33490870",
+                    "body": "There are generally a couple of approaches to missing library features: either fix it or get a different library. Fixing it can range from a local patch to a full blown PR. If the library is generally useful and good, PR is the way to go"
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 3268130,
+                        "reputation": 391,
+                        "user_id": 2752171,
+                        "user_type": "registered",
+                        "display_name": "Adrien Verg&#233;"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 10,
+                    "last_activity_date": 1454406610,
+                    "creation_date": 1454406610,
+                    "answer_id": 35149964,
+                    "question_id": 33490870,
+                    "link": "https://stackoverflow.com/questions/33490870/parsing-yaml-in-python-detect-duplicated-keys/35149964#35149964",
+                    "body": "<p>The <a href=\"http://yamllint.readthedocs.org/\" rel=\"noreferrer\">yamllint</a> command-line tool does what you\nwant:</p>\n\n<pre><code>sudo pip install yamllint\n</code></pre>\n\n<p>Specifically, it has a rule <code>key-duplicates</code> that detects repetitions and keys\nover-writing one another:</p>\n\n<pre><code>$ yamllint test.yaml\ntest.yaml\n  1:1       warning  missing document start \"---\"  (document-start)\n  10:5      error    duplication of key \"subkey5\" in mapping  (key-duplicates)\n</code></pre>\n\n<p>(It has many other rules that you can enable/disable or tweak.)</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3755009,
+                                "reputation": 1055,
+                                "user_id": 3121548,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "Dave Liu"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1620691776,
+                            "post_id": 63215043,
+                            "comment_id": 119270295,
+                            "link": "https://stackoverflow.com/questions/33490870/parsing-yaml-in-python-detect-duplicated-keys/63215043#comment119270295_63215043",
+                            "body": "This is elegant and straightforward, unlike many recommendations that require importing another package."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 480953,
+                        "reputation": 15363,
+                        "user_id": 894487,
+                        "user_type": "registered",
+                        "accept_rate": 57,
+                        "display_name": "ErichBSchulz"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 11,
+                    "last_activity_date": 1596365038,
+                    "creation_date": 1596365038,
+                    "answer_id": 63215043,
+                    "question_id": 33490870,
+                    "link": "https://stackoverflow.com/questions/33490870/parsing-yaml-in-python-detect-duplicated-keys/63215043#63215043",
+                    "body": "<p>Over-riding on of the build in loaders is a more lightweight approach:</p>\n<pre><code> import yaml\n # special loader with duplicate key checking\n class UniqueKeyLoader(yaml.SafeLoader):\n     def construct_mapping(self, node, deep=False):\n         mapping = []\n         for key_node, value_node in node.value:\n             key = self.construct_object(key_node, deep=deep)\n             assert key not in mapping\n             mapping.append(key)\n         return super().construct_mapping(node, deep)\n</code></pre>\n<p>then:</p>\n<pre><code> yaml_text = open(filename), 'r').read()\n data[f] = yaml.load(yaml_text, Loader=UniqueKeyLoader)                  \n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 27974006,
+                                "reputation": 12172,
+                                "user_id": 21363224,
+                                "user_type": "registered",
+                                "display_name": "markalex"
+                            },
+                            "reply_to_user": {
+                                "account_id": 11810343,
+                                "reputation": 33,
+                                "user_id": 8641922,
+                                "user_type": "registered",
+                                "display_name": "Lei Mao"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1691243284,
+                            "post_id": 76090386,
+                            "comment_id": 135467291,
+                            "link": "https://stackoverflow.com/questions/33490870/parsing-yaml-in-python-detect-duplicated-keys/76090386#comment135467291_76090386",
+                            "body": "@LeiMao, good catch. But don&#39;t add meta information (like edited on 28.02.2024) in posts, unless there is a really good reason for it. Please, flag this comment as no longer needed, once you see it."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 10359150,
+                        "reputation": 71,
+                        "user_id": 7640131,
+                        "user_type": "registered",
+                        "display_name": "muthukumar"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1691243163,
+                    "last_edit_date": 1691243163,
+                    "creation_date": 1682327824,
+                    "answer_id": 76090386,
+                    "question_id": 33490870,
+                    "link": "https://stackoverflow.com/questions/33490870/parsing-yaml-in-python-detect-duplicated-keys/76090386#76090386",
+                    "body": "<p><strong>ErichBSchulz</strong> great effort. thanks for the fixed code.\nhere I did minor changes. Updating the file name with line and column.</p>\n<pre><code>class UniqueKeyLoader(yaml.SafeLoader):\n    def construct_mapping(self, node, deep=False):\n        mapping = set()\n        for key_node, value_node in node.value:\n            each_key = self.construct_object(key_node, deep=deep)\n            if each_key in mapping:\n                raise ValueError(f&quot;Duplicate Key: {each_key!r} is found in YAML File.\\n&quot;\n                                 f&quot;Error File location: {key_node.end_mark}&quot;)\n            mapping.add(each_key)\n        return super().construct_mapping(node, deep)\n\nwith open(test_suite_full_path, 'r') as f:\n    yaml_ret_dict = yaml.load(f, Loader=UniqueKeyLoader)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 978270,
+                "reputation": 6346,
+                "user_id": 998649,
+                "user_type": "registered",
+                "accept_rate": 71,
+                "display_name": "Tk421"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "accepted_answer_id": 35149964,
+            "answer_count": 3,
+            "score": 15,
+            "last_activity_date": 1691243163,
+            "creation_date": 1446521211,
+            "last_edit_date": 1454409244,
+            "question_id": 33490870,
+            "link": "https://stackoverflow.com/questions/33490870/parsing-yaml-in-python-detect-duplicated-keys",
+            "title": "Parsing Yaml in Python: Detect duplicated keys",
+            "body": "<p>The <code>yaml</code> library in python is not able to detect duplicated keys. This is a bug that <a href=\"http://pyyaml.org/ticket/128\" rel=\"noreferrer\">has been reported years ago</a> and there is not a fix yet.</p>\n\n<p>I would like to find a decent workaround to this problem. How plausible could be to create a <code>regex</code> that returns all the keys ? Then it would be quite easy to detect this problem. </p>\n\n<p>Could any regex master suggest a regex that is able to extract all the keys to find duplicates ?</p>\n\n<p>File example:</p>\n\n<pre><code>mykey1:\n    subkey1: value1\n    subkey2: value2\n    subkey3:\n      - value 3.1\n      - value 3.2\nmykey2:\n    subkey1: this is not duplicated\n    subkey5: value5\n    subkey5: duplicated!\n    subkey6:\n       subkey6.1: value6.1\n       subkey6.2: valye6.2\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9651
+}

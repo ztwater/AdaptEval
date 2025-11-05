@@ -1,0 +1,73 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "matplotlib",
+                "animation"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3021001,
+                                "reputation": 1424,
+                                "user_id": 2562058,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "Barzi2001"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1665677020,
+                            "post_id": 71966295,
+                            "comment_id": 130760412,
+                            "link": "https://stackoverflow.com/questions/71961689/get-all-artists-of-an-axes-matplotlib/71966295#comment130760412_71966295",
+                            "body": "Where to see the complete list of children of a <code>Axes&#47;AxesSubplot</code>? I got mad to figure that what I wanted is called <code>ax.lines</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2698660,
+                        "reputation": 12135,
+                        "user_id": 2329968,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "Davide_sd"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": true,
+                    "score": 9,
+                    "last_activity_date": 1650619665,
+                    "last_edit_date": 1650619665,
+                    "creation_date": 1650618956,
+                    "answer_id": 71966295,
+                    "question_id": 71961689,
+                    "link": "https://stackoverflow.com/questions/71961689/get-all-artists-of-an-axes-matplotlib/71966295#71966295",
+                    "body": "<p>Maybe what you are looking for is <code>ax.get_children()</code>, however it returns everything (lines, line collections, spines, legends maybe...), so you would have to filter the results somehow.</p>\n<p>If you know in advance what kind of data you are plotting, here are a few location where Matplotlib separates the artists.</p>\n<ul>\n<li><code>ax.lines</code> stores the lines created with <code>ax.plot</code>.</li>\n<li><code>ax.collections</code> stores the collections (line collections, poly collections) created with <code>ax.add_collection</code>, <code>ax.plot_surface</code>, <code>ax.contour</code>, <code>ax.contourf</code>, ...</li>\n<li><code>ax.images</code> store the artists created with <code>ax.imshow</code>.</li>\n<li><code>ax.patches</code> contains artists created with <code>ax.bar</code>, <code>ax.fill</code>, ....</li>\n<li><code>ax.tables</code> contains artists created with <code>ax.table</code>.</li>\n</ul>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 14439223,
+                "reputation": 370,
+                "user_id": 10430394,
+                "user_type": "registered",
+                "display_name": "J.Doe"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 71966295,
+            "answer_count": 1,
+            "score": 3,
+            "last_activity_date": 1650619665,
+            "creation_date": 1650581640,
+            "question_id": 71961689,
+            "link": "https://stackoverflow.com/questions/71961689/get-all-artists-of-an-axes-matplotlib",
+            "title": "Get all artists of an axes matplotlib?",
+            "body": "<p>I'm trying to animate a plot in mpl and I've decided the smartest way to do it is to add a number of axes dynamically using Gridspec. I provide a number of columns and rows that I want Gridspec to make Axes for on my canvas and then I can fill those axes with artists.</p>\n<p>Since the number of axes is arbitrary and thus the number of artists is arbitrary, I thought it would work best to access the artists like so:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import matplotlib.pyplot as plt\n\nfig = plt.figure(constrained_layout=False, figsize=(8,8), facecolor=bg_colour)\ngs = fig.add_gridspec(nrows=nrows, ncols=ncols, hspace=0.1, wspace=0.1)\n\nfor i in range(nrows):\n    for j in range(ncols):\n        ax = plt.subplot(gs[i,j])\n\nprint(fig.axes[0].artists)\n</code></pre>\n<p>So the idea is that I can create all my axes dynamically and then I can also dynamically add artists to those axes by slicing <code>fig.axes</code> using the appropriate index. Once I have my axes selected I can just do</p>\n<pre class=\"lang-py prettyprint-override\"><code>fig.axes[0].plot([],[])\n</code></pre>\n<p>to add an empty artist to the right axes, which I can then animate with the update function in my code.</p>\n<p>The problem is that no matter how I set up the creation of the figure, the axes and the artists, the <code>fig.axes[index].artists</code> list is always empty. I don't understand how I can give the command to plot for my axes and then not have the artist show up in the list of all artists. Is <code>.artists</code> not actually the container for all artists that I need to use? Is the thing I'm looking for stored somewhere else? Does mpl not actually allow for this kind of thing in the first place?</p>\n<p>Full code</p>\n<pre class=\"lang-py prettyprint-override\"><code>import numpy as np\nimport itertools\nimport matplotlib.pyplot as plt\nfrom matplotlib.animation import FuncAnimation\nfrom matplotlib.ticker import AutoMinorLocator, MaxNLocator\n\n\n\n\ndef circle_points_x(period):\n\n    t = np.linspace(0,2*np.pi,500)\n    x = np.cos(period*t +np.pi/2)\n\n    return x\n\ndef circle_points_y(period):\n\n    t = np.linspace(0,2*np.pi,500)\n    y = np.sin(period*t +np.pi/2)\n\n    return y\n\n\n# true distribution\nncols,nrows = (5,5)\n\nbg_colour = np.array((84, 153, 215))/256\nbg_colour = np.append(bg_colour,0.5)\n\nfig = plt.figure(constrained_layout=False, figsize=(8,8), facecolor=bg_colour)\n\ngs = fig.add_gridspec(nrows=nrows, ncols=ncols, hspace=0.1, wspace=0.1)\n\n\nfor i in range(nrows):\n    for j in range(ncols):\n        ax = plt.subplot(gs[i,j])\n        ax.axis('off')\n\n\ndef init():\n\n    for i in range(nrows):\n        for j in range(ncols):\n            x = circle_points_x(j+1)\n            y = circle_points_y(i+1)\n\n            fig.axes[i*nrows +j].plot(x,y,lw=0.5,aa=True)\n            fig.axes[i*nrows +j].scatter([x[0]],[y[0]])\n\n\n    print(fig.axes[0].artists)\n\n    return list(itertools.chain(*[i.artists for i in fig.axes]))\n\n\ndef update(frame):\n\n    for i in range(nrows):\n        for j in range(ncols):\n            # fig.axes[i*nrows +j].artists[0] # TURN THIS ON TO SEE THE ERROR\n            pass\n    return list(itertools.chain(*[i.artists for i in fig.axes]))\n\n\n\n\nani = FuncAnimation(fig, update, frames=range(1,8),repeat=False,init_func=init, blit=True,interval=40)\n# ani.save('histogram.gif', dpi=300 ,writer=&quot;ffmpeg&quot;)\nplt.show()\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6800
+}

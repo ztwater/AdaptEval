@@ -1,0 +1,5 @@
+In [7]: x, y = numpy.arange(500), numpy.arange(500)
+In [8]: %timeit repeat_product(x, y)
+1.32 ms ± 24.7 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+In [9]: %timeit dstack_product(x, y)
+1.26 ms ± 8.47 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)

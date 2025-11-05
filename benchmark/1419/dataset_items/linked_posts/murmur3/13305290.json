@@ -1,0 +1,252 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "hash",
+                "murmurhash"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "user_type": "does_not_exist",
+                        "display_name": "user647772"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1352454159,
+                    "post_id": 13305290,
+                    "comment_id": 18145860,
+                    "link": "https://stackoverflow.com/questions/13305290/is-there-a-pure-python-implementation-of-murmurhash#comment18145860_13305290",
+                    "body": "Why do you want a pure Python implementation?"
+                },
+                {
+                    "owner": {
+                        "account_id": 336744,
+                        "reputation": 2349,
+                        "user_id": 664570,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "greg"
+                    },
+                    "edited": false,
+                    "score": 4,
+                    "creation_date": 1352454715,
+                    "post_id": 13305290,
+                    "comment_id": 18146094,
+                    "link": "https://stackoverflow.com/questions/13305290/is-there-a-pure-python-implementation-of-murmurhash#comment18146094_13305290",
+                    "body": "I need a pure Python implementation because my application needs to run on platforms that can&#39;t execute non-python code (like Google App Engine)."
+                },
+                {
+                    "owner": {
+                        "account_id": 31418,
+                        "reputation": 1658,
+                        "user_id": 86233,
+                        "user_type": "registered",
+                        "display_name": "Paul Bissex"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1386384224,
+                    "post_id": 13305290,
+                    "comment_id": 34176362,
+                    "link": "https://stackoverflow.com/questions/13305290/is-there-a-pure-python-implementation-of-murmurhash#comment34176362_13305290",
+                    "body": "There is also this one, but I think the mmh3 one you found looks better cared for. <a href=\"https://code.google.com/p/pyfasthash/\" rel=\"nofollow noreferrer\">code.google.com/p/pyfasthash</a>"
+                },
+                {
+                    "owner": {
+                        "account_id": 336744,
+                        "reputation": 2349,
+                        "user_id": 664570,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "greg"
+                    },
+                    "reply_to_user": {
+                        "account_id": 31418,
+                        "reputation": 1658,
+                        "user_id": 86233,
+                        "user_type": "registered",
+                        "display_name": "Paul Bissex"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1389694924,
+                    "post_id": 13305290,
+                    "comment_id": 34176363,
+                    "link": "https://stackoverflow.com/questions/13305290/is-there-a-pure-python-implementation-of-murmurhash#comment34176363_13305290",
+                    "body": "C/C++, not pure python... (&quot;It provide several common hash algorithms with C/C++ implementation for performance&quot;)"
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 365555,
+                        "reputation": 1319,
+                        "user_id": 710543,
+                        "user_type": "registered",
+                        "display_name": "Nikolas"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 12,
+                    "last_activity_date": 1364925907,
+                    "last_edit_date": 1364925907,
+                    "creation_date": 1364867411,
+                    "answer_id": 15754791,
+                    "question_id": 13305290,
+                    "link": "https://stackoverflow.com/questions/13305290/is-there-a-pure-python-implementation-of-murmurhash/15754791#15754791",
+                    "body": "<p>this is untested (sorry!), but here is a version I came up with. \nPython allows for arbitrarily large integers, so I created a mask for the first 8 bytes (or 64 bits) that I then apply (via bitwise AND) to all arithmetic results that could produce integers larger than 64bits.\nMaybe somebody else could comment on the general approach and possible issues with endianness, etc.</p>\n\n<pre><code>def bytes_to_long(bytes):\n    assert len(bytes) == 8\n    return sum((b &lt;&lt; (k * 8) for k, b in enumerate(bytes)))\n\n\ndef murmur(data, seed):\n\n    m = 0xc6a4a7935bd1e995\n    r = 47\n\n    MASK = 2 ** 64 - 1\n\n    data_as_bytes = bytearray(data)\n\n    h = seed ^ ((m * len(data_as_bytes)) &amp; MASK)\n\n    for ll in range(0, len(data_as_bytes), 8):\n        k = bytes_to_long(data_as_bytes[ll:ll + 8])\n        k = (k * m) &amp; MASK\n        k = k ^ ((k &gt;&gt; r) &amp; MASK)\n        k = (k * m) &amp; MASK\n        h = (h ^ k)\n        h = (h * m) &amp; MASK\n\n    l = len(data_as_bytes) &amp; 7\n\n    if l &gt;= 7:\n        h = (h ^ (data_as_bytes[6] &lt;&lt; 48))\n\n    if l &gt;= 6:\n        h = (h ^ (data_as_bytes[5] &lt;&lt; 40))\n\n    if l &gt;= 5:\n        h = (h ^ (data_as_bytes[4] &lt;&lt; 32))\n\n    if l &gt;= 4:\n        h = (h ^ (data_as_bytes[3] &lt;&lt; 24))\n\n    if l &gt;= 3:\n        h = (h ^ (data_as_bytes[4] &lt;&lt; 16))\n\n    if l &gt;= 2:\n        h = (h ^ (data_as_bytes[4] &lt;&lt; 8))\n\n    if l &gt;= 1:\n        h = (h ^ data_as_bytes[4])\n        h = (h * m) &amp; MASK\n\n    h = h ^ ((h &gt;&gt; r) &amp; MASK)\n    h = (h * m) &amp; MASK\n    h = h ^ ((h &gt;&gt; r) &amp; MASK)\n\n    return h\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 133757,
+                                "reputation": 1404,
+                                "user_id": 335385,
+                                "user_type": "registered",
+                                "display_name": "nob"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1579168634,
+                            "post_id": 23957502,
+                            "comment_id": 105678134,
+                            "link": "https://stackoverflow.com/questions/13305290/is-there-a-pure-python-implementation-of-murmurhash/23957502#comment105678134_23957502",
+                            "body": "Caution: The algorithm is returning an unsigned python integer (&gt;=0) while standard Java solutions return an 32bit signed integer (2 complement)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1507420,
+                        "reputation": 186,
+                        "user_id": 1410475,
+                        "user_type": "registered",
+                        "display_name": "Mauro D."
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1401461602,
+                    "creation_date": 1401461602,
+                    "answer_id": 23957502,
+                    "question_id": 13305290,
+                    "link": "https://stackoverflow.com/questions/13305290/is-there-a-pure-python-implementation-of-murmurhash/23957502#23957502",
+                    "body": "<p>Here goes a pure Python implementation of MurmurHash3 32, it hashes strings only but can be easily adapted to take byte arrays instead. This is a port from the <a href=\"https://svn.apache.org/repos/asf/mahout/trunk/math/src/main/java/org/apache/mahout/math/MurmurHash3.java\" rel=\"noreferrer\">Java version</a> of the algorithm.</p>\n\n<pre><code>def murmur3_x86_32(data, seed = 0):\n    c1 = 0xcc9e2d51\n    c2 = 0x1b873593\n\n    length = len(data)\n    h1 = seed\n    roundedEnd = (length &amp; 0xfffffffc)  # round down to 4 byte block\n    for i in range(0, roundedEnd, 4):\n      # little endian load order\n      k1 = (ord(data[i]) &amp; 0xff) | ((ord(data[i + 1]) &amp; 0xff) &lt;&lt; 8) | \\\n           ((ord(data[i + 2]) &amp; 0xff) &lt;&lt; 16) | (ord(data[i + 3]) &lt;&lt; 24)\n      k1 *= c1\n      k1 = (k1 &lt;&lt; 15) | ((k1 &amp; 0xffffffff) &gt;&gt; 17) # ROTL32(k1,15)\n      k1 *= c2\n\n      h1 ^= k1\n      h1 = (h1 &lt;&lt; 13) | ((h1 &amp; 0xffffffff) &gt;&gt; 19)  # ROTL32(h1,13)\n      h1 = h1 * 5 + 0xe6546b64\n\n    # tail\n    k1 = 0\n\n    val = length &amp; 0x03\n    if val == 3:\n        k1 = (ord(data[roundedEnd + 2]) &amp; 0xff) &lt;&lt; 16\n    # fallthrough\n    if val in [2, 3]:\n        k1 |= (ord(data[roundedEnd + 1]) &amp; 0xff) &lt;&lt; 8\n    # fallthrough\n    if val in [1, 2, 3]:\n        k1 |= ord(data[roundedEnd]) &amp; 0xff\n        k1 *= c1\n        k1 = (k1 &lt;&lt; 15) | ((k1 &amp; 0xffffffff) &gt;&gt; 17)  # ROTL32(k1,15)\n        k1 *= c2\n        h1 ^= k1\n\n    # finalization\n    h1 ^= length\n\n    # fmix(h1)\n    h1 ^= ((h1 &amp; 0xffffffff) &gt;&gt; 16)\n    h1 *= 0x85ebca6b\n    h1 ^= ((h1 &amp; 0xffffffff) &gt;&gt; 13)\n    h1 *= 0xc2b2ae35\n    h1 ^= ((h1 &amp; 0xffffffff) &gt;&gt; 16)\n\n    return h1 &amp; 0xffffffff\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 541490,
+                                "reputation": 4817,
+                                "user_id": 910062,
+                                "user_type": "registered",
+                                "display_name": "Michael Iles"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1578955185,
+                            "post_id": 28207808,
+                            "comment_id": 105600766,
+                            "link": "https://stackoverflow.com/questions/13305290/is-there-a-pure-python-implementation-of-murmurhash/28207808#comment105600766_28207808",
+                            "body": "For Python3 change <code>off = len(data_as_bytes)&#47;8*8</code> to <code>off = int(len(data_as_bytes)&#47;8)*8</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4294587,
+                                "reputation": 1,
+                                "user_id": 3509965,
+                                "user_type": "registered",
+                                "display_name": "Bo Wu"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1579837030,
+                            "post_id": 28207808,
+                            "comment_id": 105908715,
+                            "link": "https://stackoverflow.com/questions/13305290/is-there-a-pure-python-implementation-of-murmurhash/28207808#comment105908715_28207808",
+                            "body": "To compliment @zhuhongk&#39;s answer, Python version returns unsigned number, to return signed number like Java version, add following line in the end: ``` h = ctypes.c_long(h).value ```"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3288895,
+                        "reputation": 101,
+                        "user_id": 2959866,
+                        "user_type": "registered",
+                        "display_name": "zhuhongk"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 10,
+                    "last_activity_date": 1422510689,
+                    "creation_date": 1422510689,
+                    "answer_id": 28207808,
+                    "question_id": 13305290,
+                    "link": "https://stackoverflow.com/questions/13305290/is-there-a-pure-python-implementation-of-murmurhash/28207808#28207808",
+                    "body": "<p>fix the bugs in Nikolas's version</p>\n\n<pre><code>def bytes_to_long(bytes):\n    assert len(bytes) == 8\n    return sum((b &lt;&lt; (k * 8) for k, b in enumerate(bytes)))\n\n\ndef murmur64(data, seed = 19820125):\n\n    m = 0xc6a4a7935bd1e995\n    r = 47\n\n    MASK = 2 ** 64 - 1\n\n    data_as_bytes = bytearray(data)\n\n    h = seed ^ ((m * len(data_as_bytes)) &amp; MASK)\n\n    off = len(data_as_bytes)/8*8\n    for ll in range(0, off, 8):\n        k = bytes_to_long(data_as_bytes[ll:ll + 8])\n        k = (k * m) &amp; MASK\n        k = k ^ ((k &gt;&gt; r) &amp; MASK)\n        k = (k * m) &amp; MASK\n        h = (h ^ k)\n        h = (h * m) &amp; MASK\n\n    l = len(data_as_bytes) &amp; 7\n\n    if l &gt;= 7:\n        h = (h ^ (data_as_bytes[off+6] &lt;&lt; 48))\n\n    if l &gt;= 6:\n        h = (h ^ (data_as_bytes[off+5] &lt;&lt; 40))\n\n    if l &gt;= 5:\n        h = (h ^ (data_as_bytes[off+4] &lt;&lt; 32))\n\n    if l &gt;= 4:\n        h = (h ^ (data_as_bytes[off+3] &lt;&lt; 24))\n\n    if l &gt;= 3:\n        h = (h ^ (data_as_bytes[off+2] &lt;&lt; 16))\n\n    if l &gt;= 2:\n        h = (h ^ (data_as_bytes[off+1] &lt;&lt; 8))\n\n    if l &gt;= 1:\n        h = (h ^ data_as_bytes[off])\n        h = (h * m) &amp; MASK\n\n    h = h ^ ((h &gt;&gt; r) &amp; MASK)\n    h = (h * m) &amp; MASK\n    h = h ^ ((h &gt;&gt; r) &amp; MASK)\n\n    return h\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1136346,
+                        "reputation": 16542,
+                        "user_id": 1121352,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "gaborous"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 7,
+                    "last_activity_date": 1425047279,
+                    "creation_date": 1425047279,
+                    "answer_id": 28767369,
+                    "question_id": 13305290,
+                    "link": "https://stackoverflow.com/questions/13305290/is-there-a-pure-python-implementation-of-murmurhash/28767369#28767369",
+                    "body": "<p>Another pure python implementation of MurmurHash3 that is totally compatible and replaceable by the mmh3 wrapper, but still limited to 32-bits Murmur3:\n<a href=\"https://github.com/wc-duck/pymmh3\" rel=\"noreferrer\">https://github.com/wc-duck/pymmh3</a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 11485598,
+                        "reputation": 1099,
+                        "user_id": 8418376,
+                        "user_type": "registered",
+                        "display_name": "Arminius"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1526983414,
+                    "creation_date": 1526983414,
+                    "answer_id": 50464921,
+                    "question_id": 13305290,
+                    "link": "https://stackoverflow.com/questions/13305290/is-there-a-pure-python-implementation-of-murmurhash/50464921#50464921",
+                    "body": "<p>I propose to change the <code>bytes_to_long</code> function so that values with less than eight bytes are possible:</p>\n\n<pre><code>def bytes_to_long(bytes):\n    length = len(bytes)\n    if length &lt; 8:\n        extra = 8 - length\n        bytes = b'\\000' * extra + bytes\n    assert len(bytes) == 8\n   return sum((b &lt;&lt; (k * 8) for k, b in enumerate(bytes)))\n</code></pre>\n\n<p>This fills the <code>bytearray</code> with Null bytes so that the assert stills works (you could remove it now) as intended but allows for the conversion of smaller values.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 336744,
+                "reputation": 2349,
+                "user_id": 664570,
+                "user_type": "registered",
+                "accept_rate": 100,
+                "display_name": "greg"
+            },
+            "comment_count": 4,
+            "is_answered": true,
+            "accepted_answer_id": 28767369,
+            "answer_count": 5,
+            "score": 26,
+            "last_activity_date": 1579837030,
+            "creation_date": 1352453286,
+            "last_edit_date": 1429705918,
+            "question_id": 13305290,
+            "link": "https://stackoverflow.com/questions/13305290/is-there-a-pure-python-implementation-of-murmurhash",
+            "title": "Is there a pure python implementation of MurmurHash?",
+            "body": "<p>I need (and can't find) a pure python (no c++) implementation of <a href=\"https://sites.google.com/site/murmurhash/\" rel=\"noreferrer\">MurmurHash</a>, and I'm too novice to write myself. Speed or memory usage doesn't matter on my project.</p>\n\n<p>I find a attempt <a href=\"http://code.google.com/p/tropo/source/browse/trunk/Python/tr_minhash/my_murmur.py\" rel=\"noreferrer\">here</a>, but it's limited to 31bits hash and I really need a 64bits hash.</p>\n\n<p>Note : for those who need a fast implementation, there is a MurmurHash2 library <a href=\"http://pypi.python.org/pypi/Murmur/0.1.3\" rel=\"noreferrer\">here</a> and a MurmurHash3 library <a href=\"http://pypi.python.org/pypi/mmh3/2.0\" rel=\"noreferrer\">here</a></p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7323
+}

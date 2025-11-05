@@ -1,0 +1,199 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "numpy",
+                "scipy",
+                "filtering",
+                "smoothing"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5511548,
+                                "reputation": 458,
+                                "user_id": 4380615,
+                                "user_type": "registered",
+                                "display_name": "Nimal Naser"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1424075663,
+                            "post_id": 28537211,
+                            "comment_id": 45388625,
+                            "link": "https://stackoverflow.com/questions/28536191/how-to-filter-smooth-with-scipy-numpy/28537211#comment45388625_28537211",
+                            "body": "This looks good, so you split the data and applied smoothing. But I have to do this for multiple files over a thousand files and the pressure rise does not always happen at 21 ms."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2624951,
+                                "reputation": 30859,
+                                "user_id": 2272172,
+                                "user_type": "registered",
+                                "accept_rate": 68,
+                                "display_name": "cel"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5511548,
+                                "reputation": 458,
+                                "user_id": 4380615,
+                                "user_type": "registered",
+                                "display_name": "Nimal Naser"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1424075998,
+                            "post_id": 28537211,
+                            "comment_id": 45388782,
+                            "link": "https://stackoverflow.com/questions/28536191/how-to-filter-smooth-with-scipy-numpy/28537211#comment45388782_28537211",
+                            "body": "@NimalNaser, I updated the answer. Without splitting this method does not work and while the results after splitting look fairly nice, I doubt that this is the best method for your problem. Still I wanted to show the results for reference :)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2624951,
+                                "reputation": 30859,
+                                "user_id": 2272172,
+                                "user_type": "registered",
+                                "accept_rate": 68,
+                                "display_name": "cel"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5511548,
+                                "reputation": 458,
+                                "user_id": 4380615,
+                                "user_type": "registered",
+                                "display_name": "Nimal Naser"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1424079310,
+                            "post_id": 28537211,
+                            "comment_id": 45390629,
+                            "link": "https://stackoverflow.com/questions/28536191/how-to-filter-smooth-with-scipy-numpy/28537211#comment45390629_28537211",
+                            "body": "@NimalNaser, and another update. This time I decreased the smoothing area drastically. Still you see that this is far from optimal."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5511548,
+                                "reputation": 458,
+                                "user_id": 4380615,
+                                "user_type": "registered",
+                                "display_name": "Nimal Naser"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1424084990,
+                            "post_id": 28537211,
+                            "comment_id": 45393887,
+                            "link": "https://stackoverflow.com/questions/28536191/how-to-filter-smooth-with-scipy-numpy/28537211#comment45393887_28537211",
+                            "body": "The gradient is altered. I have to preserve the gradient."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2624951,
+                        "reputation": 30859,
+                        "user_id": 2272172,
+                        "user_type": "registered",
+                        "accept_rate": 68,
+                        "display_name": "cel"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1424079224,
+                    "last_edit_date": 1424079224,
+                    "creation_date": 1424075104,
+                    "answer_id": 28537211,
+                    "question_id": 28536191,
+                    "link": "https://stackoverflow.com/questions/28536191/how-to-filter-smooth-with-scipy-numpy/28537211#28537211",
+                    "body": "<p>Here is an example of using a <code>loewess</code> fit. Note that I stripped the header from <code>data.dat</code>.</p>\n\n<p>From the plot it seems that this method performs well on subsets of the data. Fitting all data at once does not give a reasonable result. So, probably this is not the best method here.</p>\n\n<pre><code>import pandas as pd\nimport matplotlib.pylab as plt\nfrom statsmodels.nonparametric.smoothers_lowess import lowess\n\ndata = pd.read_table(\"data.dat\", sep=\",\", names=[\"time\", \"pressure\"])\nsub_data = data[data.time &gt; 21.5]\n\nresult = lowess(sub_data.pressure, sub_data.time.values)\nx_smooth = result[:,0]\ny_smooth = result[:,1]\n\ntot_result = lowess(data.pressure, data.time.values, frac=0.1)\nx_tot_smooth = tot_result[:,0]\ny_tot_smooth = tot_result[:,1]\n\nfig, ax = plt.subplots(figsize=(8, 6))\nax.plot(data.time.values, data.pressure, label=\"raw\")\nax.plot(x_tot_smooth, y_tot_smooth, label=\"lowess 1%\", linewidth=3, color=\"g\")\nax.plot(x_smooth, y_smooth, label=\"lowess\", linewidth=3, color=\"r\")\nplt.legend()\n</code></pre>\n\n<p>This is the result I get:</p>\n\n<p><img src=\"https://i.stack.imgur.com/ssKcw.png\" alt=\"plot\"></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5511548,
+                                "reputation": 458,
+                                "user_id": 4380615,
+                                "user_type": "registered",
+                                "display_name": "Nimal Naser"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1424145925,
+                            "post_id": 28541805,
+                            "comment_id": 45421588,
+                            "link": "https://stackoverflow.com/questions/28536191/how-to-filter-smooth-with-scipy-numpy/28541805#comment45421588_28541805",
+                            "body": "Exactly what I wanted. But how did you select the <code>frac</code> argument? Is it obtained by trial and error or can it be related to the fluctuations in the signal, because I have to do this for multiple files (&gt;1000)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 300328,
+                                "reputation": 112936,
+                                "user_id": 1217358,
+                                "user_type": "registered",
+                                "display_name": "Warren Weckesser"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5511548,
+                                "reputation": 458,
+                                "user_id": 4380615,
+                                "user_type": "registered",
+                                "display_name": "Nimal Naser"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1424149748,
+                            "post_id": 28541805,
+                            "comment_id": 45422675,
+                            "link": "https://stackoverflow.com/questions/28536191/how-to-filter-smooth-with-scipy-numpy/28541805#comment45422675_28541805",
+                            "body": "I started with trial and error, but you can make sense of the value after the fact.  The large oscillations in the tail of the step response are roughly 3.1kHz. At 50kHz sample rate, that corresponds to about 16 samples per cycle.  For the lowess method to eliminate these oscillations, you need a window big enough to include several oscillations. There are 2000 samples in the data, and 2000*0.025 is 50, which includes about 3 oscillations.  If the spectrum of the data in all your files is similar, but the number of samples in each file is different, you could try using <code>frac=50.0&#47;num_samples</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 300328,
+                        "reputation": 112936,
+                        "user_id": 1217358,
+                        "user_type": "registered",
+                        "display_name": "Warren Weckesser"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 37,
+                    "last_activity_date": 1424094380,
+                    "last_edit_date": 1424094380,
+                    "creation_date": 1424091056,
+                    "answer_id": 28541805,
+                    "question_id": 28536191,
+                    "link": "https://stackoverflow.com/questions/28536191/how-to-filter-smooth-with-scipy-numpy/28541805#28541805",
+                    "body": "<p>Here are a couple suggestions.</p>\n\n<p>First, try the <code>lowess</code> function from <code>statsmodels</code> with <code>it=0</code>, and tweak the <code>frac</code> argument a bit:</p>\n\n<pre><code>In [328]: from statsmodels.nonparametric.smoothers_lowess import lowess\n\nIn [329]: filtered = lowess(pressure, time, is_sorted=True, frac=0.025, it=0)\n\nIn [330]: plot(time, pressure, 'r')\nOut[330]: [&lt;matplotlib.lines.Line2D at 0x1178d0668&gt;]\n\nIn [331]: plot(filtered[:,0], filtered[:,1], 'b')\nOut[331]: [&lt;matplotlib.lines.Line2D at 0x1173d4550&gt;]\n</code></pre>\n\n<p><img src=\"https://i.stack.imgur.com/cXY6T.png\" alt=\"plot\"></p>\n\n<p>A second suggestion is to use <a href=\"http://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.filtfilt.html\"><code>scipy.signal.filtfilt</code></a> instead of <code>lfilter</code> to apply the Butterworth filter.  <code>filtfilt</code> is the <em>forward-backward</em> filter.  It applies the filter twice, once forward and once backward, resulting in zero phase delay.</p>\n\n<p>Here's a modified version of your script.  The significant changes are the use of <code>filtfilt</code> instead of <code>lfilter</code>, and the change of <code>cutoff</code> from 3000 to 1500.  You might want to experiment with that parameter--higher values result in better tracking of the onset of the pressure increase, but a value that is too high doesn't filter out the 3kHz (roughly) oscillations after the pressure increase.</p>\n\n<pre><code>import numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.signal import butter, filtfilt\n\ndef butter_lowpass(cutoff, fs, order=5):\n    nyq = 0.5 * fs\n    normal_cutoff = cutoff / nyq\n    b, a = butter(order, normal_cutoff, btype='low', analog=False)\n    return b, a\n\ndef butter_lowpass_filtfilt(data, cutoff, fs, order=5):\n    b, a = butter_lowpass(cutoff, fs, order=order)\n    y = filtfilt(b, a, data)\n    return y\n\ndata = np.loadtxt('data.dat', skiprows=2, delimiter=',', unpack=True).transpose()\ntime = data[:,0]\npressure = data[:,1]\ncutoff = 1500\nfs = 50000\npressure_smooth = butter_lowpass_filtfilt(pressure, cutoff, fs)\n\nfigure_pressure_trace = plt.figure()\nfigure_pressure_trace.clf()\nplot_P_vs_t = plt.subplot(111)\nplot_P_vs_t.plot(time, pressure, 'r', linewidth=1.0)\nplot_P_vs_t.plot(time, pressure_smooth, 'b', linewidth=1.0)\nplt.show()\nplt.close()\n</code></pre>\n\n<p>Here's the plot of the result.  Note the deviation in the filtered signal at the right edge.  To handle that, you can experiment with the <code>padtype</code> and <code>padlen</code> parameters of <code>filtfilt</code>, or, if you know you have enough data, you can discard the edges of the filtered signal.</p>\n\n<p><img src=\"https://i.stack.imgur.com/Dxg8n.png\" alt=\"plot of filtfilt result\"></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 5511548,
+                "reputation": 458,
+                "user_id": 4380615,
+                "user_type": "registered",
+                "display_name": "Nimal Naser"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 28541805,
+            "answer_count": 2,
+            "score": 22,
+            "last_activity_date": 1424094380,
+            "creation_date": 1424070622,
+            "last_edit_date": 1424087532,
+            "question_id": 28536191,
+            "link": "https://stackoverflow.com/questions/28536191/how-to-filter-smooth-with-scipy-numpy",
+            "title": "How to filter/smooth with SciPy/Numpy?",
+            "body": "<p>I am trying to filter/smooth signal obtained from a pressure transducer of sampling frequency 50 kHz. A sample signal is shown below:</p>\n\n<p><img src=\"https://i.stack.imgur.com/ZtxYX.png\" alt=\"enter image description here\"></p>\n\n<p>I would like to obtain a smooth signal obtained by loess in MATLAB (I am not plotting the same data, values are different).</p>\n\n<p><img src=\"https://i.stack.imgur.com/gnf5c.png\" alt=\"enter image description here\"></p>\n\n<p>I calculated the power spectral density using matplotlib's psd() function and the power spectral density is also provided below:</p>\n\n<p><img src=\"https://i.stack.imgur.com/JE7UD.png\" alt=\"enter image description here\"></p>\n\n<p>I have tried using the following code and obtained a filtered signal:</p>\n\n<pre><code>import csv\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport scipy as sp\nfrom scipy.signal import butter, lfilter, freqz\n\ndef butter_lowpass(cutoff, fs, order=5):\n    nyq = 0.5 * fs\n    normal_cutoff = cutoff / nyq\n    b, a = butter(order, normal_cutoff, btype='low', analog=False)\n    return b, a\n\ndef butter_lowpass_filter(data, cutoff, fs, order=5):\n    b, a = butter_lowpass(cutoff, fs, order=order)\n    y = lfilter(b, a, data)\n    return y\n\ndata = np.loadtxt('data.dat', skiprows=2, delimiter=',', unpack=True).transpose()\ntime = data[:,0]\npressure = data[:,1]\ncutoff = 2000\nfs = 50000\npressure_smooth = butter_lowpass_filter(pressure, cutoff, fs)\n\nfigure_pressure_trace = plt.figure(figsize=(5.15, 5.15))\nfigure_pressure_trace.clf()\nplot_P_vs_t = plt.subplot(111)\nplot_P_vs_t.plot(time, pressure, linewidth=1.0)\nplot_P_vs_t.plot(time, pressure_smooth, linewidth=1.0)\nplot_P_vs_t.set_ylabel('Pressure (bar)', labelpad=6)\nplot_P_vs_t.set_xlabel('Time (ms)', labelpad=6)\nplt.show()\nplt.close()\n</code></pre>\n\n<p>The output I get is:</p>\n\n<p><img src=\"https://i.stack.imgur.com/m1sAf.png\" alt=\"enter image description here\"></p>\n\n<p>I need more smoothing, I tried changing the cutoff frequency but still satisfactory results can not be obtained. I can't get the same smoothness by MATLAB. I am sure it can be done in Python, but how?</p>\n\n<p>You can find the data <a href=\"https://drive.google.com/file/d/0B4oAWIdgwj-eNkl5NzIxYnJEenM/view?usp=sharing\">here</a>.</p>\n\n<p><strong>Update</strong></p>\n\n<p>I applied lowess smoothing from statsmodels, this also does not provide satisfactory results.</p>\n\n<p><img src=\"https://i.stack.imgur.com/tFPea.png\" alt=\"enter image description here\"></p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9432
+}

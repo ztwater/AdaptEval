@@ -1,0 +1,1465 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "sorting"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 3021,
+                        "reputation": 408304,
+                        "user_id": 4279,
+                        "user_type": "registered",
+                        "accept_rate": 94,
+                        "display_name": "jfs"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1394396432,
+                    "post_id": 4836710,
+                    "comment_id": 33860091,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort#comment33860091_4836710",
+                    "body": "related: <a href=\"http://stackoverflow.com/questions/2545532/python-analog-of-natsort-function-sort-a-list-using-a-natural-order-algorithm\">Python analog of natsort function (sort a list using a &quot;natural order&quot; algorithm)</a>"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 543348,
+                                "reputation": 7078,
+                                "user_id": 912450,
+                                "user_type": "registered",
+                                "accept_rate": 98,
+                                "display_name": "jperelli"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1345048438,
+                            "post_id": 4836734,
+                            "comment_id": 15960163,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/4836734#comment15960163_4836734",
+                            "body": "why do you use <code>return sorted(l, key)</code> instead of <code>l.sort(key)</code>? Is it for any performance gain or just to be more pythonic?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 45385,
+                                "reputation": 18017,
+                                "user_id": 133747,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "huggie"
+                            },
+                            "reply_to_user": {
+                                "account_id": 543348,
+                                "reputation": 7078,
+                                "user_id": 912450,
+                                "user_type": "registered",
+                                "accept_rate": 98,
+                                "display_name": "jperelli"
+                            },
+                            "edited": false,
+                            "score": 16,
+                            "creation_date": 1346302800,
+                            "post_id": 4836734,
+                            "comment_id": 16322306,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/4836734#comment16322306_4836734",
+                            "body": "@jperelli I think the ladder would change the original list in the caller. But most likely the caller wants another shallow copy of the list."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1205915,
+                                "reputation": 1967,
+                                "user_id": 2626865,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "user19087"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1484094350,
+                            "post_id": 4836734,
+                            "comment_id": 70366496,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/4836734#comment70366496_4836734",
+                            "body": "Just for the record, this can&#39;t handle all inputs: the str/int splits must line up, otherwise you&#39;ll create comparisons like [&quot;foo&quot;,0] &lt; [0,&quot;foo&quot;] for the input [&quot;foo0&quot;,&quot;0foo&quot;], which raises a TypeError."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1167654,
+                                "reputation": 161,
+                                "user_id": 1145566,
+                                "user_type": "registered",
+                                "display_name": "Florian Kusche"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1205915,
+                                "reputation": 1967,
+                                "user_id": 2626865,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "user19087"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1509354826,
+                            "post_id": 4836734,
+                            "comment_id": 80969402,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/4836734#comment80969402_4836734",
+                            "body": "@user19087: In fact it does work, because <code>re.split(&#39;([0-9]+)&#39;, &#39;0foo&#39;)</code> returns <code>[&#39;&#39;, &#39;0&#39;, &#39;foo&#39;]</code>. Because of that, strings will always be on even indexes and integers on odd indexes in the array."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5933767,
+                                "reputation": 4232,
+                                "user_id": 4667484,
+                                "user_type": "registered",
+                                "display_name": "Charlie Haley"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1566854558,
+                            "post_id": 4836734,
+                            "comment_id": 101778853,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/4836734#comment101778853_4836734",
+                            "body": "For anyone wondering about performance, this is notably slower than python&#39;s native sort. i.e. 25 -50x slower. And if you want to always sort [elm1, elm2, Elm2, elm2] as [elm1, Elm2, elm2, elm2] reliably (caps before lower), then you can simply call natural_sort(sorted(lst)). More inefficient, but very easy to get a repeatable sort.  Compile the regex for a ~50% speedup. as seen in Claudiu&#39;s answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 172794,
+                                "reputation": 7935,
+                                "user_id": 401059,
+                                "user_type": "registered",
+                                "display_name": "Caesar"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1579064219,
+                            "post_id": 4836734,
+                            "comment_id": 105638297,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/4836734#comment105638297_4836734",
+                            "body": "<code>isdigit</code> is probably not what you want: <code>&#39;\\u00B23455&#39;.isdigit()</code> evaluates to true, but <code>int(&#39;&#178;3455&#39;)</code> will fail. (Same to @Claudiu)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 145428,
+                                "reputation": 121960,
+                                "user_id": 355230,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "martineau"
+                            },
+                            "reply_to_user": {
+                                "account_id": 172794,
+                                "reputation": 7935,
+                                "user_id": 401059,
+                                "user_type": "registered",
+                                "display_name": "Caesar"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1585001792,
+                            "post_id": 4836734,
+                            "comment_id": 107610895,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/4836734#comment107610895_4836734",
+                            "body": "@Caesar: Sounds like a bug because the docs for <code>str.isdigit()</code> say &quot;Return <code>True</code> if all bytes in the sequence are <b>ASCII</b> decimal digits...&quot; (bold mine). Regardless, maybe <code>&#39;\\u00B23455&#39;.isdecimal()</code> would be a better choice."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 172794,
+                                "reputation": 7935,
+                                "user_id": 401059,
+                                "user_type": "registered",
+                                "display_name": "Caesar"
+                            },
+                            "reply_to_user": {
+                                "account_id": 145428,
+                                "reputation": 121960,
+                                "user_id": 355230,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "martineau"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1585028739,
+                            "post_id": 4836734,
+                            "comment_id": 107616397,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/4836734#comment107616397_4836734",
+                            "body": "@martineau Uhm? Which version of the docs are you looking at? &quot;Digits include decimal characters and digits that need special handling, such as the compatibility superscript digits. This covers digits which cannot be used to form numbers in base 10, like the Kharosthi numbers. &quot; <a href=\"https://docs.python.org/3.8/library/stdtypes.html\" rel=\"nofollow noreferrer\">docs.python.org/3.8/library/stdtypes.html</a> (Similar for python 2, even\u2026)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 428152,
+                                "reputation": 1553,
+                                "user_id": 810282,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Muayyad Alsadi"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1635087720,
+                            "post_id": 4836734,
+                            "comment_id": 123196195,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/4836734#comment123196195_4836734",
+                            "body": "split gives empty strings, I use <code>findall()</code> with <code>&#47;(\\d+|\\D+)&#47;</code> see my answer <a href=\"https://stackoverflow.com/a/69697978/810282\">stackoverflow.com/a/69697978/810282</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 10715632,
+                                "reputation": 477,
+                                "user_id": 7886407,
+                                "user_type": "registered",
+                                "display_name": "Darien Marks"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1708390831,
+                            "post_id": 4836734,
+                            "comment_id": 137551991,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/4836734#comment137551991_4836734",
+                            "body": "Whenever I try to use this solution, the line <code>alphanum_key = lambda key: ...</code> throws the error <code>File &quot;&#47;usr&#47;lib&#47;python3.10&#47;re.py&quot;, line 230, in split     return _compile(pattern, flags).split(string, maxsplit) TypeError: expected string or bytes-like object</code>.  Did something change about how <code>re.split()</code> works since this answer was written?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 24377,
+                        "reputation": 826125,
+                        "user_id": 61974,
+                        "user_type": "registered",
+                        "display_name": "Mark Byers"
+                    },
+                    "comment_count": 10,
+                    "is_accepted": false,
+                    "score": 264,
+                    "last_activity_date": 1622579045,
+                    "last_edit_date": 1622579045,
+                    "creation_date": 1296302491,
+                    "answer_id": 4836734,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/4836734#4836734",
+                    "body": "<p>Try this:</p>\n<pre><code>import re\n\ndef natural_sort(l): \n    convert = lambda text: int(text) if text.isdigit() else text.lower()\n    alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key)]\n    return sorted(l, key=alphanum_key)\n</code></pre>\n<p>Output:</p>\n<pre><code>['elm0', 'elm1', 'Elm2', 'elm9', 'elm10', 'Elm11', 'Elm12', 'elm13']\n</code></pre>\n<p>Code adapted from here: <a href=\"http://www.codinghorror.com/blog/2007/12/sorting-for-humans-natural-sort-order.html\" rel=\"noreferrer\">Sorting for Humans : Natural Sort Order</a>.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 79477,
+                                "reputation": 129635,
+                                "user_id": 225312,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "user225312"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7405,
+                                "reputation": 313805,
+                                "user_id": 12855,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "SilentGhost"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1296302974,
+                            "post_id": 4836735,
+                            "comment_id": 5368529,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/4836735#comment5368529_4836735",
+                            "body": "@SilentGhost: Can you explain the <code>re</code> part?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7405,
+                                "reputation": 313805,
+                                "user_id": 12855,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "SilentGhost"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1296303094,
+                            "post_id": 4836735,
+                            "comment_id": 5368541,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/4836735#comment5368541_4836735",
+                            "body": "@AA: matches digits at the end of the string."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 38358,
+                                "reputation": 53851,
+                                "user_id": 110028,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "snakile"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1296303967,
+                            "post_id": 4836735,
+                            "comment_id": 5368616,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/4836735#comment5368616_4836735",
+                            "body": "Your implementation only solves the numbers problem. The implementation fails if the strings don&#39;t have numbers in them. Try it on [&#39;silent&#39;,&#39;ghost&#39;] for instance (list index out of range)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7405,
+                                "reputation": 313805,
+                                "user_id": 12855,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "SilentGhost"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1296307074,
+                            "post_id": 4836735,
+                            "comment_id": 5368926,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/4836735#comment5368926_4836735",
+                            "body": "@snaklie: your question fails to provide decent example case. You haven&#39;t explained what you&#39;re trying to do, and neither you have updated your question with this new information. You haven&#39;t posted anything you have tried, so please don&#39;t be so dismissive of my telepathy attempt."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 38358,
+                                "reputation": 53851,
+                                "user_id": 110028,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "snakile"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7405,
+                                "reputation": 313805,
+                                "user_id": 12855,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "SilentGhost"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1296308599,
+                            "post_id": 4836735,
+                            "comment_id": 5369068,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/4836735#comment5369068_4836735",
+                            "body": "@SilentGhost: First, I gave you an upvote because I think your answer is useful (even though it doesn&#39;t solve my problem). Second, I cannot cover all the possible cases with examples. I think I&#39;ve given a pretty clear definition to natural sort. I don&#39;t think it&#39;s a good idea to give a complex example or a long definition to such a simple concept. You&#39;re welcome to edit my question if you can think of a better  formulation to the problem."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7405,
+                                "reputation": 313805,
+                                "user_id": 12855,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "SilentGhost"
+                            },
+                            "reply_to_user": {
+                                "account_id": 38358,
+                                "reputation": 53851,
+                                "user_id": 110028,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "snakile"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1296309110,
+                            "post_id": 4836735,
+                            "comment_id": 5369110,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/4836735#comment5369110_4836735",
+                            "body": "@snakile: but I don&#39;t know how to improve your question, because for me it&#39;s not clear at all how you&#39;d want to deal with strings that do not have digits, but have different cases, lengths, etc."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 38358,
+                                "reputation": 53851,
+                                "user_id": 110028,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "snakile"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7405,
+                                "reputation": 313805,
+                                "user_id": 12855,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "SilentGhost"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1296309978,
+                            "post_id": 4836735,
+                            "comment_id": 5369182,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/4836735#comment5369182_4836735",
+                            "body": "@SilentGhost: I&#39;d want to deal with such strings the same way Windows deals with such file names when it sorts files by name (ignore cases, etc). It seems clear to me, but anything I say seems clear to me, so I&#39;m not to judge whether it&#39;s clear or not."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 237126,
+                                "reputation": 607862,
+                                "user_id": 505088,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "David Heffernan"
+                            },
+                            "reply_to_user": {
+                                "account_id": 38358,
+                                "reputation": 53851,
+                                "user_id": 110028,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "snakile"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1296316929,
+                            "post_id": 4836735,
+                            "comment_id": 5369987,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/4836735#comment5369987_4836735",
+                            "body": "@snakile you have come nowhere near close defining natural search. That would be quite hard to do and would require a lot of detail. If you want the sort order used by windows explorer do you know that there is a simple api call that provides this?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7405,
+                        "reputation": 313805,
+                        "user_id": 12855,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "SilentGhost"
+                    },
+                    "comment_count": 8,
+                    "is_accepted": false,
+                    "score": -3,
+                    "last_activity_date": 1296302493,
+                    "creation_date": 1296302493,
+                    "answer_id": 4836735,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/4836735#4836735",
+                    "body": "<pre><code>&gt;&gt;&gt; import re\n&gt;&gt;&gt; sorted(lst, key=lambda x: int(re.findall(r'\\d+$', x)[0]))\n['elm0', 'elm1', 'Elm2', 'elm9', 'elm10', 'Elm11', 'Elm12', 'elm13']\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1491643,
+                                "reputation": 47445,
+                                "user_id": 1399279,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "SethMMorton"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1483425338,
+                            "post_id": 6251114,
+                            "comment_id": 70081475,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/6251114#comment70081475_6251114",
+                            "body": "Unfortunately, this solution only works for Python 2.X.  For Python 3, <code>(&#39;b&#39;, 1) &lt; (&#39;b&#39;, &#39;e&#39;, &#39;t&#39;, &#39;a&#39;, 1, &#39;.&#39;, 1)</code> will return <code>TypeError: unorderable types: int() &lt; str()</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4519667,
+                                "reputation": 620,
+                                "user_id": 3673329,
+                                "user_type": "registered",
+                                "display_name": "FlorianH"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1586794497,
+                            "post_id": 6251114,
+                            "comment_id": 108252262,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/6251114#comment108252262_6251114",
+                            "body": "@SethMMorgon is right, this code easily breaks in Python 3. The natural alternative would seem <code>natsort</code>, <a href=\"https://pypi.org/project/natsort/\" rel=\"nofollow noreferrer\">pypi.org/project/natsort</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 316105,
+                        "reputation": 16821,
+                        "user_id": 632088,
+                        "user_type": "registered",
+                        "accept_rate": 87,
+                        "display_name": "Rusty Rob"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1477409980,
+                    "last_edit_date": 1477409980,
+                    "creation_date": 1307358489,
+                    "answer_id": 6251114,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/6251114#6251114",
+                    "body": "<p>One option is to turn the string into a tuple and replace digits using expanded form <a href=\"http://wiki.answers.com/Q/What_does_expanded_form_mean\" rel=\"nofollow\">http://wiki.answers.com/Q/What_does_expanded_form_mean</a></p>\n\n<p>that way a90 would become (\"a\",90,0) and a1 would become (\"a\",1)</p>\n\n<p>below is some sample code (which isn't very efficient due to the way It removes leading 0's from numbers)</p>\n\n<pre><code>alist=[\"something1\",\n    \"something12\",\n    \"something17\",\n    \"something2\",\n    \"something25and_then_33\",\n    \"something25and_then_34\",\n    \"something29\",\n    \"beta1.1\",\n    \"beta2.3.0\",\n    \"beta2.33.1\",\n    \"a001\",\n    \"a2\",\n    \"z002\",\n    \"z1\"]\n\ndef key(k):\n    nums=set(list(\"0123456789\"))\n        chars=set(list(k))\n    chars=chars-nums\n    for i in range(len(k)):\n        for c in chars:\n            k=k.replace(c+\"0\",c)\n    l=list(k)\n    base=10\n    j=0\n    for i in range(len(l)-1,-1,-1):\n        try:\n            l[i]=int(l[i])*base**j\n            j+=1\n        except:\n            j=0\n    l=tuple(l)\n    print l\n    return l\n\nprint sorted(alist,key=key)\n</code></pre>\n\n<p>output:</p>\n\n<pre><code>('s', 'o', 'm', 'e', 't', 'h', 'i', 'n', 'g', 1)\n('s', 'o', 'm', 'e', 't', 'h', 'i', 'n', 'g', 10, 2)\n('s', 'o', 'm', 'e', 't', 'h', 'i', 'n', 'g', 10, 7)\n('s', 'o', 'm', 'e', 't', 'h', 'i', 'n', 'g', 2)\n('s', 'o', 'm', 'e', 't', 'h', 'i', 'n', 'g', 20, 5, 'a', 'n', 'd', '_', 't', 'h', 'e', 'n', '_', 30, 3)\n('s', 'o', 'm', 'e', 't', 'h', 'i', 'n', 'g', 20, 5, 'a', 'n', 'd', '_', 't', 'h', 'e', 'n', '_', 30, 4)\n('s', 'o', 'm', 'e', 't', 'h', 'i', 'n', 'g', 20, 9)\n('b', 'e', 't', 'a', 1, '.', 1)\n('b', 'e', 't', 'a', 2, '.', 3, '.')\n('b', 'e', 't', 'a', 2, '.', 30, 3, '.', 1)\n('a', 1)\n('a', 2)\n('z', 2)\n('z', 1)\n['a001', 'a2', 'beta1.1', 'beta2.3.0', 'beta2.33.1', 'something1', 'something2', 'something12', 'something17', 'something25and_then_33', 'something25and_then_34', 'something29', 'z1', 'z002']\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 8372,
+                                "reputation": 226916,
+                                "user_id": 15055,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Claudiu"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1366310971,
+                            "post_id": 8940266,
+                            "comment_id": 22972736,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/8940266#comment22972736_8940266",
+                            "body": "a simpler way to do this would be to define <code>natural_sort_key</code>, and then when sorting a list you could do chain your keys, e.g.: <code>list.sort(key=lambda el: natural_sort_key(el[&#39;name&#39;]))</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1008778,
+                                "reputation": 8128,
+                                "user_id": 1021819,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "jtlz2"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1666707630,
+                            "post_id": 8940266,
+                            "comment_id": 130997434,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/8940266#comment130997434_8940266",
+                            "body": "You can also return <code>list.sort(key=sort_key)</code> if you want to, er, return it (e.g. in a lambda). Also you shouldn&#39;t really name a var after the built-in <code>list</code>. Thanks!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 143747,
+                        "reputation": 1429,
+                        "user_id": 352311,
+                        "user_type": "registered",
+                        "display_name": "bburrier"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 21,
+                    "last_activity_date": 1327056833,
+                    "creation_date": 1327056833,
+                    "answer_id": 8940266,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/8940266#8940266",
+                    "body": "<p>I wrote a function based on <a href=\"http://www.codinghorror.com/blog/2007/12/sorting-for-humans-natural-sort-order.html\">http://www.codinghorror.com/blog/2007/12/sorting-for-humans-natural-sort-order.html</a> which adds the ability to still pass in your own 'key' parameter. I need this in order to perform a natural sort of lists that contain more complex objects (not just strings).</p>\n\n<pre><code>import re\n\ndef natural_sort(list, key=lambda s:s):\n    \"\"\"\n    Sort the list into natural alphanumeric order.\n    \"\"\"\n    def get_alphanum_key_func(key):\n        convert = lambda text: int(text) if text.isdigit() else text \n        return lambda s: [convert(c) for c in re.split('([0-9]+)', key(s))]\n    sort_key = get_alphanum_key_func(key)\n    list.sort(key=sort_key)\n</code></pre>\n\n<p>For example:</p>\n\n<pre><code>my_list = [{'name':'b'}, {'name':'10'}, {'name':'a'}, {'name':'1'}, {'name':'9'}]\nnatural_sort(my_list, key=lambda x: x['name'])\nprint my_list\n[{'name': '1'}, {'name': '9'}, {'name': '10'}, {'name': 'a'}, {'name': 'b'}]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 342731,
+                                "reputation": 351046,
+                                "user_id": 674039,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "wim"
+                            },
+                            "edited": false,
+                            "score": 11,
+                            "creation_date": 1390411055,
+                            "post_id": 16090640,
+                            "comment_id": 32081878,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/16090640#comment32081878_16090640",
+                            "body": "re module compiles and caches regexes automagically, so there is no need to precompile"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8372,
+                                "reputation": 226916,
+                                "user_id": 15055,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Claudiu"
+                            },
+                            "reply_to_user": {
+                                "account_id": 342731,
+                                "reputation": 351046,
+                                "user_id": 674039,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "wim"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1390413091,
+                            "post_id": 16090640,
+                            "comment_id": 32083141,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/16090640#comment32083141_16090640",
+                            "body": "@wim: it caches the last X usages, so it&#39;s technically possible to use X+5 regexes and then do a natural sort over and over, at which point this wouldn&#39;t be cached. but probably negligible in the long run"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 969977,
+                                "reputation": 30955,
+                                "user_id": 992687,
+                                "user_type": "registered",
+                                "accept_rate": 96,
+                                "display_name": "The Unfun Cat"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1431111098,
+                            "post_id": 16090640,
+                            "comment_id": 48371778,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/16090640#comment48371778_16090640",
+                            "body": "I did not do it, but perhaps the reason was that it can&#39;t handle tuples, like a regular python sort."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6888,
+                                "reputation": 19711,
+                                "user_id": 11722,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "Zitrax"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1448282752,
+                            "post_id": 16090640,
+                            "comment_id": 55506237,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/16090640#comment55506237_16090640",
+                            "body": "The X usages mentioned by @Claudiu seem to be <b>100</b> on Python 2.7 and <b>512</b> on Python 3.4. And also note that when the limit is reached the cache is completely cleared (so it&#39;s not only the oldest one that is thrown out)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 72386,
+                                "reputation": 5944,
+                                "user_id": 209019,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Joschua"
+                            },
+                            "reply_to_user": {
+                                "account_id": 6888,
+                                "reputation": 19711,
+                                "user_id": 11722,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "Zitrax"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1463666530,
+                            "post_id": 16090640,
+                            "comment_id": 62170338,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/16090640#comment62170338_16090640",
+                            "body": "@Zitrax Why / How does it make sense to clear the cache completely?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6888,
+                                "reputation": 19711,
+                                "user_id": 11722,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "Zitrax"
+                            },
+                            "reply_to_user": {
+                                "account_id": 72386,
+                                "reputation": 5944,
+                                "user_id": 209019,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Joschua"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1463668233,
+                            "post_id": 16090640,
+                            "comment_id": 62171759,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/16090640#comment62171759_16090640",
+                            "body": "@Joschua I just mentioned what python is doing internally - perhaps it might just be the simplest solution. You can read more about this issue here: <a href=\"http://stackoverflow.com/q/17325281/11722\">stackoverflow.com/q/17325281/11722</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5933767,
+                                "reputation": 4232,
+                                "user_id": 4667484,
+                                "user_type": "registered",
+                                "display_name": "Charlie Haley"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1566855927,
+                            "post_id": 16090640,
+                            "comment_id": 101779308,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/16090640#comment101779308_16090640",
+                            "body": "For anyone wondering about performance, this version of natural sort is about 10-15x slower than python&#39;s native sort."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1124738,
+                                "reputation": 1661,
+                                "user_id": 1112283,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "cbrnr"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1571839031,
+                            "post_id": 16090640,
+                            "comment_id": 103373959,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/16090640#comment103373959_16090640",
+                            "body": "This doesn&#39;t work when the list elements are <code>Path</code> objects. You can modify your function to make it work though, just replace the last <code>_nsre.split(s)</code> with <code>_nsre.split(str(s))</code>. Same for the lambda, replace <code>s</code> with <code>str(s)</code> at the end of the expression."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 19604789,
+                                "reputation": 967,
+                                "user_id": 14348748,
+                                "user_type": "registered",
+                                "display_name": "NicoHood"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1662803094,
+                            "post_id": 16090640,
+                            "comment_id": 130093859,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/16090640#comment130093859_16090640",
+                            "body": "Why did you use <code>[0-9]</code> in the function and <code>\\d</code> in the lambda? As far as I know those are equal, but wouldnt it make sense to adjust the answer then to use only one of the two?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8372,
+                                "reputation": 226916,
+                                "user_id": 15055,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Claudiu"
+                            },
+                            "reply_to_user": {
+                                "account_id": 6888,
+                                "reputation": 19711,
+                                "user_id": 11722,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "Zitrax"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1663869295,
+                            "post_id": 16090640,
+                            "comment_id": 130346791,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/16090640#comment130346791_16090640",
+                            "body": "Blame @Zitrax :D ( <a href=\"https://stackoverflow.com/revisions/16090640/7\">stackoverflow.com/revisions/16090640/7</a> )"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 8372,
+                        "reputation": 226916,
+                        "user_id": 15055,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "Claudiu"
+                    },
+                    "comment_count": 10,
+                    "is_accepted": false,
+                    "score": 146,
+                    "last_activity_date": 1633824768,
+                    "last_edit_date": 1633824768,
+                    "creation_date": 1366310225,
+                    "answer_id": 16090640,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/16090640#16090640",
+                    "body": "<p>Here's a much more pythonic version of Mark Byer's answer:</p>\n<pre><code>import re\n\ndef natural_sort_key(s, _nsre=re.compile('([0-9]+)')):\n    return [int(text) if text.isdigit() else text.lower()\n            for text in _nsre.split(s)]\n</code></pre>\n<p>Now this function can be used as a key in any function that uses it, like <code>list.sort</code>, <code>sorted</code>, <code>max</code>, etc.</p>\n<p>As a lambda:</p>\n<pre><code>lambda s: [int(t) if t.isdigit() else t.lower() for t in re.split('(\\d+)', s)]\n</code></pre>\n<hr />\n<p>Fully reproducible demo code:</p>\n<pre><code>import re\nnatsort = lambda s: [int(t) if t.isdigit() else t.lower() for t in re.split('(\\d+)', s)]\nL = [&quot;a1&quot;, &quot;a10&quot;, &quot;a11&quot;, &quot;a2&quot;, &quot;a22&quot;, &quot;a3&quot;]   \nprint(sorted(L, key=natsort))  \n# ['a1', 'a2', 'a3', 'a10', 'a11', 'a22'] \n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 271958,
+                                "reputation": 131586,
+                                "user_id": 562769,
+                                "user_type": "registered",
+                                "accept_rate": 61,
+                                "display_name": "Martin Thoma"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1405623117,
+                            "post_id": 18415320,
+                            "comment_id": 38514085,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/18415320#comment38514085_18415320",
+                            "body": "I also think it&#39;s quite interesting that natsort also sorts correct when the number is not at the end: like it&#39;s often the case for filenames. Feel free to include the following example:  <a href=\"http://pastebin.com/9cwCLdEK\" rel=\"nofollow noreferrer\">pastebin.com/9cwCLdEK</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 12155295,
+                                "reputation": 4081,
+                                "user_id": 8874388,
+                                "user_type": "registered",
+                                "display_name": "Mitch McMabers"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1571893413,
+                            "post_id": 18415320,
+                            "comment_id": 103391839,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/18415320#comment103391839_18415320",
+                            "body": "Natsort is a great library, should be added to python standard library! :-)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4519667,
+                                "reputation": 620,
+                                "user_id": 3673329,
+                                "user_type": "registered",
+                                "display_name": "FlorianH"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1586794629,
+                            "post_id": 18415320,
+                            "comment_id": 108252333,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/18415320#comment108252333_18415320",
+                            "body": "<code>natsort</code> also &#39;naturally&#39; handles the case of multiple separate numbers in the strings. Great stuff!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 14834271,
+                                "reputation": 534,
+                                "user_id": 10712882,
+                                "user_type": "registered",
+                                "display_name": "F. Vosnim"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1593628879,
+                            "post_id": 18415320,
+                            "comment_id": 110851010,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/18415320#comment110851010_18415320",
+                            "body": "@SethMMorton Windows sorts files in this order <code>[&#39;!2020&#39;, &#39;.2020&#39;, &#39;2020&#39;]</code>. Natsort returns <code>[&#39;2020&#39;, &#39;!2020&#39;, &#39;.2020&#39;]</code>. Can it sort like Windows?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3393932,
+                                "reputation": 7069,
+                                "user_id": 5539715,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "Nic Scozzaro"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1640629407,
+                            "post_id": 18415320,
+                            "comment_id": 124620932,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/18415320#comment124620932_18415320",
+                            "body": "Thank you for <code>os_sorted</code>, that&#39;s worked for me to match the ordering in Finder on my Mac."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3700957,
+                                "reputation": 14983,
+                                "user_id": 3080723,
+                                "user_type": "registered",
+                                "display_name": "Stef"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1665568839,
+                            "post_id": 18415320,
+                            "comment_id": 130729539,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/18415320#comment130729539_18415320",
+                            "body": "Is there a way to access other OSes sort orders? For instance, if I&#39;m on unix but I want to sort like Windows Explorer?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1491643,
+                                "reputation": 47445,
+                                "user_id": 1399279,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "SethMMorton"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3700957,
+                                "reputation": 14983,
+                                "user_id": 3080723,
+                                "user_type": "registered",
+                                "display_name": "Stef"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1665676451,
+                            "post_id": 18415320,
+                            "comment_id": 130760197,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/18415320#comment130760197_18415320",
+                            "body": "@Stef No not really. See <a href=\"https://github.com/SethMMorton/natsort/issues/150\" rel=\"nofollow noreferrer\">github.com/SethMMorton/natsort/issues/150</a> for the gory details."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1491643,
+                        "reputation": 47445,
+                        "user_id": 1399279,
+                        "user_type": "registered",
+                        "accept_rate": 81,
+                        "display_name": "SethMMorton"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": true,
+                    "score": 375,
+                    "last_activity_date": 1677472515,
+                    "last_edit_date": 1677472515,
+                    "creation_date": 1377322722,
+                    "answer_id": 18415320,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/18415320#18415320",
+                    "body": "<p>There is a third party library for this on PyPI called <a href=\"https://github.com/SethMMorton/natsort\" rel=\"noreferrer\">natsort</a> (full disclosure, I am the package's author).  For your case, you can do either of the following:</p>\n<pre><code>&gt;&gt;&gt; from natsort import natsorted, ns\n&gt;&gt;&gt; x = ['Elm11', 'Elm12', 'Elm2', 'elm0', 'elm1', 'elm10', 'elm13', 'elm9']\n&gt;&gt;&gt; natsorted(x, key=lambda y: y.lower())\n['elm0', 'elm1', 'Elm2', 'elm9', 'elm10', 'Elm11', 'Elm12', 'elm13']\n&gt;&gt;&gt; natsorted(x, alg=ns.IGNORECASE)  # or alg=ns.IC\n['elm0', 'elm1', 'Elm2', 'elm9', 'elm10', 'Elm11', 'Elm12', 'elm13']\n</code></pre>\n<p>You should note that <code>natsort</code> uses a general algorithm so it should work for just about any input that you throw at it. If you want more details on why you might choose a library to do this rather than rolling your own function, check out the <code>natsort</code> documentation's <a href=\"http://natsort.readthedocs.io/en/stable/howitworks.html\" rel=\"noreferrer\">How It Works</a> page, in particular the <a href=\"http://natsort.readthedocs.io/en/stable/howitworks.html#special-cases-everywhere\" rel=\"noreferrer\">Special Cases Everywhere!</a> section.</p>\n<hr />\n<p>If you need a sorting key instead of a sorting function, use either of the below formulas.</p>\n<pre><code>&gt;&gt;&gt; from natsort import natsort_keygen, ns\n&gt;&gt;&gt; l1 = ['elm0', 'elm1', 'Elm2', 'elm9', 'elm10', 'Elm11', 'Elm12', 'elm13']\n&gt;&gt;&gt; l2 = l1[:]\n&gt;&gt;&gt; natsort_key1 = natsort_keygen(key=lambda y: y.lower())\n&gt;&gt;&gt; l1.sort(key=natsort_key1)\n&gt;&gt;&gt; l1\n['elm0', 'elm1', 'Elm2', 'elm9', 'elm10', 'Elm11', 'Elm12', 'elm13']\n&gt;&gt;&gt; natsort_key2 = natsort_keygen(alg=ns.IGNORECASE)\n&gt;&gt;&gt; l2.sort(key=natsort_key2)\n&gt;&gt;&gt; l2\n['elm0', 'elm1', 'Elm2', 'elm9', 'elm10', 'Elm11', 'Elm12', 'elm13']\n</code></pre>\n<hr />\n<p><strong>Update November 2020</strong></p>\n<p>Given that a popular request/question is &quot;how to sort like Windows Explorer?&quot; (or whatever is your operating system's file system browser), as of <code>natsort</code> version 7.1.0 there is a function called <a href=\"https://natsort.readthedocs.io/en/stable/api.html#natsort.os_sorted\" rel=\"noreferrer\"><code>os_sorted</code></a> to do exactly this. On Windows, it will sort in the same order as Windows Explorer, and on other operating systems it should sort like whatever is the local file system browser.</p>\n<pre class=\"lang-py prettyprint-override\"><code>&gt;&gt;&gt; from natsort import os_sorted\n&gt;&gt;&gt; os_sorted(list_of_paths)\n# your paths sorted like your file system browser\n</code></pre>\n<p>For those needing a sort key, you can use <code>os_sort_keygen</code> (or <code>os_sort_key</code> if you just need the defaults).</p>\n<p><em>Caveat</em> - Please read the API documentation for this function before you use to understand the limitations and how to get best results.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1491643,
+                                "reputation": 47445,
+                                "user_id": 1399279,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "SethMMorton"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1447804685,
+                            "post_id": 27430141,
+                            "comment_id": 55306412,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/27430141#comment55306412_27430141",
+                            "body": "In your test script to which you link, <code>natsorted</code> and <code>humansorted</code> fail because they were used incorrectly... you tried to pass <code>natsorted</code> as a key but its actually the sorting function itself.  You should have tried <code>natsort_keygen()</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 632109,
+                        "reputation": 596,
+                        "user_id": 1527197,
+                        "user_type": "registered",
+                        "display_name": "Scott Lawton"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1418323376,
+                    "creation_date": 1418323376,
+                    "answer_id": 27430141,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/27430141#27430141",
+                    "body": "<p>The above answers are good for the <strong>specific example</strong> that was shown, but miss several useful cases for the more general question of natural sort. I just got bit by one of those cases, so created a more thorough solution:</p>\n\n<pre><code>def natural_sort_key(string_or_number):\n    \"\"\"\n    by Scott S. Lawton &lt;scott@ProductArchitect.com&gt; 2014-12-11; public domain and/or CC0 license\n\n    handles cases where simple 'int' approach fails, e.g.\n        ['0.501', '0.55'] floating point with different number of significant digits\n        [0.01, 0.1, 1]    already numeric so regex and other string functions won't work (and aren't required)\n        ['elm1', 'Elm2']  ASCII vs. letters (not case sensitive)\n    \"\"\"\n\n    def try_float(astring):\n        try:\n            return float(astring)\n        except:\n            return astring\n\n    if isinstance(string_or_number, basestring):\n        string_or_number = string_or_number.lower()\n\n        if len(re.findall('[.]\\d', string_or_number)) &lt;= 1:\n            # assume a floating point value, e.g. to correctly sort ['0.501', '0.55']\n            # '.' for decimal is locale-specific, e.g. correct for the Anglosphere and Asia but not continental Europe\n            return [try_float(s) for s in re.split(r'([\\d.]+)', string_or_number)]\n        else:\n            # assume distinct fields, e.g. IP address, phone number with '.', etc.\n            # caveat: might want to first split by whitespace\n            # TBD: for unicode, replace isdigit with isdecimal\n            return [int(s) if s.isdigit() else s for s in re.split(r'(\\d+)', string_or_number)]\n    else:\n        # consider: add code to recurse for lists/tuples and perhaps other iterables\n        return string_or_number\n</code></pre>\n\n<p>Test code and several links (on and off of StackOverflow) are here:\n<a href=\"http://productarchitect.com/code/better-natural-sort.py\" rel=\"nofollow\">http://productarchitect.com/code/better-natural-sort.py</a></p>\n\n<p>Feedback welcome. That's not meant to be a definitive solution; just a step forward.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5596936,
+                                "reputation": 1327,
+                                "user_id": 4434405,
+                                "user_type": "registered",
+                                "display_name": "JerodG"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1506519970,
+                            "post_id": 31432964,
+                            "comment_id": 79854737,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/31432964#comment79854737_31432964",
+                            "body": "This doesn&#39;t handle dynamic/unknown length data. It also sorts differently than other solutions for data that has numbers within the data opposed to at the end. *This isn&#39;t necessarily undesirable but I think it&#39;s good to point out."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 909718,
+                                "reputation": 613,
+                                "user_id": 943833,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "roganartu"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1511800937,
+                            "post_id": 31432964,
+                            "comment_id": 81987452,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/31432964#comment81987452_31432964",
+                            "body": "If you need to handle dynamic length data you can use <code>width = max(data, key=len)</code> to calculate what to sub in for the <code>8</code> above and then sub it into the format string with <code>&#39;{0:0&gt;{width}}&#39;.format(x, width=width)</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11108451,
+                                "reputation": 111,
+                                "user_id": 12266619,
+                                "user_type": "registered",
+                                "display_name": "S. R. Colledge"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1584864469,
+                            "post_id": 31432964,
+                            "comment_id": 107565429,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/31432964#comment107565429_31432964",
+                            "body": "Just by doing a timed test compared to all the others on this forum, this solution is by far the <b>fastest</b> and most efficient for the type of data @snakile is trying to process"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6282997,
+                                "reputation": 1115,
+                                "user_id": 4883320,
+                                "user_type": "registered",
+                                "display_name": "KiriSakow"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1693178322,
+                            "post_id": 31432964,
+                            "comment_id": 135721841,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/31432964#comment135721841_31432964",
+                            "body": "FYI the built-in function <code>str.zfill(width)</code> returns a copy of the string left filled with ASCII <code>0</code> digits to make a string of length <i>width</i>. See official documentation to learn more: <a href=\"https://docs.python.org/3/library/stdtypes.html#str.zfill\" rel=\"nofollow noreferrer\">docs.python.org/3/library/stdtypes.html#str.zfill</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 349872,
+                        "reputation": 2783,
+                        "user_id": 685410,
+                        "user_type": "registered",
+                        "display_name": "SergO"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 25,
+                    "last_activity_date": 1461067018,
+                    "last_edit_date": 1461067018,
+                    "creation_date": 1436969816,
+                    "answer_id": 31432964,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/31432964#31432964",
+                    "body": "<pre><code>data = ['elm13', 'elm9', 'elm0', 'elm1', 'Elm11', 'Elm2', 'elm10']\n</code></pre>\n\n<p>Let's analyse the data. The digit capacity of all elements is 2. And there are 3 letters in common literal part <code>'elm'</code>. </p>\n\n<p>So, the maximal length of element is 5. We can increase this value to make sure (for example, to 8).</p>\n\n<p><strong>Bearing that in mind, we've got a one-line solution:</strong></p>\n\n<pre><code>data.sort(key=lambda x: '{0:0&gt;8}'.format(x).lower())\n</code></pre>\n\n<p><strong>without regular expressions and external libraries!</strong></p>\n\n<pre><code>print(data)\n\n&gt;&gt;&gt; ['elm0', 'elm1', 'Elm2', 'elm9', 'elm10', 'Elm11', 'elm13']\n</code></pre>\n\n<p>Explanation:</p>\n\n<pre><code>for elm in data:\n    print('{0:0&gt;8}'.format(elm).lower())\n\n&gt;&gt;&gt;\n0000elm0\n0000elm1\n0000elm2\n0000elm9\n000elm10\n000elm11\n000elm13\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5596936,
+                        "reputation": 1327,
+                        "user_id": 4434405,
+                        "user_type": "registered",
+                        "display_name": "JerodG"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 9,
+                    "last_activity_date": 1462390247,
+                    "creation_date": 1462390247,
+                    "answer_id": 37036428,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/37036428#37036428",
+                    "body": "<strong>And now for something more* elegant (pythonic)</strong> <em>-just a touch</em>\n\n<p>There are many implementations out there, and while some have come close, none quite captured the elegance modern python affords.</p>\n\n<ul>\n<li>Tested using python(3.5.1)</li>\n<li>Included an additional list to demonstrate that it works when the\nnumbers are mid string</li>\n<li>Didn't test, however, I am assuming that if your list was sizable it would be more efficient to compile the regex beforehand\n\n<ul>\n<li><em>I'm sure someone will correct me if this is an erroneous assumption</em></li>\n</ul></li>\n</ul>\n\n<p></p>\n\n<strong>Quicky</strong>\n\n<pre class=\"lang-python prettyprint-override\"><code>from re import compile, split    \ndre = compile(r'(\\d+)')\nmylist.sort(key=lambda l: [int(s) if s.isdigit() else s.lower() for s in split(dre, l)])\n</code></pre>\n\n<strong>Full-Code</strong>\n\n<pre class=\"lang-python prettyprint-override\"><code>#!/usr/bin/python3\n# coding=utf-8\n\"\"\"\nNatural-Sort Test\n\"\"\"\n\nfrom re import compile, split\n\ndre = compile(r'(\\d+)')\nmylist = ['elm0', 'elm1', 'Elm2', 'elm9', 'elm10', 'Elm11', 'Elm12', 'elm13', 'elm']\nmylist2 = ['e0lm', 'e1lm', 'E2lm', 'e9lm', 'e10lm', 'E12lm', 'e13lm', 'elm', 'e01lm']\n\nmylist.sort(key=lambda l: [int(s) if s.isdigit() else s.lower() for s in split(dre, l)])\nmylist2.sort(key=lambda l: [int(s) if s.isdigit() else s.lower() for s in split(dre, l)])\n\nprint(mylist)  \n  # ['elm', 'elm0', 'elm1', 'Elm2', 'elm9', 'elm10', 'Elm11', 'Elm12', 'elm13']\nprint(mylist2)  \n  # ['e0lm', 'e1lm', 'e01lm', 'E2lm', 'e9lm', 'e10lm', 'E12lm', 'e13lm', 'elm']\n</code></pre>\n\n<p><strong>Caution</strong> when using</p>\n\n<ul>\n<li><code>from os.path import split</code>\n\n<ul>\n<li>you will need to differentiate the imports</li>\n</ul></li>\n</ul>\n\n<p><strong>Inspiration</strong> from</p>\n\n<ul>\n<li><a href=\"https://docs.python.org/3.5/howto/sorting.html\" rel=\"noreferrer\">Python Documentation- Sorting HOW TO</a></li>\n<li><a href=\"https://blog.codinghorror.com/sorting-for-humans-natural-sort-order/\" rel=\"noreferrer\">Sorting for Humans : Natural Sort Order</a></li>\n<li><a href=\"http://nedbatchelder.com/blog/200712.html#e20071211T054956\" rel=\"noreferrer\">Human Sorting</a></li>\n<li>Contributors/Commentators to this and referenced posts </li>\n</ul>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1205915,
+                        "reputation": 1967,
+                        "user_id": 2626865,
+                        "user_type": "registered",
+                        "accept_rate": 62,
+                        "display_name": "user19087"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1489864815,
+                    "last_edit_date": 1495540051,
+                    "creation_date": 1484117307,
+                    "answer_id": 41584426,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/41584426#41584426",
+                    "body": "<p>Most likely <code>functools.cmp_to_key()</code> is closely tied to the underlying implementation of python's sort. Besides, the <em>cmp</em> parameter is legacy. The modern way is to transform the input items into objects that support the desired rich comparison operations.</p>\n\n<p>Under CPython 2.x, objects of disparate types can be ordered even if the respective rich comparison operators haven't been implemented. Under CPython 3.x, objects of different types must explicitly support the comparison. See <a href=\"https://stackoverflow.com/a/3270689\">How does Python compare string and int?</a> which links to the <a href=\"https://docs.python.org/2/library/stdtypes.html#comparisons\" rel=\"nofollow noreferrer\">official documentation</a>. Most of the answers depend on this implicit ordering. Switching to Python 3.x will require a new type to implement and unify comparisons between numbers and strings.</p>\n\n<pre><code>Python 2.7.12 (default, Sep 29 2016, 13:30:34) \n&gt;&gt;&gt; (0,\"foo\") &lt; (\"foo\",0)\nTrue  \n</code></pre>\n\n\n\n<pre><code>Python 3.5.2 (default, Oct 14 2016, 12:54:53) \n&gt;&gt;&gt; (0,\"foo\") &lt; (\"foo\",0)\nTraceback (most recent call last):\n  File \"&lt;stdin&gt;\", line 1, in &lt;module&gt;\n  TypeError: unorderable types: int() &lt; str()\n</code></pre>\n\n<p>There are three different approaches. The first uses nested classes to take advantage of Python's <code>Iterable</code> comparison algorithm. The second unrolls this nesting into a single class. The third foregoes subclassing <code>str</code> to focus on performance. All are timed; the second is twice as fast while the third almost six times faster. Subclassing <code>str</code> isn't required, and was probably a bad idea in the first place, but it does come with certain conveniences.</p>\n\n<p>The sort characters are duplicated to force ordering by case, and case-swapped to force lower case letter to sort first; this is the typical definition of \"natural sort\". I couldn't decide on the type of grouping; some might prefer the following, which also brings significant performance benefits:</p>\n\n<pre><code>d = lambda s: s.lower()+s.swapcase()\n</code></pre>\n\n<p>Where utilized, the comparison operators are set to that of <code>object</code> so they won't <a href=\"https://hg.python.org/cpython/file/3.5/Lib/functools.py#l192\" rel=\"nofollow noreferrer\">be ignored by <code>functools.total_ordering</code></a>.</p>\n\n<pre><code>import functools\nimport itertools\n\n\n@functools.total_ordering\nclass NaturalStringA(str):\n    def __repr__(self):\n        return \"{}({})\".format\\\n            ( type(self).__name__\n            , super().__repr__()\n            )\n    d = lambda c, s: [ c.NaturalStringPart(\"\".join(v))\n                        for k,v in\n                       itertools.groupby(s, c.isdigit)\n                     ]\n    d = classmethod(d)\n    @functools.total_ordering\n    class NaturalStringPart(str):\n        d = lambda s: \"\".join(c.lower()+c.swapcase() for c in s)\n        d = staticmethod(d)\n        def __lt__(self, other):\n            if not isinstance(self, type(other)):\n                return NotImplemented\n            try:\n                return int(self) &lt; int(other)\n            except ValueError:\n                if self.isdigit():\n                    return True\n                elif other.isdigit():\n                    return False\n                else:\n                    return self.d(self) &lt; self.d(other)\n        def __eq__(self, other):\n            if not isinstance(self, type(other)):\n                return NotImplemented\n            try:\n                return int(self) == int(other)\n            except ValueError:\n                if self.isdigit() or other.isdigit():\n                    return False\n                else:\n                    return self.d(self) == self.d(other)\n        __le__ = object.__le__\n        __ne__ = object.__ne__\n        __gt__ = object.__gt__\n        __ge__ = object.__ge__\n    def __lt__(self, other):\n        return self.d(self) &lt; self.d(other)\n    def __eq__(self, other):\n        return self.d(self) == self.d(other)\n    __le__ = object.__le__\n    __ne__ = object.__ne__\n    __gt__ = object.__gt__\n    __ge__ = object.__ge__\n</code></pre>\n\n\n\n<pre><code>import functools\nimport itertools\n\n\n@functools.total_ordering\nclass NaturalStringB(str):\n    def __repr__(self):\n        return \"{}({})\".format\\\n            ( type(self).__name__\n            , super().__repr__()\n            )\n    d = lambda s: \"\".join(c.lower()+c.swapcase() for c in s)\n    d = staticmethod(d)\n    def __lt__(self, other):\n        if not isinstance(self, type(other)):\n            return NotImplemented\n        groups = map(lambda i: itertools.groupby(i, type(self).isdigit), (self, other))\n        zipped = itertools.zip_longest(*groups)\n        for s,o in zipped:\n            if s is None:\n                return True\n            if o is None:\n                return False\n            s_k, s_v = s[0], \"\".join(s[1])\n            o_k, o_v = o[0], \"\".join(o[1])\n            if s_k and o_k:\n                s_v, o_v = int(s_v), int(o_v)\n                if s_v == o_v:\n                    continue\n                return s_v &lt; o_v\n            elif s_k:\n                return True\n            elif o_k:\n                return False\n            else:\n                s_v, o_v = self.d(s_v), self.d(o_v)\n                if s_v == o_v:\n                    continue\n                return s_v &lt; o_v\n        return False\n    def __eq__(self, other):\n        if not isinstance(self, type(other)):\n            return NotImplemented\n        groups = map(lambda i: itertools.groupby(i, type(self).isdigit), (self, other))\n        zipped = itertools.zip_longest(*groups)\n        for s,o in zipped:\n            if s is None or o is None:\n                return False\n            s_k, s_v = s[0], \"\".join(s[1])\n            o_k, o_v = o[0], \"\".join(o[1])\n            if s_k and o_k:\n                s_v, o_v = int(s_v), int(o_v)\n                if s_v == o_v:\n                    continue\n                return False\n            elif s_k or o_k:\n                return False\n            else:\n                s_v, o_v = self.d(s_v), self.d(o_v)\n                if s_v == o_v:\n                    continue\n                return False\n        return True\n    __le__ = object.__le__\n    __ne__ = object.__ne__\n    __gt__ = object.__gt__\n    __ge__ = object.__ge__\n</code></pre>\n\n\n\n<pre><code>import functools\nimport itertools\nimport enum\n\n\nclass OrderingType(enum.Enum):\n    PerWordSwapCase         = lambda s: s.lower()+s.swapcase()\n    PerCharacterSwapCase    = lambda s: \"\".join(c.lower()+c.swapcase() for c in s)\n\n\nclass NaturalOrdering:\n    @classmethod\n    def by(cls, ordering):\n        def wrapper(string):\n            return cls(string, ordering)\n        return wrapper\n    def __init__(self, string, ordering=OrderingType.PerCharacterSwapCase):\n        self.string = string\n        self.groups = [ (k,int(\"\".join(v)))\n                            if k else\n                        (k,ordering(\"\".join(v)))\n                            for k,v in\n                        itertools.groupby(string, str.isdigit)\n                      ]\n    def __repr__(self):\n        return \"{}({})\".format\\\n            ( type(self).__name__\n            , self.string\n            )\n    def __lesser(self, other, default):\n        if not isinstance(self, type(other)):\n            return NotImplemented\n        for s,o in itertools.zip_longest(self.groups, other.groups):\n            if s is None:\n                return True\n            if o is None:\n                return False\n            s_k, s_v = s\n            o_k, o_v = o\n            if s_k and o_k:\n                if s_v == o_v:\n                    continue\n                return s_v &lt; o_v\n            elif s_k:\n                return True\n            elif o_k:\n                return False\n            else:\n                if s_v == o_v:\n                    continue\n                return s_v &lt; o_v\n        return default\n    def __lt__(self, other):\n        return self.__lesser(other, default=False)\n    def __le__(self, other):\n        return self.__lesser(other, default=True)\n    def __eq__(self, other):\n        if not isinstance(self, type(other)):\n            return NotImplemented\n        for s,o in itertools.zip_longest(self.groups, other.groups):\n            if s is None or o is None:\n                return False\n            s_k, s_v = s\n            o_k, o_v = o\n            if s_k and o_k:\n                if s_v == o_v:\n                    continue\n                return False\n            elif s_k or o_k:\n                return False\n            else:\n                if s_v == o_v:\n                    continue\n                return False\n        return True\n    # functools.total_ordering doesn't create single-call wrappers if both\n    # __le__ and __lt__ exist, so do it manually.\n    def __gt__(self, other):\n        op_result = self.__le__(other)\n        if op_result is NotImplemented:\n            return op_result\n        return not op_result\n    def __ge__(self, other):\n        op_result = self.__lt__(other)\n        if op_result is NotImplemented:\n            return op_result\n        return not op_result\n    # __ne__ is the only implied ordering relationship, it automatically\n    # delegates to __eq__\n</code></pre>\n\n\n\n<pre><code>&gt;&gt;&gt; import natsort\n&gt;&gt;&gt; import timeit\n&gt;&gt;&gt; l1 = ['Apple', 'corn', 'apPlE', 'arbour', 'Corn', 'Banana', 'apple', 'banana']\n&gt;&gt;&gt; l2 = list(map(str, range(30)))\n&gt;&gt;&gt; l3 = [\"{} {}\".format(x,y) for x in l1 for y in l2]\n&gt;&gt;&gt; print(timeit.timeit('sorted(l3+[\"0\"], key=NaturalStringA)', number=10000, globals=globals()))\n362.4729259099986\n&gt;&gt;&gt; print(timeit.timeit('sorted(l3+[\"0\"], key=NaturalStringB)', number=10000, globals=globals()))\n189.7340817489967\n&gt;&gt;&gt; print(timeit.timeit('sorted(l3+[\"0\"], key=NaturalOrdering.by(OrderingType.PerCharacterSwapCase))', number=10000, globals=globals()))\n69.34636392899847\n&gt;&gt;&gt; print(timeit.timeit('natsort.natsorted(l3+[\"0\"], alg=natsort.ns.GROUPLETTERS | natsort.ns.LOWERCASEFIRST)', number=10000, globals=globals()))\n98.2531585780016\n</code></pre>\n\n<p>Natural sorting is both pretty complicated and vaguely defined as a problem. Don't forget to run <code>unicodedata.normalize(...)</code> beforehand, and consider use <code>str.casefold()</code> rather than <code>str.lower()</code>. There are probably subtle encoding issues I haven't considered. So I tentatively recommend the <a href=\"https://pypi.python.org/pypi/natsort\" rel=\"nofollow noreferrer\">natsort</a> library. I took a quick glance at the github repository; the code maintenance has been stellar.</p>\n\n<p>All the algorithms I've seen depend on tricks such as duplicating and lowering characters, and swapping case. While this doubles the running time, an alternative would require a total natural ordering on the input character set. I don't think this is part of the unicode specification, and since there are many more unicode digits than <code>[0-9]</code>, creating such a sorting would be equally daunting. If you want locale-aware comparisons, prepare your strings with <a href=\"https://docs.python.org/3/library/locale.html#locale.strxfrm\" rel=\"nofollow noreferrer\"><code>locale.strxfrm</code></a> per Python's <a href=\"https://docs.python.org/3/howto/sorting.html#odd-and-ends\" rel=\"nofollow noreferrer\">Sorting HOW TO</a>.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 19604789,
+                                "reputation": 967,
+                                "user_id": 14348748,
+                                "user_type": "registered",
+                                "display_name": "NicoHood"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1662802875,
+                            "post_id": 42789837,
+                            "comment_id": 130093830,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/42789837#comment130093830_42789837",
+                            "body": "I dont think that relying on the 3 character long prefix is a good idea. This is very inflexible in the long run."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 9270766,
+                        "reputation": 272,
+                        "user_id": 6884818,
+                        "user_type": "registered",
+                        "display_name": "Camilo"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 20,
+                    "last_activity_date": 1622579207,
+                    "last_edit_date": 1622579207,
+                    "creation_date": 1489504616,
+                    "answer_id": 42789837,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/42789837#42789837",
+                    "body": "<p>Given:</p>\n<pre><code>data = ['Elm11', 'Elm12', 'Elm2', 'elm0', 'elm1', 'elm10', 'elm13', 'elm9']\n</code></pre>\n<p>Similar to SergO's solution, a <strong>1-liner without external libraries would be</strong>:</p>\n<pre><code>data.sort(key=lambda x: int(x[3:]))\n</code></pre>\n<p>or</p>\n<pre><code>sorted_data = sorted(data, key=lambda x: int(x[3:]))\n</code></pre>\n<p>Explanation:</p>\n<p>This solution uses the <em>key</em> feature of <em>sort</em> to define a function that will be employed for the sorting. Because we know that every data entry is preceded by 'elm' the sorting function converts to integer the portion of the string after the 3rd character (i.e. int(x[3:])). If the numerical part of the data is in a different location, then this part of the function would have to change.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3740941,
+                                "reputation": 1992,
+                                "user_id": 3110740,
+                                "user_type": "registered",
+                                "accept_rate": 33,
+                                "display_name": "skjerns"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1582892556,
+                            "post_id": 45677250,
+                            "comment_id": 106942450,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/45677250#comment106942450_45677250",
+                            "body": "this doesnt handle digits. <code>a_51</code> would be after<code>a500</code>, although 500&gt;51"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11212269,
+                                "reputation": 287,
+                                "user_id": 8226011,
+                                "user_type": "registered",
+                                "display_name": "Johny Vaknin"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3740941,
+                                "reputation": 1992,
+                                "user_id": 3110740,
+                                "user_type": "registered",
+                                "accept_rate": 33,
+                                "display_name": "skjerns"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1590622983,
+                            "post_id": 45677250,
+                            "comment_id": 109753056,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/45677250#comment109753056_45677250",
+                            "body": "True, my answer simply matches the given example of Elm11 and elm1. Missed the request for natural sort specifically and the marked answer is probably the best one here :)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 11212269,
+                        "reputation": 287,
+                        "user_id": 8226011,
+                        "user_type": "registered",
+                        "display_name": "Johny Vaknin"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1502722174,
+                    "creation_date": 1502722174,
+                    "answer_id": 45677250,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/45677250#45677250",
+                    "body": "<p>I suggest you simply use the <code>key</code> keyword argument of <code>sorted</code> to achieve your desired list<br>\nFor example:</p>\n\n<pre><code>to_order= [e2,E1,e5,E4,e3]\nordered= sorted(to_order, key= lambda x: x.lower())\n    # ordered should be [E1,e2,e3,E4,e5]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2541415,
+                        "reputation": 181,
+                        "user_id": 9230828,
+                        "user_type": "registered",
+                        "display_name": "Benjamin Drung"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1518101788,
+                    "creation_date": 1518101788,
+                    "answer_id": 48688389,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/48688389#48688389",
+                    "body": "<p>Based on the answers here, I wrote a <code>natural_sorted</code> function that behaves like the built-in function <code>sorted</code>:</p>\n\n<pre><code># Copyright (C) 2018, Benjamin Drung &lt;bdrung@posteo.de&gt;\n#\n# Permission to use, copy, modify, and/or distribute this software for any\n# purpose with or without fee is hereby granted, provided that the above\n# copyright notice and this permission notice appear in all copies.\n#\n# THE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES\n# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF\n# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR\n# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES\n# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN\n# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF\n# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n\nimport re\n\ndef natural_sorted(iterable, key=None, reverse=False):\n    \"\"\"Return a new naturally sorted list from the items in *iterable*.\n\n    The returned list is in natural sort order. The string is ordered\n    lexicographically (using the Unicode code point number to order individual\n    characters), except that multi-digit numbers are ordered as a single\n    character.\n\n    Has two optional arguments which must be specified as keyword arguments.\n\n    *key* specifies a function of one argument that is used to extract a\n    comparison key from each list element: ``key=str.lower``.  The default value\n    is ``None`` (compare the elements directly).\n\n    *reverse* is a boolean value.  If set to ``True``, then the list elements are\n    sorted as if each comparison were reversed.\n\n    The :func:`natural_sorted` function is guaranteed to be stable. A sort is\n    stable if it guarantees not to change the relative order of elements that\n    compare equal --- this is helpful for sorting in multiple passes (for\n    example, sort by department, then by salary grade).\n    \"\"\"\n    prog = re.compile(r\"(\\d+)\")\n\n    def alphanum_key(element):\n        \"\"\"Split given key in list of strings and digits\"\"\"\n        return [int(c) if c.isdigit() else c for c in prog.split(key(element)\n                if key else element)]\n\n    return sorted(iterable, key=alphanum_key, reverse=reverse)\n</code></pre>\n\n<p>The source code is also available in my GitHub snippets repository:\n<a href=\"https://github.com/bdrung/snippets/blob/master/natural_sorted.py\" rel=\"nofollow noreferrer\">https://github.com/bdrung/snippets/blob/master/natural_sorted.py</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 14447872,
+                                "reputation": 220,
+                                "user_id": 11601227,
+                                "user_type": "registered",
+                                "display_name": "morph3us"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1579211369,
+                            "post_id": 48875852,
+                            "comment_id": 105700717,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/48875852#comment105700717_48875852",
+                            "body": "Thanks a lot! I want to add however, that if you have &quot;12345_A&quot; and &quot;12345_A2&quot;, the latter will be sorted before the first. This is at least not how Windows does it. Still works for the above problem, though!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2707337,
+                        "reputation": 291593,
+                        "user_id": 2336654,
+                        "user_type": "registered",
+                        "accept_rate": 96,
+                        "display_name": "piRSquared"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1519084773,
+                    "last_edit_date": 1592644375,
+                    "creation_date": 1519083931,
+                    "answer_id": 48875852,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/48875852#48875852",
+                    "body": "<h1>Value Of This Post</h1>\n<p>My point is to offer a non regex solution that can be applied generally.<br />\nI'll create three functions:</p>\n<ol>\n<li><code>find_first_digit</code> which I borrowed from <a href=\"https://stackoverflow.com/a/4510805/2336654\">@AnuragUniyal</a>.  It will find the position of the first digit or non-digit in a string.</li>\n<li><code>split_digits</code> which is a generator that picks apart a string into digit and non digit chunks.  It will also <code>yield</code> integers when it is a digit.</li>\n<li><code>natural_key</code> just wraps <code>split_digits</code> into a <code>tuple</code>.  This is what we use as a key for <code>sorted</code>, <code>max</code>, <code>min</code>.</li>\n</ol>\n<h1>Functions</h1>\n<pre><code>def find_first_digit(s, non=False):\n    for i, x in enumerate(s):\n        if x.isdigit() ^ non:\n            return i\n    return -1\n\ndef split_digits(s, case=False):\n    non = True\n    while s:\n        i = find_first_digit(s, non)\n        if i == 0:\n            non = not non\n        elif i == -1:\n            yield int(s) if s.isdigit() else s if case else s.lower()\n            s = ''\n        else:\n            x, s = s[:i], s[i:]\n            yield int(x) if x.isdigit() else x if case else x.lower()\n\ndef natural_key(s, *args, **kwargs):\n    return tuple(split_digits(s, *args, **kwargs))\n</code></pre>\n<p>We can see that it is general in that we can have multiple digit chunks:</p>\n<pre><code># Note that the key has lower case letters\nnatural_key('asl;dkfDFKJ:sdlkfjdf809lkasdjfa_543_hh')\n\n('asl;dkfdfkj:sdlkfjdf', 809, 'lkasdjfa_', 543, '_hh')\n</code></pre>\n<p>Or leave as case sensitive:</p>\n<pre><code>natural_key('asl;dkfDFKJ:sdlkfjdf809lkasdjfa_543_hh', True)\n\n('asl;dkfDFKJ:sdlkfjdf', 809, 'lkasdjfa_', 543, '_hh')\n</code></pre>\n<hr />\n<p>We can see that it sorts the OP's list in the appropriate order</p>\n<pre><code>sorted(\n    ['elm0', 'elm1', 'Elm2', 'elm9', 'elm10', 'Elm11', 'Elm12', 'elm13'],\n    key=natural_key\n)\n\n['elm0', 'elm1', 'Elm2', 'elm9', 'elm10', 'Elm11', 'Elm12', 'elm13']\n</code></pre>\n<p>But it can handle more complicated lists as well:</p>\n<pre><code>sorted(\n    ['f_1', 'e_1', 'a_2', 'g_0', 'd_0_12:2', 'd_0_1_:2'],\n    key=natural_key\n)\n\n['a_2', 'd_0_1_:2', 'd_0_12:2', 'e_1', 'f_1', 'g_0']\n</code></pre>\n<hr />\n<p>My regex equivalent would be</p>\n<pre><code>def int_maybe(x):\n    return int(x) if str(x).isdigit() else x\n\ndef split_digits_re(s, case=False):\n    parts = re.findall('\\d+|\\D+', s)\n    if not case:\n        return map(int_maybe, (x.lower() for x in parts))\n    else:\n        return map(int_maybe, parts)\n    \ndef natural_key_re(s, *args, **kwargs):\n    return tuple(split_digits_re(s, *args, **kwargs))\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 9470310,
+                        "reputation": 847,
+                        "user_id": 8146707,
+                        "user_type": "registered",
+                        "display_name": "Varada"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1520856614,
+                    "creation_date": 1520856614,
+                    "answer_id": 49234927,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/49234927#49234927",
+                    "body": "<pre><code>a = ['H1', 'H100', 'H10', 'H3', 'H2', 'H6', 'H11', 'H50', 'H5', 'H99', 'H8']\nb = ''\nc = []\n\ndef bubble(bad_list):#bubble sort method\n        length = len(bad_list) - 1\n        sorted = False\n\n        while not sorted:\n                sorted = True\n                for i in range(length):\n                        if bad_list[i] &gt; bad_list[i+1]:\n                                sorted = False\n                                bad_list[i], bad_list[i+1] = bad_list[i+1], bad_list[i] #sort the integer list \n                                a[i], a[i+1] = a[i+1], a[i] #sort the main list based on the integer list index value\n\nfor a_string in a: #extract the number in the string character by character\n        for letter in a_string:\n                if letter.isdigit():\n                        #print letter\n                        b += letter\n        c.append(b)\n        b = ''\n\nprint 'Before sorting....'\nprint a\nc = map(int, c) #converting string list into number list\nprint c\nbubble(c)\n\nprint 'After sorting....'\nprint c\nprint a\n</code></pre>\n\n<p><strong>Acknowledgments</strong>:</p>\n\n<p><a href=\"https://stackoverflow.com/questions/895371/bubble-sort-homework\">Bubble Sort Homework</a></p>\n\n<p><a href=\"https://stackoverflow.com/questions/2633942/how-to-read-a-string-one-letter-at-a-time-in-python\">How to read a string one letter at a time in python</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 413111,
+                                "reputation": 3830,
+                                "user_id": 786559,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Ciprian Tomoiag\u0103"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1579080437,
+                            "post_id": 57527566,
+                            "comment_id": 105643628,
+                            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/57527566#comment105643628_57527566",
+                            "body": "(-1) this answer doesn&#39;t bring anything new compared to Mark&#39;s (any linter can PEP8-ify some code). Or maybe the <code>key</code> parameter? But this is also exemplified in @beauburrier&#39;s answer"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7102019,
+                        "reputation": 1132,
+                        "user_id": 7717871,
+                        "user_type": "registered",
+                        "display_name": "edthrn"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1565970387,
+                    "creation_date": 1565970387,
+                    "answer_id": 57527566,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/57527566#57527566",
+                    "body": "<p>Following @Mark Byers answer, here is an adaptation which accepts the <code>key</code> parameter, and is more PEP8-compliant.</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>def natsorted(seq, key=None):\n    def convert(text):\n        return int(text) if text.isdigit() else text\n\n    def alphanum(obj):\n        if key is not None:\n            return [convert(c) for c in re.split(r'([0-9]+)', key(obj))]\n        return [convert(c) for c in re.split(r'([0-9]+)', obj)]\n\n    return sorted(seq, key=alphanum)\n</code></pre>\n\n<p>I also made a <a href=\"https://gist.github.com/edouardtheron/5e23e494f5cfbd94cf5e19201d63ccaa\" rel=\"nofollow noreferrer\">Gist</a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1039648,
+                        "reputation": 12420,
+                        "user_id": 1046007,
+                        "user_type": "registered",
+                        "display_name": "Walter Tross"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1597243789,
+                    "last_edit_date": 1597243789,
+                    "creation_date": 1588783588,
+                    "answer_id": 61640619,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/61640619#61640619",
+                    "body": "<p>An improvement on Claudiu's improvement on Mark Byers' answer ;-)</p>\n<pre class=\"lang-python prettyprint-override\"><code>import re\n\ndef natural_sort_key(s, _re=re.compile(r'(\\d+)')):\n    return [int(t) if i &amp; 1 else t.lower() for i, t in enumerate(_re.split(s))]\n\n...\nmy_naturally_sorted_list = sorted(my_list, key=natural_sort_key)\n</code></pre>\n<p>BTW, maybe not everyone remembers that function argument defaults are evaluated at <code>def</code> time</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 50273,
+                        "reputation": 6482,
+                        "user_id": 149900,
+                        "user_type": "registered",
+                        "accept_rate": 64,
+                        "display_name": "pepoluan"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1590770957,
+                    "last_edit_date": 1590770957,
+                    "creation_date": 1590736941,
+                    "answer_id": 62080730,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/62080730#62080730",
+                    "body": "<p>Let me submit my own take on this need:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>from typing import Tuple, Union, Optional, Generator\n\n\nStrOrInt = Union[str, int]\n\n\n# On Python 3.6, string concatenation is REALLY fast\n# Tested myself, and this fella also tested:\n# https://blog.ganssle.io/articles/2019/11/string-concat.html\ndef griter(s: str) -&gt; Generator[StrOrInt, None, None]:\n    last_was_digit: Optional[bool] = None\n    cluster: str = \"\"\n    for c in s:\n        if last_was_digit is None:\n            last_was_digit = c.isdigit()\n            cluster += c\n            continue\n        if c.isdigit() != last_was_digit:\n            if last_was_digit:\n                yield int(cluster)\n            else:\n                yield cluster\n            last_was_digit = c.isdigit()\n            cluster = \"\"\n        cluster += c\n    if last_was_digit:\n        yield int(cluster)\n    else:\n        yield cluster\n    return\n\n\ndef grouper(s: str) -&gt; Tuple[StrOrInt, ...]:\n    return tuple(griter(s))\n</code></pre>\n\n<p>Now if we have the list like such:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>filelist = [\n    'File3', 'File007', 'File3a', 'File10', 'File11', 'File1', 'File4', 'File5',\n    'File9', 'File8', 'File8b1', 'File8b2', 'File8b11', 'File6'\n]\n</code></pre>\n\n<p>We can simply use the <code>key=</code> kwarg to do a natural sort:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>&gt;&gt;&gt; sorted(filelist, key=grouper)\n['File1', 'File3', 'File3a', 'File4', 'File5', 'File6', 'File007', 'File8', \n'File8b1', 'File8b2', 'File8b11', 'File9', 'File10', 'File11']\n</code></pre>\n\n<p>The drawback here is of course, as it is now, the function will sort uppercase letters before lowercase letters.</p>\n\n<p>I'll leave the implementation of a case-insenstive grouper to the reader :-)</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 472765,
+                        "reputation": 23603,
+                        "user_id": 881441,
+                        "user_type": "registered",
+                        "display_name": "Stephen Quan"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1607991320,
+                    "last_edit_date": 1607991320,
+                    "creation_date": 1607934973,
+                    "answer_id": 65285871,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/65285871#65285871",
+                    "body": "<p>The algorithm I use is <code>padzero_with_lower</code> as defined as:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import re\n\ndef padzero_with_lower(s):\n    return re.sub(r'\\d+', lambda m: m.group(0).rjust(10, '0'), s).lower()\n</code></pre>\n<p>The algorithm finds:</p>\n<ul>\n<li>finds and pads numbers of any length, to a large enough length, e.g. 10</li>\n<li>then, it turns the string into lower case</li>\n</ul>\n<p>Here's an example usage:</p>\n<pre><code>print(padzero_with_lower('file1.txt'))   # file0000000001.txt\nprint(padzero_with_lower('file12.txt'))  # file0000000012.txt\nprint(padzero_with_lower('file23.txt'))  # file0000000023.txt\nprint(padzero_with_lower('file123.txt')) # file0000000123.txt\nprint(padzero_with_lower('file301.txt')) # file0000000301.txt\nprint(padzero_with_lower('Dir2/file15.txt'))  # dir0000000002/file0000000015.txt\nprint(padzero_with_lower('dir2/file123.txt')) # dir0000000002/file0000000123.txt\nprint(padzero_with_lower('dir15/file2.txt'))  # dir0000000015/file0000000002.txt\nprint(padzero_with_lower('Dir15/file15.txt')) # dir0000000015/file0000000015.txt\nprint(padzero_with_lower('elm0'))  # elm0000000000\nprint(padzero_with_lower('elm1'))  # elm0000000001\nprint(padzero_with_lower('Elm2'))  # elm0000000002\nprint(padzero_with_lower('elm9'))  # elm0000000009\nprint(padzero_with_lower('elm10')) # elm0000000010\nprint(padzero_with_lower('Elm11')) # elm0000000011 \nprint(padzero_with_lower('Elm12')) # elm0000000012\nprint(padzero_with_lower('elm13')) # elm0000000013\n</code></pre>\n<p>With this function tested, we can now use it as our key, i.e.</p>\n<pre><code>lis = ['elm0', 'elm1', 'Elm2', 'elm9', 'elm10', 'Elm11', 'Elm12', 'elm13']\nlis.sort(key=padzero_with_lower)\nprint(lis)\n# Output: ['elm0', 'elm1', 'Elm2', 'elm9', 'elm10', 'Elm11', 'Elm12', 'elm13']\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 991646,
+                        "reputation": 5455,
+                        "user_id": 1008762,
+                        "user_type": "registered",
+                        "display_name": "Cito"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1629450301,
+                    "creation_date": 1629450301,
+                    "answer_id": 68859658,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/68859658#68859658",
+                    "body": "<p>Just for the records, here is yet another variant of Mark Byers' simple solution, similar to the one suggested by Walter Tross, which avoids calling <code>isdigit()</code>. This not only makes it faster, but also avoids the problems that can occur because <code>isdigit()</code> considers more unicode chars as digits than the the regex <code>\\d+</code>.</p>\n<pre class=\"lang-py prettyprint-override\"><code>import re\nfrom itertools import cycle\n\n_re_digits = re.compile(r&quot;(\\d+)&quot;)\n\n\ndef natural_comparison_key(key):\n    return tuple(\n        int(part) if is_digit else part\n        for part, is_digit in zip(_re_digits.split(key), cycle((False, True)))\n    )\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4375951,
+                        "reputation": 180,
+                        "user_id": 3569534,
+                        "user_type": "registered",
+                        "display_name": "bgStack15"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1646234713,
+                    "last_edit_date": 1646234713,
+                    "creation_date": 1646084039,
+                    "answer_id": 71301293,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/71301293#71301293",
+                    "body": "<p>Here's another version of Mark Byers's answer. This version demonstrates how to pass in an attribute name, that is to be used to evaluate the objects in the list.</p>\n<pre><code>def natural_sort(l, attrib):\n    convert = lambda text: int(text) if text.isdigit() else text.lower()\n    alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key.__dict__[attrib])]\n    return sorted(l, key=alphanum_key)\n\nresults = natural_sort(albums, 'albumid')\n</code></pre>\n<p>Where <code>albums</code> is a list of Album instances, and <code>albumid</code> is an string attribute that nominally has numbers in it.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 57752,
+                        "reputation": 3834,
+                        "user_id": 173003,
+                        "user_type": "registered",
+                        "accept_rate": 60,
+                        "display_name": "Aristide"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1646827951,
+                    "last_edit_date": 1646827951,
+                    "creation_date": 1646777350,
+                    "answer_id": 71402061,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/71402061#71402061",
+                    "body": "<p>A compact solution, based on the transformation of the string into a <code>List[Tuple(str, int)]</code>.</p>\n<h2>Code</h2>\n<pre class=\"lang-py prettyprint-override\"><code>def string_to_pairs(s, pairs=re.compile(r&quot;(\\D*)(\\d*)&quot;).findall):\n    return [(text.lower(), int(digits or 0)) for (text, digits) in pairs(s)[:-1]]\n</code></pre>\n<h2>Demonstration</h2>\n<pre class=\"lang-py prettyprint-override\"><code>sorted(['Elm11', 'Elm12', 'Elm2', 'elm0', 'elm1', 'elm10', 'elm13', 'elm9'], key=string_to_pairs)\n</code></pre>\n<p>Output:</p>\n<pre class=\"lang-py prettyprint-override\"><code>['elm0', 'elm1', 'Elm2', 'elm9', 'elm10', 'Elm11', 'Elm12', 'elm13']\n</code></pre>\n<h2>Tests</h2>\n<h3>Transformation</h3>\n<pre class=\"lang-py prettyprint-override\"><code>assert string_to_pairs(&quot;&quot;) == []\nassert string_to_pairs(&quot;123&quot;) == [(&quot;&quot;, 123)]\nassert string_to_pairs(&quot;abc&quot;) == [(&quot;abc&quot;, 0)]\nassert string_to_pairs(&quot;123abc&quot;) == [(&quot;&quot;, 123), (&quot;abc&quot;, 0)]\nassert string_to_pairs(&quot;abc123&quot;) == [(&quot;abc&quot;, 123)]\nassert string_to_pairs(&quot;123abc456&quot;) == [(&quot;&quot;, 123), (&quot;abc&quot;, 456)]\nassert string_to_pairs(&quot;abc123efg&quot;) == [(&quot;abc&quot;, 123), (&quot;efg&quot;, 0)]\n</code></pre>\n<h3>Sorting</h3>\n<pre class=\"lang-py prettyprint-override\"><code># Some extracts from the test suite of the natsort library. Permalink:\n# https://github.com/SethMMorton/natsort/blob/e3c32f5638bf3a0e9a23633495269bea0e75d379/tests/test_natsorted.py\n\nsort_data = [\n    (  # same as test_natsorted_can_sort_as_unsigned_ints_which_is_default()\n        [&quot;a50&quot;, &quot;a51.&quot;, &quot;a50.31&quot;, &quot;a-50&quot;, &quot;a50.4&quot;, &quot;a5.034e1&quot;, &quot;a50.300&quot;],\n        [&quot;a5.034e1&quot;, &quot;a50&quot;, &quot;a50.4&quot;, &quot;a50.31&quot;, &quot;a50.300&quot;, &quot;a51.&quot;, &quot;a-50&quot;],\n    ),\n    (  # same as test_natsorted_numbers_in_ascending_order()\n        [&quot;a2&quot;, &quot;a5&quot;, &quot;a9&quot;, &quot;a1&quot;, &quot;a4&quot;, &quot;a10&quot;, &quot;a6&quot;],\n        [&quot;a1&quot;, &quot;a2&quot;, &quot;a4&quot;, &quot;a5&quot;, &quot;a6&quot;, &quot;a9&quot;, &quot;a10&quot;],\n    ),\n    (  # same as test_natsorted_can_sort_as_version_numbers()\n        [&quot;1.9.9a&quot;, &quot;1.11&quot;, &quot;1.9.9b&quot;, &quot;1.11.4&quot;, &quot;1.10.1&quot;],\n        [&quot;1.9.9a&quot;, &quot;1.9.9b&quot;, &quot;1.10.1&quot;, &quot;1.11&quot;, &quot;1.11.4&quot;],\n    ),\n    (  # different from test_natsorted_handles_filesystem_paths()\n        [\n            &quot;/p/Folder (10)/file.tar.gz&quot;,\n            &quot;/p/Folder (1)/file (1).tar.gz&quot;,\n            &quot;/p/Folder/file.x1.9.tar.gz&quot;,\n            &quot;/p/Folder (1)/file.tar.gz&quot;,\n            &quot;/p/Folder/file.x1.10.tar.gz&quot;,\n        ],\n        [\n            &quot;/p/Folder (1)/file (1).tar.gz&quot;,\n            &quot;/p/Folder (1)/file.tar.gz&quot;,\n            &quot;/p/Folder (10)/file.tar.gz&quot;,\n            &quot;/p/Folder/file.x1.9.tar.gz&quot;,\n            &quot;/p/Folder/file.x1.10.tar.gz&quot;,\n        ],\n    ),\n    (  # same as test_natsorted_path_extensions_heuristic()\n        [\n            &quot;Try.Me.Bug - 09 - One.Two.Three.[text].mkv&quot;,\n            &quot;Try.Me.Bug - 07 - One.Two.5.[text].mkv&quot;,\n            &quot;Try.Me.Bug - 08 - One.Two.Three[text].mkv&quot;,\n        ],\n        [\n            &quot;Try.Me.Bug - 07 - One.Two.5.[text].mkv&quot;,\n            &quot;Try.Me.Bug - 08 - One.Two.Three[text].mkv&quot;,\n            &quot;Try.Me.Bug - 09 - One.Two.Three.[text].mkv&quot;,\n        ],\n    ),\n    (  # same as ns.IGNORECASE for test_natsorted_supports_case_handling()\n        [&quot;Apple&quot;, &quot;corn&quot;, &quot;Corn&quot;, &quot;Banana&quot;, &quot;apple&quot;, &quot;banana&quot;],\n        [&quot;Apple&quot;, &quot;apple&quot;, &quot;Banana&quot;, &quot;banana&quot;, &quot;corn&quot;, &quot;Corn&quot;],\n    ),\n\n]\n\nfor (given, expected) in sort_data:\n    assert sorted(given, key=string_to_pairs) == expected\n</code></pre>\n<h2>Bonus</h2>\n<p>If your strings mix non-ascii texts and numbers, you may be interested in composing <code>string_to_pairs()</code> with the function <code>remove_diacritics()</code> I give <a href=\"https://stackoverflow.com/a/71408065/173003\">elsewhere</a>.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 19604789,
+                        "reputation": 967,
+                        "user_id": 14348748,
+                        "user_type": "registered",
+                        "display_name": "NicoHood"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1692665337,
+                    "last_edit_date": 1692665337,
+                    "creation_date": 1662804696,
+                    "answer_id": 73670971,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/73670971#73670971",
+                    "body": "<p>This is a more advanced solution, improved from Claudiu and Mark Byers:</p>\n<ul>\n<li>It uses <a href=\"https://stackoverflow.com/q/40348174/14348748\"><code>casefold()</code></a> instead of <code>lower()</code> to match strings</li>\n<li>You can pass another key lambda to select an inner element (as you are used to with a normal sort function)</li>\n<li>It works of course with <code>list.sort</code>, <code>sorted</code>, <code>max</code>, etc.</li>\n</ul>\n<pre class=\"lang-py prettyprint-override\"><code>def natural_sort(key=None, _nsre=re.compile('([0-9]+)')):\n    return lambda x: [int(text) if text.isdigit() else text.casefold()\n            for text in _nsre.split(key(x) if key else x)]\n</code></pre>\n<p>Example usage:</p>\n<pre><code># Original solution\ndata.sort(key=natural_sort())\n\n# Select an additional key\nimage_files.sort(key=natural_sort(lambda x: x.original_filename))\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6282997,
+                        "reputation": 1115,
+                        "user_id": 4883320,
+                        "user_type": "registered",
+                        "display_name": "KiriSakow"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1693180795,
+                    "creation_date": 1693180795,
+                    "answer_id": 76989395,
+                    "question_id": 4836710,
+                    "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort/76989395#76989395",
+                    "body": "<pre class=\"lang-py prettyprint-override\"><code>def sort_naturally(lst: list) -&gt; list:\n    max_str_len = max([len(s) for s in lst])\n    return sorted(lst, key=lambda s: s.zfill(max_str_len + 1))\n</code></pre>\n<p>FYI the built-in function <code>str.zfill(width)</code> returns a copy of the string left filled with ASCII <code>0</code> digits to make a string of length <em>width</em>. See official documentation to learn more: <a href=\"https://docs.python.org/3/library/stdtypes.html#str.zfill\" rel=\"nofollow noreferrer\">docs.python.org/3/library/stdtypes.html#str.zfill</a></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 38358,
+                "reputation": 53851,
+                "user_id": 110028,
+                "user_type": "registered",
+                "accept_rate": 86,
+                "display_name": "snakile"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 18415320,
+            "answer_count": 24,
+            "score": 421,
+            "last_activity_date": 1693180795,
+            "creation_date": 1296302153,
+            "last_edit_date": 1605301208,
+            "question_id": 4836710,
+            "link": "https://stackoverflow.com/questions/4836710/is-there-a-built-in-function-for-string-natural-sort",
+            "title": "Is there a built in function for string natural sort?",
+            "body": "<p>I have a list of strings for which I would like to perform a <a href=\"https://en.wikipedia.org/wiki/Natural_sort_order\" rel=\"noreferrer\">natural alphabetical sort</a>.</p>\n<p>For instance, the following list is naturally sorted (what I want):</p>\n<pre><code>['elm0', 'elm1', 'Elm2', 'elm9', 'elm10', 'Elm11', 'Elm12', 'elm13']\n</code></pre>\n<p>And here's the &quot;sorted&quot; version of the above list (what I get using <a href=\"https://docs.python.org/library/functions.html#sorted\" rel=\"noreferrer\"><code>sorted()</code></a>):</p>\n<pre><code>['Elm11', 'Elm12', 'Elm2', 'elm0', 'elm1', 'elm10', 'elm13', 'elm9']\n</code></pre>\n<p>I'm looking for a sort function which behaves like the first one.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7097
+}

@@ -1,0 +1,760 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "numpy",
+                "weighted",
+                "percentile"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 1181375,
+                        "reputation": 23140,
+                        "user_id": 1156245,
+                        "user_type": "registered",
+                        "accept_rate": 85,
+                        "display_name": "geotheory"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1598285568,
+                    "post_id": 21844024,
+                    "comment_id": 112402339,
+                    "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy#comment112402339_21844024",
+                    "body": "IMO <a href=\"https://stackoverflow.com/a/63440143/1156245\">the solution by Sam A below</a> looks like a contender for current best practice."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 954131,
+                                "reputation": 3652,
+                                "user_id": 2620170,
+                                "user_type": "registered",
+                                "display_name": "colcarroll"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1392697638,
+                            "post_id": 21844256,
+                            "comment_id": 33065721,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/21844256#comment33065721_21844256",
+                            "body": "To add to this solution, you might try just <code>np.percentile(Counter(dict(zip(ar, weights)).elements()), 25)</code>.  You&#39;d need to <code>from collections import Counter</code>, and it doesn&#39;t do well with repeated keys in <code>ar</code>, but <code>Counter().elements()</code> is neat!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 85655,
+                                "reputation": 17369,
+                                "user_id": 238671,
+                                "user_type": "registered",
+                                "accept_rate": 68,
+                                "display_name": "Ruggero Turra"
+                            },
+                            "edited": false,
+                            "score": 29,
+                            "creation_date": 1407397460,
+                            "post_id": 21844256,
+                            "comment_id": 39201007,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/21844256#comment39201007_21844256",
+                            "body": "you are supposing weights to be integers"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 73748,
+                                "reputation": 171,
+                                "user_id": 212216,
+                                "user_type": "registered",
+                                "display_name": "PiHalbe"
+                            },
+                            "edited": false,
+                            "score": 11,
+                            "creation_date": 1411725860,
+                            "post_id": 21844256,
+                            "comment_id": 40821547,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/21844256#comment40821547_21844256",
+                            "body": "Also, it will likely use a lot of excess memory and CPU time for storing and sorting, respectively. Not suited for huge amount of data."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 93319,
+                        "reputation": 931,
+                        "user_id": 255364,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Joan Smith"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": true,
+                    "score": 1,
+                    "last_activity_date": 1589243755,
+                    "last_edit_date": 1589243755,
+                    "creation_date": 1392696973,
+                    "answer_id": 21844256,
+                    "question_id": 21844024,
+                    "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/21844256#21844256",
+                    "body": "<p>Unfortunately, numpy doesn't have built-in weighted functions for everything, but, you can always put something together.</p>\n\n<pre><code>def weight_array(ar, weights):\n     zipped = zip(ar, weights)\n     weighted = []\n     for a, w in zipped:\n         for j in range(w):\n             weighted.append(a)\n     return weighted\n\n\nnp.percentile(weight_array(ar, weights), 25)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1086824,
+                                "reputation": 16176,
+                                "user_id": 1082349,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "FooBar"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1411588011,
+                            "post_id": 21845277,
+                            "comment_id": 40763967,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/21845277#comment40763967_21845277",
+                            "body": "I suppose this is the better (as in more efficient) answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 73748,
+                                "reputation": 171,
+                                "user_id": 212216,
+                                "user_type": "registered",
+                                "display_name": "PiHalbe"
+                            },
+                            "edited": false,
+                            "score": 19,
+                            "creation_date": 1411725769,
+                            "post_id": 21845277,
+                            "comment_id": 40821499,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/21845277#comment40821499_21845277",
+                            "body": "Still, this only supports integer weights. And will most likely be very memory and CPU-time heavy for a larger data set."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1181375,
+                                "reputation": 23140,
+                                "user_id": 1156245,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "geotheory"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1599730781,
+                            "post_id": 21845277,
+                            "comment_id": 112866491,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/21845277#comment112866491_21845277",
+                            "body": "From personal experience I can confirm that this approach is definitely not efficient. If your vectors are long and the weights are big numbers your computer can quickly hit the memory limit."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1225209,
+                                "reputation": 485,
+                                "user_id": 1190902,
+                                "user_type": "registered",
+                                "display_name": "amyrit"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1641218137,
+                            "post_id": 21845277,
+                            "comment_id": 124742678,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/21845277#comment124742678_21845277",
+                            "body": "Also that wouldn&#39;t work with non-integer weights."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 404369,
+                        "reputation": 96230,
+                        "user_id": 772649,
+                        "user_type": "registered",
+                        "accept_rate": 59,
+                        "display_name": "HYRY"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 10,
+                    "last_activity_date": 1392702226,
+                    "creation_date": 1392702226,
+                    "answer_id": 21845277,
+                    "question_id": 21844024,
+                    "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/21845277#21845277",
+                    "body": "<p>I don' know what's Weighted percentile means, but from @Joan Smith's answer, It seems that you just need to repeat every element in <code>ar</code>, you can use <code>numpy.repeat()</code>:</p>\n\n<pre><code>import numpy as np\nnp.repeat([1,2,3], [4,5,6])\n</code></pre>\n\n<p>the result is:</p>\n\n<pre><code>array([1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3])\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2586484,
+                        "reputation": 183,
+                        "user_id": 2242078,
+                        "user_type": "registered",
+                        "display_name": "Qwerty"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1421910411,
+                    "creation_date": 1421910411,
+                    "answer_id": 28083039,
+                    "question_id": 21844024,
+                    "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/28083039#28083039",
+                    "body": "<p>As mentioned in comments, simply repeating values is impossible for float weights, and impractical for very large datasets. There is a library that does weighted percentiles here: \n<a href=\"http://kochanski.org/gpk/code/speechresearch/gmisclib/gmisclib.weighted_percentile-module.html\" rel=\"nofollow\">http://kochanski.org/gpk/code/speechresearch/gmisclib/gmisclib.weighted_percentile-module.html</a>\nIt worked for me. </p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1127148,
+                                "reputation": 896,
+                                "user_id": 1114148,
+                                "user_type": "registered",
+                                "accept_rate": 40,
+                                "display_name": "ILoveCoding"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1435247997,
+                            "post_id": 28720410,
+                            "comment_id": 50131804,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/28720410#comment50131804_28720410",
+                            "body": "nb this returns the quantile at value as the function says, interesting and related but not answering the OP which asks about percentiles ( and no percentile != quantile * 100 )"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 73748,
+                        "reputation": 171,
+                        "user_id": 212216,
+                        "user_type": "registered",
+                        "display_name": "PiHalbe"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1424871348,
+                    "creation_date": 1424871348,
+                    "answer_id": 28720410,
+                    "question_id": 21844024,
+                    "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/28720410#28720410",
+                    "body": "<p>I use this function for my needs:</p>\n\n<pre><code>def quantile_at_values(values, population, weights=None):\n    values = numpy.atleast_1d(values).astype(float)\n    population = numpy.atleast_1d(population).astype(float)\n    # if no weights are given, use equal weights\n    if weights is None:\n        weights = numpy.ones(population.shape).astype(float)\n        normal = float(len(weights))\n    # else, check weights                  \n    else:                                           \n        weights = numpy.atleast_1d(weights).astype(float)\n        assert len(weights) == len(population)\n        assert (weights &gt;= 0).all()\n        normal = numpy.sum(weights)                    \n        assert normal &gt; 0.\n    quantiles = numpy.array([numpy.sum(weights[population &lt;= value]) for value in values]) / normal\n    assert (quantiles &gt;= 0).all() and (quantiles &lt;= 1).all()\n    return quantiles\n</code></pre>\n\n<ul>\n<li>It is vectorized as far as I could go.</li>\n<li>It has a lot of sanity checks.</li>\n<li>It works with floats as weights.</li>\n<li>It can work without weights (\u2192 equal weights).</li>\n<li>It can compute multiple quantiles at once.</li>\n</ul>\n\n<p>Multiply results by 100 if you want percentiles instead of quantiles.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2460419,
+                                "reputation": 3849,
+                                "user_id": 2144720,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "Syrtis Major"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1444800663,
+                            "post_id": 29677616,
+                            "comment_id": 54048275,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/29677616#comment54048275_29677616",
+                            "body": "Nice code. What&#39;s the difference for old_style? I haven&#39;t got the point yet."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 233423,
+                                "reputation": 8208,
+                                "user_id": 498892,
+                                "user_type": "registered",
+                                "accept_rate": 57,
+                                "display_name": "Alleo"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2460419,
+                                "reputation": 3849,
+                                "user_id": 2144720,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "Syrtis Major"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1444853069,
+                            "post_id": 29677616,
+                            "comment_id": 54080705,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/29677616#comment54080705_29677616",
+                            "body": "@SubStruct : there is some minor difference in defining quantile. I.e. you have three elements. I would expect it&#39;s 0.5 quantile to be median (which is true in both cases) and 0.33 quantile to be mean of first two elements. For <code>old_style</code> (<code>numpy.percentile</code> way) this is not true.   Difference in practice is minor."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2460419,
+                                "reputation": 3849,
+                                "user_id": 2144720,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "Syrtis Major"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1444879780,
+                            "post_id": 29677616,
+                            "comment_id": 54089614,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/29677616#comment54089614_29677616",
+                            "body": "Thank you.  I noticed that the difference is indeed minor for large sample.  However I don&#39;t understand why  we would expect the 0.33 quantile is 0.25 for array [0, 0.5, 1]."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2460419,
+                                "reputation": 3849,
+                                "user_id": 2144720,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "Syrtis Major"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1444882936,
+                            "post_id": 29677616,
+                            "comment_id": 54090481,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/29677616#comment54090481_29677616",
+                            "body": "For me it seems 0.33 quantile is 0.33 for array [0, 0.5, 1] is more natural. Or it&#39;s a problem of definition, we just choose one according to the question we meet? Of course, it&#39;s not problem in most case."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 233423,
+                                "reputation": 8208,
+                                "user_id": 498892,
+                                "user_type": "registered",
+                                "accept_rate": 57,
+                                "display_name": "Alleo"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2460419,
+                                "reputation": 3849,
+                                "user_id": 2144720,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "Syrtis Major"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1444911923,
+                            "post_id": 29677616,
+                            "comment_id": 54106211,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/29677616#comment54106211_29677616",
+                            "body": "@SubStruct my intuition is following: 0.33 should correspond to point where 1/3 of elements are smaller, 2/3 are greater. Taking point &#39;right in the middle&#39; seems to be good solution, while actually I could use any point between first two elements."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4647543,
+                                "reputation": 8623,
+                                "user_id": 3765319,
+                                "user_type": "registered",
+                                "accept_rate": 95,
+                                "display_name": "Kartik"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1449206242,
+                            "post_id": 29677616,
+                            "comment_id": 55915612,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/29677616#comment55915612_29677616",
+                            "body": "I have updated your code a bit for my needs. First, I think the way you have coded <code>values_sorted</code> is a bit counter-intuitive to me. I look at it like someone is asking me, &quot;Do you want your values sorted?&quot; To which I answer, &quot;Yes&quot;, and they sort the values. So, I changed <code>values_sorted</code> to be <code>True</code> by default. Second, my data has NaN values. I have included another variable <code>remove_nan=True</code> to deal with them. So I have another if statement, and I use <code>numpy.isfinite()</code> to get rid of infinite values and corresponding weights. Thanks for the great code! I stole it, but opensource! ;-)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2635975,
+                                "reputation": 1205,
+                                "user_id": 2280637,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Li-Pin Juan"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1492549033,
+                            "post_id": 29677616,
+                            "comment_id": 74020084,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/29677616#comment74020084_29677616",
+                            "body": "Nice implementation of the method introduced in the last section of the wiki&#39;s webpage about weighted percentile <a href=\"https://en.wikipedia.org/wiki/Percentile#Definition_of_the_Weighted_Percentile_method\" rel=\"nofollow noreferrer\">link</a>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3432984,
+                                "reputation": 409,
+                                "user_id": 2876838,
+                                "user_type": "registered",
+                                "display_name": "jick"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1568678049,
+                            "post_id": 29677616,
+                            "comment_id": 102342137,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/29677616#comment102342137_29677616",
+                            "body": "Note: For integer weights, the result of this function will be different from the more naive (or &quot;correct&quot;, depending on definition) method of &quot;repeating each value k times, where k is the weight&quot;, because it interpolates between a single point (with weight k) instead of k points of identical height.  For example, if values=[1, 2] and sample_weight=[1, 3], the weighted median is 1.75, but the un-weighted median of [1, 2, 2, 2] would be 2."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2064712,
+                                "reputation": 15404,
+                                "user_id": 1840471,
+                                "user_type": "registered",
+                                "accept_rate": 66,
+                                "display_name": "Max Ghenis"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3432984,
+                                "reputation": 409,
+                                "user_id": 2876838,
+                                "user_type": "registered",
+                                "display_name": "jick"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1575519918,
+                            "post_id": 29677616,
+                            "comment_id": 104596173,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/29677616#comment104596173_29677616",
+                            "body": "@jick this isn&#39;t just for integer weights right? This occurs any time the median lies &quot;between&quot; two points, e.g. <code>weighted_quantile([1, 2], 0.5, [1, 30.5]</code> also returns 1.97, where it really should be 2. Is there a way to get this result?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2064712,
+                                "reputation": 15404,
+                                "user_id": 1840471,
+                                "user_type": "registered",
+                                "accept_rate": 66,
+                                "display_name": "Max Ghenis"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1575520303,
+                            "post_id": 29677616,
+                            "comment_id": 104596257,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/29677616#comment104596257_29677616",
+                            "body": "In general I&#39;m struggling to create a simple, viable test of this function. The one provided in the answer doesn&#39;t test that the weighting works, since the answer is identical to the unweighted median."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3432984,
+                                "reputation": 409,
+                                "user_id": 2876838,
+                                "user_type": "registered",
+                                "display_name": "jick"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2064712,
+                                "reputation": 15404,
+                                "user_id": 1840471,
+                                "user_type": "registered",
+                                "accept_rate": 66,
+                                "display_name": "Max Ghenis"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1575524058,
+                            "post_id": 29677616,
+                            "comment_id": 104597266,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/29677616#comment104597266_29677616",
+                            "body": "@MaxGhenis I think you&#39;re right - it&#39;s just that with integer weight it&#39;s easier to assume that (weight 3) represents (same value repeated 3 times), which tripped me. :)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2481715,
+                                "reputation": 1836,
+                                "user_id": 2161065,
+                                "user_type": "registered",
+                                "display_name": "user2161065"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1608732422,
+                            "post_id": 29677616,
+                            "comment_id": 115669372,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/29677616#comment115669372_29677616",
+                            "body": "Since it uses interpolation with weights, a <code>round(weighted_quantile(...))</code> should give you the correct desired output for integers, shouldn&#39;t it?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 303570,
+                                "reputation": 4274,
+                                "user_id": 612580,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "Jordan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1642992495,
+                            "post_id": 29677616,
+                            "comment_id": 125213576,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/29677616#comment125213576_29677616",
+                            "body": "@Alleo There seems to be an issue with this. I can&#39;t include the full example in a comment, but here&#39;s a pastebin that shows a failing example. I ask it for the <code>1</code> quantile, which should give me the maximum value regardless of weighting, but instead it gives a bizarrely low result. <a href=\"https://pastebin.com/4dxBHWAM\" rel=\"nofollow noreferrer\">pastebin.com/4dxBHWAM</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 303570,
+                                "reputation": 4274,
+                                "user_id": 612580,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "Jordan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1642993697,
+                            "post_id": 29677616,
+                            "comment_id": 125213779,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/29677616#comment125213779_29677616",
+                            "body": "Disregard, it was an issue with numpy overflowing the int32 it was defaulting to."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 233423,
+                        "reputation": 8208,
+                        "user_id": 498892,
+                        "user_type": "registered",
+                        "accept_rate": 57,
+                        "display_name": "Alleo"
+                    },
+                    "comment_count": 14,
+                    "is_accepted": false,
+                    "score": 80,
+                    "last_activity_date": 1593710011,
+                    "last_edit_date": 1593710011,
+                    "creation_date": 1429194155,
+                    "answer_id": 29677616,
+                    "question_id": 21844024,
+                    "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/29677616#29677616",
+                    "body": "<h2>Completely vectorized numpy solution</h2>\n<p>Here is the code I use. It's not an optimal one (which I'm unable to write with <code>numpy</code>), but still much faster and more reliable than accepted solution</p>\n<pre class=\"lang-py prettyprint-override\"><code>def weighted_quantile(values, quantiles, sample_weight=None, \n                      values_sorted=False, old_style=False):\n    &quot;&quot;&quot; Very close to numpy.percentile, but supports weights.\n    NOTE: quantiles should be in [0, 1]!\n    :param values: numpy.array with data\n    :param quantiles: array-like with many quantiles needed\n    :param sample_weight: array-like of the same length as `array`\n    :param values_sorted: bool, if True, then will avoid sorting of\n        initial array\n    :param old_style: if True, will correct output to be consistent\n        with numpy.percentile.\n    :return: numpy.array with computed quantiles.\n    &quot;&quot;&quot;\n    values = np.array(values)\n    quantiles = np.array(quantiles)\n    if sample_weight is None:\n        sample_weight = np.ones(len(values))\n    sample_weight = np.array(sample_weight)\n    assert np.all(quantiles &gt;= 0) and np.all(quantiles &lt;= 1), \\\n        'quantiles should be in [0, 1]'\n\n    if not values_sorted:\n        sorter = np.argsort(values)\n        values = values[sorter]\n        sample_weight = sample_weight[sorter]\n\n    weighted_quantiles = np.cumsum(sample_weight) - 0.5 * sample_weight\n    if old_style:\n        # To be convenient with numpy.percentile\n        weighted_quantiles -= weighted_quantiles[0]\n        weighted_quantiles /= weighted_quantiles[-1]\n    else:\n        weighted_quantiles /= np.sum(sample_weight)\n    return np.interp(quantiles, weighted_quantiles, values)\n</code></pre>\n<p>Examples:</p>\n<blockquote>\n<p>weighted_quantile([1, 2, 9, 3.2, 4], [0.0, 0.5, 1.])</p>\n</blockquote>\n<p>array([ 1. ,  3.2,  9. ])</p>\n<blockquote>\n<p>weighted_quantile([1, 2, 9, 3.2, 4], [0.0, 0.5, 1.], sample_weight=[2, 1, 2, 4, 1])</p>\n</blockquote>\n<p>array([ 1. ,  3.2,  9. ])</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7965846,
+                                "reputation": 3029,
+                                "user_id": 6012085,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Peter9192"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1519135403,
+                            "post_id": 31539746,
+                            "comment_id": 84778817,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/31539746#comment84778817_31539746",
+                            "body": "This produces different results for <code>weighted_percentile(np.array([0,3,6,9]),50,weights=np.array(&zwnj;&#8203;[1,3,3,1]))</code> and <code>weighted_percentile(np.array([0,3,3,3,6,6,6,9]),50,weights=N&zwnj;&#8203;one)</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 25769,
+                                "reputation": 66121,
+                                "user_id": 66516,
+                                "user_type": "registered",
+                                "display_name": "vladr"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1694613145,
+                            "post_id": 31539746,
+                            "comment_id": 135914404,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/31539746#comment135914404_31539746",
+                            "body": "Changing <code>1.*w.cumsum()</code> to <code>(1.*w.cumsum()-0.5*w)</code> (per <a href=\"https://stackoverflow.com/a/61343915/66516\">@imbr&#39;s answer</a> produces the expected result for the above."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5072002,
+                        "reputation": 327,
+                        "user_id": 4070524,
+                        "user_type": "registered",
+                        "accept_rate": 0,
+                        "display_name": "Kambrian"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 13,
+                    "last_activity_date": 1554938338,
+                    "last_edit_date": 1554938338,
+                    "creation_date": 1437483634,
+                    "answer_id": 31539746,
+                    "question_id": 21844024,
+                    "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/31539746#31539746",
+                    "body": "<p>A quick solution, by first sorting and then interpolating:</p>\n\n<pre><code>def weighted_percentile(data, percents, weights=None):\n    ''' percents in units of 1%\n        weights specifies the frequency (count) of data.\n    '''\n    if weights is None:\n        return np.percentile(data, percents)\n    ind=np.argsort(data)\n    d=data[ind]\n    w=weights[ind]\n    p=1.*w.cumsum()/w.sum()*100\n    y=np.interp(percents, p, d)\n    return y\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7710805,
+                                "reputation": 13844,
+                                "user_id": 6365112,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Yahya"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1657212588,
+                            "post_id": 32034085,
+                            "comment_id": 128763121,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/32034085#comment128763121_32034085",
+                            "body": "This is plain wrong!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2278357,
+                        "reputation": 71,
+                        "user_id": 2004093,
+                        "user_type": "registered",
+                        "display_name": "nayyarv"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1439721147,
+                    "creation_date": 1439721147,
+                    "answer_id": 32034085,
+                    "question_id": 21844024,
+                    "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/32034085#32034085",
+                    "body": "<pre class=\"lang-python prettyprint-override\"><code>def weighted_percentile(a, percentile = np.array([75, 25]), weights=None):\n    \"\"\"\n    O(nlgn) implementation for weighted_percentile.\n    \"\"\"\n    percentile = np.array(percentile)/100.0\n    if weights is None:\n        weights = np.ones(len(a))\n    a_indsort = np.argsort(a)\n    a_sort = a[a_indsort]\n    weights_sort = weights[a_indsort]\n    ecdf = np.cumsum(weights_sort)\n\n    percentile_index_positions = percentile * (weights.sum()-1)+1\n    # need the 1 offset at the end due to ecdf not starting at 0\n    locations = np.searchsorted(ecdf, percentile_index_positions)\n\n    out_percentiles = np.zeros(len(percentile_index_positions))\n\n    for i, empiricalLocation in enumerate(locations):\n        # iterate across the requested percentiles \n        if ecdf[empiricalLocation-1] == np.floor(percentile_index_positions[i]):\n            # i.e. is the percentile in between 2 separate values\n            uppWeight = percentile_index_positions[i] - ecdf[empiricalLocation-1]\n            lowWeight = 1 - uppWeight\n\n            out_percentiles[i] = a_sort[empiricalLocation-1] * lowWeight + \\\n                                 a_sort[empiricalLocation] * uppWeight\n        else:\n            # i.e. the percentile is entirely in one bin\n            out_percentiles[i] = a_sort[empiricalLocation]\n\n    return out_percentiles\n</code></pre>\n\n<p>This is my function, it give identical behaviour to</p>\n\n<pre><code>np.percentile(np.repeat(a, weights), percentile)\n</code></pre>\n\n<p>With less memory overhead. np.percentile is an O(n) implementation so it's potentially faster for small weights.\nIt has all the edge cases sorted out - it's an exact solution. The interpolation answers above assume linear, when it's a step for most of the case, except when the weight is 1. </p>\n\n<p>Say we have data [1,2,3] with weights [3, 11, 7] and I want the 25%  percentile. My ecdf is going to be [3, 10, 21] and I'm looking for the 5th value. The interpolation will see [3,1] and [10, 2] as the matches and interpolate giving 1.28 despite being entirely in the 2nd bin with a value of 2.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7965846,
+                                "reputation": 3029,
+                                "user_id": 6012085,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Peter9192"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1519313176,
+                            "post_id": 32216049,
+                            "comment_id": 84868907,
+                            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/32216049#comment84868907_32216049",
+                            "body": "This is useful. However, I had to wrap <code>idx_high[idx_high &gt; ecdf.size - 1] = ecdf.size - 1</code> in a conditional statement in order to make it work for single percentiles as well. Guess that&#39;s why there&#39;s the <code>zerod</code> in the numpy source code."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 240105,
+                        "reputation": 416,
+                        "user_id": 510151,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "grovduck"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 10,
+                    "last_activity_date": 1440547703,
+                    "creation_date": 1440547703,
+                    "answer_id": 32216049,
+                    "question_id": 21844024,
+                    "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/32216049#32216049",
+                    "body": "<p>Apologies for the additional (unoriginal) answer (not enough rep to comment on @nayyarv's).  His solution worked for me (ie. it replicates the default behavior of <code>np.percentage</code>), but I think you can eliminate the for loop with clues from how the original <code>np.percentage</code> is written.</p>\n\n<pre><code>def weighted_percentile(a, q=np.array([75, 25]), w=None):\n    \"\"\"\n    Calculates percentiles associated with a (possibly weighted) array\n\n    Parameters\n    ----------\n    a : array-like\n        The input array from which to calculate percents\n    q : array-like\n        The percentiles to calculate (0.0 - 100.0)\n    w : array-like, optional\n        The weights to assign to values of a.  Equal weighting if None\n        is specified\n\n    Returns\n    -------\n    values : np.array\n        The values associated with the specified percentiles.  \n    \"\"\"\n    # Standardize and sort based on values in a\n    q = np.array(q) / 100.0\n    if w is None:\n        w = np.ones(a.size)\n    idx = np.argsort(a)\n    a_sort = a[idx]\n    w_sort = w[idx]\n\n    # Get the cumulative sum of weights\n    ecdf = np.cumsum(w_sort)\n\n    # Find the percentile index positions associated with the percentiles\n    p = q * (w.sum() - 1)\n\n    # Find the bounding indices (both low and high)\n    idx_low = np.searchsorted(ecdf, p, side='right')\n    idx_high = np.searchsorted(ecdf, p + 1, side='right')\n    idx_high[idx_high &gt; ecdf.size - 1] = ecdf.size - 1\n\n    # Calculate the weights \n    weights_high = p - np.floor(p)\n    weights_low = 1.0 - weights_high\n\n    # Extract the low/high indexes and multiply by the corresponding weights\n    x1 = np.take(a_sort, idx_low) * weights_low\n    x2 = np.take(a_sort, idx_high) * weights_high\n\n    # Return the average\n    return np.add(x1, x2)\n\n# Sample data\na = np.array([1.0, 2.0, 9.0, 3.2, 4.0], dtype=np.float)\nw = np.array([2.0, 1.0, 3.0, 4.0, 1.0], dtype=np.float)\n\n# Make an unweighted \"copy\" of a for testing\na2 = np.repeat(a, w.astype(np.int))\n\n# Tests with different percentiles chosen\nq1 = np.linspace(0.0, 100.0, 11)\nq2 = np.linspace(5.0, 95.0, 10)\nq3 = np.linspace(4.0, 94.0, 10)\nfor q in (q1, q2, q3):\n    assert np.all(weighted_percentile(a, q, w) == np.percentile(a2, q))\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7171946,
+                        "reputation": 181,
+                        "user_id": 5479148,
+                        "user_type": "registered",
+                        "display_name": "Luca Jokull"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1479906908,
+                    "last_edit_date": 1479906908,
+                    "creation_date": 1472556699,
+                    "answer_id": 39226367,
+                    "question_id": 21844024,
+                    "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/39226367#39226367",
+                    "body": "<p>here my solution:</p>\n\n<pre><code>def my_weighted_perc(data,perc,weights=None):\n    if weights==None:\n        return nanpercentile(data,perc)\n    else:\n        d=data[(~np.isnan(data))&amp;(~np.isnan(weights))]\n        ix=np.argsort(d)\n        d=d[ix]\n        wei=weights[ix]\n        wei_cum=100.*cumsum(wei*1./sum(wei))\n        return interp(perc,wei_cum,d)\n</code></pre>\n\n<p>it simply calculates the weighted CDF of the data and then it uses to estimate the weighted percentiles.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2064712,
+                        "reputation": 15404,
+                        "user_id": 1840471,
+                        "user_type": "registered",
+                        "accept_rate": 66,
+                        "display_name": "Max Ghenis"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1576122124,
+                    "creation_date": 1576122124,
+                    "answer_id": 59297394,
+                    "question_id": 21844024,
+                    "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/59297394#59297394",
+                    "body": "<p>The <a href=\"https://github.com/jsvine/weightedcalcs\" rel=\"nofollow noreferrer\"><code>weightedcalcs</code> package</a> supports <a href=\"https://github.com/jsvine/weightedcalcs/blob/master/weightedcalcs/core.py#L80\" rel=\"nofollow noreferrer\">quantiles</a>:</p>\n\n<pre><code>import weightedcalcs as wc\nimport pandas as pd\n\ndf = pd.DataFrame({'v': [1, 2, 3], 'w': [3, 2, 1]})\ncalc = wc.Calculator('w')  # w designates weight\n\ncalc.quantile(df, 'v', 0.5)\n# 1.5\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1245679,
+                        "reputation": 7034,
+                        "user_id": 1207193,
+                        "user_type": "registered",
+                        "display_name": "imbr"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 15,
+                    "last_activity_date": 1587473235,
+                    "creation_date": 1587473235,
+                    "answer_id": 61343915,
+                    "question_id": 21844024,
+                    "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/61343915#61343915",
+                    "body": "<p>Cleaner and simpler using this <a href=\"https://en.wikipedia.org/wiki/Percentile#Definition_of_the_Weighted_Percentile_method\" rel=\"noreferrer\">reference</a> for weighted percentile method.</p>\n\n<pre><code>import numpy as np\n\ndef weighted_percentile(data, weights, perc):\n    \"\"\"\n    perc : percentile in [0-1]!\n    \"\"\"\n    ix = np.argsort(data)\n    data = data[ix] # sort data\n    weights = weights[ix] # sort weights\n    cdf = (np.cumsum(weights) - 0.5 * weights) / np.sum(weights) # 'like' a CDF function\n    return np.interp(perc, cdf, data)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 10055412,
+                        "reputation": 443,
+                        "user_id": 7433770,
+                        "user_type": "registered",
+                        "display_name": "Sam A."
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 16,
+                    "last_activity_date": 1597600037,
+                    "creation_date": 1597600037,
+                    "answer_id": 63440143,
+                    "question_id": 21844024,
+                    "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy/63440143#63440143",
+                    "body": "<p>This seems to be now implemented in statsmodels</p>\n<pre><code>from statsmodels.stats.weightstats import DescrStatsW\nwq = DescrStatsW(data=np.array([1, 2, 9, 3.2, 4]), weights=np.array([0.0, 0.5, 1.0, 0.3, 0.5]))\nwq.quantile(probs=np.array([0.1, 0.9]), return_pandas=False)\n# array([2., 9.])\n</code></pre>\n<p>The DescrStatsW object also has other methods implemented, such as weighted mean, etc. <a href=\"https://www.statsmodels.org/stable/generated/statsmodels.stats.weightstats.DescrStatsW.html\" rel=\"noreferrer\">https://www.statsmodels.org/stable/generated/statsmodels.stats.weightstats.DescrStatsW.html</a></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 118069,
+                "reputation": 21459,
+                "user_id": 308827,
+                "user_type": "registered",
+                "accept_rate": 96,
+                "display_name": "user308827"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 21844256,
+            "answer_count": 12,
+            "score": 55,
+            "last_activity_date": 1597600037,
+            "creation_date": 1392695732,
+            "question_id": 21844024,
+            "link": "https://stackoverflow.com/questions/21844024/weighted-percentile-using-numpy",
+            "title": "Weighted percentile using numpy",
+            "body": "<p>Is there a way to use the numpy.percentile function to compute weighted percentile? Or is anyone aware of an alternative python function to compute weighted percentile?</p>\n\n<p>thanks!</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7570
+}

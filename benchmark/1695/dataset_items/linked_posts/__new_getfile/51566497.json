@@ -1,0 +1,122 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "python-3.x",
+                "jupyter-notebook",
+                "inspect"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 9524951,
+                        "reputation": 1220,
+                        "user_id": 7078425,
+                        "user_type": "registered",
+                        "display_name": "Kevin He"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1533082258,
+                    "last_edit_date": 1533082258,
+                    "creation_date": 1532736464,
+                    "answer_id": 51566918,
+                    "question_id": 51566497,
+                    "link": "https://stackoverflow.com/questions/51566497/getting-the-source-of-an-object-defined-in-a-jupyter-notebook/51566918#51566918",
+                    "body": "<p>Using <code>inspect.getsource(inspect.getfile)</code> we can get a segment of code that deals with this:</p>\n\n<pre><code>...\nif isclass(object):\n    if hasattr(object, '__module__'):\n        object = sys.modules.get(object.__module__)\n        if hasattr(object, '__file__'):\n            return object.__file__\n    raise TypeError('{!r} is a built-in class'.format(object))\n...\n</code></pre>\n\n<p>It seems in ipython or Jupyter notebook, the classes/functions defined or the <code>__main__</code> module does not have a <code>__file__</code> attribute associated with them so <code>inspect</code> wasn't able to retrieve a source file. In this case you can define the classes in a separate <code>.py</code> file so <code>inspect</code> is able to retrieve the file associated with it.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 11876728,
+                                "reputation": 578,
+                                "user_id": 8691571,
+                                "user_type": "registered",
+                                "display_name": "Paloha"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1636447637,
+                            "post_id": 65806216,
+                            "comment_id": 123552758,
+                            "link": "https://stackoverflow.com/questions/51566497/getting-the-source-of-an-object-defined-in-a-jupyter-notebook/65806216#comment123552758_65806216",
+                            "body": "Worked perfectly. I have rewritten a class during the development without committing the first version to git, silly me. Then I needed the source of the first version. Luckily I had the first version class still in a running Jupyter notebook so your code got me the source back. Thanks a lot."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4011328,
+                                "reputation": 106,
+                                "user_id": 3304607,
+                                "user_type": "registered",
+                                "display_name": "skabbit"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1657532924,
+                            "post_id": 65806216,
+                            "comment_id": 128824099,
+                            "link": "https://stackoverflow.com/questions/51566497/getting-the-source-of-an-object-defined-in-a-jupyter-notebook/65806216#comment128824099_65806216",
+                            "body": "I&#39;m having <code>TypeError: Source for &lt;class &#39;__main__.MyClass&#39;&gt; not found</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2195529,
+                                "reputation": 1342,
+                                "user_id": 1941313,
+                                "user_type": "registered",
+                                "display_name": "Moshe Jonathan Gordon Radian"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1674033316,
+                            "post_id": 65806216,
+                            "comment_id": 132626254,
+                            "link": "https://stackoverflow.com/questions/51566497/getting-the-source-of-an-object-defined-in-a-jupyter-notebook/65806216#comment132626254_65806216",
+                            "body": "Really cool approach! It should be noted that this answer only works for classes with methods defined in them. Also - <code>inspect.getfile = new_getfile</code> will only work in the current module&#39;s context, not in imports (for better or for worse)."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4954892,
+                        "reputation": 333,
+                        "user_id": 6098174,
+                        "user_type": "registered",
+                        "display_name": "Evann Courdier"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1611133262,
+                    "creation_date": 1611133262,
+                    "answer_id": 65806216,
+                    "question_id": 51566497,
+                    "link": "https://stackoverflow.com/questions/51566497/getting-the-source-of-an-object-defined-in-a-jupyter-notebook/65806216#65806216",
+                    "body": "<p>I found a &quot;hacky way&quot; to get the source code of a class in a Jupyter Notebook.</p>\n<p>Assume in a cell you have:</p>\n<pre class=\"lang-py prettyprint-override\"><code>class MyClass:\n    test = 2\n    \n    def __init__(self):\n        self.L = 5\n    \n    def test(self, x):\n        return True\n    \n    @classmethod\n    def forward(cls, x):\n        return x\n</code></pre>\n<p>Then you can extract the code using:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import inspect\nfrom IPython.core.magics.code import extract_symbols\n\nobj = MyClass\ncell_code = &quot;&quot;.join(inspect.linecache.getlines(new_getfile(obj)))\nclass_code = extract_symbols(cell_code, obj.__name__)[0][0]\nprint(class_code)\n</code></pre>\n<p>with <code>new_getfile</code> defined from <a href=\"https://gist.github.com/nikitakit/642cb96febdf2f812d0b\" rel=\"noreferrer\">here</a>:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import inspect, sys\n\ndef new_getfile(object, _old_getfile=inspect.getfile):\n    if not inspect.isclass(object):\n        return _old_getfile(object)\n    \n    # Lookup by parent module (as in current inspect)\n    if hasattr(object, '__module__'):\n        object_ = sys.modules.get(object.__module__)\n        if hasattr(object_, '__file__'):\n            return object_.__file__\n    \n    # If parent module is __main__, lookup by methods (NEW)\n    for name, member in inspect.getmembers(object):\n        if inspect.isfunction(member) and object.__qualname__ + '.' + member.__name__ == member.__qualname__:\n            return inspect.getfile(member)\n    else:\n        raise TypeError('Source for {!r} not found'.format(object))\ninspect.getfile = new_getfile\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 364172,
+                "reputation": 3547,
+                "user_id": 708399,
+                "user_type": "registered",
+                "accept_rate": 65,
+                "display_name": "Andrew Spott"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "answer_count": 2,
+            "score": 8,
+            "last_activity_date": 1611133262,
+            "creation_date": 1532732134,
+            "question_id": 51566497,
+            "link": "https://stackoverflow.com/questions/51566497/getting-the-source-of-an-object-defined-in-a-jupyter-notebook",
+            "title": "Getting the source of an object defined in a Jupyter Notebook",
+            "body": "<p>Usually, if you want to get the source of an object, you can get it via the <code>inspect</code> module:</p>\n\n<pre><code>import inspect\ninspect.getsource(MyObject)\n</code></pre>\n\n<p>However, in a Jupyter notebook, this doesn't work:</p>\n\n<pre><code>import inspect\n\nclass Foo:\n    def __init__(self, info):\n        self.info = info\n\na = Foo(\"hi\")\n\ninspect.getsource(a)\n</code></pre>\n\n<p>Throws the error:</p>\n\n<pre><code>---------------------------------------------------------------------------\nTypeError                                 Traceback (most recent call last)\n&lt;ipython-input-14-048b6f0c2e9b&gt; in &lt;module&gt;()\n      7 a = Foo(\"hi\")\n      8 \n----&gt; 9 inspect.getsource(a)\n\n/usr/lib/python3.6/inspect.py in getsource(object)\n    963     or code object.  The source code is returned as a single string.  An\n    964     OSError is raised if the source code cannot be retrieved.\"\"\"\n--&gt; 965     lines, lnum = getsourcelines(object)\n    966     return ''.join(lines)\n    967 \n\n/usr/lib/python3.6/inspect.py in getsourcelines(object)\n    950     raised if the source code cannot be retrieved.\"\"\"\n    951     object = unwrap(object)\n--&gt; 952     lines, lnum = findsource(object)\n    953 \n    954     if ismodule(object):\n\n/usr/lib/python3.6/inspect.py in findsource(object)\n    763     is raised if the source code cannot be retrieved.\"\"\"\n    764 \n--&gt; 765     file = getsourcefile(object)\n    766     if file:\n    767         # Invalidate cache if needed.\n\n/usr/lib/python3.6/inspect.py in getsourcefile(object)\n    679     Return None if no way can be identified to get the source.\n    680     \"\"\"\n--&gt; 681     filename = getfile(object)\n    682     all_bytecode_suffixes = importlib.machinery.DEBUG_BYTECODE_SUFFIXES[:]\n    683     all_bytecode_suffixes += importlib.machinery.OPTIMIZED_BYTECODE_SUFFIXES[:]\n\n/usr/lib/python3.6/inspect.py in getfile(object)\n    661         return object.co_filename\n    662     raise TypeError('{!r} is not a module, class, method, '\n--&gt; 663                     'function, traceback, frame, or code object'.format(object))\n    664 \n    665 def getmodulename(path):\n\nTypeError: &lt;__main__.Foo object at 0x7fb9130ee518&gt; is not a module, class, method, function, traceback, frame, or code object\n</code></pre>\n\n<p>If I try to find the source of <code>Foo</code> (using <code>inspect.getsource(Foo)</code>), I get:</p>\n\n<p><code>TypeError: &lt;module '__main__'&gt; is a built-in class</code></p>\n\n<p>How do I get the source of a class defined in a Jupyter notebook?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6764
+}

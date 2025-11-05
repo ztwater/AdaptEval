@@ -1,0 +1,111 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "scipy",
+                "sparse-matrix"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2356269,
+                                "reputation": 2736,
+                                "user_id": 2436776,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "zaxliu"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1442575104,
+                            "post_id": 16532553,
+                            "comment_id": 53148034,
+                            "link": "https://stackoverflow.com/questions/16511879/reshape-sparse-matrix-efficiently-python-scipy-0-12/16532553#comment53148034_16532553",
+                            "body": "Update: this problem has been solved in <a href=\"https://github.com/scipy/scipy/pull/3957\" rel=\"nofollow noreferrer\">ENH: reshape sparse matrices #3957</a>, @Warren Weckesser&#39;s solution here was choosen."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 300328,
+                        "reputation": 112936,
+                        "user_id": 1217358,
+                        "user_type": "registered",
+                        "display_name": "Warren Weckesser"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1368488813,
+                    "last_edit_date": 1368488813,
+                    "creation_date": 1368486148,
+                    "answer_id": 16532553,
+                    "question_id": 16511879,
+                    "link": "https://stackoverflow.com/questions/16511879/reshape-sparse-matrix-efficiently-python-scipy-0-12/16532553#16532553",
+                    "body": "<p>I don't know of any established good practices, so here's a fairly straight-forward reshape function for a coo_matrix. It converts its argument to a coo_matrix, so it will actual work for other sparse formats (but it returns a coo_matrix).</p>\n\n<pre><code>from scipy.sparse import coo_matrix\n\n\ndef reshape(a, shape):\n    \"\"\"Reshape the sparse matrix `a`.\n\n    Returns a coo_matrix with shape `shape`.\n    \"\"\"\n    if not hasattr(shape, '__len__') or len(shape) != 2:\n        raise ValueError('`shape` must be a sequence of two integers')\n\n    c = a.tocoo()\n    nrows, ncols = c.shape\n    size = nrows * ncols\n\n    new_size =  shape[0] * shape[1]\n    if new_size != size:\n        raise ValueError('total size of new array must be unchanged')\n\n    flat_indices = ncols * c.row + c.col\n    new_row, new_col = divmod(flat_indices, shape[1])\n\n    b = coo_matrix((c.data, (new_row, new_col)), shape=shape)\n    return b\n</code></pre>\n\n<p>Example:</p>\n\n<pre><code>In [43]: a = coo_matrix([[0,10,0,0],[0,0,0,0],[0,20,30,40]])\n\nIn [44]: a.A\nOut[44]: \narray([[ 0, 10,  0,  0],\n       [ 0,  0,  0,  0],\n       [ 0, 20, 30, 40]])\n\nIn [45]: b = reshape(a, (2,6))\n\nIn [46]: b.A\nOut[46]: \narray([[ 0, 10,  0,  0,  0,  0],\n       [ 0,  0,  0, 20, 30, 40]])\n</code></pre>\n\n<p>Now, I'm sure there are several regular contributors here who can come up with something better (faster, more memory efficient, less filling... :)</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6570010,
+                        "reputation": 91,
+                        "user_id": 5078390,
+                        "user_type": "registered",
+                        "display_name": "Tomas"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1435937809,
+                    "creation_date": 1435937809,
+                    "answer_id": 31210315,
+                    "question_id": 16511879,
+                    "link": "https://stackoverflow.com/questions/16511879/reshape-sparse-matrix-efficiently-python-scipy-0-12/31210315#31210315",
+                    "body": "<p>I have one working example fro CSR matrix, but I cannot guarantee that it always works</p>\n\n<p>flattening the matrix A:</p>\n\n<pre><code>    indices = zeros_like(A.indices)\n    indices[A.indptr[1:-1]] = A.shape[1]\n    indices = cumsum( indices)+A.indices\n    A_flat = sparse.csc_matrix((T_rot.data, indices,[0,size(A)]),shape=(prod(A.shape),1))\n</code></pre>\n\n<p>reshaping the matrix A</p>\n\n<pre><code>    indices = zeros_like(A.indices)\n    indices[A.indptr[1:-1]] = A.shape[1]\n    indices = cumsum( indices)+A.indices\n\n    indices %= N*A.shape[1]\n    indptr = r_[0, where(diff(indices)&lt;0)[0]+1, size(A)]\n    A_reshaped = sparse.csc_matrix((A.data, indices,indptr),shape=(N*A.shape[1],A.shape[0]/N ))\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1605734,
+                        "reputation": 9006,
+                        "user_id": 1485877,
+                        "user_type": "registered",
+                        "accept_rate": 63,
+                        "display_name": "drhagen"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 2,
+                    "last_activity_date": 1549287456,
+                    "creation_date": 1549287456,
+                    "answer_id": 54517322,
+                    "question_id": 16511879,
+                    "link": "https://stackoverflow.com/questions/16511879/reshape-sparse-matrix-efficiently-python-scipy-0-12/54517322#54517322",
+                    "body": "<p>As of <a href=\"https://docs.scipy.org/doc/scipy/reference/release.1.1.0.html#scipy-sparse-improvements\" rel=\"nofollow noreferrer\">SciPy 1.1.0</a>, the <a href=\"https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.spmatrix.reshape.html#scipy.sparse.spmatrix.reshape\" rel=\"nofollow noreferrer\"><code>reshape</code></a> and <code>set_shape</code> methods have been implemented for all sparse matrix types. The signatures are what you would expect and are as identical to the equivalent methods in NumPy as feasible (e.g. you can't reshape to a vector or tensor).</p>\n\n<p>Signature:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>reshape(self, shape: Tuple[int, int], order: 'C'|'F' = 'C', copy: bool = False) -&gt; spmatrix\n</code></pre>\n\n<p>Example:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>&gt;&gt;&gt; from scipy.sparse import csr_matrix\n&gt;&gt;&gt; A = csr_matrix([[0,0,2,0], [0,1,0,3]])\n&gt;&gt;&gt; print(A)\n  (0, 2)    2\n  (1, 1)    1\n  (1, 3)    3\n&gt;&gt;&gt; B = A.reshape((4,2))\n&gt;&gt;&gt; print(B)\n  (1, 0)    2\n  (2, 1)    1\n  (3, 1)    3\n&gt;&gt;&gt; C = A.reshape((4,2), order='F')\n&gt;&gt;&gt; print(C)\n  (0, 1)    2\n  (3, 0)    1\n  (3, 1)    3\n\n</code></pre>\n\n<p>Full disclosure: I <a href=\"https://github.com/scipy/scipy/pull/7945\" rel=\"nofollow noreferrer\">wrote</a> the implementations.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 442137,
+                "reputation": 58102,
+                "user_id": 832621,
+                "user_type": "registered",
+                "accept_rate": 87,
+                "display_name": "Saullo G. P. Castro"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 54517322,
+            "answer_count": 3,
+            "score": 4,
+            "last_activity_date": 1549287456,
+            "creation_date": 1368391593,
+            "last_edit_date": 1495540756,
+            "question_id": 16511879,
+            "link": "https://stackoverflow.com/questions/16511879/reshape-sparse-matrix-efficiently-python-scipy-0-12",
+            "title": "Reshape sparse matrix efficiently, Python, SciPy 0.12",
+            "body": "<p>In <a href=\"https://stackoverflow.com/questions/9621807/python-scipy-resizing-a-sparse-matrix\">another post regarding resizing of a sparse matrix in SciPy</a> the accepted answer works when more rows or columns are to be added, using <code>scipy.sparse.vstack</code> or <code>hstack</code>, respectively. In SciPy 0.12 the <a href=\"http://docs.scipy.org/doc/scipy-0.12.0/reference/generated/scipy.sparse.coo_matrix.reshape.html#scipy.sparse.coo_matrix.reshape\" rel=\"nofollow noreferrer\"><code>reshape</code></a> or <a href=\"http://docs.scipy.org/doc/scipy-0.12.0/reference/generated/scipy.sparse.coo_matrix.set_shape.html#scipy.sparse.coo_matrix.set_shape\" rel=\"nofollow noreferrer\"><code>set_shape</code></a> methods are still not implemented.</p>\n\n<p>Are there some stabilished good practices to reshape a sparse matrix in SciPy 0.12? It would be nice to have some timing comparisons.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8877
+}

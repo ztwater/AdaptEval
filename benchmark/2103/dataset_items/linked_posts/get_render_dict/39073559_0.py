@@ -1,0 +1,9 @@
+mypkg/
+    ...
+test_helpers/
+    __init__.py
+    utils.py  
+    ...
+tests/
+    my_test.py
+    ...

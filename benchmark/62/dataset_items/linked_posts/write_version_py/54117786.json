@@ -1,0 +1,341 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python-3.x",
+                "numpy",
+                "cython",
+                "setuptools"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 7607199,
+                        "reputation": 33774,
+                        "user_id": 5769463,
+                        "user_type": "registered",
+                        "accept_rate": 93,
+                        "display_name": "ead"
+                    },
+                    "edited": false,
+                    "score": 3,
+                    "creation_date": 1547068147,
+                    "post_id": 54117786,
+                    "comment_id": 95069275,
+                    "link": "https://stackoverflow.com/questions/54117786/add-numpy-get-include-argument-to-setuptools-without-preinstalled-numpy#comment95069275_54117786",
+                    "body": "Possible duplicate of <a href=\"https://stackoverflow.com/questions/19919905/how-to-bootstrap-numpy-installation-in-setup-py\">How to Bootstrap numpy installation in setup.py</a>"
+                },
+                {
+                    "owner": {
+                        "account_id": 8088732,
+                        "reputation": 5378,
+                        "user_id": 6095394,
+                        "user_type": "registered",
+                        "accept_rate": 60,
+                        "display_name": "pschill"
+                    },
+                    "reply_to_user": {
+                        "account_id": 7607199,
+                        "reputation": 33774,
+                        "user_id": 5769463,
+                        "user_type": "registered",
+                        "accept_rate": 93,
+                        "display_name": "ead"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1547069105,
+                    "post_id": 54117786,
+                    "comment_id": 95069681,
+                    "link": "https://stackoverflow.com/questions/54117786/add-numpy-get-include-argument-to-setuptools-without-preinstalled-numpy#comment95069681_54117786",
+                    "body": "@ead This does not work because <code>cython</code> also customizes <code>build_ext</code>. If I use the proposed solution, the <code>cython</code> build fails with <code>Don&#39;t know how to compile my_c_lib&#47;some_file.pyx</code>, which means that the customized <code>build_ext</code> command of <code>cython</code> is not used anymore."
+                },
+                {
+                    "owner": {
+                        "account_id": 7607199,
+                        "reputation": 33774,
+                        "user_id": 5769463,
+                        "user_type": "registered",
+                        "accept_rate": 93,
+                        "display_name": "ead"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1547069768,
+                    "post_id": 54117786,
+                    "comment_id": 95069963,
+                    "link": "https://stackoverflow.com/questions/54117786/add-numpy-get-include-argument-to-setuptools-without-preinstalled-numpy#comment95069963_54117786",
+                    "body": "I see it is not that straight forward..."
+                },
+                {
+                    "owner": {
+                        "account_id": 4498555,
+                        "reputation": 51321,
+                        "user_id": 3657742,
+                        "user_type": "registered",
+                        "display_name": "chrisb"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1547073152,
+                    "post_id": 54117786,
+                    "comment_id": 95071300,
+                    "link": "https://stackoverflow.com/questions/54117786/add-numpy-get-include-argument-to-setuptools-without-preinstalled-numpy#comment95071300_54117786",
+                    "body": "Look at what pybind11 does <a href=\"https://github.com/pybind/python_example/blob/2ed5a68759cd6ff5d2e5992a91f08616ef457b5c/setup.py#L9\" rel=\"nofollow noreferrer\">here</a> to defer the import - haven&#39;t tested but I think similar would work here."
+                },
+                {
+                    "owner": {
+                        "account_id": 8088732,
+                        "reputation": 5378,
+                        "user_id": 6095394,
+                        "user_type": "registered",
+                        "accept_rate": 60,
+                        "display_name": "pschill"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1547100148,
+                    "post_id": 54117786,
+                    "comment_id": 95077178,
+                    "link": "https://stackoverflow.com/questions/54117786/add-numpy-get-include-argument-to-setuptools-without-preinstalled-numpy#comment95077178_54117786",
+                    "body": "The trick from pybind11 works after a small change. I had to inherit from <code>os.PathLike</code> instead of <code>object</code>, because <code>cython</code> requires a <code>str</code>, <code>bytes</code>, or <code>PathLike</code> object and <code>str</code>/<code>bytes</code> do not work because they are immutable. Do you want to create an answer from your comment oder should I self-answer my question?"
+                },
+                {
+                    "owner": {
+                        "account_id": 7607199,
+                        "reputation": 33774,
+                        "user_id": 5769463,
+                        "user_type": "registered",
+                        "accept_rate": 93,
+                        "display_name": "ead"
+                    },
+                    "reply_to_user": {
+                        "account_id": 4498555,
+                        "reputation": 51321,
+                        "user_id": 3657742,
+                        "user_type": "registered",
+                        "display_name": "chrisb"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1547100796,
+                    "post_id": 54117786,
+                    "comment_id": 95077348,
+                    "link": "https://stackoverflow.com/questions/54117786/add-numpy-get-include-argument-to-setuptools-without-preinstalled-numpy#comment95077348_54117786",
+                    "body": "@chrisb nice trick, but maybe a bit too clever: Should for example <code>build_ext</code> log options before requirements are installed, it will fail. On the other hand <code>Command.finalize_options</code> is the right place to handle such things - for a proper solution one should figure out, how it can work with Cython."
+                },
+                {
+                    "owner": {
+                        "account_id": 1902248,
+                        "reputation": 7917,
+                        "user_id": 1878788,
+                        "user_type": "registered",
+                        "accept_rate": 87,
+                        "display_name": "bli"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1570123460,
+                    "post_id": 54117786,
+                    "comment_id": 102823345,
+                    "link": "https://stackoverflow.com/questions/54117786/add-numpy-get-include-argument-to-setuptools-without-preinstalled-numpy#comment102823345_54117786",
+                    "body": "With recent enough pip, there might be solutions based on the use of the  <code>requires</code> element  of  the <code>[build-system]</code> section of a <code>pyproject.toml</code> file. That file might also need to specify a &quot;build backend&quot;. For instance: <code>build-backend = &quot;setuptools.build_meta&quot;</code>."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 17397373,
+                                "reputation": 1288,
+                                "user_id": 12606901,
+                                "user_type": "registered",
+                                "display_name": "scaramallion"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1583392754,
+                            "post_id": 54128391,
+                            "comment_id": 107102078,
+                            "link": "https://stackoverflow.com/questions/54117786/add-numpy-get-include-argument-to-setuptools-without-preinstalled-numpy/54128391#comment107102078_54128391",
+                            "body": "This is the solution that worked for me, I wanted to both <code>pip install</code> and run <code>python setup.py build_ext</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 420407,
+                                "reputation": 1557,
+                                "user_id": 798093,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "masad"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1631826998,
+                            "post_id": 54128391,
+                            "comment_id": 122335229,
+                            "link": "https://stackoverflow.com/questions/54117786/add-numpy-get-include-argument-to-setuptools-without-preinstalled-numpy/54128391#comment122335229_54128391",
+                            "body": "In latest python versions you may need to replace <code>__builtins__.__NUMPY_SETUP__ = False</code> with <code>import builtins; builtins.__NUMPY_SETUP__ = False</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 10935740,
+                                "reputation": 1562,
+                                "user_id": 8037521,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Valeria"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1701178410,
+                            "post_id": 54128391,
+                            "comment_id": 136740971,
+                            "link": "https://stackoverflow.com/questions/54117786/add-numpy-get-include-argument-to-setuptools-without-preinstalled-numpy/54128391#comment136740971_54128391",
+                            "body": "Is it possible to do something similar with Cython import when cythonize is required in ext_modules=... of setup()?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3133056,
+                        "reputation": 63405,
+                        "user_id": 2650249,
+                        "user_type": "registered",
+                        "accept_rate": 95,
+                        "display_name": "hoefling"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1547167278,
+                    "last_edit_date": 1547167278,
+                    "creation_date": 1547122116,
+                    "answer_id": 54128391,
+                    "question_id": 54117786,
+                    "link": "https://stackoverflow.com/questions/54117786/add-numpy-get-include-argument-to-setuptools-without-preinstalled-numpy/54128391#54128391",
+                    "body": "<p>One (hacky) suggestion would be using the fact that <code>extension.include_dirs</code> is first requested in <code>build_ext</code>, which is called after the setup dependencies are downloaded.</p>\n\n<pre><code>class MyExt(setuptools.Extension):\n    def __init__(self, *args, **kwargs):\n        self.__include_dirs = []\n        super().__init__(*args, **kwargs)\n\n    @property\n    def include_dirs(self):\n        import numpy\n        return self.__include_dirs + [numpy.get_include()]\n\n    @include_dirs.setter\n    def include_dirs(self, dirs):\n        self.__include_dirs = dirs\n\n\nmy_c_lib_ext = MyExt(\n    name=\"my_c_lib\",\n    sources=[\"my_c_lib/some_file.pyx\"]\n)\n\nsetup(\n    ...,\n    setup_requires=['cython', 'numpy'],\n)\n</code></pre>\n\n<hr>\n\n<h3>Update</h3>\n\n<p>Another (less, but I guess still pretty hacky) solution would be overriding <code>build</code> instead of <code>build_ext</code>, since we know that <code>build_ext</code> is a subcommand of <code>build</code> and will always be invoked by <code>build</code> on installation. This way, we don't have to touch <code>build_ext</code> and leave it to Cython. This will also work when invoking <code>build_ext</code> directly (e.g., via <code>python setup.py build_ext</code> to rebuild the extensions inplace while developing) because <a href=\"https://github.com/python/cpython/blob/master/Lib/distutils/command/build_ext.py#L133\" rel=\"nofollow noreferrer\"><code>build_ext</code> ensures all options of <code>build</code> are initialized</a>, and by coincidence, <a href=\"https://github.com/python/cpython/blob/master/Lib/distutils/cmd.py#L287\" rel=\"nofollow noreferrer\"><code>Command.set_undefined_options</code> first ensures the command has finalized</a> (I know, <code>distutils</code> is a mess).</p>\n\n<p>Of course, now we're misusing <code>build</code> - it runs code that belongs to <code>build_ext</code> finalization. However, I'd still probably go with this solution rather than with the first one, ensuring the relevant piece of code is properly documented.</p>\n\n<pre><code>import setuptools\nfrom distutils.command.build import build as build_orig\n\n\nclass build(build_orig):\n\n    def finalize_options(self):\n        super().finalize_options()\n        # I stole this line from ead's answer:\n        __builtins__.__NUMPY_SETUP__ = False\n        import numpy\n        # or just modify my_c_lib_ext directly here, ext_modules should contain a reference anyway\n        extension = next(m for m in self.distribution.ext_modules if m == my_c_lib_ext)\n        extension.include_dirs.append(numpy.get_include())\n\n\nmy_c_lib_ext = setuptools.Extension(\n    name=\"my_c_lib\",\n    sources=[\"my_c_lib/some_file.pyx\"]\n)\n\nsetuptools.setup(\n    ...,\n    ext_modules=[my_c_lib_ext],\n    cmdclass={'build': build},\n    ...\n)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3133056,
+                                "reputation": 63405,
+                                "user_id": 2650249,
+                                "user_type": "registered",
+                                "accept_rate": 95,
+                                "display_name": "hoefling"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1547167141,
+                            "post_id": 54138355,
+                            "comment_id": 95109290,
+                            "link": "https://stackoverflow.com/questions/54117786/add-numpy-get-include-argument-to-setuptools-without-preinstalled-numpy/54138355#comment95109290_54138355",
+                            "body": "Subclassing <code>build_ext</code> is actually a pretty neat idea - this led me to another proposal, subclassing <code>build</code> instead of <code>build_ext</code>. Not that it would be less of a workaround (I&#39;d prefer custom finalizing of <code>build_ext</code> too), but meh."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1379985,
+                                "reputation": 111,
+                                "user_id": 1313214,
+                                "user_type": "registered",
+                                "display_name": "Dan Blanchard"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1614287252,
+                            "post_id": 54138355,
+                            "comment_id": 117347476,
+                            "link": "https://stackoverflow.com/questions/54117786/add-numpy-get-include-argument-to-setuptools-without-preinstalled-numpy/54138355#comment117347476_54138355",
+                            "body": "I was excited because your <code>pyproject.toml</code> solution seems much simpler, but when I tried to use it I still run into the issue where <code>numpy</code> can&#39;t be imported because it isn&#39;t installed yet when <code>setup.py</code> is processed.  My pyproject.toml:  ```"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7607199,
+                                "reputation": 33774,
+                                "user_id": 5769463,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "ead"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1379985,
+                                "reputation": 111,
+                                "user_id": 1313214,
+                                "user_type": "registered",
+                                "display_name": "Dan Blanchard"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1614291557,
+                            "post_id": 54138355,
+                            "comment_id": 117348810,
+                            "link": "https://stackoverflow.com/questions/54117786/add-numpy-get-include-argument-to-setuptools-without-preinstalled-numpy/54138355#comment117348810_54138355",
+                            "body": "@DanBlanchard you have to use pip for the installation in this case."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7607199,
+                        "reputation": 33774,
+                        "user_id": 5769463,
+                        "user_type": "registered",
+                        "accept_rate": 93,
+                        "display_name": "ead"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": true,
+                    "score": 19,
+                    "last_activity_date": 1657127295,
+                    "last_edit_date": 1657127295,
+                    "creation_date": 1547162583,
+                    "answer_id": 54138355,
+                    "question_id": 54117786,
+                    "link": "https://stackoverflow.com/questions/54117786/add-numpy-get-include-argument-to-setuptools-without-preinstalled-numpy/54138355#54138355",
+                    "body": "<p>First question, when is <code>numpy</code> needed? It is needed during the setup (i.e. when <code>build_ext</code>-funcionality is called) and in the installation, when the module is used. That means <code>numpy</code> should be in <code>setup_requires</code> <strong>and</strong> in <code>install_requires</code>.</p>\n<p>There are following alternatives to solve the issue for the setup:</p>\n<ol>\n<li>using PEP <a href=\"https://www.python.org/dev/peps/pep-0517/\" rel=\"nofollow noreferrer\">517</a>/<a href=\"https://www.python.org/dev/peps/pep-0518/\" rel=\"nofollow noreferrer\">518</a> (which is more straight forward IMO)</li>\n<li>using <code>setup_requires</code>-argument of <code>setup</code> and postponing  import of <code>numpy</code> until setup's requirements are satisfied (which is not the case at the start of <code>setup.py</code>'s execution)</li>\n</ol>\n<hr />\n<h2><strong>PEP 517/518-solution:</strong></h2>\n<p>Put next to <code>setup.py</code> a <code>pyproject.toml</code>-file , with the following content:</p>\n<pre><code>[build-system]\nrequires = [&quot;setuptools&quot;, &quot;wheel&quot;, &quot;Cython&gt;=0.29&quot;, &quot;numpy &gt;= 1.15&quot;]\n</code></pre>\n<p>which defines packages needed for building, and then install using <code>pip install .</code> in the folder with <code>setup.py</code>. A disadvantage of this method is that <code>python setup.py install</code> no longer works, as it is <code>pip</code> that reads <code>pyproject.toml</code>. However, I would use this approach whenever possible.</p>\n<hr />\n<h2><strong>Postponing import</strong></h2>\n<p>This approach is more complicated and somewhat hacky, but works also without <code>pip</code>.</p>\n<p>First, let's take a look at unsuccessful tries so far:</p>\n<p><strong>pybind11-trick</strong>\n@chrisb's &quot;pybind11&quot;-trick, which can be found <a href=\"https://github.com/pybind/python_example/blob/2ed5a68759cd6ff5d2e5992a91f08616ef457b5c/setup.py#L9\" rel=\"nofollow noreferrer\">here</a>: With help of an indirection, one delays the call to <code>import numpy</code> until numpy is present during the setup-phase, i.e.:</p>\n<pre><code>class get_numpy_include(object):\n\n    def __str__(self):\n        import numpy\n        return numpy.get_include()\n...\nmy_c_lib_ext = setuptools.Extension(\n    ...\n    include_dirs=[get_numpy_include()]\n)\n</code></pre>\n<p>Clever! The problem: it doesn't work with the Cython-compiler: somewhere down the line, Cython passes the <code>get_numpy_include</code>-object to <code>os.path.join(...,...)</code> which checks whether the argument is really a string, which it obviously isn't.</p>\n<p>This could be fixed by inheriting from <code>str</code>, but the above shows the dangers of the approach in the long run - it doesn't use the designed mechanics, is brittle and may easily fail in the future.</p>\n<p><strong>the classical <a href=\"https://stackoverflow.com/a/21621689/5769463\"><code>build_ext</code>-solution</a></strong></p>\n<p>Which looks as following:</p>\n<pre><code>...\nfrom setuptools.command.build_ext import build_ext as _build_ext\n\nclass build_ext(_build_ext):\n    def finalize_options(self):\n        _build_ext.finalize_options(self)\n        # Prevent numpy from thinking it is still in its setup process:\n        __builtins__.__NUMPY_SETUP__ = False\n        import numpy\n        self.include_dirs.append(numpy.get_include())\n\nsetupttools.setup(\n    ...\n    cmdclass={'build_ext':build_ext},\n    ...\n)\n</code></pre>\n<p>Yet also this solution doesn't work with cython-extensions, because <code>pyx</code>-files don't get recognized.</p>\n<p>The real question is, how did <code>pyx</code>-files get recognized in the first place? The answer is <a href=\"https://github.com/pypa/setuptools/blob/a94ccbf404a79d56f9b171024dee361de9a948da/setuptools/command/build_ext.py#L15\" rel=\"nofollow noreferrer\">this part</a> of <code>setuptools.command.build_ext</code>:</p>\n<pre><code>...\ntry:\n    # Attempt to use Cython for building extensions, if available\n    from Cython.Distutils.build_ext import build_ext as _build_ext\n    # Additionally, assert that the compiler module will load\n    # also. Ref #1229.\n    __import__('Cython.Compiler.Main')\nexcept ImportError:\n    _build_ext = _du_build_ext\n...\n</code></pre>\n<p>That means <code>setuptools</code> tries to use the Cython's build_ext if possible, and because the import of the module is delayed until <code>build_ext</code> is called, it founds Cython present.</p>\n<p>The situation is different when <code>setuptools.command.build_ext</code> is imported at the beginning of the <code>setup.py</code> - the Cython isn't yet present and a fall back without cython-functionality is used.</p>\n<p><strong>mixing up pybind11-trick and classical solution</strong></p>\n<p>So let's add an indirection, so we don't have to import <code>setuptools.command.build_ext</code> directly at the beginning of <code>setup.py</code>:</p>\n<pre><code>....\n# factory function\ndef my_build_ext(pars):\n     # import delayed:\n     from setuptools.command.build_ext import build_ext as _build_ext#\n \n     # include_dirs adjusted: \n     class build_ext(_build_ext):\n         def finalize_options(self):\n             _build_ext.finalize_options(self)\n             # Prevent numpy from thinking it is still in its setup process:\n             __builtins__.__NUMPY_SETUP__ = False\n             import numpy\n             self.include_dirs.append(numpy.get_include())\n     \n    #object returned:\n    return build_ext(pars)\n...\nsetuptools.setup(\n    ...\n    cmdclass={'build_ext' : my_build_ext},\n    ...\n)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 16157869,
+                        "reputation": 91,
+                        "user_id": 11664715,
+                        "user_type": "registered",
+                        "display_name": "floschl"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1584536532,
+                    "creation_date": 1584536532,
+                    "answer_id": 60740179,
+                    "question_id": 54117786,
+                    "link": "https://stackoverflow.com/questions/54117786/add-numpy-get-include-argument-to-setuptools-without-preinstalled-numpy/60740179#60740179",
+                    "body": "<p>I found a very easy solution in <a href=\"https://luminousmen.com/post/resolve-cython-and-numpy-dependencies\" rel=\"nofollow noreferrer\">this post</a>:</p>\n\n<blockquote>\n  <p>Or you can stick to <a href=\"https://github.com/pypa/pip/issues/5761\" rel=\"nofollow noreferrer\">https://github.com/pypa/pip/issues/5761</a>. Here you install cython and numpy using setuptools.dist before actual setup:</p>\n</blockquote>\n\n<pre><code>from setuptools import dist\ndist.Distribution().fetch_build_eggs(['Cython&gt;=0.15.1', 'numpy&gt;=1.10'])\n</code></pre>\n\n<p>Works well for me!</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 8088732,
+                "reputation": 5378,
+                "user_id": 6095394,
+                "user_type": "registered",
+                "accept_rate": 60,
+                "display_name": "pschill"
+            },
+            "comment_count": 7,
+            "is_answered": true,
+            "accepted_answer_id": 54138355,
+            "answer_count": 3,
+            "score": 18,
+            "last_activity_date": 1657127295,
+            "creation_date": 1547065430,
+            "last_edit_date": 1547068941,
+            "question_id": 54117786,
+            "link": "https://stackoverflow.com/questions/54117786/add-numpy-get-include-argument-to-setuptools-without-preinstalled-numpy",
+            "title": "Add numpy.get_include() argument to setuptools without preinstalled numpy",
+            "body": "<p>I am currently developing a python package that uses <code>cython</code> and <code>numpy</code> and I want the package to be installable using the <code>pip install</code> command from a clean python installation. All dependencies should be installed automatically. I am using <code>setuptools</code> with the following <code>setup.py</code>:</p>\n\n<pre><code>import setuptools\n\nmy_c_lib_ext = setuptools.Extension(\n    name=\"my_c_lib\",\n    sources=[\"my_c_lib/some_file.pyx\"]\n)\n\nsetuptools.setup(\n    name=\"my_lib\",\n    version=\"0.0.1\",\n    author=\"Me\",\n    author_email=\"me@myself.com\",\n    description=\"Some python library\",\n    packages=[\"my_lib\"],\n    ext_modules=[my_c_lib_ext],\n    setup_requires=[\"cython &gt;= 0.29\"],\n    install_requires=[\"numpy &gt;= 1.15\"],\n    classifiers=[\n        \"Programming Language :: Python :: 3\",\n        \"Operating System :: OS Independent\"\n    ]\n)\n</code></pre>\n\n<p>This has worked great so far. The <code>pip install</code> command downloads <code>cython</code> for the build and is able to build my package and install it together with <code>numpy</code>.</p>\n\n<p>Now I want to improve the performance of my <code>cython</code> code, which leads to some changes in my <code>setup.py</code>. I need to add <code>include_dirs=[numpy.get_include()]</code> to either the call of <code>setuptools.Extension(...)</code> or <code>setuptools.setup(...)</code> which means that I also need to <code>import numpy</code>. (See <a href=\"http://docs.cython.org/en/latest/src/tutorial/numpy.html\" rel=\"noreferrer\">http://docs.cython.org/en/latest/src/tutorial/numpy.html</a> and <a href=\"https://stackoverflow.com/questions/2379898/make-distutils-look-for-numpy-header-files-in-the-correct-place\">Make distutils look for numpy header files in the correct place</a> for rationals.)</p>\n\n<p>This is bad. Now the user cannot call <code>pip install</code> from a clean environment, because <code>import numpy</code> will fail. The user needs to <code>pip install numpy</code> before installing my library. Even if I move <code>\"numpy &gt;= 1.15\"</code> from <code>install_requires</code> to <code>setup_requires</code> the installation fails, because the <code>import numpy</code> is evaluated earlier.</p>\n\n<p>Is there a way to evaluate the <code>include_dirs</code> at a later point of the installation, for example, after the dependencies from <code>setup_requires</code> or <code>install_requires</code> have been resolved? I really like to have all dependencies resolved automatically and I dont want the user to type multiple <code>pip install</code> commands.</p>\n\n<p>The following snippet works, but it is not officially supported because it uses an undocumented (and private) method:</p>\n\n<pre><code>class NumpyExtension(setuptools.Extension):\n    # setuptools calls this function after installing dependencies\n    def _convert_pyx_sources_to_lang(self):\n        import numpy\n        self.include_dirs.append(numpy.get_include())\n        super()._convert_pyx_sources_to_lang()\n\nmy_c_lib_ext = NumpyExtension(\n    name=\"my_c_lib\",\n    sources=[\"my_c_lib/some_file.pyx\"]\n)\n</code></pre>\n\n<p>The article <a href=\"https://stackoverflow.com/questions/19919905/how-to-bootstrap-numpy-installation-in-setup-py\">How to Bootstrap numpy installation in setup.py</a> proposes using a <code>cmdclass</code> with custom <code>build_ext</code> class. Unfortunately, this breaks the build of the <code>cython</code> extension because <code>cython</code> also customizes <code>build_ext</code>.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9881
+}

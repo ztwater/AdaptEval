@@ -1,0 +1,2 @@
+def DEF ():
+    print ("A");

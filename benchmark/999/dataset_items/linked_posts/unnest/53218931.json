@@ -1,0 +1,484 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "pandas",
+                "dataframe",
+                "pandas-explode"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 6321039,
+                        "reputation": 393303,
+                        "user_id": 4909087,
+                        "user_type": "registered",
+                        "accept_rate": 97,
+                        "display_name": "cs95"
+                    },
+                    "edited": false,
+                    "score": 6,
+                    "creation_date": 1542024012,
+                    "post_id": 53218931,
+                    "comment_id": 93407682,
+                    "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows#comment93407682_53218931",
+                    "body": "Related, unnesting strings: <a href=\"https://stackoverflow.com/q/48197234/4909087\">stackoverflow.com/q/48197234/4909087</a>"
+                },
+                {
+                    "owner": {
+                        "account_id": 1666782,
+                        "reputation": 25602,
+                        "user_id": 1534017,
+                        "user_type": "registered",
+                        "accept_rate": 92,
+                        "display_name": "Cleb"
+                    },
+                    "edited": false,
+                    "score": 7,
+                    "creation_date": 1546605793,
+                    "post_id": 53218931,
+                    "comment_id": 94913439,
+                    "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows#comment94913439_53218931",
+                    "body": "Couple of related posts: <a href=\"https://stackoverflow.com/questions/45885143/explode-lists-with-different-lengths-in-pandas?noredirect=1&amp;lq=1\">here</a>, <a href=\"https://stackoverflow.com/questions/45871154/how-to-efficiently-create-a-pivot-table\">here</a>, <a href=\"https://stackoverflow.com/questions/36558954/pandas-dataframe-explode-column-contents\">here</a>, <a href=\"https://stackoverflow.com/questions/51743092/exploding-a-pandas-dataframe-column\">here</a>, ..."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 14457984,
+                                "reputation": 377,
+                                "user_id": 10499953,
+                                "user_type": "registered",
+                                "display_name": "Attila the Fun"
+                            },
+                            "edited": false,
+                            "score": 12,
+                            "creation_date": 1630252611,
+                            "post_id": 53218939,
+                            "comment_id": 121900416,
+                            "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/53218939#comment121900416_53218939",
+                            "body": "As of version 1.3.0 we can explode() multiple columns at once."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 14457984,
+                                "reputation": 377,
+                                "user_id": 10499953,
+                                "user_type": "registered",
+                                "display_name": "Attila the Fun"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1662407705,
+                            "post_id": 53218939,
+                            "comment_id": 129994458,
+                            "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/53218939#comment129994458_53218939",
+                            "body": "If you have a column of Series objects (and no duplicates in the outer column&#39;s index) and want to go straight to long format while preserving inner indexes, you can do <code>pd.concat(df[x].to_dict())</code>.  It will stack all values of the inner series while appending their corresponding index values to the (multi)index of the returned object."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 19853427,
+                                "reputation": 513,
+                                "user_id": 14543452,
+                                "user_type": "registered",
+                                "display_name": "Mr. Panda"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1669491579,
+                            "post_id": 53218939,
+                            "comment_id": 131654235,
+                            "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/53218939#comment131654235_53218939",
+                            "body": "If column wise operation does not work, check if the data type is str. If yes, convert into list."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 10829702,
+                        "reputation": 321263,
+                        "user_id": 7964527,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "BENY"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": true,
+                    "score": 334,
+                    "last_activity_date": 1639669807,
+                    "last_edit_date": 1639669807,
+                    "creation_date": 1541730007,
+                    "answer_id": 53218939,
+                    "question_id": 53218931,
+                    "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/53218939#53218939",
+                    "body": "<p>I know <code>object</code> dtype columns makes the data hard to convert with pandas functions. When I receive data like this, the first thing that came to mind was to &quot;flatten&quot; or unnest the columns.</p>\n<p>I am using pandas and Python functions for this type of question. If you are worried about the speed of the above solutions, check out <a href=\"https://stackoverflow.com/questions/53219045\">user3483203's answer</a>, since it's using numpy and most of the time numpy is faster. I recommend <a href=\"https://cython.org/\" rel=\"noreferrer\">Cython</a> or <a href=\"http://numba.pydata.org/\" rel=\"noreferrer\">numba</a> if speed matters.</p>\n<hr />\n<p><strong>Method 0 [pandas &gt;= 0.25]</strong>\nStarting from <a href=\"https://pandas.pydata.org/pandas-docs/version/0.25/user_guide/reshaping.html#exploding-a-list-like-column\" rel=\"noreferrer\">pandas 0.25</a>, if you only need to explode <em>one</em> column, you can use the <a href=\"https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.explode.html\" rel=\"noreferrer\"><code>pandas.DataFrame.explode</code></a> function:</p>\n<pre><code>df.explode('B')\n\n       A  B\n    0  1  1\n    1  1  2\n    0  2  1\n    1  2  2\n</code></pre>\n<p>Given a dataframe with an empty <code>list</code> or a <code>NaN</code> in the column. An empty list will not cause an issue, but a <code>NaN</code> will need to be filled with a <code>list</code></p>\n<pre><code>df = pd.DataFrame({'A': [1, 2, 3, 4],'B': [[1, 2], [1, 2], [], np.nan]})\ndf.B = df.B.fillna({i: [] for i in df.index})  # replace NaN with []\ndf.explode('B')\n\n   A    B\n0  1    1\n0  1    2\n1  2    1\n1  2    2\n2  3  NaN\n3  4  NaN\n</code></pre>\n<hr />\n<p><strong>Method 1</strong>\n<strong><code>apply + pd.Series</code></strong> (easy to understand but in terms of performance not recommended . )</p>\n<pre><code>df.set_index('A').B.apply(pd.Series).stack().reset_index(level=0).rename(columns={0:'B'})\nOut[463]:\n   A  B\n0  1  1\n1  1  2\n0  2  1\n1  2  2\n</code></pre>\n<hr />\n<p><strong>Method 2</strong>\nUsing <code>repeat</code> with <code>DataFrame</code> constructor , re-create your dataframe (good at performance, not good at multiple columns )</p>\n<pre><code>df=pd.DataFrame({'A':df.A.repeat(df.B.str.len()),'B':np.concatenate(df.B.values)})\ndf\nOut[465]:\n   A  B\n0  1  1\n0  1  2\n1  2  1\n1  2  2\n</code></pre>\n<p><strong>Method 2.1</strong>\nfor example besides A we have A.1 .....A.n. If we still use the method(<strong>Method 2</strong>) above it is hard for us to re-create the columns one by one .</p>\n<p>Solution : <code>join</code> or <code>merge</code> with the <code>index</code> after 'unnest' the single columns</p>\n<pre><code>s=pd.DataFrame({'B':np.concatenate(df.B.values)},index=df.index.repeat(df.B.str.len()))\ns.join(df.drop('B',1),how='left')\nOut[477]:\n   B  A\n0  1  1\n0  2  1\n1  1  2\n1  2  2\n</code></pre>\n<p>If you need the column order exactly the same as before, add <code>reindex</code> at the end.</p>\n<pre><code>s.join(df.drop('B',1),how='left').reindex(columns=df.columns)\n</code></pre>\n<hr />\n<p><strong>Method 3</strong>\nrecreate the <code>list</code></p>\n<pre><code>pd.DataFrame([[x] + [z] for x, y in df.values for z in y],columns=df.columns)\nOut[488]:\n   A  B\n0  1  1\n1  1  2\n2  2  1\n3  2  2\n</code></pre>\n<p>If more than two columns, use</p>\n<pre><code>s=pd.DataFrame([[x] + [z] for x, y in zip(df.index,df.B) for z in y])\ns.merge(df,left_on=0,right_index=True)\nOut[491]:\n   0  1  A       B\n0  0  1  1  [1, 2]\n1  0  2  1  [1, 2]\n2  1  1  2  [1, 2]\n3  1  2  2  [1, 2]\n</code></pre>\n<hr />\n<p><strong>Method 4</strong>\nusing <code>reindex</code>  or <code>loc</code></p>\n<pre><code>df.reindex(df.index.repeat(df.B.str.len())).assign(B=np.concatenate(df.B.values))\nOut[554]:\n   A  B\n0  1  1\n0  1  2\n1  2  1\n1  2  2\n\n#df.loc[df.index.repeat(df.B.str.len())].assign(B=np.concatenate(df.B.values))\n</code></pre>\n<hr />\n<p><strong>Method 5</strong>\nwhen the list only contains unique values:</p>\n<pre><code>df=pd.DataFrame({'A':[1,2],'B':[[1,2],[3,4]]})\nfrom collections import ChainMap\nd = dict(ChainMap(*map(dict.fromkeys, df['B'], df['A'])))\npd.DataFrame(list(d.items()),columns=df.columns[::-1])\nOut[574]:\n   B  A\n0  1  1\n1  2  1\n2  3  2\n3  4  2\n</code></pre>\n<hr />\n<p><strong>Method 6</strong>\nusing <code>numpy</code> for high performance:</p>\n<pre><code>newvalues=np.dstack((np.repeat(df.A.values,list(map(len,df.B.values))),np.concatenate(df.B.values)))\npd.DataFrame(data=newvalues[0],columns=df.columns)\n   A  B\n0  1  1\n1  1  2\n2  2  1\n3  2  2\n</code></pre>\n<hr />\n<p><strong>Method 7</strong>\nusing base function <code>itertools</code> <code>cycle</code> and <code>chain</code>: Pure python solution just for fun</p>\n<pre><code>from itertools import cycle,chain\nl=df.values.tolist()\nl1=[list(zip([x[0]], cycle(x[1])) if len([x[0]]) &gt; len(x[1]) else list(zip(cycle([x[0]]), x[1]))) for x in l]\npd.DataFrame(list(chain.from_iterable(l1)),columns=df.columns)\n   A  B\n0  1  1\n1  1  2\n2  2  1\n3  2  2\n</code></pre>\n<hr />\n<p><strong>Generalizing to multiple columns</strong></p>\n<pre><code>df=pd.DataFrame({'A':[1,2],'B':[[1,2],[3,4]],'C':[[1,2],[3,4]]})\ndf\nOut[592]:\n   A       B       C\n0  1  [1, 2]  [1, 2]\n1  2  [3, 4]  [3, 4]\n</code></pre>\n<p>Self-def function:</p>\n<pre><code>def unnesting(df, explode):\n    idx = df.index.repeat(df[explode[0]].str.len())\n    df1 = pd.concat([\n        pd.DataFrame({x: np.concatenate(df[x].values)}) for x in explode], axis=1)\n    df1.index = idx\n\n    return df1.join(df.drop(explode, 1), how='left')\n\n\nunnesting(df,['B','C'])\nOut[609]:\n   B  C  A\n0  1  1  1\n0  2  2  1\n1  3  3  2\n1  4  4  2\n</code></pre>\n<hr />\n<h3><strong>Column-wise Unnesting</strong></h3>\n<p>All above method is talking about the <em><strong>vertical</strong></em> unnesting and explode , If you do need expend the list <em><strong>horizontal</strong></em>, Check with <code>pd.DataFrame</code> constructor</p>\n<pre><code>df.join(pd.DataFrame(df.B.tolist(),index=df.index).add_prefix('B_'))\nOut[33]:\n   A       B       C  B_0  B_1\n0  1  [1, 2]  [1, 2]    1    2\n1  2  [3, 4]  [3, 4]    3    4\n</code></pre>\n<p><strong>Updated function</strong></p>\n<pre><code>def unnesting(df, explode, axis):\n    if axis==1:\n        idx = df.index.repeat(df[explode[0]].str.len())\n        df1 = pd.concat([\n            pd.DataFrame({x: np.concatenate(df[x].values)}) for x in explode], axis=1)\n        df1.index = idx\n\n        return df1.join(df.drop(explode, 1), how='left')\n    else :\n        df1 = pd.concat([\n                         pd.DataFrame(df[x].tolist(), index=df.index).add_prefix(x) for x in explode], axis=1)\n        return df1.join(df.drop(explode, 1), how='left')\n</code></pre>\n<p>Test Output</p>\n<pre><code>unnesting(df, ['B','C'], axis=0)\nOut[36]:\n   B0  B1  C0  C1  A\n0   1   2   1   2  1\n1   3   4   3   4  2\n</code></pre>\n<blockquote>\n<p>Update 2021-02-17 with original explode function</p>\n</blockquote>\n<pre><code>def unnesting(df, explode, axis):\n    if axis==1:\n        df1 = pd.concat([df[x].explode() for x in explode], axis=1)\n        return df1.join(df.drop(explode, 1), how='left')\n    else :\n        df1 = pd.concat([\n                         pd.DataFrame(df[x].tolist(), index=df.index).add_prefix(x) for x in explode], axis=1)\n        return df1.join(df.drop(explode, 1), how='left')\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3122286,
+                                "reputation": 10879,
+                                "user_id": 2641825,
+                                "user_type": "registered",
+                                "accept_rate": 59,
+                                "display_name": "Paul Rougieux"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1574850113,
+                            "post_id": 53219045,
+                            "comment_id": 104374134,
+                            "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/53219045#comment104374134_53219045",
+                            "body": "Interesting, would be nice to know the comparison with the new <code>df.explode</code> method."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4258097,
+                        "reputation": 50870,
+                        "user_id": 3483203,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "user3483203"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 54,
+                    "last_activity_date": 1541736938,
+                    "last_edit_date": 1541736938,
+                    "creation_date": 1541730917,
+                    "answer_id": 53219045,
+                    "question_id": 53218931,
+                    "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/53219045#53219045",
+                    "body": "<p><strong><em>Option 1</em></strong></p>\n\n<p>If all of the sublists in the other column are the same length, <code>numpy</code> can be an efficient option here:</p>\n\n<pre><code>vals = np.array(df.B.values.tolist())    \na = np.repeat(df.A, vals.shape[1])\n\npd.DataFrame(np.column_stack((a, vals.ravel())), columns=df.columns)\n</code></pre>\n\n<p></p>\n\n<pre><code>   A  B\n0  1  1\n1  1  2\n2  2  1\n3  2  2\n</code></pre>\n\n<hr>\n\n<p><strong><em>Option 2</em></strong></p>\n\n<p>If the sublists have different length, you need an additional step:</p>\n\n<pre><code>vals = df.B.values.tolist()\nrs = [len(r) for r in vals]    \na = np.repeat(df.A, rs)\n\npd.DataFrame(np.column_stack((a, np.concatenate(vals))), columns=df.columns)\n</code></pre>\n\n<p></p>\n\n<pre><code>   A  B\n0  1  1\n1  1  2\n2  2  1\n3  2  2\n</code></pre>\n\n<hr>\n\n<p><strong><em>Option 3</em></strong></p>\n\n<p>I took a shot at generalizing this to work to flatten <code>N</code> columns and tile <code>M</code> columns, I'll work later on making it more efficient:</p>\n\n<pre><code>df = pd.DataFrame({'A': [1,2,3], 'B': [[1,2], [1,2,3], [1]],\n                   'C': [[1,2,3], [1,2], [1,2]], 'D': ['A', 'B', 'C']})\n</code></pre>\n\n<p></p>\n\n<pre><code>   A          B          C  D\n0  1     [1, 2]  [1, 2, 3]  A\n1  2  [1, 2, 3]     [1, 2]  B\n2  3        [1]     [1, 2]  C\n</code></pre>\n\n<p></p>\n\n<pre><code>def unnest(df, tile, explode):\n    vals = df[explode].sum(1)\n    rs = [len(r) for r in vals]\n    a = np.repeat(df[tile].values, rs, axis=0)\n    b = np.concatenate(vals.values)\n    d = np.column_stack((a, b))\n    return pd.DataFrame(d, columns = tile +  ['_'.join(explode)])\n\nunnest(df, ['A', 'D'], ['B', 'C'])\n</code></pre>\n\n<p></p>\n\n<pre><code>    A  D B_C\n0   1  A   1\n1   1  A   2\n2   1  A   1\n3   1  A   2\n4   1  A   3\n5   2  B   1\n6   2  B   2\n7   2  B   3\n8   2  B   1\n9   2  B   2\n10  3  C   1\n11  3  C   1\n12  3  C   2\n</code></pre>\n\n<hr>\n\n<p><strong><em>Functions</em></strong></p>\n\n<pre><code>def wen1(df):\n    return df.set_index('A').B.apply(pd.Series).stack().reset_index(level=0).rename(columns={0: 'B'})\n\ndef wen2(df):\n    return pd.DataFrame({'A':df.A.repeat(df.B.str.len()),'B':np.concatenate(df.B.values)})\n\ndef wen3(df):\n    s = pd.DataFrame({'B': np.concatenate(df.B.values)}, index=df.index.repeat(df.B.str.len()))\n    return s.join(df.drop('B', 1), how='left')\n\ndef wen4(df):\n    return pd.DataFrame([[x] + [z] for x, y in df.values for z in y],columns=df.columns)\n\ndef chris1(df):\n    vals = np.array(df.B.values.tolist())\n    a = np.repeat(df.A, vals.shape[1])\n    return pd.DataFrame(np.column_stack((a, vals.ravel())), columns=df.columns)\n\ndef chris2(df):\n    vals = df.B.values.tolist()\n    rs = [len(r) for r in vals]\n    a = np.repeat(df.A.values, rs)\n    return pd.DataFrame(np.column_stack((a, np.concatenate(vals))), columns=df.columns)\n</code></pre>\n\n<p><strong><em>Timings</em></strong></p>\n\n<pre><code>import pandas as pd\nimport matplotlib.pyplot as plt\nimport numpy as np\nfrom timeit import timeit\n\nres = pd.DataFrame(\n       index=['wen1', 'wen2', 'wen3', 'wen4', 'chris1', 'chris2'],\n       columns=[10, 50, 100, 500, 1000, 5000, 10000],\n       dtype=float\n)\n\nfor f in res.index:\n    for c in res.columns:\n        df = pd.DataFrame({'A': [1, 2], 'B': [[1, 2], [1, 2]]})\n        df = pd.concat([df]*c)\n        stmt = '{}(df)'.format(f)\n        setp = 'from __main__ import df, {}'.format(f)\n        res.at[f, c] = timeit(stmt, setp, number=50)\n\nax = res.div(res.min()).T.plot(loglog=True)\nax.set_xlabel(\"N\")\nax.set_ylabel(\"time (relative)\")\n</code></pre>\n\n<p><strong><em>Performance</em></strong></p>\n\n<p><a href=\"https://i.stack.imgur.com/SWzSN.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/SWzSN.png\" alt=\"enter image description here\"></a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 11900153,
+                        "reputation": 70225,
+                        "user_id": 8708364,
+                        "user_type": "registered",
+                        "display_name": "U13-Forward"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1541731208,
+                    "creation_date": 1541731208,
+                    "answer_id": 53219085,
+                    "question_id": 53218931,
+                    "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/53219085#53219085",
+                    "body": "<p>Something pretty not recommended (at least work in this case):</p>\n\n<pre><code>df=pd.concat([df]*2).sort_index()\nit=iter(df['B'].tolist()[0]+df['B'].tolist()[0])\ndf['B']=df['B'].apply(lambda x:next(it))\n</code></pre>\n\n<p><code>concat</code> + <code>sort_index</code> + <code>iter</code> + <code>apply</code> + <code>next</code>.</p>\n\n<p>Now:</p>\n\n<pre><code>print(df)\n</code></pre>\n\n<p>Is:</p>\n\n<pre><code>   A  B\n0  1  1\n0  1  2\n1  2  1\n1  2  2\n</code></pre>\n\n<p>If care about index:</p>\n\n<pre><code>df=df.reset_index(drop=True)\n</code></pre>\n\n<p>Now:</p>\n\n<pre><code>print(df)\n</code></pre>\n\n<p>Is:</p>\n\n<pre><code>   A  B\n0  1  1\n1  1  2\n2  2  1\n3  2  2\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4974930,
+                        "reputation": 61554,
+                        "user_id": 4001592,
+                        "user_type": "registered",
+                        "display_name": "Dani Mesejo"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 12,
+                    "last_activity_date": 1543627905,
+                    "creation_date": 1543627905,
+                    "answer_id": 53567010,
+                    "question_id": 53218931,
+                    "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/53567010#53567010",
+                    "body": "<p>One alternative is to apply the <a href=\"https://stackoverflow.com/questions/1208118/using-numpy-to-build-an-array-of-all-combinations-of-two-arrays\">meshgrid recipe</a> over the rows of the columns to unnest:</p>\n\n<pre><code>import numpy as np\nimport pandas as pd\n\n\ndef unnest(frame, explode):\n    def mesh(values):\n        return np.array(np.meshgrid(*values)).T.reshape(-1, len(values))\n\n    data = np.vstack(mesh(row) for row in frame[explode].values)\n    return pd.DataFrame(data=data, columns=explode)\n\n\ndf = pd.DataFrame({'A': [1, 2], 'B': [[1, 2], [1, 2]]})\nprint(unnest(df, ['A', 'B']))  # base\nprint()\n\ndf = pd.DataFrame({'A': [1, 2], 'B': [[1, 2], [3, 4]], 'C': [[1, 2], [3, 4]]})\nprint(unnest(df, ['A', 'B', 'C']))  # multiple columns\nprint()\n\ndf = pd.DataFrame({'A': [1, 2, 3], 'B': [[1, 2], [1, 2, 3], [1]],\n                   'C': [[1, 2, 3], [1, 2], [1, 2]], 'D': ['A', 'B', 'C']})\n\nprint(unnest(df, ['A', 'B']))  # uneven length lists\nprint()\nprint(unnest(df, ['D', 'B']))  # different types\nprint()\n</code></pre>\n\n<p><strong>Output</strong></p>\n\n<pre><code>   A  B\n0  1  1\n1  1  2\n2  2  1\n3  2  2\n\n   A  B  C\n0  1  1  1\n1  1  2  1\n2  1  1  2\n3  1  2  2\n4  2  3  3\n5  2  4  3\n6  2  3  4\n7  2  4  4\n\n   A  B\n0  1  1\n1  1  2\n2  2  1\n3  2  2\n4  2  3\n5  3  1\n\n   D  B\n0  A  1\n1  A  2\n2  B  1\n3  B  2\n4  B  3\n5  C  1\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6094154,
+                        "reputation": 3822,
+                        "user_id": 4755520,
+                        "user_type": "registered",
+                        "display_name": "ayorgo"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1544500221,
+                    "last_edit_date": 1544500221,
+                    "creation_date": 1544493947,
+                    "answer_id": 53716367,
+                    "question_id": 53218931,
+                    "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/53716367#53716367",
+                    "body": "<p>My 5 cents:</p>\n\n<pre><code>df[['B', 'B2']] = pd.DataFrame(df['B'].values.tolist())\n\ndf[['A', 'B']].append(df[['A', 'B2']].rename(columns={'B2': 'B'}),\n                      ignore_index=True)\n</code></pre>\n\n<p>and another 5</p>\n\n<pre><code>df[['B1', 'B2']] = pd.DataFrame([*df['B']]) # if values.tolist() is too boring\n\n(pd.wide_to_long(df.drop('B', 1), 'B', 'A', '')\n .reset_index(level=1, drop=True)\n .reset_index())\n</code></pre>\n\n<p>both resulting in the same</p>\n\n<pre><code>   A  B\n0  1  1\n1  2  1\n2  1  2\n3  2  2\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 15774417,
+                        "reputation": 59,
+                        "user_id": 11382495,
+                        "user_type": "registered",
+                        "display_name": "Ze Tang"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1555660032,
+                    "last_edit_date": 1555660032,
+                    "creation_date": 1555658670,
+                    "answer_id": 55758120,
+                    "question_id": 53218931,
+                    "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/55758120#55758120",
+                    "body": "<p>Because normally sublist length are different and join/merge is far more computational expensive. I retested the method for different length sublist and more normal columns.</p>\n\n<p>MultiIndex should be also a easier way to write and has near the same performances as numpy way.</p>\n\n<p>Surprisingly, in my implementation comprehension way has the best performance.</p>\n\n<pre><code>def stack(df):\n    return df.set_index(['A', 'C']).B.apply(pd.Series).stack()\n\n\ndef comprehension(df):\n    return pd.DataFrame([x + [z] for x, y in zip(df[['A', 'C']].values.tolist(), df.B) for z in y])\n\n\ndef multiindex(df):\n    return pd.DataFrame(np.concatenate(df.B.values), index=df.set_index(['A', 'C']).index.repeat(df.B.str.len()))\n\n\ndef array(df):\n    return pd.DataFrame(\n        np.column_stack((\n            np.repeat(df[['A', 'C']].values, df.B.str.len(), axis=0),\n            np.concatenate(df.B.values)\n        ))\n    )\n\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport numpy as np\nfrom timeit import timeit\n\nres = pd.DataFrame(\n    index=[\n        'stack',\n        'comprehension',\n        'multiindex',\n        'array',\n    ],\n    columns=[1000, 2000, 5000, 10000, 20000, 50000],\n    dtype=float\n)\n\nfor f in res.index:\n    for c in res.columns:\n        df = pd.DataFrame({'A': list('abc'), 'C': list('def'), 'B': [['g', 'h', 'i'], ['j', 'k'], ['l']]})\n        df = pd.concat([df] * c)\n        stmt = '{}(df)'.format(f)\n        setp = 'from __main__ import df, {}'.format(f)\n        res.at[f, c] = timeit(stmt, setp, number=20)\n\nax = res.div(res.min()).T.plot(loglog=True)\nax.set_xlabel(\"N\")\nax.set_ylabel(\"time (relative)\")\n</code></pre>\n\n<h2>Performance</h2>\n\n<p><a href=\"https://i.stack.imgur.com/4SFWo.png\" rel=\"nofollow noreferrer\">Relative time of each method</a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 14239643,
+                        "reputation": 2559,
+                        "user_id": 10286422,
+                        "user_type": "registered",
+                        "display_name": "Ben Pap"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1556144355,
+                    "creation_date": 1556144355,
+                    "answer_id": 55839330,
+                    "question_id": 53218931,
+                    "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/55839330#55839330",
+                    "body": "<pre><code>df=pd.DataFrame({'A':[1,2],'B':[[1,2],[1,2]]})\n\npd.concat([df['A'], pd.DataFrame(df['B'].values.tolist())], axis = 1)\\\n  .melt(id_vars = 'A', value_name = 'B')\\\n  .dropna()\\\n  .drop('variable', axis = 1)\n\n    A   B\n0   1   1\n1   2   1\n2   1   2\n3   2   2\n</code></pre>\n\n<p>Any opinions on this method I thought of? or is doing both concat and melt considered too \"expensive\"?</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5974384,
+                        "reputation": 3641,
+                        "user_id": 4695774,
+                        "user_type": "registered",
+                        "accept_rate": 66,
+                        "display_name": "Siraj S."
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1559971045,
+                    "creation_date": 1559971045,
+                    "answer_id": 56503668,
+                    "question_id": 53218931,
+                    "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/56503668#56503668",
+                    "body": "<pre><code>df=pd.DataFrame({'A':[1,2],'B':[[1,2],[1,2]]})\n\nout = pd.concat([df.loc[:,'A'],(df.B.apply(pd.Series))], axis=1, sort=False)\n\nout = out.set_index('A').stack().droplevel(level=1).reset_index().rename(columns={0:\"B\"})\n\n       A    B\n   0    1   1\n   1    1   2\n   2    2   1\n   3    2   2\n</code></pre>\n\n<ul>\n<li>you can implement this as one liner, if you don't wish to create intermediate object</li>\n</ul>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 15836369,
+                        "reputation": 1,
+                        "user_id": 11426125,
+                        "user_type": "registered",
+                        "display_name": "serge2020"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1561152495,
+                    "creation_date": 1561152495,
+                    "answer_id": 56710661,
+                    "question_id": 53218931,
+                    "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/56710661#56710661",
+                    "body": "<pre><code># Here's the answer to the related question in:\n# https://stackoverflow.com/q/56708671/11426125\n\n# initial dataframe\ndf12=pd.DataFrame({'Date':['2007-12-03','2008-09-07'],'names':\n[['Peter','Alex'],['Donald','Stan']]})\n\n# convert dataframe to array for indexing list values (names)\na = np.array(df12.values)  \n\n# create a new, dataframe with dimensions for unnested\nb = np.ndarray(shape = (4,2))\ndf2 = pd.DataFrame(b, columns = [\"Date\", \"names\"], dtype = str)\n\n# implement loops to assign date/name values as required\ni = range(len(a[0]))\nj = range(len(a[0]))\nfor x in i:\n    for y in j:\n        df2.iat[2*x+y, 0] = a[x][0]\n        df2.iat[2*x+y, 1] = a[x][1][y]\n\n# set Date column as Index\ndf2.Date=pd.to_datetime(df2.Date)\ndf2.index=df2.Date\ndf2.drop('Date',axis=1,inplace =True)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4662401,
+                        "reputation": 10072,
+                        "user_id": 7128154,
+                        "user_type": "registered",
+                        "accept_rate": 60,
+                        "display_name": "Markus Dutschke"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1561973438,
+                    "last_edit_date": 1561973438,
+                    "creation_date": 1561969526,
+                    "answer_id": 56832277,
+                    "question_id": 53218931,
+                    "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/56832277#56832277",
+                    "body": "<p>I generalized the problem a bit to be applicable to more columns.</p>\n\n<p><strong>Summary of what my solution does:</strong></p>\n\n<pre><code>In[74]: df\nOut[74]: \n    A   B             C             columnD\n0  A1  B1  [C1.1, C1.2]                D1\n1  A2  B2  [C2.1, C2.2]  [D2.1, D2.2, D2.3]\n2  A3  B3            C3        [D3.1, D3.2]\n\nIn[75]: dfListExplode(df,['C','columnD'])\nOut[75]: \n    A   B     C columnD\n0  A1  B1  C1.1    D1\n1  A1  B1  C1.2    D1\n2  A2  B2  C2.1    D2.1\n3  A2  B2  C2.1    D2.2\n4  A2  B2  C2.1    D2.3\n5  A2  B2  C2.2    D2.1\n6  A2  B2  C2.2    D2.2\n7  A2  B2  C2.2    D2.3\n8  A3  B3    C3    D3.1\n9  A3  B3    C3    D3.2\n</code></pre>\n\n<p>Complete example:</p>\n\n<p><strong>The actual explosion is performed in 3 lines.</strong> The rest is cosmetics (multi column explosion, handling of strings instead of lists in the explosion column, ...).</p>\n\n<pre><code>import pandas as pd\nimport numpy as np\n\ndf=pd.DataFrame( {'A': ['A1','A2','A3'],\n                  'B': ['B1','B2','B3'],\n                  'C': [ ['C1.1','C1.2'],['C2.1','C2.2'],'C3'],\n                  'columnD': [ 'D1',['D2.1','D2.2', 'D2.3'],['D3.1','D3.2']],\n                  })\nprint('df',df, sep='\\n')\n\ndef dfListExplode(df, explodeKeys):\n    if not isinstance(explodeKeys, list):\n        explodeKeys=[explodeKeys]\n    # recursive handling of explodeKeys\n    if len(explodeKeys)==0:\n        return df\n    elif len(explodeKeys)==1:\n        explodeKey=explodeKeys[0]\n    else:\n        return dfListExplode( dfListExplode(df, explodeKeys[:1]), explodeKeys[1:])\n    # perform explosion/unnesting for key: explodeKey\n    dfPrep=df[explodeKey].apply(lambda x: x if isinstance(x,list) else [x]) #casts all elements to a list\n    dfIndExpl=pd.DataFrame([[x] + [z] for x, y in zip(dfPrep.index,dfPrep.values) for z in y ], columns=['explodedIndex',explodeKey])\n    dfMerged=dfIndExpl.merge(df.drop(explodeKey, axis=1), left_on='explodedIndex', right_index=True)\n    dfReind=dfMerged.reindex(columns=list(df))\n    return dfReind\n\ndfExpl=dfListExplode(df,['C','columnD'])\nprint('dfExpl',dfExpl, sep='\\n')\n</code></pre>\n\n<p>Credits to <a href=\"https://stackoverflow.com/a/53218939/7128154\">WeNYoBen's answer</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 12967343,
+                                "reputation": 465,
+                                "user_id": 9374372,
+                                "user_type": "registered",
+                                "display_name": "Fernando Jesus Garcia Hipola"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1688371016,
+                            "post_id": 57105930,
+                            "comment_id": 135060093,
+                            "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/57105930#comment135060093_57105930",
+                            "body": "but this does not work anymore in newer versions of pandas, where the original list is kept in each row column value  <a href=\"https://pandas.pydata.org/docs/reference/api/pandas.Series.explode.html\" rel=\"nofollow noreferrer\">pandas.pydata.org/docs/reference/api/pandas.Series.explode.h&zwnj;&#8203;tml</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2446057,
+                                "reputation": 46242,
+                                "user_id": 2166823,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "joelostblom"
+                            },
+                            "reply_to_user": {
+                                "account_id": 12967343,
+                                "reputation": 465,
+                                "user_id": 9374372,
+                                "user_type": "registered",
+                                "display_name": "Fernando Jesus Garcia Hipola"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1688409460,
+                            "post_id": 57105930,
+                            "comment_id": 135067733,
+                            "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/57105930#comment135067733_57105930",
+                            "body": "@FernandoJesusGarciaHipola It works for me in 2.0.1, which version are you on?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2446057,
+                        "reputation": 46242,
+                        "user_id": 2166823,
+                        "user_type": "registered",
+                        "accept_rate": 70,
+                        "display_name": "joelostblom"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 18,
+                    "last_activity_date": 1563513407,
+                    "creation_date": 1563513407,
+                    "answer_id": 57105930,
+                    "question_id": 53218931,
+                    "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/57105930#57105930",
+                    "body": "<p>Exploding a list-like column has been <a href=\"https://pandas.pydata.org/pandas-docs/version/0.25/user_guide/reshaping.html#exploding-a-list-like-column\" rel=\"noreferrer\">simplified significantly in pandas 0.25</a> with the addition of the <code>explode()</code> method:</p>\n\n<pre><code>df = pd.DataFrame({'A': [1, 2], 'B': [[1, 2], [1, 2]]})\ndf.explode('B')\n</code></pre>\n\n<p>Out:</p>\n\n<pre><code>   A  B\n0  1  1\n0  1  2\n1  2  1\n1  2  2\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 324679,
+                        "reputation": 3015,
+                        "user_id": 645388,
+                        "user_type": "registered",
+                        "display_name": "Marius"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1568705923,
+                    "creation_date": 1568705923,
+                    "answer_id": 57969493,
+                    "question_id": 53218931,
+                    "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/57969493#57969493",
+                    "body": "<p>In my case with more than one column to explode, and with variables lengths for the arrays that needs to be unnested.</p>\n\n<p>I ended up applying the new pandas 0.25 <code>explode</code> function two times, then removing generated duplicates and it does the job !</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>df = df.explode('A')\ndf = df.explode('B')\ndf = df.drop_duplicates()\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2707337,
+                        "reputation": 291593,
+                        "user_id": 2336654,
+                        "user_type": "registered",
+                        "accept_rate": 96,
+                        "display_name": "piRSquared"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1587654856,
+                    "creation_date": 1587654856,
+                    "answer_id": 61390677,
+                    "question_id": 53218931,
+                    "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/61390677#61390677",
+                    "body": "<h3>Problem Setup</h3>\n\n<p>Assume there are multiple columns with different length objects within it</p>\n\n<pre><code>df = pd.DataFrame({\n    'A': [1, 2],\n    'B': [[1, 2], [3, 4]],\n    'C': [[1, 2], [3, 4, 5]]\n})\n\ndf\n\n   A       B          C\n0  1  [1, 2]     [1, 2]\n1  2  [3, 4]  [3, 4, 5]\n</code></pre>\n\n<p>When the lengths are the same, it is easy for us to assume that the varying elements coincide and should be \"zipped\" together.</p>\n\n<pre><code>   A       B          C\n0  1  [1, 2]     [1, 2]  # Typical to assume these should be zipped [(1, 1), (2, 2)]\n1  2  [3, 4]  [3, 4, 5]\n</code></pre>\n\n<p>However, the assumption gets challenged when we see different length objects, should we \"zip\", if so, how do we handle the excess in one of the objects.  <strong>OR</strong>, maybe we want the product of all of the objects.  This will get big fast, but might be what is wanted.</p>\n\n<pre><code>   A       B          C\n0  1  [1, 2]     [1, 2]\n1  2  [3, 4]  [3, 4, 5]  # is this [(3, 3), (4, 4), (None, 5)]?\n</code></pre>\n\n<p><strong>OR</strong></p>\n\n<pre><code>   A       B          C\n0  1  [1, 2]     [1, 2]\n1  2  [3, 4]  [3, 4, 5]  # is this [(3, 3), (3, 4), (3, 5), (4, 3), (4, 4), (4, 5)]\n</code></pre>\n\n<hr>\n\n<h3>The Function</h3>\n\n<p>This function gracefully handles <code>zip</code> or <code>product</code> based on a parameter and assumes to <code>zip</code> according to the length of the longest object with <code>zip_longest</code></p>\n\n<pre><code>from itertools import zip_longest, product\n\ndef xplode(df, explode, zipped=True):\n    method = zip_longest if zipped else product\n\n    rest = {*df} - {*explode}\n\n    zipped = zip(zip(*map(df.get, rest)), zip(*map(df.get, explode)))\n    tups = [tup + exploded\n     for tup, pre in zipped\n     for exploded in method(*pre)]\n\n    return pd.DataFrame(tups, columns=[*rest, *explode])[[*df]]\n</code></pre>\n\n<hr>\n\n<h3>Zipped</h3>\n\n<pre><code>xplode(df, ['B', 'C'])\n\n   A    B  C\n0  1  1.0  1\n1  1  2.0  2\n2  2  3.0  3\n3  2  4.0  4\n4  2  NaN  5\n</code></pre>\n\n<hr>\n\n<h3>Product</h3>\n\n<pre><code>xplode(df, ['B', 'C'], zipped=False)\n\n   A  B  C\n0  1  1  1\n1  1  1  2\n2  1  2  1\n3  1  2  2\n4  2  3  3\n5  2  3  4\n6  2  3  5\n7  2  4  3\n8  2  4  4\n9  2  4  5\n</code></pre>\n\n<hr>\n\n<h3>New Setup</h3>\n\n<p>Varying up the example a bit</p>\n\n<pre><code>df = pd.DataFrame({\n    'A': [1, 2],\n    'B': [[1, 2], [3, 4]],\n    'C': 'C',\n    'D': [[1, 2], [3, 4, 5]],\n    'E': [('X', 'Y', 'Z'), ('W',)]\n})\n\ndf\n\n   A       B  C          D          E\n0  1  [1, 2]  C     [1, 2]  (X, Y, Z)\n1  2  [3, 4]  C  [3, 4, 5]       (W,)\n</code></pre>\n\n<hr>\n\n<h3>Zipped</h3>\n\n<pre><code>xplode(df, ['B', 'D', 'E'])\n\n   A    B  C    D     E\n0  1  1.0  C  1.0     X\n1  1  2.0  C  2.0     Y\n2  1  NaN  C  NaN     Z\n3  2  3.0  C  3.0     W\n4  2  4.0  C  4.0  None\n5  2  NaN  C  5.0  None\n</code></pre>\n\n<hr>\n\n<h3>Product</h3>\n\n<pre><code>xplode(df, ['B', 'D', 'E'], zipped=False)\n\n    A  B  C  D  E\n0   1  1  C  1  X\n1   1  1  C  1  Y\n2   1  1  C  1  Z\n3   1  1  C  2  X\n4   1  1  C  2  Y\n5   1  1  C  2  Z\n6   1  2  C  1  X\n7   1  2  C  1  Y\n8   1  2  C  1  Z\n9   1  2  C  2  X\n10  1  2  C  2  Y\n11  1  2  C  2  Z\n12  2  3  C  3  W\n13  2  3  C  4  W\n14  2  3  C  5  W\n15  2  4  C  3  W\n16  2  4  C  4  W\n17  2  4  C  5  W\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 9309177,
+                        "reputation": 1244,
+                        "user_id": 6911682,
+                        "user_type": "registered",
+                        "display_name": "MarkusOdenthal"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1597367052,
+                    "creation_date": 1597367052,
+                    "answer_id": 63405138,
+                    "question_id": 53218931,
+                    "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/63405138#63405138",
+                    "body": "<p>I have another good way to solves this when you have more than one column to explode.</p>\n<pre><code>df=pd.DataFrame({'A':[1,2],'B':[[1,2],[1,2]], 'C':[[1,2,3],[1,2,3]]})\n\nprint(df)\n   A       B          C\n0  1  [1, 2]  [1, 2, 3]\n1  2  [1, 2]  [1, 2, 3]\n</code></pre>\n<p>I want to explode the columns B and C. First I explode B, second C. Than I drop B and C from the original df. After that I will do an index join on the 3 dfs.</p>\n<pre><code>explode_b = df.explode('B')['B']\nexplode_c = df.explode('C')['C']\ndf = df.drop(['B', 'C'], axis=1)\ndf = df.join([explode_b, explode_c])\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1341482,
+                        "reputation": 3563,
+                        "user_id": 1283063,
+                        "user_type": "registered",
+                        "display_name": "Roei Bahumi"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1603105889,
+                    "last_edit_date": 1603105889,
+                    "creation_date": 1603102233,
+                    "answer_id": 64425244,
+                    "question_id": 53218931,
+                    "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/64425244#64425244",
+                    "body": "<p>Below is a simple function for horizontal explode, based on @BEN_YO's answer.</p>\n<pre><code>import typing\nimport pandas as pd\n\ndef horizontal_explode(df: pd.DataFrame, col_name: str, new_columns: typing.Union[list, None]=None) -&gt; pd.DataFrame:\n    t = pd.DataFrame(df[col_name].tolist(), columns=new_columns, index=df.index)\n    return pd.concat([df, t], axis=1)\n\n</code></pre>\n<p>Running example:</p>\n<pre><code>items = [\n    [&quot;1&quot;, [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]],\n    [&quot;2&quot;, [&quot;d&quot;, &quot;e&quot;, &quot;f&quot;]]\n]\n\ndf = pd.DataFrame(items, columns = [&quot;col1&quot;, &quot;col2&quot;])\nprint(df)\n\nt = horizontal_explode(df=df, col_name=&quot;col2&quot;)\ndel t[&quot;col2&quot;]\nprint(t)\n\nt = horizontal_explode(df=df, col_name=&quot;col2&quot;, new_columns=[&quot;new_col1&quot;, &quot;new_col2&quot;, &quot;new_col3&quot;])\ndel t[&quot;col2&quot;]\nprint(t)\n</code></pre>\n<p>This the relevant output:</p>\n<pre><code>  col1       col2\n0    1  [a, b, c]\n1    2  [d, e, f]\n\n  col1  0  1  2\n0    1  a  b  c\n1    2  d  e  f\n\n  col1 new_col1 new_col2 new_col3\n0    1        a        b        c\n1    2        d        e        f\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4974350,
+                        "reputation": 4046,
+                        "user_id": 4001177,
+                        "user_type": "registered",
+                        "display_name": "Golden Lion"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1611768134,
+                    "creation_date": 1611768134,
+                    "answer_id": 65924179,
+                    "question_id": 53218931,
+                    "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows/65924179#65924179",
+                    "body": "<pre><code> demo = {'set1':{'t1':[1,2,3],'t2':[4,5,6],'t3':[7,8,9]}, 'set2':{'t1':[1,2,3],'t2':[4,5,6],'t3':[7,8,9]}, 'set3': {'t1':[1,2,3],'t2':[4,5,6],'t3':[7,8,9]}}\n df = pd.DataFrame.from_dict(demo, orient='index') \n\n print(df.head())\n my_list=[]\n df2=pd.DataFrame(columns=['set','t1','t2','t3'])\n\n for key,item in df.iterrows():\n    t1=item.t1\n    t2=item.t2\n    t3=item.t3\n    mat1=np.matrix([t1,t2,t3])\n    row1=[key,mat1[0,0],mat1[0,1],mat1[0,2]]\n    df2.loc[len(df2)]=row1\n    row2=[key,mat1[1,0],mat1[1,1],mat1[1,2]]\n    df2.loc[len(df2)]=row2\n    row3=[key,mat1[2,0],mat1[2,1],mat1[2,2]]\n    df2.loc[len(df2)]=row3\n\nprint(df2) \n\nset t1 t2 t3\n0  set1  1  2  3\n1  set1  4  5  6\n2  set1  7  8  9\n3  set2  1  2  3\n4  set2  4  5  6\n5  set2  7  8  9\n6  set3  1  2  3\n7  set3  4  5  6\n8  set3  7  8  9   \n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 10829702,
+                "reputation": 321263,
+                "user_id": 7964527,
+                "user_type": "registered",
+                "accept_rate": 100,
+                "display_name": "BENY"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "accepted_answer_id": 53218939,
+            "answer_count": 16,
+            "score": 220,
+            "last_activity_date": 1666608610,
+            "creation_date": 1541729962,
+            "last_edit_date": 1666608610,
+            "question_id": 53218931,
+            "link": "https://stackoverflow.com/questions/53218931/how-to-unnest-explode-a-column-in-a-pandas-dataframe-into-multiple-rows",
+            "title": "How to unnest (explode) a column in a pandas DataFrame, into multiple rows",
+            "body": "<p>I have the following DataFrame where one of the columns is an object (list type cell):</p>\n<pre><code>df = pd.DataFrame({'A': [1, 2], 'B': [[1, 2], [1, 2]]})\n</code></pre>\n<p>Output:</p>\n<pre><code>   A       B\n0  1  [1, 2]\n1  2  [1, 2]\n</code></pre>\n<p>My expected output is:</p>\n<pre><code>   A  B\n0  1  1\n1  1  2\n3  2  1\n4  2  2\n</code></pre>\n<p>What should I do to achieve this?</p>\n<hr />\n<p>Related question</p>\n<p><a href=\"https://stackoverflow.com/questions/27263805/pandas-when-cell-contents-are-lists-create-a-row-for-each-element-in-the-list\">Pandas column of lists, create a row for each list element</a></p>\n<p>Good question and answer but only handle one column with list(In my answer the self-def function will work for multiple columns, also the accepted answer is use the most time consuming <code>apply</code> , which is not recommended, check more info <a href=\"https://stackoverflow.com/questions/54432583/when-should-i-ever-want-to-use-pandas-apply-in-my-code\">When should I (not) want to use pandas apply() in my code?</a>)</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8110
+}

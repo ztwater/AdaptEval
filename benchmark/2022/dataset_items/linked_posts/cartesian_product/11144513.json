@@ -1,0 +1,796 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "numpy",
+                "cartesian-product"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 5239,
+                        "reputation": 12176,
+                        "user_id": 8338,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Alexey Lebedev"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1340305769,
+                    "post_id": 11144513,
+                    "comment_id": 14610953,
+                    "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points#comment14610953_11144513",
+                    "body": "I noticed that the most expensive step in itertools approach is the final conversion from list to array. Without this last step it&#39;s twice as fast as Ken&#39;s example."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3372720,
+                                "reputation": 3404,
+                                "user_id": 2831598,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "tlnagy"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1438022112,
+                            "post_id": 11144716,
+                            "comment_id": 51266043,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/11144716#comment51266043_11144716",
+                            "body": "An advantage of this approach is that it produces consistent output for arrays of the same size. The <code>meshgrid</code> + <code>dstack</code> approach, while faster in some cases, can lead to bugs if you expect the cartesian product to be constructed in the same order for arrays of the same size."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 281021,
+                                "reputation": 148953,
+                                "user_id": 577088,
+                                "user_type": "registered",
+                                "display_name": "senderle"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3372720,
+                                "reputation": 3404,
+                                "user_id": 2831598,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "tlnagy"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1500243986,
+                            "post_id": 11144716,
+                            "comment_id": 77237048,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/11144716#comment77237048_11144716",
+                            "body": "@tlnagy, I haven&#39;t noticed any case where this approach produces different results from those produced by <code>meshgrid</code> + <code>dstack</code>. Could you post an example?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 79153,
+                        "reputation": 518021,
+                        "user_id": 224671,
+                        "user_type": "registered",
+                        "accept_rate": 67,
+                        "display_name": "kennytm"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 125,
+                    "last_activity_date": 1340304181,
+                    "last_edit_date": 1495540510,
+                    "creation_date": 1340304181,
+                    "answer_id": 11144716,
+                    "question_id": 11144513,
+                    "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/11144716#11144716",
+                    "body": "<pre><code>&gt;&gt;&gt; numpy.transpose([numpy.tile(x, len(y)), numpy.repeat(y, len(x))])\narray([[1, 4],\n       [2, 4],\n       [3, 4],\n       [1, 5],\n       [2, 5],\n       [3, 5]])\n</code></pre>\n\n<p>See <a href=\"https://stackoverflow.com/questions/1208118/using-numpy-to-build-an-array-of-all-combinations-of-two-arrays\">Using numpy to build an array of all combinations of two arrays</a> for a general solution for computing the Cartesian product of N arrays.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4723736,
+                                "reputation": 2480,
+                                "user_id": 3820991,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "user3820991"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1425479004,
+                            "post_id": 11146645,
+                            "comment_id": 45979643,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/11146645#comment45979643_11146645",
+                            "body": "and adding <code>dtype=object</code> into <code>arr = np.empty( )</code> would allow for using different types in the product, e.g. <code>arrays = [np.array([1,2,3]), [&#39;str1&#39;, &#39;str2&#39;]]</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 64585,
+                                "reputation": 864610,
+                                "user_id": 190597,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "unutbu"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1500313747,
+                            "post_id": 11146645,
+                            "comment_id": 77270219,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/11146645#comment77270219_11146645",
+                            "body": "Thanks very much for your innovative solutions. Just thought you&#39;d like to know some users may find <code>cartesian_product_tranpose</code> faster than <code>cartesian_product</code> depending on their machine OS, python or numpy version. For example, on Ubuntu 14.04, python3.4.3, numpy 1.14.0.dev0+b7050a9, <code>%timeit cartesian_product_transpose(x500,y500)</code> yields <code>1000 loops, best of 3: 682 &#181;s per loop</code> while <code>%timeit cartesian_product(x500,y500)</code> yields <code>1000 loops, best of 3: 1.55 ms per loop</code>. I&#39;m also finding <code>cartesian_product_transpose</code> may be faster when <code>len(arrays) &gt; 2</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 64585,
+                                "reputation": 864610,
+                                "user_id": 190597,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "unutbu"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1500313766,
+                            "post_id": 11146645,
+                            "comment_id": 77270231,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/11146645#comment77270231_11146645",
+                            "body": "Additionally, <code>cartesian_product</code> returns an array of floating-point dtype while <code>cartesian_product_transpose</code> returns an array of the same dtype as the first (broadcasted) array. The ability to preserve dtype when working with integer arrays may be a reason for users to favor <code>cartesian_product_transpose</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 281021,
+                                "reputation": 148953,
+                                "user_id": 577088,
+                                "user_type": "registered",
+                                "display_name": "senderle"
+                            },
+                            "reply_to_user": {
+                                "account_id": 64585,
+                                "reputation": 864610,
+                                "user_id": 190597,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "unutbu"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1500317980,
+                            "post_id": 11146645,
+                            "comment_id": 77272427,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/11146645#comment77272427_11146645",
+                            "body": "@unutbu thanks again -- as I ought to have known, cloning the dtype doesn&#39;t just add convenience; it speeds up the code by another 20-30% in some cases."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 64585,
+                                "reputation": 864610,
+                                "user_id": 190597,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "unutbu"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1500402879,
+                            "post_id": 11146645,
+                            "comment_id": 77317330,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/11146645#comment77317330_11146645",
+                            "body": "@senderle: Wow, that&#39;s nice! Also, it just occurred to me that something like <code>dtype = np.find_common_type([arr.dtype for arr in arrays], [])</code> could be used to find the common dtype of all the arrays, instead of forcing the user to place the array which controls the dtype first."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 64585,
+                                "reputation": 864610,
+                                "user_id": 190597,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "unutbu"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1501675135,
+                            "post_id": 11146645,
+                            "comment_id": 77880479,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/11146645#comment77880479_11146645",
+                            "body": "Correction: <code>dtype = np.result_type(*arrays)</code> suffices (instead of <code>dtype = np.find_common_type([arr.dtype for arr in arrays], [])</code>) and is a bit quicker."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1863023,
+                                "reputation": 491,
+                                "user_id": 1687200,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "xappppp"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1605279321,
+                            "post_id": 11146645,
+                            "comment_id": 114609767,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/11146645#comment114609767_11146645",
+                            "body": "this is awesome, Is the cartesian product works on 2-D array?, basically I&#39;m trying to join two matrix, but seems not giving me errors."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 281021,
+                        "reputation": 148953,
+                        "user_id": 577088,
+                        "user_type": "registered",
+                        "display_name": "senderle"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": false,
+                    "score": 203,
+                    "last_activity_date": 1522251119,
+                    "last_edit_date": 1522251119,
+                    "creation_date": 1340312320,
+                    "answer_id": 11146645,
+                    "question_id": 11144513,
+                    "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/11146645#11146645",
+                    "body": "<h2>A canonical <code>cartesian_product</code> (almost)</h2>\n\n<p>There are many approaches to this problem with different properties. Some are faster than others, and some are more general-purpose. After a lot of testing and tweaking, I've found that the following function, which calculates an n-dimensional <code>cartesian_product</code>, is faster than most others for many inputs. For a pair of approaches that are slightly more complex, but are even a bit faster in many cases, see the answer by <a href=\"https://stackoverflow.com/a/49445693/577088\">Paul Panzer</a>.</p>\n\n<p>Given that answer, this is no longer the <em>fastest</em> implementation of the cartesian product in <code>numpy</code> that I'm aware of. However, I think its simplicity will continue to make it a useful benchmark for future improvement:</p>\n\n<pre><code>def cartesian_product(*arrays):\n    la = len(arrays)\n    dtype = numpy.result_type(*arrays)\n    arr = numpy.empty([len(a) for a in arrays] + [la], dtype=dtype)\n    for i, a in enumerate(numpy.ix_(*arrays)):\n        arr[...,i] = a\n    return arr.reshape(-1, la)\n</code></pre>\n\n<p>It's worth mentioning that this function uses <code>ix_</code> in an unusual way; whereas the documented use of <code>ix_</code> is to <a href=\"https://docs.scipy.org/doc/numpy/reference/generated/numpy.ix_.html\" rel=\"noreferrer\">generate indices</a> <em>into</em> an array, it just so happens that arrays with the same shape can be used for broadcasted assignment. Many thanks to <a href=\"https://stackoverflow.com/a/12955035/577088\">mgilson</a>, who inspired me to try using <code>ix_</code> this way, and to <a href=\"https://stackoverflow.com/users/190597/unutbu\">unutbu</a>, who provided some extremely helpful feedback on this answer, including the suggestion to use <a href=\"https://docs.scipy.org/doc/numpy/reference/generated/numpy.result_type.html\" rel=\"noreferrer\"><code>numpy.result_type</code></a>. </p>\n\n<h2>Notable alternatives</h2>\n\n<p>It's sometimes faster to write contiguous blocks of memory in Fortran order. That's the basis of this alternative, <code>cartesian_product_transpose</code>, which has proven faster on some hardware than <code>cartesian_product</code> (see below). However, Paul Panzer's answer, which uses the same principle, is even faster. Still, I include this here for interested readers:  </p>\n\n<pre><code>def cartesian_product_transpose(*arrays):\n    broadcastable = numpy.ix_(*arrays)\n    broadcasted = numpy.broadcast_arrays(*broadcastable)\n    rows, cols = numpy.prod(broadcasted[0].shape), len(broadcasted)\n    dtype = numpy.result_type(*arrays)\n\n    out = numpy.empty(rows * cols, dtype=dtype)\n    start, end = 0, rows\n    for a in broadcasted:\n        out[start:end] = a.reshape(-1)\n        start, end = end, end + rows\n    return out.reshape(cols, rows).T\n</code></pre>\n\n<p>After coming to understand Panzer's approach, I wrote a new version that's almost as fast as his, and is almost as simple as <code>cartesian_product</code>:</p>\n\n<pre><code>def cartesian_product_simple_transpose(arrays):\n    la = len(arrays)\n    dtype = numpy.result_type(*arrays)\n    arr = numpy.empty([la] + [len(a) for a in arrays], dtype=dtype)\n    for i, a in enumerate(numpy.ix_(*arrays)):\n        arr[i, ...] = a\n    return arr.reshape(la, -1).T\n</code></pre>\n\n<p>This appears to have some constant-time overhead that makes it run slower than Panzer's for small inputs. But for larger inputs, in all the tests I ran, it performs just as well as his fastest implementation (<code>cartesian_product_transpose_pp</code>).</p>\n\n<p>In following sections, I include some tests of other alternatives. These are now somewhat out of date, but rather than duplicate effort, I've decided to leave them here out of historical interest. For up-to-date tests, see Panzer's answer, as well as <a href=\"https://stackoverflow.com/a/45378609/577088\">Nico Schl\u00f6mer</a>'s.</p>\n\n<h2>Tests against alternatives</h2>\n\n<p>Here is a battery of tests that show the performance boost that some of these functions provide relative to a number of alternatives. All the tests shown here were performed on a quad-core machine, running Mac OS 10.12.5, Python 3.6.1, and <code>numpy</code> 1.12.1. Variations on hardware and software are known to produce different results, so YMMV. Run these tests for yourself to be sure!</p>\n\n<p>Definitions: </p>\n\n<pre><code>import numpy\nimport itertools\nfrom functools import reduce\n\n### Two-dimensional products ###\n\ndef repeat_product(x, y):\n    return numpy.transpose([numpy.tile(x, len(y)), \n                            numpy.repeat(y, len(x))])\n\ndef dstack_product(x, y):\n    return numpy.dstack(numpy.meshgrid(x, y)).reshape(-1, 2)\n\n### Generalized N-dimensional products ###\n\ndef cartesian_product(*arrays):\n    la = len(arrays)\n    dtype = numpy.result_type(*arrays)\n    arr = numpy.empty([len(a) for a in arrays] + [la], dtype=dtype)\n    for i, a in enumerate(numpy.ix_(*arrays)):\n        arr[...,i] = a\n    return arr.reshape(-1, la)\n\ndef cartesian_product_transpose(*arrays):\n    broadcastable = numpy.ix_(*arrays)\n    broadcasted = numpy.broadcast_arrays(*broadcastable)\n    rows, cols = numpy.prod(broadcasted[0].shape), len(broadcasted)\n    dtype = numpy.result_type(*arrays)\n\n    out = numpy.empty(rows * cols, dtype=dtype)\n    start, end = 0, rows\n    for a in broadcasted:\n        out[start:end] = a.reshape(-1)\n        start, end = end, end + rows\n    return out.reshape(cols, rows).T\n\n# from https://stackoverflow.com/a/1235363/577088\n\ndef cartesian_product_recursive(*arrays, out=None):\n    arrays = [numpy.asarray(x) for x in arrays]\n    dtype = arrays[0].dtype\n\n    n = numpy.prod([x.size for x in arrays])\n    if out is None:\n        out = numpy.zeros([n, len(arrays)], dtype=dtype)\n\n    m = n // arrays[0].size\n    out[:,0] = numpy.repeat(arrays[0], m)\n    if arrays[1:]:\n        cartesian_product_recursive(arrays[1:], out=out[0:m,1:])\n        for j in range(1, arrays[0].size):\n            out[j*m:(j+1)*m,1:] = out[0:m,1:]\n    return out\n\ndef cartesian_product_itertools(*arrays):\n    return numpy.array(list(itertools.product(*arrays)))\n\n### Test code ###\n\nname_func = [('repeat_product',                                                 \n              repeat_product),                                                  \n             ('dstack_product',                                                 \n              dstack_product),                                                  \n             ('cartesian_product',                                              \n              cartesian_product),                                               \n             ('cartesian_product_transpose',                                    \n              cartesian_product_transpose),                                     \n             ('cartesian_product_recursive',                           \n              cartesian_product_recursive),                            \n             ('cartesian_product_itertools',                                    \n              cartesian_product_itertools)]\n\ndef test(in_arrays, test_funcs):\n    global func\n    global arrays\n    arrays = in_arrays\n    for name, func in test_funcs:\n        print('{}:'.format(name))\n        %timeit func(*arrays)\n\ndef test_all(*in_arrays):\n    test(in_arrays, name_func)\n\n# `cartesian_product_recursive` throws an \n# unexpected error when used on more than\n# two input arrays, so for now I've removed\n# it from these tests.\n\ndef test_cartesian(*in_arrays):\n    test(in_arrays, name_func[2:4] + name_func[-1:])\n\nx10 = [numpy.arange(10)]\nx50 = [numpy.arange(50)]\nx100 = [numpy.arange(100)]\nx500 = [numpy.arange(500)]\nx1000 = [numpy.arange(1000)]\n</code></pre>\n\n<p>Test results:</p>\n\n<pre><code>In [2]: test_all(*(x100 * 2))\nrepeat_product:\n67.5 \u00b5s \u00b1 633 ns per loop (mean \u00b1 std. dev. of 7 runs, 10000 loops each)\ndstack_product:\n67.7 \u00b5s \u00b1 1.09 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 10000 loops each)\ncartesian_product:\n33.4 \u00b5s \u00b1 558 ns per loop (mean \u00b1 std. dev. of 7 runs, 10000 loops each)\ncartesian_product_transpose:\n67.7 \u00b5s \u00b1 932 ns per loop (mean \u00b1 std. dev. of 7 runs, 10000 loops each)\ncartesian_product_recursive:\n215 \u00b5s \u00b1 6.01 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 1000 loops each)\ncartesian_product_itertools:\n3.65 ms \u00b1 38.7 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 100 loops each)\n\nIn [3]: test_all(*(x500 * 2))\nrepeat_product:\n1.31 ms \u00b1 9.28 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 1000 loops each)\ndstack_product:\n1.27 ms \u00b1 7.5 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 1000 loops each)\ncartesian_product:\n375 \u00b5s \u00b1 4.5 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 1000 loops each)\ncartesian_product_transpose:\n488 \u00b5s \u00b1 8.88 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 1000 loops each)\ncartesian_product_recursive:\n2.21 ms \u00b1 38.4 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 100 loops each)\ncartesian_product_itertools:\n105 ms \u00b1 1.17 ms per loop (mean \u00b1 std. dev. of 7 runs, 10 loops each)\n\nIn [4]: test_all(*(x1000 * 2))\nrepeat_product:\n10.2 ms \u00b1 132 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 100 loops each)\ndstack_product:\n12 ms \u00b1 120 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 100 loops each)\ncartesian_product:\n4.75 ms \u00b1 57.1 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 100 loops each)\ncartesian_product_transpose:\n7.76 ms \u00b1 52.7 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 100 loops each)\ncartesian_product_recursive:\n13 ms \u00b1 209 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 100 loops each)\ncartesian_product_itertools:\n422 ms \u00b1 7.77 ms per loop (mean \u00b1 std. dev. of 7 runs, 1 loop each)\n</code></pre>\n\n<p>In all cases, <code>cartesian_product</code> as defined at the beginning of this answer is fastest.</p>\n\n<p>For those functions that accept an arbitrary number of input arrays, it's worth checking performance when <code>len(arrays) &gt; 2</code> as well. (Until I can determine why <a href=\"https://stackoverflow.com/a/1235363/577088\"><code>cartesian_product_recursive</code></a> throws an error in this case, I've removed it from these tests.) </p>\n\n<pre><code>In [5]: test_cartesian(*(x100 * 3))\ncartesian_product:\n8.8 ms \u00b1 138 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 100 loops each)\ncartesian_product_transpose:\n7.87 ms \u00b1 91.5 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 100 loops each)\ncartesian_product_itertools:\n518 ms \u00b1 5.5 ms per loop (mean \u00b1 std. dev. of 7 runs, 1 loop each)\n\nIn [6]: test_cartesian(*(x50 * 4))\ncartesian_product:\n169 ms \u00b1 5.1 ms per loop (mean \u00b1 std. dev. of 7 runs, 10 loops each)\ncartesian_product_transpose:\n184 ms \u00b1 4.32 ms per loop (mean \u00b1 std. dev. of 7 runs, 10 loops each)\ncartesian_product_itertools:\n3.69 s \u00b1 73.5 ms per loop (mean \u00b1 std. dev. of 7 runs, 1 loop each)\n\nIn [7]: test_cartesian(*(x10 * 6))\ncartesian_product:\n26.5 ms \u00b1 449 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 10 loops each)\ncartesian_product_transpose:\n16 ms \u00b1 133 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 100 loops each)\ncartesian_product_itertools:\n728 ms \u00b1 16 ms per loop (mean \u00b1 std. dev. of 7 runs, 1 loop each)\n\nIn [8]: test_cartesian(*(x10 * 7))\ncartesian_product:\n650 ms \u00b1 8.14 ms per loop (mean \u00b1 std. dev. of 7 runs, 1 loop each)\ncartesian_product_transpose:\n518 ms \u00b1 7.09 ms per loop (mean \u00b1 std. dev. of 7 runs, 1 loop each)\ncartesian_product_itertools:\n8.13 s \u00b1 122 ms per loop (mean \u00b1 std. dev. of 7 runs, 1 loop each)\n</code></pre>\n\n<p>As these tests show, <code>cartesian_product</code> remains competitive until the number of input arrays rises above (roughly) four. After that, <code>cartesian_product_transpose</code> does have a slight edge.</p>\n\n<p>It's worth reiterating that users with other hardware and operating systems may see different results. For example, unutbu reports seeing the following results for these tests using Ubuntu 14.04, Python 3.4.3, and <code>numpy</code> 1.14.0.dev0+b7050a9:</p>\n\n<pre><code>&gt;&gt;&gt; %timeit cartesian_product_transpose(x500, y500) \n1000 loops, best of 3: 682 \u00b5s per loop\n&gt;&gt;&gt; %timeit cartesian_product(x500, y500)\n1000 loops, best of 3: 1.55 ms per loop\n</code></pre>\n\n<p>Below, I go into a few details about earlier tests I've run along these lines. The relative performance of these approaches has changed over time, for different hardware and different versions of Python and <code>numpy</code>. While it's not immediately useful for people using up-to-date versions of <code>numpy</code>, it illustrates how things have changed since the first version of this answer.</p>\n\n<h2>A simple alternative: <code>meshgrid</code> + <code>dstack</code></h2>\n\n<p>The currently accepted answer uses <code>tile</code> and <code>repeat</code> to broadcast two arrays together. But the <code>meshgrid</code> function does practically the same thing. Here's the output of <code>tile</code> and <code>repeat</code> before being passed to transpose:</p>\n\n<pre><code>In [1]: import numpy\nIn [2]: x = numpy.array([1,2,3])\n   ...: y = numpy.array([4,5])\n   ...: \n\nIn [3]: [numpy.tile(x, len(y)), numpy.repeat(y, len(x))]\nOut[3]: [array([1, 2, 3, 1, 2, 3]), array([4, 4, 4, 5, 5, 5])]\n</code></pre>\n\n<p>And here's the output of <code>meshgrid</code>:</p>\n\n<pre><code>In [4]: numpy.meshgrid(x, y)\nOut[4]: \n[array([[1, 2, 3],\n        [1, 2, 3]]), array([[4, 4, 4],\n        [5, 5, 5]])]\n</code></pre>\n\n<p>As you can see, it's almost identical. We need only reshape the result to get exactly the same result. </p>\n\n<pre><code>In [5]: xt, xr = numpy.meshgrid(x, y)\n   ...: [xt.ravel(), xr.ravel()]\nOut[5]: [array([1, 2, 3, 1, 2, 3]), array([4, 4, 4, 5, 5, 5])]\n</code></pre>\n\n<p>Rather than reshaping at this point, though, we could pass the output of <code>meshgrid</code> to <code>dstack</code> and reshape afterwards, which saves some work:</p>\n\n<pre><code>In [6]: numpy.dstack(numpy.meshgrid(x, y)).reshape(-1, 2)\nOut[6]: \narray([[1, 4],\n       [2, 4],\n       [3, 4],\n       [1, 5],\n       [2, 5],\n       [3, 5]])\n</code></pre>\n\n<p>Contrary to the claim in <a href=\"https://stackoverflow.com/questions/11144513/numpy-cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/11146645#comment51266043_11144716\">this comment</a>, I've seen no evidence that different inputs will produce differently shaped outputs, and as the above demonstrates, they do very similar things, so it would be quite strange if they did. Please let me know if you find a counterexample.</p>\n\n<h2>Testing <code>meshgrid</code> + <code>dstack</code> vs. <code>repeat</code> + <code>transpose</code></h2>\n\n<p>The relative performance of these two approaches has changed over time. In an earlier version of Python (2.7), the result using <code>meshgrid</code> + <code>dstack</code> was noticeably faster for small inputs. (Note that these tests are from an old version of this answer.) Definitions:</p>\n\n<pre><code>&gt;&gt;&gt; def repeat_product(x, y):\n...     return numpy.transpose([numpy.tile(x, len(y)), \n                                numpy.repeat(y, len(x))])\n...\n&gt;&gt;&gt; def dstack_product(x, y):\n...     return numpy.dstack(numpy.meshgrid(x, y)).reshape(-1, 2)\n...     \n</code></pre>\n\n<p>For moderately-sized input, I saw a significant speedup. But I retried these tests with more recent versions of Python (3.6.1) and <code>numpy</code> (1.12.1), on a newer machine. The two approaches are almost identical now.</p>\n\n<p><strong>Old Test</strong></p>\n\n<pre><code>&gt;&gt;&gt; x, y = numpy.arange(500), numpy.arange(500)\n&gt;&gt;&gt; %timeit repeat_product(x, y)\n10 loops, best of 3: 62 ms per loop\n&gt;&gt;&gt; %timeit dstack_product(x, y)\n100 loops, best of 3: 12.2 ms per loop\n</code></pre>\n\n<p><strong>New Test</strong></p>\n\n<pre><code>In [7]: x, y = numpy.arange(500), numpy.arange(500)\nIn [8]: %timeit repeat_product(x, y)\n1.32 ms \u00b1 24.7 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 1000 loops each)\nIn [9]: %timeit dstack_product(x, y)\n1.26 ms \u00b1 8.47 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 1000 loops each)\n</code></pre>\n\n<p>As always, YMMV, but this suggests that in recent versions of Python and numpy, these are interchangeable. </p>\n\n<h2>Generalized product functions</h2>\n\n<p>In general, we might expect that using built-in functions will be faster for small inputs, while for large inputs, a purpose-built function might be faster. Furthermore for a generalized n-dimensional product, <code>tile</code> and <code>repeat</code> won't help, because they don't have clear higher-dimensional analogues. So it's worth investigating the behavior of purpose-built functions as well.</p>\n\n<p>Most of the relevant tests appear at the beginning of this answer, but here are a few of the tests performed on earlier versions of Python and <code>numpy</code> for comparison.</p>\n\n<p>The <code>cartesian</code> function defined in <a href=\"https://stackoverflow.com/a/1235363/577088\">another answer</a> used to perform pretty well for larger inputs. (It's the same as the function called <code>cartesian_product_recursive</code> above.) In order to compare <code>cartesian</code> to <code>dstack_prodct</code>, we use just two dimensions.</p>\n\n<p>Here again, the old test showed a significant difference, while the new test shows almost none.</p>\n\n<p><strong>Old Test</strong></p>\n\n<pre><code>&gt;&gt;&gt; x, y = numpy.arange(1000), numpy.arange(1000)\n&gt;&gt;&gt; %timeit cartesian([x, y])\n10 loops, best of 3: 25.4 ms per loop\n&gt;&gt;&gt; %timeit dstack_product(x, y)\n10 loops, best of 3: 66.6 ms per loop\n</code></pre>\n\n<p><strong>New Test</strong></p>\n\n<pre><code>In [10]: x, y = numpy.arange(1000), numpy.arange(1000)\nIn [11]: %timeit cartesian([x, y])\n12.1 ms \u00b1 199 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 100 loops each)\nIn [12]: %timeit dstack_product(x, y)\n12.7 ms \u00b1 334 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 100 loops each)\n</code></pre>\n\n<p>As before, <code>dstack_product</code> still beats <code>cartesian</code> at smaller scales.</p>\n\n<p><strong>New Test</strong> (<em>redundant old test not shown</em>)</p>\n\n<pre><code>In [13]: x, y = numpy.arange(100), numpy.arange(100)\nIn [14]: %timeit cartesian([x, y])\n215 \u00b5s \u00b1 4.75 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 1000 loops each)\nIn [15]: %timeit dstack_product(x, y)\n65.7 \u00b5s \u00b1 1.15 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 10000 loops each)\n</code></pre>\n\n<p>These distinctions are, I think, interesting and worth recording; but they are academic in the end. As the tests at the beginning of this answer showed, all of these versions are almost always slower than <code>cartesian_product</code>, defined at the very beginning of this answer -- which is itself a bit slower than the fastest implementations among the answers to this question.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 8009756,
+                                "reputation": 171,
+                                "user_id": 6041933,
+                                "user_type": "registered",
+                                "display_name": "Kukuster"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1619369727,
+                            "post_id": 19459709,
+                            "comment_id": 118879050,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/19459709#comment118879050_19459709",
+                            "body": "Perfect! Except it results in a 1d array of length n*m, instead of a 2d array of length n by m. But this is useful. E.g., you can change [x0,y0] to x0*y0, and this can be used, say, to multiply two 1d distributions (plotted as a curved line on a 2d graph) to get a 2d distribution (plotted as a curved plane on a 3d graph). Like here you multiply two 1d binomial distributions to get a 2d multivariate binomial distribution: <a href=\"https://upload.wikimedia.org/wikipedia/commons/8/8e/MultivariateNormal.png\" rel=\"nofollow noreferrer\">upload.wikimedia.org/wikipedia/commons/8/8e/&hellip;</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8009756,
+                                "reputation": 171,
+                                "user_id": 6041933,
+                                "user_type": "registered",
+                                "display_name": "Kukuster"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1619429855,
+                            "post_id": 19459709,
+                            "comment_id": 118893679,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/19459709#comment118893679_19459709",
+                            "body": "DANG! If you need 2d array of length n by m, just wrap one loop in a separate comprehension: instead of <code>[(x0, y0) for x0 in x for y0 in y]</code> do <code>[[(x0, y0) for x0 in x] for y0 in y]</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2874636,
+                        "reputation": 795,
+                        "user_id": 2467072,
+                        "user_type": "registered",
+                        "display_name": "ozooxo"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 66,
+                    "last_activity_date": 1382133634,
+                    "creation_date": 1382133634,
+                    "answer_id": 19459709,
+                    "question_id": 11144513,
+                    "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/19459709#19459709",
+                    "body": "<p>You can just do normal list comprehension in python</p>\n\n<pre><code>x = numpy.array([1,2,3])\ny = numpy.array([4,5])\n[[x0, y0] for x0 in x for y0 in y]\n</code></pre>\n\n<p>which should give you</p>\n\n<pre><code>[[1, 4], [1, 5], [2, 4], [2, 5], [3, 4], [3, 5]]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2942049,
+                        "reputation": 822,
+                        "user_id": 2686319,
+                        "user_type": "registered",
+                        "display_name": "Jonathan"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1451993912,
+                    "creation_date": 1451993912,
+                    "answer_id": 34610835,
+                    "question_id": 11144513,
+                    "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/34610835#34610835",
+                    "body": "<p>More generally, if you have two 2d numpy arrays a and b, and you want to concatenate every row of a to every row of b (A cartesian product of rows, kind of like a join in a database), you can use this method:</p>\n\n<pre><code>import numpy\ndef join_2d(a, b):\n    assert a.dtype == b.dtype\n    a_part = numpy.tile(a, (len(b), 1))\n    b_part = numpy.repeat(b, len(a), axis=0)\n    return numpy.hstack((a_part, b_part))\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 144356,
+                        "reputation": 56762,
+                        "user_id": 353337,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "Nico Schl&#246;mer"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 50,
+                    "last_activity_date": 1588238902,
+                    "last_edit_date": 1588238902,
+                    "creation_date": 1501260278,
+                    "answer_id": 45378609,
+                    "question_id": 11144513,
+                    "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/45378609#45378609",
+                    "body": "<p>I was interested in this as well and did a little performance comparison, perhaps somewhat clearer than in @senderle's answer.</p>\n\n<p>For two arrays (the classical case):</p>\n\n<p><a href=\"https://i.stack.imgur.com/GFsMV.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/GFsMV.png\" alt=\"enter image description here\"></a></p>\n\n<p>For four arrays:</p>\n\n<p><a href=\"https://i.stack.imgur.com/4WQgQ.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/4WQgQ.png\" alt=\"enter image description here\"></a></p>\n\n<p>(Note that the length the arrays is only a few dozen entries here.)</p>\n\n<hr>\n\n<p>Code to reproduce the plots:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>from functools import reduce\nimport itertools\nimport numpy\nimport perfplot\n\n\ndef dstack_product(arrays):\n    return numpy.dstack(numpy.meshgrid(*arrays, indexing=\"ij\")).reshape(-1, len(arrays))\n\n\n# Generalized N-dimensional products\ndef cartesian_product(arrays):\n    la = len(arrays)\n    dtype = numpy.find_common_type([a.dtype for a in arrays], [])\n    arr = numpy.empty([len(a) for a in arrays] + [la], dtype=dtype)\n    for i, a in enumerate(numpy.ix_(*arrays)):\n        arr[..., i] = a\n    return arr.reshape(-1, la)\n\n\ndef cartesian_product_transpose(arrays):\n    broadcastable = numpy.ix_(*arrays)\n    broadcasted = numpy.broadcast_arrays(*broadcastable)\n    rows, cols = reduce(numpy.multiply, broadcasted[0].shape), len(broadcasted)\n    dtype = numpy.find_common_type([a.dtype for a in arrays], [])\n\n    out = numpy.empty(rows * cols, dtype=dtype)\n    start, end = 0, rows\n    for a in broadcasted:\n        out[start:end] = a.reshape(-1)\n        start, end = end, end + rows\n    return out.reshape(cols, rows).T\n\n\n# from https://stackoverflow.com/a/1235363/577088\ndef cartesian_product_recursive(arrays, out=None):\n    arrays = [numpy.asarray(x) for x in arrays]\n    dtype = arrays[0].dtype\n\n    n = numpy.prod([x.size for x in arrays])\n    if out is None:\n        out = numpy.zeros([n, len(arrays)], dtype=dtype)\n\n    m = n // arrays[0].size\n    out[:, 0] = numpy.repeat(arrays[0], m)\n    if arrays[1:]:\n        cartesian_product_recursive(arrays[1:], out=out[0:m, 1:])\n        for j in range(1, arrays[0].size):\n            out[j * m : (j + 1) * m, 1:] = out[0:m, 1:]\n    return out\n\n\ndef cartesian_product_itertools(arrays):\n    return numpy.array(list(itertools.product(*arrays)))\n\n\nperfplot.show(\n    setup=lambda n: 2 * (numpy.arange(n, dtype=float),),\n    n_range=[2 ** k for k in range(13)],\n    # setup=lambda n: 4 * (numpy.arange(n, dtype=float),),\n    # n_range=[2 ** k for k in range(6)],\n    kernels=[\n        dstack_product,\n        cartesian_product,\n        cartesian_product_transpose,\n        cartesian_product_recursive,\n        cartesian_product_itertools,\n    ],\n    logx=True,\n    logy=True,\n    xlabel=\"len(a), len(b)\",\n    equality_check=None,\n)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 77701,
+                        "reputation": 1120,
+                        "user_id": 221602,
+                        "user_type": "registered",
+                        "display_name": "MrDrFenner"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 23,
+                    "last_activity_date": 1644328716,
+                    "last_edit_date": 1644328716,
+                    "creation_date": 1507428408,
+                    "answer_id": 46626894,
+                    "question_id": 11144513,
+                    "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/46626894#46626894",
+                    "body": "<p>As of Oct. 2017, numpy now has a generic <code>np.stack</code> function that takes an axis parameter.  Using it, we can have  a &quot;generalized cartesian product&quot; using the &quot;dstack and meshgrid&quot; technique:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import numpy as np\n\ndef cartesian_product(*arrays):\n    ndim = len(arrays)\n    return (np.stack(np.meshgrid(*arrays), axis=-1)\n              .reshape(-1, ndim))\n\na = np.array([1,2])\nb = np.array([10,20])\ncartesian_product(a,b)\n\n# output:\n# array([[ 1, 10],\n#        [ 2, 10],\n#        [ 1, 20],\n#        [ 2, 20]])  \n</code></pre>\n<p>Note on the <code>axis=-1</code> parameter.  This is the last (inner-most) axis in the result.  It is equivalent to using <code>axis=ndim</code>.</p>\n<p>One other comment, since Cartesian products blow up very quickly, unless we <em>need</em> to realize the array in memory for some reason, if the product is very large, we may want to make use of <code>itertools</code> and use the values on-the-fly.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 458431,
+                        "reputation": 569,
+                        "user_id": 5721839,
+                        "user_type": "registered",
+                        "accept_rate": 73,
+                        "display_name": "Sean McVeigh"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1519144072,
+                    "last_edit_date": 1519144072,
+                    "creation_date": 1515102327,
+                    "answer_id": 48104036,
+                    "question_id": 11144513,
+                    "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/48104036#48104036",
+                    "body": "<p>I used @kennytm <a href=\"https://stackoverflow.com/a/11144716/5721839\">answer</a> for a while, but when trying to do the same in TensorFlow, but I found that TensorFlow has no equivalent of <code>numpy.repeat()</code>. After a little experimentation, I think I found a more general solution for arbitrary vectors of points.</p>\n\n<p>For numpy:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>import numpy as np\n\ndef cartesian_product(*args: np.ndarray) -&gt; np.ndarray:\n    \"\"\"\n    Produce the cartesian product of arbitrary length vectors.\n\n    Parameters\n    ----------\n    np.ndarray args\n        vector of points of interest in each dimension\n\n    Returns\n    -------\n    np.ndarray\n        the cartesian product of size [m x n] wherein:\n            m = prod([len(a) for a in args])\n            n = len(args)\n    \"\"\"\n    for i, a in enumerate(args):\n        assert a.ndim == 1, \"arg {:d} is not rank 1\".format(i)\n    return np.concatenate([np.reshape(xi, [-1, 1]) for xi in np.meshgrid(*args)], axis=1)\n</code></pre>\n\n<p>and for TensorFlow:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>import tensorflow as tf\n\ndef cartesian_product(*args: tf.Tensor) -&gt; tf.Tensor:\n    \"\"\"\n    Produce the cartesian product of arbitrary length vectors.\n\n    Parameters\n    ----------\n    tf.Tensor args\n        vector of points of interest in each dimension\n\n    Returns\n    -------\n    tf.Tensor\n        the cartesian product of size [m x n] wherein:\n            m = prod([len(a) for a in args])\n            n = len(args)\n    \"\"\"\n    for i, a in enumerate(args):\n        tf.assert_rank(a, 1, message=\"arg {:d} is not rank 1\".format(i))\n    return tf.concat([tf.reshape(xi, [-1, 1]) for xi in tf.meshgrid(*args)], axis=1)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7536150,
+                                "reputation": 7978,
+                                "user_id": 5722359,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "Sun Bear"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1593211678,
+                            "post_id": 49445693,
+                            "comment_id": 110710522,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/49445693#comment110710522_49445693",
+                            "body": "Thank you for sharing this excellent answer. When the size of <code>arrays</code> in cartesian_product_transpose_pp(arrays) exceeds a certain size, <code>MemoryError</code> will occur. In this situation, I would like this function to yield smaller chunks of results. I have posted a <a href=\"https://stackoverflow.com/q/62603715/5722359\">question</a> on this matter. Can you address my question? Thanks."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5543867,
+                                "reputation": 2104,
+                                "user_id": 4399321,
+                                "user_type": "registered",
+                                "accept_rate": 72,
+                                "display_name": "amarchin"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1673897958,
+                            "post_id": 49445693,
+                            "comment_id": 132595499,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/49445693#comment132595499_49445693",
+                            "body": "Does it work when the dtype is object and the factors have a different length?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 9717573,
+                        "reputation": 52603,
+                        "user_id": 7207392,
+                        "user_type": "registered",
+                        "accept_rate": 73,
+                        "display_name": "Paul Panzer"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 26,
+                    "last_activity_date": 1522345256,
+                    "last_edit_date": 1522345256,
+                    "creation_date": 1521795311,
+                    "answer_id": 49445693,
+                    "question_id": 11144513,
+                    "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/49445693#49445693",
+                    "body": "<p>Building on @senderle's exemplary ground work I've come up with two versions - one for C and one for Fortran layouts - that are often a bit faster.</p>\n\n<ul>\n<li><code>cartesian_product_transpose_pp</code> is - unlike @senderle's <code>cartesian_product_transpose</code> which uses a different strategy altogether - a version of <code>cartesion_product</code> that uses the more favorable transpose memory layout + some very minor optimizations.</li>\n<li><code>cartesian_product_pp</code> sticks with the original memory layout. What makes it fast is its using contiguous copying. Contiguous copies turn out to be so much faster that copying a full block of memory even though only part of it contains valid data is preferable to only copying the valid bits.</li>\n</ul>\n\n<p>Some perfplots. I made separate ones for C and Fortran layouts, because these are different tasks IMO.</p>\n\n<p>Names ending in 'pp' are my approaches. </p>\n\n<p>1) many tiny factors (2 elements each)</p>\n\n<p><a href=\"https://i.stack.imgur.com/iq4b0.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/iq4b0.png\" alt=\"enter image description here\"></a><a href=\"https://i.stack.imgur.com/IQLXt.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/IQLXt.png\" alt=\"enter image description here\"></a></p>\n\n<p>2) many small factors (4 elements each)</p>\n\n<p><a href=\"https://i.stack.imgur.com/5aQYY.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/5aQYY.png\" alt=\"enter image description here\"></a><a href=\"https://i.stack.imgur.com/swfTv.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/swfTv.png\" alt=\"enter image description here\"></a></p>\n\n<p>3) three factors of equal length</p>\n\n<p><a href=\"https://i.stack.imgur.com/hpw8r.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/hpw8r.png\" alt=\"enter image description here\"></a><a href=\"https://i.stack.imgur.com/wsjo4.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/wsjo4.png\" alt=\"enter image description here\"></a></p>\n\n<p>4) two factors of equal length</p>\n\n<p><a href=\"https://i.stack.imgur.com/kelwf.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/kelwf.png\" alt=\"enter image description here\"></a><a href=\"https://i.stack.imgur.com/YbTd0.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/YbTd0.png\" alt=\"enter image description here\"></a></p>\n\n<p>Code (need to do separate runs for each plot b/c I couldn't figure out how to reset; also need to edit / comment in / out appropriately):</p>\n\n<pre><code>import numpy\nimport numpy as np\nfrom functools import reduce\nimport itertools\nimport timeit\nimport perfplot\n\ndef dstack_product(arrays):\n    return numpy.dstack(\n        numpy.meshgrid(*arrays, indexing='ij')\n        ).reshape(-1, len(arrays))\n\ndef cartesian_product_transpose_pp(arrays):\n    la = len(arrays)\n    dtype = numpy.result_type(*arrays)\n    arr = numpy.empty((la, *map(len, arrays)), dtype=dtype)\n    idx = slice(None), *itertools.repeat(None, la)\n    for i, a in enumerate(arrays):\n        arr[i, ...] = a[idx[:la-i]]\n    return arr.reshape(la, -1).T\n\ndef cartesian_product(arrays):\n    la = len(arrays)\n    dtype = numpy.result_type(*arrays)\n    arr = numpy.empty([len(a) for a in arrays] + [la], dtype=dtype)\n    for i, a in enumerate(numpy.ix_(*arrays)):\n        arr[...,i] = a\n    return arr.reshape(-1, la)\n\ndef cartesian_product_transpose(arrays):\n    broadcastable = numpy.ix_(*arrays)\n    broadcasted = numpy.broadcast_arrays(*broadcastable)\n    rows, cols = numpy.prod(broadcasted[0].shape), len(broadcasted)\n    dtype = numpy.result_type(*arrays)\n\n    out = numpy.empty(rows * cols, dtype=dtype)\n    start, end = 0, rows\n    for a in broadcasted:\n        out[start:end] = a.reshape(-1)\n        start, end = end, end + rows\n    return out.reshape(cols, rows).T\n\nfrom itertools import accumulate, repeat, chain\n\ndef cartesian_product_pp(arrays, out=None):\n    la = len(arrays)\n    L = *map(len, arrays), la\n    dtype = numpy.result_type(*arrays)\n    arr = numpy.empty(L, dtype=dtype)\n    arrs = *accumulate(chain((arr,), repeat(0, la-1)), np.ndarray.__getitem__),\n    idx = slice(None), *itertools.repeat(None, la-1)\n    for i in range(la-1, 0, -1):\n        arrs[i][..., i] = arrays[i][idx[:la-i]]\n        arrs[i-1][1:] = arrs[i]\n    arr[..., 0] = arrays[0][idx]\n    return arr.reshape(-1, la)\n\ndef cartesian_product_itertools(arrays):\n    return numpy.array(list(itertools.product(*arrays)))\n\n\n# from https://stackoverflow.com/a/1235363/577088\ndef cartesian_product_recursive(arrays, out=None):\n    arrays = [numpy.asarray(x) for x in arrays]\n    dtype = arrays[0].dtype\n\n    n = numpy.prod([x.size for x in arrays])\n    if out is None:\n        out = numpy.zeros([n, len(arrays)], dtype=dtype)\n\n    m = n // arrays[0].size\n    out[:, 0] = numpy.repeat(arrays[0], m)\n    if arrays[1:]:\n        cartesian_product_recursive(arrays[1:], out=out[0:m, 1:])\n        for j in range(1, arrays[0].size):\n            out[j*m:(j+1)*m, 1:] = out[0:m, 1:]\n    return out\n\n### Test code ###\nif False:\n  perfplot.save('cp_4el_high.png',\n    setup=lambda n: n*(numpy.arange(4, dtype=float),),\n                n_range=list(range(6, 11)),\n    kernels=[\n        dstack_product,\n        cartesian_product_recursive,\n        cartesian_product,\n#        cartesian_product_transpose,\n        cartesian_product_pp,\n#        cartesian_product_transpose_pp,\n        ],\n    logx=False,\n    logy=True,\n    xlabel='#factors',\n    equality_check=None\n    )\nelse:\n  perfplot.save('cp_2f_T.png',\n    setup=lambda n: 2*(numpy.arange(n, dtype=float),),\n    n_range=[2**k for k in range(5, 11)],\n    kernels=[\n#        dstack_product,\n#        cartesian_product_recursive,\n#        cartesian_product,\n        cartesian_product_transpose,\n#        cartesian_product_pp,\n        cartesian_product_transpose_pp,\n        ],\n    logx=True,\n    logy=True,\n    xlabel='length of each factor',\n    equality_check=None\n    )\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 6321039,
+                                "reputation": 393303,
+                                "user_id": 4909087,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "cs95"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1522093940,
+                            "post_id": 49499476,
+                            "comment_id": 86003126,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/49499476#comment86003126_49499476",
+                            "body": "Is this faster than @senderle&#39;s function?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5051836,
+                                "reputation": 12699,
+                                "user_id": 4056181,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "jmd_dk"
+                            },
+                            "reply_to_user": {
+                                "account_id": 6321039,
+                                "reputation": 393303,
+                                "user_id": 4909087,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "cs95"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1522094697,
+                            "post_id": 49499476,
+                            "comment_id": 86003538,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/49499476#comment86003538_49499476",
+                            "body": "@c\u1d0f\u029f\u1d05s\u1d18\u1d07\u1d07\u1d05 I havn&#39;t tested. I was hoping that this was implemented in e.g. C or Fortran and thus pretty much unbeatable, but <a href=\"https://github.com/scikit-learn/scikit-learn/blob/master/sklearn/utils/extmath.py\" rel=\"nofollow noreferrer\">it seems</a> to be written using NumPy. As such, this function is convenient but should not be significantly faster than what one can construct using NumPy constructs oneself."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5051836,
+                        "reputation": 12699,
+                        "user_id": 4056181,
+                        "user_type": "registered",
+                        "accept_rate": 74,
+                        "display_name": "jmd_dk"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 12,
+                    "last_activity_date": 1522093699,
+                    "creation_date": 1522093699,
+                    "answer_id": 49499476,
+                    "question_id": 11144513,
+                    "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/49499476#49499476",
+                    "body": "<p>The <a href=\"http://scikit-learn.org/stable/\" rel=\"noreferrer\">Scikit-learn</a> package has a fast implementation of exactly this:</p>\n\n<pre><code>from sklearn.utils.extmath import cartesian\nproduct = cartesian((x,y))\n</code></pre>\n\n<p>Note that the convention of this implementation is different from what you want, if you care about the order of the output. For your exact ordering, you can do</p>\n\n<pre><code>product = cartesian((y,x))[:, ::-1]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 76636,
+                                "reputation": 5776,
+                                "user_id": 219229,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "syockit"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1583746675,
+                            "post_id": 49500991,
+                            "comment_id": 107207039,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/49500991#comment107207039_49500991",
+                            "body": "For the product calculation, outer product broadcasting <code>foo = a[:,None]*b</code> is faster. Using your timing method without <code>print(foo)</code>, it&#39;s 0.001103 s vs 0.002225 s. Using timeit, it&#39;s 304 \u03bcs vs 1.6 ms. Matrix is known to be slower than ndarray, so I tried your code with np.array but it&#39;s still slower (1.57 ms) than broadcasting."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5366218,
+                        "reputation": 684,
+                        "user_id": 4276112,
+                        "user_type": "registered",
+                        "display_name": "mosegui"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1524578736,
+                    "last_edit_date": 1524578736,
+                    "creation_date": 1522100025,
+                    "answer_id": 49500991,
+                    "question_id": 11144513,
+                    "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/49500991#49500991",
+                    "body": "<p>The fastest you can get is either by combining a generator expression with the map function:</p>\n\n<pre><code>import numpy\nimport datetime\na = np.arange(1000)\nb = np.arange(200)\n\nstart = datetime.datetime.now()\n\nfoo = (item for sublist in [list(map(lambda x: (x,i),a)) for i in b] for item in sublist)\n\nprint (list(foo))\n\nprint ('execution time: {} s'.format((datetime.datetime.now() - start).total_seconds()))\n</code></pre>\n\n<p>Outputs (actually the whole resulting list is printed):</p>\n\n<pre><code>[(0, 0), (1, 0), ...,(998, 199), (999, 199)]\nexecution time: 1.253567 s\n</code></pre>\n\n<p>or by using a double generator expression:</p>\n\n<pre><code>a = np.arange(1000)\nb = np.arange(200)\n\nstart = datetime.datetime.now()\n\nfoo = ((x,y) for x in a for y in b)\n\nprint (list(foo))\n\nprint ('execution time: {} s'.format((datetime.datetime.now() - start).total_seconds()))\n</code></pre>\n\n<p>Outputs (whole list printed):</p>\n\n<pre><code>[(0, 0), (1, 0), ...,(998, 199), (999, 199)]\nexecution time: 1.187415 s\n</code></pre>\n\n<p>Take into account that most of the computation time goes into the printing command. The generator calculations are otherwise decently efficient. Without printing the calculation times are:</p>\n\n<pre><code>execution time: 0.079208 s\n</code></pre>\n\n<p>for generator expression + map function and:</p>\n\n<pre><code>execution time: 0.007093 s\n</code></pre>\n\n<p>for the double generator expression.</p>\n\n<p>If what you actually want is to calculate the actual product of each of the coordinate pairs, the fastest is to solve it as a numpy matrix product:</p>\n\n<pre><code>a = np.arange(1000)\nb = np.arange(200)\n\nstart = datetime.datetime.now()\n\nfoo = np.dot(np.asmatrix([[i,0] for i in a]), np.asmatrix([[i,0] for i in b]).T)\n\nprint (foo)\n\nprint ('execution time: {} s'.format((datetime.datetime.now() - start).total_seconds()))\n</code></pre>\n\n<p>Outputs:</p>\n\n<pre><code> [[     0      0      0 ...,      0      0      0]\n [     0      1      2 ...,    197    198    199]\n [     0      2      4 ...,    394    396    398]\n ..., \n [     0    997   1994 ..., 196409 197406 198403]\n [     0    998   1996 ..., 196606 197604 198602]\n [     0    999   1998 ..., 196803 197802 198801]]\nexecution time: 0.003869 s\n</code></pre>\n\n<p>and without printing (in this case it doesn't save much since only a tiny piece of the matrix is actually printed out):</p>\n\n<pre><code>execution time: 0.003083 s\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 12003714,
+                                "reputation": 556,
+                                "user_id": 8782672,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "Coddy"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1579716594,
+                            "post_id": 49557680,
+                            "comment_id": 105862724,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/49557680#comment105862724_49557680",
+                            "body": "you don&#39;t need to call numpy. plain old python arrays also works with this."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15921267,
+                                "reputation": 188,
+                                "user_id": 11738218,
+                                "user_type": "registered",
+                                "display_name": "Krzysztof Mochocki"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1666370040,
+                            "post_id": 49557680,
+                            "comment_id": 130928807,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/49557680#comment130928807_49557680",
+                            "body": "thanks i was looking for function without pandas nor numpy"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 9204480,
+                        "reputation": 907,
+                        "user_id": 6840305,
+                        "user_type": "registered",
+                        "display_name": "Muhammad Umar Amanat"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1542826244,
+                    "last_edit_date": 1542826244,
+                    "creation_date": 1522330977,
+                    "answer_id": 49557680,
+                    "question_id": 11144513,
+                    "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/49557680#49557680",
+                    "body": "<p>This can also be easily done by using itertools.product method     </p>\n\n<pre><code>from itertools import product\nimport numpy as np\n\nx = np.array([1, 2, 3])\ny = np.array([4, 5])\ncart_prod = np.array(list(product(*[x, y])),dtype='int32')\n</code></pre>\n\n<p>Result:\n   array([<br>[1, 4],<br>\n       [1, 5], <br>\n       [2, 4],<br>\n       [2, 5],<br>\n       [3, 4],<br>\n       [3, 5]], dtype=int32)</p>\n\n<p><strong>Execution time: 0.000155 s</strong></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 9717573,
+                                "reputation": 52603,
+                                "user_id": 7207392,
+                                "user_type": "registered",
+                                "accept_rate": 73,
+                                "display_name": "Paul Panzer"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1558543415,
+                            "post_id": 56261134,
+                            "comment_id": 99139518,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/56261134#comment99139518_56261134",
+                            "body": "If <code>dtype</code> is <code>float</code> you can do <code>(a[:, None, None] + 1j * b[None, :, None]).view(float)</code> which is surprisingly fast."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6725779,
+                        "reputation": 691,
+                        "user_id": 5183809,
+                        "user_type": "registered",
+                        "accept_rate": 50,
+                        "display_name": "Kyuuhachi"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1558541827,
+                    "creation_date": 1558541827,
+                    "answer_id": 56261134,
+                    "question_id": 11144513,
+                    "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/56261134#56261134",
+                    "body": "<p>In the specific case that you need to perform simple operations such as addition on each pair, you can introduce an extra dimension and let broadcasting do the job:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>&gt;&gt;&gt; a, b = np.array([1,2,3]), np.array([10,20,30])\n&gt;&gt;&gt; a[None,:] + b[:,None]\narray([[11, 12, 13],\n       [21, 22, 23],\n       [31, 32, 33]])\n</code></pre>\n\n<p>I'm not sure if there is any similar way to actually get the pairs themselves.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1397680,
+                        "reputation": 470,
+                        "user_id": 1327143,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "Hadrien Titeux"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1597269665,
+                    "creation_date": 1597269665,
+                    "answer_id": 63385274,
+                    "question_id": 11144513,
+                    "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/63385274#63385274",
+                    "body": "<p>I'm a bit late to the party, but I encoutered a tricky variant of that problem.\nLet's say I want the cartesian product of several arrays, but that cartesian product ends up being much larger than the computers' memory (however, the computation done with that product are fast, or at least parallelizable).</p>\n<p>The obvious solution is to divide this cartesian product in chunks, and treat these chunks one after the other (in sort of a &quot;streaming&quot; manner). You can do that easily with <code>itertools.product</code>, but it's horrendously slow. Also, none of the proposed solutions here (as fast as they are) give us this possibility. The solution I propose uses Numba, and is slightly faster than the &quot;canonical&quot;\u00a0<code>cartesian_product</code>\u00a0mentioned here. It's pretty long because I tried to optimize it everywhere I could.</p>\n<pre class=\"lang-py prettyprint-override\"><code>import numba as nb\nimport numpy as np\nfrom typing import List\n\n\n@nb.njit(nb.types.Tuple((nb.int32[:, :],\n                         nb.int32[:]))(nb.int32[:],\n                                       nb.int32[:],\n                                       nb.int64, nb.int64))\ndef cproduct(sizes: np.ndarray, current_tuple: np.ndarray, start_idx: int, end_idx: int):\n    &quot;&quot;&quot;Generates ids tuples from start_id to end_id&quot;&quot;&quot;\n    assert len(sizes) &gt;= 2\n    assert start_idx &lt; end_idx\n\n    tuples = np.zeros((end_idx - start_idx, len(sizes)), dtype=np.int32)\n    tuple_idx = 0\n    # stores the current combination\n    current_tuple = current_tuple.copy()\n    while tuple_idx &lt; end_idx - start_idx:\n        tuples[tuple_idx] = current_tuple\n        current_tuple[0] += 1\n        # using a condition here instead of including this in the inner loop\n        # to gain a bit of speed: this is going to be tested each iteration,\n        # and starting a loop to have it end right away is a bit silly\n        if current_tuple[0] == sizes[0]:\n            # the reset to 0 and subsequent increment amount to carrying\n            # the number to the higher &quot;power&quot;\n            current_tuple[0] = 0\n            current_tuple[1] += 1\n            for i in range(1, len(sizes) - 1):\n                if current_tuple[i] == sizes[i]:\n                    # same as before, but in a loop, since this is going\n                    # to get called less often\n                    current_tuple[i + 1] += 1\n                    current_tuple[i] = 0\n                else:\n                    break\n        tuple_idx += 1\n    return tuples, current_tuple\n\n\ndef chunked_cartesian_product_ids(sizes: List[int], chunk_size: int):\n    &quot;&quot;&quot;Just generates chunks of the cartesian product of the ids of each\n    input arrays (thus, we just need their sizes here, not the actual arrays)&quot;&quot;&quot;\n    prod = np.prod(sizes)\n\n    # putting the largest number at the front to more efficiently make use\n    # of the cproduct numba function\n    sizes = np.array(sizes, dtype=np.int32)\n    sorted_idx = np.argsort(sizes)[::-1]\n    sizes = sizes[sorted_idx]\n    if chunk_size &gt; prod:\n        chunk_bounds = (np.array([0, prod])).astype(np.int64)\n    else:\n        num_chunks = np.maximum(np.ceil(prod / chunk_size), 2).astype(np.int32)\n        chunk_bounds = (np.arange(num_chunks + 1) * chunk_size).astype(np.int64)\n        chunk_bounds[-1] = prod\n    current_tuple = np.zeros(len(sizes), dtype=np.int32)\n    for start_idx, end_idx in zip(chunk_bounds[:-1], chunk_bounds[1:]):\n        tuples, current_tuple = cproduct(sizes, current_tuple, start_idx, end_idx)\n        # re-arrange columns to match the original order of the sizes list\n        # before yielding\n        yield tuples[:, np.argsort(sorted_idx)]\n\n\ndef chunked_cartesian_product(*arrays, chunk_size=2 ** 25):\n    &quot;&quot;&quot;Returns chunks of the full cartesian product, with arrays of shape\n    (chunk_size, n_arrays). The last chunk will obviously have the size of the\n    remainder&quot;&quot;&quot;\n    array_lengths = [len(array) for array in arrays]\n    for array_ids_chunk in chunked_cartesian_product_ids(array_lengths, chunk_size):\n        slices_lists = [arrays[i][array_ids_chunk[:, i]] for i in range(len(arrays))]\n        yield np.vstack(slices_lists).swapaxes(0,1)\n\n\ndef cartesian_product(*arrays):\n    &quot;&quot;&quot;Actual cartesian product, not chunked, still fast&quot;&quot;&quot;\n    total_prod = np.prod([len(array) for array in arrays])\n    return next(chunked_cartesian_product(*arrays, total_prod))\n\n\na = np.arange(0, 3)\nb = np.arange(8, 10)\nc = np.arange(13, 16)\nfor cartesian_tuples in chunked_cartesian_product(*[a, b, c], chunk_size=5):\n    print(cartesian_tuples)\n\n</code></pre>\n<p>This would output our cartesian product in chunks of 5 3-uples:</p>\n<pre><code>[[ 0  8 13]\n [ 0  8 14]\n [ 0  8 15]\n [ 1  8 13]\n [ 1  8 14]]\n[[ 1  8 15]\n [ 2  8 13]\n [ 2  8 14]\n [ 2  8 15]\n [ 0  9 13]]\n[[ 0  9 14]\n [ 0  9 15]\n [ 1  9 13]\n [ 1  9 14]\n [ 1  9 15]]\n[[ 2  9 13]\n [ 2  9 14]\n [ 2  9 15]]\n</code></pre>\n<p>If you're willing to understand what is being done here, the intuition behind the <code>njitted</code> function is to enumerate each &quot;number&quot; in a weird numerical base whose elements would be composed of the sizes of the input arrays (instead of the same number in regular binary, decimal or hexadecimal bases).</p>\n<p>Obviously, this solution is interesting for large products. For small ones, the overhead might be a bit costly.</p>\n<p>NOTE: since numba is still under heavy development, i'm using numba 0.50 to run this, with python 3.6.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3842358,
+                                "reputation": 2468,
+                                "user_id": 3185053,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Sebastian Wagner"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1629411979,
+                            "post_id": 68850503,
+                            "comment_id": 121687246,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/68850503#comment121687246_68850503",
+                            "body": "Hi, could you add a description of how (and why) your code snippet differs from others?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5598375,
+                                "reputation": 184,
+                                "user_id": 8787259,
+                                "user_type": "registered",
+                                "display_name": "Ashkan Ranjbar"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3842358,
+                                "reputation": 2468,
+                                "user_id": 3185053,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Sebastian Wagner"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1629413792,
+                            "post_id": 68850503,
+                            "comment_id": 121687569,
+                            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/68850503#comment121687569_68850503",
+                            "body": "Hi @sebastian-wagner, of course. Well besides that <code>.meshgrid</code> which has been used almost by all the other answers, I used <code>.ravel()</code> which flattens the n-dimensional array into a 1D k-vector (k will be the size of the former array), then it comes <code>.c_</code> which glues its inputs together along the second axis (it can concatenate more than 2 inputs). About the difference, I&#39;m not quite sure if this is faster, worse than others or anything, I just liked the briefness."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5598375,
+                        "reputation": 184,
+                        "user_id": 8787259,
+                        "user_type": "registered",
+                        "display_name": "Ashkan Ranjbar"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1629386362,
+                    "creation_date": 1629386362,
+                    "answer_id": 68850503,
+                    "question_id": 11144513,
+                    "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/68850503#68850503",
+                    "body": "<p>Yet another one:</p>\n<pre><code>&gt;&gt;&gt;x1, y1 = np.meshgrid(x, y)\n&gt;&gt;&gt;np.c_[x1.ravel(), y1.ravel()]\narray([[1, 4],\n       [2, 4],\n       [3, 4],\n       [1, 5],\n       [2, 5],\n       [3, 5]])\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 14241562,
+                        "reputation": 390,
+                        "user_id": 12350727,
+                        "user_type": "registered",
+                        "display_name": "Gajraj Singh Chouhan"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1633146749,
+                    "creation_date": 1633146749,
+                    "answer_id": 69413845,
+                    "question_id": 11144513,
+                    "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/69413845#69413845",
+                    "body": "<p>Inspired by <a href=\"https://stackoverflow.com/a/68850503/12350727\">Ashkan's answer</a>, you can also try the following.</p>\n<pre class=\"lang-py prettyprint-override\"><code>&gt;&gt;&gt; x, y = np.meshgrid(x, y)\n&gt;&gt;&gt; np.concatenate([x.flatten().reshape(-1,1), y.flatten().reshape(-1,1)], axis=1)\n</code></pre>\n<p>This will give you the required cartesian product!</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6893414,
+                        "reputation": 15149,
+                        "user_id": 5296106,
+                        "user_type": "registered",
+                        "display_name": "Riccardo Bucco"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1663717442,
+                    "creation_date": 1663717442,
+                    "answer_id": 73793643,
+                    "question_id": 11144513,
+                    "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/73793643#73793643",
+                    "body": "<p>This is a generalized version of the accepted answer (Cartesian product of multiple arrays using <code>numpy.tile</code> and <code>numpy.repeat</code> functions).</p>\n<pre><code>from functors import reduce\nfrom operator import mul\n\ndef cartesian_product(arrays):\n    return np.vstack(\n        np.tile(\n            np.repeat(arrays[j], reduce(mul, map(len, arrays[j+1:]), 1)),\n            reduce(mul, map(len, arrays[:j]), 1),\n        )\n        for j in range(len(arrays))\n    ).T\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1426233,
+                        "reputation": 7568,
+                        "user_id": 1349673,
+                        "user_type": "registered",
+                        "accept_rate": 33,
+                        "display_name": "James Hirschorn"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1669426921,
+                    "creation_date": 1669426921,
+                    "answer_id": 74579125,
+                    "question_id": 11144513,
+                    "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/74579125#74579125",
+                    "body": "<p>If you are willing to use PyTorch, I should think it is highly efficient:</p>\n<pre><code>&gt;&gt;&gt; import torch\n\n&gt;&gt;&gt; torch.cartesian_prod(torch.as_tensor(x), torch.as_tensor(y))\ntensor([[1, 4],\n        [1, 5],\n        [2, 4],\n        [2, 5],\n        [3, 4],\n        [3, 5]])\n\n</code></pre>\n<p>and you can easily get a <code>numpy</code> array:</p>\n<pre><code>&gt;&gt;&gt; torch.cartesian_prod(torch.as_tensor(x), torch.as_tensor(y)).numpy()\narray([[1, 4],\n       [1, 5],\n       [2, 4],\n       [2, 5],\n       [3, 4],\n       [3, 5]])\n\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3813599,
+                        "reputation": 1277,
+                        "user_id": 3163607,
+                        "user_type": "registered",
+                        "display_name": "Giancarlo Sportelli"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1687368885,
+                    "creation_date": 1687368885,
+                    "answer_id": 76525858,
+                    "question_id": 11144513,
+                    "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points/76525858#76525858",
+                    "body": "<p>Note that if you need the cartesian product of whole ranges, you can use the following functions:</p>\n<pre><code>numpy.indices((100, 200)).reshape(2, -1).T\n</code></pre>\n<p>or</p>\n<pre><code>numpy.mgrid[0:100, 0:200].reshape(2, -1).T\n</code></pre>\n<p>both will return</p>\n<pre><code>array([[  0,   0],\n       [  0,   1],\n       [  0,   2],\n       ...,\n       [ 99, 197],\n       [ 99, 198],\n       [ 99, 199]])\n</code></pre>\n<p><code>numpy.indices</code> ranges only from 0 to each of the specified dimensions, but it is way faster. Both functions can also operate on more than two dimensions, e.g.:</p>\n<pre><code>numpy.indices((100, 200, 300)).reshape(3, -1).T\n</code></pre>\n<p>and</p>\n<pre><code>numpy.mgrid[0:100, 0:200, 0:300].reshape(3, -1).T\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 18636,
+                "reputation": 12393,
+                "user_id": 42897,
+                "user_type": "registered",
+                "accept_rate": 85,
+                "display_name": "Rich"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 11144716,
+            "answer_count": 18,
+            "score": 213,
+            "last_activity_date": 1687368885,
+            "creation_date": 1340303419,
+            "last_edit_date": 1562782605,
+            "question_id": 11144513,
+            "link": "https://stackoverflow.com/questions/11144513/cartesian-product-of-x-and-y-array-points-into-single-array-of-2d-points",
+            "title": "Cartesian product of x and y array points into single array of 2D points",
+            "body": "<p>I have two numpy arrays that define the x and y axes of a grid.  For example:</p>\n\n<pre><code>x = numpy.array([1,2,3])\ny = numpy.array([4,5])\n</code></pre>\n\n<p>I'd like to generate the Cartesian product of these arrays to generate:</p>\n\n<pre><code>array([[1,4],[2,4],[3,4],[1,5],[2,5],[3,5]])\n</code></pre>\n\n<p>In a way that's not terribly inefficient since I need to do this many times in a loop.  I'm assuming that converting them to a Python list and using <code>itertools.product</code> and back to a numpy array is not the most efficient form.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6180
+}

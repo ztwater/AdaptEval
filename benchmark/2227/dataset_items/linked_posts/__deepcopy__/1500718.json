@@ -1,0 +1,854 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "python-internals"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 8083,
+                        "reputation": 370773,
+                        "user_id": 14343,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "Ned Batchelder"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1254346411,
+                    "post_id": 1500718,
+                    "comment_id": 1353691,
+                    "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object#comment1353691_1500718",
+                    "body": "Does it work?  Are there problems?"
+                },
+                {
+                    "owner": {
+                        "account_id": 53422,
+                        "reputation": 19293,
+                        "user_id": 159658,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Brent Writes Code"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1254347081,
+                    "post_id": 1500718,
+                    "comment_id": 1353740,
+                    "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object#comment1353740_1500718",
+                    "body": "I thought I was still getting problems with shared references, but it&#39;s entirely possible I messed up elsewhere.  I&#39;ll double check based on @MortenSiebuhr&#39;s post when I get a chance and update with the results."
+                },
+                {
+                    "owner": {
+                        "account_id": 1046075,
+                        "reputation": 1669,
+                        "user_id": 1051028,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "emschorsch"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1439267873,
+                    "post_id": 1500718,
+                    "comment_id": 51777975,
+                    "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object#comment51777975_1500718",
+                    "body": "From my currently limited understanding I would expect copy.deepcopy(ChartConfigInstance) to return a new instance which wouldn&#39;t have any shared references with the original (without reimplementing deepcopy yourself). Is this incorrect?"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7405,
+                                "reputation": 313805,
+                                "user_id": 12855,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "SilentGhost"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1254346978,
+                            "post_id": 1500788,
+                            "comment_id": 1353725,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/1500788#comment1353725_1500788",
+                            "body": "<i>In order for a class to define its own copy implementation, it can define special methods <code>__copy__(</code>) and <code>__deepcopy__()</code>.</i> <a href=\"http://docs.python.org/library/copy.html\" rel=\"nofollow noreferrer\">docs.python.org/library/copy.html</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 53422,
+                                "reputation": 19293,
+                                "user_id": 159658,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Brent Writes Code"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1254347129,
+                            "post_id": 1500788,
+                            "comment_id": 1353746,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/1500788#comment1353746_1500788",
+                            "body": "I&#39;ll double-check my code, thanks.  I&#39;m going to feel dumb if this was a simple bug elsewhere :-P"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 53422,
+                                "reputation": 19293,
+                                "user_id": 159658,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Brent Writes Code"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1254360222,
+                            "post_id": 1500788,
+                            "comment_id": 1354378,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/1500788#comment1354378_1500788",
+                            "body": "@MortenSiebuhr You are correct.  I wasn&#39;t entirely clear that copy/deepcopy would do anything by default without me overriding those functions. I was looking for actual code though that I can tweak later (e.g. if I don&#39;t want to copy all attributes), so I gave you an up-vote but I&#39;m going to go with @AlexMartinelli&#39;s answer. Thanks!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 48856,
+                        "reputation": 6108,
+                        "user_id": 145307,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Morten Siebuhr"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1461153584,
+                    "last_edit_date": 1461153584,
+                    "creation_date": 1254346554,
+                    "answer_id": 1500788,
+                    "question_id": 1500718,
+                    "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/1500788#1500788",
+                    "body": "<p>I might be a bit off on the specifics, but here goes;</p>\n\n<p>From the <a href=\"http://docs.python.org/library/copy.html\" rel=\"noreferrer\"><code>copy</code> docs</a>;</p>\n\n<blockquote>\n  <ul>\n  <li>A shallow copy constructs a new compound object and then (to the extent possible) inserts references into it to the objects found in the original.</li>\n  <li>A deep copy constructs a new compound object and then, recursively, inserts copies into it of the objects found in the original.</li>\n  </ul>\n</blockquote>\n\n<p>In other words: <code>copy()</code> will copy only the top element and leave the rest as pointers into the original structure. <code>deepcopy()</code> will recursively copy over everything.</p>\n\n<p>That is, <code>deepcopy()</code> is what you need.</p>\n\n<p>If you need to do something really specific, you can override <code>__copy__()</code> or <code>__deepcopy__()</code>, as described in the manual. Personally, I'd probably implement a plain function (e.g. <code>config.copy_config()</code> or such) to make it plain that it isn't Python standard behaviour.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 46465,
+                                "reputation": 48929,
+                                "user_id": 137317,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "u0b34a0f6ae"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1254355103,
+                            "post_id": 1500887,
+                            "comment_id": 1354207,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/1500887#comment1354207_1500887",
+                            "body": "I think I have heard that it&#39;s better to override <code>__getstate__</code>/<code>__setstate__</code> to implement copying. Or am I confused?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 34048,
+                                "reputation": 869830,
+                                "user_id": 95810,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Alex Martelli"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1254359277,
+                            "post_id": 1500887,
+                            "comment_id": 1354353,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/1500887#comment1354353_1500887",
+                            "body": "@kaizer, they&#39;re fine to customize pickling/unpickling as well as copying, but if you don&#39;t care about the pickling, it&#39;s simpler and more direct to use <code>__copy__</code>/<code>__deepcopy__</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8669,
+                                "reputation": 1235,
+                                "user_id": 15720,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Rob Young"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1309197682,
+                            "post_id": 1500887,
+                            "comment_id": 7640932,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/1500887#comment7640932_1500887",
+                            "body": "That doesn&#39;t seem to be a direct translation of copy/deepcopy. Neither copy nor deepcopy call the constructor of the object being copied. Consider this example. class Test1(object):     def <b>init__(self):         print &quot;%s.%s&quot; % (self.__class</b>.__name__, &quot;<b>init</b>&quot;)  class Test2(Test1):     def __copy__(self):         new = type(self)()         return new  t1 = Test1() copy.copy(t1) t2 = Test2() copy.copy(t2)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8669,
+                                "reputation": 1235,
+                                "user_id": 15720,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Rob Young"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1309197809,
+                            "post_id": 1500887,
+                            "comment_id": 7640971,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/1500887#comment7640971_1500887",
+                            "body": "Oh, well that was a bit of a fail, looks like you can&#39;t put code in comments. Well, it&#39;s just showing that with Test1 the constructor only gets called once, while with Test2 it gets called twice."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1245419,
+                                "reputation": 15078,
+                                "user_id": 1206998,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Juh_"
+                            },
+                            "edited": false,
+                            "score": 12,
+                            "creation_date": 1362475533,
+                            "post_id": 1500887,
+                            "comment_id": 21452843,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/1500887#comment21452843_1500887",
+                            "body": "I think instead of type(self)(), you should use  cls = self.__class__; cls.__new__(cls)   to be insensitive to constructors interface (especially for subclassing). It is not really important here however."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 444251,
+                                "reputation": 11053,
+                                "user_id": 835945,
+                                "user_type": "registered",
+                                "accept_rate": 72,
+                                "display_name": "Alois Mahdal"
+                            },
+                            "edited": false,
+                            "score": 14,
+                            "creation_date": 1379079363,
+                            "post_id": 1500887,
+                            "comment_id": 27702012,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/1500887#comment27702012_1500887",
+                            "body": "Why <code>self.foo = deepcopy(self.foo, memo)</code>... ? Don&#39;t you really mean <code>newone.foo = ...</code>?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6442382,
+                                "reputation": 101,
+                                "user_id": 6647626,
+                                "user_type": "registered",
+                                "display_name": "Nimrod"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1245419,
+                                "reputation": 15078,
+                                "user_id": 1206998,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Juh_"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1470861907,
+                            "post_id": 1500887,
+                            "comment_id": 65127358,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/1500887#comment65127358_1500887",
+                            "body": "@Juh_&#39;s comment is spot on. You don&#39;t want to call <code>__init__</code>. That&#39;s not what copy does. Also there is very often a use case where pickling and copying need to be different. In fact, I don&#39;t even know why copy tries to use the pickling protocol by default. Copying is for in-memory manipulation, pickling is for cross-epoch persistence; they are completely different things that bear little relation to each other."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2126416,
+                                "reputation": 1352,
+                                "user_id": 1938956,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Soren Bjornstad"
+                            },
+                            "reply_to_user": {
+                                "account_id": 444251,
+                                "reputation": 11053,
+                                "user_id": 835945,
+                                "user_type": "registered",
+                                "accept_rate": 72,
+                                "display_name": "Alois Mahdal"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1531617559,
+                            "post_id": 1500887,
+                            "comment_id": 89662356,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/1500887#comment89662356_1500887",
+                            "body": "@AloisMahdal Unless I&#39;m missing something, it doesn&#39;t really matter whether you give the current instance or the new instance the copy. Either way you end up with two separate, identical objects, one referenced from each instance. I agree <code>newone.foo</code> is a lot more intuitive, though."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 159889,
+                                "reputation": 6927,
+                                "user_id": 379572,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Azmisov"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1600454737,
+                            "post_id": 1500887,
+                            "comment_id": 113104255,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/1500887#comment113104255_1500887",
+                            "body": "Your quote is for python 2.7. For python 3.5+ and perhaps earlier, the copy module <i>does</i> use the registered reducers from copyreg module."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 34048,
+                        "reputation": 869830,
+                        "user_id": 95810,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "Alex Martelli"
+                    },
+                    "comment_count": 9,
+                    "is_accepted": true,
+                    "score": 94,
+                    "last_activity_date": 1254349325,
+                    "last_edit_date": 1254349325,
+                    "creation_date": 1254347938,
+                    "answer_id": 1500887,
+                    "question_id": 1500718,
+                    "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/1500887#1500887",
+                    "body": "<p>The recommendations for customizing are at the very end of the <a href=\"http://docs.python.org/library/copy.html\" rel=\"noreferrer\">docs page</a>:</p>\n\n<blockquote>\n  <p>Classes can use the same interfaces to\n  control copying that they use to\n  control pickling. See the description\n  of module pickle for information on\n  these methods. The copy module does\n  not use the copy_reg registration\n  module.</p>\n  \n  <p>In order for a class to define its own\n  copy implementation, it can define\n  special methods <code>__copy__()</code> and\n  <code>__deepcopy__()</code>. The former is called to implement the shallow copy\n  operation; no additional arguments are\n  passed. The latter is called to\n  implement the deep copy operation; it\n  is passed one argument, the memo\n  dictionary. If the <code>__deepcopy__()</code>\n  implementation needs to make a deep\n  copy of a component, it should call\n  the <code>deepcopy()</code> function with the\n  component as first argument and the\n  memo dictionary as second argument.</p>\n</blockquote>\n\n<p>Since you appear not to care about pickling customization, defining <code>__copy__</code> and <code>__deepcopy__</code> definitely seems like the right way to go for you.</p>\n\n<p>Specifically, <code>__copy__</code> (the shallow copy) is pretty easy in your case...:</p>\n\n<pre><code>def __copy__(self):\n  newone = type(self)()\n  newone.__dict__.update(self.__dict__)\n  return newone\n</code></pre>\n\n<p><code>__deepcopy__</code> would be similar (accepting a <code>memo</code> arg too) but before the return it would have to call <code>self.foo = deepcopy(self.foo, memo)</code> for any attribute <code>self.foo</code> that needs deep copying (essentially attributes that are containers -- lists, dicts, non-primitive objects which hold other stuff through their <code>__dict__</code>s).</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2727512,
+                                "reputation": 378,
+                                "user_id": 2352142,
+                                "user_type": "registered",
+                                "display_name": "Anton&#237;n Hoskovec"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1548063183,
+                            "post_id": 15774013,
+                            "comment_id": 95394705,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/15774013#comment95394705_15774013",
+                            "body": "I think <code>__deepcopy__</code> should include a test to avoid infinite recursion: &lt;!-- language: lang-python --&gt;      d = id(self)     result = memo.get(d, None)     if result is not None:         return result"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 660089,
+                                "reputation": 7781,
+                                "user_id": 472610,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "Jonathan H"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1554035663,
+                            "post_id": 15774013,
+                            "comment_id": 97598057,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/15774013#comment97598057_15774013",
+                            "body": "@AntonyHatchkins It&#39;s not immediately clear from your post <i>where</i> <code>memo[id(self)]</code> actually gets used to prevent infinite recursion. I have put together a <a href=\"https://pyfiddle.io/fiddle/8352e97e-ca12-4479-afd2-05cfc431a80e/?i=true\" rel=\"nofollow noreferrer\">short example</a> which suggests that <code>copy.deepcopy()</code> internally aborts the call to an object if its <code>id()</code> is a key of <code>memo</code>, correct? It is also worth noting that <code>deepcopy()</code> seems to do this on its own <i>by default</i>, which makes it hard to imagine a case where defining <code>__deepcopy__</code> manually is actually needed..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1962480,
+                                "reputation": 15697,
+                                "user_id": 1763602,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "Marco Sulla"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1603216516,
+                            "post_id": 15774013,
+                            "comment_id": 113965109,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/15774013#comment113965109_15774013",
+                            "body": "Is it useful to do <code>memo[id(self)]</code> for a mutable object? I thing <code>memo</code> is useful only if the object have an hash, so <code>try: memo[self]</code> seems to me better."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3153335,
+                                "reputation": 37105,
+                                "user_id": 2666289,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "Holt"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1962480,
+                                "reputation": 15697,
+                                "user_id": 1763602,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "Marco Sulla"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1604140572,
+                            "post_id": 15774013,
+                            "comment_id": 114260165,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/15774013#comment114260165_15774013",
+                            "body": "@MarcoSulla That does not work because <code>copy.deepcopy(obj, memo)</code> checks for <code>memo[id(obj)]</code>, so you have to use <code>id(self)</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9089780,
+                                "reputation": 5077,
+                                "user_id": 8748308,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "adam.hendry"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1661973767,
+                            "post_id": 15774013,
+                            "comment_id": 129901584,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/15774013#comment129901584_15774013",
+                            "body": "Shouldn&#39;t <code>b1</code> print <code>12 [2, 3, 4, 5]</code>? If <code>copy</code> is intended to be <code>shallow</code>, <code>b1</code> should be the same as <code>a</code>...?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 84915,
+                        "reputation": 33138,
+                        "user_id": 237105,
+                        "user_type": "registered",
+                        "accept_rate": 52,
+                        "display_name": "Antony Hatchkins"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": false,
+                    "score": 140,
+                    "last_activity_date": 1372738479,
+                    "last_edit_date": 1372738479,
+                    "creation_date": 1364935604,
+                    "answer_id": 15774013,
+                    "question_id": 1500718,
+                    "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/15774013#15774013",
+                    "body": "<p>Putting together Alex Martelli's answer and Rob Young's comment you get the following code:</p>\n\n<pre><code>from copy import copy, deepcopy\n\nclass A(object):\n    def __init__(self):\n        print 'init'\n        self.v = 10\n        self.z = [2,3,4]\n\n    def __copy__(self):\n        cls = self.__class__\n        result = cls.__new__(cls)\n        result.__dict__.update(self.__dict__)\n        return result\n\n    def __deepcopy__(self, memo):\n        cls = self.__class__\n        result = cls.__new__(cls)\n        memo[id(self)] = result\n        for k, v in self.__dict__.items():\n            setattr(result, k, deepcopy(v, memo))\n        return result\n\na = A()\na.v = 11\nb1, b2 = copy(a), deepcopy(a)\na.v = 12\na.z.append(5)\nprint b1.v, b1.z\nprint b2.v, b2.z\n</code></pre>\n\n<p>prints</p>\n\n<pre><code>init\n11 [2, 3, 4, 5]\n11 [2, 3, 4]\n</code></pre>\n\n<p>here <code>__deepcopy__</code> fills in the <code>memo</code> dict to avoid excess copying in case the object itself is referenced from its member.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1801412,
+                                "reputation": 2391,
+                                "user_id": 1639671,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "flutefreak7"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1491513618,
+                            "post_id": 24621200,
+                            "comment_id": 73600471,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/24621200#comment73600471_24621200",
+                            "body": "Doesn&#39;t the clone also need it&#39;s <code>__deepcopy__</code> method reset since it will have <code>__deepcopy__</code> = None?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 454252,
+                                "reputation": 12944,
+                                "user_id": 851699,
+                                "user_type": "registered",
+                                "accept_rate": 41,
+                                "display_name": "Peter"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1801412,
+                                "reputation": 2391,
+                                "user_id": 1639671,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "flutefreak7"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1491570115,
+                            "post_id": 24621200,
+                            "comment_id": 73625522,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/24621200#comment73625522_24621200",
+                            "body": "Nope.  If <code>__deepcopy__</code> method is not found (or <code>obj.__deepcopy__</code> returns None), then <code>deepcopy</code> falls back on the standard deep-copying function.  This can be seen <a href=\"https://github.com/python/cpython/blob/3.6/Lib/copy.py#L159\" rel=\"nofollow noreferrer\">here</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1801412,
+                                "reputation": 2391,
+                                "user_id": 1639671,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "flutefreak7"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1491570470,
+                            "post_id": 24621200,
+                            "comment_id": 73625783,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/24621200#comment73625783_24621200",
+                            "body": "But then b won&#39;t have the ability to deepcopy with sharing? c = deepcopy(a) would be different from d=deepcopy(b) because d would be a default deepcopy where c would have some shared attrs with a."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 454252,
+                                "reputation": 12944,
+                                "user_id": 851699,
+                                "user_type": "registered",
+                                "accept_rate": 41,
+                                "display_name": "Peter"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1801412,
+                                "reputation": 2391,
+                                "user_id": 1639671,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "flutefreak7"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1491815871,
+                            "post_id": 24621200,
+                            "comment_id": 73702667,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/24621200#comment73702667_24621200",
+                            "body": "Ah, now I see what you&#39;re saying.  Good point.  I fixed it, I think, by deleting the fake <code>__deepcopy__=None</code> attribute from the clone. See new code."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1374347,
+                                "reputation": 337,
+                                "user_id": 1308657,
+                                "user_type": "registered",
+                                "accept_rate": 17,
+                                "display_name": "complexM"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1516544675,
+                            "post_id": 24621200,
+                            "comment_id": 83722159,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/24621200#comment83722159_24621200",
+                            "body": "maybe clear to the python experts: if you use this code in python 3, change &quot;    for attr, val in shared_attributes.iteritems():&quot; with &quot;    for attr, val in shared_attributes.items():&quot;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1211201,
+                                "reputation": 2626,
+                                "user_id": 1179689,
+                                "user_type": "registered",
+                                "accept_rate": 49,
+                                "display_name": "yehudahs"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1557643464,
+                            "post_id": 24621200,
+                            "comment_id": 98829069,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/24621200#comment98829069_24621200",
+                            "body": "Peter - can you explain why removing the mem from the line clone = deepcopy(obj) and adding del clone.__deepcopy__ will solve flutefreak7 comment ? how clone will be able to call <b>deepcopy</b> if it is deleted ?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 454252,
+                        "reputation": 12944,
+                        "user_id": 851699,
+                        "user_type": "registered",
+                        "accept_rate": 41,
+                        "display_name": "Peter"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": false,
+                    "score": 12,
+                    "last_activity_date": 1491815769,
+                    "last_edit_date": 1491815769,
+                    "creation_date": 1404773612,
+                    "answer_id": 24621200,
+                    "question_id": 1500718,
+                    "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/24621200#24621200",
+                    "body": "<p>Its not clear from your problem why you need to override these methods, since you don't want to do any customization to the copying methods.</p>\n\n<p>Anyhow, if you do want to customize the deep copy (e.g. by sharing some attributes and copying others), here is a solution:</p>\n\n<pre><code>from copy import deepcopy\n\n\ndef deepcopy_with_sharing(obj, shared_attribute_names, memo=None):\n    '''\n    Deepcopy an object, except for a given list of attributes, which should\n    be shared between the original object and its copy.\n\n    obj is some object\n    shared_attribute_names: A list of strings identifying the attributes that\n        should be shared between the original and its copy.\n    memo is the dictionary passed into __deepcopy__.  Ignore this argument if\n        not calling from within __deepcopy__.\n    '''\n    assert isinstance(shared_attribute_names, (list, tuple))\n    shared_attributes = {k: getattr(obj, k) for k in shared_attribute_names}\n\n    if hasattr(obj, '__deepcopy__'):\n        # Do hack to prevent infinite recursion in call to deepcopy\n        deepcopy_method = obj.__deepcopy__\n        obj.__deepcopy__ = None\n\n    for attr in shared_attribute_names:\n        del obj.__dict__[attr]\n\n    clone = deepcopy(obj)\n\n    for attr, val in shared_attributes.iteritems():\n        setattr(obj, attr, val)\n        setattr(clone, attr, val)\n\n    if hasattr(obj, '__deepcopy__'):\n        # Undo hack\n        obj.__deepcopy__ = deepcopy_method\n        del clone.__deepcopy__\n\n    return clone\n\n\n\nclass A(object):\n\n    def __init__(self):\n        self.copy_me = []\n        self.share_me = []\n\n    def __deepcopy__(self, memo):\n        return deepcopy_with_sharing(self, shared_attribute_names = ['share_me'], memo=memo)\n\na = A()\nb = deepcopy(a)\nassert a.copy_me is not b.copy_me\nassert a.share_me is b.share_me\n\nc = deepcopy(b)\nassert c.copy_me is not b.copy_me\nassert c.share_me is b.share_me\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7928081,
+                                "reputation": 6992,
+                                "user_id": 5986907,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "joel"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1594840355,
+                            "post_id": 40484215,
+                            "comment_id": 111271465,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/40484215#comment111271465_40484215",
+                            "body": "is this preferred to using <code>delattr(self, &#39;__deepcopy__&#39;)</code> then <code>setattr(self, &#39;__deepcopy__&#39;, deepcopy_method)</code>?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 50306,
+                                "reputation": 4379,
+                                "user_id": 150015,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Eino Gourdin"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7928081,
+                                "reputation": 6992,
+                                "user_id": 5986907,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "joel"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1595572828,
+                            "post_id": 40484215,
+                            "comment_id": 111526865,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/40484215#comment111526865_40484215",
+                            "body": "According to <a href=\"https://stackoverflow.com/a/12801950/150015\">this answer</a>, both are equivalent ; but setattr is more useful when setting an attribute whose name is dynamic / not known at coding time."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 444735,
+                                "reputation": 6645,
+                                "user_id": 836748,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Aaron D. Marasco"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1603806954,
+                            "post_id": 40484215,
+                            "comment_id": 114149145,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/40484215#comment114149145_40484215",
+                            "body": "This is my personal fave and I&#39;m using it in production where an object has a logger, which then has a thread lock, which cannot be pickled. Save off the logger, set it to <code>None</code>, call the default for everything else, and then put it back. Future-proof because I don&#39;t need to worry about forgetting to handle a field, and inherited classes &quot;just work.&quot;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 444735,
+                                "reputation": 6645,
+                                "user_id": 836748,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Aaron D. Marasco"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1603811247,
+                            "post_id": 40484215,
+                            "comment_id": 114151401,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/40484215#comment114151401_40484215",
+                            "body": "BTW I tried the <code>delattr()</code> one and it failed in Python2.7 with <code>AttributeError</code>. The &quot;set it to <code>None</code>&quot; is what I&#39;ve been using."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 415918,
+                                "reputation": 8835,
+                                "user_id": 791018,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "eric.mitchell"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1623431785,
+                            "post_id": 40484215,
+                            "comment_id": 120086550,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/40484215#comment120086550_40484215",
+                            "body": "Wonderful- useful for making deep copies of PyTorch nn.Modules with custom attributes."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2016352,
+                                "reputation": 133,
+                                "user_id": 1803571,
+                                "user_type": "registered",
+                                "display_name": "Igor Kozyrenko"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1628765824,
+                            "post_id": 40484215,
+                            "comment_id": 121511671,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/40484215#comment121511671_40484215",
+                            "body": "@EinoGourdin <code>deepcopy_method = self.__deepcopy__</code> is creating a reference bound to <code>self</code> and then both objects are getting it instead of unbound version from the class itself. This will make all copies made from any other copies to be actually always made from the original object. And original object is never deleted unless all copies are deleted."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2016352,
+                                "reputation": 133,
+                                "user_id": 1803571,
+                                "user_type": "registered",
+                                "display_name": "Igor Kozyrenko"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7928081,
+                                "reputation": 6992,
+                                "user_id": 5986907,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "joel"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1628767013,
+                            "post_id": 40484215,
+                            "comment_id": 121512187,
+                            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/40484215#comment121512187_40484215",
+                            "body": "@joel @EinoGourdin to avoid always copying the first object this approach might be used: <code>self.__deepcopy__ = None; cp = deepcopy(self, memo); delattr(self, &quot;__deepcopy__&quot;); delattr(cp, &quot;__deepcopy__&quot;)</code>. Maybe with additional check in case self had <code>__deepcopy__</code> in it&#39;s instance dict but I&#39;m not sure what meaningful can be done in that case."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 50306,
+                        "reputation": 4379,
+                        "user_id": 150015,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Eino Gourdin"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": false,
+                    "score": 21,
+                    "last_activity_date": 1672820949,
+                    "last_edit_date": 1672820949,
+                    "creation_date": 1478599987,
+                    "answer_id": 40484215,
+                    "question_id": 1500718,
+                    "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/40484215#40484215",
+                    "body": "<p>Following <a href=\"https://stackoverflow.com/a/24621200/150015\">Peter's excellent answer</a>, to implement a custom deepcopy, with minimal alteration to the default implementation (e.g. just modifying a field like I needed) :</p>\n<pre><code>class Foo(object):\n    def __deepcopy__(self, memo):\n        deepcopy_method = self.__deepcopy__\n        self.__deepcopy__ = None\n        cp = deepcopy(self, memo)\n        self.__deepcopy__ = deepcopy_method\n        cp.__deepcopy__ = deepcopy_method\n\n        # custom treatments\n        # for instance: cp.id = None\n\n        return cp\n</code></pre>\n<p>Edit: a limitation of this approach, as Igor Kozyrenko points out, is that the copies' <code>__deepcopy__</code> will still be bound to the original object, so a copy of a copy will actually be a copy of the original. There's perhaps a way to re-bind the <code>__deepcopy__</code> to <code>cp</code>, instead of just assigning it with <code>cp.__deepcopy__ = deepcopy_method</code></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4648386,
+                        "reputation": 5252,
+                        "user_id": 3765905,
+                        "user_type": "registered",
+                        "accept_rate": 79,
+                        "display_name": "BoltzmannBrain"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1517430494,
+                    "creation_date": 1517430494,
+                    "answer_id": 48550898,
+                    "question_id": 1500718,
+                    "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/48550898#48550898",
+                    "body": "<p>Building on Antony Hatchkins' clean answer, here's my version where the class in question derives from another custom class (s.t. we need to call <code>super</code>):</p>\n\n<pre><code>class Foo(FooBase):\n    def __init__(self, param1, param2):\n        self._base_params = [param1, param2]\n        super(Foo, result).__init__(*self._base_params)\n\n    def __copy__(self):\n        cls = self.__class__\n        result = cls.__new__(cls)\n        result.__dict__.update(self.__dict__)\n        super(Foo, result).__init__(*self._base_params)\n        return result\n\n    def __deepcopy__(self, memo):\n        cls = self.__class__\n        result = cls.__new__(cls)\n        memo[id(self)] = result\n        for k, v in self.__dict__.items():\n            setattr(result, k, copy.deepcopy(v, memo))\n        super(Foo, result).__init__(*self._base_params)\n        return result\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 263317,
+                        "reputation": 9025,
+                        "user_id": 548792,
+                        "user_type": "registered",
+                        "accept_rate": 67,
+                        "display_name": "ankostis"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1595075448,
+                    "last_edit_date": 1595075448,
+                    "creation_date": 1521650380,
+                    "answer_id": 49411975,
+                    "question_id": 1500718,
+                    "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/49411975#49411975",
+                    "body": "<p>The <code>copy</code> module uses eventually the <a href=\"https://docs.python.org/3/library/pickle.html#object.__getstate__\" rel=\"nofollow noreferrer\"><code>__getstate__()</code></a>/<a href=\"https://docs.python.org/3/library/pickle.html#object.__setstate__\" rel=\"nofollow noreferrer\"><code>__setstate__()</code></a> <strong>pickling protocol</strong>, so these are also valid targets to override.</p>\n<p>The default implementation just returns and sets the <code>__dict__</code> of the class, so you don't have to call <code>super()</code> and worry about Eino Gourdin's clever trick, <a href=\"https://stackoverflow.com/a/40484215/548792\">above</a>.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5410522,
+                        "reputation": 31,
+                        "user_id": 16491486,
+                        "user_type": "registered",
+                        "display_name": "Zach Price"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1626826409,
+                    "creation_date": 1626826409,
+                    "answer_id": 68462650,
+                    "question_id": 1500718,
+                    "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/68462650#68462650",
+                    "body": "<p><a href=\"https://stackoverflow.com/a/24621200/16491486\">Peter</a>'s and <a href=\"https://stackoverflow.com/a/40484215/16491486\">Eino Gourdin</a>'s answers are clever and useful, but they have a very subtle bug!</p>\n<p>Python methods are bound to their object. When you do <code>cp.__deepcopy__ = deepcopy_method</code>, you are actually giving the object <code>cp</code> <em>a reference to</em> <code>__deepcopy__</code> <em>on the original object</em>. Any calls to <code>cp.__deepcopy__</code> will return a <strong>copy of the original!</strong>\nIf you deepcopy your object and then <em>deepcopy that copy</em>, the output is a <strong>NOT a copy of the copy!</strong></p>\n<p>Here's a minimal example of the behavior, along with my fixed implementation where you copy the <code>__deepcopy__</code> implementation and then bind it to the new object:</p>\n<pre><code>from copy import deepcopy\nimport types\n\n\nclass Good:\n    def __init__(self):\n        self.i = 0\n\n    def __deepcopy__(self, memo):\n        deepcopy_method = self.__deepcopy__\n        self.__deepcopy__ = None\n        cp = deepcopy(self, memo)\n        self.__deepcopy__ = deepcopy_method\n        # Copy the function object\n        func = types.FunctionType(\n            deepcopy_method.__code__,\n            deepcopy_method.__globals__,\n            deepcopy_method.__name__,\n            deepcopy_method.__defaults__,\n            deepcopy_method.__closure__,\n        )\n        # Bind to cp and set\n        bound_method = func.__get__(cp, cp.__class__)\n        cp.__deepcopy__ = bound_method\n\n        return cp\n\n\nclass Bad:\n    def __init__(self):\n        self.i = 0\n\n    def __deepcopy__(self, memo):\n        deepcopy_method = self.__deepcopy__\n        self.__deepcopy__ = None\n        cp = deepcopy(self, memo)\n        self.__deepcopy__ = deepcopy_method\n        cp.__deepcopy__ = deepcopy_method\n        return cp\n\n\nx = Bad()\ncopy = deepcopy(x)\ncopy.i = 1\ncopy_of_copy = deepcopy(copy)\nprint(copy_of_copy.i)  # 0\n\nx = Good()\ncopy = deepcopy(x)\ncopy.i = 1\ncopy_of_copy = deepcopy(copy)\nprint(copy_of_copy.i)  # 1\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 21046662,
+                        "reputation": 57,
+                        "user_id": 15467861,
+                        "user_type": "registered",
+                        "display_name": "eltings"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1631289270,
+                    "creation_date": 1631289270,
+                    "answer_id": 69134900,
+                    "question_id": 1500718,
+                    "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/69134900#69134900",
+                    "body": "<p>I came here for performance reasons. Using the default <code>copy.deepcopy()</code> function was slowing down my code by up to 30 times.\nUsing the <a href=\"https://stackoverflow.com/a/15774013/15467861\">answer</a> by @<a href=\"https://stackoverflow.com/users/237105/antony-hatchkins\">Anthony Hatchkins</a> as a starting point, I realized that <code>copy.deepcopy()</code> is really slow for e.g. lists. I replaced the <code>setattr</code> loop with simple <code>[:]</code> slicing to copy whole lists. For anyone concerned with performance it is worthwhile doing <code>timeit.timeit()</code> comparisons and replacing the calls to <code>copy.deepcopy()</code> by faster alternatives.</p>\n<pre><code>setup = 'import copy; l = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]'\ntimeit.timeit(setup = setup, stmt='m=l[:]')\ntimeit.timeit(setup = setup, stmt='m=l.copy()')\ntimeit.timeit(setup = setup, stmt='m=copy.deepcopy(l)')\n</code></pre>\n<p>will give these results:</p>\n<pre><code>0.11505379999289289\n0.09126630000537261\n6.423627900003339\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 16693913,
+                        "reputation": 41,
+                        "user_id": 12065696,
+                        "user_type": "registered",
+                        "display_name": "NeverMore"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1644923450,
+                    "last_edit_date": 1644923450,
+                    "creation_date": 1644922952,
+                    "answer_id": 71125311,
+                    "question_id": 1500718,
+                    "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object/71125311#71125311",
+                    "body": "<p>Similar with <a href=\"https://stackoverflow.com/a/68462650/12065696\">Zach Price</a>'s thoughts, there is a simpler way to achieve that goal, i.e. unbind the original <code>__deepcopy__</code> method then bind it to <code>cp</code></p>\n<pre><code>from copy import deepcopy\nimport types\n\n\nclass Good:\n    def __init__(self):\n        self.i = 0\n\n    def __deepcopy__(self, memo):\n        deepcopy_method = self.__deepcopy__\n        self.__deepcopy__ = None\n        cp = deepcopy(self, memo)\n        self.__deepcopy__ = deepcopy_method\n        \n        # Bind to cp by types.MethodType\n        cp.__deepcopy__ = types.MethodType(deepcopy_method.__func__, cp)\n\n        return cp\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 53422,
+                "reputation": 19293,
+                "user_id": 159658,
+                "user_type": "registered",
+                "accept_rate": 100,
+                "display_name": "Brent Writes Code"
+            },
+            "comment_count": 3,
+            "is_answered": true,
+            "accepted_answer_id": 1500887,
+            "answer_count": 10,
+            "score": 143,
+            "last_activity_date": 1672820949,
+            "creation_date": 1254345525,
+            "last_edit_date": 1574420935,
+            "question_id": 1500718,
+            "link": "https://stackoverflow.com/questions/1500718/how-to-override-the-copy-deepcopy-operations-for-a-python-object",
+            "title": "How to override the copy/deepcopy operations for a Python object?",
+            "body": "<p>I understand the difference between <code>copy</code> vs. <code>deepcopy</code> in the copy module. I've used <code>copy.copy</code> and <code>copy.deepcopy</code> before successfully, but this is the first time I've actually gone about overloading the <code>__copy__</code> and <code>__deepcopy__</code> methods.  I've already Googled around and looked through the built-in Python modules to look for instances of the <code>__copy__</code> and <code>__deepcopy__</code> functions (e.g. <code>sets.py</code>, <code>decimal.py</code>, and <code>fractions.py</code>), but I'm still not 100% sure I've got it right.</p>\n\n<p>Here's my scenario: </p>\n\n<p>I have a configuration object.  Initially, I'm going to instantiate one configuration object with a default set of values.  This configuration will be handed off to multiple other objects (to ensure all objects start with the same configuration).  However, once user interaction starts, each object needs to tweak its configurations independently without affecting each other's configurations (which says to me I'll need to make deepcopys of my initial configuration to hand around).</p>\n\n<p>Here's a sample object:</p>\n\n<pre><code>class ChartConfig(object):\n\n    def __init__(self):\n\n        #Drawing properties (Booleans/strings)\n        self.antialiased = None\n        self.plot_style = None\n        self.plot_title = None\n        self.autoscale = None\n\n        #X axis properties (strings/ints)\n        self.xaxis_title = None\n        self.xaxis_tick_rotation = None\n        self.xaxis_tick_align = None\n\n        #Y axis properties (strings/ints)\n        self.yaxis_title = None\n        self.yaxis_tick_rotation = None\n        self.yaxis_tick_align = None\n\n        #A list of non-primitive objects\n        self.trace_configs = []\n\n    def __copy__(self):\n        pass\n\n    def __deepcopy__(self, memo):\n        pass \n</code></pre>\n\n<p>What is the right way to implement the <code>copy</code> and <code>deepcopy</code> methods on this object to ensure <code>copy.copy</code> and <code>copy.deepcopy</code> give me the proper behavior?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5783
+}

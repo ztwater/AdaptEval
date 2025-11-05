@@ -1,0 +1,465 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "python-2.x"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 62273,
+                                "reputation": 689,
+                                "user_id": 185124,
+                                "user_type": "registered",
+                                "display_name": "danielshiplett"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1274116508,
+                            "post_id": 2851053,
+                            "comment_id": 2894325,
+                            "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/2851053#comment2894325_2851053",
+                            "body": "If I then call sys.stdin.read() with no parameter, it should read all the binary data that was piped in, correct?  How then do I determine the length correctly?  len(data) returns the incorrect value if the last byte of the data was a zero.  How do you check and correct for this situation?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5626,
+                                "reputation": 33066,
+                                "user_id": 9167,
+                                "user_type": "registered",
+                                "display_name": "Yann Ramin"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1274117244,
+                            "post_id": 2851053,
+                            "comment_id": 2894423,
+                            "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/2851053#comment2894423_2851053",
+                            "body": "<code>len</code> counts the \\x00 characters in the string. Python does not have null terminated strings. <code>len(&quot;Hello\\x00&quot;) == 6</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 62273,
+                                "reputation": 689,
+                                "user_id": 185124,
+                                "user_type": "registered",
+                                "display_name": "danielshiplett"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1274118729,
+                            "post_id": 2851053,
+                            "comment_id": 2894595,
+                            "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/2851053#comment2894595_2851053",
+                            "body": "I wonder then if it might be the &#39;type&#39; command from the MS-DOS shell that is causing the loss of the final byte?  I guess I will have to test the equivalent on Linux.  Thanks."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 31617,
+                                "reputation": 53545,
+                                "user_id": 86967,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "Brent Bradburn"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1360092842,
+                            "post_id": 2851053,
+                            "comment_id": 20583628,
+                            "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/2851053#comment20583628_2851053",
+                            "body": "I think this answer misses the point of the question: if the stream is in &quot;text&quot; mode, the results from <code>read()</code> might be different than if the stream is in &quot;binary&quot; mode."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3021,
+                                "reputation": 408304,
+                                "user_id": 4279,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "jfs"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1384563706,
+                            "post_id": 2851053,
+                            "comment_id": 29800710,
+                            "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/2851053#comment29800710_2851053",
+                            "body": "It might corrupt input stream on Windows e.g., <code>&#39;\\r\\n&#39;</code> -&gt; <code>&#39;\\n&#39;</code>. Also, on Python 3 <code>sys.stdin.read()</code> returns Unicode strings e.g., <code>b&#39;\\xf0\\x9f\\x96\\x96&#39;</code> -&gt; <code>&#39;\\U0001f596&#39;</code> (4 bytes -&gt; 1 chararcter). It is undesirable behaviour if input is not text."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5626,
+                        "reputation": 33066,
+                        "user_id": 9167,
+                        "user_type": "registered",
+                        "display_name": "Yann Ramin"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": false,
+                    "score": -3,
+                    "last_activity_date": 1274117381,
+                    "last_edit_date": 1274117381,
+                    "creation_date": 1274115432,
+                    "answer_id": 2851053,
+                    "question_id": 2850893,
+                    "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/2851053#2851053",
+                    "body": "<pre><code>import sys\n\ndata = sys.stdin.read(10) # Read 10 bytes from stdin\n</code></pre>\n\n<p>If you need to interpret binary data, use the <code>struct</code> module.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 114866,
+                                "reputation": 6747,
+                                "user_id": 301877,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Dan Menes"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1274123660,
+                            "post_id": 2851966,
+                            "comment_id": 2895283,
+                            "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/2851966#comment2895283_2851966",
+                            "body": "I have tested this with &#39;type&#39; and it appears to work.  That is, if I leave out the -u flag, I get one fewer character per line."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 62273,
+                                "reputation": 689,
+                                "user_id": 185124,
+                                "user_type": "registered",
+                                "display_name": "danielshiplett"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1274124349,
+                            "post_id": 2851966,
+                            "comment_id": 2895389,
+                            "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/2851966#comment2895389_2851966",
+                            "body": "Cool.  Thanks for the test.  So, just because I like you so much, any idea how to pass the &#39;-u&#39; option through the JarRunner.java class that is used to fire off Jython through an executable JAR file?  I know.  I never do anything the easy way."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 114866,
+                                "reputation": 6747,
+                                "user_id": 301877,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Dan Menes"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1274124735,
+                            "post_id": 2851966,
+                            "comment_id": 2895443,
+                            "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/2851966#comment2895443_2851966",
+                            "body": "According to docs, setting the PYTHONUNBUFFERED environment variable will have the same effect.  Not sure if that helps."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 62273,
+                                "reputation": 689,
+                                "user_id": 185124,
+                                "user_type": "registered",
+                                "display_name": "danielshiplett"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1274126278,
+                            "post_id": 2851966,
+                            "comment_id": 2895627,
+                            "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/2851966#comment2895627_2851966",
+                            "body": "Even easier, it appears that all you need to do is:  sys.stdin = os.fdopen(sys.stdin.fileno(), &#39;rb&#39;, 0)  That will reopen the fd in unbuffered &#39;binary&#39; mode."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 114866,
+                                "reputation": 6747,
+                                "user_id": 301877,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Dan Menes"
+                            },
+                            "reply_to_user": {
+                                "account_id": 62273,
+                                "reputation": 689,
+                                "user_id": 185124,
+                                "user_type": "registered",
+                                "display_name": "danielshiplett"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1274128030,
+                            "post_id": 2851966,
+                            "comment_id": 2895851,
+                            "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/2851966#comment2895851_2851966",
+                            "body": "@thebeav: Oddly enough that doesn&#39;t work on my system.  I don&#39;t know if that&#39;s because I&#39;m using CPython instead of Jython, or if it&#39;s because I&#39;m running Windows XP Pro, and &quot;type&quot; behaves differently, or its because there is a magnetic anomaly in the Manassas area that makes computers do different things.  FWIW, I tried a number of ways to get Python to change the file mode after the interpreter had started, including accessing the C runtime&#39;s &quot;setmode&quot; function via ctypes.  Nothing works for me."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 62273,
+                                "reputation": 689,
+                                "user_id": 185124,
+                                "user_type": "registered",
+                                "display_name": "danielshiplett"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1274187767,
+                            "post_id": 2851966,
+                            "comment_id": 2901111,
+                            "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/2851966#comment2901111_2851966",
+                            "body": "Uh-oh.  I smell a portability issue.  Thanks for the info.  I guess I&#39;m going to have to do some fairly rigorous testing on multiple platforms.  I hope this doesn&#39;t have to do with the JVM in use."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 114866,
+                        "reputation": 6747,
+                        "user_id": 301877,
+                        "user_type": "registered",
+                        "accept_rate": 67,
+                        "display_name": "Dan Menes"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": true,
+                    "score": 15,
+                    "last_activity_date": 1384563986,
+                    "last_edit_date": 1384563986,
+                    "creation_date": 1274123193,
+                    "answer_id": 2851966,
+                    "question_id": 2850893,
+                    "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/2851966#2851966",
+                    "body": "<p>Use the <a href=\"http://docs.python.org/2/using/cmdline.html#cmdoption-u\" rel=\"noreferrer\"><code>-u</code> command line switch</a> to force Python 2 to treat stdin, stdout and stderr as binary unbuffered streams.</p>\n\n<pre><code>C:&gt; type mydoc.txt | python.exe -u myscript.py\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4060,
+                                "reputation": 304570,
+                                "user_id": 5987,
+                                "user_type": "registered",
+                                "accept_rate": 55,
+                                "display_name": "Mark Ransom"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1390367045,
+                            "post_id": 4160894,
+                            "comment_id": 32056293,
+                            "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/4160894#comment32056293_4160894",
+                            "body": "But Windows is the only system where most people will run into a problem, so this should be an acceptable solution."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 48893,
+                                "reputation": 34735,
+                                "user_id": 145400,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "Dr. Jan-Philip Gehrcke"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1392910162,
+                            "post_id": 4160894,
+                            "comment_id": 33186681,
+                            "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/4160894#comment33186681_4160894",
+                            "body": "This is the correct solution for Python 2 to retrieve the raw bytes from stdin on Windows. On Unix, there is no difference between binary and normal mode. See this thread: <a href=\"http://code.activestate.com/lists/python-list/20426/\" rel=\"nofollow noreferrer\">code.activestate.com/lists/python-list/20426</a> (re-opening stdin in raw (binary) mode?)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 145428,
+                                "reputation": 121960,
+                                "user_id": 355230,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "martineau"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1460400720,
+                            "post_id": 4160894,
+                            "comment_id": 60714105,
+                            "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/4160894#comment60714105_4160894",
+                            "body": "I was getting a <code>ValueError: insecure string pickle</code> exception on Windows when trying to un<code>pickle</code> data that had been written to <code>stdout</code> in one process which was being piped into another. The solution turned out to be adding a <code>msvcrt.setmode(sys.stdout.fileno(), os.O_BINARY)</code> in the process that wrote the data."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 672449,
+                        "reputation": 107,
+                        "user_id": 505247,
+                        "user_type": "unregistered",
+                        "display_name": "Frazil"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 9,
+                    "last_activity_date": 1289525506,
+                    "creation_date": 1289525506,
+                    "answer_id": 4160894,
+                    "question_id": 2850893,
+                    "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/4160894#4160894",
+                    "body": "<p>If you still need this...\nThis simple test i've used to read binary file that contains 0x1A character in between</p>\n\n<pre><code>import os, sys, msvcrt\n\nmsvcrt.setmode (sys.stdin.fileno(), os.O_BINARY)\ns = sys.stdin.read()\nprint len (s)\n</code></pre>\n\n<p>My test file data was:</p>\n\n<pre><code>0x23, 0x1A, 0x45\n</code></pre>\n\n<p>Without setting stdin to binary mode this test prints 1 as soon it treats 0x1A as EOF.\nOf course it works on windows only, because depends on msvcrt module.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 346604,
+                                "reputation": 5575,
+                                "user_id": 680232,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "K.-Michael Aye"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1350409706,
+                            "post_id": 4849792,
+                            "comment_id": 17506759,
+                            "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/4849792#comment17506759_4849792",
+                            "body": "that doc leads to py3k docs, not what the OP wants to deal with."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 81935,
+                                "reputation": 12943,
+                                "user_id": 230744,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "ony"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1409641333,
+                            "post_id": 4849792,
+                            "comment_id": 40020787,
+                            "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/4849792#comment40020787_4849792",
+                            "body": "I&#39;ve tried <code>-u</code> with Python v3.2.5 but it did nothing useful. But using <code>sys.stdout.buffer</code> works pretty well though on Python 2.7.8 there is no such feature."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 175099,
+                                "reputation": 3305,
+                                "user_id": 404861,
+                                "user_type": "registered",
+                                "accept_rate": 43,
+                                "display_name": "Yuval"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1490946412,
+                            "post_id": 4849792,
+                            "comment_id": 73347967,
+                            "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/4849792#comment73347967_4849792",
+                            "body": "The OP&#39;s question was about Python 2.6."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 292169,
+                        "reputation": 851,
+                        "user_id": 594769,
+                        "user_type": "registered",
+                        "display_name": "Prestel Nu&#233;"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 30,
+                    "last_activity_date": 1296469607,
+                    "creation_date": 1296469607,
+                    "answer_id": 4849792,
+                    "question_id": 2850893,
+                    "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/4849792#4849792",
+                    "body": "<p>From the docs (see <a href=\"http://docs.python.org/py3k/library/sys.html#sys.stdin\" rel=\"noreferrer\">here</a>):</p>\n\n<blockquote>\n  <p>The standard streams are in text mode\n  by default. To write or read binary\n  data to these, use the underlying\n  binary buffer. For example, to write\n  bytes to stdout, use\n  <code>sys.stdout.buffer.write(b'abc')</code>.</p>\n</blockquote>\n\n<p>But, as in the accepted answer, invoking python with a <code>-u</code> is another option which forces stdin, stdout and stderr to be totally unbuffered. See the python(1) manpage for details.</p>\n\n<p>See the <a href=\"http://docs.python.org/py3k/library/io.html#io.TextIOBase.detach\" rel=\"noreferrer\">documentation on <code>io</code></a> for more information on text buffering, and use <code>sys.stdin.detach()</code> to disable buffering from within Python.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 85917,
+                        "reputation": 20283,
+                        "user_id": 239247,
+                        "user_type": "registered",
+                        "accept_rate": 56,
+                        "display_name": "anatoly techtonik"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 24,
+                    "last_activity_date": 1471151809,
+                    "last_edit_date": 1471151809,
+                    "creation_date": 1471151149,
+                    "answer_id": 38939320,
+                    "question_id": 2850893,
+                    "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/38939320#38939320",
+                    "body": "<p>Here is the final cut for Linux/Windows Python 2/3 compatible code to read data from stdin without corruption:</p>\n\n<pre><code>import sys\n\nPY3K = sys.version_info &gt;= (3, 0)\n\nif PY3K:\n    source = sys.stdin.buffer\nelse:\n    # Python 2 on Windows opens sys.stdin in text mode, and\n    # binary data that read from it becomes corrupted on \\r\\n\n    if sys.platform == \"win32\":\n        # set sys.stdin to binary mode\n        import os, msvcrt\n        msvcrt.setmode(sys.stdin.fileno(), os.O_BINARY)\n    source = sys.stdin\n\nb = source.read()\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7032893,
+                        "reputation": 2698,
+                        "user_id": 5387972,
+                        "user_type": "registered",
+                        "accept_rate": 67,
+                        "display_name": "Jay"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1555349781,
+                    "creation_date": 1555349781,
+                    "answer_id": 55694557,
+                    "question_id": 2850893,
+                    "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/55694557#55694557",
+                    "body": "<p>You can perform an unbuffered read with:</p>\n\n<p><code>os.read(0, bytes_to_read)</code></p>\n\n<p>with 0 being the file descriptor for stdin</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 34404,
+                        "reputation": 85231,
+                        "user_id": 97248,
+                        "user_type": "registered",
+                        "accept_rate": 91,
+                        "display_name": "pts"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1681817126,
+                    "creation_date": 1681817126,
+                    "answer_id": 76043988,
+                    "question_id": 2850893,
+                    "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin/76043988#76043988",
+                    "body": "<p>To read binary data from stdin (in Python 2.4\u20132.7, 3.0\u2013, both Unix and Windows), do this:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import os, sys\nif sys.platform.startswith('win'):\n    try:\n        __import__('msvcrt').setmode(sys.stdout.fileno(), os.O_BINARY)\n    except ImportError:\n        pass\nsys.stdin = os.fdopen(sys.stdin.fileno(), 'rb')\n...\nprint(sys.stdin.read(4096))\n</code></pre>\n<p>To read binary data from stdin, without modifying <code>sys.stdin</code> (in Python 2.4\u20132.7, 3.0\u2013, both Unix and Windows), do this:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import os, sys\nf = os.fdopen(os.dup(sys.stdin.fileno()), 'rb')\nif sys.platform.startswith('win'):\n    try:\n        __import__('msvcrt').setmode(f.fileno(), os.O_BINARY)\n    except ImportError:\n        pass\n...\nprint(f.read(4096))\n</code></pre>\n<p>To read binary data unbuffered (i.e. as soon as it is available to the Python process) from a file object, while putting the underlying file descriptor to binary mode, do this (in Python 2.4\u20132.7, 3.0\u2013, both Unix and Windows):</p>\n<pre class=\"lang-py prettyprint-override\"><code>import os, sys\nf = sys.stdin  # Or anything other file object.\nif sys.platform.startswith('win'):\n    try:\n        __import__('msvcrt').setmode(f.fileno(), os.O_BINARY)\n    except ImportError:\n        pass\n...\nprint(os.read(f.fileno(), 4096))\n</code></pre>\n<p>For unbuffered binary reads, it's tempting to do <code>f = os.fdopen(f.fileno(), 'rb', 0)</code>, but in Python 2.x it doesn't make the read (i.e. <code>f.read(4096)</code>) unbuffered, it would still wait indefinitely for more input until the 4096 bytes are filled or EOF is reached.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 62273,
+                "reputation": 689,
+                "user_id": 185124,
+                "user_type": "registered",
+                "display_name": "danielshiplett"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 2851966,
+            "answer_count": 7,
+            "score": 44,
+            "last_activity_date": 1681817126,
+            "creation_date": 1274114061,
+            "last_edit_date": 1644247798,
+            "question_id": 2850893,
+            "link": "https://stackoverflow.com/questions/2850893/reading-binary-data-from-stdin",
+            "title": "Reading binary data from stdin",
+            "body": "<p>Is it possible to read stdin as binary data in Python 2.6?  If so, how?</p>\n<p>I see in the <a href=\"http://docs.python.org/py3k/library/sys.html\" rel=\"noreferrer\">Python 3.1 documentation</a> that this is fairly simple, but the facilities for doing this in 2.6 don't seem to be there.</p>\n<p>If the methods described in 3.1 aren't available, is there a way to close stdin and reopen in in binary mode?</p>\n<p>Just to be clear, I am using 'type' in a MS-DOS shell to pipe the contents of a binary file to my python code.  This should be the equivalent of a Unix 'cat' command, as far as I understand.  But when I test this out, I always get one byte less than the expected file size.</p>\n<hr />\n<p>The reason I'm going the Java/JAR/Jython route is because one of my main external libraries is only available as a Java JAR.  But unfortunately, I had started my work as Python.  It might have been easier to convert my code over to Java a while ago, but since this stuff was all supposed to be compatible, I figured I would try trucking through it and prove it could be done.</p>\n<p>In case anyone was wondering, this is also related to <a href=\"https://stackoverflow.com/questions/2827771/packaging-and-deploying-a-jython-program-from-eclipse\">this question</a> I asked a few days ago.</p>\n<p>Some of was answered in <a href=\"https://stackoverflow.com/questions/1252965/distributing-my-python-scripts-as-jars-with-jython\">this question</a>.</p>\n<p>So I'll try to update my original question with some notes on what I have figured out so far.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6427
+}

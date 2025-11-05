@@ -1,0 +1,1142 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "numpy",
+                "random",
+                "shuffle",
+                "numpy-ndarray"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 64464,
+                        "reputation": 8352,
+                        "user_id": 190280,
+                        "user_type": "registered",
+                        "accept_rate": 85,
+                        "display_name": "Josh Bleecher Snyder"
+                    },
+                    "edited": false,
+                    "score": 27,
+                    "creation_date": 1512179626,
+                    "post_id": 4601373,
+                    "comment_id": 82166412,
+                    "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison#comment82166412_4601373",
+                    "body": "Six years later, I&#39;m amused and surprised by how popular this question proved to be. And in a bit of delightful coincidence, for Go 1.10 I <a href=\"https://golang.org/cl/51891\" rel=\"nofollow noreferrer\">contributed math/rand.Shuffle to the standard library</a>. The design of the API makes it trivial to shuffle two arrays in unison, and doing so is even included as an example in the docs."
+                },
+                {
+                    "owner": {
+                        "account_id": 167824,
+                        "reputation": 21398,
+                        "user_id": 1439305,
+                        "user_type": "registered",
+                        "accept_rate": 81,
+                        "display_name": "Audrius Me\u0161kauskas"
+                    },
+                    "edited": false,
+                    "score": 8,
+                    "creation_date": 1615797905,
+                    "post_id": 4601373,
+                    "comment_id": 117792582,
+                    "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison#comment117792582_4601373",
+                    "body": "This is a different programming language however."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 64464,
+                                "reputation": 8352,
+                                "user_id": 190280,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Josh Bleecher Snyder"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1294214070,
+                            "post_id": 4601791,
+                            "comment_id": 5056650,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4601791#comment5056650_4601791",
+                            "body": "<a href=\"http://www.codinghorror.com/blog/2007/12/the-danger-of-naivete.html\" rel=\"nofollow noreferrer\">codinghorror.com/blog/2007/12/the-danger-of-naivete.html</a> has made me wary of implementing my own shuffle algorithms; it is in part responsible for my asking this question. :) However, you are very right to point out that I should consider using the Knuth-Fisher-Yates algorithm."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 223307,
+                                "reputation": 7082,
+                                "user_id": 482420,
+                                "user_type": "registered",
+                                "accept_rate": 40,
+                                "display_name": "DaveP"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1294216320,
+                            "post_id": 4601791,
+                            "comment_id": 5056900,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4601791#comment5056900_4601791",
+                            "body": "Well spotted, I&#39;ve fixed the code now.  Anyway, I think the basic idea of in-place shuffling is scalable to an arbitrary number of arrays an avoids making copies."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 104636,
+                                "reputation": 589403,
+                                "user_id": 279627,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "Sven Marnach"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1294224597,
+                            "post_id": 4601791,
+                            "comment_id": 5058132,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4601791#comment5058132_4601791",
+                            "body": "The code is still incorrect (it won&#39;t even run).  To make it work, replace <code>len(a)</code> by <code>reversed(range(1, len(a)))</code>.  But it won&#39;t be very efficient anyway."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 223307,
+                        "reputation": 7082,
+                        "user_id": 482420,
+                        "user_type": "registered",
+                        "accept_rate": 40,
+                        "display_name": "DaveP"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1294216176,
+                    "last_edit_date": 1294216176,
+                    "creation_date": 1294213133,
+                    "answer_id": 4601791,
+                    "question_id": 4601373,
+                    "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4601791#4601791",
+                    "body": "<p>If you want to avoid copying arrays, then I would suggest that instead of generating a permutation list, you go through every element in the array, and randomly swap it to another position in the array</p>\n\n<pre><code>for old_index in len(a):\n    new_index = numpy.random.randint(old_index+1)\n    a[old_index], a[new_index] = a[new_index], a[old_index]\n    b[old_index], b[new_index] = b[new_index], b[old_index]\n</code></pre>\n\n<p>This implements the Knuth-Fisher-Yates shuffle algorithm. </p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 104636,
+                                "reputation": 589403,
+                                "user_id": 279627,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "Sven Marnach"
+                            },
+                            "edited": false,
+                            "score": 24,
+                            "creation_date": 1294223072,
+                            "post_id": 4602224,
+                            "comment_id": 5057878,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4602224#comment5057878_4602224",
+                            "body": "This <i>does</i> create copies, as it uses advanced indexing.  But of course it is faster than the original."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 104636,
+                                "reputation": 589403,
+                                "user_id": 279627,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "Sven Marnach"
+                            },
+                            "reply_to_user": {
+                                "account_id": 41390,
+                                "reputation": 34708,
+                                "user_id": 120261,
+                                "user_type": "registered",
+                                "display_name": "mtrw"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1294239693,
+                            "post_id": 4602224,
+                            "comment_id": 5061121,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4602224#comment5061121_4602224",
+                            "body": "@mtrw: The mere fact that the original arrays are untouched does not outrule that the returned arrays are views of the same data.  But they are indeed not, since NumPy views are not flexible enough to support permuted views (this wouldn&#39;t be desirable either)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 30185,
+                                "reputation": 11050,
+                                "user_id": 82159,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "Dat Chu"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1294240487,
+                            "post_id": 4602224,
+                            "comment_id": 5061305,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4602224#comment5061305_4602224",
+                            "body": "I tried this function with the time module and it is not faster than the previous one. Did I do something wrong?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 41390,
+                                "reputation": 34708,
+                                "user_id": 120261,
+                                "user_type": "registered",
+                                "display_name": "mtrw"
+                            },
+                            "reply_to_user": {
+                                "account_id": 104636,
+                                "reputation": 589403,
+                                "user_id": 279627,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "Sven Marnach"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1294243306,
+                            "post_id": 4602224,
+                            "comment_id": 5062088,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4602224#comment5062088_4602224",
+                            "body": "@Sven - I really have to learn about views.  @Dat Chu - I just tried <code>&gt;&gt;&gt; t = timeit.Timer(stmt = &quot;&lt;function&gt;(a,b)&quot;, setup = &quot;import numpy as np; a,b = np.arange(4), np.arange(4*20).reshape((4,20))&quot;)&gt;&gt;&gt; t.timeit()</code> and got 38 seconds for the OP&#39;s version, and 27.5 seconds for mine, for 1 million calls each."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 64464,
+                                "reputation": 8352,
+                                "user_id": 190280,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Josh Bleecher Snyder"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1294249599,
+                            "post_id": 4602224,
+                            "comment_id": 5063718,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4602224#comment5063718_4602224",
+                            "body": "I really like the simplicity and readability of this, and advanced indexing continues to surprise and amaze me; for that this answer readily gets +1. Oddly enough, though, on my (large) datasets, it is slower than my original function: my original takes ~1.8s for 10 iterations, and this takes ~2.7s. Both numbers are quite consistent. The dataset I used to test has <code>a.shape</code> is <code>(31925, 405)</code> and <code>b.shape</code> is <code>(31925,)</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 41390,
+                                "reputation": 34708,
+                                "user_id": 120261,
+                                "user_type": "registered",
+                                "display_name": "mtrw"
+                            },
+                            "reply_to_user": {
+                                "account_id": 64464,
+                                "reputation": 8352,
+                                "user_id": 190280,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Josh Bleecher Snyder"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1294251002,
+                            "post_id": 4602224,
+                            "comment_id": 5064030,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4602224#comment5064030_4602224",
+                            "body": "@Josh - yep, you&#39;re right.  That&#39;s really odd.  I tried a square array (NxN) and a linear array (N), and your original function is faster starting around N = 75.  I&#39;m perplexed.  But, as Sven pointed out, your second idea of resetting the state of the RNG is probably the easiest way to go anyway."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3091338,
+                                "reputation": 916,
+                                "user_id": 2617351,
+                                "user_type": "registered",
+                                "display_name": "&#205;hor M&#233;"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1476983312,
+                            "post_id": 4602224,
+                            "comment_id": 67589795,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4602224#comment67589795_4602224",
+                            "body": "Maybe, the slowness has to do with the fact that you&#39;re not doing things in-place, but are instead creating new arrays. Or with some slowness related to how CPython parses array-indexes."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1289619,
+                                "reputation": 2617,
+                                "user_id": 1241952,
+                                "user_type": "registered",
+                                "accept_rate": 38,
+                                "display_name": "legel"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1608816753,
+                            "post_id": 4602224,
+                            "comment_id": 115693128,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4602224#comment115693128_4602224",
+                            "body": "Thank you @mtrw for your service to Python. The gods favor you."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 41390,
+                        "reputation": 34708,
+                        "user_id": 120261,
+                        "user_type": "registered",
+                        "display_name": "mtrw"
+                    },
+                    "comment_count": 8,
+                    "is_accepted": false,
+                    "score": 482,
+                    "last_activity_date": 1476985332,
+                    "last_edit_date": 1476985332,
+                    "creation_date": 1294217524,
+                    "answer_id": 4602224,
+                    "question_id": 4601373,
+                    "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4602224#4602224",
+                    "body": "<p>Your can use NumPy's <a href=\"https://docs.scipy.org/doc/numpy-1.10.1/user/basics.indexing.html\">array indexing</a>:</p>\n\n<pre><code>def unison_shuffled_copies(a, b):\n    assert len(a) == len(b)\n    p = numpy.random.permutation(len(a))\n    return a[p], b[p]\n</code></pre>\n\n<p>This will result in creation of separate unison-shuffled arrays.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 64464,
+                                "reputation": 8352,
+                                "user_id": 190280,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Josh Bleecher Snyder"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1294249777,
+                            "post_id": 4603609,
+                            "comment_id": 5063757,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4603609#comment5063757_4603609",
+                            "body": "Re: the scary solution: I just worry that arrays of different shapes could (conceivably) yield different numbers of calls to the rng, which would cause divergence. However, I think you are right that the current behavior is perhaps unlikely to change, and a very simple doctest does make confirming correct behavior very easy..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 64464,
+                                "reputation": 8352,
+                                "user_id": 190280,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Josh Bleecher Snyder"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1294249910,
+                            "post_id": 4603609,
+                            "comment_id": 5063791,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4603609#comment5063791_4603609",
+                            "body": "I like your suggested approach, and could definitely arrange to have a and b start life as a unified c array. However, a and b will need to be contiguous shortly after shuffling (for efficient transfer to a GPU), so I think that, in my particular case, I&#39;d end up making copies of a and b anyway. :("
+                        },
+                        {
+                            "owner": {
+                                "account_id": 104636,
+                                "reputation": 589403,
+                                "user_id": 279627,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "Sven Marnach"
+                            },
+                            "reply_to_user": {
+                                "account_id": 64464,
+                                "reputation": 8352,
+                                "user_id": 190280,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Josh Bleecher Snyder"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1294254707,
+                            "post_id": 4603609,
+                            "comment_id": 5064860,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4603609#comment5064860_4603609",
+                            "body": "@Josh: Note that <code>numpy.random.shuffle()</code> operates on arbitrary mutable sequences, such as Python lists or NumPy arrays.  The array shape does not matter, only the length of the sequence.  This is <i>very</i> unlikely to change in my opinion."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 64464,
+                                "reputation": 8352,
+                                "user_id": 190280,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Josh Bleecher Snyder"
+                            },
+                            "reply_to_user": {
+                                "account_id": 104636,
+                                "reputation": 589403,
+                                "user_id": 279627,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "Sven Marnach"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1294255041,
+                            "post_id": 4603609,
+                            "comment_id": 5064921,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4603609#comment5064921_4603609",
+                            "body": "I didn&#39;t know that. That makes me much more comfortable with it. Thank you."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6645265,
+                                "reputation": 401,
+                                "user_id": 5570764,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "ajfbiw.s"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1455126196,
+                            "post_id": 4603609,
+                            "comment_id": 58353214,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4603609#comment58353214_4603609",
+                            "body": "@SvenMarnach : I posted an answer below. Can you comment on whether you think it makes sense/ is a good way to do it?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1497794,
+                                "reputation": 202,
+                                "user_id": 1403340,
+                                "user_type": "registered",
+                                "display_name": "Abhimanyu Pallavi Sudhir"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1592913399,
+                            "post_id": 4603609,
+                            "comment_id": 110589195,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4603609#comment110589195_4603609",
+                            "body": "Is there a possibility that numpy will be updated to automatically change the RNG state whenever a random function is called?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 104636,
+                                "reputation": 589403,
+                                "user_id": 279627,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "Sven Marnach"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1497794,
+                                "reputation": 202,
+                                "user_id": 1403340,
+                                "user_type": "registered",
+                                "display_name": "Abhimanyu Pallavi Sudhir"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1592919779,
+                            "post_id": 4603609,
+                            "comment_id": 110592988,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4603609#comment110592988_4603609",
+                            "body": "@AbhimanyuPallaviSudhir I&#39;m not quite sure what you are referring to. The RNG state does advance whenever you call a function using random bits \u2013 otherwise you&#39;d get the same bits with every call."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1497794,
+                                "reputation": 202,
+                                "user_id": 1403340,
+                                "user_type": "registered",
+                                "display_name": "Abhimanyu Pallavi Sudhir"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1592930070,
+                            "post_id": 4603609,
+                            "comment_id": 110598991,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4603609#comment110598991_4603609",
+                            "body": "@SvenMarnach Does it advance before or after calling such a random function? I&#39;m guessing after. I&#39;m saying what if they change that to before? (Presumably the next state is not a deterministic function of the current state, i.e. it depends on the current time, or something like that -- correct?)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 104636,
+                                "reputation": 589403,
+                                "user_id": 279627,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "Sven Marnach"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1497794,
+                                "reputation": 202,
+                                "user_id": 1403340,
+                                "user_type": "registered",
+                                "display_name": "Abhimanyu Pallavi Sudhir"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1592942692,
+                            "post_id": 4603609,
+                            "comment_id": 110604826,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4603609#comment110604826_4603609",
+                            "body": "@AbhimanyuPallaviSudhir The state is changed <i>during</i> the function call, as part of generating a random number. It&#39;s neither before nor after. And the new state <i>is</i> a deterministic, pure function of the old state, which is why good PRNGs have lots of entropy in their state. Usually you <i>seed</i> the state with some non-deterministic entropy, but after that all further steps are deterministic."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 104636,
+                        "reputation": 589403,
+                        "user_id": 279627,
+                        "user_type": "registered",
+                        "accept_rate": 82,
+                        "display_name": "Sven Marnach"
+                    },
+                    "comment_count": 9,
+                    "is_accepted": true,
+                    "score": 81,
+                    "last_activity_date": 1294227328,
+                    "creation_date": 1294227328,
+                    "answer_id": 4603609,
+                    "question_id": 4601373,
+                    "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4603609#4603609",
+                    "body": "<p>Your \"scary\" solution does not appear scary to me.  Calling <code>shuffle()</code> for two sequences of the same length results in the same number of calls to the random number generator, and these are the only \"random\" elements in the shuffle algorithm.  By resetting the state, you ensure that the calls to the random number generator will give the same results in the second call to <code>shuffle()</code>, so the whole algorithm will generate the same permutation.</p>\n\n<p>If you don't like this, a different solution would be to store your data in one array instead of two right from the beginning, and create two views into this single array simulating the two arrays you have now.  You can use the single array for shuffling and the views for all other purposes.</p>\n\n<p>Example: Let's assume the arrays <code>a</code> and <code>b</code> look like this:</p>\n\n<pre><code>a = numpy.array([[[  0.,   1.,   2.],\n                  [  3.,   4.,   5.]],\n\n                 [[  6.,   7.,   8.],\n                  [  9.,  10.,  11.]],\n\n                 [[ 12.,  13.,  14.],\n                  [ 15.,  16.,  17.]]])\n\nb = numpy.array([[ 0.,  1.],\n                 [ 2.,  3.],\n                 [ 4.,  5.]])\n</code></pre>\n\n<p>We can now construct a single array containing all the data:</p>\n\n<pre><code>c = numpy.c_[a.reshape(len(a), -1), b.reshape(len(b), -1)]\n# array([[  0.,   1.,   2.,   3.,   4.,   5.,   0.,   1.],\n#        [  6.,   7.,   8.,   9.,  10.,  11.,   2.,   3.],\n#        [ 12.,  13.,  14.,  15.,  16.,  17.,   4.,   5.]])\n</code></pre>\n\n<p>Now we create views simulating the original <code>a</code> and <code>b</code>:</p>\n\n<pre><code>a2 = c[:, :a.size//len(a)].reshape(a.shape)\nb2 = c[:, a.size//len(a):].reshape(b.shape)\n</code></pre>\n\n<p>The data of <code>a2</code> and <code>b2</code> is shared with <code>c</code>.  To shuffle both arrays simultaneously, use <code>numpy.random.shuffle(c)</code>.</p>\n\n<p>In production code, you would of course try to avoid creating the original <code>a</code> and <code>b</code> at all and right away create <code>c</code>, <code>a2</code> and <code>b2</code>.</p>\n\n<p>This solution could be adapted to the case that <code>a</code> and <code>b</code> have different dtypes.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 361563,
+                                "reputation": 2434,
+                                "user_id": 704244,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "bartolo-otrit"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1584179557,
+                            "post_id": 30633632,
+                            "comment_id": 107361092,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/30633632#comment107361092_30633632",
+                            "body": "This solution creates <a href=\"https://scikit-learn.org/stable/modules/generated/sklearn.utils.shuffle.html\" rel=\"nofollow noreferrer\">copies</a> (<i>&quot;The original arrays are not impacted&quot;</i>), whereas the author&#39;s &quot;scary&quot; solution doesn&#39;t."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1439605,
+                                "reputation": 2585,
+                                "user_id": 1360133,
+                                "user_type": "registered",
+                                "display_name": "James"
+                            },
+                            "reply_to_user": {
+                                "account_id": 361563,
+                                "reputation": 2434,
+                                "user_id": 704244,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "bartolo-otrit"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1584339658,
+                            "post_id": 30633632,
+                            "comment_id": 107396602,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/30633632#comment107396602_30633632",
+                            "body": "You can choose any style as you like"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1439605,
+                        "reputation": 2585,
+                        "user_id": 1360133,
+                        "user_type": "registered",
+                        "display_name": "James"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 217,
+                    "last_activity_date": 1433382415,
+                    "creation_date": 1433382415,
+                    "answer_id": 30633632,
+                    "question_id": 4601373,
+                    "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/30633632#30633632",
+                    "body": "<pre><code>X = np.array([[1., 0.], [2., 1.], [0., 0.]])\ny = np.array([0, 1, 2])\nfrom sklearn.utils import shuffle\nX, y = shuffle(X, y, random_state=0)\n</code></pre>\n\n<p>To learn more, see <a href=\"http://scikit-learn.org/stable/modules/generated/sklearn.utils.shuffle.html\" rel=\"noreferrer\">http://scikit-learn.org/stable/modules/generated/sklearn.utils.shuffle.html</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 104636,
+                                "reputation": 589403,
+                                "user_id": 279627,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "Sven Marnach"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1455127632,
+                            "post_id": 35307827,
+                            "comment_id": 58354101,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/35307827#comment58354101_35307827",
+                            "body": "This is more or less equivalent to <code>combo = zip(images, labels); shuffle(combo); im, lab = zip(*combo)</code>, just slower.  Since you are using Numpy anyway, a yet much faster solution would be to zip the arrays using Numpy <code>combo = np.c_[images, labels]</code>, shuffle, and unzip again <code>images, labels = combo.T</code>.  Assuming that <code>labels</code> and <code>images</code> are one-dimensional Numpy arrays of the same length to begin with, this will be easily the fastest solution.  If they are multi-dimensional, see my answer above."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6645265,
+                                "reputation": 401,
+                                "user_id": 5570764,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "ajfbiw.s"
+                            },
+                            "reply_to_user": {
+                                "account_id": 104636,
+                                "reputation": 589403,
+                                "user_id": 279627,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "Sven Marnach"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1455127794,
+                            "post_id": 35307827,
+                            "comment_id": 58354201,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/35307827#comment58354201_35307827",
+                            "body": "Ok that makes sense. Thanks! @SvenMarnach"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6645265,
+                        "reputation": 401,
+                        "user_id": 5570764,
+                        "user_type": "registered",
+                        "accept_rate": 74,
+                        "display_name": "ajfbiw.s"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1455083571,
+                    "creation_date": 1455083571,
+                    "answer_id": 35307827,
+                    "question_id": 4601373,
+                    "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/35307827#35307827",
+                    "body": "<p>With an example, this is what I'm doing:</p>\n\n<pre><code>combo = []\nfor i in range(60000):\n    combo.append((images[i], labels[i]))\n\nshuffle(combo)\n\nim = []\nlab = []\nfor c in combo:\n    im.append(c[0])\n    lab.append(c[1])\nimages = np.asarray(im)\nlabels = np.asarray(lab)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 64464,
+                                "reputation": 8352,
+                                "user_id": 190280,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Josh Bleecher Snyder"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1465487076,
+                            "post_id": 37710486,
+                            "comment_id": 62932389,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/37710486#comment62932389_37710486",
+                            "body": "This is equivalent to mtrw&#39;s solution. Your first two lines are just generating a permutation, but that can be done in one line."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 8600140,
+                        "reputation": 561,
+                        "user_id": 6442007,
+                        "user_type": "registered",
+                        "display_name": "connor"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 46,
+                    "last_activity_date": 1465411500,
+                    "creation_date": 1465411500,
+                    "answer_id": 37710486,
+                    "question_id": 4601373,
+                    "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/37710486#37710486",
+                    "body": "<p>Very simple solution:</p>\n\n<pre><code>randomize = np.arange(len(x))\nnp.random.shuffle(randomize)\nx = x[randomize]\ny = y[randomize]\n</code></pre>\n\n<p>the two arrays x,y are now both randomly shuffled in the same way</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1087577,
+                        "reputation": 1768,
+                        "user_id": 1082933,
+                        "user_type": "registered",
+                        "display_name": "Ivo"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1509372947,
+                    "creation_date": 1509372947,
+                    "answer_id": 47017474,
+                    "question_id": 4601373,
+                    "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/47017474#47017474",
+                    "body": "<p>I extended python's random.shuffle() to take a second arg:</p>\n\n<pre><code>def shuffle_together(x, y):\n    assert len(x) == len(y)\n\n    for i in reversed(xrange(1, len(x))):\n        # pick an element in x[:i+1] with which to exchange x[i]\n        j = int(random.random() * (i+1))\n        x[i], x[j] = x[j], x[i]\n        y[i], y[j] = y[j], y[i]\n</code></pre>\n\n<p>That way I can be sure that the shuffling happens in-place, and the function is not all too long or complicated.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2292041,
+                                "reputation": 3317,
+                                "user_id": 2014549,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "Bruno Klein"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1516826858,
+                            "post_id": 47584567,
+                            "comment_id": 83853665,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/47584567#comment83853665_47584567",
+                            "body": "This code does not work. <code>RandomState</code> changes state on the first call and <code>a</code> and <code>b</code> are not shuffled in unison."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8897979,
+                                "reputation": 198,
+                                "user_id": 6642285,
+                                "user_type": "registered",
+                                "display_name": "Adam Snaider"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2292041,
+                                "reputation": 3317,
+                                "user_id": 2014549,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "Bruno Klein"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1519101516,
+                            "post_id": 47584567,
+                            "comment_id": 84759904,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/47584567#comment84759904_47584567",
+                            "body": "@BrunoKlein You are right. I fixed the post to re-seed the random state. Also, even though it is not in unison in the sense of both lists being shuffled at the same time, they are in unison in the sense that both are shuffled in the same way, and it also doesn&#39;t require more memory to hold a copy of the lists (which OP mentions in his question)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 8897979,
+                        "reputation": 198,
+                        "user_id": 6642285,
+                        "user_type": "registered",
+                        "display_name": "Adam Snaider"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1519101312,
+                    "last_edit_date": 1519101312,
+                    "creation_date": 1512086173,
+                    "answer_id": 47584567,
+                    "question_id": 4601373,
+                    "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/47584567#47584567",
+                    "body": "<p>One way in which in-place shuffling  can be done for connected lists is using a seed (it could be random) and using numpy.random.shuffle to do the shuffling.</p>\n\n<pre><code># Set seed to a random number if you want the shuffling to be non-deterministic.\ndef shuffle(a, b, seed):\n   np.random.seed(seed)\n   np.random.shuffle(a)\n   np.random.seed(seed)\n   np.random.shuffle(b)\n</code></pre>\n\n<p>That's it. This will shuffle both a and b in the exact same way. This is also done in-place which is always a plus.</p>\n\n<h3>EDIT, don't use np.random.seed() use np.random.RandomState instead</h3>\n\n<pre><code>def shuffle(a, b, seed):\n   rand_state = np.random.RandomState(seed)\n   rand_state.shuffle(a)\n   rand_state.seed(seed)\n   rand_state.shuffle(b)\n</code></pre>\n\n<p>When calling it just pass in any seed to feed the random state:</p>\n\n<pre><code>a = [1,2,3,4]\nb = [11, 22, 33, 44]\nshuffle(a, b, 12345)\n</code></pre>\n\n<p>Output:</p>\n\n<pre><code>&gt;&gt;&gt; a\n[1, 4, 2, 3]\n&gt;&gt;&gt; b\n[11, 44, 22, 33]\n</code></pre>\n\n<p>Edit: Fixed code to re-seed the random state</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1522906,
+                                "reputation": 44396,
+                                "user_id": 1422096,
+                                "user_type": "registered",
+                                "accept_rate": 63,
+                                "display_name": "Basj"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1542381855,
+                            "post_id": 49597803,
+                            "comment_id": 93560411,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/49597803#comment93560411_49597803",
+                            "body": "Really, this is the best solution, and should be the accepted one! It even works for many (more than 2) arrays at the same time. The idea is simple: just shuffle the index list [0, 1, 2, ..., n-1] , and then reindex the arrays&#39; rows with the shuffled indexes. Nice!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 11522673,
+                        "reputation": 766,
+                        "user_id": 8443985,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "mohammad hassan bigdeli shamlo"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 13,
+                    "last_activity_date": 1522583957,
+                    "creation_date": 1522583957,
+                    "answer_id": 49597803,
+                    "question_id": 4601373,
+                    "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/49597803#49597803",
+                    "body": "<p>you can make an array like:</p>\n\n<pre><code>s = np.arange(0, len(a), 1)\n</code></pre>\n\n<p>then shuffle it:</p>\n\n<pre><code>np.random.shuffle(s)\n</code></pre>\n\n<p>now use this s as argument of your arrays. same shuffled arguments return same shuffled vectors.</p>\n\n<pre><code>x_data = x_data[s]\nx_label = x_label[s]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 13680186,
+                        "reputation": 301,
+                        "user_id": 9870740,
+                        "user_type": "unregistered",
+                        "display_name": "Daniel"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 30,
+                    "last_activity_date": 1534337551,
+                    "last_edit_date": 1534337551,
+                    "creation_date": 1527688707,
+                    "answer_id": 50606617,
+                    "question_id": 4601373,
+                    "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/50606617#50606617",
+                    "body": "<p>James wrote in 2015 an sklearn <a href=\"https://stackoverflow.com/a/30633632/3441514\">solution</a> which is helpful. But he added a random state variable, which is not needed. In the below code, the random state from numpy is automatically assumed.</p>\n\n<pre><code>X = np.array([[1., 0.], [2., 1.], [0., 0.]])\ny = np.array([0, 1, 2])\nfrom sklearn.utils import shuffle\nX, y = shuffle(X, y)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 6815600,
+                                "reputation": 846,
+                                "user_id": 5244410,
+                                "user_type": "registered",
+                                "accept_rate": 37,
+                                "display_name": "wprins"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1541101303,
+                            "post_id": 51526109,
+                            "comment_id": 93111862,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/51526109#comment93111862_51526109",
+                            "body": "beautiful solution, this worked perfect for me. Even with arrays of 3+ axis"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 476264,
+                                "reputation": 5088,
+                                "user_id": 887074,
+                                "user_type": "registered",
+                                "accept_rate": 54,
+                                "display_name": "Erotemic"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1580823270,
+                            "post_id": 51526109,
+                            "comment_id": 106218248,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/51526109#comment106218248_51526109",
+                            "body": "This is the correct answer. There is no reason to use the global np.random when you can pass around random state objects."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 361563,
+                                "reputation": 2434,
+                                "user_id": 704244,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "bartolo-otrit"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1584183898,
+                            "post_id": 51526109,
+                            "comment_id": 107362033,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/51526109#comment107362033_51526109",
+                            "body": "One <code>RandomState</code> could be used outside of the loop. See Adam Snaider&#39;s <a href=\"https://stackoverflow.com/a/47584567/704244\">answer</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9938559,
+                                "reputation": 755,
+                                "user_id": 7355989,
+                                "user_type": "registered",
+                                "display_name": "Isaac B"
+                            },
+                            "reply_to_user": {
+                                "account_id": 361563,
+                                "reputation": 2434,
+                                "user_id": 704244,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "bartolo-otrit"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1584297320,
+                            "post_id": 51526109,
+                            "comment_id": 107387324,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/51526109#comment107387324_51526109",
+                            "body": "@bartolo-otrit, the choice that has to be made in the <code>for</code> loop is whether to reassign or reseed random state. With the number of arrays being passed into a shuffling function expected to be small, I wouldn&#39;t expect a performance difference between the two. But yes, rstate could be assigned outside the loop and reseeded inside the loop on each iteration."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 9938559,
+                        "reputation": 755,
+                        "user_id": 7355989,
+                        "user_type": "registered",
+                        "display_name": "Isaac B"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 22,
+                    "last_activity_date": 1532548465,
+                    "last_edit_date": 1532548465,
+                    "creation_date": 1532545947,
+                    "answer_id": 51526109,
+                    "question_id": 4601373,
+                    "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/51526109#51526109",
+                    "body": "<p>Shuffle any number of arrays together, in-place, using only NumPy.</p>\n\n<pre><code>import numpy as np\n\n\ndef shuffle_arrays(arrays, set_seed=-1):\n    \"\"\"Shuffles arrays in-place, in the same order, along axis=0\n\n    Parameters:\n    -----------\n    arrays : List of NumPy arrays.\n    set_seed : Seed value if int &gt;= 0, else seed is random.\n    \"\"\"\n    assert all(len(arr) == len(arrays[0]) for arr in arrays)\n    seed = np.random.randint(0, 2**(32 - 1) - 1) if set_seed &lt; 0 else set_seed\n\n    for arr in arrays:\n        rstate = np.random.RandomState(seed)\n        rstate.shuffle(arr)\n</code></pre>\n\n<p>And can be used like this</p>\n\n<pre><code>a = np.array([1, 2, 3, 4, 5])\nb = np.array([10,20,30,40,50])\nc = np.array([[1,10,11], [2,20,22], [3,30,33], [4,40,44], [5,50,55]])\n\nshuffle_arrays([a, b, c])\n</code></pre>\n\n<p>A few things to note:</p>\n\n<ul>\n<li>The assert ensures that all input arrays have the same length along\ntheir first dimension.</li>\n<li>Arrays shuffled in-place by their first dimension - nothing returned.</li>\n<li>Random seed within positive int32 range.</li>\n<li>If a repeatable shuffle is needed, seed value can be set.</li>\n</ul>\n\n<p>After the shuffle, the data can be split using <code>np.split</code> or referenced using slices - depending on the application.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 13076666,
+                                "reputation": 1217,
+                                "user_id": 9448540,
+                                "user_type": "registered",
+                                "display_name": "curiouscupcake"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1574176389,
+                            "post_id": 53196864,
+                            "comment_id": 104133005,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/53196864#comment104133005_53196864",
+                            "body": "I can not believe I never thought of this. Your answer is brilliant."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 17448265,
+                                "reputation": 868,
+                                "user_id": 12648789,
+                                "user_type": "registered",
+                                "display_name": "theProcrastinator"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1622628800,
+                            "post_id": 53196864,
+                            "comment_id": 119844598,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/53196864#comment119844598_53196864",
+                            "body": "Has something changed in sklearn? This solution is not working for me and throwing a ValueError."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8985335,
+                                "reputation": 5942,
+                                "user_id": 6699069,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "sziraqui"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1622830167,
+                            "post_id": 53196864,
+                            "comment_id": 119913467,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/53196864#comment119913467_53196864",
+                            "body": "I don&#39;t see any changes in this function. Check if you are passing correct data type (any array-like type will work) and also check if the arrays have same shape."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 8985335,
+                        "reputation": 5942,
+                        "user_id": 6699069,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "sziraqui"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1541677630,
+                    "last_edit_date": 1541677630,
+                    "creation_date": 1541620543,
+                    "answer_id": 53196864,
+                    "question_id": 4601373,
+                    "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/53196864#53196864",
+                    "body": "<p>There is a well-known function that can handle this:</p>\n\n<pre><code>from sklearn.model_selection import train_test_split\nX, _, Y, _ = train_test_split(X,Y, test_size=0.0)\n</code></pre>\n\n<p>Just setting test_size to 0 will avoid splitting and give you shuffled data. \nThough it is usually used to split train and test data, it does shuffle them too.<br>\nFrom <a href=\"https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html\" rel=\"noreferrer\">documentation</a></p>\n\n<blockquote>\n  <p>Split arrays or matrices into random train and test subsets</p>\n  \n  <p>Quick utility that wraps input validation and\n  next(ShuffleSplit().split(X, y)) and application to input data into a\n  single call for splitting (and optionally subsampling) data in a\n  oneliner.</p>\n</blockquote>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7346896,
+                                "reputation": 587,
+                                "user_id": 5594295,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Kev"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1548956419,
+                            "post_id": 53638614,
+                            "comment_id": 95740502,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/53638614#comment95740502_53638614",
+                            "body": "Why not just a[indices,:] or b[indices,:]?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1962130,
+                        "reputation": 1686,
+                        "user_id": 1763367,
+                        "user_type": "registered",
+                        "accept_rate": 60,
+                        "display_name": "monolith"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1544034649,
+                    "creation_date": 1544034649,
+                    "answer_id": 53638614,
+                    "question_id": 4601373,
+                    "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/53638614#53638614",
+                    "body": "<p>Say we have two arrays: a and b. </p>\n\n<pre><code>a = np.array([[1,2,3],[4,5,6],[7,8,9]])\nb = np.array([[9,1,1],[6,6,6],[4,2,0]]) \n</code></pre>\n\n<p>We can first obtain row indices by permutating first dimension </p>\n\n<pre><code>indices = np.random.permutation(a.shape[0])\n[1 2 0]\n</code></pre>\n\n<p>Then use advanced indexing.\nHere we are using the same indices to shuffle both arrays in unison. </p>\n\n<pre><code>a_shuffled = a[indices[:,np.newaxis], np.arange(a.shape[1])]\nb_shuffled = b[indices[:,np.newaxis], np.arange(b.shape[1])]\n</code></pre>\n\n<p>This is equivalent to</p>\n\n<pre><code>np.take(a, indices, axis=0)\n[[4 5 6]\n [7 8 9]\n [1 2 3]]\n\nnp.take(b, indices, axis=0)\n[[6 6 6]\n [4 2 0]\n [9 1 1]]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1894536,
+                                "reputation": 55139,
+                                "user_id": 1711796,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Bernhard Barker"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1657628635,
+                            "post_id": 55347790,
+                            "comment_id": 128851474,
+                            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/55347790#comment128851474_55347790",
+                            "body": "This is essentially identical to <a href=\"https://stackoverflow.com/a/4602224/1711796\">the top-voted answer</a>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 140234,
+                        "reputation": 827,
+                        "user_id": 346389,
+                        "user_type": "registered",
+                        "accept_rate": 25,
+                        "display_name": "benjaminjsanders"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 25,
+                    "last_activity_date": 1553556198,
+                    "creation_date": 1553556198,
+                    "answer_id": 55347790,
+                    "question_id": 4601373,
+                    "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/55347790#55347790",
+                    "body": "<pre><code>from np.random import permutation\nfrom sklearn.datasets import load_iris\niris = load_iris()\nX = iris.data #numpy array\ny = iris.target #numpy array\n\n# Data is currently unshuffled; we should shuffle \n# each X[i] with its corresponding y[i]\nperm = permutation(len(X))\nX = X[perm]\ny = y[perm]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 17475398,
+                        "reputation": 33,
+                        "user_id": 12670374,
+                        "user_type": "registered",
+                        "display_name": "szZzr"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1585870259,
+                    "last_edit_date": 1585870259,
+                    "creation_date": 1585863002,
+                    "answer_id": 61001460,
+                    "question_id": 4601373,
+                    "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/61001460#61001460",
+                    "body": "<p>Just use <code>numpy</code>...</p>\n\n<p>First merge the two input arrays 1D array is labels(y) and 2D array is data(x) and shuffle them with NumPy <code>shuffle</code> method. Finally split them and return.</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>import numpy as np\n\ndef shuffle_2d(a, b):\n    rows= a.shape[0]\n    if b.shape != (rows,1):\n        b = b.reshape((rows,1))\n    S = np.hstack((b,a))\n    np.random.shuffle(S)\n    b, a  = S[:,0], S[:,1:]\n    return a,b\n\nfeatures, samples = 2, 5\nx, y = np.random.random((samples, features)), np.arange(samples)\nx, y = shuffle_2d(train, test)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4751485,
+                        "reputation": 668,
+                        "user_id": 3841412,
+                        "user_type": "registered",
+                        "display_name": "andrea m."
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1590082742,
+                    "last_edit_date": 1590082742,
+                    "creation_date": 1587092444,
+                    "answer_id": 61263444,
+                    "question_id": 4601373,
+                    "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/61263444#61263444",
+                    "body": "<p>This seems like a very simple solution:</p>\n\n<pre><code>import numpy as np\ndef shuffle_in_unison(a,b):\n\n    assert len(a)==len(b)\n    c = np.arange(len(a))\n    np.random.shuffle(c)\n\n    return a[c],b[c]\n\na =  np.asarray([[1, 1], [2, 2], [3, 3]])\nb =  np.asarray([11, 22, 33])\n\nshuffle_in_unison(a,b)\nOut[94]: \n(array([[3, 3],\n        [2, 2],\n        [1, 1]]),\n array([33, 22, 11]))\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 12560012,
+                        "reputation": 383,
+                        "user_id": 9138148,
+                        "user_type": "registered",
+                        "display_name": "momo668"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1632274457,
+                    "creation_date": 1632274457,
+                    "answer_id": 69277205,
+                    "question_id": 4601373,
+                    "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/69277205#69277205",
+                    "body": "<p>Shortest and easiest way in my opinion, use <strong>seed</strong>:</p>\n<pre><code>random.seed(seed)\nrandom.shuffle(x_data)\n# reset the same seed to get the identical random sequence and shuffle the y\nrandom.seed(seed)\nrandom.shuffle(y_data)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5751280,
+                        "reputation": 1803,
+                        "user_id": 4540883,
+                        "user_type": "registered",
+                        "accept_rate": 64,
+                        "display_name": "Diego Velez"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1653740220,
+                    "creation_date": 1653740220,
+                    "answer_id": 72415634,
+                    "question_id": 4601373,
+                    "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/72415634#72415634",
+                    "body": "<p>most solutions above work, however if you have column vectors you have to transpose them first. here is an example</p>\n<pre class=\"lang-py prettyprint-override\"><code>def shuffle(self) -&gt; None:\n    &quot;&quot;&quot;\n    Shuffles X and Y\n    &quot;&quot;&quot;\n    x = self.X.T\n    y = self.Y.T\n    p = np.random.permutation(len(x))\n    self.X = x[p].T\n    self.Y = y[p].T\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 64464,
+                "reputation": 8352,
+                "user_id": 190280,
+                "user_type": "registered",
+                "accept_rate": 85,
+                "display_name": "Josh Bleecher Snyder"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "accepted_answer_id": 4603609,
+            "answer_count": 18,
+            "score": 343,
+            "last_activity_date": 1653740220,
+            "creation_date": 1294208636,
+            "last_edit_date": 1556402806,
+            "question_id": 4601373,
+            "link": "https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison",
+            "title": "Better way to shuffle two numpy arrays in unison",
+            "body": "<p>I have two numpy arrays of different shapes, but with the same length (leading dimension). I want to shuffle each of them, such that corresponding elements continue to correspond -- i.e. shuffle them in unison with respect to their leading indices.</p>\n\n<p>This code works, and illustrates my goals:</p>\n\n<pre><code>def shuffle_in_unison(a, b):\n    assert len(a) == len(b)\n    shuffled_a = numpy.empty(a.shape, dtype=a.dtype)\n    shuffled_b = numpy.empty(b.shape, dtype=b.dtype)\n    permutation = numpy.random.permutation(len(a))\n    for old_index, new_index in enumerate(permutation):\n        shuffled_a[new_index] = a[old_index]\n        shuffled_b[new_index] = b[old_index]\n    return shuffled_a, shuffled_b\n</code></pre>\n\n<p>For example:</p>\n\n<pre><code>&gt;&gt;&gt; a = numpy.asarray([[1, 1], [2, 2], [3, 3]])\n&gt;&gt;&gt; b = numpy.asarray([1, 2, 3])\n&gt;&gt;&gt; shuffle_in_unison(a, b)\n(array([[2, 2],\n       [1, 1],\n       [3, 3]]), array([2, 1, 3]))\n</code></pre>\n\n<p>However, this feels clunky, inefficient, and slow, and it requires making a copy of the arrays -- I'd rather shuffle them in-place, since they'll be quite large.</p>\n\n<p>Is there a better way to go about this? Faster execution and lower memory usage are my primary goals, but elegant code would be nice, too.</p>\n\n<p>One other thought I had was this:</p>\n\n<pre><code>def shuffle_in_unison_scary(a, b):\n    rng_state = numpy.random.get_state()\n    numpy.random.shuffle(a)\n    numpy.random.set_state(rng_state)\n    numpy.random.shuffle(b)\n</code></pre>\n\n<p>This works...but it's a little scary, as I see little guarantee it'll continue to work -- it doesn't look like the sort of thing that's guaranteed to survive across numpy version, for example.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6887
+}

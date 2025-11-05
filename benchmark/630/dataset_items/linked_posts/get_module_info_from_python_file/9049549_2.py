@@ -1,0 +1,10 @@
+>>> for imp in get_imports("/path/to/file.py"): print imp
+Import(module=['coco'], name=['bunny'], alias=None)
+Import(module=['coco', 'bungy'], name=['carrot'], alias=None)
+Import(module=['meta'], name=['teta'], alias=None)
+Import(module=['rocket'], name=['spaceship'], alias='sp')
+Import(module=[], name=['bingo'], alias=None)
+Import(module=[], name=['com', 'stackoverflow'], alias=None)
+Import(module=[], name=['motorbike'], alias='car')
+Import(module=[], name=['module1'], alias=None)
+Import(module=[], name=['module2'], alias=None)

@@ -1,0 +1,345 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "arguments",
+                "argparse"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 3597514,
+                        "reputation": 119122,
+                        "user_id": 3001761,
+                        "user_type": "registered",
+                        "display_name": "jonrsharpe"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1443355275,
+                    "post_id": 32807319,
+                    "comment_id": 53452110,
+                    "link": "https://stackoverflow.com/questions/32807319/disable-remove-argument-in-argparse#comment53452110_32807319",
+                    "body": "Why not factor out the shared parameters, then add each version of <code>arg1</code> in the script where it&#39;s actually needed?"
+                },
+                {
+                    "owner": {
+                        "account_id": 1267053,
+                        "reputation": 6010,
+                        "user_id": 1224158,
+                        "user_type": "registered",
+                        "accept_rate": 92,
+                        "display_name": "Bryan P"
+                    },
+                    "reply_to_user": {
+                        "account_id": 3597514,
+                        "reputation": 119122,
+                        "user_id": 3001761,
+                        "user_type": "registered",
+                        "display_name": "jonrsharpe"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1443361861,
+                    "post_id": 32807319,
+                    "comment_id": 53453922,
+                    "link": "https://stackoverflow.com/questions/32807319/disable-remove-argument-in-argparse#comment53453922_32807319",
+                    "body": "@jonrsharpe That may be the best option and is what I am doing now, but some co-developers are excited to keep a single command-line parsing function in the main, first, file so I wanted to look for alternatives."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1749730,
+                                "reputation": 31681,
+                                "user_id": 1599111,
+                                "user_type": "registered",
+                                "display_name": "Lukas Graf"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1443353507,
+                            "post_id": 32807403,
+                            "comment_id": 53451659,
+                            "link": "https://stackoverflow.com/questions/32807319/disable-remove-argument-in-argparse/32807403#comment53451659_32807403",
+                            "body": "This will still <i>parse</i> the argument, and for example have it be required if it&#39;s flagged as such."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1267053,
+                                "reputation": 6010,
+                                "user_id": 1224158,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Bryan P"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1443353702,
+                            "post_id": 32807403,
+                            "comment_id": 53451706,
+                            "link": "https://stackoverflow.com/questions/32807319/disable-remove-argument-in-argparse/32807403#comment53451706_32807403",
+                            "body": "Also, I would like the first file to run stand-alone and include the <code>arg1</code> help in the output display. I&#39;ve edited the question to help clarify."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1267053,
+                                "reputation": 6010,
+                                "user_id": 1224158,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Bryan P"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1443354009,
+                            "post_id": 32807403,
+                            "comment_id": 53451769,
+                            "link": "https://stackoverflow.com/questions/32807319/disable-remove-argument-in-argparse/32807403#comment53451769_32807403",
+                            "body": "Oh, wait, I see now it seems I could use SUPPRESS in the second file. That should sort of work (although it does still treat the option as valid). But seems that parsing a positional argument might be problematic (added this consideration to original question."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 415531,
+                        "reputation": 172519,
+                        "user_id": 790387,
+                        "user_type": "registered",
+                        "accept_rate": 83,
+                        "display_name": "Burhan Khalid"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 17,
+                    "last_activity_date": 1443353617,
+                    "last_edit_date": 1443353617,
+                    "creation_date": 1443353210,
+                    "answer_id": 32807403,
+                    "question_id": 32807319,
+                    "link": "https://stackoverflow.com/questions/32807319/disable-remove-argument-in-argparse/32807403#32807403",
+                    "body": "<blockquote>\n  <p>Is it possible to remove or disable an argument in argparse, such that\n  it does not show in the help?</p>\n</blockquote>\n\n<p>Set <code>help</code> to <code>argparse.SUPPRESS</code> when you add the argument, like this:</p>\n\n<pre><code>parser.add_argument('--arg1', help=argparse.SUPPRESS)\n</code></pre>\n\n<p>This will prevent the argument from showing up in the default help output.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1267053,
+                                "reputation": 6010,
+                                "user_id": 1224158,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Bryan P"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1443509684,
+                            "post_id": 32809642,
+                            "comment_id": 53510138,
+                            "link": "https://stackoverflow.com/questions/32807319/disable-remove-argument-in-argparse/32809642#comment53510138_32809642",
+                            "body": "Great find. Seems argparse developers could use this machinery to make an official, supported implementation."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 353880,
+                                "reputation": 10876,
+                                "user_id": 691859,
+                                "user_type": "registered",
+                                "accept_rate": 95,
+                                "display_name": "2rs2ts"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1448390539,
+                            "post_id": 32809642,
+                            "comment_id": 55565190,
+                            "link": "https://stackoverflow.com/questions/32807319/disable-remove-argument-in-argparse/32809642#comment55565190_32809642",
+                            "body": "This wreaks havoc on subparsers. I have a base subparser and a bunch of other ones that mark that base as their <code>parent</code>. If I remove an optional argument from one subparser, then all the other subparsers still have the argument... but it becomes positional (but shows as optional in their help messages, still!) The same thing happens for Burhan&#39;s method too, so it&#39;s probably a limitation of the library."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 485561,
+                                "reputation": 227434,
+                                "user_id": 901925,
+                                "user_type": "registered",
+                                "display_name": "hpaulj"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1448403517,
+                            "post_id": 32809642,
+                            "comment_id": 55572483,
+                            "link": "https://stackoverflow.com/questions/32807319/disable-remove-argument-in-argparse/32809642#comment55572483_32809642",
+                            "body": "I added an explanation and a link to an earlier SO virtually the same problem."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 485561,
+                        "reputation": 227434,
+                        "user_id": 901925,
+                        "user_type": "registered",
+                        "display_name": "hpaulj"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": true,
+                    "score": 4,
+                    "last_activity_date": 1448403466,
+                    "last_edit_date": 1495542854,
+                    "creation_date": 1443368096,
+                    "answer_id": 32809642,
+                    "question_id": 32807319,
+                    "link": "https://stackoverflow.com/questions/32807319/disable-remove-argument-in-argparse/32809642#32809642",
+                    "body": "<p>Despite the bug issue I mention below, your use of <code>resolve</code> suggests a possible method.  This is not for the novice or someone who needs to stick with the public API.</p>\n\n<p>The <code>parser</code> has a list of the Action (argument) objects (as created by <code>add_argument</code>).</p>\n\n<p>Using your 2nd parser definition, its <code>_actions</code> list is:</p>\n\n<pre><code>In [22]: parser._actions\nOut[22]: \n[_HelpAction(option_strings=['-h', '--help'], dest='help'...),\n _StoreAction(option_strings=['--arg2'], dest='arg2', nargs=None,\n      const=None, default=None, type=None, choices=None, \n      help='A second one', metavar=None),\n _StoreAction(option_strings=['--arg1'], dest='arg1', nargs=None,\n      const=None, default=None, type=None, choices=None, \n      help='New number 1', metavar=None)]\n</code></pre>\n\n<p>When you add a conflicting one with <code>resolve</code>, it removes the existing Action that conflicts.  Look at the <code>_handle_conflict_resolve</code> method for details.  But I can fool it into removing an action without adding a new one.</p>\n\n<pre><code>In [23]: parser._handle_conflict_resolve(None, [('--arg1',parser._actions[2])])\n</code></pre>\n\n<p>Look at <code>_actions</code> and help to verify that <code>--arg1</code> is gone.</p>\n\n<pre><code>In [24]: parser._actions\nOut[24]: \n[_HelpAction(option_strings=['-h', '--help'], dest='help',....),\n _StoreAction(option_strings=['--arg2'], dest='arg2', nargs=None,...)]\n\nIn [25]: parser.print_help()\nusage: ipython3 [-h] [--arg2 ARG2]\n\noptional arguments:\n  -h, --help   show this help message and exit\n  --arg2 ARG2  A second one\n</code></pre>\n\n<p><code>resolve</code> just handles <code>optionals</code>, ones where the flag strings might conflict.  And it removes conflicting flags first, removing the conflicting action only if no flags remain.  So be extra careful when you have both short and long options.</p>\n\n<p>And this does not address the case of positionals.  They don't have flags, and they may share <code>dest</code> parameters.  (though only one will appear in the result, unless they are appending actions).</p>\n\n<pre><code>In [27]: foo1 = parser.add_argument('foo',help='foo 1 positional')\nIn [28]: foo2 = parser.add_argument('foo',help='foo 2 positional')\nIn [29]: parser.print_help()\nusage: ipython3 [-h] [--arg2 ARG2] foo foo\npositional arguments:\n  foo          foo 1 positional\n  foo          foo 2 positional\n  ...\n</code></pre>\n\n<p>Playing around a bit more, it looks like I can remove one of these new positionals:</p>\n\n<pre><code>In [33]: parser._actions[-1]\nOut[33]: _StoreAction(option_strings=[], dest='foo',... help='foo 2 positional', metavar=None)\nIn [35]: foo2=parser._actions[-1]\nIn [36]: foo2.container._remove_action(foo2)\nIn [39]: parser.print_help()\nusage: ipython3 [-h] [--arg2 ARG2] foo    \npositional arguments:\n  foo          foo 1 positional\n ....\n</code></pre>\n\n<p>If I'd choosen <code>_actions[-2]</code> I would have removed the first <code>foo</code>.  If I assign the value that <code>add_argument</code> returns to a variable, e.g. <code>foo1</code>, I can use that instead of looking up the value in the <code>parser._actions</code> list.  It may be helpful to run a sample parser in an interative shell (I use IPython) and look at these objects.</p>\n\n<p>Again, this seems to work on a simple example, but it needs careful testing if used with something more complex (or for production).</p>\n\n<hr>\n\n<p>The topic was raised on the Python bugs/issues a couple of years ago:</p>\n\n<p><a href=\"http://bugs.python.org/issue19462\" rel=\"nofollow noreferrer\">http://bugs.python.org/issue19462</a> <code>Add remove_argument() method to argparse.ArgumentParser</code></p>\n\n<p>I discussed the difficulties in complete removal, and suggested some alternatives.  <code>argparse.SUPPRESS</code> can be used to hide helps.  <code>optionals</code> can be ignored if they aren't required.  <code>positionals</code> are trickier, though I suggested tweaking their attributes (<code>nargs</code> and <code>default</code>).  But it's been a while, so I need to review those posts.</p>\n\n<p>=============================</p>\n\n<p>I was curious about <code>@2rs2ts</code> problem (see comment).</p>\n\n<p>I made a parser, and then used it as parent to another parser (no need to use the subparser mechanism).  Then I removed an argument from one parser, and looked at changes in the other parser. </p>\n\n<p>Make a parent parser with one argument:</p>\n\n<pre><code>In [59]: p=argparse.ArgumentParser()\nIn [60]: p.add_argument('--foo')\nOut[60]: _StoreAction(option_strings=['--foo'], dest='foo', nargs=None, const=None, default=None, type=None, choices=None, help=None, metavar=None)\n</code></pre>\n\n<p>Make another with <code>parents</code>:</p>\n\n<pre><code>In [61]: p1=argparse.ArgumentParser(parents=[p],add_help=False)\nIn [62]: p1._actions\nOut[62]: \n[_HelpAction(option_strings=['-h', '--help'], dest='help', nargs=0, const=None, default='==SUPPRESS==', type=None, choices=None, help='show this help message and exit', metavar=None),\n _StoreAction(option_strings=['--foo'], dest='foo', nargs=None, const=None, default=None, type=None, choices=None, help=None, metavar=None)]\n</code></pre>\n\n<p>Note that the 2nd Action is the same for both parsers (same id).  <code>parents</code> just copied a reference to the original <code>--foo</code> Action, it did not make a copy.</p>\n\n<pre><code>In [63]: id(p._actions[1])\nOut[63]: 3000108652\nIn [64]: id(p1._actions[1])\nOut[64]: 3000108652\n</code></pre>\n\n<p>Now remove '--foo' from one parser, using the trick I worked out before:</p>\n\n<pre><code>In [65]: p1._handle_conflict_resolve(None,[('--foo',p1._actions[1])])\nIn [66]: p1._actions\nOut[66]: [_HelpAction(option_strings=['-h', '--help'], dest='help', nargs=0, const=None, default='==SUPPRESS==', type=None, choices=None, help='show this help message and exit', metavar=None)]\n</code></pre>\n\n<p>'--foo' is gone from <code>p1</code> list, but still present in the <code>p</code> list.  But <code>option_strings</code> is now empty.</p>\n\n<pre><code>In [67]: p._actions\nOut[67]: \n[_HelpAction(option_strings=['-h', '--help'], dest='help', nargs=0, const=None, default='==SUPPRESS==', type=None, choices=None, help='show this help message and exit', metavar=None),\n _StoreAction(option_strings=[], dest='foo', nargs=None, const=None, default=None, type=None, choices=None, help=None, metavar=None)]\n</code></pre>\n\n<p>The <code>resolve</code> code removed conflicting <code>option_strings</code> from the <code>--foo</code> action, and then removed it from the <code>p1._actions</code> list.  But changing <code>option_strings</code> for the <code>p1</code> reference changed the <code>p</code> reference as well.</p>\n\n<p><code>argparse</code> uses a couple of ways to distinguish <code>positionals</code> from <code>optionals</code>, but the one used most often in parsing is to look at whether the <code>option_strings</code> attribute is empty or not.  By emptying this attribute, <code>resolve</code> has effectively turned an <code>optional</code> into a <code>positional</code>.</p>\n\n<p>Oops, my memory isn't what it should be.:)  A year ago I answered a similar question involving <code>parents</code> and <code>resolve</code></p>\n\n<p><a href=\"https://stackoverflow.com/a/25821043/901925\">https://stackoverflow.com/a/25821043/901925</a>\n<code>argparse conflict resolver for options in subcommands turns keyword argument into positional argument</code></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1267053,
+                                "reputation": 6010,
+                                "user_id": 1224158,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Bryan P"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1461876249,
+                            "post_id": 36863647,
+                            "comment_id": 61411439,
+                            "link": "https://stackoverflow.com/questions/32807319/disable-remove-argument-in-argparse/36863647#comment61411439_36863647",
+                            "body": "Interesting. Will this both remove it from help and prevent the option from being parsed? Might you add a bit more explanation and an example?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7674040,
+                        "reputation": 215,
+                        "user_id": 5815432,
+                        "user_type": "registered",
+                        "display_name": "Santi Oliveras"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1461670165,
+                    "creation_date": 1461670165,
+                    "answer_id": 36863647,
+                    "question_id": 32807319,
+                    "link": "https://stackoverflow.com/questions/32807319/disable-remove-argument-in-argparse/36863647#36863647",
+                    "body": "<p>Function to remove argparse options:</p>\n\n<pre><code>def remove_options(parser, options):\n    for option in options:\n        for action in parser._actions:\n            if vars(action)['option_strings'][0] == option:\n                parser._handle_conflict_resolve(None,[(option,action)])\n                break\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 12482347,
+                                "reputation": 5793,
+                                "user_id": 9201239,
+                                "user_type": "registered",
+                                "display_name": "stason"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1597013396,
+                            "post_id": 49753634,
+                            "comment_id": 111988459,
+                            "link": "https://stackoverflow.com/questions/32807319/disable-remove-argument-in-argparse/49753634#comment111988459_49753634",
+                            "body": "The code doesn&#39;t have a usage example. You have to pass an argument without leading dashes for it to work, e.g. to remove <code>--bar</code>, call <code>remove_option(parser, &quot;bar&quot;)</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3157208,
+                                "reputation": 336,
+                                "user_id": 2669353,
+                                "user_type": "registered",
+                                "display_name": "Eric Hansen"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1648919707,
+                            "post_id": 49753634,
+                            "comment_id": 126747061,
+                            "link": "https://stackoverflow.com/questions/32807319/disable-remove-argument-in-argparse/49753634#comment126747061_49753634",
+                            "body": "I love you. This works so well. Thank you @Lorenzo."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6752706,
+                                "reputation": 1093,
+                                "user_id": 5202246,
+                                "user_type": "registered",
+                                "display_name": "a_girl"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1658344047,
+                            "post_id": 49753634,
+                            "comment_id": 129031296,
+                            "link": "https://stackoverflow.com/questions/32807319/disable-remove-argument-in-argparse/49753634#comment129031296_49753634",
+                            "body": "this solution worked for me, but I don&#39;t understand why haven&#39;t they made it a part of ArgsParser class itself"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3050562,
+                        "reputation": 101,
+                        "user_id": 2585234,
+                        "user_type": "registered",
+                        "display_name": "Lorenzo"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 10,
+                    "last_activity_date": 1678377130,
+                    "last_edit_date": 1678377130,
+                    "creation_date": 1523363179,
+                    "answer_id": 49753634,
+                    "question_id": 32807319,
+                    "link": "https://stackoverflow.com/questions/32807319/disable-remove-argument-in-argparse/49753634#49753634",
+                    "body": "<p>Although hpaulj answer is great, in my case <code>parser._remove_action(action)</code> was not removing positional arguments from the help.  It also needed to be removed from the <code>_action_group</code>:</p>\n<pre class=\"lang-py prettyprint-override\"><code>def remove_argument(parser, arg):\n    for action in parser._actions:\n        opts = action.option_strings\n        if (opts and opts[0] == arg) or action.dest == arg:\n            parser._remove_action(action)\n            break\n\n    for action in parser._action_groups:\n        for group_action in action._group_actions:\n            opts = group_action.option_strings\n            if (opts and opts[0] == arg) or group_action.dest == arg:\n                action._group_actions.remove(group_action)\n                return\n</code></pre>\n<p>To remove <code>--bar</code>, call:</p>\n<pre><code>remove_argument(parser, &quot;bar&quot;)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2098285,
+                        "reputation": 295,
+                        "user_id": 1866576,
+                        "user_type": "registered",
+                        "display_name": "Marcus"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1679423434,
+                    "creation_date": 1679423434,
+                    "answer_id": 75805115,
+                    "question_id": 32807319,
+                    "link": "https://stackoverflow.com/questions/32807319/disable-remove-argument-in-argparse/75805115#75805115",
+                    "body": "<p>This works for me:</p>\n<pre><code>def disable_argument(parser: argparse.ArgumentParser, arg: str) -&gt; None:\n    &quot;&quot;&quot;Disable an argument from a parser.\n\n    Args:\n        parser (argparse.ArgumentParser): Parser.\n        arg (str): Argument to be removed.\n    &quot;&quot;&quot;\n    def raise_disabled_error(action):\n        &quot;&quot;&quot;Raise an argument error.&quot;&quot;&quot;\n        def raise_disabled_error_wrapper(*args) -&gt; str:\n            &quot;&quot;&quot;Raise an exception.&quot;&quot;&quot;\n            raise argparse.ArgumentError(action, f'Has been disabled!')\n        return raise_disabled_error_wrapper\n\n    for action in parser._actions:\n        opts = action.option_strings\n        if (opts and opts[0] == arg) or action.dest == arg:\n            action.type = raise_disabled_error(action)\n            action.help = argparse.SUPPRESS\n            break\n</code></pre>\n<p>This will raise an error if the disabled argument is used and it removes the argument from the help.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 1267053,
+                "reputation": 6010,
+                "user_id": 1224158,
+                "user_type": "registered",
+                "accept_rate": 92,
+                "display_name": "Bryan P"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "accepted_answer_id": 32809642,
+            "answer_count": 5,
+            "score": 33,
+            "last_activity_date": 1679423434,
+            "creation_date": 1443352474,
+            "last_edit_date": 1495542357,
+            "question_id": 32807319,
+            "link": "https://stackoverflow.com/questions/32807319/disable-remove-argument-in-argparse",
+            "title": "Disable/Remove argument in argparse",
+            "body": "<p><strong>Is it possible to remove or disable an argument in argparse, such that it does not show in the help? How?</strong></p>\n\n<p>It is easy to add new arguments:</p>\n\n<pre><code>parser = argparse.ArgumentParser()\nparser.add_argument('--arg1', help='Argument 1')\nparser.add_argument('--arg2', help='A second one')\n</code></pre>\n\n<p>And I know you can override arguments with a new definition by specifying the \"resolve\" conflict handler:</p>\n\n<pre><code>#In one script that should stand-alone and include arg1:\n\nparser = argparse.ArgumentParser(conflict_handler='resolve')\nparser.add_argument('--arg1', help='Argument 1')\nparser.add_argument('--arg2', help='A second one')\n\n#In another script with similar options\nparser.add_argument('--arg1', help='New number 1')\n</code></pre>\n\n<p>But this still includes arg1 in the help message and results of <code>parse_args</code> Is there anything like</p>\n\n<pre><code>#Wishful thinking\n#In another script with similar options, that shouldn't include arg1\nparser.remove_argument('--arg1')\n</code></pre>\n\n<p>Or another reasonably easy way to achieve this?</p>\n\n<p><strong>Also: Would the approach be different if the argument was a positional argument?</strong></p>\n\n<p>Note: the problem with removing <code>arg1</code> after parsing as suggested <a href=\"https://stackoverflow.com/q/19430496/1224158\">here</a> is that the argument still shows in the help</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9899
+}

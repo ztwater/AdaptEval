@@ -1,0 +1,126 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "pytest"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 6498360,
+                        "reputation": 7160,
+                        "user_id": 5030164,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "modesitt"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1588288853,
+                    "post_id": 61533694,
+                    "comment_id": 108849460,
+                    "link": "https://stackoverflow.com/questions/61533694/run-slow-pytest-commands-at-the-end-of-the-test-suite#comment108849460_61533694",
+                    "body": "does the <a href=\"https://pytest-ordering.readthedocs.io/en/develop/\" rel=\"nofollow noreferrer\"><code>pytest-ordering</code></a> plugin fit your needs"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 8853109,
+                                "reputation": 5337,
+                                "user_id": 6611672,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "Johnny Metz"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1588374443,
+                            "post_id": 61539510,
+                            "comment_id": 108880042,
+                            "link": "https://stackoverflow.com/questions/61533694/run-slow-pytest-commands-at-the-end-of-the-test-suite/61539510#comment108880042_61539510",
+                            "body": "Works great! Just need to remove <code>reverse=True</code> to get the slow tests to run last."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 17324354,
+                                "reputation": 51,
+                                "user_id": 12548932,
+                                "user_type": "registered",
+                                "display_name": "bafrullaci"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1657249512,
+                            "post_id": 61539510,
+                            "comment_id": 128771360,
+                            "link": "https://stackoverflow.com/questions/61533694/run-slow-pytest-commands-at-the-end-of-the-test-suite/61539510#comment128771360_61539510",
+                            "body": "I had to change <code>by_slow_marker</code> to <code>return 1 if item.get_closest_marker(&#39;slow&#39;) is None else 0</code> to get this to work."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3133056,
+                        "reputation": 63405,
+                        "user_id": 2650249,
+                        "user_type": "registered",
+                        "accept_rate": 95,
+                        "display_name": "hoefling"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 12,
+                    "last_activity_date": 1653837477,
+                    "last_edit_date": 1653837477,
+                    "creation_date": 1588323503,
+                    "answer_id": 61539510,
+                    "question_id": 61533694,
+                    "link": "https://stackoverflow.com/questions/61533694/run-slow-pytest-commands-at-the-end-of-the-test-suite/61539510#61539510",
+                    "body": "<p>You can add custom sorting of collected tests and place the items with the <code>slow</code> marker last. Put the following code in a file <code>conftest.py</code> in your project or test root dir:</p>\n<pre><code>from _pytest.mark import Mark\n\n\nempty_mark = Mark('', [], {})\n\n\ndef by_slow_marker(item):\n    return item.get_closest_marker('slow', default=empty_mark)\n\n\ndef pytest_collection_modifyitems(items):\n    items.sort(key=by_slow_marker, reverse=False)\n</code></pre>\n<p>This will place the items having the <code>slow</code> marker at the end of the collected tests sequence. If you want to turn this functionality on and off, add a custom command line flag:</p>\n<pre><code>def pytest_addoption(parser):\n    parser.addoption('--slow-last', action='store_true', default=False)\n\n\ndef pytest_collection_modifyitems(items, config):\n    if config.getoption('--slow-last'):\n        items.sort(key=by_slow_marker, reverse=True)\n</code></pre>\n<p>Running <code>pytest --slow-last</code> will now resort the items.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6472032,
+                        "reputation": 382,
+                        "user_id": 5011864,
+                        "user_type": "registered",
+                        "display_name": "Luis Kabongo"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1709558546,
+                    "creation_date": 1709558546,
+                    "answer_id": 78101546,
+                    "question_id": 61533694,
+                    "link": "https://stackoverflow.com/questions/61533694/run-slow-pytest-commands-at-the-end-of-the-test-suite/78101546#78101546",
+                    "body": "<p>As of Python 3.11, the 1st answer's original code did not work for me (functions parameters were not valid any more), here is an updated version...</p>\n<pre class=\"lang-python prettyprint-override\"><code>def by_slow_marker(item):\n    return 0 if item.get_closest_marker(&quot;slow&quot;) is None else 1\n\ndef pytest_collection_modifyitems(session, config, items):\n    if config.getoption(&quot;--slow-last&quot;):\n        items.sort(key=by_slow_marker, reverse=False)\n\ndef pytest_addoption(parser, pluginmanager):\n    parser.addoption(&quot;--slow-last&quot;, action=&quot;store_true&quot;, default=False)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 8853109,
+                "reputation": 5337,
+                "user_id": 6611672,
+                "user_type": "registered",
+                "accept_rate": 97,
+                "display_name": "Johnny Metz"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 61539510,
+            "answer_count": 2,
+            "score": 4,
+            "last_activity_date": 1709558546,
+            "creation_date": 1588285017,
+            "question_id": 61533694,
+            "link": "https://stackoverflow.com/questions/61533694/run-slow-pytest-commands-at-the-end-of-the-test-suite",
+            "title": "Run slow Pytest commands at the end of the test suite",
+            "body": "<p>Let's say I have the following pytest script:</p>\n\n<pre><code>import pytest\n\ndef test_one():\n    pass\n\ndef test_two():\n    pass\n\n@pytest.mark.slow\ndef test_three():\n    pass\n</code></pre>\n\n<p>Is there a single command I can use to run all tests with the <code>slow</code> marker last? I know I can do this using two pytest commands but it would be great to do this using a single command:</p>\n\n<pre><code>pytest -v -m \"not slow\"\n# test_markers.py::test_one PASSED                                                                                                                    \n# test_markers.py::test_two PASSED\n\npytest -v -m slow\n# test_markers.py::test_three PASSED\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8308
+}

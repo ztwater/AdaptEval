@@ -1,0 +1,156 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "decorator",
+                "pytest",
+                "python-decorators"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user2210287"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1422466420,
+                            "post_id": 28198398,
+                            "comment_id": 44763715,
+                            "link": "https://stackoverflow.com/questions/28179026/how-to-skip-a-pytest-using-an-external-fixture/28198398#comment44763715_28198398",
+                            "body": "Thank you - I also chose the marker yesterday as a work around, but didn&#39;t like it as it wasn&#39;t as elegant as yours. (I used <code>pytest_runtest_setup</code> for the marker check). But given py.tests constraints this seems like the closest solution to my question and I will update my question to align it."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2625553,
+                                "reputation": 2803,
+                                "user_id": 2272638,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "dwanderson"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1521754978,
+                            "post_id": 28198398,
+                            "comment_id": 85879849,
+                            "link": "https://stackoverflow.com/questions/28179026/how-to-skip-a-pytest-using-an-external-fixture/28198398#comment85879849_28198398",
+                            "body": "Hmm, getting errors about <code>&#39;skip_platform&#39; not a registered marker</code> - would it matter if I made the fixture outside the <code>conftest</code> file?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2445188,
+                                "reputation": 10554,
+                                "user_id": 2132753,
+                                "user_type": "registered",
+                                "display_name": "Gustavo Bezerra"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1549556732,
+                            "post_id": 28198398,
+                            "comment_id": 95953127,
+                            "link": "https://stackoverflow.com/questions/28179026/how-to-skip-a-pytest-using-an-external-fixture/28198398#comment95953127_28198398",
+                            "body": "<code>get_marker</code> was removed and should now be <code>get_closest_marker</code>:  <a href=\"https://github.com/pytest-dev/pytest/pull/4564\" rel=\"nofollow noreferrer\">github.com/pytest-dev/pytest/pull/4564</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 69691,
+                        "reputation": 14482,
+                        "user_id": 202645,
+                        "user_type": "registered",
+                        "display_name": "Bruno Oliveira"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": true,
+                    "score": 73,
+                    "last_activity_date": 1671932637,
+                    "last_edit_date": 1671932637,
+                    "creation_date": 1422465510,
+                    "answer_id": 28198398,
+                    "question_id": 28179026,
+                    "link": "https://stackoverflow.com/questions/28179026/how-to-skip-a-pytest-using-an-external-fixture/28198398#28198398",
+                    "body": "<p>It seems py.test doesn't use the test fixtures when evaluating the expression for <code>skipif</code>. By your example, <code>test_ios</code> is actually successful because it is comparing the <strong>function</strong> <code>platform</code> found in the module's namespace to the <code>&quot;ios&quot;</code> string, which evaluates to <code>False</code> hence the test is executed and succeeds. If pytest was inserting the fixture for evaluation as you expect, that test should have been skipped.</p>\n<p>A solution to your problem (not to your question though) would be to implement a fixture that inspects marks into the tests, and skips them accordingly:</p>\n<pre><code># conftest.py\nimport pytest\n\n@pytest.fixture\ndef platform():\n    return &quot;ios&quot;\n\n@pytest.fixture(autouse=True)\ndef skip_by_platform(request, platform):\n    if request.node.get_closest_marker('skip_platform'):\n        if request.node.get_closest_marker('skip_platform').args[0] == platform:\n            pytest.skip('skipped on this platform: {}'.format(platform))   \n</code></pre>\n<p>A key point is the <code>autouse</code> parameter, which would make that fixture to be automatically included by all tests. Then your tests can mark which platforms to skip like this:</p>\n<pre><code>@pytest.mark.skip_platform('ios')\ndef test_ios(platform, request):\n    assert 0, 'should be skipped'\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1096127,
+                        "reputation": 303,
+                        "user_id": 1089693,
+                        "user_type": "registered",
+                        "display_name": "Alexper"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1512137952,
+                    "last_edit_date": 1512137952,
+                    "creation_date": 1512133615,
+                    "answer_id": 47594103,
+                    "question_id": 28179026,
+                    "link": "https://stackoverflow.com/questions/28179026/how-to-skip-a-pytest-using-an-external-fixture/47594103#47594103",
+                    "body": "<p>I had a similar problem and I don't know if this is still relevant for you, but I might have found a workaround that would do what you want.</p>\n\n<p>The idea is to extend the <code>MarkEvaluator</code> class and override the <code>_getglobals</code> method to force to add fixture values in the global set used by evaluator:</p>\n\n<p><strong>conftest.py</strong></p>\n\n<pre><code>from _pytest.skipping import MarkEvaluator\n\nclass ExtendedMarkEvaluator(MarkEvaluator):\n    def _getglobals(self):\n        d = super()._getglobals()\n        d.update(self.item._request._fixture_values)\n        return d\n</code></pre>\n\n<p>add a hook to test calls:</p>\n\n<pre><code>def pytest_runtest_call(item):\n    evalskipif = ExtendedMarkEvaluator(item, \"skipif_call\")\n    if evalskipif.istrue():\n        pytest.skip('[CANNOT RUN]' + evalskipif.getexplanation())\n</code></pre>\n\n<p>then you can use the marker <code>skipif_call</code> in your test case:</p>\n\n<p><strong>test_example.py</strong></p>\n\n<pre><code>class Machine():\n   def __init__(self, state):\n      self.state = state\n\n@pytest.fixture\ndef myfixture(request):\n   return Machine(\"running\")\n\n@pytest.mark.skipif_call('myfixture.state != \"running\"')\ndef test_my_fixture_running_success(myfixture):\n   print(myfixture.state)\n   myfixture.state = \"stopped\"\n   assert True\n\n@pytest.mark.skipif_call('myfixture.state != \"running\"')\ndef test_my_fixture_running_fail(myfixture):\n   print(myfixture.state)\n   assert False\n\n@pytest.mark.skipif_call('myfixture.state != \"stopped\"')\ndef test_my_fixture_stopped_success(myfixture):\n   print(myfixture.state)\n   myfixture.state = \"running\"\n\n@pytest.mark.skipif_call('myfixture.state != \"stopped\"')\ndef test_my_fixture_stopped_fail(myfixture):\n   print(myfixture.state)\n   assert False\n</code></pre>\n\n<p><strong>Run</strong></p>\n\n<pre><code>pytest -v --tb=line\n============================= test session starts =============================\n[...]\ncollected 4 items\n\ntest_example.py::test_my_fixture_running_success PASSED\ntest_example.py::test_my_fixture_running_fail FAILED\ntest_example.py::test_my_fixture_stopped_success PASSED\ntest_example.py::test_my_fixture_stopped_fail FAILED\n\n================================== FAILURES ===================================\nC:\\test_example.py:21: assert False\nC:\\test_example.py:31: assert False\n===================== 2 failed, 2 passed in 0.16 seconds ======================\n</code></pre>\n\n<p><strong>Problem</strong></p>\n\n<p>Unfortunately, this works only once for each evaluation expression since MarkEvaluator uses cached eval based on expression as key, so the next time the same expression will be tested, the result will be the cached value. </p>\n\n<p><strong>Solution</strong></p>\n\n<p>The expression is evaluated in the <code>_istrue</code> method. Unfortunately there is no way to configure the evaluator to avoid caching results.\nThe only way to avoid caching is to override the <code>_istrue</code> method to not use the cached_eval function:</p>\n\n<pre><code>class ExtendedMarkEvaluator(MarkEvaluator):\n    def _getglobals(self):\n        d = super()._getglobals()\n        d.update(self.item._request._fixture_values)\n        return d\n\n    def _istrue(self):\n        if self.holder:\n            self.result = False\n            args = self.holder.args\n            kwargs = self.holder.kwargs\n            for expr in args:\n                import _pytest._code\n                self.expr = expr\n                d = self._getglobals()\n                # Non cached eval to reload fixture values\n                exprcode = _pytest._code.compile(expr, mode=\"eval\")\n                result = eval(exprcode, d)\n\n                if result:\n                    self.result = True\n                    self.reason = expr\n                    self.expr = expr\n                    break\n            return self.result\n        return False\n</code></pre>\n\n<p><strong>Run</strong></p>\n\n<pre><code>pytest -v --tb=line\n============================= test session starts =============================\n[...]\ncollected 4 items\n\ntest_example.py::test_my_fixture_running_success PASSED\ntest_example.py::test_my_fixture_running_fail SKIPPED\ntest_example.py::test_my_fixture_stopped_success PASSED\ntest_example.py::test_my_fixture_stopped_fail SKIPPED\n\n===================== 2 passed, 2 skipped in 0.10 seconds =====================\n</code></pre>\n\n<p>Now the tests are skipped because 'myfixture' value has been updated.</p>\n\n<p>Hope it helps.</p>\n\n<p>Cheers</p>\n\n<p>Alex</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1842586,
+                        "reputation": 1687,
+                        "user_id": 1671693,
+                        "user_type": "registered",
+                        "accept_rate": 76,
+                        "display_name": "Gregory Kuhn"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1551176254,
+                    "creation_date": 1551176254,
+                    "answer_id": 54883155,
+                    "question_id": 28179026,
+                    "link": "https://stackoverflow.com/questions/28179026/how-to-skip-a-pytest-using-an-external-fixture/54883155#54883155",
+                    "body": "<p>Using inspiration from this <a href=\"https://stackoverflow.com/a/33879151/1671693\">answer</a> to another SO question, I am using this approach to this problem which works well:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>import pytest\n\n@pytest.fixture(scope='session')\ndef requires_something(request):\n    something = 'a_thing'\n    if request.param != something:\n        pytest.skip(f\"Test requires {request.param} but environment has {something}\")\n\n\n@pytest.mark.parametrize('requires_something',('something_else',), indirect=True)\ndef test_indirect(requires_something):\n    print(\"Executing test: test_indirect\")\n\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2168991,
+                        "reputation": 301,
+                        "user_id": 1921483,
+                        "user_type": "registered",
+                        "display_name": "user1921483"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 20,
+                    "last_activity_date": 1563445642,
+                    "creation_date": 1563445642,
+                    "answer_id": 57092426,
+                    "question_id": 28179026,
+                    "link": "https://stackoverflow.com/questions/28179026/how-to-skip-a-pytest-using-an-external-fixture/57092426#57092426",
+                    "body": "<p>The Solution from Bruno Oliveira is working, but for new pytest (>= 3.5.0) you need to add the pytest_configure: </p>\n\n<pre><code>\n# conftest.py\nimport pytest\n\n@pytest.fixture\ndef platform():\n    return \"ios\"\n\n@pytest.fixture(autouse=True)\ndef skip_by_platform(request, platform):\n    if request.node.get_closest_marker('skip_platform'):\n        if request.node.get_closest_marker('skip_platform').args[0] == platform:\n            pytest.skip('skipped on this platform: {}'.format(platform))   \n\ndef pytest_configure(config):\n  config.addinivalue_line(\n        \"markers\", \"skip_by_platform(platform): skip test for the given search engine\",\n  )\n</code></pre>\n\n<p>Use:</p>\n\n<pre><code>@pytest.mark.skip_platform('ios')\ndef test_ios(platform, request):\n    assert 0, 'should be skipped' \n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "user_type": "does_not_exist",
+                "display_name": "user2210287"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 28198398,
+            "answer_count": 4,
+            "score": 46,
+            "last_activity_date": 1671932637,
+            "creation_date": 1422389130,
+            "last_edit_date": 1422466503,
+            "question_id": 28179026,
+            "link": "https://stackoverflow.com/questions/28179026/how-to-skip-a-pytest-using-an-external-fixture",
+            "title": "How to skip a pytest using an external fixture?",
+            "body": "<h1>Background</h1>\n\n<p>I am running a <a href=\"http://pytest.org/latest/\">py.test</a> with a <a href=\"http://pytest.org/latest/fixture.html\">fixture</a> in a <a href=\"http://pytest.org/latest/plugins.html#conftest-py-local-per-directory-plugins\">conftest file</a>. You can see the code below(this all works fine):</p>\n\n<p><strong>example_test.py</strong></p>\n\n<pre><code>import pytest\n\n@pytest.fixture\ndef platform():\n    return \"ios\"\n\n@pytest.mark.skipif(\"platform == 'ios'\")\ndef test_ios(platform):\n    if platform != 'ios':\n        raise Exception('not ios')\n\ndef test_android_external(platform_external):\n    if platform_external != 'android':\n        raise Exception('not android')\n</code></pre>\n\n<p><strong>conftest.py</strong></p>\n\n<pre><code>import pytest\n\n@pytest.fixture\ndef platform_external():\n    return \"android\"\n</code></pre>\n\n<h1>Problem</h1>\n\n<p>Now I want to be able to skip some tests that do not apply to my current test-run. In my example I am running tests either for <strong>iOS</strong> or <strong>Android</strong> (This is just for demonstration purposes only and could be any other expression).</p>\n\n<p>Unfortunately I cannot get ahold of (my <em>externally</em> defined <strong>fixture</strong>) <code>platform_external</code> in the <code>skipif</code> statement. When I run the code below I receive the following exception: <code>NameError: name 'platform_external' is not defined</code>. I don't know if this is a <strong>py.test</strong> bug as <em>locally</em> defined fixtures are working.</p>\n\n<p>add-on for <strong>example_test.py</strong></p>\n\n<pre><code>@pytest.mark.skipif(\"platform_external == 'android'\")\ndef test_android(platform_external):\n    \"\"\"This test will fail as 'platform_external' is not available in the decorator.\n    It is only available for the function parameter.\"\"\"\n    if platform_external != 'android':\n        raise Exception('not android')\n</code></pre>\n\n<p>So I thought I will just create my own <strong>decorator</strong>, just to see that it won't receive the fixtures as parameters:</p>\n\n<pre><code>from functools import wraps\n\ndef platform_custom_decorator(func):\n    @wraps(func)\n    def func_wrapper(*args, **kwargs):\n        return func(*args, **kwargs)\n    return func_wrapper\n\n@platform_custom_decorator\ndef test_android_2(platform_external):\n    \"\"\"This test will also fail as 'platform_external' will not be given to the \n    decorator.\"\"\"\n    if platform_external != 'android':\n        raise Exception('not android')\n</code></pre>\n\n<h1>Question</h1>\n\n<p>How can I define a <strong>fixture</strong> in a <strong>conftest</strong> file and use it to (conditionally) <strong>skip a test</strong>?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6313
+}

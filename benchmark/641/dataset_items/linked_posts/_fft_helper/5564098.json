@@ -1,0 +1,258 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "numpy",
+                "memory",
+                "large-data"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "user_type": "does_not_exist",
+                        "display_name": "user201788"
+                    },
+                    "edited": false,
+                    "score": 2,
+                    "creation_date": 1324667565,
+                    "post_id": 5564098,
+                    "comment_id": 10700637,
+                    "link": "https://stackoverflow.com/questions/5564098/repeat-numpy-array-without-replicating-data#comment10700637_5564098",
+                    "body": "I came across this question after trying to search for large-data manipulation in Python. I read about Strides and was wondering why would need a replicated data which is essentially the same (points to same data in the memory). You can read read from single data set twice, can&#39;t you? I just want to know the reason you are doing this replication. Thanks."
+                },
+                {
+                    "owner": {
+                        "account_id": 43003,
+                        "reputation": 26116,
+                        "user_id": 125507,
+                        "user_type": "registered",
+                        "accept_rate": 69,
+                        "display_name": "endolith"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1654006893,
+                    "post_id": 5564098,
+                    "comment_id": 127986310,
+                    "link": "https://stackoverflow.com/questions/5564098/repeat-numpy-array-without-replicating-data#comment127986310_5564098",
+                    "body": "I feel like a lot of times you might want to do this, what you <i>really</i> want to do is use broadcasting."
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 167868,
+                        "reputation": 67744,
+                        "user_id": 392949,
+                        "user_type": "registered",
+                        "accept_rate": 70,
+                        "display_name": "JoshAdel"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1302095032,
+                    "last_edit_date": 1495535444,
+                    "creation_date": 1302094011,
+                    "answer_id": 5566571,
+                    "question_id": 5564098,
+                    "link": "https://stackoverflow.com/questions/5564098/repeat-numpy-array-without-replicating-data/5566571#5566571",
+                    "body": "<p>I'm not 100% sure what you mean by 'not replicating the data 1000 times'. If you are looking for a numpy method to build <code>b</code> from <code>a</code> in one fell swoop (rather than looping), you can use:</p>\n\n<pre><code>a = np.arange(1000)\nb = np.tile(a,1000)\n</code></pre>\n\n<p>Otherwise, I would do something like:</p>\n\n<pre><code>a = np.arange(1000)\nii = [700,2000,10000] # The indices you want of the tiled array\nb = a[np.mod(ii,a.size)]\n</code></pre>\n\n<p><code>b</code> is not a view of <code>a</code> in this case because of the fancy indexing (it makes a copy), but at least it returns a numpy array and doesn't create the 1000*1000x1 array in memory and just contains the elements you want. </p>\n\n<p>As far as them being immutable (see <a href=\"https://stackoverflow.com/questions/5541324/immutable-numpy-array/5541452#5541452\">Immutable numpy array?</a>), you would need to switch the flag for each separately since copies don't retain the flag setting.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 310159,
+                        "reputation": 9020,
+                        "user_id": 623007,
+                        "user_type": "registered",
+                        "accept_rate": 82,
+                        "display_name": "lafras"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1302099142,
+                    "last_edit_date": 1302099142,
+                    "creation_date": 1302094965,
+                    "answer_id": 5566789,
+                    "question_id": 5564098,
+                    "link": "https://stackoverflow.com/questions/5564098/repeat-numpy-array-without-replicating-data/5566789#5566789",
+                    "body": "<p>I do not claim that this is the most elegant solution, because you have to fool numpy into creating an array of objects (see the line with the comment)</p>\n\n<pre><code>from numpy import array\n\nn = 3\n\na = array([1,2])\na.setflags(write=False)\nt = [a]*n + [array([1])] # Append spurious array that is not len(a)\nr = array(t,dtype=object)\nr.setflags(write=False)\n\nassert id(a) == id(t[1]) == id(r[1])\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 224049,
+                                "reputation": 11708,
+                                "user_id": 483620,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "Benjamin"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1302101827,
+                            "post_id": 5568169,
+                            "comment_id": 6333912,
+                            "link": "https://stackoverflow.com/questions/5564098/repeat-numpy-array-without-replicating-data/5568169#comment6333912_5568169",
+                            "body": "Cool, I was wondering if strides could be used, but I couldn&#39;t figure out how! <code>b.flat</code> or <code>b.flatten()</code>?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 167868,
+                                "reputation": 67744,
+                                "user_id": 392949,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "JoshAdel"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1302102249,
+                            "post_id": 5568169,
+                            "comment_id": 6334091,
+                            "link": "https://stackoverflow.com/questions/5564098/repeat-numpy-array-without-replicating-data/5568169#comment6334091_5568169",
+                            "body": "<code>b.flat.base is b</code> is True; <code>b.flatten().base is b</code> is False, so you want <code>b.flat</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 224049,
+                                "reputation": 11708,
+                                "user_id": 483620,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "Benjamin"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1302102909,
+                            "post_id": 5568169,
+                            "comment_id": 6334311,
+                            "link": "https://stackoverflow.com/questions/5564098/repeat-numpy-array-without-replicating-data/5568169#comment6334311_5568169",
+                            "body": "Not sure what that means. <code>b.flatten().base</code> returns nothing... <code>(b.flat == b.flatten()).all()</code> is True, so what is the difference?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 167868,
+                                "reputation": 67744,
+                                "user_id": 392949,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "JoshAdel"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1302103299,
+                            "post_id": 5568169,
+                            "comment_id": 6334459,
+                            "link": "https://stackoverflow.com/questions/5564098/repeat-numpy-array-without-replicating-data/5568169#comment6334459_5568169",
+                            "body": "see  <a href=\"http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.base.html\" rel=\"nofollow noreferrer\">docs.scipy.org/doc/numpy/reference/generated/&hellip;</a>. The difference is that your comparison tests if the values are the same on an element-wise basis. <code>.base</code> tells you about ownership of data."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 15146,
+                        "reputation": 43070,
+                        "user_id": 31676,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "Paul"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": true,
+                    "score": 28,
+                    "last_activity_date": 1500999373,
+                    "last_edit_date": 1500999373,
+                    "creation_date": 1302100652,
+                    "answer_id": 5568169,
+                    "question_id": 5564098,
+                    "link": "https://stackoverflow.com/questions/5564098/repeat-numpy-array-without-replicating-data/5568169#5568169",
+                    "body": "<p>You can't do this; a NumPy array must have a consistent stride along each dimension, while your strides would need to go one way most of the time but sometimes jump backwards.</p>\n\n<p>The closest you can get is either a 1000-row 2D array where every row is a view of your first array, or a <a href=\"https://docs.scipy.org/doc/numpy/reference/generated/numpy.flatiter.html\" rel=\"nofollow noreferrer\"><code>flatiter</code> object</a>, which behaves kind of like a 1D array. (flatiters support iteration and indexing, but you can't take views of them; all indexing makes a copy.)</p>\n\n<p>Setup:</p>\n\n<pre><code>import numpy as np\na = np.arange(10)\n</code></pre>\n\n<p>2D view:</p>\n\n<pre><code>b = np.lib.stride_tricks.as_strided(a, (1000, a.size), (0, a.itemsize))\n</code></pre>\n\n<p>flatiter object:</p>\n\n<pre><code>c = b.flat\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 167868,
+                                "reputation": 67744,
+                                "user_id": 392949,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "JoshAdel"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1302102510,
+                            "post_id": 5568447,
+                            "comment_id": 6334189,
+                            "link": "https://stackoverflow.com/questions/5564098/repeat-numpy-array-without-replicating-data/5568447#comment6334189_5568447",
+                            "body": "This seems like a very expensive way of doing things if you are going to produce a copy, and is ~15x slower than just using <code>np.tile</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 224049,
+                        "reputation": 11708,
+                        "user_id": 483620,
+                        "user_type": "registered",
+                        "accept_rate": 93,
+                        "display_name": "Benjamin"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1302102536,
+                    "last_edit_date": 1302102536,
+                    "creation_date": 1302101737,
+                    "answer_id": 5568447,
+                    "question_id": 5564098,
+                    "link": "https://stackoverflow.com/questions/5564098/repeat-numpy-array-without-replicating-data/5568447#5568447",
+                    "body": "<p>Would this work:</p>\n\n<pre><code>import numpy\na = numpy.array([1, 2, 3, 4])\nb = numpy.ones((1000, a.shape[0]))\nb *= a\nb = b.flatten()\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 441876,
+                        "reputation": 6972,
+                        "user_id": 832218,
+                        "user_type": "registered",
+                        "accept_rate": 82,
+                        "display_name": "Erik"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 19,
+                    "last_activity_date": 1606472421,
+                    "last_edit_date": 1606472421,
+                    "creation_date": 1465929039,
+                    "answer_id": 37819585,
+                    "question_id": 5564098,
+                    "link": "https://stackoverflow.com/questions/5564098/repeat-numpy-array-without-replicating-data/37819585#37819585",
+                    "body": "<p><a href=\"https://numpy.org/doc/stable/reference/generated/numpy.broadcast_to.html\" rel=\"noreferrer\"><code>broadcast_to</code></a> was added in numpy 1.10, which allows you effectively repeat an array with a little less effort.</p>\n<p>Copying the style of the accepted answer:</p>\n<pre><code>import numpy as np\narr = np.arange(10)\nrepeated = np.broadcast_to(arr, (1000, arr.size))\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 152622,
+                "reputation": 494215,
+                "user_id": 367273,
+                "user_type": "registered",
+                "accept_rate": 96,
+                "display_name": "NPE"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "accepted_answer_id": 5568169,
+            "answer_count": 5,
+            "score": 25,
+            "last_activity_date": 1606472421,
+            "creation_date": 1302081656,
+            "last_edit_date": 1506102294,
+            "question_id": 5564098,
+            "link": "https://stackoverflow.com/questions/5564098/repeat-numpy-array-without-replicating-data",
+            "title": "Repeat NumPy array without replicating data?",
+            "body": "<p>I'd like to create a 1D NumPy array that would consist of 1000 back-to-back repetitions of another 1D array, without replicating the data 1000 times.</p>\n\n<p>Is it possible?</p>\n\n<p>If it helps, I intend to treat both arrays as immutable.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8883
+}

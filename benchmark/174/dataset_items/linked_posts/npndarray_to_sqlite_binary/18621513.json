@@ -1,0 +1,400 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "numpy",
+                "sqlite"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 1550642,
+                        "reputation": 10361,
+                        "user_id": 1443118,
+                        "user_type": "registered",
+                        "accept_rate": 55,
+                        "display_name": "reptilicus"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1378320701,
+                    "post_id": 18621513,
+                    "comment_id": 27412324,
+                    "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database#comment27412324_18621513",
+                    "body": "Don&#39;t know, but try to convert to list? np.arange(1000).tolist()"
+                },
+                {
+                    "owner": {
+                        "account_id": 1550642,
+                        "reputation": 10361,
+                        "user_id": 1443118,
+                        "user_type": "registered",
+                        "accept_rate": 55,
+                        "display_name": "reptilicus"
+                    },
+                    "edited": false,
+                    "score": 2,
+                    "creation_date": 1378320805,
+                    "post_id": 18621513,
+                    "comment_id": 27412386,
+                    "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database#comment27412386_18621513",
+                    "body": "or probably json.dumps(np.arange(1000).tolist())"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1522906,
+                                "reputation": 44396,
+                                "user_id": 1422096,
+                                "user_type": "registered",
+                                "accept_rate": 63,
+                                "display_name": "Basj"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1656161369,
+                            "post_id": 18621673,
+                            "comment_id": 128506750,
+                            "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database/18621673#comment128506750_18621673",
+                            "body": "This could work for small arrays (~ 100k items). But it&#39;s highly inefficient to convert a numpy array to a Python list and then to a JSON text when dealing with millions of items or more..."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1550642,
+                        "reputation": 10361,
+                        "user_id": 1443118,
+                        "user_type": "registered",
+                        "accept_rate": 55,
+                        "display_name": "reptilicus"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 11,
+                    "last_activity_date": 1378321026,
+                    "creation_date": 1378321026,
+                    "answer_id": 18621673,
+                    "question_id": 18621513,
+                    "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database/18621673#18621673",
+                    "body": "<p>This works for me:</p>\n\n<pre><code>import sqlite3 as sql\nimport numpy as np\nimport json\ncon = sql.connect('test.db',isolation_level=None)\ncur = con.cursor()\ncur.execute(\"DROP TABLE FOOBAR\")\ncur.execute(\"CREATE TABLE foobar (id INTEGER PRIMARY KEY, array BLOB)\")\ncur.execute(\"INSERT INTO foobar VALUES (?,?)\", (None, json.dumps(np.arange(0,500,0.5).tolist())))\ncon.commit()\ncur.execute(\"SELECT * FROM FOOBAR\")\ndata = cur.fetchall()\nprint data\ndata = cur.fetchall()\nmy_list = json.loads(data[0][1])\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1458486,
+                                "reputation": 2258,
+                                "user_id": 1373468,
+                                "user_type": "registered",
+                                "accept_rate": 57,
+                                "display_name": "Robin Newhouse"
+                            },
+                            "edited": false,
+                            "score": 10,
+                            "creation_date": 1382527753,
+                            "post_id": 18622264,
+                            "comment_id": 28991619,
+                            "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database/18622264#comment28991619_18622264",
+                            "body": "This works great for me. Just to make clear for others, the connection must be opened with the option detect_types=sqlite3.PARSE_DECLTYPES I ran in to trouble because I forgot to keep that in."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 808621,
+                                "reputation": 360780,
+                                "user_id": 908494,
+                                "user_type": "registered",
+                                "accept_rate": 25,
+                                "display_name": "abarnert"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1430864608,
+                            "post_id": 18622264,
+                            "comment_id": 48243320,
+                            "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database/18622264#comment48243320_18622264",
+                            "body": "That <code>buffer</code> breaks 3.x compatibility (which is a weird thing to do in code that uses the <code>io</code> module and <code>print</code> as a function), and it is doesn&#39;t seem to be necessary in my 2.7.6 or 2.7.9. Maybe older versions of <code>sqlite3</code> had a problem with it, but if 2.6+ works without it, you should probably remove it. See also <a href=\"http://stackoverflow.com/questions/30063437/trouble-storing-numpy-array-in-sqlite3-with-python/30064209#30064209\">this question</a>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 808621,
+                                "reputation": 360780,
+                                "user_id": 908494,
+                                "user_type": "registered",
+                                "accept_rate": 25,
+                                "display_name": "abarnert"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1430865089,
+                            "post_id": 18622264,
+                            "comment_id": 48243484,
+                            "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database/18622264#comment48243484_18622264",
+                            "body": "Also, if it <i>is</i> a problem with 2.x, does <code>bytearray</code> solve the problem? Because that would be portable to 3.x (without having to do a hack like defining <code>try: buffer except NameError: buffer=bytes</code> or <code>def buffer(x): return x</code> or something)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2297460,
+                                "reputation": 930,
+                                "user_id": 2018567,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Clock ZHONG"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1493880195,
+                            "post_id": 18622264,
+                            "comment_id": 74592030,
+                            "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database/18622264#comment74592030_18622264",
+                            "body": "I followed this solution, but can&#39;t load the value back to memory variables after I stored them into sqlite3 db."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2297460,
+                                "reputation": 930,
+                                "user_id": 2018567,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Clock ZHONG"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1493882550,
+                            "post_id": 18622264,
+                            "comment_id": 74593553,
+                            "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database/18622264#comment74593553_18622264",
+                            "body": "Thanks, I got the root cause of my problem. I didn&#39;t set detect_types=sqlite3.PARSE_DECLTYPES when calling sqlite3.connect(), after adding it, it works for my system also. Thanks again!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 64585,
+                        "reputation": 864612,
+                        "user_id": 190597,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "unutbu"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": true,
+                    "score": 65,
+                    "last_activity_date": 1436461296,
+                    "last_edit_date": 1436461296,
+                    "creation_date": 1378323147,
+                    "answer_id": 18622264,
+                    "question_id": 18621513,
+                    "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database/18622264#18622264",
+                    "body": "<p>You could register a new <code>array</code> data type with <code>sqlite3</code>:</p>\n\n<pre><code>import sqlite3\nimport numpy as np\nimport io\n\ndef adapt_array(arr):\n    \"\"\"\n    http://stackoverflow.com/a/31312102/190597 (SoulNibbler)\n    \"\"\"\n    out = io.BytesIO()\n    np.save(out, arr)\n    out.seek(0)\n    return sqlite3.Binary(out.read())\n\ndef convert_array(text):\n    out = io.BytesIO(text)\n    out.seek(0)\n    return np.load(out)\n\n\n# Converts np.array to TEXT when inserting\nsqlite3.register_adapter(np.ndarray, adapt_array)\n\n# Converts TEXT to np.array when selecting\nsqlite3.register_converter(\"array\", convert_array)\n\nx = np.arange(12).reshape(2,6)\n\ncon = sqlite3.connect(\":memory:\", detect_types=sqlite3.PARSE_DECLTYPES)\ncur = con.cursor()\ncur.execute(\"create table test (arr array)\")\n</code></pre>\n\n<p>With this setup, you can simply insert the NumPy array with no change in syntax:</p>\n\n<pre><code>cur.execute(\"insert into test (arr) values (?)\", (x, ))\n</code></pre>\n\n<p>And retrieve the array directly from sqlite as a NumPy array:</p>\n\n<pre><code>cur.execute(\"select arr from test\")\ndata = cur.fetchone()[0]\n\nprint(data)\n# [[ 0  1  2  3  4  5]\n#  [ 6  7  8  9 10 11]]\nprint(type(data))\n# &lt;type 'numpy.ndarray'&gt;\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 64585,
+                                "reputation": 864612,
+                                "user_id": 190597,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "unutbu"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1436461423,
+                            "post_id": 31312102,
+                            "comment_id": 50634278,
+                            "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database/31312102#comment50634278_31312102",
+                            "body": "Thank you for this improvement; this seems to work in both Python3 and 2.7. I&#39;ve updated my answer to use <code>sqlite3.Binary</code> as well."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2131477,
+                        "reputation": 149,
+                        "user_id": 1892222,
+                        "user_type": "registered",
+                        "display_name": "SoulNibbler"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 9,
+                    "last_activity_date": 1548328077,
+                    "last_edit_date": 1548328077,
+                    "creation_date": 1436430534,
+                    "answer_id": 31312102,
+                    "question_id": 18621513,
+                    "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database/31312102#31312102",
+                    "body": "<p>Happy Leap Second has it close but I kept getting an automatic casting to string.\nAlso if you check out this other post: <a href=\"https://stackoverflow.com/questions/3425320/sqlite3-programmingerror-you-must-not-use-8-bit-bytestrings-unless-you-use-a-te\">a fun debate on using buffer or Binary to push non text data into sqlite</a> you see that the documented approach is to avoid the buffer all together and use this chunk of code.</p>\n\n<pre><code>def adapt_array(arr):\n    out = io.BytesIO()\n    np.save(out, arr)\n    out.seek(0)\n    return sqlite3.Binary(out.read())\n</code></pre>\n\n<p>I haven't heavily tested this in python 3, but it seems to work in python 2.7</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 474979,
+                                "reputation": 2716,
+                                "user_id": 1447953,
+                                "user_type": "registered",
+                                "accept_rate": 58,
+                                "display_name": "Ben Farmer"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1579255468,
+                            "post_id": 46358247,
+                            "comment_id": 105713294,
+                            "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database/46358247#comment105713294_46358247",
+                            "body": "I am getting this error, any ideas?: LookupError: &#39;zlib&#39; is not a text encoding; use codecs.decode() to handle arbitrary codecs"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1512716,
+                                "reputation": 1317,
+                                "user_id": 1873877,
+                                "user_type": "registered",
+                                "accept_rate": 43,
+                                "display_name": "Marko"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1645559064,
+                            "post_id": 46358247,
+                            "comment_id": 125902417,
+                            "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database/46358247#comment125902417_46358247",
+                            "body": "You can also use <code>zlib.compress(out.read())</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2538419,
+                                "reputation": 1942,
+                                "user_id": 2259468,
+                                "user_type": "registered",
+                                "accept_rate": 57,
+                                "display_name": "EngrStudent"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1694749565,
+                            "post_id": 46358247,
+                            "comment_id": 135935029,
+                            "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database/46358247#comment135935029_46358247",
+                            "body": "several libraries to put in imports: os, time, sklearn.datasets fetch_openml.  The fetch_mldata function is deprecated.  The sqlite returns an error : &#39; ProgrammingError: Error binding parameter 2: type &#39;Series&#39; is not supported&#39; regarding this line &quot;cur.execute(&quot;insert into test (idx, X, y) values (?,?,?)&quot;,&quot;"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2471997,
+                        "reputation": 1134,
+                        "user_id": 6924622,
+                        "user_type": "registered",
+                        "display_name": "asterio gonzalez"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 22,
+                    "last_activity_date": 1506061952,
+                    "creation_date": 1506061952,
+                    "answer_id": 46358247,
+                    "question_id": 18621513,
+                    "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database/46358247#46358247",
+                    "body": "<p>I think that <code>matlab</code> format is a really convenient way to store and retrieve numpy arrays. Is really <strong>fast</strong> and the <strong>disk and memory footprint</strong> is quite the same.</p>\n\n<p><img src=\"https://raw.githubusercontent.com/mverleg/array_storage_benchmark/master/result/bm_random.png\" alt=\"Load / Save / Disk Comparison\"></p>\n\n<p>(image from <a href=\"https://github.com/mverleg/array_storage_benchmark\" rel=\"noreferrer\">mverleg benchmarks</a>)</p>\n\n<p>But if for any reason you need to store the numpy arrays into SQLite I suggest to add some compression capabilities.</p>\n\n<p>The extra lines from <a href=\"https://stackoverflow.com/users/190597/unutbu\">unutbu</a> code is pretty simple</p>\n\n<pre><code>compressor = 'zlib'  # zlib, bz2\n\ndef adapt_array(arr):\n    \"\"\"\n    http://stackoverflow.com/a/31312102/190597 (SoulNibbler)\n    \"\"\"\n    # zlib uses similar disk size that Matlab v5 .mat files\n    # bz2 compress 4 times zlib, but storing process is 20 times slower.\n    out = io.BytesIO()\n    np.save(out, arr)\n    out.seek(0)\n    return sqlite3.Binary(out.read().encode(compressor))  # zlib, bz2\n\ndef convert_array(text):\n    out = io.BytesIO(text)\n    out.seek(0)\n    out = io.BytesIO(out.read().decode(compressor))\n    return np.load(out)\n</code></pre>\n\n<p>The results testing with MNIST database gives were:</p>\n\n<pre><code>$ ./test_MNIST.py\n[69900]:  99% remain: 0 secs   \nStoring 70000 images in 379.9 secs\nRetrieve 6990 images in 9.5 secs\n$ ls -lh example.db \n-rw-r--r-- 1 agp agp 69M sep 22 07:27 example.db\n$ ls -lh mnist-original.mat \n-rw-r--r-- 1 agp agp 53M sep 20 17:59 mnist-original.mat\n```\n</code></pre>\n\n<p>using <code>zlib</code>, and</p>\n\n<pre><code>$ ./test_MNIST.py\n[69900]:  99% remain: 12 secs   \nStoring 70000 images in 8536.2 secs\nRetrieve 6990 images in 37.4 secs\n$ ls -lh example.db \n-rw-r--r-- 1 agp agp 19M sep 22 03:33 example.db\n$ ls -lh mnist-original.mat \n-rw-r--r-- 1 agp agp 53M sep 20 17:59 mnist-original.mat\n</code></pre>\n\n<p>using <code>bz2</code></p>\n\n<p>Comparing <code>Matlab V5</code> format with <code>bz2</code> on SQLite, the bz2 compression is around 2.8, but the access time is quite long comparing to Matlab format (almost instantaneously vs more than 30 secs). Maybe is worthy only for really huge databases where the learning process is much time consuming than access time or where the database footprint is needed to be as small as possible.</p>\n\n<p>Finally note that <code>bipz/zlib</code> ratio is around 3.7 and <code>zlib/matlab</code> requires 30% more space.</p>\n\n<p>The full code if you want to play yourself is:</p>\n\n<pre><code>import sqlite3\nimport numpy as np\nimport io\n\ncompressor = 'zlib'  # zlib, bz2\n\ndef adapt_array(arr):\n    \"\"\"\n    http://stackoverflow.com/a/31312102/190597 (SoulNibbler)\n    \"\"\"\n    # zlib uses similar disk size that Matlab v5 .mat files\n    # bz2 compress 4 times zlib, but storing process is 20 times slower.\n    out = io.BytesIO()\n    np.save(out, arr)\n    out.seek(0)\n    return sqlite3.Binary(out.read().encode(compressor))  # zlib, bz2\n\ndef convert_array(text):\n    out = io.BytesIO(text)\n    out.seek(0)\n    out = io.BytesIO(out.read().decode(compressor))\n    return np.load(out)\n\nsqlite3.register_adapter(np.ndarray, adapt_array)\nsqlite3.register_converter(\"array\", convert_array)\n\ndbname = 'example.db'\ndef test_save_sqlite_arrays():\n    \"Load MNIST database (70000 samples) and store in a compressed SQLite db\"\n    os.path.exists(dbname) and os.unlink(dbname)\n    con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)\n    cur = con.cursor()\n    cur.execute(\"create table test (idx integer primary key, X array, y integer );\")\n\n    mnist = fetch_mldata('MNIST original')\n\n    X, y =  mnist.data, mnist.target\n    m = X.shape[0]\n    t0 = time.time()\n    for i, x in enumerate(X):\n        cur.execute(\"insert into test (idx, X, y) values (?,?,?)\",\n                    (i, y, int(y[i])))\n        if not i % 100 and i &gt; 0:\n            elapsed = time.time() - t0\n            remain = float(m - i) / i * elapsed\n            print \"\\r[%5d]: %3d%% remain: %d secs\" % (i, 100 * i / m, remain),\n            sys.stdout.flush()\n\n    con.commit()\n    con.close()\n    elapsed = time.time() - t0\n    print\n    print \"Storing %d images in %0.1f secs\" % (m, elapsed)\n\ndef test_load_sqlite_arrays():\n    \"Query MNIST SQLite database and load some samples\"\n    con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)\n    cur = con.cursor()\n\n    # select all images labeled as '2'\n    t0 = time.time()\n    cur.execute('select idx, X, y from test where y = 2')\n    data = cur.fetchall()\n    elapsed = time.time() - t0\n    print \"Retrieve %d images in %0.1f secs\" % (len(data), elapsed)\n\n\nif __name__ == '__main__':\n    test_save_sqlite_arrays()\n    test_load_sqlite_arrays()\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 30352,
+                                "reputation": 16070,
+                                "user_id": 82733,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Joseph Turian"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1615430472,
+                            "post_id": 55799782,
+                            "comment_id": 117690765,
+                            "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database/55799782#comment117690765_55799782",
+                            "body": "I like this but if you have different dtypes, some float and some float32, it&#39;s best to standardize: <code>arr.astype(&#39;float32&#39;).tobytes()</code> and <code>np.frombuffer(text, dtype=&#39;float32&#39;)</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1522906,
+                                "reputation": 44396,
+                                "user_id": 1422096,
+                                "user_type": "registered",
+                                "accept_rate": 63,
+                                "display_name": "Basj"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1656161859,
+                            "post_id": 55799782,
+                            "comment_id": 128506854,
+                            "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database/55799782#comment128506854_55799782",
+                            "body": "This works if you always use 1D arrays. But if you have sometimes 1D arrays, and sometimes 2D arrays, it won&#39;t work: after select, you will always get a flattened 1D array. Reason: <a href=\"https://stackoverflow.com/a/61838233/1422096\">tobytes() doesn&#39;t store the shape</a>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 14272035,
+                        "reputation": 831,
+                        "user_id": 10309266,
+                        "user_type": "registered",
+                        "display_name": "gavin"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1656161822,
+                    "last_edit_date": 1656161822,
+                    "creation_date": 1555960204,
+                    "answer_id": 55799782,
+                    "question_id": 18621513,
+                    "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database/55799782#55799782",
+                    "body": "<p>The other methods specified didn't work for me. And well there seems to be a <code>numpy.tobytes</code> method now and a <code>numpy.fromstring</code> (which works on byte strings) but is deprecated and the recommended method is <code>numpy.frombuffer</code>.</p>\n<pre><code>import sqlite3\nimport numpy as np\n\nsqlite3.register_adapter(np.array, lambda arr: arr.tobytes())    \nsqlite3.register_converter(&quot;array&quot;, np.frombuffer)\n</code></pre>\n<p>I've tested it in my application and it works well for me on <code>Python 3.7.3</code> and <code>numpy 1.16.2</code></p>\n<p><code>numpy.fromstring</code> gives the same outputs along with <code>DeprecationWarning: The binary mode of fromstring is deprecated, as it behaves surprisingly on unicode inputs. Use frombuffer instead</code></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1522906,
+                        "reputation": 44396,
+                        "user_id": 1422096,
+                        "user_type": "registered",
+                        "accept_rate": 63,
+                        "display_name": "Basj"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1678221244,
+                    "last_edit_date": 1678221244,
+                    "creation_date": 1656162344,
+                    "answer_id": 72754097,
+                    "question_id": 18621513,
+                    "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database/72754097#72754097",
+                    "body": "<p>Ready to use code based on @unutbu's answer (cleaned a bit, no need to seek, etc.), and test with a 2D <code>ndarray</code>:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import sqlite3, numpy as np, io\n\ndef adapt_array(arr):\n    out = io.BytesIO()\n    np.save(out, arr)\n    return sqlite3.Binary(out.getvalue())\n\nsqlite3.register_adapter(np.ndarray, adapt_array)\nsqlite3.register_converter(&quot;array&quot;, lambda x: np.load(io.BytesIO(x)))\n\nx = np.random.rand(100, 100)\ncon = sqlite3.connect(&quot;:memory:&quot;, detect_types=sqlite3.PARSE_DECLTYPES)\ncon.execute(&quot;create table test (arr array)&quot;)\ncon.execute(&quot;insert into test (arr) values (?)&quot;, (x, ))\nfor r in con.execute(&quot;select arr from test&quot;):\n    print(r[0])\n</code></pre>\n<p>You can use this (see @gavin's answer) instead if and <em>only if</em> you only work with 1D arrays:</p>\n<pre class=\"lang-py prettyprint-override\"><code>sqlite3.register_adapter(np.ndarray, lambda arr: arr.tobytes())\nsqlite3.register_converter(&quot;array&quot;, np.frombuffer)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 1899220,
+                "reputation": 1126,
+                "user_id": 1715453,
+                "user_type": "registered",
+                "accept_rate": 97,
+                "display_name": "Joe Flip"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "accepted_answer_id": 18622264,
+            "answer_count": 6,
+            "score": 48,
+            "last_activity_date": 1678221244,
+            "creation_date": 1378320428,
+            "question_id": 18621513,
+            "link": "https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database",
+            "title": "Python insert numpy array into sqlite3 database",
+            "body": "<p>I'm trying to store a numpy array of about 1000 floats in a sqlite3 database but I keep getting the error \"InterfaceError: Error binding parameter 1 - probably unsupported type\".</p>\n\n<p>I was under the impression a BLOB data type could be anything but it definitely doesn't work with a numpy array. Here's what I tried:</p>\n\n<pre><code>import sqlite3 as sql\nimport numpy as np\ncon = sql.connect('test.bd',isolation_level=None)\ncur = con.cursor()\ncur.execute(\"CREATE TABLE foobar (id INTEGER PRIMARY KEY, array BLOB)\")\ncur.execute(\"INSERT INTO foobar VALUES (?,?)\", (None,np.arange(0,500,0.5)))\ncon.commit()\n</code></pre>\n\n<p>Is there another module I can use to get the numpy array into the table? Or can I convert the numpy array into another form in Python (like a list or string I can split) that sqlite will accept? Performance isn't a priority. I just want it to work!</p>\n\n<p>Thanks!</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9714
+}

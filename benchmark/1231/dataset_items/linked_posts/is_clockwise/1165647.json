@@ -1,0 +1,2564 @@
+{
+    "items": [
+        {
+            "tags": [
+                "math",
+                "geometry",
+                "polygon",
+                "computational-geometry"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 68306,
+                        "reputation": 20248,
+                        "user_id": 199364,
+                        "user_type": "registered",
+                        "accept_rate": 83,
+                        "display_name": "ToolmakerSteve"
+                    },
+                    "edited": false,
+                    "score": 21,
+                    "creation_date": 1549399873,
+                    "post_id": 1165647,
+                    "comment_id": 95886747,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order#comment95886747_1165647",
+                    "body": "PLEASE NOTE: The accepted answer, and many answers after it, require a lot of additions and multiplications (they are based on area calculations that end negative or positive; e.g. &quot;shoelace formula&quot;). Before implementing one of those, consider <a href=\"https://stackoverflow.com/a/1180256/199364\">lhf&#39;s answer</a>, which is simpler/quicker - based on <a href=\"https://en.wikipedia.org/wiki/Curve_orientation#Orientation_of_a_simple_polygon\" rel=\"nofollow noreferrer\">wiki - orientation of simple polygon</a>."
+                },
+                {
+                    "owner": {
+                        "account_id": 16878,
+                        "reputation": 307381,
+                        "user_id": 37213,
+                        "user_type": "registered",
+                        "accept_rate": 81,
+                        "display_name": "duffymo"
+                    },
+                    "edited": false,
+                    "score": 3,
+                    "creation_date": 1570191515,
+                    "post_id": 1165647,
+                    "comment_id": 102845463,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order#comment102845463_1165647",
+                    "body": "I always think of it in terms of the cross product of two adjacent vectors.  If I walk around the perimeter of the polygon my head points out of the plane.  I cross the out of plane vector into my walking direction vector to get the third direction in my coordinate system.  If that vector points so that the interior is on my left it&#39;s counterclockwise; if the interior is on my right it&#39;s clockwise."
+                },
+                {
+                    "owner": {
+                        "account_id": 7649122,
+                        "reputation": 6991,
+                        "user_id": 6630397,
+                        "user_type": "registered",
+                        "accept_rate": 42,
+                        "display_name": "swiss_knight"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1673718502,
+                    "post_id": 1165647,
+                    "comment_id": 132562576,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order#comment132562576_1165647",
+                    "body": "Without in any way diminishing the interest of the question; for those coming here and who don&#39;t want to reinvent the wheel, you can checkout the <a href=\"https://libgeos.org/\" rel=\"nofollow noreferrer\">GEOS/libgeos</a> source code as explained <a href=\"https://stackoverflow.com/a/75120030/6630397\">hereunder</a> along with a small Python snippet using <a href=\"https://shapely.readthedocs.io\" rel=\"nofollow noreferrer\">Shapely</a>, where this orientation check is available."
+                },
+                {
+                    "owner": {
+                        "account_id": 2658998,
+                        "reputation": 521,
+                        "user_id": 2299100,
+                        "user_type": "registered",
+                        "display_name": "Slyv"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1709110692,
+                    "post_id": 1165647,
+                    "comment_id": 137636747,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order#comment137636747_1165647",
+                    "body": "IMPORTANT: all &quot;area&quot; based solutions may return wrong value for self-intersecting polygons. You can for example test these polygons: <code>(0,0) (9,0) (0,10) (10,10)</code> and <code>(0,0) (11,0) (0,10) (10,10)</code>"
+                },
+                {
+                    "owner": {
+                        "account_id": 2658998,
+                        "reputation": 521,
+                        "user_id": 2299100,
+                        "user_type": "registered",
+                        "display_name": "Slyv"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1709111250,
+                    "post_id": 1165647,
+                    "comment_id": 137636838,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order#comment137636838_1165647",
+                    "body": "For self-intersecting polygons these &quot;area&quot; solutions return information if they are &quot;mostly clockwise&quot;, or not. And it is not information whether all neighbouring points are clockwise."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2973,
+                                "reputation": 980,
+                                "user_id": 4218,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "ReaperUnreal"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1248273894,
+                            "post_id": 1165713,
+                            "comment_id": 985053,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165713#comment985053_1165713",
+                            "body": "Seeing as how the cross product basically boils down to a positive scaling factor times the sine of the angle, it&#39;s probably better to just do a cross product. It&#39;ll be faster and less complicated."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 40970,
+                        "reputation": 11267,
+                        "user_id": 118959,
+                        "user_type": "registered",
+                        "display_name": "Steve Gilham"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1248273068,
+                    "creation_date": 1248273068,
+                    "answer_id": 1165713,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165713#1165713",
+                    "body": "<p>Start at one of the vertices, and compute the angle subtended by each side.  </p>\n\n<p>The first and the last will be zero (so skip those); for the rest, the sine of the angle will be given by the cross product of the normalizations to unit length of (point[n]-point[0]) and (point[n-1]-point[0]).</p>\n\n<p>If the sum of the values is positive, then your polygon is drawn in the anti-clockwise sense.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 236846,
+                                "reputation": 10329,
+                                "user_id": 504611,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "Vicky Chijwani"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1349757248,
+                            "post_id": 1165766,
+                            "comment_id": 17296411,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165766#comment17296411_1165766",
+                            "body": "by &quot;center of mass&quot; I think you mean &quot;centroid&quot;?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 68306,
+                                "reputation": 20248,
+                                "user_id": 199364,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ToolmakerSteve"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1549401861,
+                            "post_id": 1165766,
+                            "comment_id": 95887603,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165766#comment95887603_1165766",
+                            "body": "Probably works if polygon is entirely convex. But better to instead use an answer that will work for non-convex polygons."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 46108,
+                        "reputation": 7039,
+                        "user_id": 136135,
+                        "user_type": "registered",
+                        "accept_rate": 47,
+                        "display_name": "ufukgun"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": -4,
+                    "last_activity_date": 1248273494,
+                    "creation_date": 1248273494,
+                    "answer_id": 1165766,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165766#1165766",
+                    "body": "<p>find the center of mass of these points. </p>\n\n<p>suppose there are lines from this point to your points.</p>\n\n<p>find the angle between two lines for line0 line1</p>\n\n<p>than do it for line1 and line2</p>\n\n<p>...</p>\n\n<p>...</p>\n\n<p>if this angle is monotonically increasing than it is counterclockwise ,</p>\n\n<p>else if monotonically decreasing it is clockwise</p>\n\n<p>else (it is not monotonical)</p>\n\n<p>you cant decide, so it is not wise</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 44018,
+                                "reputation": 98126,
+                                "user_id": 128940,
+                                "user_type": "registered",
+                                "display_name": "Beta"
+                            },
+                            "edited": false,
+                            "score": 37,
+                            "creation_date": 1248704426,
+                            "post_id": 1165943,
+                            "comment_id": 1010505,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment1010505_1165943",
+                            "body": "It&#39;s calculus applied to a simple case. (I don&#39;t have the skill to post graphics.) The area under a line segment equals its average height (y2+y1)/2 times its horizontal length (x2-x1). Notice the sign convention in x. Try this with some triangles and you&#39;ll soon see how it works."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 44018,
+                                "reputation": 98126,
+                                "user_id": 128940,
+                                "user_type": "registered",
+                                "display_name": "Beta"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1251733470,
+                            "post_id": 1165943,
+                            "comment_id": 1194826,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment1194826_1165943",
+                            "body": "I&#39;d suggest proving it first for a triangle, then showing that any polygon can be split into triangles in a way that doesn&#39;t change its &quot;clockwiseness&quot;."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 756,
+                                "reputation": 72789,
+                                "user_id": 986,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "Mark Ingram"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1257787182,
+                            "post_id": 1165943,
+                            "comment_id": 1578262,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment1578262_1165943",
+                            "body": "Is there a particular name to this method?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 44018,
+                                "reputation": 98126,
+                                "user_id": 128940,
+                                "user_type": "registered",
+                                "display_name": "Beta"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1257794245,
+                            "post_id": 1165943,
+                            "comment_id": 1579021,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment1579021_1165943",
+                            "body": "Now that I think of it, the method of calculating area using a counterclockwise curve can be derived from Green&#39;s Theorem. I saw the method (without derivation) years ago-- I may have come up with idea of using it as a clockwiseness test myself, but it&#39;s a pretty obvious jump."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 160436,
+                                "reputation": 179,
+                                "user_id": 380510,
+                                "user_type": "registered",
+                                "display_name": "the Ritz"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1363096026,
+                            "post_id": 1165943,
+                            "comment_id": 21705845,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment21705845_1165943",
+                            "body": "Is there a similar elegant solution for polygons in 3D space?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 160436,
+                                "reputation": 179,
+                                "user_id": 380510,
+                                "user_type": "registered",
+                                "display_name": "the Ritz"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1363096495,
+                            "post_id": 1165943,
+                            "comment_id": 21706170,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment21706170_1165943",
+                            "body": "Found it here: <a href=\"http://stackoverflow.com/questions/12642256/python-find-area-of-polygon-from-xyz-coordinates\" title=\"python find area of polygon from xyz coordinates\">stackoverflow.com/questions/12642256/&hellip;</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2993324,
+                                "reputation": 5853,
+                                "user_id": 2540407,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "Michael"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1377635981,
+                            "post_id": 1165943,
+                            "comment_id": 27155736,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment27155736_1165943",
+                            "body": "It also generalizes nicely to 3-D polytopes: for each face compute the signed area in x-y plane as described in this answer, multiply by the mean value of z, and sum it up for all faces. The absolute value of the result will be the polytope&#39;s volume."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 186022,
+                                "reputation": 27778,
+                                "user_id": 423105,
+                                "user_type": "registered",
+                                "accept_rate": 68,
+                                "display_name": "LarsH"
+                            },
+                            "edited": false,
+                            "score": 94,
+                            "creation_date": 1381524562,
+                            "post_id": 1165943,
+                            "comment_id": 28629100,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment28629100_1165943",
+                            "body": "A minor caveat: this answer assumes a normal Cartesian coordinate system. The reason that&#39;s worth mentioning is that some common contexts, like HTML5 canvas, use an inverted Y-axis. Then the rule has to be flipped: if the area is <i>negative</i>, the curve is clockwise."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3458964,
+                                "reputation": 152,
+                                "user_id": 2896705,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "Mr.Qbs"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1418489397,
+                            "post_id": 1165943,
+                            "comment_id": 43358780,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment43358780_1165943",
+                            "body": "This method is wrong! I implemented it ad is works in 98% cases. But not always.  <a href=\"http://en.wikipedia.org/wiki/Curve_orientation\" rel=\"nofollow noreferrer\">What worked for me (in every case) is this link</a>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 44018,
+                                "reputation": 98126,
+                                "user_id": 128940,
+                                "user_type": "registered",
+                                "display_name": "Beta"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3458964,
+                                "reputation": 152,
+                                "user_id": 2896705,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "Mr.Qbs"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1418516470,
+                            "post_id": 1165943,
+                            "comment_id": 43366370,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment43366370_1165943",
+                            "body": "@Mr.Qbs: Please give us the simplest counterexample you know."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3458964,
+                                "reputation": 152,
+                                "user_id": 2896705,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "Mr.Qbs"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1418557095,
+                            "post_id": 1165943,
+                            "comment_id": 43373036,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment43373036_1165943",
+                            "body": "I checked my implementation to show you that it&#39;s properly done and to give you counterexample. Then I saw your coment &quot;I&#39;d suggest proving it for a triangle&quot; so I tried it and it works! When i have 3 points (2 edges of my big polygon) I need to calculate 3 edges to get properly result (ab, bc, ca - imaginary edge).   But when I try it only for 2 &quot;real&quot; edges (that realy belongs to my polygon) result sometimes is bad (its hard to give example - i compute 3d objects and I can see the bad arc quickly on modified model - sometimes arc is made in bad direction)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 44018,
+                                "reputation": 98126,
+                                "user_id": 128940,
+                                "user_type": "registered",
+                                "display_name": "Beta"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3458964,
+                                "reputation": 152,
+                                "user_id": 2896705,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "Mr.Qbs"
+                            },
+                            "edited": false,
+                            "score": 16,
+                            "creation_date": 1418565810,
+                            "post_id": 1165943,
+                            "comment_id": 43375057,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment43375057_1165943",
+                            "body": "@Mr.Qbs: So my method works, but if you <i>skip a vital part</i>, then it doesn&#39;t work. This is not news."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 472485,
+                                "reputation": 108978,
+                                "user_id": 880990,
+                                "user_type": "registered",
+                                "display_name": "Olivier Jacot-Descombes"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3458964,
+                                "reputation": 152,
+                                "user_id": 2896705,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "Mr.Qbs"
+                            },
+                            "edited": false,
+                            "score": 12,
+                            "creation_date": 1437403509,
+                            "post_id": 1165943,
+                            "comment_id": 51000145,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment51000145_1165943",
+                            "body": "@Mr.Qbs: You always have to link the last point to the first one. If you have N points numbered from 0 to N-1, then you must calculate: <code>Sum( (x[(i+1) mod N] - x[i]) * (y[i] + y[(i+1) mod N]) )</code> for i = 0 to N-1. I.e., must must take the index Modulo N (<code>N \u2261 0</code>) The formula works only for <b>closed</b> polygons. Polygons have no imaginary edges."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4953530,
+                                "reputation": 3940,
+                                "user_id": 4114447,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Dan M."
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1470160735,
+                            "post_id": 1165943,
+                            "comment_id": 64830698,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment64830698_1165943",
+                            "body": "Can the result be zero? And if it can, then what orientation is it? (It looks like some special cease)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 44018,
+                                "reputation": 98126,
+                                "user_id": 128940,
+                                "user_type": "registered",
+                                "display_name": "Beta"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4953530,
+                                "reputation": 3940,
+                                "user_id": 4114447,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Dan M."
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1470191004,
+                            "post_id": 1165943,
+                            "comment_id": 64842614,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment64842614_1165943",
+                            "body": "@DanM. If the result is zero, that means that the positive and negative areas cancel out, as in a figure-eight."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4953530,
+                                "reputation": 3940,
+                                "user_id": 4114447,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Dan M."
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1471127403,
+                            "post_id": 1165943,
+                            "comment_id": 65231051,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment65231051_1165943",
+                            "body": "Btw, It seems you only need to calculate sum of <code>x&lt;sub&gt;i + 1&lt;&#47;sub&gt;*y&lt;sub&gt;i&lt;&#47;sub&gt; - x&lt;sub&gt;i&lt;&#47;sub&gt;*y&lt;sub&gt;i + 1&lt;&#47;sub&gt;</code> to determine the answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 44018,
+                                "reputation": 98126,
+                                "user_id": 128940,
+                                "user_type": "registered",
+                                "display_name": "Beta"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4953530,
+                                "reputation": 3940,
+                                "user_id": 4114447,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Dan M."
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1471204489,
+                            "post_id": 1165943,
+                            "comment_id": 65246994,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment65246994_1165943",
+                            "body": "@DanM.: True, but notice that my formula has only one multiplication, while yours has two."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2836359,
+                                "reputation": 1543,
+                                "user_id": 2436902,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Matt Fiocca"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1484189933,
+                            "post_id": 1165943,
+                            "comment_id": 70411131,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment70411131_1165943",
+                            "body": "I&#39;m trying this out with a clockwise diamond, and getting a negative (counter-clockwise) sum result, and a positive sum for counter-clockwise. CLOCKWISE DIAMOND: <code>point[0] = 0,5 (5-0)(0+5) = 25, point[1] = 5,0 (10-5)(5+0) = 25, point[2] = 10,5 (5-10)(5+10) = -75, point[3] = 5,10 (0-5)(10+5) = -75</code> == -100.  COUNTER DIAMOND: <code>point[0] = 0,5 (5-0)(5+10) = 75, point[1] = 5,10 (10-5)(10+5) = 75, point[2] = 10,5 (5-10)(5+0) = -25, point[3] = 5,0 (0-5)(5+0) = -25</code> == +100  Is this a special case?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 44018,
+                                "reputation": 98126,
+                                "user_id": 128940,
+                                "user_type": "registered",
+                                "display_name": "Beta"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2836359,
+                                "reputation": 1543,
+                                "user_id": 2436902,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Matt Fiocca"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1484190587,
+                            "post_id": 1165943,
+                            "comment_id": 70411293,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment70411293_1165943",
+                            "body": "@MattFiocca: You are using the words &quot;clockwise&quot; and &quot;counter-clockwise&quot; in the opposite sense of everyone else."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2836359,
+                                "reputation": 1543,
+                                "user_id": 2436902,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Matt Fiocca"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1484198911,
+                            "post_id": 1165943,
+                            "comment_id": 70413459,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment70413459_1165943",
+                            "body": "@Beta: just so i&#39;m not going crazy, is everyone else using clockwise as counter-clockface? Here&#39;s a link to my diagram with calculations. <a href=\"https://s3-us-west-2.amazonaws.com/mattfiocca/polydirection.png\" rel=\"nofollow noreferrer\">s3-us-west-2.amazonaws.com/mattfiocca/polydirection.png</a>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 44018,
+                                "reputation": 98126,
+                                "user_id": 128940,
+                                "user_type": "registered",
+                                "display_name": "Beta"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2836359,
+                                "reputation": 1543,
+                                "user_id": 2436902,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Matt Fiocca"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1484264472,
+                            "post_id": 1165943,
+                            "comment_id": 70451269,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment70451269_1165943",
+                            "body": "@MattFiocca: The convention in mathematics is that the Y coordinate increases upward; your Y coordinates increase downward."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2836359,
+                                "reputation": 1543,
+                                "user_id": 2436902,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Matt Fiocca"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1484278429,
+                            "post_id": 1165943,
+                            "comment_id": 70454728,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment70454728_1165943",
+                            "body": "@Beta: ah thanks! I knew I was missing something vital, having come from the backward world of web and apps."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4033891,
+                                "reputation": 2406,
+                                "user_id": 3319076,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "Sreeraj"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1489734193,
+                            "post_id": 1165943,
+                            "comment_id": 72809530,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment72809530_1165943",
+                            "body": "This works only with all positive co-ordinates. I tried with Polygons in X,-Z Plane (all Z values are negative in this case.). Only way I could get this logic to work in this case is by translating the polygons to X,+Z plane. i.e, by offsetting the Z values of all co-ordinates with a constant such that all values are positive. Please correct me if am wrong or if there is any simpler alternative."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 44018,
+                                "reputation": 98126,
+                                "user_id": 128940,
+                                "user_type": "registered",
+                                "display_name": "Beta"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4033891,
+                                "reputation": 2406,
+                                "user_id": 3319076,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "Sreeraj"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1489874916,
+                            "post_id": 1165943,
+                            "comment_id": 72864328,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment72864328_1165943",
+                            "body": "@Sreeraj: You are mistaken, but a comment thread is not the place to discuss it. If I have time I&#39;ll make a chat room."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 118548,
+                                "reputation": 13254,
+                                "user_id": 309641,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "David Zorychta"
+                            },
+                            "edited": false,
+                            "score": 13,
+                            "creation_date": 1494983763,
+                            "post_id": 1165943,
+                            "comment_id": 75055855,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment75055855_1165943",
+                            "body": "This <a href=\"http://blog.element84.com/polygon-winding.html\" rel=\"nofollow noreferrer\">blog.element84.com/polygon-winding.html</a> explains in simple english why this solution works."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3369699,
+                                "reputation": 166,
+                                "user_id": 2829260,
+                                "user_type": "registered",
+                                "accept_rate": 25,
+                                "display_name": "RunninglVlan"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1511712844,
+                            "post_id": 1165943,
+                            "comment_id": 81951636,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment81951636_1165943",
+                            "body": "Alternatively it can be calculated as sum of <code>(point.x + nextPoint.x) * (point.y - nextPoint.y)</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1619576,
+                                "reputation": 7815,
+                                "user_id": 1496453,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "Sandy Gifford"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1523878596,
+                            "post_id": 1165943,
+                            "comment_id": 86727049,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment86727049_1165943",
+                            "body": "Would this work for lat/lon coordinates assuming you&#39;re not near/crossing a pole, and all polygons that cross 180 are defined with numbers greater than 180?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 10137341,
+                                "reputation": 527,
+                                "user_id": 7489927,
+                                "user_type": "registered",
+                                "display_name": "GarryM"
+                            },
+                            "reply_to_user": {
+                                "account_id": 118548,
+                                "reputation": 13254,
+                                "user_id": 309641,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "David Zorychta"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1543330278,
+                            "post_id": 1165943,
+                            "comment_id": 93873816,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment93873816_1165943",
+                            "body": "@Macmee: the link given by you is broken, archive: <a href=\"https://web.archive.org/web/20171212175910/blog.element84.com/polygon-winding.html\" rel=\"nofollow noreferrer\">web.archive.org/web/20171212175910/blog.element84.com/&hellip;</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2262332,
+                                "reputation": 391,
+                                "user_id": 1992064,
+                                "user_type": "registered",
+                                "display_name": "Brian Carcich"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1543942627,
+                            "post_id": 1165943,
+                            "comment_id": 94096253,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment94096253_1165943",
+                            "body": "Ah, with a clever approach that cancels the extra XnYn terms over the sum, this is a cross product.  Sweet!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9971171,
+                                "reputation": 246,
+                                "user_id": 7377162,
+                                "user_type": "registered",
+                                "display_name": "Chanwoo Park"
+                            },
+                            "reply_to_user": {
+                                "account_id": 186022,
+                                "reputation": 27778,
+                                "user_id": 423105,
+                                "user_type": "registered",
+                                "accept_rate": 68,
+                                "display_name": "LarsH"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1587621005,
+                            "post_id": 1165943,
+                            "comment_id": 108583531,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment108583531_1165943",
+                            "body": "@LarsH unless it&#39;s Y coordinate is inverted resulting in a negative Y value, wouldn&#39;t positive sum of edges still means the polygon is clockwise?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 186022,
+                                "reputation": 27778,
+                                "user_id": 423105,
+                                "user_type": "registered",
+                                "accept_rate": 68,
+                                "display_name": "LarsH"
+                            },
+                            "reply_to_user": {
+                                "account_id": 9971171,
+                                "reputation": 246,
+                                "user_id": 7377162,
+                                "user_type": "registered",
+                                "display_name": "Chanwoo Park"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1587651706,
+                            "post_id": 1165943,
+                            "comment_id": 108600125,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment108600125_1165943",
+                            "body": "@ChanwooPark: Good question. I can see why that might appear to be the case, since <code>y1 + y2</code> wouldn&#39;t change sign just from inverting the direction of the y axis. But I don&#39;t think so. Try it for a simple triangle. (I don&#39;t have time to try it now.)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 186022,
+                                "reputation": 27778,
+                                "user_id": 423105,
+                                "user_type": "registered",
+                                "accept_rate": 68,
+                                "display_name": "LarsH"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1587652121,
+                            "post_id": 1165943,
+                            "comment_id": 108600410,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment108600410_1165943",
+                            "body": "Ok I tried it with the example given in the answer. If you flip the y-axis to go from 5 to 0 instead of 0 to 5, you end up with 45 instead of -44. So no, a positive sum doesn&#39;t mean the polygon is clockwise, when the y-axis is flipped."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 186022,
+                                "reputation": 27778,
+                                "user_id": 423105,
+                                "user_type": "registered",
+                                "accept_rate": 68,
+                                "display_name": "LarsH"
+                            },
+                            "reply_to_user": {
+                                "account_id": 9971171,
+                                "reputation": 246,
+                                "user_id": 7377162,
+                                "user_type": "registered",
+                                "display_name": "Chanwoo Park"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1587655732,
+                            "post_id": 1165943,
+                            "comment_id": 108602596,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment108602596_1165943",
+                            "body": "@ChanwooPark Think of how the algorithm works: if edges that go leftward (x2 &lt; x1) have higher y-values overall than edges that go rightward (x2 &gt; x1), the negative terms will outweigh the positive, and in a Cartesian coordinate system this means the polygon goes counterclockwise."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 186022,
+                                "reputation": 27778,
+                                "user_id": 423105,
+                                "user_type": "registered",
+                                "accept_rate": 68,
+                                "display_name": "LarsH"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1587655864,
+                            "post_id": 1165943,
+                            "comment_id": 108602685,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment108602685_1165943",
+                            "body": "Whereas in an inverted y-coordinate system, edges that would have had higher y-values than the others now have lower y-values. So for a counterclockwise polygon, the leftward edges now have lower y-values, and the positive terms of the rightward edges will outweigh them, producing a positive result."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 186022,
+                                "reputation": 27778,
+                                "user_id": 423105,
+                                "user_type": "registered",
+                                "accept_rate": 68,
+                                "display_name": "LarsH"
+                            },
+                            "reply_to_user": {
+                                "account_id": 9971171,
+                                "reputation": 246,
+                                "user_id": 7377162,
+                                "user_type": "registered",
+                                "display_name": "Chanwoo Park"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1587741888,
+                            "post_id": 1165943,
+                            "comment_id": 108637610,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment108637610_1165943",
+                            "body": "@ChanwooPark Thx for the question. I hadn&#39;t really understood the algorithm until you provoked me to think it thru."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1380719,
+                                "reputation": 249,
+                                "user_id": 1313787,
+                                "user_type": "registered",
+                                "display_name": "stenfeio"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1613429973,
+                            "post_id": 1165943,
+                            "comment_id": 117068085,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment117068085_1165943",
+                            "body": "Can this be generalized to 3 dimensions, x, y, z?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 44018,
+                                "reputation": 98126,
+                                "user_id": 128940,
+                                "user_type": "registered",
+                                "display_name": "Beta"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1380719,
+                                "reputation": 249,
+                                "user_id": 1313787,
+                                "user_type": "registered",
+                                "display_name": "stenfeio"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1613437773,
+                            "post_id": 1165943,
+                            "comment_id": 117069855,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment117069855_1165943",
+                            "body": "@stenfeio: Yes, but you must think carefully about what &quot;clockwise&quot; means in 3D. If you don&#39;t see how, you can post ta Question; it&#39;s too much to add to this one."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1380719,
+                                "reputation": 249,
+                                "user_id": 1313787,
+                                "user_type": "registered",
+                                "display_name": "stenfeio"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1613486500,
+                            "post_id": 1165943,
+                            "comment_id": 117085616,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment117085616_1165943",
+                            "body": "@Beta, posted here: <a href=\"https://stackoverflow.com/questions/66226478/how-do-you-determine-if-a-list-of-of-points-in-3d-space-are-in-clock-wise-order\" title=\"how do you determine if a list of of points in 3d space are in clock wise order\">stackoverflow.com/questions/66226478/&hellip;</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2785811,
+                                "reputation": 4366,
+                                "user_id": 2397253,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "oarfish"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1707911380,
+                            "post_id": 1165943,
+                            "comment_id": 137499379,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment137499379_1165943",
+                            "body": "What if the points are neither clockwise, nor counterclockwise?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 44018,
+                                "reputation": 98126,
+                                "user_id": 128940,
+                                "user_type": "registered",
+                                "display_name": "Beta"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2785811,
+                                "reputation": 4366,
+                                "user_id": 2397253,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "oarfish"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1707969573,
+                            "post_id": 1165943,
+                            "comment_id": 137507468,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#comment137507468_1165943",
+                            "body": "@oarfish: What if they are? Try to work it out yourself."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 44018,
+                        "reputation": 98126,
+                        "user_id": 128940,
+                        "user_type": "registered",
+                        "display_name": "Beta"
+                    },
+                    "comment_count": 40,
+                    "is_accepted": true,
+                    "score": 509,
+                    "last_activity_date": 1451932376,
+                    "last_edit_date": 1451932376,
+                    "creation_date": 1248274942,
+                    "answer_id": 1165943,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1165943#1165943",
+                    "body": "<p>Some of the suggested methods will fail in the case of a non-convex polygon, such as a crescent. Here's a simple one that will work with non-convex polygons (it'll even work with a self-intersecting polygon like a figure-eight, telling you whether it's <i>mostly</i> clockwise).</p>\n\n<p>Sum over the edges, (x<sub>2</sub> \u2212 x<sub>1</sub>)(y<sub>2</sub> + y<sub>1</sub>). If the result is positive the curve is clockwise, if it's negative the curve is counter-clockwise. (The result is twice the enclosed area, with a +/- convention.)</p>\n\n<pre><code>point[0] = (5,0)   edge[0]: (6-5)(4+0) =   4\npoint[1] = (6,4)   edge[1]: (4-6)(5+4) = -18\npoint[2] = (4,5)   edge[2]: (1-4)(5+5) = -30\npoint[3] = (1,5)   edge[3]: (1-1)(0+5) =   0\npoint[4] = (1,0)   edge[4]: (5-1)(0+0) =   0\n                                         ---\n                                         -44  counter-clockwise\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 15446,
+                                "reputation": 145207,
+                                "user_id": 32632,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "Charles Bretana"
+                            },
+                            "reply_to_user": {
+                                "account_id": 26704,
+                                "reputation": 22810,
+                                "user_id": 69746,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Xolve"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1365258597,
+                            "post_id": 1167206,
+                            "comment_id": 22559292,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1167206#comment22559292_1167206",
+                            "body": "Actually,  this solution is a different solution than the accepted solution.  Whether they are equivalent or not is a question I am investigating, but I suspect they are not... The accepted answer calculates the area of the polygon, by taking the difference between the area under the top edge of the polygon and the area under the bottom edge of the polygon. One will be negative (the one where you are traversing from left to right), and the other will be negative. When traversing clockwise, The upper edge is traversed left to right and is larger, so the total is positive."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15446,
+                                "reputation": 145207,
+                                "user_id": 32632,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "Charles Bretana"
+                            },
+                            "reply_to_user": {
+                                "account_id": 26704,
+                                "reputation": 22810,
+                                "user_id": 69746,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Xolve"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1365258635,
+                            "post_id": 1167206,
+                            "comment_id": 22559303,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1167206#comment22559303_1167206",
+                            "body": "My solution measures the sum of sines of the changes in edge angles at each vertex.  This will be positive when traversing clockwise and negative when traversing counter clockwise."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 911923,
+                                "reputation": 6919,
+                                "user_id": 1004168,
+                                "user_type": "registered",
+                                "display_name": "agentp"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1369932852,
+                            "post_id": 1167206,
+                            "comment_id": 24285165,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1167206#comment24285165_1167206",
+                            "body": "It seems with this approach you DO need to take the arcsin, unless you assume convexity (in which case you need only check one vertex)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15446,
+                                "reputation": 145207,
+                                "user_id": 32632,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "Charles Bretana"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1430870032,
+                            "post_id": 1167206,
+                            "comment_id": 48245084,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1167206#comment48245084_1167206",
+                            "body": "No, you do not need to take the arcsine. You do need to divide by the magnitudes of the two vector, to eliminate  scaling, (where one very large pair od segments that bends one way a small angle contributes more tot the sum than many smaller segments that bend the other way by a larger angle.  But the arcsine just converts one measure of an angle to another."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 387472,
+                                "reputation": 1459,
+                                "user_id": 745834,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "marsbear"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1516393448,
+                            "post_id": 1167206,
+                            "comment_id": 83684161,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1167206#comment83684161_1167206",
+                            "body": "Why all the expensive math functions? Wouldn&#39;t it be faster to only calculate the z-part of a 3D cross product by doing a1 * b2 - a2 * b1 (as the x- and y-parts will be zero anyway) and checking the sign of the result? No trigonometric functions are needed and no sqrt."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15446,
+                                "reputation": 145207,
+                                "user_id": 32632,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "Charles Bretana"
+                            },
+                            "reply_to_user": {
+                                "account_id": 387472,
+                                "reputation": 1459,
+                                "user_id": 745834,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "marsbear"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1516398660,
+                            "post_id": 1167206,
+                            "comment_id": 83686594,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1167206#comment83686594_1167206",
+                            "body": "@marsbear, That will only work if all vectors are the same magnitude (or, equivalently, have first been normalized). If they are of different lengths, then you will get the wrong answer., because a clockwise angle between two long segments of the polygon will contribute much more to the overall sum than a counterclockwise angle between two very small segments."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 387472,
+                                "reputation": 1459,
+                                "user_id": 745834,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "marsbear"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1516789524,
+                            "post_id": 1167206,
+                            "comment_id": 83829767,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1167206#comment83829767_1167206",
+                            "body": "But shouldn&#39;t it be enough to &quot;add up&quot; the signs of the cross products?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15446,
+                                "reputation": 145207,
+                                "user_id": 32632,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "Charles Bretana"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1516809165,
+                            "post_id": 1167206,
+                            "comment_id": 83843153,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1167206#comment83843153_1167206",
+                            "body": "No, all that would do is &quot;count&quot; the number of turns to the right minus the number of turns to the left. If you start pointing East, and take ninety one degree turns to the right, (totaling 90 degrees of right), each an inch long,  you will be pointing south, and then take five 90 degree turns to the left, you will be pointing east again, and with appropriate adjustment of the length of each segment, (make the lefts longer) reconnect to the start point. The overall closed curve is clearly counterclockwise, but just counting the signs would count 90 to the right and only 5 to the left."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4148701,
+                                "reputation": 15803,
+                                "user_id": 3924118,
+                                "user_type": "registered",
+                                "accept_rate": 35,
+                                "display_name": "nbro"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1519515995,
+                            "post_id": 1167206,
+                            "comment_id": 84943151,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1167206#comment84943151_1167206",
+                            "body": "I have reformulated your answer (to make it more precise mathematically) until your sentence &quot;The magnitude of this value is a measure of the sine of the angle between the 2 original vectors&quot;. You should edit that sentence and the remaining ones to take into account my changes. The reason I didn&#39;t edit that sentence and the remaining ones is that I am not fully understanding what you mean those."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3683805,
+                                "reputation": 8751,
+                                "user_id": 3950982,
+                                "user_type": "registered",
+                                "display_name": "Luke Hutchison"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1528448874,
+                            "post_id": 1167206,
+                            "comment_id": 88521854,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1167206#comment88521854_1167206",
+                            "body": "You DO need to take the arcsin. Try it on a bunch of random non-convex polygons, and you will find the test will fail for some polygons if you don&#39;t take the arcsin."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15446,
+                                "reputation": 145207,
+                                "user_id": 32632,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "Charles Bretana"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1528814933,
+                            "post_id": 1167206,
+                            "comment_id": 88645303,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1167206#comment88645303_1167206",
+                            "body": "No, You don&#39;t. Whatever test you are running, you are running it wrong. The value before taking the arcsine IS the sin of the original angle of rotation, converting it from a value between -1 and +1 to an actual angle between -Pi and +Pi does nothing to change the answer. And as long as you divide by the product of the magnitudes of the two vectors, the magnitudes will be normalized, and their sum will indicate the overall direction of curvature."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 68306,
+                                "reputation": 20248,
+                                "user_id": 199364,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ToolmakerSteve"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1549396988,
+                            "post_id": 1167206,
+                            "comment_id": 95885497,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1167206#comment95885497_1167206",
+                            "body": "@CharlesBretana - while I have not run Luke&#39;s test, I believe he is correct. That is the nature of <i>summing</i> combined with a <i>nonlinear</i> scale [without arcsin vs. with arcsin]. Consider what marsbear suggested, that you correctly rejected. He suggested that you &quot;just count&quot;, and you pointed out that a handful of large values could outweigh a large number of small values. Now consider arcsin of each value vs not. Isn&#39;t it still the case that failing to take arcsin gives incorrect weight to each value, therefore has same flaw (though much less so)?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 15446,
+                        "reputation": 145207,
+                        "user_id": 32632,
+                        "user_type": "registered",
+                        "accept_rate": 76,
+                        "display_name": "Charles Bretana"
+                    },
+                    "comment_count": 12,
+                    "is_accepted": false,
+                    "score": 51,
+                    "last_activity_date": 1519660968,
+                    "last_edit_date": 1519660968,
+                    "creation_date": 1248287006,
+                    "answer_id": 1167206,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1167206#1167206",
+                    "body": "<p>The <a href=\"https://en.wikipedia.org/wiki/Cross_product\" rel=\"nofollow noreferrer\">cross product</a> measures the degree of perpendicular-ness of two vectors. Imagine that each edge of your polygon is a vector in the x-y plane of a three-dimensional (3-D) xyz space. Then the cross product of two successive edges is a vector in the z-direction, (positive z-direction if the second segment is clockwise, minus z-direction if it's counter-clockwise). The magnitude of this vector is proportional to the sine of the angle between the two original edges, so it reaches a maximum when they are perpendicular, and tapers off to disappear when the edges are collinear (parallel).</p>\n\n<p>So, for each vertex (point) of the polygon, calculate the cross-product magnitude of the two adjoining edges: </p>\n\n<pre><code>Using your data:\npoint[0] = (5, 0)\npoint[1] = (6, 4)\npoint[2] = (4, 5)\npoint[3] = (1, 5)\npoint[4] = (1, 0)\n</code></pre>\n\n<p>So Label the edges consecutively as<br>\n <code>edgeA</code> is the segment from <code>point0</code> to <code>point1</code> and<br>\n <code>edgeB</code> between <code>point1</code> to <code>point2</code><br>\n ...<br>\n <code>edgeE</code> is between <code>point4</code> and <code>point0</code>.   </p>\n\n<p>Then Vertex A (<code>point0</code>)  is between<br>\n   <code>edgeE</code> [From  <code>point4</code> to <code>point0</code>]<br>\n   <code>edgeA</code> [From  <code>point0</code> to `point1' </p>\n\n<p>These two edges are themselves vectors, whose x and y coordinates can be determined by subtracting the coordinates of their start and end points:</p>\n\n<p><code>edgeE</code> = <code>point0</code> - <code>point4</code> = <code>(1, 0) - (5, 0)</code> = <code>(-4, 0)</code>   and<br>\n   <code>edgeA</code> = <code>point1</code> - <code>point0</code> = <code>(6, 4) - (1, 0)</code> = <code>(5, 4)</code>   and </p>\n\n<p>And the cross product of these two adjoining edges is calculated using the determinant of the following matrix, which is constructed by putting the coordinates of the two vectors below the symbols representing the three coordinate axis (<code>i</code>, <code>j</code>, &amp; <code>k</code>). The third (zero)-valued coordinate is there because the cross product concept is a 3-D construct, and so we extend these 2-D vectors into 3-D in order to apply the cross-product:</p>\n\n<pre><code> i    j    k \n-4    0    0\n 1    4    0    \n</code></pre>\n\n<p>Given that all cross-products produce a vector perpendicular to the plane of two vectors being multiplied, the determinant of the matrix above only has a <code>k</code>, (or z-axis) component.<br>\nThe formula for calculating the magnitude of the <code>k</code> or z-axis component is<br>\n  <code>a1*b2 - a2*b1 = -4* 4 - 0* 1</code>     =    <code>-16</code></p>\n\n<p>The magnitude of this value (<code>-16</code>), is a measure of the sine of the angle between the 2 original vectors, multiplied by the product of the magnitudes of the 2 vectors.<br>\nActually, another formula for its value is<br>\n  <code>A X B (Cross Product) = |A| * |B| * sin(AB)</code>.  </p>\n\n<p>So, to get back to just a measure of the angle you need to divide this value, (<code>-16</code>), by the product of the magnitudes of the two vectors. </p>\n\n<p><code>|A| * |B|</code>  = <code>4 * Sqrt(17)</code>  = <code>16.4924...</code></p>\n\n<p>So the measure of sin(AB) = <code>-16 / 16.4924</code> = <code>-.97014...</code></p>\n\n<p>This is a measure of whether the next segment after the vertex has bent to the left or right, and by how much. There is no need to take arc-sine. All we will care about is its magnitude, and of course its sign (positive or negative)!</p>\n\n<p>Do this for each of the other 4 points around the closed path, and add up the values from this calculation at each vertex.. </p>\n\n<p>If final sum is positive, you went clockwise, negative, counterclockwise.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 162898,
+                                "reputation": 5286,
+                                "user_id": 384670,
+                                "user_type": "registered",
+                                "accept_rate": 48,
+                                "display_name": "M Katz"
+                            },
+                            "edited": false,
+                            "score": 12,
+                            "creation_date": 1433226601,
+                            "post_id": 1180256,
+                            "comment_id": 49246811,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1180256#comment49246811_1180256",
+                            "body": "This is also explained in <a href=\"http://en.wikipedia.org/wiki/Curve_orientation\" rel=\"nofollow noreferrer\">en.wikipedia.org/wiki/Curve_orientation</a>. The point is that the the found point must be on the convex hull, and it&#39;s only necessary to look locally at a single point on the convex hull (and its immediate neighbors) to determine the orientation of the whole polygon."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3343278,
+                                "reputation": 10053,
+                                "user_id": 2809027,
+                                "user_type": "registered",
+                                "display_name": "Cecil Curry"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1496475552,
+                            "post_id": 1180256,
+                            "comment_id": 75686143,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1180256#comment75686143_1180256",
+                            "body": "Shocked and awed this hasn&#39;t received more upvotes. For simple polygons (<i>which is most polygons in some fields</i>), this answer yields an <code>O(1)</code> solution. All other answers yield <code>O(n)</code> solutions for <code>n</code> the number of polygon points. For even deeper optimizations, see the <a href=\"https://en.wikipedia.org/wiki/Curve_orientation#Practical_considerations\" rel=\"nofollow noreferrer\"><i>Practical Considerations</i></a> subsection of Wikipedia&#39;s fantastic <a href=\"http://en.wikipedia.org/wiki/Curve_orientation\" rel=\"nofollow noreferrer\">Curve orientation</a> article."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3343278,
+                                "reputation": 10053,
+                                "user_id": 2809027,
+                                "user_type": "registered",
+                                "display_name": "Cecil Curry"
+                            },
+                            "edited": false,
+                            "score": 18,
+                            "creation_date": 1496476169,
+                            "post_id": 1180256,
+                            "comment_id": 75686309,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1180256#comment75686309_1180256",
+                            "body": "<b><i>Clarification:</i></b> this solution is <code>O(1)</code> only if either <b>(A)</b> this polygon is convex (in which case any arbitrary vertex resides on the convex hull and hence suffices) <i>or</i> <b>(B)</b> you already know the vertex with the smallest Y coordinate. If this is <i>not</i> the case (i.e., this polygon is non-convex and you don&#39;t know anything about it), an <code>O(n)</code> search is required. Since no summation is required, however, this is still dramatically faster than any other solution for simple polygons."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 68306,
+                                "reputation": 20248,
+                                "user_id": 199364,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ToolmakerSteve"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1549425092,
+                            "post_id": 1180256,
+                            "comment_id": 95893236,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1180256#comment95893236_1180256",
+                            "body": "An implementation of this answer: <a href=\"https://stackoverflow.com/a/54546353/199364\">c# code to find corner vertex and calculate determinant of angle at that vertex.</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 186022,
+                                "reputation": 27778,
+                                "user_id": 423105,
+                                "user_type": "registered",
+                                "accept_rate": 68,
+                                "display_name": "LarsH"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3343278,
+                                "reputation": 10053,
+                                "user_id": 2809027,
+                                "user_type": "registered",
+                                "display_name": "Cecil Curry"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1588432588,
+                            "post_id": 1180256,
+                            "comment_id": 108895714,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1180256#comment108895714_1180256",
+                            "body": "@CecilCurry I think your 2nd comment explains why this hasn&#39;t received more upvotes. It yields wrong answers in certain scenarios, without any mention of those limitations."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 137849,
+                                "reputation": 10494,
+                                "user_id": 857848,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "citykid"
+                            },
+                            "reply_to_user": {
+                                "account_id": 186022,
+                                "reputation": 27778,
+                                "user_id": 423105,
+                                "user_type": "registered",
+                                "accept_rate": 68,
+                                "display_name": "LarsH"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1710563870,
+                            "post_id": 1180256,
+                            "comment_id": 137811973,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1180256#comment137811973_1180256",
+                            "body": "@LarsH can you name a scenario  that this method answers wrong?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 186022,
+                                "reputation": 27778,
+                                "user_id": 423105,
+                                "user_type": "registered",
+                                "accept_rate": 68,
+                                "display_name": "LarsH"
+                            },
+                            "reply_to_user": {
+                                "account_id": 137849,
+                                "reputation": 10494,
+                                "user_id": 857848,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "citykid"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1710703861,
+                            "post_id": 1180256,
+                            "comment_id": 137822145,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1180256#comment137822145_1180256",
+                            "body": "@citykid Sorry, I can&#39;t remember now what I was thinking of when I wrote that. Maybe I had misread Cecil&#39;s 2nd comment and was thinking the method gave wrong answers when A and B were false."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 37458,
+                        "reputation": 71557,
+                        "user_id": 107090,
+                        "user_type": "registered",
+                        "accept_rate": 25,
+                        "display_name": "lhf"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": false,
+                    "score": 90,
+                    "last_activity_date": 1543914521,
+                    "last_edit_date": 1543914521,
+                    "creation_date": 1248471021,
+                    "answer_id": 1180256,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1180256#1180256",
+                    "body": "<p>Find the vertex with smallest y (and largest x if there are ties). Let the vertex be <code>A</code> and the previous vertex in the list be <code>B</code> and the next vertex in the list be <code>C</code>. Now compute the <em>sign</em> of the cross product of <code>AB</code> and <code>AC</code>.</p>\n\n<hr>\n\n<p>References:</p>\n\n<ul>\n<li><p><em>How do I find the orientation of a simple polygon?</em> in \n<a href=\"http://www.faqs.org/faqs/graphics/algorithms-faq/\" rel=\"noreferrer\">Frequently Asked Questions: comp.graphics.algorithms</a>.</p></li>\n<li><p><a href=\"http://en.wikipedia.org/wiki/Curve_orientation\" rel=\"noreferrer\">Curve orientation</a> at Wikipedia.</p></li>\n</ul>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2757352,
+                                "reputation": 1766,
+                                "user_id": 2375040,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "Michael Macha"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1432585538,
+                            "post_id": 10298685,
+                            "comment_id": 48973086,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/10298685#comment48973086_10298685",
+                            "body": "Was that a typo in your signed area formula above? It ends with &quot;xn*y1 - x1*yn&quot;; when I believe it should be &quot;x_n y_{n+1} - y_n x_{n-1}&quot; (in LaTeX, at least). On the other hand, it&#39;s been ten years since I took any linear algebra classes."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 430615,
+                                "reputation": 5322,
+                                "user_id": 814160,
+                                "user_type": "registered",
+                                "accept_rate": 40,
+                                "display_name": "Sean the Bean"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1432661923,
+                            "post_id": 10298685,
+                            "comment_id": 49011059,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/10298685#comment49011059_10298685",
+                            "body": "Nope. If you check the <a href=\"http://mathworld.wolfram.com/PolygonArea.html\" rel=\"nofollow noreferrer\">source</a>, you&#39;ll see that the formula does in fact reference the first point again in the last term (y1 and x1).  (Sorry, I&#39;m not very familiar with LaTeX, but I formatted the subscripts to make them more readable.)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 64944,
+                                "reputation": 720,
+                                "user_id": 191443,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "Eric Fortier"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1547604209,
+                            "post_id": 10298685,
+                            "comment_id": 95245136,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/10298685#comment95245136_10298685",
+                            "body": "I used this solution and it worked perfectly for my use. Note that if you can plan ahead and spare and extra two vectors in your array, you can get rid of the comparison (or %) by adding the first vector at the tail of the array. That way you simply loop over all the elements, except the last one (length-2 instead of length-1)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 68306,
+                                "reputation": 20248,
+                                "user_id": 199364,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ToolmakerSteve"
+                            },
+                            "reply_to_user": {
+                                "account_id": 64944,
+                                "reputation": 720,
+                                "user_id": 191443,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "Eric Fortier"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1549397779,
+                            "post_id": 10298685,
+                            "comment_id": 95885874,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/10298685#comment95885874_10298685",
+                            "body": "@EricFortier - FWIW, rather than resize a possibly large array, an efficient alternative is for each iteration to save its point as <code>previousPoint</code> for next iteration. Before starting loop, set <code>previousPoint</code> to array&#39;s last point.  Trade off is extra local variable copy but fewer array accesses. And most importantly, don&#39;t have to touch the input array."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 68306,
+                                "reputation": 20248,
+                                "user_id": 199364,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ToolmakerSteve"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2757352,
+                                "reputation": 1766,
+                                "user_id": 2375040,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "Michael Macha"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1549398007,
+                            "post_id": 10298685,
+                            "comment_id": 95885976,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/10298685#comment95885976_10298685",
+                            "body": "@MichaelEricOberlin - its necessary to <i>close</i> the polygon, by including the line segment from last point to first point. (A correct calculation will be the same, no matter which point starts the closed polygon.)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 64944,
+                                "reputation": 720,
+                                "user_id": 191443,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "Eric Fortier"
+                            },
+                            "reply_to_user": {
+                                "account_id": 68306,
+                                "reputation": 20248,
+                                "user_id": 199364,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ToolmakerSteve"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1549817121,
+                            "post_id": 10298685,
+                            "comment_id": 96030106,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/10298685#comment96030106_10298685",
+                            "body": "@ToolmakerSteve - Good point. Unless you know the size beforehand and can create the array with the extra element, your solution is fast and prevents resizing."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 430615,
+                        "reputation": 5322,
+                        "user_id": 814160,
+                        "user_type": "registered",
+                        "accept_rate": 40,
+                        "display_name": "Sean the Bean"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": false,
+                    "score": 62,
+                    "last_activity_date": 1607537194,
+                    "last_edit_date": 1607537194,
+                    "creation_date": 1335273570,
+                    "answer_id": 10298685,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/10298685#10298685",
+                    "body": "<p>I'm going to throw out another solution because it's straightforward and not mathematically intensive - it just uses basic algebra. Calculate the signed area of the polygon. If it's negative the points are in clockwise order, if it's positive they are counterclockwise. (This is very similar to Beta's solution.)</p>\n<p>Calculate the signed area:\nA = 1/2 * (x<sub>1</sub>*y<sub>2</sub> - x<sub>2</sub>*y<sub>1</sub> + x<sub>2</sub>*y<sub>3</sub> - x<sub>3</sub>*y<sub>2</sub> + ... + x<sub>n</sub>*y<sub>1</sub> - x<sub>1</sub>*y<sub>n</sub>)</p>\n<p>Or in pseudo-code:</p>\n<pre><code>signedArea = 0\nfor each point in points:\n    x1 = point[0]\n    y1 = point[1]\n    if point is last point\n        x2 = firstPoint[0]\n        y2 = firstPoint[1]\n    else\n        x2 = nextPoint[0]\n        y2 = nextPoint[1]\n    end if\n\n    signedArea += (x1 * y2 - x2 * y1)\nend for\nreturn signedArea / 2\n</code></pre>\n<p>Note that if you are only checking the ordering, you don't need to bother dividing by 2.</p>\n<p>Sources: <a href=\"http://mathworld.wolfram.com/PolygonArea.html\" rel=\"noreferrer\">http://mathworld.wolfram.com/PolygonArea.html</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4148701,
+                                "reputation": 15803,
+                                "user_id": 3924118,
+                                "user_type": "registered",
+                                "accept_rate": 35,
+                                "display_name": "nbro"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1519557313,
+                            "post_id": 15251293,
+                            "comment_id": 84950556,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/15251293#comment84950556_15251293",
+                            "body": "Can you specify which other answers exactly this answer is based on?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1615315,
+                        "reputation": 7476,
+                        "user_id": 1493192,
+                        "user_type": "registered",
+                        "accept_rate": 65,
+                        "display_name": "Gianni Spear"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1519556791,
+                    "last_edit_date": 1519556791,
+                    "creation_date": 1362583529,
+                    "answer_id": 15251293,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/15251293#15251293",
+                    "body": "<p>This is my solution using the explanations in the other answers:</p>\n\n<pre><code>def segments(poly):\n    \"\"\"A sequence of (x,y) numeric coordinates pairs \"\"\"\n    return zip(poly, poly[1:] + [poly[0]])\n\ndef check_clockwise(poly):\n    clockwise = False\n    if (sum(x0*y1 - x1*y0 for ((x0, y0), (x1, y1)) in segments(poly))) &lt; 0:\n        clockwise = not clockwise\n    return clockwise\n\npoly = [(2,2),(6,2),(6,6),(2,6)]\ncheck_clockwise(poly)\nFalse\n\npoly = [(2, 6), (6, 6), (6, 2), (2, 2)]\ncheck_clockwise(poly)\nTrue\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1848449,
+                                "reputation": 1033,
+                                "user_id": 1675589,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "Michel Rouzic"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1645196973,
+                            "post_id": 18472899,
+                            "comment_id": 125814298,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/18472899#comment125814298_18472899",
+                            "body": "You can avoid the costly <code>%</code> and avoid branching too by setting <code>v1 = vertices[vertices.Count-1]</code> before the loop starts, use <code>v2 = vertices[i];</code> then after the addition to the <code>sum</code> do <code>v1 = v2</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7558027,
+                                "reputation": 1442,
+                                "user_id": 5736835,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "WDUK"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1848449,
+                                "reputation": 1033,
+                                "user_id": 1675589,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "Michel Rouzic"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1651134240,
+                            "post_id": 18472899,
+                            "comment_id": 127292241,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/18472899#comment127292241_18472899",
+                            "body": "@MichelRouzic how is <code>(i+1) % (count-1)</code> a branch isn&#39;t that just a math operation for the next index? Why would this involve branching ?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1848449,
+                                "reputation": 1033,
+                                "user_id": 1675589,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "Michel Rouzic"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1651235849,
+                            "post_id": 18472899,
+                            "comment_id": 127322125,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/18472899#comment127322125_18472899",
+                            "body": "It took me some time to remember what I meant by this, it&#39;s not branching, I meant that if anyone tried to do something like <code>(i+1) % (count-1)</code> without <code>%</code> they&#39;d go for something like <code>i+1 &lt; count ? i+1 : 0</code> like <a href=\"https://stackoverflow.com/a/49035316/1675589\">this answer</a> for instance, when there&#39;s a way that avoids both modulo and branching."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7558027,
+                                "reputation": 1442,
+                                "user_id": 5736835,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "WDUK"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1671614148,
+                            "post_id": 18472899,
+                            "comment_id": 132134739,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/18472899#comment132134739_18472899",
+                            "body": "This doesn&#39;t work if the points are in symmetrical positions Example of 4 points for a square: (-5,-5)(-5,5)(5,5)(5,-5) you will get zero when they are clearly clockwise ordered..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 472485,
+                                "reputation": 108978,
+                                "user_id": 880990,
+                                "user_type": "registered",
+                                "display_name": "Olivier Jacot-Descombes"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7558027,
+                                "reputation": 1442,
+                                "user_id": 5736835,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "WDUK"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1671621055,
+                            "post_id": 18472899,
+                            "comment_id": 132136919,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/18472899#comment132136919_18472899",
+                            "body": "@WDUK, I get a sum of 200: (-5 - 5) * (-5 + -5) = 100, (-5 - -5) * (5 + -5) = 0, (5 - -5) * (5 + 5) = 100, (5 - 5) * (-5 + 5) = 0. The sum is 0 if you invert the two last points, in which case get a shape looking like an infinity symbol."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7558027,
+                                "reputation": 1442,
+                                "user_id": 5736835,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "WDUK"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1671660257,
+                            "post_id": 18472899,
+                            "comment_id": 132149377,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/18472899#comment132149377_18472899",
+                            "body": "<code>(-5 - 5) * (-5 + -5) = 100</code> ?  The first two points are (-5,-5) and (-5,5)  So v2.x - v1.x will always be 0 so how did you get 100 for the first two points?  <code>((-5) - (-5)) * ((-5) - 5)  = 0</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 472485,
+                                "reputation": 108978,
+                                "user_id": 880990,
+                                "user_type": "registered",
+                                "display_name": "Olivier Jacot-Descombes"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7558027,
+                                "reputation": 1442,
+                                "user_id": 5736835,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "WDUK"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1671714315,
+                            "post_id": 18472899,
+                            "comment_id": 132160237,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/18472899#comment132160237_18472899",
+                            "body": "@WDUK, I added the test to my answer. Note that the first sum is calculated from the last (<code>v1 = vertices[^1]</code>) and first (<code>v2</code>) point. So the zero you mention is printed as the second line in the test."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 472485,
+                        "reputation": 108978,
+                        "user_id": 880990,
+                        "user_type": "registered",
+                        "display_name": "Olivier Jacot-Descombes"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": false,
+                    "score": 36,
+                    "last_activity_date": 1671714350,
+                    "last_edit_date": 1671714350,
+                    "creation_date": 1377628135,
+                    "answer_id": 18472899,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/18472899#18472899",
+                    "body": "<p>Here is a simple C# implementation of the algorithm based on <a href=\"https://stackoverflow.com/a/1165943/3924118\">@Beta's answer</a>.</p>\n<p>Let's assume that we have a <code>Vector</code> type having <code>X</code> and <code>Y</code> properties of type <code>double</code>.</p>\n<pre class=\"lang-cs prettyprint-override\"><code>public bool IsClockwise(IList&lt;Vector&gt; vertices)\n{\n    double sum = 0.0;\n    for (int i = 0; i &lt; vertices.Count; i++) {\n        Vector v1 = vertices[i];\n        Vector v2 = vertices[(i + 1) % vertices.Count];\n        sum += (v2.X - v1.X) * (v2.Y + v1.Y);\n    }\n    return sum &gt; 0.0;\n}\n</code></pre>\n<p><code>%</code> is the modulo or remainder operator performing the modulo operation which (<a href=\"https://en.wikipedia.org/wiki/Modulo_operation\" rel=\"nofollow noreferrer\">according to Wikipedia</a>) finds the remainder after division of one number by another.</p>\n<hr />\n<p>Optimized version according to @MichelRouzic's comment:</p>\n<pre class=\"lang-cs prettyprint-override\"><code>double sum = 0.0;\nVector v1 = vertices[vertices.Count - 1]; // or vertices[^1] with\n                                          // C# 8.0+ and .NET Core\nfor (int i = 0; i &lt; vertices.Count; i++) {\n    Vector v2 = vertices[i];\n    sum += (v2.X - v1.X) * (v2.Y + v1.Y);\n    v1 = v2;\n}\nreturn sum &gt; 0.0;\n</code></pre>\n<p>This saves not only the modulo operation <code>%</code> but also an array indexing.</p>\n<hr />\n<p><strong>Test</strong> (See discussion with @WDUK)</p>\n<pre class=\"lang-cs prettyprint-override\"><code>public static bool IsClockwise(IList&lt;(double X, double Y)&gt; vertices)\n{\n    double sum = 0.0;\n    var v1 = vertices[^1];\n    for (int i = 0; i &lt; vertices.Count; i++) {\n        var v2 = vertices[i];\n        sum += (v2.X - v1.X) * (v2.Y + v1.Y);\n        Console.WriteLine($&quot;(({v2.X,2}) - ({v1.X,2})) * (({v2.Y,2}) + ({v1.Y,2})) = {(v2.X - v1.X) * (v2.Y + v1.Y)}&quot;);\n        v1 = v2;\n    }\n    Console.WriteLine(sum);\n    return sum &gt; 0.0;\n}\n\npublic static void Test()\n{\n    Console.WriteLine(IsClockwise(new[] { (-5.0, -5.0), (-5.0, 5.0), (5.0, 5.0), (5.0, -5.0) }));\n\n    // infinity Symbol\n    //Console.WriteLine(IsClockwise(new[] { (-5.0, -5.0), (-5.0, 5.0), (5.0, -5.0), (5.0, 5.0) }));\n}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2283185,
+                        "reputation": 1301,
+                        "user_id": 2007836,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "Frederick"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1519557001,
+                    "last_edit_date": 1519557001,
+                    "creation_date": 1382019042,
+                    "answer_id": 19429060,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/19429060#19429060",
+                    "body": "<p>If you use Matlab, the function <a href=\"https://ch.mathworks.com/help/map/ref/ispolycw.html\" rel=\"nofollow noreferrer\"><code>ispolycw</code></a> returns true if the polygon vertices are in clockwise order.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1836236,
+                                "reputation": 7287,
+                                "user_id": 1666569,
+                                "user_type": "registered",
+                                "display_name": "Cameron Roberts"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1538079400,
+                            "post_id": 20696973,
+                            "comment_id": 92028845,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/20696973#comment92028845_20696973",
+                            "body": "Trying this I get exactly the opposite result, a polygon drawn in clockwise order yields a negative area, while one drawn counter clockwise yields positive. In either case, this snippet is still super useful 5yrs on, thank you."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6392380,
+                                "reputation": 577,
+                                "user_id": 4958027,
+                                "user_type": "registered",
+                                "display_name": "allez l&#39;OM"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1836236,
+                                "reputation": 7287,
+                                "user_id": 1666569,
+                                "user_type": "registered",
+                                "display_name": "Cameron Roberts"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1575380781,
+                            "post_id": 20696973,
+                            "comment_id": 104541235,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/20696973#comment104541235_20696973",
+                            "body": "@CameronRoberts The norm (see IETF in particular for geoJson) is to follow the &#39;right-hand rule&#39;. I guess that Google is complaining with. In that case outer ring must be counterclockwise (yielding positive area), and inner rings (holes) are winding clockwise (negative area to be removed from main area)."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2267822,
+                        "reputation": 9456,
+                        "user_id": 1995977,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "Steve Jansen"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1387517734,
+                    "creation_date": 1387517734,
+                    "answer_id": 20696973,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/20696973#20696973",
+                    "body": "<p>For what it is worth, I used this mixin to calculate the winding order for Google Maps API v3 apps.</p>\n\n<p>The code leverages the side effect of polygon areas: a clockwise winding order of vertexes yields a positive area, while a counter-clockwise winding order of the same vertexes produces the same area as a negative value.  The code also uses a sort of private API in the Google Maps geometry library.  I felt comfortable using it - use at your own risk.</p>\n\n<p>Sample usage:</p>\n\n<pre><code>var myPolygon = new google.maps.Polygon({/*options*/});\nvar isCW = myPolygon.isPathClockwise();\n</code></pre>\n\n<p>Full example with unit tests @ <a href=\"http://jsfiddle.net/stevejansen/bq2ec/\" rel=\"nofollow\">http://jsfiddle.net/stevejansen/bq2ec/</a></p>\n\n<pre class=\"lang-js prettyprint-override\"><code>/** Mixin to extend the behavior of the Google Maps JS API Polygon type\n *  to determine if a polygon path has clockwise of counter-clockwise winding order.\n *  \n *  Tested against v3.14 of the GMaps API.\n *\n *  @author  stevejansen_github@icloud.com\n *\n *  @license http://opensource.org/licenses/MIT\n *\n *  @version 1.0\n *\n *  @mixin\n *  \n *  @param {(number|Array|google.maps.MVCArray)} [path] - an optional polygon path; defaults to the first path of the polygon\n *  @returns {boolean} true if the path is clockwise; false if the path is counter-clockwise\n */\n(function() {\n  var category = 'google.maps.Polygon.isPathClockwise';\n     // check that the GMaps API was already loaded\n  if (null == google || null == google.maps || null == google.maps.Polygon) {\n    console.error(category, 'Google Maps API not found');\n    return;\n  }\n  if (typeof(google.maps.geometry.spherical.computeArea) !== 'function') {\n    console.error(category, 'Google Maps geometry library not found');\n    return;\n  }\n\n  if (typeof(google.maps.geometry.spherical.computeSignedArea) !== 'function') {\n    console.error(category, 'Google Maps geometry library private function computeSignedArea() is missing; this may break this mixin');\n  }\n\n  function isPathClockwise(path) {\n    var self = this,\n        isCounterClockwise;\n\n    if (null === path)\n      throw new Error('Path is optional, but cannot be null');\n\n    // default to the first path\n    if (arguments.length === 0)\n        path = self.getPath();\n\n    // support for passing an index number to a path\n    if (typeof(path) === 'number')\n        path = self.getPaths().getAt(path);\n\n    if (!path instanceof Array &amp;&amp; !path instanceof google.maps.MVCArray)\n      throw new Error('Path must be an Array or MVCArray');\n\n    // negative polygon areas have counter-clockwise paths\n    isCounterClockwise = (google.maps.geometry.spherical.computeSignedArea(path) &lt; 0);\n\n    return (!isCounterClockwise);\n  }\n\n  if (typeof(google.maps.Polygon.prototype.isPathClockwise) !== 'function') {\n    google.maps.Polygon.prototype.isPathClockwise = isPathClockwise;\n  }\n})();\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4148701,
+                                "reputation": 15803,
+                                "user_id": 3924118,
+                                "user_type": "registered",
+                                "accept_rate": 35,
+                                "display_name": "nbro"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7946018,
+                                "reputation": 563,
+                                "user_id": 5998529,
+                                "user_type": "registered",
+                                "display_name": "tibetty"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1519558479,
+                            "post_id": 23413106,
+                            "comment_id": 84950853,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/23413106#comment84950853_23413106",
+                            "body": "@tibetty Can you explain why this method wouldn&#39;t work in many situations if the polygon is concave?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7946018,
+                                "reputation": 563,
+                                "user_id": 5998529,
+                                "user_type": "registered",
+                                "display_name": "tibetty"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1519780819,
+                            "post_id": 23413106,
+                            "comment_id": 85046311,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/23413106#comment85046311_23413106",
+                            "body": "Please look at the last table in the wiki item reference in your post. It&#39;s easy for me to give a false example but hard to prove it."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7946018,
+                                "reputation": 563,
+                                "user_id": 5998529,
+                                "user_type": "registered",
+                                "display_name": "tibetty"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1519780969,
+                            "post_id": 23413106,
+                            "comment_id": 85046345,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/23413106#comment85046345_23413106",
+                            "body": "Please look at the last table in the wiki item reference in your post. It&#39;s easy for me to give a false example but hard to prove it."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 68306,
+                                "reputation": 20248,
+                                "user_id": 199364,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ToolmakerSteve"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7946018,
+                                "reputation": 563,
+                                "user_id": 5998529,
+                                "user_type": "registered",
+                                "display_name": "tibetty"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1549400832,
+                            "post_id": 23413106,
+                            "comment_id": 95887150,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/23413106#comment95887150_23413106",
+                            "body": "@tibetty is correct. You can&#39;t simply take any three points along the polygon; you might be in either a convex or concave region of that polygon. Reading wiki carefully, one must take three points <i>along the convex hull that encloses the polygon</i>. From &quot;practical considerations&quot;: <i>&quot;One does not need to construct the convex hull of a polygon to find a suitable vertex. A common choice is the vertex of the polygon with the smallest X-coordinate. If there are several of them, the one with the smallest Y-coordinate is picked. It is guaranteed to be [a] vertex of the convex hull of the polygon.&quot;</i>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 68306,
+                                "reputation": 20248,
+                                "user_id": 199364,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ToolmakerSteve"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1549401073,
+                            "post_id": 23413106,
+                            "comment_id": 95887255,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/23413106#comment95887255_23413106",
+                            "body": "Hence <a href=\"https://stackoverflow.com/a/1180256/199364\">lhf&#39;s earlier answer</a>, which is similar, and references the same wiki article, but specifies such a point. [Apparently it doesn&#39;t matter whether one takes smallest or largest, x or y, as long as one avoids being in the middle; effectively one is working from one edge of the bounding box around the polygon, to guarantee in a concave region.]"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 321545,
+                        "reputation": 3510,
+                        "user_id": 640427,
+                        "user_type": "registered",
+                        "accept_rate": 90,
+                        "display_name": "Ian"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1519592851,
+                    "last_edit_date": 1519592851,
+                    "creation_date": 1398965618,
+                    "answer_id": 23413106,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/23413106#23413106",
+                    "body": "<p>As also explained in this Wikipedia article <a href=\"https://en.wikipedia.org/wiki/Curve_orientation\" rel=\"nofollow noreferrer\">Curve orientation</a>, given 3 points <code>p</code>, <code>q</code> and <code>r</code> on the plane (i.e. with x and y coordinates), you can calculate the sign of the following determinant</p>\n\n<p><img src=\"https://i.stack.imgur.com/6sxC6.png\" alt=\"enter image description here\"></p>\n\n<p>If the determinant is negative (i.e. <code>Orient(p, q, r) &lt; 0</code>), then the polygon is oriented clockwise (CW). If the determinant is positive (i.e. <code>Orient(p, q, r) &gt; 0</code>), the polygon is oriented counterclockwise (CCW). The determinant is zero (i.e. <code>Orient(p, q, r) == 0</code>) if points <code>p</code>, <code>q</code> and <code>r</code> are <a href=\"https://en.wikipedia.org/wiki/Collinearity\" rel=\"nofollow noreferrer\">collinear</a>.</p>\n\n<p>In the formula above, we prepend the ones in front of the coordinates of <code>p</code>, <code>q</code>  and <code>r</code> because we are using <a href=\"https://en.wikipedia.org/wiki/Homogeneous_coordinates\" rel=\"nofollow noreferrer\">homogeneous coordinates</a>.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5312529,
+                                "reputation": 3740,
+                                "user_id": 4238323,
+                                "user_type": "registered",
+                                "display_name": "MSS"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4148701,
+                                "reputation": 15803,
+                                "user_id": 3924118,
+                                "user_type": "registered",
+                                "accept_rate": 35,
+                                "display_name": "nbro"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1519630167,
+                            "post_id": 26992579,
+                            "comment_id": 84971549,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/26992579#comment84971549_26992579",
+                            "body": "Openlayers is javascript based map management library like googlemaps and it&#39;s wrote and used in openlayers 2."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4148701,
+                                "reputation": 15803,
+                                "user_id": 3924118,
+                                "user_type": "registered",
+                                "accept_rate": 35,
+                                "display_name": "nbro"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1519640742,
+                            "post_id": 26992579,
+                            "comment_id": 84976848,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/26992579#comment84976848_26992579",
+                            "body": "Can you explain a little bit what your code does, and why you&#39;re doing it?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6392380,
+                                "reputation": 577,
+                                "user_id": 4958027,
+                                "user_type": "registered",
+                                "display_name": "allez l&#39;OM"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4148701,
+                                "reputation": 15803,
+                                "user_id": 3924118,
+                                "user_type": "registered",
+                                "accept_rate": 35,
+                                "display_name": "nbro"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1575383468,
+                            "post_id": 26992579,
+                            "comment_id": 104542926,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/26992579#comment104542926_26992579",
+                            "body": "@nbro this code implements the <a href=\"https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/1180256#1180256\">lhf answer</a>. It is easy to keep the non OpenLayer part in a pure javascript function by having <i>vertices</i> directly as parameter. It works well, and could be adapted to the case of <i>multiPolygon</i>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5312529,
+                        "reputation": 3740,
+                        "user_id": 4238323,
+                        "user_type": "registered",
+                        "display_name": "MSS"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1519640650,
+                    "last_edit_date": 1519640650,
+                    "creation_date": 1416308177,
+                    "answer_id": 26992579,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/26992579#26992579",
+                    "body": "<p>This is the implemented function for <a href=\"http://openlayers.org/two/\" rel=\"nofollow noreferrer\">OpenLayers 2</a>. The condition for having a clockwise polygon is <code>area &lt; 0</code>, it confirmed by <a href=\"http://en.wikipedia.org/wiki/Shoelace_formula\" rel=\"nofollow noreferrer\">this reference</a>.</p>\n\n<pre><code>function IsClockwise(feature)\n{\n    if(feature.geometry == null)\n        return -1;\n\n    var vertices = feature.geometry.getVertices();\n    var area = 0;\n\n    for (var i = 0; i &lt; (vertices.length); i++) {\n        j = (i + 1) % vertices.length;\n\n        area += vertices[i].x * vertices[j].y;\n        area -= vertices[j].x * vertices[i].y;\n        // console.log(area);\n    }\n\n    return (area &lt; 0);\n}\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 68306,
+                                "reputation": 20248,
+                                "user_id": 199364,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ToolmakerSteve"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1549402849,
+                            "post_id": 28696087,
+                            "comment_id": 95888075,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/28696087#comment95888075_28696087",
+                            "body": "True, but you misunderstand the concept of a polygon&#39;s winding order (clockwise or counter-clockwise). In an entirely convex polygon, the angle at all points will be clockwise or all will be counter-clockwise [as in your first sentence]. In a polygon with concave region(s), the &quot;caves&quot; will be in the opposite direction, but the polygon as a whole still has a well-defined interior, and is considered clockwise or counter-clockwise accordingly. See <a href=\"https://en.wikipedia.org/wiki/Curve_orientation#Orientation_of_a_simple_polygon\" rel=\"nofollow noreferrer\">en.wikipedia.org/wiki/&hellip;</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5770162,
+                        "reputation": 157,
+                        "user_id": 4553816,
+                        "user_type": "unregistered",
+                        "display_name": "daniel"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1424781691,
+                    "creation_date": 1424781691,
+                    "answer_id": 28696087,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/28696087#28696087",
+                    "body": "<p>I think in order for some points to be given clockwise all edges need to be positive not only the sum of edges. If one edge is negative than at least 3 points are given counter-clockwise.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 52941,
+                        "reputation": 31702,
+                        "user_id": 158285,
+                        "user_type": "registered",
+                        "accept_rate": 59,
+                        "display_name": "bradgonesurfing"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1466752873,
+                    "creation_date": 1466752873,
+                    "answer_id": 38007788,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/38007788#38007788",
+                    "body": "<p>My C# / LINQ solution is based on the cross product advice of @charlesbretana is below. You can specify a reference normal for the winding. It should work as long as  the curve is mostly in the plane defined by the up vector.</p>\n\n<pre><code>using System.Collections.Generic;\nusing System.Linq;\nusing System.Numerics;\n\nnamespace SolidworksAddinFramework.Geometry\n{\n    public static class PlanePolygon\n    {\n        /// &lt;summary&gt;\n        /// Assumes that polygon is closed, ie first and last points are the same\n        /// &lt;/summary&gt;\n       public static bool Orientation\n           (this IEnumerable&lt;Vector3&gt; polygon, Vector3 up)\n        {\n            var sum = polygon\n                .Buffer(2, 1) // from Interactive Extensions Nuget Pkg\n                .Where(b =&gt; b.Count == 2)\n                .Aggregate\n                  ( Vector3.Zero\n                  , (p, b) =&gt; p + Vector3.Cross(b[0], b[1])\n                                  /b[0].Length()/b[1].Length());\n\n            return Vector3.Dot(up, sum) &gt; 0;\n\n        } \n\n    }\n}\n</code></pre>\n\n<p>with a unit test</p>\n\n<pre><code>namespace SolidworksAddinFramework.Spec.Geometry\n{\n    public class PlanePolygonSpec\n    {\n        [Fact]\n        public void OrientationShouldWork()\n        {\n\n            var points = Sequences.LinSpace(0, Math.PI*2, 100)\n                .Select(t =&gt; new Vector3((float) Math.Cos(t), (float) Math.Sin(t), 0))\n                .ToList();\n\n            points.Orientation(Vector3.UnitZ).Should().BeTrue();\n            points.Reverse();\n            points.Orientation(Vector3.UnitZ).Should().BeFalse();\n\n\n\n        } \n    }\n}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5857762,
+                        "reputation": 2839,
+                        "user_id": 4614499,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Marjan Moderc"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1519557597,
+                    "last_edit_date": 1519557597,
+                    "creation_date": 1504860646,
+                    "answer_id": 46112428,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/46112428#46112428",
+                    "body": "<p>After testing several unreliable implementations, the algorithm that provided satisfactory results regarding the CW/CCW orientation out of the box was the one, posted by OP in <a href=\"https://stackoverflow.com/q/41077185/4614499\">this</a> thread (<code>shoelace_formula_3</code>). </p>\n\n<p>As always, a positive number represents a CW orientation, whereas a negative number CCW.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 25438,
+                        "reputation": 278121,
+                        "user_id": 65387,
+                        "user_type": "registered",
+                        "accept_rate": 66,
+                        "display_name": "mpen"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1507322163,
+                    "creation_date": 1507322163,
+                    "answer_id": 46613578,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/46613578#46613578",
+                    "body": "<p>An implementation of <a href=\"https://stackoverflow.com/a/10298685/65387\">Sean's answer</a> in JavaScript:</p>\n\n<p><div class=\"snippet\" data-lang=\"js\" data-hide=\"false\" data-console=\"true\" data-babel=\"false\">\r\n<div class=\"snippet-code\">\r\n<pre class=\"snippet-code-js lang-js prettyprint-override\"><code>function calcArea(poly) {\r\n    if(!poly || poly.length &lt; 3) return null;\r\n    let end = poly.length - 1;\r\n    let sum = poly[end][0]*poly[0][1] - poly[0][0]*poly[end][1];\r\n    for(let i=0; i&lt;end; ++i) {\r\n        const n=i+1;\r\n        sum += poly[i][0]*poly[n][1] - poly[n][0]*poly[i][1];\r\n    }\r\n    return sum;\r\n}\r\n\r\nfunction isClockwise(poly) {\r\n    return calcArea(poly) &gt; 0;\r\n}\r\n\r\nlet poly = [[352,168],[305,208],[312,256],[366,287],[434,248],[416,186]];\r\n\r\nconsole.log(isClockwise(poly));\r\n\r\nlet poly2 = [[618,186],[650,170],[701,179],[716,207],[708,247],[666,259],[637,246],[615,219]];\r\n\r\nconsole.log(isClockwise(poly2));</code></pre>\r\n</div>\r\n</div>\r\n</p>\n\n<p>Pretty sure this is right. It seems to be working :-)</p>\n\n<p>Those polygons look like this, if you're wondering:</p>\n\n<p><img src=\"https://i.stack.imgur.com/ON5bI.png\" alt=\"\"></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 68306,
+                                "reputation": 20248,
+                                "user_id": 199364,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ToolmakerSteve"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1549401779,
+                            "post_id": 48372181,
+                            "comment_id": 95887570,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/48372181#comment95887570_48372181",
+                            "body": "<i>Maybe</i> this works if the polygon is entirely convex. It definitely is not reliable if there are any concave regions - its easy to pick a point that is on the &quot;wrong&quot; side of one of the edges of the cave, then connect it to that edge. Will get wrong answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 10401488,
+                                "reputation": 1,
+                                "user_id": 7669594,
+                                "user_type": "registered",
+                                "display_name": "Venkata Goli"
+                            },
+                            "reply_to_user": {
+                                "account_id": 68306,
+                                "reputation": 20248,
+                                "user_id": 199364,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ToolmakerSteve"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1549492094,
+                            "post_id": 48372181,
+                            "comment_id": 95925928,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/48372181#comment95925928_48372181",
+                            "body": "It works even if the polygon is concave. The point needs to be inside that concave polygon. However I am not sure about complex polygon (did not test.)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 68306,
+                                "reputation": 20248,
+                                "user_id": 199364,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ToolmakerSteve"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1549564168,
+                            "post_id": 48372181,
+                            "comment_id": 95957218,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/48372181#comment95957218_48372181",
+                            "body": "&quot;It works even if the polygon is concave.&quot; - Counterexample: poly (0,0), (1,1), (0,2), (2,2), (2,0). Line segment (1,1), (0, 2).  If you pick an interior point within (1,1), (0,2), (1,2) to form triangle -&gt; (1,1), (0,2), (0.5,1.5)), you get <i>opposite</i> winding than if you pick an interior point within (0,0), (1,1), (1,0) &gt; (1,1), (0,2),(0.5,0.5). Those are both interior to the original polygon, yet have opposite windings. Therefore, one of them gives the wrong answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 68306,
+                                "reputation": 20248,
+                                "user_id": 199364,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ToolmakerSteve"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1549564970,
+                            "post_id": 48372181,
+                            "comment_id": 95957631,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/48372181#comment95957631_48372181",
+                            "body": "In general, if a polygon has any concave region, pick a segment in the concave region. Because it is concave, you can find two &quot;interior&quot; points that are on opposite sides of that line. Because they are on opposite sides of that line, the triangles formed have opposite windings. End of proof."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 10401488,
+                        "reputation": 1,
+                        "user_id": 7669594,
+                        "user_type": "registered",
+                        "display_name": "Venkata Goli"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1519557406,
+                    "last_edit_date": 1519557406,
+                    "creation_date": 1516572245,
+                    "answer_id": 48372181,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/48372181#48372181",
+                    "body": "<p>A much computationally simpler method, <em>if you already know a point inside the polygon</em>:</p>\n\n<ol>\n<li><p>Choose any line segment from the original polygon, points and their coordinates in that order.</p></li>\n<li><p>Add a known \"inside\" point, and form a triangle.</p></li>\n<li><p>Calculate CW or CCW as suggested <a href=\"https://stackoverflow.com/a/1165943/3924118\">here</a> with those three points.</p></li>\n</ol>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 202589,
+                        "reputation": 183,
+                        "user_id": 449755,
+                        "user_type": "registered",
+                        "display_name": "Toby Evetts"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1519838768,
+                    "creation_date": 1519838768,
+                    "answer_id": 49035316,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/49035316#49035316",
+                    "body": "<p>Here's swift 3.0 solution based on answers above:</p>\n\n<pre><code>    for (i, point) in allPoints.enumerated() {\n        let nextPoint = i == allPoints.count - 1 ? allPoints[0] : allPoints[i+1]\n        signedArea += (point.x * nextPoint.y - nextPoint.x * point.y)\n    }\n\n    let clockwise  = signedArea &lt; 0\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1734241,
+                        "reputation": 41,
+                        "user_id": 2311000,
+                        "user_type": "registered",
+                        "display_name": "Ind"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1525348726,
+                    "creation_date": 1525348726,
+                    "answer_id": 50154587,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/50154587#50154587",
+                    "body": "<p>Another solution for this;</p>\n\n<pre><code>const isClockwise = (vertices=[]) =&gt; {\n    const len = vertices.length;\n    const sum = vertices.map(({x, y}, index) =&gt; {\n        let nextIndex = index + 1;\n        if (nextIndex === len) nextIndex = 0;\n\n        return {\n            x1: x,\n            x2: vertices[nextIndex].x,\n            y1: x,\n            y2: vertices[nextIndex].x\n        }\n    }).map(({ x1, x2, y1, y2}) =&gt; ((x2 - x1) * (y1 + y2))).reduce((a, b) =&gt; a + b);\n\n    if (sum &gt; -1) return true;\n    if (sum &lt; 0) return false;\n}\n</code></pre>\n\n<p>Take all the vertices as an array like this;</p>\n\n<pre><code>const vertices = [{x: 5, y: 0}, {x: 6, y: 4}, {x: 4, y: 5}, {x: 1, y: 5}, {x: 1, y: 0}];\nisClockwise(vertices);\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 13863994,
+                        "reputation": 1,
+                        "user_id": 10008894,
+                        "user_type": "registered",
+                        "display_name": "dez"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1530246319,
+                    "creation_date": 1530246319,
+                    "answer_id": 51094285,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/51094285#51094285",
+                    "body": "<p>Solution for R to determine direction and reverse if clockwise (found it necessary for owin objects):</p>\n\n<pre><code>coords &lt;- cbind(x = c(5,6,4,1,1),y = c(0,4,5,5,0))\na &lt;- numeric()\nfor (i in 1:dim(coords)[1]){\n  #print(i)\n  q &lt;- i + 1\n  if (i == (dim(coords)[1])) q &lt;- 1\n  out &lt;- ((coords[q,1]) - (coords[i,1])) * ((coords[q,2]) + (coords[i,2]))\n  a[q] &lt;- out\n  rm(q,out)\n} #end i loop\n\nrm(i)\n\na &lt;- sum(a) #-ve is anti-clockwise\n\nb &lt;- cbind(x = rev(coords[,1]), y = rev(coords[,2]))\n\nif (a&gt;0) coords &lt;- b #reverses coords if polygon not traced in anti-clockwise direction\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 68306,
+                                "reputation": 20248,
+                                "user_id": 199364,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ToolmakerSteve"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1549403750,
+                            "post_id": 54502302,
+                            "comment_id": 95888430,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/54502302#comment95888430_54502302",
+                            "body": "IMHO, it would be safer to stick to the fundamental math shown in <a href=\"https://stackoverflow.com/a/1180256/199364\">lhf&#39;s answer</a> - thank you for mentioning him. The challenge in reducing it to quadrants is that its a fair amount of work to <i>prove</i> that your formula is correct in all cases. Did you correctly calculate &quot;more west&quot;? In a concave polygon where <i>both</i> [1] and [3] are &quot;west and south&quot; of [2]?  Did you correctly handle different lengths of [1] and [3] in that situation?  I have no idea, whereas if I directly compute that angle (or its determinant), I&#39;m using well-known formulas."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1254949,
+                                "reputation": 709,
+                                "user_id": 1214621,
+                                "user_type": "registered",
+                                "accept_rate": 20,
+                                "display_name": "VectorVortec"
+                            },
+                            "reply_to_user": {
+                                "account_id": 68306,
+                                "reputation": 20248,
+                                "user_id": 199364,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ToolmakerSteve"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1549417377,
+                            "post_id": 54502302,
+                            "comment_id": 95891746,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/54502302#comment95891746_54502302",
+                            "body": "@ToolmakerSteve the if statements always work if the 3 points are convex. The if statements will return, then you&#39;ll get the right answer. The if statements will not return, if the shape is concave and extreme. That&#39;s when you have to do the math. Most images have one quadrant, so that part is easy. More than 99% of my subroutine calls are handled by the if statements."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 68306,
+                                "reputation": 20248,
+                                "user_id": 199364,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ToolmakerSteve"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1549424254,
+                            "post_id": 54502302,
+                            "comment_id": 95893058,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/54502302#comment95893058_54502302",
+                            "body": "That doesn&#39;t address my concern. What is that formula? Is it the orientation determinant as given in the wiki link from lhf&#39;s answer?  If so, then say so. Explain that what you are doing is doing quick checks that handle most cases, to avoid the standard math. If that is so, then your answer now makes sense to me. (Minor nit: would be easier to read if you used <code>.x</code> and <code>.y</code> of a struct, instead of <code>[0]</code> and <code>[1]</code>. I didn&#39;t know what your code was saying, first time I glanced at it.)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 68306,
+                                "reputation": 20248,
+                                "user_id": 199364,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ToolmakerSteve"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1549426031,
+                            "post_id": 54502302,
+                            "comment_id": 95893428,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/54502302#comment95893428_54502302",
+                            "body": "Since I did not have confidence in your approach, I <a href=\"https://stackoverflow.com/a/54546353/199364\">implemented lhf&#39;s approach</a>; formula from his link. Slow part is <i>finding</i> appropriate vertex - O(N) search. Once found, the determinant is an O(1) operation, using 6 multiplies with 5 adds. That last part is what you&#39;ve optimized; but you&#39;ve done so by adding additional if-tests. I can&#39;t personally justify taking a non-standard approach - would need to verify each step is correct - But thank you for an interesting analysis of quadrants!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1254949,
+                        "reputation": 709,
+                        "user_id": 1214621,
+                        "user_type": "registered",
+                        "accept_rate": 20,
+                        "display_name": "VectorVortec"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1549396523,
+                    "last_edit_date": 1549396523,
+                    "creation_date": 1549192711,
+                    "answer_id": 54502302,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/54502302#54502302",
+                    "body": "<p>While these answers are correct, they are more mathematically intense than necessary. Assume map coordinates, where the most north point is the highest point on the map. Find the most north point, and if 2 points tie, it is the most north then the most east (this is the point that lhf uses in his answer). In your points,</p>\n\n<p>point[0] = (5,0)</p>\n\n<p>point[1] = (6,4)</p>\n\n<p>point[2] = (4,5)</p>\n\n<p>point[3] = (1,5)</p>\n\n<p>point[4] = (1,0)</p>\n\n<p>If we assume that P2 is the most north then east point either the previous or next point determine clockwise, CW, or CCW. Since the most north point is on the north face, if the P1 (previous) to P2 moves east the direction is CW. In this case, it moves west, so the direction is CCW as the accepted answer says. If the previous point has no horizontal movement, then the same system applies to the next point, P3. If P3 is west of P2, it is, then the movement is CCW. If the P2 to P3 movement is east, it's west in this case, the movement is CW. Assume that nte, P2 in your data, is the most north then east point and the prv is the previous point, P1 in your data, and nxt is the next point, P3 in your data, and [0] is horizontal or east/west where west is less than east, and [1] is vertical.</p>\n\n<pre><code>if (nte[0] &gt;= prv[0] &amp;&amp; nxt[0] &gt;= nte[0]) return(CW);\nif (nte[0] &lt;= prv[0] &amp;&amp; nxt[0] &lt;= nte[0]) return(CCW);\n// Okay, it's not easy-peasy, so now, do the math\nif (nte[0] * nxt[1] - nte[1] * nxt[0] - prv[0] * (nxt[1] - crt[1]) + prv[1] * (nxt[0] - nte[0]) &gt;= 0) return(CCW); // For quadrant 3 return(CW)\nreturn(CW) // For quadrant 3 return (CCW)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 891556,
+                                "reputation": 178,
+                                "user_id": 1270232,
+                                "user_type": "registered",
+                                "display_name": "Warwick Allison"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1549672620,
+                            "post_id": 54546353,
+                            "comment_id": 96000315,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/54546353#comment96000315_54546353",
+                            "body": "This appears to be for down-is-positive Y coordinates. Flip CW/CCW for standard coordinates."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 315980,
+                                "reputation": 10468,
+                                "user_id": 631911,
+                                "user_type": "registered",
+                                "display_name": "Tatarize"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1683586261,
+                            "post_id": 54546353,
+                            "comment_id": 134386566,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/54546353#comment134386566_54546353",
+                            "body": "<code>down-is-positive Y</code> <i>is</i> standard coordinates."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 68306,
+                                "reputation": 20248,
+                                "user_id": 199364,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ToolmakerSteve"
+                            },
+                            "reply_to_user": {
+                                "account_id": 315980,
+                                "reputation": 10468,
+                                "user_id": 631911,
+                                "user_type": "registered",
+                                "display_name": "Tatarize"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1683592989,
+                            "post_id": 54546353,
+                            "comment_id": 134387216,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/54546353#comment134387216_54546353",
+                            "body": "@Tatarize - that depends on the context. If no context is stated, it is generally assumed to be up. OTOH, since this is a computer graphics discussion, it could be argued either way. <a href=\"https://en.wikipedia.org/wiki/Cartesian_coordinate_system\" rel=\"nofollow noreferrer\">Cartesian coordinate system</a>: <i>&quot;In mathematics, physics, and engineering, the first axis is usually defined or depicted as horizontal and oriented to the right, and the second axis is vertical and oriented <b>upwards</b> [emphasis added]. (However, in some computer graphics contexts, the ordinate axis may be oriented downwards.)&quot;</i>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 315980,
+                                "reputation": 10468,
+                                "user_id": 631911,
+                                "user_type": "registered",
+                                "display_name": "Tatarize"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1683603919,
+                            "post_id": 54546353,
+                            "comment_id": 134388105,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/54546353#comment134388105_54546353",
+                            "body": "It does depend a bit on context. Most graphing stuff including math graphs are <code>up-is-positive-y</code> but graphic systems which is a lot of computer science is are <code>down-is-positive-y</code> systems.  There really isn&#39;t a &quot;standard&quot; there. And, in fact, in a lot of projects I make a point to write a coordinate system section within the documentation."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 68306,
+                                "reputation": 20248,
+                                "user_id": 199364,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ToolmakerSteve"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1683654414,
+                            "post_id": 54546353,
+                            "comment_id": 134398869,
+                            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/54546353#comment134398869_54546353",
+                            "body": "Exactly. Now we are in agreement."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 68306,
+                        "reputation": 20248,
+                        "user_id": 199364,
+                        "user_type": "registered",
+                        "accept_rate": 83,
+                        "display_name": "ToolmakerSteve"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1549425050,
+                    "creation_date": 1549425050,
+                    "answer_id": 54546353,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/54546353#54546353",
+                    "body": "<p>C# code to implement <a href=\"https://stackoverflow.com/a/1180256/199364\">lhf's answer</a>:</p>\n\n<pre><code>// https://en.wikipedia.org/wiki/Curve_orientation#Orientation_of_a_simple_polygon\npublic static WindingOrder DetermineWindingOrder(IList&lt;Vector2&gt; vertices)\n{\n    int nVerts = vertices.Count;\n    // If vertices duplicates first as last to represent closed polygon,\n    // skip last.\n    Vector2 lastV = vertices[nVerts - 1];\n    if (lastV.Equals(vertices[0]))\n        nVerts -= 1;\n    int iMinVertex = FindCornerVertex(vertices);\n    // Orientation matrix:\n    //     [ 1  xa  ya ]\n    // O = | 1  xb  yb |\n    //     [ 1  xc  yc ]\n    Vector2 a = vertices[WrapAt(iMinVertex - 1, nVerts)];\n    Vector2 b = vertices[iMinVertex];\n    Vector2 c = vertices[WrapAt(iMinVertex + 1, nVerts)];\n    // determinant(O) = (xb*yc + xa*yb + ya*xc) - (ya*xb + yb*xc + xa*yc)\n    double detOrient = (b.X * c.Y + a.X * b.Y + a.Y * c.X) - (a.Y * b.X + b.Y * c.X + a.X * c.Y);\n\n    // TBD: check for \"==0\", in which case is not defined?\n    // Can that happen?  Do we need to check other vertices / eliminate duplicate vertices?\n    WindingOrder result = detOrient &gt; 0\n            ? WindingOrder.Clockwise\n            : WindingOrder.CounterClockwise;\n    return result;\n}\n\npublic enum WindingOrder\n{\n    Clockwise,\n    CounterClockwise\n}\n\n// Find vertex along one edge of bounding box.\n// In this case, we find smallest y; in case of tie also smallest x.\nprivate static int FindCornerVertex(IList&lt;Vector2&gt; vertices)\n{\n    int iMinVertex = -1;\n    float minY = float.MaxValue;\n    float minXAtMinY = float.MaxValue;\n    for (int i = 0; i &lt; vertices.Count; i++)\n    {\n        Vector2 vert = vertices[i];\n        float y = vert.Y;\n        if (y &gt; minY)\n            continue;\n        if (y == minY)\n            if (vert.X &gt;= minXAtMinY)\n                continue;\n\n        // Minimum so far.\n        iMinVertex = i;\n        minY = y;\n        minXAtMinY = vert.X;\n    }\n\n    return iMinVertex;\n}\n\n// Return value in (0..n-1).\n// Works for i in (-n..+infinity).\n// If need to allow more negative values, need more complex formula.\nprivate static int WrapAt(int i, int n)\n{\n    // \"+n\": Moves (-n..) up to (0..).\n    return (i + n) % n;\n}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4148701,
+                        "reputation": 15803,
+                        "user_id": 3924118,
+                        "user_type": "registered",
+                        "accept_rate": 35,
+                        "display_name": "nbro"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1590349296,
+                    "creation_date": 1590349296,
+                    "answer_id": 61991493,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/61991493#61991493",
+                    "body": "<p>Here's a simple Python 3 implementation based on <a href=\"https://stackoverflow.com/a/18472899/3924118\">this answer</a> (which, in turn, is based on <a href=\"https://stackoverflow.com/a/1165943/3924118\">the solution proposed in the accepted answer</a>)</p>\n\n<pre><code>def is_clockwise(points):\n    # points is your list (or array) of 2d points.\n    assert len(points) &gt; 0\n    s = 0.0\n    for p1, p2 in zip(points, points[1:] + [points[0]]):\n        s += (p2[0] - p1[0]) * (p2[1] + p1[1])\n    return s &gt; 0.0\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 22428505,
+                        "reputation": 1768,
+                        "user_id": 16634738,
+                        "user_type": "registered",
+                        "display_name": "Richard Henage"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1670525077,
+                    "creation_date": 1670525077,
+                    "answer_id": 74734967,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/74734967#74734967",
+                    "body": "<p>Javascript implementation of <a href=\"https://stackoverflow.com/a/1180256/16634738\">lhf</a>'s answer<br />\n(Again, this only works for simple polygons, e.i. <strong>not</strong> for figure 8's)</p>\n<p><div class=\"snippet\" data-lang=\"js\" data-hide=\"false\" data-console=\"true\" data-babel=\"false\">\r\n<div class=\"snippet-code\">\r\n<pre class=\"snippet-code-js lang-js prettyprint-override\"><code>let polygon = [\n  {x:5,y:0},\n  {x:6,y:4},\n  {x:4,y:5},\n  {x:1,y:5},\n  {x:1,y:0}\n]\ndocument.body.innerHTML += `Polygon ${polygon.map(p=&gt;`(${p.x}, ${p.y})`).join(\", \")} is clockwise? ${isPolygonClockwise(polygon)}`\n\nlet reversePolygon = []\npolygon.forEach(point=&gt;reversePolygon.unshift(point))\ndocument.body.innerHTML += `&lt;br/&gt;Polygon ${reversePolygon.map(p=&gt;`(${p.x}, ${p.y})`).join(\", \")} is clockwise? ${isPolygonClockwise(reversePolygon)}`\n\nfunction isPolygonClockwise (polygon) {\n  // From http://www.faqs.org/faqs/graphics/algorithms-faq/ \"How do I find the orientation of a simple polygon?\"\n  // THIS SOMETIMES FAILS if the polygon is a figure 8, or similar shape where it crosses over itself\n  \n  // Take the lowest point (break ties with the right-most). \n  if (polygon.length &lt; 3) {\n    return true // A single point or two points can't be clockwise/counterclockwise\n  }\n  let previousPoint = polygon[0]\n  let lowestPoint = polygon[1]\n  let nextPoint = polygon[2]\n  polygon.forEach((point, index)=&gt;{\n    if (point.y &gt; lowestPoint.y || (point.y === lowestPoint.y &amp;&amp; point.x &gt; lowestPoint.x)) { // larger y values are lower, in svgs\n      // Break ties with furthest right\n      previousPoint = polygon[(index-1) &gt;= (0)                ? (index-1) : (polygon.length-1)]\n      lowestPoint = polygon[index]\n      nextPoint = polygon[(index+1)     &lt;= (polygon.length-1) ? (index+1) : (0)]\n    }\n  })\n  // Check the angle between the previous point, that point, and the next point.\n  // If the angle is less than PI radians, the polygon is clockwise\n  let angle = findAngle(previousPoint, lowestPoint, nextPoint)\n  return angle &lt; Math.PI\n}\n\nfunction findAngle(A,B,C) {\n  var AB = Math.atan2(B.y-A.y, B.x-A.x);\n  var BC = Math.atan2(C.y-B.y, C.x-B.x);\n  if (AB &lt; 0) AB += Math.PI*2\n  if (BC &lt; 0) BC += Math.PI*2\n  return BC-AB;\n}</code></pre>\r\n</div>\r\n</div>\r\n</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7649122,
+                        "reputation": 6991,
+                        "user_id": 6630397,
+                        "user_type": "registered",
+                        "accept_rate": 42,
+                        "display_name": "swiss_knight"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1673718114,
+                    "creation_date": 1673718114,
+                    "answer_id": 75120030,
+                    "question_id": 1165647,
+                    "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order/75120030#75120030",
+                    "body": "<p>For those who don't want to &quot;reinvent the wheel&quot;, I think it's worth mentioning that this check is implemented in a nice Python package called <a href=\"https://shapely.readthedocs.io/en/stable/\" rel=\"nofollow noreferrer\">Shapely</a> (<a href=\"https://github.com/shapely/shapely\" rel=\"nofollow noreferrer\">github</a>) (which is based on the <a href=\"https://libgeos.org/\" rel=\"nofollow noreferrer\">GEOS</a> C/C++ library):</p>\n<blockquote>\n<p>Shapely is a BSD-licensed Python package for manipulation and analysis of planar geometric objects. It is using the widely deployed open-source geometry library GEOS (the engine of PostGIS, and a port of JTS). Shapely wraps GEOS geometries and operations to provide both a feature rich Geometry interface for singular (scalar) geometries and higher-performance NumPy ufuncs for operations using arrays of geometries. Shapely is not primarily focused on data serialization formats or coordinate systems, but can be readily integrated with packages that are.</p>\n</blockquote>\n<p>Source: <a href=\"https://shapely.readthedocs.io/en/stable/\" rel=\"nofollow noreferrer\">https://shapely.readthedocs.io/en/stable/</a></p>\n<p>A small example given the OP coordinates:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import numpy as np\nfrom shapely.geometry import Polygon\n\npoints = np.array([\n    (5,0),\n    (6,4),\n    (4,5),\n    (1,5),\n    (1,0)\n])\n\nP = Polygon(points)\n</code></pre>\n<p>This is the newly constructed polygon:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import matplotlib.pyplot as plt\n\nx,y = P.exterior.coords.xy\nplt.plot(x,y)\nplt.axis('equal')\nplt.grid()\nplt.show()\n</code></pre>\n<p><a href=\"https://i.stack.imgur.com/xF3Rq.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/xF3Rq.png\" alt=\"enter image description here\" /></a></p>\n<p>And you can directly use the <a href=\"https://shapely.readthedocs.io/en/stable/manual.html#object.is_ccw\" rel=\"nofollow noreferrer\"><code>is_ccw</code></a> property of a LinearRing to check if the polygon is CW or CCW:</p>\n<pre class=\"lang-py prettyprint-override\"><code>type(P.exterior)\n&gt;: shapely.geometry.polygon.LinearRing\n\nP.exterior.is_ccw\n&gt;: True\n</code></pre>\n<p>If reversed:</p>\n<pre class=\"lang-py prettyprint-override\"><code>points = np.flipud(points)\npoints\n&gt;: \narray([[1, 0],\n       [1, 5],\n       [4, 5],\n       [6, 4],\n       [5, 0]])\n\n\nP1 = Polygon(points)\n\nP1.exterior.is_ccw\n&gt;: True\n</code></pre>\n<p>Documentation and references for further reading:</p>\n<ul>\n<li><p>Shapely <code>is_ccw</code> (github): <a href=\"https://github.com/shapely/shapely/blob/eba985c6e0170ecdd90c83592fd0afa7ae793cb8/shapely/predicates.py#L72-L108\" rel=\"nofollow noreferrer\">https://github.com/shapely/shapely/blob/eba985c6e0170ecdd90c83592fd0afa7ae793cb8/shapely/predicates.py#L72-L108</a></p>\n</li>\n<li><p>libgeos (github): <a href=\"https://github.com/libgeos/geos\" rel=\"nofollow noreferrer\">https://github.com/libgeos/geos</a></p>\n</li>\n<li><p>GEOS API reference: <a href=\"https://libgeos.org/doxygen/classgeos_1_1algorithm_1_1Orientation.html#a5af93795969b80f97d7997195974d7c8\" rel=\"nofollow noreferrer\">https://libgeos.org/doxygen/classgeos_1_1algorithm_1_1Orientation.html#a5af93795969b80f97d7997195974d7c8</a></p>\n</li>\n<li><p>GEOS implementation (github): <a href=\"https://github.com/libgeos/geos/blob/ab0ce6dafdf7f75ec6d234b6c65bb209037dda17/src/algorithm/Orientation.cpp#L43-L133\" rel=\"nofollow noreferrer\">https://github.com/libgeos/geos/blob/ab0ce6dafdf7f75ec6d234b6c65bb209037dda17/src/algorithm/Orientation.cpp#L43-L133</a></p>\n</li>\n</ul>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 27160,
+                "reputation": 12189,
+                "user_id": 71380,
+                "user_type": "registered",
+                "accept_rate": 91,
+                "display_name": "St&#233;cy"
+            },
+            "comment_count": 5,
+            "is_answered": true,
+            "accepted_answer_id": 1165943,
+            "answer_count": 25,
+            "score": 338,
+            "last_activity_date": 1673718114,
+            "creation_date": 1248272673,
+            "last_edit_date": 1548336674,
+            "question_id": 1165647,
+            "link": "https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order",
+            "title": "How to determine if a list of polygon points are in clockwise order?",
+            "body": "<p>Having a list of points, how do I find if they are in clockwise order?</p>\n\n<p>For example:</p>\n\n<pre><code>point[0] = (5,0)\npoint[1] = (6,4)\npoint[2] = (4,5)\npoint[3] = (1,5)\npoint[4] = (1,0)\n</code></pre>\n\n<p>would say that it is anti-clockwise (or counter-clockwise, for some people).</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7722
+}

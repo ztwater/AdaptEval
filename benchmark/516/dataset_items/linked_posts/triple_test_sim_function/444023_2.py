@@ -1,0 +1,1 @@
+:: /tmp/dirname/filename.etc

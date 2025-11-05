@@ -1,0 +1,461 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "sqlalchemy",
+                "foreign-keys"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 185535,
+                        "reputation": 6257,
+                        "user_id": 422321,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "sayap"
+                    },
+                    "edited": false,
+                    "score": 3,
+                    "creation_date": 1343519059,
+                    "post_id": 11668355,
+                    "comment_id": 15526098,
+                    "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to#comment15526098_11668355",
+                    "body": "You can do that by iterating through <code>Base._decl_class_registry</code>"
+                },
+                {
+                    "owner": {
+                        "account_id": 12998710,
+                        "reputation": 396,
+                        "user_id": 9395457,
+                        "user_type": "registered",
+                        "display_name": "ryjack"
+                    },
+                    "edited": false,
+                    "score": 2,
+                    "creation_date": 1564371291,
+                    "post_id": 11668355,
+                    "comment_id": 100994306,
+                    "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to#comment100994306_11668355",
+                    "body": "Iterating through <code>Base.__subclasses__()</code> also works"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 9630,
+                                "reputation": 47996,
+                                "user_id": 17875,
+                                "user_type": "registered",
+                                "display_name": "Eevee"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1369183999,
+                            "post_id": 11718281,
+                            "comment_id": 24005884,
+                            "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/11718281#comment24005884_11718281",
+                            "body": "oh my goodness.  this is brittle all around, but <i>if nothing else</i>: you don&#39;t need to stringify the class to test what it is!  just check <code>issubclass(globals[k], Base)</code>!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 385128,
+                                "reputation": 15956,
+                                "user_id": 742082,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Sheena"
+                            },
+                            "reply_to_user": {
+                                "account_id": 9630,
+                                "reputation": 47996,
+                                "user_id": 17875,
+                                "user_type": "registered",
+                                "display_name": "Eevee"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1369214226,
+                            "post_id": 11718281,
+                            "comment_id": 24015604,
+                            "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/11718281#comment24015604_11718281",
+                            "body": "@Eevee: hey, it works. sayap&#39;s comment makes sense... can you tell me how it is brittle? I know a try...except with no exception type is generally bad practice, and stringifying things isn&#39;t necessary (taken that out). What else?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9630,
+                                "reputation": 47996,
+                                "user_id": 17875,
+                                "user_type": "registered",
+                                "display_name": "Eevee"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1369250710,
+                            "post_id": 11718281,
+                            "comment_id": 24037505,
+                            "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/11718281#comment24037505_11718281",
+                            "body": "<code>type(...) == ...</code> is also unnecessary; use <code>issubclass</code> with your base class or <code>isinstance</code> with the metaclass.  you could iterate over <code>globals.items()</code> instead of doing a key lookup multiple times.  a function like this should raise an exception on failure.  but most importantly, as soon as a model file like this gets bigger than a couple dozen tables, most developers will be inclined to <i>split it up</i> which will break this code in ways that may not be immediately obvious."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 385128,
+                                "reputation": 15956,
+                                "user_id": 742082,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Sheena"
+                            },
+                            "reply_to_user": {
+                                "account_id": 9630,
+                                "reputation": 47996,
+                                "user_id": 17875,
+                                "user_type": "registered",
+                                "display_name": "Eevee"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1369990463,
+                            "post_id": 11718281,
+                            "comment_id": 24305352,
+                            "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/11718281#comment24305352_11718281",
+                            "body": "I didn&#39;t know about <code>items()</code>, thanks. I don&#39;t see the downside of using <code>type</code> rather than <code>issubclass</code> or <code>isinstance</code>... Also, the problem I solved with this is one of finding the correct model class in a predefined scope. In my case the scope is global and that&#39;s convenient. If anyone wants to adapt this for their purposes then they should adapt it for their scope. Scope is not the issue being explored here. And solving scope issues shouldn&#39;t be very hard anyway. Creative use of importlib would do the trick, or context could be included as a parameter."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9630,
+                                "reputation": 47996,
+                                "user_id": 17875,
+                                "user_type": "registered",
+                                "display_name": "Eevee"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1370030481,
+                            "post_id": 11718281,
+                            "comment_id": 24326523,
+                            "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/11718281#comment24326523_11718281",
+                            "body": "<code>type</code> is brittle and can be fooled in a lot of ways.  looking up things in a lexical scope should always be a last resort\u2014in this case you already have the mapping you want, as the comment on your question indicates."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 385128,
+                                "reputation": 15956,
+                                "user_id": 742082,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Sheena"
+                            },
+                            "reply_to_user": {
+                                "account_id": 9630,
+                                "reputation": 47996,
+                                "user_id": 17875,
+                                "user_type": "registered",
+                                "display_name": "Eevee"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1370252448,
+                            "post_id": 11718281,
+                            "comment_id": 24376892,
+                            "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/11718281#comment24376892_11718281",
+                            "body": "@Eevee: &quot;the comment&quot;, what comment? If you are referring to my documentation string then I&#39;m not sure what you mean. In what way do I already have a tablename to model class mapping? I know I have a model class to tablename mapping but that&#39;s not what I&#39;m after"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9630,
+                                "reputation": 47996,
+                                "user_id": 17875,
+                                "user_type": "registered",
+                                "display_name": "Eevee"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1370278866,
+                            "post_id": 11718281,
+                            "comment_id": 24391616,
+                            "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/11718281#comment24391616_11718281",
+                            "body": "sayap&#39;s comment, above.  <code>Base._decl_class_registry</code> is a dict of declarative class names to classes.  you could iterate its <code>.values()</code> and check the table names.  or you could extend the declarative metaclass to create your own similar dict."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 385128,
+                        "reputation": 15956,
+                        "user_id": 742082,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "Sheena"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1423574506,
+                    "last_edit_date": 1423574506,
+                    "creation_date": 1343638992,
+                    "answer_id": 11718281,
+                    "question_id": 11668355,
+                    "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/11718281#11718281",
+                    "body": "<p>I was going to delete this but I figure that the discussion in the comments might be useful for people who want to know about some good practices. Take this answer with a pinch of salt.</p>\n\n<hr>\n\n<p>something like this does the trick: </p>\n\n<pre><code>def getModelFromTableName(sTable):\n    \"\"\"\n    return the Model class with the given __tablename__\n    \"\"\"\n    globals = globals()\n    for k in globals:\n        if type(globals[k]) == sqlalchemy.ext.declarative.DeclarativeMeta:\n            try:\n                if globals[k].__tablename__ == sTable:\n                    return globals[k]\n            except:\n                pass\n    return None\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 213439,
+                                "reputation": 453,
+                                "user_id": 466823,
+                                "user_type": "registered",
+                                "display_name": "pip"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1426598615,
+                            "post_id": 23754464,
+                            "comment_id": 46430705,
+                            "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/23754464#comment46430705_23754464",
+                            "body": "Works great - for flask-sqlalchemy replace Base with db.Model as they are the same thing (more or less)."
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user2738183"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1480365596,
+                            "post_id": 23754464,
+                            "comment_id": 68922852,
+                            "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/23754464#comment68922852_23754464",
+                            "body": "had to change <code>__tablename__</code> to <code>__table__</code> to get this to work"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1074846,
+                        "reputation": 11341,
+                        "user_id": 1073222,
+                        "user_type": "registered",
+                        "accept_rate": 57,
+                        "display_name": "OrangeTux"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 57,
+                    "last_activity_date": 1513775686,
+                    "last_edit_date": 1513775686,
+                    "creation_date": 1400573966,
+                    "answer_id": 23754464,
+                    "question_id": 11668355,
+                    "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/23754464#23754464",
+                    "body": "<p>Inspired by <a href=\"https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/23754464#comment24391616_11718281\">Eevee</a>'s comment:</p>\n\n<pre><code>def get_class_by_tablename(tablename):\n  \"\"\"Return class reference mapped to table.\n\n  :param tablename: String with name of table.\n  :return: Class reference or None.\n  \"\"\"\n  for c in Base._decl_class_registry.values():\n    if hasattr(c, '__tablename__') and c.__tablename__ == tablename:\n      return c\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2525542,
+                                "reputation": 2150,
+                                "user_id": 2195033,
+                                "user_type": "registered",
+                                "display_name": "dequis"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1478233593,
+                            "post_id": 28831522,
+                            "comment_id": 68080274,
+                            "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/28831522#comment68080274_28831522",
+                            "body": "This function takes the table object (the exact same one, <code>c.__table__ is table</code>), not a table name."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6795037,
+                                "reputation": 15469,
+                                "user_id": 5230702,
+                                "user_type": "registered",
+                                "display_name": "Anand Tripathi"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1645628209,
+                            "post_id": 28831522,
+                            "comment_id": 125923244,
+                            "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/28831522#comment125923244_28831522",
+                            "body": "correct maybe @Konsta you can change the comparision to str(c.__table__) in your implementation or use <b>tablename</b> cause most of the time we dont know the class only the table name then only we can use this function"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 963354,
+                        "reputation": 81,
+                        "user_id": 4627580,
+                        "user_type": "registered",
+                        "display_name": "Konsta Vesterinen"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1426945099,
+                    "last_edit_date": 1426945099,
+                    "creation_date": 1425384665,
+                    "answer_id": 28831522,
+                    "question_id": 11668355,
+                    "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/28831522#28831522",
+                    "body": "<p>Utility function for this has been added to <a href=\"https://github.com/kvesteri/sqlalchemy-utils\" rel=\"noreferrer\">SQLAlchemy-Utils</a>. See <a href=\"http://sqlalchemy-utils.readthedocs.org/en/latest/orm_helpers.html#sqlalchemy_utils.functions.get_class_by_table\" rel=\"noreferrer\">get_class_by_table docs</a> for more information. The solution in SQLAlchemy-Utils is able to cover single table inheritance scenarios as well.</p>\n\n<pre><code>import sqlalchemy as sa\n\n\ndef get_class_by_table(base, table, data=None):\n    \"\"\"\n    Return declarative class associated with given table. If no class is found\n    this function returns `None`. If multiple classes were found (polymorphic\n    cases) additional `data` parameter can be given to hint which class\n    to return.\n\n    ::\n\n        class User(Base):\n            __tablename__ = 'entity'\n            id = sa.Column(sa.Integer, primary_key=True)\n            name = sa.Column(sa.String)\n\n\n        get_class_by_table(Base, User.__table__)  # User class\n\n\n    This function also supports models using single table inheritance.\n    Additional data paratemer should be provided in these case.\n\n    ::\n\n        class Entity(Base):\n            __tablename__ = 'entity'\n            id = sa.Column(sa.Integer, primary_key=True)\n            name = sa.Column(sa.String)\n            type = sa.Column(sa.String)\n            __mapper_args__ = {\n                'polymorphic_on': type,\n                'polymorphic_identity': 'entity'\n            }\n\n        class User(Entity):\n            __mapper_args__ = {\n                'polymorphic_identity': 'user'\n            }\n\n\n        # Entity class\n        get_class_by_table(Base, Entity.__table__, {'type': 'entity'})\n\n        # User class\n        get_class_by_table(Base, Entity.__table__, {'type': 'user'})\n\n\n    :param base: Declarative model base\n    :param table: SQLAlchemy Table object\n    :param data: Data row to determine the class in polymorphic scenarios\n    :return: Declarative class or None.\n    \"\"\"\n    found_classes = set(\n        c for c in base._decl_class_registry.values()\n        if hasattr(c, '__table__') and c.__table__ is table\n    )\n    if len(found_classes) &gt; 1:\n        if not data:\n            raise ValueError(\n                \"Multiple declarative classes found for table '{0}'. \"\n                \"Please provide data parameter for this function to be able \"\n                \"to determine polymorphic scenarios.\".format(\n                    table.name\n                )\n            )\n        else:\n            for cls in found_classes:\n                mapper = sa.inspect(cls)\n                polymorphic_on = mapper.polymorphic_on.name\n                if polymorphic_on in data:\n                    if data[polymorphic_on] == mapper.polymorphic_identity:\n                        return cls\n            raise ValueError(\n                \"Multiple declarative classes found for table '{0}'. Given \"\n                \"data row does not match any polymorphic identity of the \"\n                \"found classes.\".format(\n                    table.name\n                )\n            )\n    elif found_classes:\n        return found_classes.pop()\n    return None\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7774117,
+                        "reputation": 131,
+                        "user_id": 5882749,
+                        "user_type": "registered",
+                        "display_name": "Florian Mounier"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 13,
+                    "last_activity_date": 1550742553,
+                    "last_edit_date": 1550742553,
+                    "creation_date": 1454584301,
+                    "answer_id": 35199507,
+                    "question_id": 11668355,
+                    "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/35199507#35199507",
+                    "body": "<p>Beware the <a href=\"https://stackoverflow.com/a/23754464/4213715\">OrangeTux</a> answer does not take schemas in account. If you have table homonyms in different schemas use:</p>\n\n<pre><code>def get_class_by_tablename(table_fullname):\n  \"\"\"Return class reference mapped to table.\n\n  :param table_fullname: String with fullname of table.\n  :return: Class reference or None.\n  \"\"\"\n  for c in Base._decl_class_registry.values():\n    if hasattr(c, '__table__') and c.__table__.fullname == table_fullname:\n      return c\n</code></pre>\n\n<p><code>fullname</code> is a Table attribute see:</p>\n\n<p><a href=\"https://github.com/sqlalchemy/sqlalchemy/blob/7a4c40ff6b9d278529735c792c3ddfda60bd4a85/lib/sqlalchemy/sql/schema.py#L530-L532\" rel=\"noreferrer\">github.com/sqlalchemy/sqlalchemy/blob/master/lib/sqlalchemy/sql/schema.py#L530-L532</a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 8561836,
+                        "reputation": 11,
+                        "user_id": 6415627,
+                        "user_type": "registered",
+                        "display_name": "Leefun"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1538060660,
+                    "creation_date": 1538060660,
+                    "answer_id": 52540012,
+                    "question_id": 11668355,
+                    "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/52540012#52540012",
+                    "body": "<p>if you are working with sqlalchemy automap, you need a slight modification. Took me couple minutes to tune it out:</p>\n\n<pre><code>def get_class_by_tablename(tablename, Base):\n  for c in Base._decl_class_registry.values():\n    if c.__table__.name == tablename:\n      return c\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 12998710,
+                        "reputation": 396,
+                        "user_id": 9395457,
+                        "user_type": "registered",
+                        "display_name": "ryjack"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1583353726,
+                    "creation_date": 1583353726,
+                    "answer_id": 60534196,
+                    "question_id": 11668355,
+                    "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/60534196#60534196",
+                    "body": "<p>One way would be to define a <code>__table_cls__</code> classmethod in <code>Base</code> or as a mixin. Note that I haven't tested this with any sort of inheritance. An example if augmenting <code>Base</code>:</p>\n\n<pre><code># Python 3.7.2, SQLAlchemy 1.3.13\n###\n# app/models.py\nfrom sqlalchemy import Table\nfrom sqlalchemy.ext.declarative import declarative_base\n\nclass Base(object):\n    @classmethod\n    def __table_cls__(cls, *args, **kwargs):\n        t = Table(*args, **kwargs)\n        t.decl_class = cls\n        return t\n\nBase = declarative_base(cls=Base)\n</code></pre>\n\n<p>Contriving a table example:</p>\n\n<pre><code># app/models.py\nclass Account(Base):  # Note this is the customized Base class\n    __tablename__ = 'account'\n    id = Column(Integer, primary_key=True)\n    name = Column(String, nullable=False)\n    account_number = Column(String)\n</code></pre>\n\n<p>Testing in console:</p>\n\n<pre><code># Python 3.7.2 Console\n&gt;&gt;&gt; from app import models as m\n&gt;&gt;&gt; account_table = m.Base.metadata.tables['account']\n&gt;&gt;&gt; account_table.__class__\n&lt;class 'sqlalchemy.sql.schema.Table'&gt;\n\n&gt;&gt;&gt; account_table.decl_class\n&lt;class 'app.models.Account'&gt;\n</code></pre>\n\n<p>As a function:</p>\n\n<pre><code>def get_class_by_table_name(table_name):\n    tbl = Base.metadata.tables[table_name]\n    return tbl.decl_class\n</code></pre>\n\n<p>Side note: since a lot of answers have referenced <code>Base._decl_class_registry</code>, the <code>declarative_base()</code> function also accepts a dictionary for the <code>class_registry</code> named parameter.</p>\n\n<pre><code>&gt;&gt;&gt; registered_classes = {}\n&gt;&gt;&gt; Base = declarative_base(cls=Base, class_registry=registered_classes)\n&gt;&gt;&gt; registered_classes.keys()\ndict_keys(['Account', '_sa_module_registry', 'AccountType', ...])\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 476264,
+                        "reputation": 5088,
+                        "user_id": 887074,
+                        "user_type": "registered",
+                        "accept_rate": 54,
+                        "display_name": "Erotemic"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 23,
+                    "last_activity_date": 1615953466,
+                    "creation_date": 1615953466,
+                    "answer_id": 66666783,
+                    "question_id": 11668355,
+                    "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/66666783#66666783",
+                    "body": "<p>So in SQLAlchemy version 1.4.x (which I updated to around 2020-03-16) it seems <code>_decl_class_registry</code> no longer exists.</p>\n<p>I was able to work around using the new <code>registry</code> class attribute (which is not protected, so hopefully it wont be removed suddenly!).</p>\n<pre><code>Base.TBLNAME_TO_CLASS = {}\n\nfor mapper in Base.registry.mappers:\n    cls = mapper.class_\n    classname = cls.__name__\n    if not classname.startswith('_'):\n        tblname = cls.__tablename__\n        Base.TBLNAME_TO_CLASS[tblname] = cls\n</code></pre>\n<p>Not sure if this is the best way to do it, but its how I did it.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 14878286,
+                        "reputation": 625,
+                        "user_id": 10743742,
+                        "user_type": "registered",
+                        "display_name": "igoras1993"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1629462939,
+                    "creation_date": 1629462939,
+                    "answer_id": 68862329,
+                    "question_id": 11668355,
+                    "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/68862329#68862329",
+                    "body": "<p>For sqlalchemy 1.4.x (and probably 2.0.x for the future readers too) You can nicely extend the <a href=\"https://stackoverflow.com/a/66666783/10743742\">Erotemic</a> answer to be more convenient when models are distributed across many files (such case is a primary reason for looking up ORM classes when doing proper OOP).</p>\n<p>Take such class and make a <code>Base</code> from it:</p>\n<pre><code>from sqlalchemy.orm import declarative_base\n\nclass BaseModel:\n\n    @classmethod\n    def model_lookup_by_table_name(cls, table_name):\n        registry_instance = getattr(cls, &quot;registry&quot;)\n        for mapper_ in registry_instance.mappers:\n            model = mapper_.class_\n            model_class_name = model.__tablename__\n            if model_class_name == table_name:\n                return model\n\n\nBase = declarative_base(cls=BaseModel)\n</code></pre>\n<p>Then declaring your models, even in separate modules, enables You to use <code>cls.model_lookup_by_table_name(...)</code> method without importing anything,\nas long as You are deriving from a <code>Base</code>:</p>\n<p><code>user_models.py</code></p>\n<pre><code>from sqlalchemy import Column, Integer\n\nclass User(Base):\n    __tablename__ = &quot;user&quot;\n\n    id = Column(Integer, primary_key=True)\n\n    # ... and other columns\n\n    def some_method(self):\n        # successfully use lookup like this\n        balance_model = self.model_lookup_by_table_name(&quot;balance&quot;)\n        # ...\n        return balance_model\n</code></pre>\n<p><code>balance_models.py</code></p>\n<pre><code>from sqlalchemy import Column, Integer\n\nclass Balance(Base):\n    __tablename__ = &quot;balance&quot;\n\n    id = Column(Integer, primary_key=True)\n\n    # ... other columns\n\n    def some_method(self):\n        # lookup works on every model\n        user_model = self.model_lookup_by_table_name(&quot;user&quot;)\n        # ...\n        return user_model\n</code></pre>\n<p>And it works as expected:</p>\n<pre><code>&gt;&gt;&gt; User().some_method()\n&lt;class 'balance_models.Balance'&gt;\n&gt;&gt;&gt; Balance().some_method()\n&lt;class 'user_models.User'&gt;\n&gt;&gt;&gt; Base.model_lookup_by_table_name(&quot;user&quot;)\n&lt;class 'user_models.User'&gt;\n&gt;&gt;&gt; Base.model_lookup_by_table_name(&quot;balance&quot;)\n&lt;class 'balance_models.Balance'&gt;\n</code></pre>\n<p>You can safely cache the output of this method using <code>functools.lru_cache</code> to improve performance (avoiding python <code>for</code> loop when it is not needed). Also, You can add more lookups the same way, e.g. by a class name (not only by a table name like in this example)</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 24676645,
+                        "reputation": 100,
+                        "user_id": 18570948,
+                        "user_type": "registered",
+                        "display_name": "tubular"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1648142592,
+                    "creation_date": 1648142592,
+                    "answer_id": 71606852,
+                    "question_id": 11668355,
+                    "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/71606852#71606852",
+                    "body": "<p>Old thread, but none of the answers here worked for me working with Flask-SQLAlchemy 2.5.1. and SQLAlchemy 1.4.32</p>\n<p>As <code>db.Model</code> object you use in Flask-SQLAlchemy is practically identical to the <code>Base</code> model object in SQLAlchemy ORM, I think my answer below applies in the modern context.</p>\n<p><a href=\"https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/23754464?newreg=7f89400988544dcf9e49fd7db845e238#comment100994306_11668355\">This comment</a> from @Supra621 seems to be the cleanest solution where you can simply do:</p>\n<pre class=\"lang-py prettyprint-override\"><code>def get_class_from_tablename(tablename):\n  for c in Base.__subclasses__():\n    if c.__tablename__ == tablename:\n      return c\n</code></pre>\n<p>Additionally, if you'd rather access this table object using the registry like the majority of the old answers here:</p>\n<pre class=\"lang-py prettyprint-override\"><code>def get_class_from_tablename(tablename):\n  for c in Base.registry._class_registry.data.values():\n    if hasattr(c, '__tablename__') and c.__tablename__ == tablename:\n      return c\n</code></pre>\n<p>Not sure from which version the attribute names change, but at least this works in both SQLAlchemy ORM and Flask SQLAlchemy (latest versions at the time of writing).</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7074737,
+                        "reputation": 2302,
+                        "user_id": 6084517,
+                        "user_type": "registered",
+                        "display_name": "Nathan Chappell"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1666884521,
+                    "creation_date": 1666884521,
+                    "answer_id": 74224578,
+                    "question_id": 11668355,
+                    "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to/74224578#74224578",
+                    "body": "<p>I don't know if things are different now or something, but in <em>relatively simple</em> circumstances you can create a lookup table after configuring your mappers like so:</p>\n<pre class=\"lang-py prettyprint-override\"><code>table_name_to_class = {m.tables[0].name: m.class_ for m in Base.registry.mappers}\n</code></pre>\n<p>Here's a full code sample for anyone who cares (sorry for mixing in the <strong>pytest</strong> junk, I'm in the middle of something and this was the easiest way to demo the code...)</p>\n<pre class=\"lang-py prettyprint-override\"><code>import pytest\nimport sqlalchemy as sa\nfrom sqlalchemy.orm import declarative_base, Session\n\nengine = sa.create_engine(&quot;postgresql+psycopg2://postgres@localhost/test&quot;)\nBase = declarative_base(bind=engine)\n\n\nclass A(Base):\n    __tablename__ = &quot;table_a&quot;\n    a_id = sa.Column(sa.Integer, primary_key=True)\n\n\nclass B(Base):\n    __tablename__ = &quot;table_b&quot;\n    b_id = sa.Column(sa.Integer, primary_key=True)\n    a_id = sa.Column(sa.Integer, sa.ForeignKey(&quot;table_a.a_id&quot;))\n\n\n@pytest.fixture\ndef table_name_to_class():\n    try:\n        Base.metadata.create_all()\n        Base.registry.configure()\n        yield {m.tables[0].name: m.class_ for m in Base.registry.mappers}\n    finally:\n        Base.metadata.drop_all()\n\n\ndef test_table_lookup(table_name_to_class):\n    assert table_name_to_class[&quot;table_a&quot;] is A\n    assert table_name_to_class[&quot;table_b&quot;] is B\n\n    with Session(bind=Base.metadata.bind) as session:\n        session.add(table_name_to_class[&quot;table_a&quot;](a_id=0))\n        session.add(table_name_to_class[&quot;table_b&quot;](b_id=0, a_id=0))\n        session.add(table_name_to_class[&quot;table_b&quot;](b_id=1, a_id=0))\n        session.commit()\n\n    assert engine.execute(&quot;&quot;&quot; SELECT COUNT(a_id) FROM table_a &quot;&quot;&quot;).scalar() == 1\n    assert engine.execute(&quot;&quot;&quot; SELECT COUNT(b_id) FROM table_b &quot;&quot;&quot;).scalar() == 2\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 385128,
+                "reputation": 15956,
+                "user_id": 742082,
+                "user_type": "registered",
+                "accept_rate": 78,
+                "display_name": "Sheena"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "accepted_answer_id": 23754464,
+            "answer_count": 10,
+            "score": 45,
+            "last_activity_date": 1666884521,
+            "creation_date": 1343302331,
+            "last_edit_date": 1577001044,
+            "question_id": 11668355,
+            "link": "https://stackoverflow.com/questions/11668355/sqlalchemy-get-model-from-table-name-this-may-imply-appending-some-function-to",
+            "title": "SQLAlchemy: get Model from table name. This may imply appending some function to a metaclass constructor as far as I can see",
+            "body": "<p>I want to make a function that, given the name of a table, returns the model with that <strong>tablename</strong>.\nEg:</p>\n\n<pre><code>class Model(Base):\n    __tablename__ = 'table'\n    ...a bunch of Columns\n\ndef getModelFromTableName(tablename):\n   ...something magical\n</code></pre>\n\n<p>so getModelFromTableName('table') should return the Model class.</p>\n\n<p>My aim is to use the function in a simple form generator I'm making since FormAlchemy does not work with python3.2 and I want it to handle foreign keys nicely. </p>\n\n<p>Can anyone give me any pointers on how to get getModelFromTableName to work?</p>\n\n<p>Here's one idea I have (it might be totally wrong, I haven't worked with meta classes before...)</p>\n\n<p>What if I were to make my Model classes inherit from Base as well as some other class (TableReg) and have the class meta of TableReg store Model.<strong>tablename</strong> in some global dictionary or Singleton. </p>\n\n<p>I realise this could be totally off because Base's metaclass does some very important and totally nifty stuff that I don't want to break, but I assume there has to be a way for me to append a little bit of constructor code to the meta class of my models. Or I don't understand. </p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9933
+}

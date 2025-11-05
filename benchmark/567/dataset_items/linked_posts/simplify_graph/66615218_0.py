@@ -1,0 +1,1 @@
+edges = g.edges(node)

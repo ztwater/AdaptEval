@@ -1,0 +1,52 @@
+{
+    "items": [
+        {
+            "tags": [
+                "geojson",
+                "geopandas",
+                "folium"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 1461295,
+                        "reputation": 58775,
+                        "user_id": 1375553,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Vadim Gremyachev"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1616959890,
+                    "creation_date": 1616959890,
+                    "answer_id": 66845418,
+                    "question_id": 66813862,
+                    "link": "https://stackoverflow.com/questions/66813862/loosing-geojsons-feature-property-information-when-visualising-by-using-folium/66845418#66845418",
+                    "body": "<p>Provided GeoJSON (<code>output</code>) contains styling properties defined in <a href=\"https://github.com/mapbox/simplestyle-spec\" rel=\"nofollow noreferrer\"><code>simplestyle</code> spec</a> which are not supported by leaflet <code>L.geoJSON</code></p>\n<p><a href=\"https://github.com/rowanwins/leaflet-simplestyle\" rel=\"nofollow noreferrer\"><code>leaflet-simplestyle</code> plugin</a> could be utilized which <em>extends</em> <code>L.geoJSON</code> to support the simplestyle spec, here is a an example on how to utilize it in folium</p>\n<pre><code>import folium\nfrom folium.elements import JSCSSMixin\nfrom folium.map import Layer\nfrom jinja2 import Template\n\n\nclass StyledGeoJson(JSCSSMixin, Layer):\n    &quot;&quot;&quot;\n    Creates a GeoJson which supports.\n\n    &quot;&quot;&quot;\n    _template = Template(u&quot;&quot;&quot;\n        {% macro script(this, kwargs) %}\n\n            var {{ this.get_name() }} = L.geoJson({{ this.data }},\n                {\n                    useSimpleStyle: true,\n                    useMakiMarkers: true\n                }\n            ).addTo({{ this._parent.get_name() }});\n        {% endmacro %}\n        &quot;&quot;&quot;)  \n\n    default_js = [\n        ('leaflet-simplestyle', 'https://unpkg.com/leaflet-simplestyle'),\n    ]\n\n    def __init__(self, data,name=None, overlay=True, control=True, show=True):\n        super(StyledGeoJson, self).__init__(name=name, overlay=overlay,\n                                       control=control, show=show)\n        self._name = 'StyledGeoJson'\n        self.data = data\n</code></pre>\n<p>Usage</p>\n<pre><code>output = {&quot;type&quot;: &quot;FeatureCollection&quot;, &quot;features&quot;: [ {&quot;type&quot;: &quot;Feature&quot;,  &quot;geometry&quot;: {&quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [103.815381, 1.279109]}, &quot;properties&quot;: {&quot;temperature&quot;: 24, &quot;marker-symbol&quot;: &quot;park&quot;, &quot;marker-color&quot;: &quot;#AF4646&quot;}},  {&quot;type&quot;: &quot;Feature&quot;,  &quot;geometry&quot;:  {&quot;type&quot;: &quot;MultiLineString&quot;, &quot;coordinates&quot;: [[[103.809297, 1.294906], [103.799445, 1.283906], [103.815381, 1.294906]]]}, &quot;properties&quot;: {&quot;temperature&quot;: 24, &quot;stroke&quot;: &quot;#AF4646&quot;}}]}\nm = folium.Map(location=[1.2791,103.8154], zoom_start=14)\n\nStyledGeoJson(output).add_to(m)\nm\n</code></pre>\n<p><strong>Result</strong></p>\n<p><a href=\"https://i.stack.imgur.com/KBNpY.jpg\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/KBNpY.jpg\" alt=\"enter image description here\" /></a></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 17789117,
+                "reputation": 11,
+                "user_id": 12918569,
+                "user_type": "registered",
+                "display_name": "60221611"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "answer_count": 1,
+            "score": 0,
+            "last_activity_date": 1616959890,
+            "creation_date": 1616749536,
+            "question_id": 66813862,
+            "link": "https://stackoverflow.com/questions/66813862/loosing-geojsons-feature-property-information-when-visualising-by-using-folium",
+            "title": "Loosing geojson&#39;s feature property information when visualising by using folium",
+            "body": "<p>currently I have already made a geojson file (called <strong>output</strong>):\n<code>{&quot;type&quot;: &quot;FeatureCollection&quot;, &quot;features&quot;: [ {&quot;type&quot;: &quot;Feature&quot;,  &quot;geometry&quot;: {&quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [103.815381, 1.279109]}, &quot;properties&quot;: {&quot;temperature&quot;: 24, &quot;marker-symbol&quot;: &quot;park&quot;, &quot;marker-color&quot;: &quot;#AF4646&quot;}},  {&quot;type&quot;: &quot;Feature&quot;,  &quot;geometry&quot;:  {&quot;type&quot;: &quot;MultiLineString&quot;, &quot;coordinates&quot;: [[[103.809297, 1.294906], [103.799445, 1.283906], [103.815381, 1.294906]]]}, &quot;properties&quot;: {&quot;temperature&quot;: 24, &quot;stroke&quot;: &quot;#AF4646&quot;}}]}</code></p>\n<p>It contains a multiline string type and a point type. The expected output should be like this (visualised by using geojson.io), <strong>where all the properties (e.g. colour of string and the marker, the forest icon of the marker) are all kept</strong>:\n<a href=\"https://i.stack.imgur.com/oRFaj.jpg\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/oRFaj.jpg\" alt=\"enter image description here\" /></a></p>\n<p>My goal is to generate an html or an image file (the best choice) of this map. So I turned to folium. However, when I use command:</p>\n<p><code>m = folium.Map(location=[1.2791,103.8154], zoom_start=12)</code>\n<code>folium.GeoJson(output, name='test').add_to(m)</code>\n<code>m.save('map.html')</code>\nThe visualisation is like this:\n<a href=\"https://i.stack.imgur.com/w7NmL.jpg\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/w7NmL.jpg\" alt=\"enter image description here\" /></a>\nWhere all the property information has been wiped out. Are there any way to keep those property information? Thanks.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6027
+}

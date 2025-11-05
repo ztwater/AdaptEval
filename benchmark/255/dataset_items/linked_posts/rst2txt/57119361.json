@@ -1,0 +1,92 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "python-sphinx",
+                "docutils"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 4073962,
+                        "reputation": 6402,
+                        "user_id": 3346095,
+                        "user_type": "registered",
+                        "accept_rate": 62,
+                        "display_name": "Hatshepsut"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 3,
+                    "last_activity_date": 1563574446,
+                    "creation_date": 1563574446,
+                    "answer_id": 57120114,
+                    "question_id": 57119361,
+                    "link": "https://stackoverflow.com/questions/57119361/convert-restructuredtext-to-plain-text-programmatically-in-python/57120114#57120114",
+                    "body": "<p>This code works. It has some hacks like setting a fake config dir, maybe there's a better way.</p>\n\n<pre><code>import sys\nimport textwrap\nimport types\n\nimport docutils.nodes\nimport docutils.parsers.rst\nimport docutils.utils\nimport sphinx.writers.text\nimport sphinx.builders.text\nimport sphinx.util.osutil\n\n\ndef parse_rst(text: str) -&gt; docutils.nodes.document:\n    parser = docutils.parsers.rst.Parser()\n    components = (docutils.parsers.rst.Parser,)\n    settings = docutils.frontend.OptionParser(\n        components=components\n    ).get_default_values()\n    document = docutils.utils.new_document(\"&lt;rst-doc&gt;\", settings=settings)\n    parser.parse(text, document)\n    return document\n\n\nif __name__ == \"__main__\":\n    source = textwrap.dedent(\n        \"\"\"\\\n    ============\n    Introduction\n    ============\n\n    Hello world.\n\n    .. code-block:: bash\n\n        $ echo Greetings.\n\n\n    \"\"\"\n    )\n\n    document = parse_rst(source)\n\n    app = types.SimpleNamespace(\n        srcdir=None,\n        confdir=None,\n        outdir=None,\n        doctreedir=\"/\",\n        config=types.SimpleNamespace(\n            text_newlines=\"native\",\n            text_sectionchars=\"=\",\n            text_add_secnumbers=False,\n            text_secnumber_suffix=\".\",\n        ),\n        tags=set(),\n        registry=types.SimpleNamespace(\n            create_translator=lambda self, something, new_builder: sphinx.writers.text.TextTranslator(\n                document, new_builder\n            )\n        ),\n    )\n\n    builder = sphinx.builders.text.TextBuilder(app)\n\n    translator = sphinx.writers.text.TextTranslator(document, builder)\n\n    document.walkabout(translator)\n\n    print(translator.body)\n</code></pre>\n\n<p>Output:</p>\n\n<pre><code>    Introduction\n    ============\n\n    Hello world.\n\n       $ echo Greetings.\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2551225,
+                        "reputation": 14517,
+                        "user_id": 2214933,
+                        "user_type": "registered",
+                        "display_name": "Steve Piercy"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1563610950,
+                    "creation_date": 1563610950,
+                    "answer_id": 57122985,
+                    "question_id": 57119361,
+                    "link": "https://stackoverflow.com/questions/57119361/convert-restructuredtext-to-plain-text-programmatically-in-python/57122985#57122985",
+                    "body": "<p>Sphinx comes with a <a href=\"http://www.sphinx-doc.org/en/master/usage/builders/index.html?highlight=make#sphinx.builders.text.TextBuilder\" rel=\"nofollow noreferrer\">TextBuilder</a>.  From the command line:</p>\n\n<pre><code>make text\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5237507,
+                        "reputation": 384,
+                        "user_id": 7827119,
+                        "user_type": "registered",
+                        "display_name": "Markus Kaukonen"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1699001454,
+                    "last_edit_date": 1699001454,
+                    "creation_date": 1699001150,
+                    "answer_id": 77415244,
+                    "question_id": 57119361,
+                    "link": "https://stackoverflow.com/questions/57119361/convert-restructuredtext-to-plain-text-programmatically-in-python/77415244#77415244",
+                    "body": "<p>This a workaround that seems to work in Linux.\nIt uses linux command 'more' to do the job.</p>\n<pre><code>import subprocess\n\n\ndef rst_to_plain_text(rst_file: Union[str, Path], tmpfile=&quot;tmp.txt&quot;) -&gt; str:\n    &quot;&quot;&quot;use linux command 'more' to read contents of a reStructuredText format file to string\n\n    Args:\n        rst_file (Union[str, Path]): filepath to .rst file\n        tmpfile (str, optional): temporary file to write as plain text\n\n    Returns:\n        str: plain text version of rst file\n    &quot;&quot;&quot;\n    subprocess.check_output(f&quot;more {rst_file} &gt; {tmpfile}&quot;, shell=True)\n    with open(tmpfile, &quot;r&quot;) as f:\n        txt = f.read()\n    return txt\n\n</code></pre>\n<p>Terveisin, Markus</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 4073962,
+                "reputation": 6402,
+                "user_id": 3346095,
+                "user_type": "registered",
+                "accept_rate": 62,
+                "display_name": "Hatshepsut"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 57120114,
+            "answer_count": 3,
+            "score": 1,
+            "last_activity_date": 1699001454,
+            "creation_date": 1563568700,
+            "last_edit_date": 1563571902,
+            "question_id": 57119361,
+            "link": "https://stackoverflow.com/questions/57119361/convert-restructuredtext-to-plain-text-programmatically-in-python",
+            "title": "Convert reStructuredText to plain text programmatically in Python",
+            "body": "<p>Say I have some reStructuredText source in a string </p>\n\n<pre><code>source = \"\"\"\n============\nIntroduction\n============\n\nHello world.\n\n.. code-block:: bash\n\n    $ echo Greetings.\n\n\n\"\"\"\n\nimport sys\n\nimport docutils.nodes\nimport docutils.parsers.rst\nimport docutils.utils\nimport sphinx.writers.text\nimport sphinx.builders.text\n\ndef parse_rst(text: str) -&gt; docutils.nodes.document:\n    parser = docutils.parsers.rst.Parser()\n    components = (docutils.parsers.rst.Parser,)\n    settings = docutils.frontend.OptionParser(components=components).get_default_values()\n    document = docutils.utils.new_document('&lt;rst-doc&gt;', settings=settings)\n    parser.parse(text, document)\n    return document\n\nif __name__ == '__main__':        \n    document = parse_rst(source)\n</code></pre>\n\n<p>I'd like to convert it into plain text without the reST markup using Python. </p>\n\n<p>I tried to use <a href=\"https://www.sphinx-doc.org/en/master/usage/builders/index.html#sphinx.builders.text.TextBuilder\" rel=\"nofollow noreferrer\"><code>sphinx.builders.text.TextBuilder</code></a> but it seems to want an <code>App</code> object, not a string.</p>\n\n<hr>\n\n<ul>\n<li><a href=\"https://stackoverflow.com/questions/1192632/how-to-convert-restructuredtext-to-plain-text\">Here</a> is a related question about doing it manually on the command-line with files instead of strings.</li>\n<li>Parsing code comes from <a href=\"https://stackoverflow.com/a/48719723/3346095\">this answer</a></li>\n</ul>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9612
+}

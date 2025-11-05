@@ -1,0 +1,1 @@
+days = dates.astype('datetime64[D]') - dates.astype('datetime64[M]') + 1

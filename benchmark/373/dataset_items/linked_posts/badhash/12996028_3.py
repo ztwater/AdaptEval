@@ -1,0 +1,6 @@
+uint64_t unhash(uint64_t x) {
+    x = (x ^ (x >> 31) ^ (x >> 62)) * UINT64_C(0x319642b2d24d8ec3);
+    x = (x ^ (x >> 27) ^ (x >> 54)) * UINT64_C(0x96de1b173f119089);
+    x = x ^ (x >> 30) ^ (x >> 60);
+    return x;
+}

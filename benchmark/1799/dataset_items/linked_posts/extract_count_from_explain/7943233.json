@@ -1,0 +1,767 @@
+{
+    "items": [
+        {
+            "tags": [
+                "sql",
+                "postgresql",
+                "count",
+                "rowcount"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 142988,
+                        "reputation": 47545,
+                        "user_id": 351031,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "g.d.d.c"
+                    },
+                    "edited": false,
+                    "score": 9,
+                    "creation_date": 1319947459,
+                    "post_id": 7943233,
+                    "comment_id": 9706835,
+                    "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql#comment9706835_7943233",
+                    "body": "Couldn&#39;t you just attempt to select the first <i>n</i> rows where <i>n</i> = <i>constant + 1</i>?  If it returns more than your constant, you know you should use your constant, and if it doesn&#39;t you&#39;re good?"
+                },
+                {
+                    "owner": {
+                        "account_id": 73187,
+                        "reputation": 15035,
+                        "user_id": 210908,
+                        "user_type": "registered",
+                        "display_name": "Sparky"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1319947477,
+                    "post_id": 7943233,
+                    "comment_id": 9706837,
+                    "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql#comment9706837_7943233",
+                    "body": "Do you have an identity or auto increment field in the table"
+                },
+                {
+                    "owner": {
+                        "account_id": 221717,
+                        "reputation": 431615,
+                        "user_id": 479863,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "mu is too short"
+                    },
+                    "reply_to_user": {
+                        "account_id": 73187,
+                        "reputation": 15035,
+                        "user_id": 210908,
+                        "user_type": "registered",
+                        "display_name": "Sparky"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1319948315,
+                    "post_id": 7943233,
+                    "comment_id": 9706903,
+                    "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql#comment9706903_7943233",
+                    "body": "@Sparky: Sequence backed PKs aren&#39;t guaranteed to be contiguous, rows can be deleted or there could be gaps caused by aborted transactions."
+                },
+                {
+                    "owner": {
+                        "account_id": 7879,
+                        "reputation": 77610,
+                        "user_id": 13860,
+                        "user_type": "registered",
+                        "accept_rate": 63,
+                        "display_name": "Jonathan Hall"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1319948513,
+                    "post_id": 7943233,
+                    "comment_id": 9706913,
+                    "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql#comment9706913_7943233",
+                    "body": "Your update seems to contradict your original question... do you need to know the exact number of rows, or do you only need to know the exact number if it&#39;s below a threshold?"
+                },
+                {
+                    "owner": {
+                        "account_id": 380750,
+                        "reputation": 35915,
+                        "user_id": 734984,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "Renato Dinhani"
+                    },
+                    "reply_to_user": {
+                        "account_id": 7879,
+                        "reputation": 77610,
+                        "user_id": 13860,
+                        "user_type": "registered",
+                        "accept_rate": 63,
+                        "display_name": "Jonathan Hall"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1319948997,
+                    "post_id": 7943233,
+                    "comment_id": 9706962,
+                    "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql#comment9706962_7943233",
+                    "body": "@Flimzy Both. I need exact number if below the threshold, otherwise, I will use the threshold as limit."
+                },
+                {
+                    "owner": {
+                        "account_id": 7879,
+                        "reputation": 77610,
+                        "user_id": 13860,
+                        "user_type": "registered",
+                        "accept_rate": 63,
+                        "display_name": "Jonathan Hall"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1319949176,
+                    "post_id": 7943233,
+                    "comment_id": 9706979,
+                    "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql#comment9706979_7943233",
+                    "body": "Okay, then I think my answer below may help... but as noted, it depends on the complexity of the query you&#39;re running whether the query planner&#39;s estimates will be close enough to be useful for you."
+                },
+                {
+                    "owner": {
+                        "account_id": 58252,
+                        "reputation": 556,
+                        "user_id": 174452,
+                        "user_type": "registered",
+                        "display_name": "Ritesh"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1319955633,
+                    "post_id": 7943233,
+                    "comment_id": 9707415,
+                    "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql#comment9707415_7943233",
+                    "body": "@RenatoDinhaniConcei&#231;&#227;o : Can you explain the <b>Exact</b> problem you are trying to solve? I think my answer below solves what you initially said was your issue. The update makes it look like you want count(*) as well as many other fields. It would help if you can explain exactly what you are trying to do. Thanks."
+                },
+                {
+                    "owner": {
+                        "account_id": 773942,
+                        "reputation": 43794,
+                        "user_id": 905902,
+                        "user_type": "registered",
+                        "display_name": "wildplasser"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1319971015,
+                    "post_id": 7943233,
+                    "comment_id": 9708591,
+                    "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql#comment9708591_7943233",
+                    "body": "Please show us the table definition. Also: I suspect that your DB is not normalised at all. BTW: text is a reserved word (datatype), though the parsers may accept it, it is still advisable to avoid reserved words as a column name."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 46304,
+                                "reputation": 3404,
+                                "user_id": 136720,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Chris Bednarski"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1319951614,
+                            "post_id": 7943265,
+                            "comment_id": 9707162,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7943265#comment9707162_7943265",
+                            "body": "SELECT count(*) cnt FROM table will always return a single row. Not sure how LIMIT is going to add any benefit there."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 58252,
+                                "reputation": 556,
+                                "user_id": 174452,
+                                "user_type": "registered",
+                                "display_name": "Ritesh"
+                            },
+                            "reply_to_user": {
+                                "account_id": 46304,
+                                "reputation": 3404,
+                                "user_id": 136720,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Chris Bednarski"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1319955206,
+                            "post_id": 7943265,
+                            "comment_id": 9707388,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7943265#comment9707388_7943265",
+                            "body": "@ChrisBednarski : I verified the oracle version of my answer on an Oracle db. It works great and solves what I thought was OP&#39;s problem (0.05 s with <code>count(*)</code> with rownum, 1 s without the use of rownum). Yes, <code>SELECT count(*) cnt FROM table</code> is always going to return 1 row, but with the LIMIT condition, it will return &quot;500001&quot; when table&#39;s size is over 500000 and &lt;size&gt; when table&#39;s size &lt;= 500000."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 904738,
+                                "reputation": 634485,
+                                "user_id": 939860,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Erwin Brandstetter"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1319982869,
+                            "post_id": 7943265,
+                            "comment_id": 9709916,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7943265#comment9709916_7943265",
+                            "body": "Your PostgreSQL query is complete nonsense. Syntactically and logically wrong. Please correct or remove it."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 58252,
+                                "reputation": 556,
+                                "user_id": 174452,
+                                "user_type": "registered",
+                                "display_name": "Ritesh"
+                            },
+                            "reply_to_user": {
+                                "account_id": 904738,
+                                "reputation": 634485,
+                                "user_id": 939860,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Erwin Brandstetter"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1319990392,
+                            "post_id": 7943265,
+                            "comment_id": 9710979,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7943265#comment9710979_7943265",
+                            "body": "@ErwinBrandstetter : Removed, didn&#39;t realize PostgreSQL was so different."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 46304,
+                                "reputation": 3404,
+                                "user_id": 136720,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Chris Bednarski"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1320004980,
+                            "post_id": 7943265,
+                            "comment_id": 9713298,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7943265#comment9713298_7943265",
+                            "body": "@allrite: no doubt your Oracle query works fine. LIMIT works differently though. At a basic level, it limits the number of rows returned to the client, not the number of rows queried by the database engine."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 58252,
+                        "reputation": 556,
+                        "user_id": 174452,
+                        "user_type": "registered",
+                        "display_name": "Ritesh"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": false,
+                    "score": -3,
+                    "last_activity_date": 1319990365,
+                    "last_edit_date": 1319990365,
+                    "creation_date": 1319947888,
+                    "answer_id": 7943265,
+                    "question_id": 7943233,
+                    "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7943265#7943265",
+                    "body": "<p>In Oracle, you could use <code>rownum</code> to limit the number of rows returned. I am guessing similar construct exists in other SQLs as well. So, for the example you gave, you could limit the number of rows returned to 500001 and apply a <code>count(*)</code> then:</p>\n\n<pre><code>SELECT (case when cnt &gt; 500000 then 500000 else cnt end) myCnt\nFROM (SELECT count(*) cnt FROM table WHERE rownum&lt;=500001)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4388321,
+                                "reputation": 482,
+                                "user_id": 3577667,
+                                "user_type": "registered",
+                                "display_name": "exyi"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1667213432,
+                            "post_id": 7943283,
+                            "comment_id": 131109288,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7943283#comment131109288_7943283",
+                            "body": "This is actually quite convenient for interactive use :)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6747801,
+                                "reputation": 695,
+                                "user_id": 5240096,
+                                "user_type": "registered",
+                                "display_name": "G_Style"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1704827253,
+                            "post_id": 7943283,
+                            "comment_id": 137135288,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7943283#comment137135288_7943283",
+                            "body": "Yes, be careful with this. one. It is not accurate. I ran this against a 7 billion row table and was off by 188,069 rows. As he said it is probably fine for simple queries and small tables but don&#39;t use this as an exact count."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 107775,
+                                "reputation": 10130,
+                                "user_id": 286406,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Daniel Lidstr&#246;m"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1707381715,
+                            "post_id": 7943283,
+                            "comment_id": 137439679,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7943283#comment137439679_7943283",
+                            "body": "<code>EXPLAIN (format json)</code> and you don&#39;t have to use regexp."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7879,
+                        "reputation": 77610,
+                        "user_id": 13860,
+                        "user_type": "registered",
+                        "accept_rate": 63,
+                        "display_name": "Jonathan Hall"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 28,
+                    "last_activity_date": 1319948342,
+                    "creation_date": 1319948342,
+                    "answer_id": 7943283,
+                    "question_id": 7943233,
+                    "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7943283#7943283",
+                    "body": "<p>I did this once in a postgres app by running:</p>\n\n<pre><code>EXPLAIN SELECT * FROM foo;\n</code></pre>\n\n<p>Then examining the output with a regex, or similar logic. For a simple SELECT *, the first line of output should look something like this:</p>\n\n<pre><code>Seq Scan on uids  (cost=0.00..1.21 rows=8 width=75)\n</code></pre>\n\n<p>You can use the <code>rows=(\\d+)</code> value as a rough estimate of the number of rows that would be returned, then only do the actual <code>SELECT COUNT(*)</code> if the estimate is, say, less than 1.5x your threshold (or whatever number you deem makes sense for your application).</p>\n\n<p>Depending on the complexity of your query, this number may become less and less accurate. In fact, in my application, as we added joins and complex conditions, it became so inaccurate it was completely worthless, even to know how within a power of 100 how many rows we'd have returned, so we had to abandon that strategy.</p>\n\n<p>But if your query is simple enough that Pg can predict within some reasonable margin of error how many rows it will return, it may work for you.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 46304,
+                        "reputation": 3404,
+                        "user_id": 136720,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Chris Bednarski"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1319952500,
+                    "creation_date": 1319952500,
+                    "answer_id": 7943466,
+                    "question_id": 7943233,
+                    "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7943466#7943466",
+                    "body": "<p>How wide is the text column?</p>\n\n<p>With a GROUP BY there's not much you can do to avoid a data scan (at least an index scan).</p>\n\n<p>I'd recommend:</p>\n\n<ol>\n<li><p>If possible, changing the schema to remove duplication of text data. This way the count will happen on a narrow foreign key field in the 'many' table.</p></li>\n<li><p>Alternatively, creating a generated column with a HASH of the text, then GROUP BY the hash column.\nAgain, this is to decrease the workload (scan through a narrow column index)</p></li>\n</ol>\n\n<p>Edit:  </p>\n\n<p>Your original question did not quite match your edit. I'm not sure if you're aware that the COUNT, when used with a GROUP BY, will return the count of items per group and not the count of items in the entire table.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 904738,
+                                "reputation": 634485,
+                                "user_id": 939860,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Erwin Brandstetter"
+                            },
+                            "edited": false,
+                            "score": 11,
+                            "creation_date": 1370994976,
+                            "post_id": 7945274,
+                            "comment_id": 24661373,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7945274#comment24661373_7945274",
+                            "body": "I eventually updated the Postgres Wiki page with the improved query."
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user330315"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1440700020,
+                            "post_id": 7945274,
+                            "comment_id": 52393816,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7945274#comment52393816_7945274",
+                            "body": "With 9.5 getting an estimate fast should be possible using the <code>tablesample</code> clause: e.g. <code>select count(*) * 100 as cnt from mytable tablesample system (1);</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 904738,
+                                "reputation": 634485,
+                                "user_id": 939860,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Erwin Brandstetter"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1440703011,
+                            "post_id": 7945274,
+                            "comment_id": 52395375,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7945274#comment52395375_7945274",
+                            "body": "@a_horse_with_no_name: Interesting option. This would randomly pick 1% of all blocks and count rows in it. Much faster than a full count, but not nearly as fast as looking up <code>reg_class</code>. It&#39;s hard to tell how accurate the result might be since it depends on the number of dead tuples in each block and general rounding and projection errors. May be a good option without autovacuum or estimates immediately after big writes (before <code>ANALYZE</code> can kick in). Not so good for very big / mostly static tables / uneven data distribution. Did I miss anything? I might add a chapter to the above answer ..."
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user330315"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1440703288,
+                            "post_id": 7945274,
+                            "comment_id": 52395520,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7945274#comment52395520_7945274",
+                            "body": "We are only talking about an <i>estimate</i> here, so I guess the tablesample should be good enough. If the dead tuples are spread evenly (statistically speaking) over the blocks, then they shouldn&#39;t matter either. It would probably be a slightly more accurate estimate when using <code>tablesample bernoulli</code> I think, but that is going to be slower, than <code>system</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 904738,
+                                "reputation": 634485,
+                                "user_id": 939860,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Erwin Brandstetter"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1440703469,
+                            "post_id": 7945274,
+                            "comment_id": 52395613,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7945274#comment52395613_7945274",
+                            "body": "It doesn&#39;t look like <code>BERNOULLI</code> would be useful for this at all. <a href=\"http://www.postgresql.org/docs/devel/static/sql-select.html\" rel=\"nofollow noreferrer\">The manual</a>: <code>The BERNOULLI method scans the whole table and selects or ignores individual rows independently with the specified probability</code>. It might be faster to just count all rows. But <code>SYSTEM</code> can be .."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 402947,
+                                "reputation": 22842,
+                                "user_id": 770425,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Jeff Widman"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1449130044,
+                            "post_id": 7945274,
+                            "comment_id": 55874895,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7945274#comment55874895_7945274",
+                            "body": "Will the estimate occasionally be greater than the number of rows? Or is it always less than/equal to the number of rows?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 904738,
+                                "reputation": 634485,
+                                "user_id": 939860,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Erwin Brandstetter"
+                            },
+                            "reply_to_user": {
+                                "account_id": 402947,
+                                "reputation": 22842,
+                                "user_id": 770425,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Jeff Widman"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1449130578,
+                            "post_id": 7945274,
+                            "comment_id": 55875134,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7945274#comment55875134_7945274",
+                            "body": "@JeffWidman: All of these estimates <i>can</i> be greater than the actual row count for various reasons. Not least, deletes may have happened in the meantime."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7713180,
+                                "reputation": 619,
+                                "user_id": 5841824,
+                                "user_type": "registered",
+                                "accept_rate": 63,
+                                "display_name": "Idham Choudry"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1471951697,
+                            "post_id": 7945274,
+                            "comment_id": 65546315,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7945274#comment65546315_7945274",
+                            "body": "@ErwinBrandstetter what if i have a query like this <code>SELECT COUNT(*) FROM users where last_name=&#39;a&#39;;</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9652252,
+                                "reputation": 311,
+                                "user_id": 7163009,
+                                "user_type": "registered",
+                                "accept_rate": 40,
+                                "display_name": "Nicholas Erdenberger"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1497285474,
+                            "post_id": 7945274,
+                            "comment_id": 76002500,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7945274#comment76002500_7945274",
+                            "body": "@ErwinBrandstetter realize this question is old, but if you wrapped the query in subquery then did the limit would this still be efficient or would the whole subquery be executed then limited in the outer query.  <code>SELECT count(*) FROM (Select * from (SELECT 1 FROM token) query) LIMIT 500000) limited_query;</code> (I ask because I am trying to get a count from an arbitrary query that might have a limit clause in it already)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 904738,
+                                "reputation": 634485,
+                                "user_id": 939860,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Erwin Brandstetter"
+                            },
+                            "reply_to_user": {
+                                "account_id": 9652252,
+                                "reputation": 311,
+                                "user_id": 7163009,
+                                "user_type": "registered",
+                                "accept_rate": 40,
+                                "display_name": "Nicholas Erdenberger"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1497721070,
+                            "post_id": 7945274,
+                            "comment_id": 76201915,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7945274#comment76201915_7945274",
+                            "body": "@NicholasErdenberger: That depends on the subquery. Postgres may need to consider more rows than the limit anyway (like with <code>ORDER BY something</code> while it can&#39;t use an index, or with aggregate functions). Apart from that, only the limited number of rows from the subquery is processed."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4185192,
+                                "reputation": 664,
+                                "user_id": 3429115,
+                                "user_type": "registered",
+                                "display_name": "Rafs"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1669205685,
+                            "post_id": 7945274,
+                            "comment_id": 131590804,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7945274#comment131590804_7945274",
+                            "body": "All these work on concrete tables; do they work on materialised views? I tried on views too and that doesn&#39;t work, so wondering if there is a workaround for views"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 904738,
+                                "reputation": 634485,
+                                "user_id": 939860,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Erwin Brandstetter"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4185192,
+                                "reputation": 664,
+                                "user_id": 3429115,
+                                "user_type": "registered",
+                                "display_name": "Rafs"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1669245715,
+                            "post_id": 7945274,
+                            "comment_id": 131603603,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7945274#comment131603603_7945274",
+                            "body": "@RTD: <a href=\"https://www.postgresql.org/docs/current/sql-creatematerializedview.html\" rel=\"nofollow noreferrer\">Materialized views</a>: yes. See: <a href=\"https://stackoverflow.com/a/22564996/939860\">stackoverflow.com/a/22564996/939860</a> <a href=\"https://www.postgresql.org/docs/current/sql-createview.html\" rel=\"nofollow noreferrer\">Views</a>: mostly no. Only the query is persisted, not resulting data. You have to execute the query to count rows. (There are shortcuts for trivial views ...)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 904738,
+                        "reputation": 634485,
+                        "user_id": 939860,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Erwin Brandstetter"
+                    },
+                    "comment_count": 12,
+                    "is_accepted": true,
+                    "score": 555,
+                    "last_activity_date": 1670061540,
+                    "last_edit_date": 1670061540,
+                    "creation_date": 1319982452,
+                    "answer_id": 7945274,
+                    "question_id": 7943233,
+                    "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/7945274#7945274",
+                    "body": "<p>Counting rows in big tables is known to be slow in PostgreSQL. The <a href=\"https://www.postgresql.org/docs/current/mvcc.html\" rel=\"noreferrer\">MVCC</a> model requires a full count of live rows for a precise number. There are workarounds to <strong>speed this up dramatically</strong> if the count does <strong>not</strong> have to be <strong>exact</strong> like it seems to be in your case.</p>\n<p>(Remember that even an &quot;exact&quot; count is potentially dead on arrival under concurrent write load.)</p>\n<h3>Exact count</h3>\n<p><strong>Slow</strong> for big tables.<br />\nWith concurrent write operations, it may be outdated the moment you get it.</p>\n<pre><code>SELECT count(*) AS exact_count FROM myschema.mytable;\n</code></pre>\n<h5>Estimate</h5>\n<p>Extremely <strong>fast</strong>:</p>\n<pre><code>SELECT reltuples AS estimate FROM pg_class where relname = 'mytable';\n</code></pre>\n<p>Typically, the estimate is very close. How close, depends on whether <a href=\"https://www.postgresql.org/docs/current/sql-analyze.html\" rel=\"noreferrer\"><code>ANALYZE</code></a> or <a href=\"https://www.postgresql.org/docs/current/sql-vacuum.html\" rel=\"noreferrer\"><code>VACUUM</code></a> are run enough - where &quot;enough&quot; is defined by the level of write activity to your table.</p>\n<h4>Safer estimate</h4>\n<p>The above ignores the possibility of multiple tables with the same name in one database - in different schemas. To account for that:</p>\n<pre><code>SELECT c.reltuples::bigint AS estimate\nFROM   pg_class c\nJOIN   pg_namespace n ON n.oid = c.relnamespace\nWHERE  c.relname = 'mytable'\nAND    n.nspname = 'myschema';\n</code></pre>\n<p>The cast to <code>bigint</code> formats the <code>real</code> number nicely, especially for big counts.</p>\n<h3>Better estimate</h3>\n<pre><code>SELECT reltuples::bigint AS estimate\nFROM   pg_class\nWHERE  oid = 'myschema.mytable'::regclass;\n</code></pre>\n<p>Faster, simpler, safer, more elegant. See the manual on <a href=\"https://www.postgresql.org/docs/current/datatype-oid.html\" rel=\"noreferrer\">Object Identifier Types</a>.</p>\n<p>Replace <code>'myschema.mytable'::regclass</code> with <code>to_regclass('myschema.mytable')</code> in Postgres 9.4+ to get nothing instead of an exception for invalid table names. See:</p>\n<ul>\n<li><a href=\"https://stackoverflow.com/questions/20582500/how-to-check-if-a-table-exists-in-a-given-schema/24089729#24089729\">How to check if a table exists in a given schema</a></li>\n</ul>\n<h2>Better estimate yet (for very little added cost)</h2>\n<p>This <strong>does not work for partitioned tables</strong> because <code>relpages</code> is always -1 for the parent table (while <code>reltuples</code> contains an actual estimate covering all partitions) - tested in Postgres 14.<br />\nYou have to add up estimates for all partitions instead.</p>\n<p>We can do what the Postgres planner does. Quoting the <a href=\"https://www.postgresql.org/docs/current/row-estimation-examples.html\" rel=\"noreferrer\"><em><strong>Row Estimation Examples</strong></em> in the manual</a>:</p>\n<blockquote>\n<p>These numbers are current as of the last <code>VACUUM</code> or <code>ANALYZE</code> on the\ntable. The planner then fetches the actual current number of pages in\nthe table (this is a cheap operation, not requiring a table scan). If\nthat is different from <code>relpages</code> then <code>reltuples</code> is scaled\naccordingly to arrive at a current number-of-rows estimate.</p>\n</blockquote>\n<p>Postgres uses <code>estimate_rel_size</code> defined in <a href=\"https://www.postgresql.org/docs/current/sql-analyze.html\" rel=\"noreferrer\"><code>src/backend/utils/adt/plancat.c</code></a>, which also covers the corner case of no data in <code>pg_class</code> because the relation was never vacuumed. We can do something similar in SQL:</p>\n<h4>Minimal form</h4>\n<pre class=\"lang-sql prettyprint-override\"><code>SELECT (reltuples / relpages * (pg_relation_size(oid) / 8192))::bigint\nFROM   pg_class\nWHERE  oid = 'mytable'::regclass;  -- your table here\n</code></pre>\n<h4>Safe and explicit</h4>\n<pre class=\"lang-sql prettyprint-override\"><code>SELECT (CASE WHEN c.reltuples &lt; 0 THEN NULL       -- never vacuumed\n             WHEN c.relpages = 0 THEN float8 '0'  -- empty table\n             ELSE c.reltuples / c.relpages END\n     * (pg_catalog.pg_relation_size(c.oid)\n      / pg_catalog.current_setting('block_size')::int)\n       )::bigint\nFROM   pg_catalog.pg_class c\nWHERE  c.oid = 'myschema.mytable'::regclass;      -- schema-qualified table here\n</code></pre>\n<p>Doesn't break with empty tables and tables that have never seen <code>VACUUM</code> or <code>ANALYZE</code>. <a href=\"https://www.postgresql.org/docs/current/catalog-pg-class.html\" rel=\"noreferrer\">The manual on <code>pg_class</code></a>:</p>\n<blockquote>\n<p>If the table has never yet been vacuumed or analyzed, <code>reltuples</code> contains <code>-1</code> indicating that the row count is unknown.</p>\n</blockquote>\n<p>If this query returns <code>NULL</code>, run <code>ANALYZE</code> or <code>VACUUM</code> for the table and repeat. (Alternatively, you could estimate row width based on column types like Postgres does, but that's tedious and error-prone.)</p>\n<p>If this query returns <code>0</code>, the table seems to be empty. But I would <code>ANALYZE</code> to make sure. (And maybe check your <code>autovacuum</code> settings.)</p>\n<p>Typically, <a href=\"https://www.postgresql.org/docs/current/runtime-config-preset.html#GUC-BLOCK-SIZE\" rel=\"noreferrer\"><code>block_size</code></a> is 8192. <code>current_setting('block_size')::int</code> covers rare exceptions.</p>\n<p>Table and schema qualifications make it immune to any <code>search_path</code> and scope.</p>\n<p>Either way, the query consistently takes &lt; 0.1 ms for me.</p>\n<p>More Web resources:</p>\n<ul>\n<li>The <a href=\"https://wiki.postgresql.org/wiki/FAQ#Why_is_.22SELECT_count.28.2A.29_FROM_bigtable.3B.22_slow.3F\" rel=\"noreferrer\">Postgres Wiki FAQ</a></li>\n<li>The Postgres wiki pages for <a href=\"https://wiki.postgresql.org/wiki/Count_estimate\" rel=\"noreferrer\">count estimates</a> and <a href=\"https://wiki.postgresql.org/wiki/Slow_Counting\" rel=\"noreferrer\">count(*) performance</a></li>\n</ul>\n<br/>\n<h3><a href=\"https://www.postgresql.org/docs/current/sql-select.html#SQL-FROM\" rel=\"noreferrer\"><code>TABLESAMPLE SYSTEM (n)</code></a> in Postgres 9.5+</h3>\n<pre><code>SELECT 100 * count(*) AS estimate FROM mytable TABLESAMPLE SYSTEM (1);\n</code></pre>\n<p>Like <a href=\"https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table/7945274?noredirect=1#comment52393816_7945274\">@a_horse commented</a>, the added clause for the <code>SELECT</code> command can be useful if statistics in <code>pg_class</code> are not current enough for some reason. For example:</p>\n<ul>\n<li>No <code>autovacuum</code> running.</li>\n<li>Immediately after a large <code>INSERT</code> / <code>UPDATE</code> / <code>DELETE</code>.</li>\n<li><code>TEMPORARY</code> tables (which are not covered by <code>autovacuum</code>).</li>\n</ul>\n<p>This only looks at a random <em>n</em> % (<code>1</code> in the example) selection of blocks and counts rows in it. A bigger sample increases the cost and reduces the error, your pick. Accuracy depends on more factors:</p>\n<ul>\n<li>Distribution of row size. If a given block happens to hold wider than usual rows, the count is lower than usual etc.</li>\n<li>Dead tuples or a <code>FILLFACTOR</code> occupy space per block. If unevenly distributed across the table, the estimate may be off.</li>\n<li>General rounding errors.</li>\n</ul>\n<p>Typically, the estimate from <code>pg_class</code> will be faster and more accurate.</p>\n<h3>Answer to actual question</h3>\n<blockquote>\n<p>First, I need to know the number of rows in that table, if the total\ncount is greater than some predefined constant,</p>\n</blockquote>\n<p>And whether it ...</p>\n<blockquote>\n<p>... is possible at the moment the count pass my constant value, it will\nstop the counting (and not wait to finish the counting to inform the\nrow count is greater).</p>\n</blockquote>\n<p><strong>Yes.</strong> You can use a <strong>subquery with <code>LIMIT</code></strong>:</p>\n<pre><code>SELECT count(*) FROM (SELECT 1 FROM token LIMIT 500000) t;\n</code></pre>\n<p>Postgres <em>actually stops counting</em> beyond the given limit, you get an <em>exact and current</em> count for up to <em>n</em> rows (500000 in the example), and <em>n</em> otherwise. Not nearly as fast as the estimate in <code>pg_class</code>, though.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 784974,
+                                "reputation": 1624,
+                                "user_id": 1158644,
+                                "user_type": "registered",
+                                "display_name": "Shayne"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1684393061,
+                            "post_id": 26625956,
+                            "comment_id": 134512220,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/26625956#comment134512220_26625956",
+                            "body": "Wrong db dude. The question is about postgres"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1680922,
+                        "reputation": 9694,
+                        "user_id": 1545171,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "DrKoch"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -8,
+                    "last_activity_date": 1414572356,
+                    "creation_date": 1414572356,
+                    "answer_id": 26625956,
+                    "question_id": 7943233,
+                    "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/26625956#26625956",
+                    "body": "<p>For SQL Server (2005 or above) a quick and <strong>reliable</strong> method is:</p>\n\n<pre><code>SELECT SUM (row_count)\nFROM sys.dm_db_partition_stats\nWHERE object_id=OBJECT_ID('MyTableName')   \nAND (index_id=0 or index_id=1);\n</code></pre>\n\n<p>Details about sys.dm_db_partition_stats are explained in <a href=\"http://msdn.microsoft.com/en-us/library/ms187737.aspx\" rel=\"nofollow\" title=\"MSDN\">MSDN</a></p>\n\n<p>The query adds rows from all parts of a (possibly) partitioned table.</p>\n\n<p>index_id=0 is an unordered table (Heap) and index_id=1 is an ordered table (clustered index)</p>\n\n<p>Even faster (but unreliable) methods are detailed <a href=\"http://blogs.msdn.com/b/martijnh/archive/2010/07/15/sql-server-how-to-quickly-retrieve-accurate-row-count-for-table.aspx\" rel=\"nofollow\">here.</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4403174,
+                                "reputation": 445,
+                                "user_id": 3588242,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "William Abma"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1573143351,
+                            "post_id": 35377521,
+                            "comment_id": 103793671,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/35377521#comment103793671_35377521",
+                            "body": "Just quick note that you need to VACUUM ANALYZE your tables for this method to work."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2637441,
+                        "reputation": 7443,
+                        "user_id": 2281778,
+                        "user_type": "registered",
+                        "accept_rate": 22,
+                        "display_name": "Anvesh"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1455350280,
+                    "creation_date": 1455350280,
+                    "answer_id": 35377521,
+                    "question_id": 7943233,
+                    "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/35377521#35377521",
+                    "body": "<p><a href=\"http://www.dbrnd.com/2015/10/postgresql-fast-way-to-find-the-row-count-of-a-table/\" rel=\"noreferrer\">Reference taken from this Blog.</a> </p>\n\n<p>You can use below to query to find row count. </p>\n\n<p><strong>Using pg_class:</strong>   </p>\n\n<pre><code> SELECT reltuples::bigint AS EstimatedCount\n    FROM   pg_class\n    WHERE  oid = 'public.TableName'::regclass;\n</code></pre>\n\n<p><strong>Using pg_stat_user_tables:</strong></p>\n\n<pre><code>SELECT \n    schemaname\n    ,relname\n    ,n_live_tup AS EstimatedCount \nFROM pg_stat_user_tables \nORDER BY n_live_tup DESC;\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 904738,
+                                "reputation": 634485,
+                                "user_id": 939860,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Erwin Brandstetter"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1635784947,
+                            "post_id": 69799960,
+                            "comment_id": 123380320,
+                            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/69799960#comment123380320_69799960",
+                            "body": "If gap-less integer IDs starting with 1 are enforced. Which would be a <b><i>very</i></b> exotic case."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1276488,
+                        "reputation": 2467,
+                        "user_id": 1231636,
+                        "user_type": "registered",
+                        "accept_rate": 76,
+                        "display_name": "masterforker"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -3,
+                    "last_activity_date": 1635784696,
+                    "creation_date": 1635784696,
+                    "answer_id": 69799960,
+                    "question_id": 7943233,
+                    "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/69799960#69799960",
+                    "body": "<p>You can also just <code>SELECT MAX(id) FROM &lt;table_name&gt;</code>; change id to whatever the PK of the table is</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 200410,
+                        "reputation": 666,
+                        "user_id": 446253,
+                        "user_type": "registered",
+                        "display_name": "gshilin"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1696853202,
+                    "creation_date": 1696853202,
+                    "answer_id": 77258709,
+                    "question_id": 7943233,
+                    "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql/77258709#77258709",
+                    "body": "<p>This is the function (not mine) that implements @Jonathan Hall's answer:</p>\n<pre class=\"lang-sql prettyprint-override\"><code>CREATE OR REPLACE FUNCTION count_estimate(query text) RETURNS integer AS $$\nDECLARE\n    rec   record;\n    rows  integer;\nBEGIN\n    FOR rec IN EXECUTE 'EXPLAIN ' || query LOOP\n            rows := substring(rec.&quot;QUERY PLAN&quot; FROM ' rows=([[:digit:]]+)');\n            EXIT WHEN rows IS NOT NULL;\n        END LOOP;\n    RETURN rows;\nEND;\n$$ LANGUAGE plpgsql VOLATILE STRICT;\n\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 380750,
+                "reputation": 35915,
+                "user_id": 734984,
+                "user_type": "registered",
+                "accept_rate": 88,
+                "display_name": "Renato Dinhani"
+            },
+            "comment_count": 8,
+            "is_answered": true,
+            "accepted_answer_id": 7945274,
+            "answer_count": 8,
+            "score": 259,
+            "last_activity_date": 1696853202,
+            "creation_date": 1319947104,
+            "last_edit_date": 1637123618,
+            "question_id": 7943233,
+            "link": "https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql",
+            "title": "Fast way to discover the row count of a table in PostgreSQL",
+            "body": "<p>I need to know the number of rows in a table to calculate a percentage. If the total count is greater than some predefined constant, I will use the constant value. Otherwise, I will use the actual number of rows.</p>\n\n<p>I can use <code>SELECT count(*) FROM table</code>. But if my constant value is <em>500,000</em> and I have <em>5,000,000,000</em> rows in my table, counting all rows will waste a lot of time.</p>\n\n<p>Is it possible to stop counting as soon as my constant value is surpassed?</p>\n\n<p>I need the exact number of rows only as long as it's below the given limit. Otherwise, if the count is above the limit, I use the limit value instead and want the answer as fast as possible.</p>\n\n<p>Something like this:</p>\n\n<pre><code>SELECT text,count(*), percentual_calculus()  \nFROM token  \nGROUP BY text  \nORDER BY count DESC;\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6622
+}

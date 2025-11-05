@@ -1,0 +1,1826 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "filenames",
+                "slug",
+                "sanitize"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 43003,
+                        "reputation": 26116,
+                        "user_id": 125507,
+                        "user_type": "registered",
+                        "accept_rate": 69,
+                        "display_name": "endolith"
+                    },
+                    "edited": false,
+                    "score": 34,
+                    "creation_date": 1236693591,
+                    "post_id": 295135,
+                    "comment_id": 13488388,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename#comment13488388_295135",
+                    "body": "Shouldn&#39;t this be built into the os.path module?"
+                },
+                {
+                    "owner": {
+                        "account_id": 970014,
+                        "reputation": 1277,
+                        "user_id": 992720,
+                        "user_type": "registered",
+                        "display_name": "javawizard"
+                    },
+                    "edited": false,
+                    "score": 5,
+                    "creation_date": 1370295434,
+                    "post_id": 295135,
+                    "comment_id": 24399922,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename#comment24399922_295135",
+                    "body": "Perhaps, although her use case would require a single path that&#39;s safe across <i>all</i> platforms, not just the current one, which is something os.path isn&#39;t designed to handle."
+                },
+                {
+                    "owner": {
+                        "account_id": 468585,
+                        "reputation": 5269,
+                        "user_id": 874671,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "dshepherd"
+                    },
+                    "edited": false,
+                    "score": 6,
+                    "creation_date": 1425985092,
+                    "post_id": 295135,
+                    "comment_id": 46175712,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename#comment46175712_295135",
+                    "body": "To expand on the above comment: the current design of <code>os.path</code> actually loads a different library depending on the os (see the second note in <a href=\"https://docs.python.org/3/library/os.path.html\" rel=\"nofollow noreferrer\">the documentation</a>). So if a quoting function was implemented in <code>os.path</code> it could only quote the string for POSIX-safety when running on a POSIX system or for windows-safety when running on windows. The resulting filename would not necessarily be valid across both windows and POSIX, which is what the question asks for."
+                },
+                {
+                    "owner": {
+                        "account_id": 1877929,
+                        "reputation": 7843,
+                        "user_id": 1698736,
+                        "user_type": "registered",
+                        "accept_rate": 90,
+                        "display_name": "cowlinator"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1627031844,
+                    "post_id": 295135,
+                    "comment_id": 121054433,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename#comment121054433_295135",
+                    "body": "It&#39;s easy enough to use the <code>path</code> functions for a different OS.  For example, on unix, use <code>import ntpath; ntpath.abspath(&quot;a.txt&quot;)</code> to get the absolute path of a file on a (hypothetical) Windows file system.  Or use <code>posixpath</code> for posix systems (linux, Mac OS)"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3021,
+                                "reputation": 408304,
+                                "user_id": 4279,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "jfs"
+                            },
+                            "edited": false,
+                            "score": 9,
+                            "creation_date": 1226920482,
+                            "post_id": 295146,
+                            "comment_id": 142609,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295146#comment142609_295146",
+                            "body": "<code>valid_chars = frozenset(valid_chars)</code> wouldn&#39;t hurt. It is 1.5 times faster if applied to allchars."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 316105,
+                                "reputation": 16821,
+                                "user_id": 632088,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "Rusty Rob"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1337129635,
+                            "post_id": 295146,
+                            "comment_id": 13748490,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295146#comment13748490_295146",
+                            "body": "Warning: This maps two different strings to the same string &gt;&gt;&gt; import string &gt;&gt;&gt; valid_chars = &quot;-<i>.() %s%s&quot; % (string.ascii_letters, string.digits) &gt;&gt;&gt; valid_chars &#39;-</i>.() abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567&zwnj;&#8203;89&#39; &gt;&gt;&gt; filename = &quot;a.com/hello/world&quot; &gt;&gt;&gt; &#39;&#39;.join(c for c in filename if c in valid_chars) &#39;a.comhelloworld&#39; &gt;&gt;&gt; filename = &quot;a.com/helloworld&quot; &gt;&gt;&gt; &#39;&#39;.join(c for c in filename if c in valid_chars) &#39;a.comhelloworld&#39; &gt;&gt;&gt;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 65895,
+                                "reputation": 72441,
+                                "user_id": 193619,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Nathan Osman"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1341461384,
+                            "post_id": 295146,
+                            "comment_id": 14928506,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295146#comment14928506_295146",
+                            "body": "Not to mention that naming a file <code>&quot;CON&quot;</code> on Windows will get you into trouble..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 106628,
+                                "reputation": 1982,
+                                "user_id": 283973,
+                                "user_type": "registered",
+                                "display_name": "PeterVermont"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1392059821,
+                            "post_id": 295146,
+                            "comment_id": 32783793,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295146#comment32783793_295146",
+                            "body": "A slight rearrangement makes specifying a substitute character straightforward. First the original functionality:     &#39;&#39;.join(c if c in valid_chars else &#39;&#39; for c in filename) or with a substituted character or string for every invalid character:     &#39;&#39;.join(c if c in valid_chars else &#39;.&#39; for c in filename)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 344677,
+                                "reputation": 418,
+                                "user_id": 677114,
+                                "user_type": "registered",
+                                "accept_rate": 38,
+                                "display_name": "Pat C"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1599454632,
+                            "post_id": 295146,
+                            "comment_id": 112769133,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295146#comment112769133_295146",
+                            "body": "Minor point,&quot;.txt&quot; is a valid filename on Windows, though I suspect there are lot more &quot;.gitignore&quot; files out there."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3591,
+                        "reputation": 336051,
+                        "user_id": 5190,
+                        "user_type": "moderator",
+                        "accept_rate": 76,
+                        "display_name": "Vinko Vrsalovic"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": false,
+                    "score": 114,
+                    "last_activity_date": 1226917530,
+                    "last_edit_date": 1495539204,
+                    "creation_date": 1226913049,
+                    "answer_id": 295146,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295146#295146",
+                    "body": "<p>This whitelist approach (ie, allowing only the chars present in valid_chars) will work if there aren't limits on the formatting of the files or combination of valid chars that are illegal (like \"..\"), for example, what you say would allow a filename named \" . txt\" which I think is not valid on Windows. As this is the most simple approach I'd try to remove whitespace from the valid_chars and prepend a known valid string in case of error, any other approach will have to know about what is allowed where to cope with <a href=\"https://stackoverflow.com/questions/62771/how-check-if-given-string-is-legal-allowed-file-name-under-windows\">Windows file naming limitations</a> and thus be a lot more complex. </p>\n\n<pre><code>&gt;&gt;&gt; import string\n&gt;&gt;&gt; valid_chars = \"-_.() %s%s\" % (string.ascii_letters, string.digits)\n&gt;&gt;&gt; valid_chars\n'-_.() abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'\n&gt;&gt;&gt; filename = \"This Is a (valid) - filename%$&amp;$ .txt\"\n&gt;&gt;&gt; ''.join(c for c in filename if c in valid_chars)\n'This Is a (valid) - filename .txt'\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 15674,
+                                "reputation": 13000,
+                                "user_id": 33342,
+                                "user_type": "registered",
+                                "display_name": "Phil Hord"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1289866159,
+                            "post_id": 295147,
+                            "comment_id": 4528592,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295147#comment4528592_295147",
+                            "body": "You need the dash to go first in the group matcher so it doesn&#39;t appear as a range.  re.sub(&#39;[^-a-zA-Z0-9_.() ]+&#39;, &#39;&#39;, str)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11265035,
+                                "reputation": 2092,
+                                "user_id": 8262102,
+                                "user_type": "registered",
+                                "display_name": "Ste"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1666488810,
+                            "post_id": 295147,
+                            "comment_id": 130948835,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295147#comment130948835_295147",
+                            "body": "Had issues with blank spaces at the start and end of a base filename so changed the regex to <code>[^-a-zA-Z0-9_.() ]+|^\\s+|\\s+$</code>. This is in case anyone else comes across this problem."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 11238,
+                        "reputation": 403,
+                        "user_id": 21580,
+                        "user_type": "registered",
+                        "display_name": "gx."
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1435743310,
+                    "last_edit_date": 1435743310,
+                    "creation_date": 1226913053,
+                    "answer_id": 295147,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295147#295147",
+                    "body": "<p>You could use the re.sub() method to replace anything not \"filelike\". But in effect, every character could be valid; so there are no prebuilt functions (I believe), to get it done.</p>\n\n<pre><code>import re\n\nstr = \"File!name?.txt\"\nf = open(os.path.join(\"/tmp\", re.sub('[^-a-zA-Z0-9_.() ]+', '', str))\n</code></pre>\n\n<p>Would result in a filehandle to /tmp/filename.txt.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1236,
+                                "reputation": 1155,
+                                "user_id": 1645,
+                                "user_type": "registered",
+                                "display_name": "Matthew"
+                            },
+                            "edited": false,
+                            "score": 82,
+                            "creation_date": 1239500022,
+                            "post_id": 295150,
+                            "comment_id": 552805,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295150#comment552805_295150",
+                            "body": "Warning! base64 encoding by default includes the &quot;/&quot; character as valid output which isn&#39;t valid in filenames on a lot of systems.  Instead use base64.urlsafe_b64encode(your_string)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2991564,
+                                "reputation": 498,
+                                "user_id": 2539058,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "codetaku"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1382129371,
+                            "post_id": 295150,
+                            "comment_id": 28855149,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295150#comment28855149_295150",
+                            "body": "This should <i>absolutely</i> be regarded as the ideal answer for webservers with any internal user-named content. Even if the administrator needs to go find something, you can easily write a script to transform all queries to the same form."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 54841,
+                                "reputation": 54854,
+                                "user_id": 164171,
+                                "user_type": "registered",
+                                "accept_rate": 95,
+                                "display_name": "static_rtti"
+                            },
+                            "edited": false,
+                            "score": 26,
+                            "creation_date": 1435221990,
+                            "post_id": 295150,
+                            "comment_id": 50113248,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295150#comment50113248_295150",
+                            "body": "Actually human readability is almost always a factor, even if only for debugging purposes."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 379606,
+                                "reputation": 5997,
+                                "user_id": 733092,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Noumenon"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1437849818,
+                            "post_id": 295150,
+                            "comment_id": 51207095,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295150#comment51207095_295150",
+                            "body": "In Python 3 <code>your_string</code> needs to be a byte array or the result of <code>encode(&#39;ascii&#39;)</code> for this to work."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3873232,
+                                "reputation": 3138,
+                                "user_id": 3207990,
+                                "user_type": "registered",
+                                "accept_rate": 27,
+                                "display_name": "JeffProd"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1450190667,
+                            "post_id": 295150,
+                            "comment_id": 56325509,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295150#comment56325509_295150",
+                            "body": "<code>def url2filename(url):     url = url.encode(&#39;UTF-8&#39;)     return base64.urlsafe_b64encode(url).decode(&#39;UTF-8&#39;)  def filename2url(f):     return base64.urlsafe_b64decode(f).decode(&#39;UTF-8&#39;)</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1073569,
+                                "reputation": 697,
+                                "user_id": 1072246,
+                                "user_type": "registered",
+                                "display_name": "rcriii"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1688047489,
+                            "post_id": 295150,
+                            "comment_id": 135023736,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295150#comment135023736_295150",
+                            "body": "As @Nouemon says, you need to convert your string to a byte array, for example as shown in this answer:  <a href=\"https://stackoverflow.com/questions/7585435/best-way-to-convert-string-to-bytes-in-python-3\" title=\"best way to convert string to bytes in python 3\">stackoverflow.com/questions/7585435/&hellip;</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 12940,
+                        "reputation": 10666,
+                        "user_id": 25737,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Igal Serban"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": false,
+                    "score": 117,
+                    "last_activity_date": 1239641316,
+                    "last_edit_date": 1239641316,
+                    "creation_date": 1226913122,
+                    "answer_id": 295150,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295150#295150",
+                    "body": "<p>What is the reason to use the strings as file names? If human readability is not a factor I would go with base64 module which can produce file system safe strings. It won't be readable but you won't have to deal with collisions and it is reversible.</p>\n\n<pre><code>import base64\nfile_name_string = base64.urlsafe_b64encode(your_string)\n</code></pre>\n\n<p><strong>Update</strong>: Changed based on Matthew comment.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 102988,
+                                "reputation": 25030,
+                                "user_id": 276093,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "matt burns"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1296464793,
+                            "post_id": 295152,
+                            "comment_id": 5385533,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295152#comment5385533_295152",
+                            "body": "Although it doesn&#39;t include the few extra chars he wanted &quot;_-.() &quot;. Still my favourite solution though ;)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 50710,
+                                "reputation": 9913,
+                                "user_id": 151299,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Oben Sonne"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1318850743,
+                            "post_id": 295152,
+                            "comment_id": 9492366,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295152#comment9492366_295152",
+                            "body": "Note that you can omit the square brackets. In this case a <a href=\"http://docs.python.org/glossary.html#term-generator-expression\" rel=\"nofollow noreferrer\">generator expression</a> is passed to join, which saves the step of creating an otherwise unused list."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 22727,
+                                "reputation": 4868,
+                                "user_id": 56349,
+                                "user_type": "registered",
+                                "accept_rate": 72,
+                                "display_name": "Eddie Parker"
+                            },
+                            "edited": false,
+                            "score": 59,
+                            "creation_date": 1354833892,
+                            "post_id": 295152,
+                            "comment_id": 18903193,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295152#comment18903193_295152",
+                            "body": "+1 Loved this. Slight modification I&#39;ve done: &quot;&quot;.join([x if x.isalnum() else &quot;_&quot; for x in s]) -- would yield a result where invalid items are _, like they&#39;re blanked.  Maybe tha thelps someone else."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 312915,
+                                "reputation": 205,
+                                "user_id": 627278,
+                                "user_type": "registered",
+                                "display_name": "Alex Krycek"
+                            },
+                            "edited": false,
+                            "score": 22,
+                            "creation_date": 1372029432,
+                            "post_id": 295152,
+                            "comment_id": 25028115,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295152#comment25028115_295152",
+                            "body": "This solution is great! I made a slight modification though: <code>filename = &quot;&quot;.join(i for i in s if i not in &quot;\\&#47;:*?&lt;&gt;|&quot;)</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 392087,
+                                "reputation": 1214,
+                                "user_id": 753136,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "tiktak"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1373539232,
+                            "post_id": 295152,
+                            "comment_id": 25599301,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295152#comment25599301_295152",
+                            "body": "Unfortunately it doesn&#39;t even allow spaces and dots, but I like the idea."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1622065,
+                                "reputation": 1232,
+                                "user_id": 1498405,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "hardmooth"
+                            },
+                            "reply_to_user": {
+                                "account_id": 392087,
+                                "reputation": 1214,
+                                "user_id": 753136,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "tiktak"
+                            },
+                            "edited": false,
+                            "score": 24,
+                            "creation_date": 1462775538,
+                            "post_id": 295152,
+                            "comment_id": 61760095,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295152#comment61760095_295152",
+                            "body": "@tiktak: to (also) allow spaces, dots and underscores you can go for <code>&quot;&quot;.join( x for x in s if (x.isalnum() or x in &quot;._- &quot;))</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 146698,
+                                "reputation": 7558,
+                                "user_id": 357313,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "Michel de Ruiter"
+                            },
+                            "reply_to_user": {
+                                "account_id": 312915,
+                                "reputation": 205,
+                                "user_id": 627278,
+                                "user_type": "registered",
+                                "display_name": "Alex Krycek"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1605779158,
+                            "post_id": 295152,
+                            "comment_id": 114758531,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295152#comment114758531_295152",
+                            "body": "@AlexKrycek except that you need to double the backslash."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4854535,
+                                "reputation": 111,
+                                "user_id": 5956545,
+                                "user_type": "registered",
+                                "display_name": "Dan J."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1715367060,
+                            "post_id": 295152,
+                            "comment_id": 138325579,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295152#comment138325579_295152",
+                            "body": "If you would prefer to replace the illegal character rather than simply delete it:  docname = &quot;&quot;.join(i if i not in &quot;\\/:*?&lt;&gt;|&quot; else &quot;_&quot; for i in s )"
+                        }
+                    ],
+                    "owner": {
+                        "user_type": "does_not_exist",
+                        "display_name": "lutz"
+                    },
+                    "comment_count": 8,
+                    "is_accepted": false,
+                    "score": 184,
+                    "last_activity_date": 1351504745,
+                    "last_edit_date": 1351504745,
+                    "creation_date": 1226913169,
+                    "answer_id": 295152,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295152#295152",
+                    "body": "<p>You can use list comprehension together with the string methods.</p>\n\n<pre><code>&gt;&gt;&gt; s\n'foo-bar#baz?qux@127/\\\\9]'\n&gt;&gt;&gt; \"\".join(x for x in s if x.isalnum())\n'foobarbazqux1279'\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5792,
+                        "reputation": 118085,
+                        "user_id": 9493,
+                        "user_type": "registered",
+                        "display_name": "Brian"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 47,
+                    "last_activity_date": 1226915860,
+                    "creation_date": 1226915860,
+                    "answer_id": 295206,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295206#295206",
+                    "body": "<p>Just to further complicate things, you are not guaranteed to get a valid filename just by removing invalid characters.  Since allowed characters differ on different filenames, a conservative approach could end up turning a valid name into an invalid one.  You may want to add special handling for the cases where:</p>\n\n<ul>\n<li><p>The string is all invalid characters (leaving you with an empty string)</p></li>\n<li><p>You end up with a string with a special meaning, eg \".\" or \"..\"</p></li>\n<li><p>On windows, <a href=\"http://msdn.microsoft.com/en-us/library/aa365247.aspx\" rel=\"noreferrer\">certain device names</a> are reserved.  For instance, you can't create a file named \"nul\", \"nul.txt\" (or nul.anything in fact)  The reserved names are:</p>\n\n<p>CON, PRN, AUX, NUL, COM1, COM2, COM3, COM4, COM5, COM6, COM7, COM8, COM9, LPT1, LPT2,  LPT3, LPT4, LPT5, LPT6, LPT7, LPT8, and LPT9</p></li>\n</ul>\n\n<p>You can probably work around these issues by prepending some string to the filenames that can never result in one of these cases, and stripping invalid characters.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 26756,
+                                "reputation": 11499,
+                                "user_id": 69893,
+                                "user_type": "registered",
+                                "display_name": "Christian Witts"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1236769170,
+                            "post_id": 295242,
+                            "comment_id": 447044,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295242#comment447044_295242",
+                            "body": "+1 for translation tables, it is by far the most efficient method. For the special filenames/empties, a simple pre-condition check will suffice and for extraneous periods that&#39;s a simple correction as well."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 38439,
+                                "reputation": 7019,
+                                "user_id": 110296,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "nosatalian"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1261596077,
+                            "post_id": 295242,
+                            "comment_id": 1866784,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295242#comment1866784_295242",
+                            "body": "While translate is slightly more efficient than a regexp, that time will most likely be dwarfed if you actually try to open the file, which no doubt you are intending to do.  Thus I prefer more a more readable regexp solution than the mess above"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 517812,
+                                "reputation": 952,
+                                "user_id": 971529,
+                                "user_type": "registered",
+                                "display_name": "isaaclw"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1335291783,
+                            "post_id": 295242,
+                            "comment_id": 13260579,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295242#comment13260579_295242",
+                            "body": "I&#39;m also worried about the blacklist. Granted, it&#39;s a blacklist that&#39;s based off a whitelist, but still. It seems less... safe. How do you know that &quot;allchars&quot; is actually complete?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3021,
+                                "reputation": 408304,
+                                "user_id": 4279,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "jfs"
+                            },
+                            "reply_to_user": {
+                                "account_id": 517812,
+                                "reputation": 952,
+                                "user_id": 971529,
+                                "user_type": "registered",
+                                "display_name": "isaaclw"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1335340089,
+                            "post_id": 295242,
+                            "comment_id": 13272285,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295242#comment13272285_295242",
+                            "body": "@isaaclw: &#39;.translate()&#39; accepts 256-char string as a translation table (byte-to-byte translation). &#39;.maketrans()&#39; creates such string. All values are covered; it is a pure whitelist approach"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 288627,
+                                "reputation": 6386,
+                                "user_id": 589165,
+                                "user_type": "registered",
+                                "accept_rate": 45,
+                                "display_name": "Finn &#197;rup Nielsen"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1423067215,
+                            "post_id": 295242,
+                            "comment_id": 45000293,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295242#comment45000293_295242",
+                            "body": "What about the filename &#39;.&#39; (a single dot). That would not work on Unixes as the present directory is using that name."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3021,
+                                "reputation": 408304,
+                                "user_id": 4279,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "jfs"
+                            },
+                            "reply_to_user": {
+                                "account_id": 288627,
+                                "reputation": 6386,
+                                "user_id": 589165,
+                                "user_type": "registered",
+                                "accept_rate": 45,
+                                "display_name": "Finn &#197;rup Nielsen"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1653127357,
+                            "post_id": 295242,
+                            "comment_id": 127778749,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295242#comment127778749_295242",
+                            "body": "@Finn&#197;rupNielsen: yes, special filenames should be handled. <a href=\"https://stackoverflow.com/a/295206/4279\">It is worse on Windows</a>. It depends on the task how exactly it should be done."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3021,
+                                "reputation": 408304,
+                                "user_id": 4279,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "jfs"
+                            },
+                            "reply_to_user": {
+                                "account_id": 38439,
+                                "reputation": 7019,
+                                "user_id": 110296,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "nosatalian"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1653127682,
+                            "post_id": 295242,
+                            "comment_id": 127778808,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295242#comment127778808_295242",
+                            "body": "@nosatalian you are right that you should use the most straightforward simple code first and reserve optimized code for [rare] special cases where it is necessary and if StackOverflow allowed just one answer per question then a regex answer that might be more readable then the <code>.translate</code>-based answer should have been preferred but SO allows more than one answer so for those who might need to handle a special case here it is. <a href=\"https://gist.github.com/zed/ff1a7bb7d6382c8560a5154374165e90\" rel=\"nofollow noreferrer\">The &quot;slight&quot; performance improvement can be 4x</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3021,
+                        "reputation": 408304,
+                        "user_id": 4279,
+                        "user_type": "registered",
+                        "accept_rate": 94,
+                        "display_name": "jfs"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1498130810,
+                    "last_edit_date": 1498130810,
+                    "creation_date": 1226916915,
+                    "answer_id": 295242,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295242#295242",
+                    "body": "<pre><code>&gt;&gt;&gt; import string\n&gt;&gt;&gt; safechars = bytearray(('_-.()' + string.digits + string.ascii_letters).encode())\n&gt;&gt;&gt; allchars = bytearray(range(0x100))\n&gt;&gt;&gt; deletechars = bytearray(set(allchars) - set(safechars))\n&gt;&gt;&gt; filename = u'#ab\\xa0c.$%.txt'\n&gt;&gt;&gt; safe_filename = filename.encode('ascii', 'ignore').translate(None, deletechars).decode()\n&gt;&gt;&gt; safe_filename\n'abc..txt'\n</code></pre>\n\n<p>It doesn't handle empty strings, special filenames ('nul', 'con', etc).</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1877929,
+                                "reputation": 7843,
+                                "user_id": 1698736,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "cowlinator"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1531167490,
+                            "post_id": 295298,
+                            "comment_id": 89485766,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295298#comment89485766_295298",
+                            "body": "The OP states that &quot;The filename needs to be valid on multiple operating systems&quot;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8615,
+                                "reputation": 56862,
+                                "user_id": 15614,
+                                "user_type": "registered",
+                                "display_name": "Kent Fredric"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1877929,
+                                "reputation": 7843,
+                                "user_id": 1698736,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "cowlinator"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1557968929,
+                            "post_id": 295298,
+                            "comment_id": 98947358,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295298#comment98947358_295298",
+                            "body": "@cowlinator that clarification was added 10 hours after my answer was posted :) Check the OP&#39;s edit log."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3754967,
+                                "reputation": 1444,
+                                "user_id": 3121518,
+                                "user_type": "registered",
+                                "accept_rate": 40,
+                                "display_name": "Harley"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1643444970,
+                            "post_id": 295298,
+                            "comment_id": 125345057,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295298#comment125345057_295298",
+                            "body": "\\0 seems fine on Ubuntu"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 8615,
+                        "reputation": 56862,
+                        "user_id": 15614,
+                        "user_type": "registered",
+                        "display_name": "Kent Fredric"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 16,
+                    "last_activity_date": 1226918754,
+                    "creation_date": 1226918754,
+                    "answer_id": 295298,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295298#295298",
+                    "body": "<p>Keep in mind, there are actually no restrictions on filenames on Unix systems other than </p>\n\n<ul>\n<li>It may not contain \\0 </li>\n<li>It may not contain  /</li>\n</ul>\n\n<p>Everything else is fair game. </p>\n\n<pre>\n$ touch \"\n> even multiline\n> haha\n> ^[[31m red ^[[0m\n> evil\"\n$ ls -la \n-rw-r--r--       0 Nov 17 23:39 ?even multiline?haha??[31m red ?[0m?evil\n$ ls -lab\n-rw-r--r--       0 Nov 17 23:39 \\neven\\ multiline\\nhaha\\n\\033[31m\\ red\\ \\033[0m\\nevil\n$ perl -e 'for my $i ( glob(q{./*even*}) ){ print $i; } '\n./\neven multiline\nhaha\n red \nevil\n</pre>\n\n<p>Yes, i just stored ANSI Colour Codes in a file name and had them take effect. </p>\n\n<p>For entertainment, put a BEL character in a directory name and watch the fun that ensues when you CD into it ;) </p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 144732,
+                                "reputation": 11065,
+                                "user_id": 1524913,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "jeromej"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1393464782,
+                            "post_id": 295354,
+                            "comment_id": 33445821,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295354#comment33445821_295354",
+                            "body": "Does it valid the name though? I mean, if the OS is not happy, then you still need to do something, right?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8615,
+                                "reputation": 56862,
+                                "user_id": 15614,
+                                "user_type": "registered",
+                                "display_name": "Kent Fredric"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1459851779,
+                            "post_id": 295354,
+                            "comment_id": 60461501,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295354#comment60461501_295354",
+                            "body": "In some cases, the OS/Language may silently munge your filename into an alternative form, but when you do a directory listing, you&#39;ll get a different name out. And this can lead to a &quot;when I write the file its there, but when I look for the file its called something else&quot; problem.  ( I&#39;m talking about behaviour I&#39;ve heard about on VAX  ... )"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 186022,
+                                "reputation": 27778,
+                                "user_id": 423105,
+                                "user_type": "registered",
+                                "accept_rate": 68,
+                                "display_name": "LarsH"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1559650553,
+                            "post_id": 295354,
+                            "comment_id": 99480828,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295354#comment99480828_295354",
+                            "body": "Moreover, &quot;The filename needs to be valid on multiple operating systems&quot;, which you can&#39;t detect with an <code>osopen</code> running on one machine."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 17180,
+                        "reputation": 27253,
+                        "user_id": 38207,
+                        "user_type": "registered",
+                        "accept_rate": 83,
+                        "display_name": "James Anderson"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1338342413,
+                    "last_edit_date": 1338342413,
+                    "creation_date": 1226921089,
+                    "answer_id": 295354,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295354#295354",
+                    "body": "<p>Why not just wrap the \"osopen\" with a try/except and let the underlying OS sort out whether the file is valid?</p>\n\n<p>This seems like much less work and is valid no matter which OS you use.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 30352,
+                                "reputation": 16070,
+                                "user_id": 82733,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Joseph Turian"
+                            },
+                            "edited": false,
+                            "score": 13,
+                            "creation_date": 1286520570,
+                            "post_id": 295466,
+                            "comment_id": 4140344,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295466#comment4140344_295466",
+                            "body": "The last line should be: value = unicode(re.sub(&#39;[-\\s]+&#39;, &#39;-&#39;, value))"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 270690,
+                                "reputation": 233,
+                                "user_id": 560792,
+                                "user_type": "registered",
+                                "display_name": "Alex Cook"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1326396087,
+                            "post_id": 295466,
+                            "comment_id": 11040476,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295466#comment11040476_295466",
+                            "body": "Thanks - I could be missing something, but I&#39;m getting: &quot;normalize() argument 2 must be unicode, not str&quot;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6358,
+                                "reputation": 388738,
+                                "user_id": 10661,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "S.Lott"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1326396447,
+                            "post_id": 295466,
+                            "comment_id": 11040594,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295466#comment11040594_295466",
+                            "body": "&quot;normalize() argument 2&quot;.  Means the <code>value</code>.  If the value must be Unicode, then, you have to be sure that it&#39;s actually Unicode.  Or.  You might want to leave out unicode normalization if your actual value is actually an ASCII string."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1354888,
+                                "reputation": 3619,
+                                "user_id": 1293501,
+                                "user_type": "registered",
+                                "accept_rate": 38,
+                                "display_name": "Michael Scott Asato Cuthbert"
+                            },
+                            "edited": false,
+                            "score": 11,
+                            "creation_date": 1352340826,
+                            "post_id": 295466,
+                            "comment_id": 18106823,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295466#comment18106823_295466",
+                            "body": "In case anyone hasn&#39;t noticed the positive side of this approach is that it doesn&#39;t just remove non-alpha characters, but attempts to find good substitutes first (via the NFKD normalization), so &#233; becomes e, a superscript 1 becomes a normal 1, etc.  Thanks"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 129265,
+                                "reputation": 1177,
+                                "user_id": 327725,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "olpa"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1381395784,
+                            "post_id": 295466,
+                            "comment_id": 28566348,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295466#comment28566348_295466",
+                            "body": "For a non-web application. I&#39;ve rewritten the function to retain German (and other non-ascii) letters as is:      re_slugify = re.compile(&#39;[^\\w\\s-]&#39;, re.UNICODE)     def slugify(value):       value = unicodedata.normalize(&#39;NFKD&#39;, value)       value = unicode(re_slugify.sub(&#39;&#39;, value).strip())       value = re.sub(&#39;[-\\s]+&#39;, &#39;-&#39;, value)       return value"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 42834,
+                                "reputation": 48512,
+                                "user_id": 124946,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Denilson S&#225; Maia"
+                            },
+                            "edited": false,
+                            "score": 67,
+                            "creation_date": 1386106786,
+                            "post_id": 295466,
+                            "comment_id": 30398440,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295466#comment30398440_295466",
+                            "body": "The <code>slugify</code> function has been moved to <a href=\"http://github.com/django/django/blob/master/django/utils/text.py\" rel=\"nofollow noreferrer\">django/utils/text.py</a>, and that file also contains a <code>get_valid_filename</code> function."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8372,
+                                "reputation": 226916,
+                                "user_id": 15055,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Claudiu"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1470609400,
+                            "post_id": 295466,
+                            "comment_id": 65005123,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295466#comment65005123_295466",
+                            "body": "I found it helpful to replace spaces with &quot;-&quot; as well"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6540980,
+                                "reputation": 649,
+                                "user_id": 5058564,
+                                "user_type": "registered",
+                                "display_name": "am70"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1572162639,
+                            "post_id": 295466,
+                            "comment_id": 103470303,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295466#comment103470303_295466",
+                            "body": "then add <code>return value</code> at the end"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6540980,
+                                "reputation": 649,
+                                "user_id": 5058564,
+                                "user_type": "registered",
+                                "display_name": "am70"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1572163162,
+                            "post_id": 295466,
+                            "comment_id": 103470381,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295466#comment103470381_295466",
+                            "body": "The <code>slugify</code> function (python 3 version) is available at <a href=\"https://github.com/django/django/blob/master/django/utils/text.py\" rel=\"nofollow noreferrer\">github.com/django/django/blob/master/django/utils/text.py</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1762936,
+                                "reputation": 11030,
+                                "user_id": 1609514,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Bill"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1691341718,
+                            "post_id": 295466,
+                            "comment_id": 135475490,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295466#comment135475490_295466",
+                            "body": "This is useful thanks. For my application I want to replace some non-alphanumeric characters with <code>&#39;-&#39;</code> rather than delete them. For example I want <code>&#39;ab&#47;cd&#39;</code> to be converted to <code>&#39;ab-cd&#39;</code>. To achieve this I added the characters to your last two regex&#39;s, E.g.: <code>r&#39;[^-\\w\\s\\&#47;]&#39;</code> and <code>r&#39;[-\\s\\&#47;]+&#39;</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6358,
+                        "reputation": 388738,
+                        "user_id": 10661,
+                        "user_type": "registered",
+                        "accept_rate": 91,
+                        "display_name": "S.Lott"
+                    },
+                    "comment_count": 10,
+                    "is_accepted": true,
+                    "score": 297,
+                    "last_activity_date": 1678715610,
+                    "last_edit_date": 1678715610,
+                    "creation_date": 1226924632,
+                    "answer_id": 295466,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295466#295466",
+                    "body": "<p>You can look at the <a href=\"http://www.djangoproject.com\" rel=\"noreferrer\">Django framework</a> (but take their licence into account!) for how they create a &quot;slug&quot; from arbitrary text.  A slug is URL- and filename- friendly.</p>\n<p>The Django text utils define a function, <a href=\"https://docs.djangoproject.com/en/4.0/ref/utils/#django.utils.text.slugify\" rel=\"noreferrer\"><code>slugify()</code></a>, that's probably the gold standard for this kind of thing. Essentially, their code is the following.</p>\n<pre class=\"lang-py prettyprint-override\"><code>import unicodedata\nimport re\n\ndef slugify(value, allow_unicode=False):\n    &quot;&quot;&quot;\n    Taken from https://github.com/django/django/blob/master/django/utils/text.py\n    Convert to ASCII if 'allow_unicode' is False. Convert spaces or repeated\n    dashes to single dashes. Remove characters that aren't alphanumerics,\n    underscores, or hyphens. Convert to lowercase. Also strip leading and\n    trailing whitespace, dashes, and underscores.\n    &quot;&quot;&quot;\n    value = str(value)\n    if allow_unicode:\n        value = unicodedata.normalize('NFKC', value)\n    else:\n        value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore').decode('ascii')\n    value = re.sub(r'[^\\w\\s-]', '', value.lower())\n    return re.sub(r'[-\\s]+', '-', value).strip('-_')\n</code></pre>\n<p>And the older version:</p>\n<pre class=\"lang-py prettyprint-override\"><code>def slugify(value):\n    &quot;&quot;&quot;\n    Normalizes string, converts to lowercase, removes non-alpha characters,\n    and converts spaces to hyphens.\n    &quot;&quot;&quot;\n    import unicodedata\n    value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore')\n    value = unicode(re.sub('[^\\w\\s-]', '', value).strip().lower())\n    value = unicode(re.sub('[-\\s]+', '-', value))\n    # ...\n    return value\n</code></pre>\n<p>There's more, but I left it out, since it doesn't address slugification, but escaping.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 10108,
+                        "reputation": 532737,
+                        "user_id": 18936,
+                        "user_type": "registered",
+                        "display_name": "bobince"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1226928259,
+                    "creation_date": 1226928259,
+                    "answer_id": 295560,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/295560#295560",
+                    "body": "<p>Another issue that the other comments haven't addressed yet is the empty string, which is obviously not a valid filename. You can also end up with an empty string from stripping too many characters.</p>\n\n<p>What with the Windows reserved filenames and issues with dots, the safest answer to the question \u201chow do I normalise a valid filename from arbitrary user input?\u201d is \u201cdon't even bother try\u201d: if you can find any other way to avoid it (eg. using integer primary keys from a database as filenames), do that.</p>\n\n<p>If you must, and you really need to allow spaces and \u2018.\u2019 for file extensions as part of the name, try something like:</p>\n\n<pre><code>import re\nbadchars= re.compile(r'[^A-Za-z0-9_. ]+|^\\.|\\.$|^ | $|^$')\nbadnames= re.compile(r'(aux|com[1-9]|con|lpt[1-9]|prn)(\\.|$)')\n\ndef makeName(s):\n    name= badchars.sub('_', s)\n    if badnames.match(name):\n        name= '_'+name\n    return name\n</code></pre>\n\n<p>Even this can't be guaranteed right especially on unexpected OSs\u2009\u2014\u2009for example RISC OS hates spaces and uses \u2018.\u2019 as a directory separator.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 24481,
+                        "reputation": 6952,
+                        "user_id": 62262,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "karlcow"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1236768286,
+                    "creation_date": 1236768286,
+                    "answer_id": 634023,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/634023#634023",
+                    "body": "<p>Though you have to be careful. It is not clearly said in your intro, if you are looking only at latine language. Some words can become meaningless or another meaning if you sanitize them with ascii characters only.</p>\n\n<p>imagine you have \"for\u00eat po\u00e9sie\" (forest poetry), your sanitization might give \"fort-posie\" (strong + something meaningless)</p>\n\n<p>Worse if  you have to deal with chinese characters.</p>\n\n<p>\"\u4e0b\u5317\u6ca2\" your system might end up doing \"---\" which is doomed to fail after a while and not very helpful. So if you deal with only files I would encourage to either call them a generic chain that you control or to keep the characters as it is. For URIs, about the same.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7607,
+                                "reputation": 22751,
+                                "user_id": 13263,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "slf"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1238442651,
+                            "post_id": 698714,
+                            "comment_id": 511663,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/698714#comment511663_698714",
+                            "body": "you should be able to use uuid.uuid4() for your unique prefix"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 466440,
+                                "reputation": 7247,
+                                "user_id": 871196,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "demented hedgehog"
+                            },
+                            "edited": false,
+                            "score": 11,
+                            "creation_date": 1476676493,
+                            "post_id": 698714,
+                            "comment_id": 67429337,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/698714#comment67429337_698714",
+                            "body": "camel case .. ahh"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 119976,
+                                "reputation": 662,
+                                "user_id": 312089,
+                                "user_type": "registered",
+                                "display_name": "Wavesailor"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1520004186,
+                            "post_id": 698714,
+                            "comment_id": 85149755,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/698714#comment85149755_698714",
+                            "body": "Could this be edited / updated to work with Python 3.6 ?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 16845,
+                        "reputation": 5619,
+                        "user_id": 37134,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "Sophie Gage"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 20,
+                    "last_activity_date": 1238442017,
+                    "creation_date": 1238442017,
+                    "answer_id": 698714,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/698714#698714",
+                    "body": "<p>This is the solution I ultimately used:</p>\n\n<pre><code>import unicodedata\n\nvalidFilenameChars = \"-_.() %s%s\" % (string.ascii_letters, string.digits)\n\ndef removeDisallowedFilenameChars(filename):\n    cleanedFilename = unicodedata.normalize('NFKD', filename).encode('ASCII', 'ignore')\n    return ''.join(c for c in cleanedFilename if c in validFilenameChars)\n</code></pre>\n\n<p>The unicodedata.normalize call replaces accented characters with the unaccented equivalent, which is better than simply stripping them out. After that all disallowed characters are removed.</p>\n\n<p>My solution doesn't prepend a known string to avoid possible disallowed filenames, because I know they can't occur given my particular filename format. A more general solution would need to do so.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2152049,
+                                "reputation": 2849,
+                                "user_id": 2243767,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Shravan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1451125106,
+                            "post_id": 1108783,
+                            "comment_id": 56682311,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/1108783#comment56682311_1108783",
+                            "body": "All links dead. Man, do something."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 27532,
+                        "reputation": 4728,
+                        "user_id": 72787,
+                        "user_type": "registered",
+                        "display_name": "wires"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1451313016,
+                    "last_edit_date": 1451313016,
+                    "creation_date": 1247221151,
+                    "answer_id": 1108783,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/1108783#1108783",
+                    "body": "<p><strong>UPDATE</strong></p>\n\n<p>All links broken beyond repair in this 6 year old answer.</p>\n\n<p>Also, I also wouldn't do it this way anymore, just <code>base64</code> encode or drop unsafe chars. Python 3 example:</p>\n\n<pre><code>import re\nt = re.compile(\"[a-zA-Z0-9.,_-]\")\nunsafe = \"abc\u2202\u00e9\u00e5\u00df\u00ae\u2206\u02da\u02d9\u00a9\u00ac\u00f1\u221a\u0192\u00b5\u00a9\u2206\u222b\u00f8\"\nsafe = [ch for ch in unsafe if t.match(ch)]\n# =&gt; 'abc'\n</code></pre>\n\n<p>With <code>base64</code> you can encode and decode, so you can retrieve the original filename again.</p>\n\n<p>But depending on the use case you might be better off generating a random filename and storing the metadata in separate file or DB.</p>\n\n<pre><code>from random import choice\nfrom string import ascii_lowercase, ascii_uppercase, digits\nallowed_chr = ascii_lowercase + ascii_uppercase + digits\n\nsafe = ''.join([choice(allowed_chr) for _ in range(16)])\n# =&gt; 'CYQ4JDKE9JfcRzAZ'\n</code></pre>\n\n<p><strong>ORIGINAL LINKROTTEN ANSWER</strong>:</p>\n\n<p>The <code>bobcat</code> project contains a python module that does just this.</p>\n\n<p>It's not completely robust, see this <a href=\"http://mail.python.org/pipermail/python-list/2007-September/628023.html\" rel=\"nofollow noreferrer\">post</a> and this <a href=\"http://mail.python.org/pipermail/python-list/2007-September/628042.html\" rel=\"nofollow noreferrer\">reply</a>.</p>\n\n<p>So, as noted: <code>base64</code> encoding is probably a better idea if readability doesn't matter.</p>\n\n<ul>\n<li>Docs <a href=\"https://svn.origo.ethz.ch/bobcat/src-doc/safefilename-module.html\" rel=\"nofollow noreferrer\">https://svn.origo.ethz.ch/bobcat/src-doc/safefilename-module.html</a></li>\n<li>Source <a href=\"https://svn.origo.ethz.ch/bobcat/trunk/src/bobcatlib/safefilename.py\" rel=\"nofollow noreferrer\">https://svn.origo.ethz.ch/bobcat/trunk/src/bobcatlib/safefilename.py</a></li>\n</ul>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 37666,
+                                "reputation": 11492,
+                                "user_id": 2571881,
+                                "user_type": "registered",
+                                "display_name": "SergioAraujo"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1527689424,
+                            "post_id": 10458710,
+                            "comment_id": 88223304,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/10458710#comment88223304_10458710",
+                            "body": "I&#39;ve found this <code>&quot;&quot;.join( x for x in s if (x.isalnum() or x in &quot;._- &quot;))</code> on this <a href=\"https://stackoverflow.com/a/295152/2571881\">post</a> comments"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 258794,
+                        "reputation": 12388,
+                        "user_id": 541208,
+                        "user_type": "registered",
+                        "accept_rate": 85,
+                        "display_name": "TankorSmash"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1336190160,
+                    "creation_date": 1336190160,
+                    "answer_id": 10458710,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/10458710#10458710",
+                    "body": "<p>I'm sure this isn't a great answer, since it modifies the string it's looping over, but it seems to work alright:</p>\n\n<pre><code>import string\nfor chr in your_string:\n if chr == ' ':\n   your_string = your_string.replace(' ', '_')\n elif chr not in string.ascii_letters or chr not in string.digits:\n    your_string = your_string.replace(chr, '')\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 316105,
+                                "reputation": 16821,
+                                "user_id": 632088,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "Rusty Rob"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1385414484,
+                            "post_id": 10610768,
+                            "comment_id": 30124011,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/10610768#comment30124011_10610768",
+                            "body": "note, if using helloworld1, you also need to check helloworld1 isn&#39;t in use and so on.."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 316105,
+                        "reputation": 16821,
+                        "user_id": 632088,
+                        "user_type": "registered",
+                        "accept_rate": 87,
+                        "display_name": "Rusty Rob"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1337130274,
+                    "creation_date": 1337130274,
+                    "answer_id": 10610768,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/10610768#10610768",
+                    "body": "<p>Most of these solutions don't work.</p>\n\n<p>'/hello/world' -> 'helloworld'</p>\n\n<p>'/helloworld'/ -> 'helloworld'</p>\n\n<p>This isn't what you want generally, say you are saving the html for each link, you're going to overwrite the html for a different webpage.</p>\n\n<p>I pickle a dict such as:</p>\n\n<pre><code>{'helloworld': \n    (\n    {'/hello/world': 'helloworld', '/helloworld/': 'helloworld1'},\n    2)\n    }\n</code></pre>\n\n<p>2 represents the number that should be appended to the next filename.</p>\n\n<p>I look up the filename each time from the dict. If it's not there, I create a new one, appending the max number if needed.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1153697,
+                                "reputation": 8558,
+                                "user_id": 1134881,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "SpeedCoder5"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1529515432,
+                            "post_id": 25808207,
+                            "comment_id": 88905404,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/25808207#comment88905404_25808207",
+                            "body": "A wrapper for this with no spaces in files names: <code>def safe_filename(filename):     return safePath(filename.strip().replace(&#39; &#39;,&#39;_&#39;))</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 236479,
+                                "reputation": 1238,
+                                "user_id": 503991,
+                                "user_type": "registered",
+                                "accept_rate": 24,
+                                "display_name": "Yan King Yin"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1666425003,
+                            "post_id": 25808207,
+                            "comment_id": 130937851,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/25808207#comment130937851_25808207",
+                            "body": "1) Does not allow unicode chars that are actually valid filename chars. 2) Can you provide inverse function?  Love a mathematically-minded solution :)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 539760,
+                        "reputation": 527,
+                        "user_id": 907720,
+                        "user_type": "registered",
+                        "display_name": "makeroo"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1410524379,
+                    "creation_date": 1410524379,
+                    "answer_id": 25808207,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/25808207#25808207",
+                    "body": "<p>Not exactly what OP was asking for but this is what I use because I need unique and reversible conversions:</p>\n\n<pre><code># p3 code\ndef safePath (url):\n    return ''.join(map(lambda ch: chr(ch) if ch in safePath.chars else '%%%02x' % ch, url.encode('utf-8')))\nsafePath.chars = set(map(lambda x: ord(x), '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+-_ .'))\n</code></pre>\n\n<p>Result is \"somewhat\" readable, at least from a sysadmin point of view.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 393931,
+                                "reputation": 3702,
+                                "user_id": 756056,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "therealmarv"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1507219520,
+                            "post_id": 29942164,
+                            "comment_id": 80133301,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/29942164#comment80133301_29942164",
+                            "body": "I like this library but it&#39;s not that good as I thought. Initial testing ok but it converts also dots. So <code>test.txt</code> gets <code>test-txt</code> which is too much."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 386131,
+                                "reputation": 2259,
+                                "user_id": 743730,
+                                "user_type": "registered",
+                                "accept_rate": 45,
+                                "display_name": "mhucka"
+                            },
+                            "reply_to_user": {
+                                "account_id": 393931,
+                                "reputation": 3702,
+                                "user_id": 756056,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "therealmarv"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1635951946,
+                            "post_id": 29942164,
+                            "comment_id": 123429761,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/29942164#comment123429761_29942164",
+                            "body": "Slugify looks to be actively maintained, and the current (as of 2021-11-03) version has many options, some of which could be used to control <code>.</code> and <code>-</code> substitution. See also the comments to @therealmarv&#39;s <a href=\"https://stackoverflow.com/a/46590727/743730\">answer below</a>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1360035,
+                        "reputation": 7234,
+                        "user_id": 1297578,
+                        "user_type": "registered",
+                        "accept_rate": 82,
+                        "display_name": "Shoham"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 56,
+                    "last_activity_date": 1430306387,
+                    "creation_date": 1430306387,
+                    "answer_id": 29942164,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/29942164#29942164",
+                    "body": "<p>There is a nice project on Github called <a href=\"https://github.com/un33k/python-slugify\">python-slugify</a>:  </p>\n\n<p>Install:</p>\n\n<pre><code>pip install python-slugify\n</code></pre>\n\n<p>Then use:</p>\n\n<pre><code>&gt;&gt;&gt; from slugify import slugify\n&gt;&gt;&gt; txt = \"This\\ is/ a%#$ test ---\"\n&gt;&gt;&gt; slugify(txt)\n'this-is-a-test'\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3981052,
+                        "reputation": 527,
+                        "user_id": 3282927,
+                        "user_type": "registered",
+                        "display_name": "mnach"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 20,
+                    "last_activity_date": 1470310143,
+                    "creation_date": 1470310143,
+                    "answer_id": 38766141,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/38766141#38766141",
+                    "body": "<p>In one line:</p>\n\n<pre><code>valid_file_name = re.sub('[^\\w_.)( -]', '', any_string)\n</code></pre>\n\n<p>you can also put '_' character to make it more readable (in case of replacing slashs, for example)</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 468529,
+                                "reputation": 1472,
+                                "user_id": 874582,
+                                "user_type": "registered",
+                                "display_name": "vicenteherrera"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1584965701,
+                            "post_id": 46590727,
+                            "comment_id": 107594507,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/46590727#comment107594507_46590727",
+                            "body": "I like this, don&#39;t reinvent the wheel, don&#39;t import the whole Django framework if you don&#39;t need it, don&#39;t directly paste the code if you are not going to maintain it in the future, and generated string tries to matches similar letters to safe ones, so new string is easier to read."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 468529,
+                                "reputation": 1472,
+                                "user_id": 874582,
+                                "user_type": "registered",
+                                "display_name": "vicenteherrera"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1584965958,
+                            "post_id": 46590727,
+                            "comment_id": 107594625,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/46590727#comment107594625_46590727",
+                            "body": "To use underscore instead of dash: name=slugify(s, separator=&#39;_&#39;)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 393931,
+                        "reputation": 3702,
+                        "user_id": 756056,
+                        "user_type": "registered",
+                        "accept_rate": 87,
+                        "display_name": "therealmarv"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1507222267,
+                    "last_edit_date": 1507222267,
+                    "creation_date": 1507221407,
+                    "answer_id": 46590727,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/46590727#46590727",
+                    "body": "<p>I liked the python-slugify approach here but it was stripping dots also away which was not desired. So I optimized it for uploading a clean filename to s3 this way:</p>\n\n<pre><code>pip install python-slugify\n</code></pre>\n\n<p>Example code:</p>\n\n<pre><code>s = 'Very / Unsafe / file\\nname h\u00e4h\u00e4 \\n\\r .txt'\nclean_basename = slugify(os.path.splitext(s)[0])\nclean_extension = slugify(os.path.splitext(s)[1][1:])\nif clean_extension:\n    clean_filename = '{}.{}'.format(clean_basename, clean_extension)\nelif clean_basename:\n    clean_filename = clean_basename\nelse:\n    clean_filename = 'none' # only unclean characters\n</code></pre>\n\n<p>Output:</p>\n\n<pre><code>&gt;&gt;&gt; clean_filename\n'very-unsafe-file-name-haha.txt'\n</code></pre>\n\n<p>This is so failsafe, it works with filenames without extension and it even works for only unsafe characters file names (result is <code>none</code> here).</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 383218,
+                                "reputation": 1186,
+                                "user_id": 738924,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "theannouncer"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1520020764,
+                            "post_id": 46801075,
+                            "comment_id": 85158744,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/46801075#comment85158744_46801075",
+                            "body": "for the lazy already on django: <code>django.utils.text import get_valid_filename</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1877929,
+                                "reputation": 7843,
+                                "user_id": 1698736,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "cowlinator"
+                            },
+                            "reply_to_user": {
+                                "account_id": 383218,
+                                "reputation": 1186,
+                                "user_id": 738924,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "theannouncer"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1525470088,
+                            "post_id": 46801075,
+                            "comment_id": 87384276,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/46801075#comment87384276_46801075",
+                            "body": "In case you are unfamiliar with regex, <code>re.sub(r&#39;(?u)[^-\\w.]&#39;, &#39;&#39;, s)</code> removes all characters which are not letters, not numbers (0-9), not the underscore (&#39;_&#39;), not the dash (&#39;-&#39;), and not the period (&#39;.&#39;).  &quot;Letters&quot; here includes all unicode letters, such as \u6f22\u8a9e."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3157,
+                                "reputation": 16146,
+                                "user_id": 4494,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "Matthias Winkelmann"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1542113429,
+                            "post_id": 46801075,
+                            "comment_id": 93444380,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/46801075#comment93444380_46801075",
+                            "body": "You may want to also check for length: Filenames are limited to 255 characters (or, you know, 32; depending on the FS)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1489695,
+                                "reputation": 3202,
+                                "user_id": 1397100,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "spiralmoon"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1593973283,
+                            "post_id": 46801075,
+                            "comment_id": 110957484,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/46801075#comment110957484_46801075",
+                            "body": "<code>return re.sub(r&#39;(?u)[^-\\w.]&#39;, &#39;_&#39;, s)</code> for better readability"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1877929,
+                        "reputation": 7843,
+                        "user_id": 1698736,
+                        "user_type": "registered",
+                        "accept_rate": 90,
+                        "display_name": "cowlinator"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 50,
+                    "last_activity_date": 1682753346,
+                    "last_edit_date": 1682753346,
+                    "creation_date": 1508286284,
+                    "answer_id": 46801075,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/46801075#46801075",
+                    "body": "<p>Just like <a href=\"https://stackoverflow.com/users/10661\">S.Lott</a> answered, you can look at the <a href=\"https://www.djangoproject.com/\" rel=\"nofollow noreferrer\">Django Framework</a> for how they convert a string to a valid filename.</p>\n<p>The most recent and updated version is found in <code>utils/text.py</code>, and defines <code>get_valid_filename</code>, which is as follows:</p>\n<pre><code>def get_valid_filename(name):\n    s = str(name).strip().replace(&quot; &quot;, &quot;_&quot;)\n    s = re.sub(r&quot;(?u)[^-\\w.]&quot;, &quot;&quot;, s)\n    if s in {&quot;&quot;, &quot;.&quot;, &quot;..&quot;}:\n        raise SuspiciousFileOperation(&quot;Could not derive file name from '%s'&quot; % name)\n    return s\n</code></pre>\n<p>( See <a href=\"https://github.com/django/django/blob/master/django/utils/text.py\" rel=\"nofollow noreferrer\">https://github.com/django/django/blob/master/django/utils/text.py</a> )</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1457300,
+                        "reputation": 1697,
+                        "user_id": 1372570,
+                        "user_type": "registered",
+                        "display_name": "Tuncay G&#246;nc&#252;o\u011flu"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 9,
+                    "last_activity_date": 1552306862,
+                    "creation_date": 1552306862,
+                    "answer_id": 55101759,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/55101759#55101759",
+                    "body": "<p>I realise there are many answers but they mostly rely on regular expressions or external modules, so I'd like to throw in my own answer. A pure python function, no external module needed, no regular expression used. My approach is not to clean invalid chars, but to only allow valid ones.</p>\n\n<pre><code>def normalizefilename(fn):\n    validchars = \"-_.() \"\n    out = \"\"\n    for c in fn:\n      if str.isalpha(c) or str.isdigit(c) or (c in validchars):\n        out += c\n      else:\n        out += \"_\"\n    return out    \n</code></pre>\n\n<p>if you like, you can add your own valid chars to the <code>validchars</code> variable at the beginning, such as your national letters that don't exist in English alphabet. This is something you may or may not want: some file systems that don't run on UTF-8 might still have problems with non-ASCII chars.</p>\n\n<p>This function is to test for a single file name validity, so it will replace path separators with _ considering them invalid chars. If you want to add that, it is trivial to modify the <code>if</code> to include os path separator.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3154103,
+                                "reputation": 36127,
+                                "user_id": 2666859,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Serenity"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1555909655,
+                            "post_id": 55789246,
+                            "comment_id": 98248565,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/55789246#comment98248565_55789246",
+                            "body": "Could you explain your answer in details?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6010324,
+                                "reputation": 119,
+                                "user_id": 4720978,
+                                "user_type": "registered",
+                                "display_name": "Jean-Robin Tremblay"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3154103,
+                                "reputation": 36127,
+                                "user_id": 2666859,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Serenity"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1555910601,
+                            "post_id": 55789246,
+                            "comment_id": 98248766,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/55789246#comment98248766_55789246",
+                            "body": "Its the same answer accepted by Sophie Gage. But it has been modified to work on python 3.6"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6010324,
+                        "reputation": 119,
+                        "user_id": 4720978,
+                        "user_type": "registered",
+                        "display_name": "Jean-Robin Tremblay"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1567580545,
+                    "last_edit_date": 1567580545,
+                    "creation_date": 1555908537,
+                    "answer_id": 55789246,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/55789246#55789246",
+                    "body": "<p>Answer modified for python 3.6</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>import string\nimport unicodedata\n\nvalidFilenameChars = \"-_.() %s%s\" % (string.ascii_letters, string.digits)\ndef removeDisallowedFilenameChars(filename):\n    cleanedFilename = unicodedata.normalize('NFKD', filename).encode('ASCII', 'ignore')\n    return ''.join(chr(c) for c in cleanedFilename if chr(c) in validFilenameChars)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 119690,
+                                "reputation": 2625,
+                                "user_id": 311567,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "dashesy"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1648602058,
+                            "post_id": 60856137,
+                            "comment_id": 126664441,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/60856137#comment126664441_60856137",
+                            "body": "This is a very clean solution"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2672069,
+                        "reputation": 194,
+                        "user_id": 2309247,
+                        "user_type": "registered",
+                        "display_name": "Stavros"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1585164873,
+                    "creation_date": 1585164873,
+                    "answer_id": 60856137,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/60856137#60856137",
+                    "body": "<p>If you don't mind installing a package, this should be useful:\n<a href=\"https://pypi.org/project/pathvalidate/\" rel=\"noreferrer\">https://pypi.org/project/pathvalidate/</a></p>\n\n<p>From <a href=\"https://pypi.org/project/pathvalidate/#sanitize-a-filename\" rel=\"noreferrer\">https://pypi.org/project/pathvalidate/#sanitize-a-filename</a>:</p>\n\n<blockquote>\n  <pre class=\"lang-py prettyprint-override\"><code>from pathvalidate import sanitize_filename\n\nfname = \"fi:l*e/p\\\"a?t&gt;h|.t&lt;xt\"\nprint(f\"{fname} -&gt; {sanitize_filename(fname)}\\n\")\nfname = \"\\0_a*b:c&lt;d&gt;e%f/(g)h+i_0.txt\"\nprint(f\"{fname} -&gt; {sanitize_filename(fname)}\\n\")\n</code></pre>\n  \n  <h3>Output</h3>\n  \n  <pre class=\"lang-py prettyprint-override\"><code>fi:l*e/p\"a?t&gt;h|.t&lt;xt -&gt; filepath.txt\n_a*b:c&lt;d&gt;e%f/(g)h+i_0.txt -&gt; _abcde%f(g)h+i_0.txt\n</code></pre>\n</blockquote>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2979251,
+                        "reputation": 7244,
+                        "user_id": 2529619,
+                        "user_type": "registered",
+                        "accept_rate": 48,
+                        "display_name": "ChaimG"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1608308777,
+                    "last_edit_date": 1608308777,
+                    "creation_date": 1608308301,
+                    "answer_id": 65360401,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/65360401#65360401",
+                    "body": "<p>Here, this should cover all the bases. It handles all types of issues for you, including (but not limited too) character substitution.</p>\n<p>Works in Windows, *nix, and almost every other file system. Allows printable characters only.</p>\n<pre><code>def txt2filename(txt, chr_set='normal'):\n    &quot;&quot;&quot;Converts txt to a valid Windows/*nix filename with printable characters only.\n\n    args:\n        txt: The str to convert.\n        chr_set: 'normal', 'universal', or 'inclusive'.\n            'universal':    ' -.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'\n            'normal':       Every printable character exept those disallowed on Windows/*nix.\n            'extended':     All 'normal' characters plus the extended character ASCII codes 128-255\n    &quot;&quot;&quot;\n\n    FILLER = '-'\n\n    # Step 1: Remove excluded characters.\n    if chr_set == 'universal':\n        # Lookups in a set are O(n) vs O(n * x) for a str.\n        printables = set(' -.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz')\n    else:\n        if chr_set == 'normal':\n            max_chr = 127\n        elif chr_set == 'extended':\n            max_chr = 256\n        else:\n            raise ValueError(f'The chr_set argument may be normal, extended or universal; not {chr_set=}')\n        EXCLUDED_CHRS = set(r'&lt;&gt;:&quot;/\\|?*')               # Illegal characters in Windows filenames.\n        EXCLUDED_CHRS.update(chr(127))                  # DEL (non-printable).\n        printables = set(chr(x)\n                         for x in range(32, max_chr)\n                         if chr(x) not in EXCLUDED_CHRS)\n    result = ''.join(x if x in printables else FILLER   # Allow printable characters only.\n                     for x in txt)\n\n    # Step 2: Device names, '.', and '..' are invalid filenames in Windows.\n    DEVICE_NAMES = 'CON,PRN,AUX,NUL,COM1,COM2,COM3,COM4,' \\\n                   'COM5,COM6,COM7,COM8,COM9,LPT1,LPT2,' \\\n                   'LPT3,LPT4,LPT5,LPT6,LPT7,LPT8,LPT9,' \\\n                   'CONIN$,CONOUT$,..,.'.split()        # This list is an O(n) operation.\n    if result in DEVICE_NAMES:\n        result = f'-{result}-'\n\n    # Step 3: Maximum length of filename is 255 bytes in Windows and Linux (other *nix flavors may allow longer names).\n    result = result[:255]\n\n    # Step 4: Windows does not allow filenames to end with '.' or ' ' or begin with ' '.\n    result = re.sub(r'^[. ]', FILLER, result)\n    result = re.sub(r' $', FILLER, result)\n\n    return result\n</code></pre>\n<p>This solution needs no external libraries. It substitutes non-printable filenames too because they are not always simple to deal with.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 21067716,
+                        "reputation": 325,
+                        "user_id": 15484549,
+                        "user_type": "registered",
+                        "display_name": "Alex"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1616746503,
+                    "creation_date": 1616746503,
+                    "answer_id": 66813197,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/66813197#66813197",
+                    "body": "<p>When confronted with the same problem I used python-slugify.</p>\n<p>Usage was also suggested by Shoham but, as therealmarv pointed out, by default python-slugify also converts dots.</p>\n<p>This behaviour can be overruled by including dots into the <code>regex_pattern</code> argument.</p>\n<pre><code>&gt; filename = &quot;This is a v\u00e4ry\u00ec' Strange File-N\u00f6m\u00e9.jpeg&quot;\n&gt; pattern = re.compile(r'[^-a-zA-Z0-9.]+')\n&gt; slugify(filename,regex_pattern=pattern) \n'this-is-a-varyi-strange-file-nome.jpeg'\n</code></pre>\n<p>Note that the regex pattern was copied from the</p>\n<p><code>ALLOWED_CHARS_PATTERN_WITH_UPPERCASE</code></p>\n<p>global variable within the <code>slugify.py</code> file of the python-slugify package and extended with &quot;.&quot;</p>\n<p>Keep in mind that special characters like <code>.()</code> must be escaped with <code>\\</code>.</p>\n<p>If you want to preserve uppercase letters use the <code>lowercase=False</code> argument.</p>\n<pre><code>&gt; filename = &quot;This is a v\u00e4ry\u00ec' Strange File-N\u00f6m\u00e9.jpeg&quot;\n&gt; pattern = re.compile(r'[^-a-zA-Z0-9.]+')\n&gt; slugify(filename,regex_pattern=pattern, lowercase=False) \n'This-is-a-varyi-Strange-File-Nome.jpeg'\n</code></pre>\n<p>This worked using Python 3.8.4 and python-slugify 4.0.1</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3304019,
+                                "reputation": 155,
+                                "user_id": 2779402,
+                                "user_type": "registered",
+                                "display_name": "Matan Dobrushin"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1654491581,
+                            "post_id": 68083584,
+                            "comment_id": 128095276,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/68083584#comment128095276_68083584",
+                            "body": "That worked great for me, I just commented the replacement of the backslash as I used this with os.makesidrs (I needed it to create directories...) But great answer, thanks."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1170244,
+                                "reputation": 195,
+                                "user_id": 1173555,
+                                "user_type": "registered",
+                                "display_name": "Martin Connell"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1698919757,
+                            "post_id": 68083584,
+                            "comment_id": 136466458,
+                            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/68083584#comment136466458_68083584",
+                            "body": "For some reason unknown to a Python newbie I had to replace the &#39;\\u0022&#39; with &#39;\\x22&#39; etc. to get working. Thanks."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3331976,
+                        "reputation": 1654,
+                        "user_id": 2800701,
+                        "user_type": "registered",
+                        "display_name": "RexBarker"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1624365444,
+                    "last_edit_date": 1624365444,
+                    "creation_date": 1624365024,
+                    "answer_id": 68083584,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/68083584#68083584",
+                    "body": "<p>Yet another answer for Windows specific paths, using simple replacement and no funky modules:</p>\n<pre><code>import re\n\ndef check_for_illegal_char(input_str):\n    # remove illegal characters for Windows file names/paths \n    # (illegal filenames are a superset (41) of the illegal path names (36))\n    # this is according to windows blacklist obtained with Powershell\n    # from: https://stackoverflow.com/questions/1976007/what-characters-are-forbidden-in-windows-and-linux-directory-names/44750843#44750843\n    #\n    # PS&gt; $enc = [system.Text.Encoding]::UTF8\n    # PS&gt; $FileNameInvalidChars = [System.IO.Path]::GetInvalidFileNameChars()\n    # PS&gt; $FileNameInvalidChars | foreach { $enc.GetBytes($_) } | Out-File -FilePath InvalidFileCharCodes.txt\n\n    illegal = '\\u0022\\u003c\\u003e\\u007c\\u0000\\u0001\\u0002\\u0003\\u0004\\u0005\\u0006\\u0007\\u0008' + \\\n              '\\u0009\\u000a\\u000b\\u000c\\u000d\\u000e\\u000f\\u0010\\u0011\\u0012\\u0013\\u0014\\u0015' + \\\n              '\\u0016\\u0017\\u0018\\u0019\\u001a\\u001b\\u001c\\u001d\\u001e\\u001f\\u003a\\u002a\\u003f\\u005c\\u002f' \n\n    output_str, _ = re.subn('['+illegal+']','_', input_str)\n    output_str = output_str.replace('\\\\','_')   # backslash cannot be handled by regex\n    output_str = output_str.replace('..','_')   # double dots are illegal too, or at least a bad idea \n    output_str = output_str[:-1] if output_str[-1] == '.' else output_str # can't have end of line '.'\n\n    if output_str != input_str:\n        print(f&quot;The name '{input_str}' had invalid characters, &quot;\n              f&quot;name was modified to '{output_str}'&quot;)\n\n    return output_str\n</code></pre>\n<p>When tested with <code>check_for_illegal_char('fas\\u0003\\u0004good\\\\..asd.')</code>, I get:</p>\n<pre><code>The name 'fas\u2665\u2666good\\..asd.' had invalid characters, name was modified to 'fas__good__asd'\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6155068,
+                        "reputation": 730,
+                        "user_id": 4798335,
+                        "user_type": "registered",
+                        "display_name": "VengaVenga"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1669915805,
+                    "creation_date": 1669915805,
+                    "answer_id": 74645904,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/74645904#74645904",
+                    "body": "<p>Still haven't found a good library to generate a valid filename. Note that in languages like German, Norwegian or French special characters in filenames are very common and totally OK. So I ended up with my own library:</p>\n<pre><code># util/files.py\n\nCHAR_MAX_LEN = 31\nCHAR_REPLACE = '_'\n\nILLEGAL_CHARS = [\n    '#',  # pound\n    '%',  # percent\n    '&amp;',  # ampersand\n    '{',  # left curly bracket\n    '}',  # right curly bracket\n    '\\\\',  # back slash\n    '&lt;',  # left angle bracket\n    '&gt;',  # right angle bracket\n    '*',  # asterisk\n    '?',  # question mark\n    '/',  # forward slash\n    ' ',  # blank spaces\n    '$',  # dollar sign\n    '!',  # exclamation point\n    &quot;'&quot;,  # single quotes\n    '&quot;',  # double quotes\n    ':',  # colon\n    '@',  # at sign\n    '+',  # plus sign\n    '`',  # backtick\n    '|',  # pipe\n    '=',  # equal sign\n]\n\n\ndef generate_filename(\n        name, char_replace=CHAR_REPLACE, length=CHAR_MAX_LEN, \n        illegal=ILLEGAL_CHARS, replace_dot=False):\n    ''' return clean filename '''\n    # init\n    _elem = name.split('.')\n    extension = _elem[-1].strip()\n    _length = length - len(extension) - 1\n    label = '.'.join(_elem[:-1]).strip()[:_length]\n    filename = ''\n    \n    # replace '.' ?\n    if replace_dot:\n        label = label.replace('.', char_replace)\n    \n    # clean\n    for char in label + '.' + extension:\n        if char in illegal:\n            char = char_replace\n        filename += char      \n    \n    return filename\n\n</code></pre>\n<p><code>generate_filename('nucgae zuta\u00e4er..0.1.docx', replace_dot=False)</code></p>\n<p>nucgae_zuta\u00e4er..0.1.docx</p>\n<p><code>generate_filename('nucgae zuta\u00e4er..0.1.docx', replace_dot=True)</code></p>\n<p>nucgae_zuta\u00e4er__0_1.docx</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4662401,
+                        "reputation": 10072,
+                        "user_id": 7128154,
+                        "user_type": "registered",
+                        "accept_rate": 60,
+                        "display_name": "Markus Dutschke"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1708693840,
+                    "creation_date": 1708693840,
+                    "answer_id": 78047637,
+                    "question_id": 295135,
+                    "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename/78047637#78047637",
+                    "body": "<h1>minimal working example with pytest</h1>\n<p>Transforming every character, which is not <code>A-Z</code>, <code>a-z</code>, <code>0-9</code> or <code>-</code> into <code>_</code>.</p>\n<h2>demo</h2>\n<pre><code>slugify(&quot;a b c&quot;)\nOut[9]: 'a_b_c'\nslugify(&quot;https://www.algorithmus-schmiede.de/kontakt/&quot;)\nOut[10]: 'https___www_algorithmus-schmiede_de_kontakt_'\nslugify(&quot;a-b c&quot;)\nOut[11]: 'a-b_c'\n</code></pre>\n<h2>full code with pytest</h2>\n<pre><code>import re\n\ndef slugify(str_: str):\n    slug = re.sub(r'[^A-z0-9-]', '_', str_)\n    return slug\n\nimport pytest\n\n@pytest.mark.parametrize(\n    &quot;inp, outp_exp&quot;,\n    [\n        pytest.param(&quot;a b c&quot;, &quot;a_b_c&quot;, id=&quot;whitespace -&gt; underscore&quot;),\n        pytest.param(&quot;https://www.algorithmus-schmiede.de/kontakt/&quot;,\n                     &quot;https___www_algorithmus-schmiede_de_kontakt_&quot;, id=&quot;url&quot;),\n        pytest.param(&quot;a-b c&quot;, &quot;a-b_c&quot;, id=&quot;minus conserved&quot;),\n    ]\n)\ndef test_slugify(inp, outp_exp):\n    assert slugify(inp) == outp_exp\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 16845,
+                "reputation": 5619,
+                "user_id": 37134,
+                "user_type": "registered",
+                "accept_rate": 80,
+                "display_name": "Sophie Gage"
+            },
+            "comment_count": 4,
+            "is_answered": true,
+            "accepted_answer_id": 295466,
+            "answer_count": 28,
+            "score": 450,
+            "last_activity_date": 1708693840,
+            "creation_date": 1226912527,
+            "last_edit_date": 1480299527,
+            "question_id": 295135,
+            "link": "https://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename",
+            "title": "Turn a string into a valid filename?",
+            "body": "<p>I have a string that I want to use as a filename, so I want to remove all characters that wouldn't be allowed in filenames, using Python.</p>\n\n<p>I'd rather be strict than otherwise, so let's say I want to retain only letters, digits, and a small set of other characters like <code>\"_-.() \"</code>. What's the most elegant solution?</p>\n\n<p>The filename needs to be valid on multiple operating systems (Windows, Linux and Mac OS) - it's an MP3 file in my library with the song title as the filename, and is shared and backed up between 3 machines.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7891
+}

@@ -1,0 +1,3 @@
+my_arg_parser = ArgumentParser(formatter_class=CustomArgumentFormatter)
+# ... add your arguments ...
+print(my_arg_parser.format_help())

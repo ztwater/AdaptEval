@@ -1,0 +1,567 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "logistic-regression",
+                "roc"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 3932738,
+                        "reputation": 3966,
+                        "user_id": 3638768,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "cgnorthcutt"
+                    },
+                    "edited": false,
+                    "score": 26,
+                    "creation_date": 1515724604,
+                    "post_id": 28719067,
+                    "comment_id": 83419434,
+                    "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python#comment83419434_28719067",
+                    "body": "The answer to your question is simply, np.argmax(tpr - fpr)"
+                },
+                {
+                    "owner": {
+                        "account_id": 3932738,
+                        "reputation": 3966,
+                        "user_id": 3638768,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "cgnorthcutt"
+                    },
+                    "edited": false,
+                    "score": 17,
+                    "creation_date": 1526450140,
+                    "post_id": 28719067,
+                    "comment_id": 87742944,
+                    "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python#comment87742944_28719067",
+                    "body": "And if you want the threshold value, its just thresholds[np.argmax(tpr - fpr)]. Everything else is verbosity."
+                },
+                {
+                    "owner": {
+                        "account_id": 11487331,
+                        "reputation": 1927,
+                        "user_id": 8419574,
+                        "user_type": "registered",
+                        "display_name": "kevin_theinfinityfund"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1595439338,
+                    "post_id": 28719067,
+                    "comment_id": 111477908,
+                    "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python#comment111477908_28719067",
+                    "body": "Can anyone speak to the difference between <code>thresholds[np.argmax(tpr - fpr)]</code> and the most upvoted answer function <code>threshold = Find_Optimal_Cutoff(data[&#39;true&#39;], data[&#39;pred&#39;])</code>? The thresholds are close, but different when I do an actual calculation."
+                },
+                {
+                    "owner": {
+                        "account_id": 9801024,
+                        "reputation": 773,
+                        "user_id": 7262393,
+                        "user_type": "registered",
+                        "accept_rate": 77,
+                        "display_name": "Dan"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1618250164,
+                    "post_id": 28719067,
+                    "comment_id": 118540422,
+                    "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python#comment118540422_28719067",
+                    "body": "I would argue that to find the optimal point, you&#39;re looking for the balance point of sensitivity and specificity or, the tpr and 1-fpr. If you have a particular reason not to have the minimum difference between sensitivity and specificity, I can understand. To me though, the optimal point for the threshold value would be <code>thresholds[np.argmin(abs(tpr-(1-fpr)))]</code>"
+                },
+                {
+                    "owner": {
+                        "account_id": 3906088,
+                        "reputation": 91,
+                        "user_id": 3232769,
+                        "user_type": "registered",
+                        "display_name": "rcauvin"
+                    },
+                    "reply_to_user": {
+                        "account_id": 3932738,
+                        "reputation": 3966,
+                        "user_id": 3638768,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "cgnorthcutt"
+                    },
+                    "edited": false,
+                    "score": 6,
+                    "creation_date": 1619738051,
+                    "post_id": 28719067,
+                    "comment_id": 119003129,
+                    "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python#comment119003129_28719067",
+                    "body": "If you consider the optimal threshold to be the point on the curve closest to the top left corner of the ROC-AUC graph, you may use <code>thresholds[np.argmin((1 - tpr) ** 2 + fpr ** 2)]</code>. But @cgnorthcutt&#39;s solution maximizes the Youden&#39;s J statistic, which seems to be the more accepted method. What is truly &quot;optimal&quot; for your situation depends on the relative costs of false positives and false negatives."
+                },
+                {
+                    "owner": {
+                        "account_id": 4615717,
+                        "reputation": 3736,
+                        "user_id": 3972558,
+                        "user_type": "registered",
+                        "accept_rate": 92,
+                        "display_name": "Joop"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1642843397,
+                    "post_id": 28719067,
+                    "comment_id": 125183811,
+                    "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python#comment125183811_28719067",
+                    "body": "I do not really understand why no one mentions here that the assumption everyone makes is that the cost of a False Positive is equal to a True Positive. This is not always the case. Only with this assumption this question can be answered with a single optimum in the way that is described here. Full explanation: <a href=\"https://en.wikipedia.org/wiki/Youden%27s_J_statistic\" rel=\"nofollow noreferrer\">en.wikipedia.org/wiki/Youden%27s_J_statistic</a>"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3233089,
+                                "reputation": 1617,
+                                "user_id": 2727875,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "skmathur"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1460517202,
+                            "post_id": 32482924,
+                            "comment_id": 60774091,
+                            "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/32482924#comment60774091_32482924",
+                            "body": "Is there a simple method to apply this threshold value to the predictions? Or do you just use an <code>apply</code> type function on the <code>data[&#39;preds&#39;]</code>?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4774571,
+                                "reputation": 2095,
+                                "user_id": 3858156,
+                                "user_type": "registered",
+                                "display_name": "Manohar Swamynathan"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3233089,
+                                "reputation": 1617,
+                                "user_id": 2727875,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "skmathur"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1460533078,
+                            "post_id": 32482924,
+                            "comment_id": 60780680,
+                            "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/32482924#comment60780680_32482924",
+                            "body": "@ skmathur, I have made it as a function for re-usability &amp; simplification. Hope this helps."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1565156,
+                                "reputation": 476,
+                                "user_id": 1454125,
+                                "user_type": "registered",
+                                "display_name": "John Bonfardeci"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1491878926,
+                            "post_id": 32482924,
+                            "comment_id": 73735786,
+                            "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/32482924#comment73735786_32482924",
+                            "body": "There&#39;s a problem with your formula for Youden&#39;s Index in the <code>Find_Optimal_Cutoff</code> function. <code>roc_curve</code> returns <code>fpr</code> which is the false positive rate (1-specificity).  You&#39;re subtracting <code>(1-fpr)</code>. You need to change the <code>tpr-(1-fpr)</code> to <code>tpr-fpr</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 983914,
+                                "reputation": 3293,
+                                "user_id": 1002903,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Ravi"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1493921235,
+                            "post_id": 32482924,
+                            "comment_id": 74620429,
+                            "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/32482924#comment74620429_32482924",
+                            "body": "Epi package in R chooses the cutoff that maximizes (specificity + sensitivity). Hence, it should be tpr + (1-fpr) and not tpr - (1-fpr) as given in the code"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 438612,
+                                "reputation": 24712,
+                                "user_id": 826983,
+                                "user_type": "registered",
+                                "accept_rate": 69,
+                                "display_name": "Stefan Falk"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1565156,
+                                "reputation": 476,
+                                "user_id": 1454125,
+                                "user_type": "registered",
+                                "display_name": "John Bonfardeci"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1517829155,
+                            "post_id": 32482924,
+                            "comment_id": 84238922,
+                            "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/32482924#comment84238922_32482924",
+                            "body": "@JohnBonfardeci Is it just me? I have the feeling OPs solution is producing the wrong result .. Shouldn&#39;t it be <code>pd.Series(tpr-fpr, index=thresholds, name=&#39;tf&#39;).idxmax()</code> ?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 23694,
+                                "reputation": 6211,
+                                "user_id": 59557,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "quant_dev"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1552985408,
+                            "post_id": 32482924,
+                            "comment_id": 97206790,
+                            "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/32482924#comment97206790_32482924",
+                            "body": "If applying this method to MNLogit with binary outcome, change the line <code>fpr, tpr, thresholds =roc_curve(data[&#39;admit&#39;], data[&#39;pred&#39;])</code> to <code>fpr, tpr, thresholds =roc_curve(data[&#39;admit&#39;], data[&#39;pred&#39;][:, 1])</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 17590479,
+                                "reputation": 354,
+                                "user_id": 12762467,
+                                "user_type": "registered",
+                                "display_name": "Zwiebak"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1565156,
+                                "reputation": 476,
+                                "user_id": 1454125,
+                                "user_type": "registered",
+                                "display_name": "John Bonfardeci"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1673451969,
+                            "post_id": 32482924,
+                            "comment_id": 132503171,
+                            "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/32482924#comment132503171_32482924",
+                            "body": "I don&#39;t understand why this reply has the most upvotes. @JohnBonfardeci and @ StefanFalk are right, the formula is incorrect. Besides that, the axis discribtions of the plot are also wrong, there should be a double y-axis or a legend for the tpr and fpr and the x-axis is actually the thresholds."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4774571,
+                        "reputation": 2095,
+                        "user_id": 3858156,
+                        "user_type": "registered",
+                        "display_name": "Manohar Swamynathan"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": true,
+                    "score": 83,
+                    "last_activity_date": 1580742731,
+                    "last_edit_date": 1592644375,
+                    "creation_date": 1441810508,
+                    "answer_id": 32482924,
+                    "question_id": 28719067,
+                    "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/32482924#32482924",
+                    "body": "<p>You can do this <a href=\"https://stackoverflow.com/questions/23131897/how-can-i-get-the-optimal-cutoff-point-of-the-roc-in-logistic-regression-as-a-nu\">using the <code>epi</code> package in R</a>, however I could not find similar package or example in Python.</p>\n<p>The optimal cut off point would be where \u201ctrue positive rate\u201d is <strong>high</strong> and the \u201cfalse positive rate\u201d is <strong>low</strong>. Based on this logic, I have pulled an example below to find optimal threshold.</p>\n<h1>Python code:</h1>\n<pre><code>import pandas as pd\nimport statsmodels.api as sm\nimport pylab as pl\nimport numpy as np\nfrom sklearn.metrics import roc_curve, auc\n\n# read the data in\ndf = pd.read_csv(&quot;http://www.ats.ucla.edu/stat/data/binary.csv&quot;)\n\n# rename the 'rank' column because there is also a DataFrame method called 'rank'\ndf.columns = [&quot;admit&quot;, &quot;gre&quot;, &quot;gpa&quot;, &quot;prestige&quot;]\n# dummify rank\ndummy_ranks = pd.get_dummies(df['prestige'], prefix='prestige')\n# create a clean data frame for the regression\ncols_to_keep = ['admit', 'gre', 'gpa']\ndata = df[cols_to_keep].join(dummy_ranks.iloc[:, 'prestige_2':])\n\n# manually add the intercept\ndata['intercept'] = 1.0\n\ntrain_cols = data.columns[1:]\n# fit the model\nresult = sm.Logit(data['admit'], data[train_cols]).fit()\nprint result.summary()\n\n# Add prediction to dataframe\ndata['pred'] = result.predict(data[train_cols])\n\nfpr, tpr, thresholds =roc_curve(data['admit'], data['pred'])\nroc_auc = auc(fpr, tpr)\nprint(&quot;Area under the ROC curve : %f&quot; % roc_auc)\n\n####################################\n# The optimal cut off would be where tpr is high and fpr is low\n# tpr - (1-fpr) is zero or near to zero is the optimal cut off point\n####################################\ni = np.arange(len(tpr)) # index for df\nroc = pd.DataFrame({'fpr' : pd.Series(fpr, index=i),'tpr' : pd.Series(tpr, index = i), '1-fpr' : pd.Series(1-fpr, index = i), 'tf' : pd.Series(tpr - (1-fpr), index = i), 'thresholds' : pd.Series(thresholds, index = i)})\nroc.iloc[(roc.tf-0).abs().argsort()[:1]]\n\n# Plot tpr vs 1-fpr\nfig, ax = pl.subplots()\npl.plot(roc['tpr'])\npl.plot(roc['1-fpr'], color = 'red')\npl.xlabel('1-False Positive Rate')\npl.ylabel('True Positive Rate')\npl.title('Receiver operating characteristic')\nax.set_xticklabels([])\n</code></pre>\n<p>The optimal cut off point is 0.317628, so anything above this can be labeled as 1 else 0. You can see from the output/chart that where TPR is crossing 1-FPR the TPR is 63%, FPR is 36% and TPR-(1-FPR) is nearest to zero in the  current example.</p>\n<h1>Output:</h1>\n<pre><code>        1-fpr       fpr        tf     thresholds       tpr\n  171  0.637363  0.362637  0.000433    0.317628     0.637795\n</code></pre>\n<p><a href=\"https://i.stack.imgur.com/UzN2X.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/UzN2X.png\" alt=\"enter image description here\" /></a></p>\n<p>Hope this is helpful.</p>\n<h1>Edit</h1>\n<p>To simplify and bring in re-usability, I have made a function to find the optimal probability cutoff point.</p>\n<h3>Python Code:</h3>\n<pre><code>def Find_Optimal_Cutoff(target, predicted):\n    &quot;&quot;&quot; Find the optimal probability cutoff point for a classification model related to event rate\n    Parameters\n    ----------\n    target : Matrix with dependent or target data, where rows are observations\n\n    predicted : Matrix with predicted data, where rows are observations\n\n    Returns\n    -------     \n    list type, with optimal cutoff value\n        \n    &quot;&quot;&quot;\n    fpr, tpr, threshold = roc_curve(target, predicted)\n    i = np.arange(len(tpr)) \n    roc = pd.DataFrame({'tf' : pd.Series(tpr-(1-fpr), index=i), 'threshold' : pd.Series(threshold, index=i)})\n    roc_t = roc.iloc[(roc.tf-0).abs().argsort()[:1]]\n\n    return list(roc_t['threshold']) \n\n\n# Add prediction probability to dataframe\ndata['pred_proba'] = result.predict(data[train_cols])\n\n# Find optimal probability threshold\nthreshold = Find_Optimal_Cutoff(data['admit'], data['pred_proba'])\nprint threshold\n# [0.31762762459360921]\n\n# Find prediction to the dataframe applying threshold\ndata['pred'] = data['pred_proba'].map(lambda x: 1 if x &gt; threshold else 0)\n\n# Print confusion Matrix\nfrom sklearn.metrics import confusion_matrix\nconfusion_matrix(data['admit'], data['pred'])\n# array([[175,  98],\n#        [ 46,  81]])\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 8055264,
+                        "reputation": 421,
+                        "user_id": 6072632,
+                        "user_type": "registered",
+                        "display_name": "lee"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 19,
+                    "last_activity_date": 1512580066,
+                    "last_edit_date": 1512580066,
+                    "creation_date": 1512578386,
+                    "answer_id": 47679281,
+                    "question_id": 28719067,
+                    "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/47679281#47679281",
+                    "body": "<p>Vanilla Python Implementation of Youden's J-Score</p>\n\n<pre><code>def cutoff_youdens_j(fpr,tpr,thresholds):\n    j_scores = tpr-fpr\n    j_ordered = sorted(zip(j_scores,thresholds))\n    return j_ordered[-1][1]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1131891,
+                                "reputation": 5267,
+                                "user_id": 1117789,
+                                "user_type": "registered",
+                                "accept_rate": 41,
+                                "display_name": "Allan Ruin"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1522220613,
+                            "post_id": 48218787,
+                            "comment_id": 86061657,
+                            "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/48218787#comment86061657_48218787",
+                            "body": "what if I get negative optimal_threshold ...., My output prediction is in the range [0,1]..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4639839,
+                                "reputation": 1585,
+                                "user_id": 3760021,
+                                "user_type": "registered",
+                                "accept_rate": 17,
+                                "display_name": "RafaelCaballero"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1572724841,
+                            "post_id": 48218787,
+                            "comment_id": 103650975,
+                            "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/48218787#comment103650975_48218787",
+                            "body": "Using      optimal_idx = np.argmax(tpr - fpr)     optimal_threshold = thresholds[optimal_idx]  as suggested does not work for me. The thresholds array contains negative values, but I expected values between 0 and 1."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3932738,
+                                "reputation": 3966,
+                                "user_id": 3638768,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "cgnorthcutt"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4639839,
+                                "reputation": 1585,
+                                "user_id": 3760021,
+                                "user_type": "registered",
+                                "accept_rate": 17,
+                                "display_name": "RafaelCaballero"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1572815693,
+                            "post_id": 48218787,
+                            "comment_id": 103668599,
+                            "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/48218787#comment103668599_48218787",
+                            "body": "@rafaelcaballero &quot;does not work&quot;? Everything you described sounds like it&#39;s working correctly. It should not be between 0 and 1. It&#39;s just a score."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4639839,
+                                "reputation": 1585,
+                                "user_id": 3760021,
+                                "user_type": "registered",
+                                "accept_rate": 17,
+                                "display_name": "RafaelCaballero"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1572824848,
+                            "post_id": 48218787,
+                            "comment_id": 103670300,
+                            "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/48218787#comment103670300_48218787",
+                            "body": "Then I missunderstood the question. I thought that the threshold moved between 0 and 1, and that the goal was to find the value in this range that maximized tpr-fpr"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1747819,
+                                "reputation": 810,
+                                "user_id": 1597592,
+                                "user_type": "registered",
+                                "display_name": "Qinsi"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1577259927,
+                            "post_id": 48218787,
+                            "comment_id": 105130132,
+                            "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/48218787#comment105130132_48218787",
+                            "body": "@cgnorthcutt Your code is correct. But TPR = TP/(real positive), FPR = FP/(real negative). TPR + FPR != 1."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3932738,
+                                "reputation": 3966,
+                                "user_id": 3638768,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "cgnorthcutt"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1747819,
+                                "reputation": 810,
+                                "user_id": 1597592,
+                                "user_type": "registered",
+                                "display_name": "Qinsi"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1577372745,
+                            "post_id": 48218787,
+                            "comment_id": 105154557,
+                            "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/48218787#comment105154557_48218787",
+                            "body": "@Qinsi - Yup. That&#39;s why I say &quot;it should not be between 0 and 1. It&#39;s just a score,&quot; above. Its a good point, though. Thanks for reminding."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3932738,
+                        "reputation": 3966,
+                        "user_id": 3638768,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "cgnorthcutt"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": false,
+                    "score": 73,
+                    "last_activity_date": 1515724688,
+                    "creation_date": 1515724688,
+                    "answer_id": 48218787,
+                    "question_id": 28719067,
+                    "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/48218787#48218787",
+                    "body": "<p>Given tpr, fpr, thresholds from your question, the answer for the optimal threshold is just:</p>\n\n<pre><code>optimal_idx = np.argmax(tpr - fpr)\noptimal_threshold = thresholds[optimal_idx]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 65630,
+                                "reputation": 4435,
+                                "user_id": 193017,
+                                "user_type": "registered",
+                                "accept_rate": 59,
+                                "display_name": "Roland Pihlakas"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1638495353,
+                            "post_id": 60933543,
+                            "comment_id": 124110341,
+                            "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/60933543#comment124110341_60933543",
+                            "body": "Use of <code>sqrt</code> seems unnecessary here. Argmax works same without it."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8924195,
+                                "reputation": 6136,
+                                "user_id": 6733064,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "GabrielChu"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1644472971,
+                            "post_id": 60933543,
+                            "comment_id": 125617421,
+                            "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/60933543#comment125617421_60933543",
+                            "body": "What optimal does it give us? Wouldn&#39;t it contradict with Youden&#39;s index for this example: <code>tpr=0.5 &amp; fpr=0.5</code> and <code>tpr=0.55 &amp; fpr=0.45</code>?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 10321130,
+                        "reputation": 1548,
+                        "user_id": 7613995,
+                        "user_type": "registered",
+                        "display_name": "Ramesh Kumar"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1585580872,
+                    "creation_date": 1585580872,
+                    "answer_id": 60933543,
+                    "question_id": 28719067,
+                    "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/60933543#60933543",
+                    "body": "<p>Although I am late to the party, but you can also use Geometric Mean to determine the optimal threshold as stated here: <a href=\"https://machinelearningmastery.com/threshold-moving-for-imbalanced-classification/\" rel=\"noreferrer\">threshold tuning for imbalance classification</a></p>\n\n<p>It can be computed as:</p>\n\n<pre><code># calculate the g-mean for each threshold\ngmeans = sqrt(tpr * (1-fpr))\n# locate the index of the largest g-mean\nix = argmax(gmeans)\nprint('Best Threshold=%f, G-Mean=%.3f' % (thresholds[ix], gmeans[ix]))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 13074628,
+                                "reputation": 188,
+                                "user_id": 9447180,
+                                "user_type": "registered",
+                                "display_name": "Alexander Vocaet"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1651482817,
+                            "post_id": 70229424,
+                            "comment_id": 127367060,
+                            "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/70229424#comment127367060_70229424",
+                            "body": "This is a nice approach, it does however not account for non unique probabilites. roc_curve returns a value for each unique probability, yet the line <code>df_test[&quot;tpr&quot;] = tpr[1:][::-1]</code> error, for any df that was created with unique y_proba"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 13074628,
+                                "reputation": 188,
+                                "user_id": 9447180,
+                                "user_type": "registered",
+                                "display_name": "Alexander Vocaet"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1692083590,
+                            "post_id": 70229424,
+                            "comment_id": 135573320,
+                            "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/70229424#comment135573320_70229424",
+                            "body": "I suggest, dropping all duplicates regarding to the column <code>&quot;proba&quot; </code> in <code>df_test </code> right after its creation."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 9176835,
+                        "reputation": 2149,
+                        "user_id": 6822178,
+                        "user_type": "registered",
+                        "display_name": "Max Pierini"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1638651460,
+                    "creation_date": 1638651460,
+                    "answer_id": 70229424,
+                    "question_id": 28719067,
+                    "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python/70229424#70229424",
+                    "body": "<p>Another possible solution.</p>\n<p>I'll create some random data.</p>\n<pre><code>import numpy as np\nimport pandas as pd\nimport scipy.stats as sps\nfrom sklearn import linear_model\nfrom sklearn.metrics import roc_curve, RocCurveDisplay, auc\nfrom sklearn.model_selection import train_test_split\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\n# define data distributions\nN0 = 300\nN1 = 250\n\ndist0 = sps.gamma(a=8, scale=1/10)\nx0 = np.linspace(dist0.ppf(0), dist0.ppf(1-1e-5), 100)\ny0 = dist0.pdf(x0)\n\ndist1 = sps.gamma(a=15, scale=1/10)\nx1 = np.linspace(dist1.ppf(0), dist1.ppf(1-1e-5), 100)\ny1 = dist1.pdf(x1)\n\nwith plt.style.context(&quot;bmh&quot;):\n    plt.plot(x0, y0, label=&quot;NEG&quot;)\n    plt.plot(x1, y1, label=&quot;POS&quot;)\n    plt.legend()\n    plt.title(&quot;Gamma distributions&quot;)\n</code></pre>\n<p><a href=\"https://i.stack.imgur.com/JIv81.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/JIv81.png\" alt=\"enter image description here\" /></a></p>\n<pre><code># create a random dataset\nrvs0 = dist0.rvs(N0, random_state=0)\nrvs1 = dist1.rvs(N1, random_state=1)\n\nwith plt.style.context(&quot;bmh&quot;):\n    plt.hist(rvs0, alpha=.5, label=&quot;NEG&quot;)\n    plt.hist(rvs1, alpha=.5, label=&quot;POS&quot;)\n    plt.legend()\n    plt.title(&quot;Random dataset&quot;)\n</code></pre>\n<p><a href=\"https://i.stack.imgur.com/0Yk66.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/0Yk66.png\" alt=\"enter image description here\" /></a></p>\n<p>Initialize a dataframe with observations (x feature and y target)</p>\n<pre><code>df = pd.DataFrame({\n    &quot;y&quot;: np.concatenate(( np.repeat(0, N0) , np.repeat(1, N1) )),\n    &quot;x&quot;: np.concatenate(( rvs0             , rvs1             )),\n})\n</code></pre>\n<p>and display it with a box plot</p>\n<pre><code># plot the data\nwith plt.style.context(&quot;bmh&quot;):\n    g = sns.catplot(\n        kind=&quot;box&quot;,\n        data=df,\n        x=&quot;y&quot;, y=&quot;x&quot;\n    )\n    ax = g.axes.flat[0]\n    sns.stripplot(\n        data=df,\n        x=&quot;y&quot;, y=&quot;x&quot;,\n        ax=ax, color='k',\n        alpha=.25\n    )\n    plt.show()\n</code></pre>\n<p><a href=\"https://i.stack.imgur.com/n2Us3.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/n2Us3.png\" alt=\"enter image description here\" /></a></p>\n<p>Now, we can split the dataframe into train-test, perform Logistic regression, compute ROC curve, AUC, Youden's index, find the cut-off and plot everything. All using <code>pandas</code></p>\n<pre><code># split dataset into train-test\nX_train, X_test, y_train, y_test = train_test_split(\n    df[[&quot;x&quot;]], df.y.values, test_size=0.5, random_state=1)\n# init and fit Logistic Regression on train set\nclf = linear_model.LogisticRegression()\nclf.fit(X_train, y_train)\n# predict probabilities on x test set\ny_proba = clf.predict_proba(X_test)\n# compute FPR and TPR from y test set and predicted probabilities\nfpr, tpr, thresholds = roc_curve(\n    y_test, y_proba[:,1], drop_intermediate=False)\n# compute ROC AUC\nroc_auc = auc(fpr, tpr)\n# init a dataframe for results\ndf_test = pd.DataFrame({\n    &quot;x&quot;: X_test.x.values.flatten(),\n    &quot;y&quot;: y_test,\n    &quot;proba&quot;: y_proba[:,1]\n})\n# sort it by predicted probabilities\n# because thresholds[1:] = y_proba[::-1]\ndf_test.sort_values(by=&quot;proba&quot;, inplace=True)\n# add reversed TPR and FPR\ndf_test[&quot;tpr&quot;] = tpr[1:][::-1]\ndf_test[&quot;fpr&quot;] = fpr[1:][::-1]\n# optional: add thresholds to check\n#df_test[&quot;thresholds&quot;] = thresholds[1:][::-1]\n# add Youden's j index\ndf_test[&quot;youden_j&quot;] = df_test.tpr - df_test.fpr\n# define the cut_off and diplay it\ncut_off = df_test.sort_values(\n    by=&quot;youden_j&quot;, ascending=False, ignore_index=True).iloc[0]\nprint(&quot;CUT-OFF:&quot;)\nprint(cut_off)\n\n# plot everything\nwith plt.style.context(&quot;bmh&quot;):\n    fig, ax = plt.subplots(1, 3, figsize=(15, 5))\n    \n    RocCurveDisplay(\n        fpr=df_test.fpr, tpr=df_test.tpr,\n        roc_auc=roc_auc).plot(ax=ax[0])\n    ax[0].set_title(&quot;ROC curve&quot;)\n    ax[0].axline(xy1=(0,0), slope=1, color=&quot;r&quot;, ls=&quot;:&quot;)\n    ax[0].plot(cut_off.fpr, cut_off.tpr, 'ko', ms=10)\n    \n    df_test.plot(\n        x=&quot;youden_j&quot;, y=&quot;proba&quot;, ax=ax[1], \n        ylabel=&quot;Predicted Probabilities&quot;, xlabel=&quot;Youden j&quot;,\n        title=&quot;Youden's index&quot;, legend=False\n    )\n    ax[1].axvline(cut_off.youden_j, color=&quot;k&quot;, ls=&quot;--&quot;)\n    ax[1].axhline(cut_off.proba, color=&quot;k&quot;, ls=&quot;--&quot;)\n    \n    df_test.plot(\n        x=&quot;x&quot;, y=&quot;proba&quot;, ax=ax[2], \n        ylabel=&quot;Predicted Probabilities&quot;, xlabel=&quot;X Feature&quot;,\n        title=&quot;Cut-Off&quot;, legend=False\n    )\n    ax[2].axvline(cut_off.x, color=&quot;k&quot;, ls=&quot;--&quot;)\n    ax[2].axhline(cut_off.proba, color=&quot;k&quot;, ls=&quot;--&quot;)\n\n    plt.show()\n</code></pre>\n<p>and we get</p>\n<pre><code>CUT-OFF:\nx           1.065712\ny           1.000000\nproba       0.378543\ntpr         0.852713\nfpr         0.143836\nyouden_j    0.708878\n</code></pre>\n<p><a href=\"https://i.stack.imgur.com/P46JQ.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/P46JQ.png\" alt=\"enter image description here\" /></a></p>\n<p>We can finally check</p>\n<pre><code># check results\nTP = df_test[(df_test.x&gt;=cut_off.x)&amp;(df_test.y==1)].index.size\nFP = df_test[(df_test.x&gt;=cut_off.x)&amp;(df_test.y==0)].index.size\nTN = df_test[(df_test.x&lt; cut_off.x)&amp;(df_test.y==0)].index.size\nFN = df_test[(df_test.x&lt; cut_off.x)&amp;(df_test.y==1)].index.size\n\nprint(&quot;True Positive Rate: &quot;, TP / (TP + FN))\nprint(&quot;False Positive Rate:&quot;, 1 - TN / (TN + FP))\n</code></pre>\n<pre><code>True Positive Rate:  0.8527131782945736\nFalse Positive Rate: 0.14383561643835618\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 3575270,
+                "reputation": 1879,
+                "user_id": 3844339,
+                "user_type": "registered",
+                "accept_rate": 53,
+                "display_name": "Shiva Prakash"
+            },
+            "comment_count": 6,
+            "is_answered": true,
+            "accepted_answer_id": 32482924,
+            "answer_count": 5,
+            "score": 86,
+            "last_activity_date": 1638651460,
+            "creation_date": 1424867335,
+            "last_edit_date": 1554372537,
+            "question_id": 28719067,
+            "link": "https://stackoverflow.com/questions/28719067/roc-curve-and-cut-off-point-python",
+            "title": "Roc curve and cut off point. Python",
+            "body": "<p>I ran a logistic regression model and made predictions of the logit values. I used this to get the points on the ROC curve:</p>\n\n<pre><code> from sklearn import metrics\n fpr, tpr, thresholds = metrics.roc_curve(Y_test,p)\n</code></pre>\n\n<p>I know <code>metrics.roc_auc_score</code> gives the area under the ROC curve. Can anyone tell me what command will find the optimal cut-off point (threshold value)?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9120
+}

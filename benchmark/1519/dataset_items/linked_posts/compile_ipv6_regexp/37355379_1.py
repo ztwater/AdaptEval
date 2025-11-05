@@ -1,0 +1,1 @@
+ifconfig -a | egrep -o '([a-f0-9:]+:+)+[a-f0-9]+'

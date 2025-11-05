@@ -1,0 +1,564 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "pandas",
+                "dataframe",
+                "rolling-computation"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 10220562,
+                        "reputation": 137,
+                        "user_id": 9274598,
+                        "user_type": "registered",
+                        "display_name": "High GPA"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1660025039,
+                    "post_id": 60736556,
+                    "comment_id": 129428336,
+                    "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns#comment129428336_60736556",
+                    "body": "masscenter is just a function that maps every x into zero?"
+                },
+                {
+                    "owner": {
+                        "account_id": 10220562,
+                        "reputation": 137,
+                        "user_id": 9274598,
+                        "user_type": "registered",
+                        "display_name": "High GPA"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1660043284,
+                    "post_id": 60736556,
+                    "comment_id": 129434252,
+                    "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns#comment129434252_60736556",
+                    "body": "df2[&#39;stamp&#39;] undefined though. Did I miss anything?"
+                },
+                {
+                    "owner": {
+                        "account_id": 13763773,
+                        "reputation": 1230,
+                        "user_id": 12497820,
+                        "user_type": "registered",
+                        "display_name": "Suthiro"
+                    },
+                    "reply_to_user": {
+                        "account_id": 10220562,
+                        "reputation": 137,
+                        "user_id": 9274598,
+                        "user_type": "registered",
+                        "display_name": "High GPA"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1660402539,
+                    "post_id": 60736556,
+                    "comment_id": 129527316,
+                    "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns#comment129527316_60736556",
+                    "body": "@HighGPA the &#39;masscenter&#39; function was constructed this way to create a minimal, reproducible example. Have you declared <code>columns=[&#39;stamp&#39;, &#39;price&#39;,&#39;nQty&#39;]</code>?"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 13763773,
+                                "reputation": 1230,
+                                "user_id": 12497820,
+                                "user_type": "registered",
+                                "display_name": "Suthiro"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1584561608,
+                            "post_id": 60743386,
+                            "comment_id": 107477740,
+                            "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/60743386#comment107477740_60743386",
+                            "body": "Thank you, but alas! It also accepts fixed window size - 2 (or whatever number) of <i>points</i>, but not <i>seconds</i> or another so-called <i>offsets</i>. However, you gave me an idea. I will try it and if it works will post soon."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 193676,
+                                "reputation": 5471,
+                                "user_id": 435563,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "shaunc"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1601826656,
+                            "post_id": 60743386,
+                            "comment_id": 113520201,
+                            "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/60743386#comment113520201_60743386",
+                            "body": "If your data is not too sparse, you could use rolling_apply as suggested using a window large enough to encompass given time offset records, and incorporate a bounds check against the stamp inside the applied function. You might need to use large windows, but potentially rolling_apply&#39;s ability to execute parallel jobs might make up for that."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7991958,
+                        "reputation": 301,
+                        "user_id": 9397979,
+                        "user_type": "registered",
+                        "display_name": "saninstein"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 20,
+                    "last_activity_date": 1584547892,
+                    "creation_date": 1584547892,
+                    "answer_id": 60743386,
+                    "question_id": 60736556,
+                    "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/60743386#60743386",
+                    "body": "<p>You can use <strong>rolling_apply</strong> function from <a href=\"https://pypi.org/project/numpy-ext/\" rel=\"noreferrer\">numpy_ext</a> module:</p>\n\n<pre><code>import numpy as np\nimport pandas as pd\nfrom numpy_ext import rolling_apply\n\n\ndef masscenter(price, nQty):\n    return np.sum(price * nQty) / np.sum(nQty)\n\n\ndf = pd.DataFrame( [['02:59:47.000282', 87.60, 739],\n                    ['03:00:01.042391', 87.51, 10],\n                    ['03:00:01.630182', 87.51, 10],\n                    ['03:00:01.635150', 88.00, 792],\n                    ['03:00:01.914104', 88.00, 10]], \n                   columns=['stamp', 'price','nQty'])\ndf['stamp'] = pd.to_datetime(df['stamp'], format='%H:%M:%S.%f')\ndf.set_index('stamp', inplace=True, drop=True)\n\nwindow = 2\ndf['y'] = rolling_apply(masscenter, window, df.price.values, df.nQty.values)\nprint(df)\n\n                            price  nQty          y\nstamp                                             \n1900-01-01 02:59:47.000282  87.60   739        NaN\n1900-01-01 03:00:01.042391  87.51    10  87.598798\n1900-01-01 03:00:01.630182  87.51    10  87.510000\n1900-01-01 03:00:01.635150  88.00   792  87.993890\n1900-01-01 03:00:01.914104  88.00    10  88.000000\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 13763773,
+                        "reputation": 1230,
+                        "user_id": 12497820,
+                        "user_type": "registered",
+                        "display_name": "Suthiro"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1585066309,
+                    "creation_date": 1585066309,
+                    "answer_id": 60834940,
+                    "question_id": 60736556,
+                    "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/60834940#60834940",
+                    "body": "<p>So I found no way to roll over two columns, however without inbuilt pandas functions.\nThe code is listed below.</p>\n\n<pre><code># function to find an index corresponding\n# to current value minus offset value\ndef prevInd(series, offset, date):\n    offset = to_offset(offset)\n    end_date = date - offset\n    end = series.index.searchsorted(end_date, side=\"left\")\n    return end\n\n# function to find an index corresponding\n# to the first value greater than current\n# it is useful when one has timeseries with non-unique\n# but monotonically increasing values\ndef nextInd(series, date):\n    end = series.index.searchsorted(date, side=\"right\")\n    return end\n\ndef twoColumnsRoll(dFrame, offset, usecols, fn, columnName = 'twoColRol'):\n    # find all unique indices\n    uniqueIndices = dFrame.index.unique()\n    numOfPoints = len(uniqueIndices)\n    # prepare an output array\n    moving = np.zeros(numOfPoints)\n    # nameholders\n    price = dFrame[usecols[0]]\n    qty   = dFrame[usecols[1]]\n\n    # iterate over unique indices\n    for ii in range(numOfPoints):\n        # nameholder\n        pp = uniqueIndices[ii]\n        # right index - value greater than current\n        rInd = afta.nextInd(dFrame,pp)\n        # left index - the least value that \n        # is bigger or equal than (pp - offset)\n        lInd = afta.prevInd(dFrame,offset,pp)\n        # call the actual calcuating function over two arrays\n        moving[ii] = fn(price[lInd:rInd], qty[lInd:rInd])\n    # construct and return DataFrame\n    return pd.DataFrame(data=moving,index=uniqueIndices,columns=[columnName])\n</code></pre>\n\n<p>This code works, but it is relatively slow and inefficient. I suppose one can use numpy.lib.stride_tricks from <a href=\"https://stackoverflow.com/questions/38878917/how-to-invoke-pandas-rolling-apply-with-parameters-from-multiple-column\">How to invoke pandas.rolling.apply with parameters from multiple column?</a> to speedup things.\nHowever, go big or go home - I ended writing a function in C++ and a wrapper for it.\n<br>I'd like not to post it as answer, since it is a workaround and I have not answered neither part of my question, but it is too long for a commentary.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 13763773,
+                                "reputation": 1230,
+                                "user_id": 12497820,
+                                "user_type": "registered",
+                                "display_name": "Suthiro"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1585519639,
+                            "post_id": 60918101,
+                            "comment_id": 107781854,
+                            "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/60918101#comment107781854_60918101",
+                            "body": "This is the answer at least for the second part. I knew that it should be possible. Such simple and pythonic solution! Thank you very much!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7903240,
+                                "reputation": 1139,
+                                "user_id": 5969611,
+                                "user_type": "registered",
+                                "display_name": "Harald Husum"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1597935557,
+                            "post_id": 60918101,
+                            "comment_id": 112300671,
+                            "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/60918101#comment112300671_60918101",
+                            "body": "This is a very expensive solution, though, for larger datasets."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 12411256,
+                                "reputation": 1916,
+                                "user_id": 9043286,
+                                "user_type": "registered",
+                                "display_name": "adr"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1598041696,
+                            "post_id": 60918101,
+                            "comment_id": 112339751,
+                            "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/60918101#comment112339751_60918101",
+                            "body": "Could you elaborate on your observation?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6177751,
+                                "reputation": 4083,
+                                "user_id": 5443120,
+                                "user_type": "registered",
+                                "accept_rate": 25,
+                                "display_name": "falsePockets"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1610939431,
+                            "post_id": 60918101,
+                            "comment_id": 116282106,
+                            "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/60918101#comment116282106_60918101",
+                            "body": "&quot;then you use those index values to get multi-column slices from your original DataFrame&quot; - do you mean <code>.iloc[i, c]</code> to reach into the dataframe from inside <code>masscenter</code>? i.e. <code>masscenter</code> doesn&#39;t have the arguments it needs directly?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2863905,
+                                "reputation": 748,
+                                "user_id": 2458579,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "w00dy"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1618501881,
+                            "post_id": 60918101,
+                            "comment_id": 118625913,
+                            "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/60918101#comment118625913_60918101",
+                            "body": "Works for me though pandas&#39; devs should really implement this somehow..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8542323,
+                                "reputation": 111,
+                                "user_id": 6401987,
+                                "user_type": "registered",
+                                "display_name": "Tom"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2863905,
+                                "reputation": 748,
+                                "user_id": 2458579,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "w00dy"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1629463024,
+                            "post_id": 60918101,
+                            "comment_id": 121699977,
+                            "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/60918101#comment121699977_60918101",
+                            "body": "Could not more agree with @w00dy, should be made as an issue  : such a useful tool that would be"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1161243,
+                                "reputation": 383,
+                                "user_id": 1140696,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "chuse"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1643214786,
+                            "post_id": 60918101,
+                            "comment_id": 125281628,
+                            "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/60918101#comment125281628_60918101",
+                            "body": "it is a nice solution, but then you have to hardcore df into the function masscenter; how do you solve that?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 12411256,
+                                "reputation": 1916,
+                                "user_id": 9043286,
+                                "user_type": "registered",
+                                "display_name": "adr"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1643306357,
+                            "post_id": 60918101,
+                            "comment_id": 125310950,
+                            "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/60918101#comment125310950_60918101",
+                            "body": "Could be a new question..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 12411256,
+                                "reputation": 1916,
+                                "user_id": 9043286,
+                                "user_type": "registered",
+                                "display_name": "adr"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1643306696,
+                            "post_id": 60918101,
+                            "comment_id": 125311102,
+                            "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/60918101#comment125311102_60918101",
+                            "body": "...but look at the documentation for <code>apply</code> first."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 85011,
+                                "reputation": 64,
+                                "user_id": 237296,
+                                "user_type": "registered",
+                                "display_name": "lele1c"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1691444673,
+                            "post_id": 60918101,
+                            "comment_id": 135490041,
+                            "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/60918101#comment135490041_60918101",
+                            "body": "Use a closure to put df in the lexical scope of masscenter."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 12411256,
+                                "reputation": 1916,
+                                "user_id": 9043286,
+                                "user_type": "registered",
+                                "display_name": "adr"
+                            },
+                            "reply_to_user": {
+                                "account_id": 85011,
+                                "reputation": 64,
+                                "user_id": 237296,
+                                "user_type": "registered",
+                                "display_name": "lele1c"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1692347427,
+                            "post_id": 60918101,
+                            "comment_id": 135613353,
+                            "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/60918101#comment135613353_60918101",
+                            "body": "@lele1c Maybe you can add a solution that does this?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 441885,
+                                "reputation": 60711,
+                                "user_id": 832230,
+                                "user_type": "registered",
+                                "display_name": "Asclepius"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1694911807,
+                            "post_id": 60918101,
+                            "comment_id": 135953651,
+                            "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/60918101#comment135953651_60918101",
+                            "body": "The answer has been duly updated to provide <code>df</code> into the applied function as per the docs of <a href=\"https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.core.window.rolling.Rolling.apply.html\" rel=\"nofollow noreferrer\"><code>apply</code></a>,"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 12411256,
+                        "reputation": 1916,
+                        "user_id": 9043286,
+                        "user_type": "registered",
+                        "display_name": "adr"
+                    },
+                    "comment_count": 12,
+                    "is_accepted": true,
+                    "score": 39,
+                    "last_activity_date": 1694921512,
+                    "last_edit_date": 1694921512,
+                    "creation_date": 1585502847,
+                    "answer_id": 60918101,
+                    "question_id": 60736556,
+                    "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/60918101#60918101",
+                    "body": "<p>How about this:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import pandas as pd\n\ndef masscenter(ser: pd.Series, df: pd.DataFrame):\n    df_roll = df.loc[ser.index]\n    return your_actual_masscenter(df_roll)\n\nmasscenter_output = df['price'].rolling(window=3).apply(masscenter, args=(df,))\n</code></pre>\n<p>It uses the rolling logic to get subsets via an arbitrary column. The arbitrary column itself is not used, only the rolling index is used. This relies on the default of <code>raw=False</code> which provides the index values for those subsets. The applied function uses those index values to get multi-column slices from the original dataframe.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7326622,
+                                "reputation": 1353,
+                                "user_id": 5580841,
+                                "user_type": "registered",
+                                "display_name": "Ludo Schmidt"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1622123846,
+                            "post_id": 67245054,
+                            "comment_id": 119705163,
+                            "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/67245054#comment119705163_67245054",
+                            "body": "personal exp&#233;rience with your respond : I pip install and used &quot;from numpy_ext import rolling_apply&quot;. But it destroyed my pandas in my script."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 37565,
+                                "reputation": 78537,
+                                "user_id": 107409,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Contango"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7326622,
+                                "reputation": 1353,
+                                "user_id": 5580841,
+                                "user_type": "registered",
+                                "display_name": "Ludo Schmidt"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1622124621,
+                            "post_id": 67245054,
+                            "comment_id": 119705563,
+                            "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/67245054#comment119705563_67245054",
+                            "body": "@LudoSchmidt Good point. Updated code above to import <code>rolling_apply</code> as <code>rolling_apply_ext</code>, so everything is backwards compatible with the existing <code>rolling_apply</code> calls in Pandas."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 13763773,
+                                "reputation": 1230,
+                                "user_id": 12497820,
+                                "user_type": "registered",
+                                "display_name": "Suthiro"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1623921802,
+                            "post_id": 67245054,
+                            "comment_id": 120217123,
+                            "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/67245054#comment120217123_67245054",
+                            "body": "&quot;I gave up trying to use Pandas. It&#39;s fundamentally broken&quot; - this, unfortunately."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 19582,
+                                "reputation": 8028,
+                                "user_id": 45974,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Tom"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1667520001,
+                            "post_id": 67245054,
+                            "comment_id": 131192119,
+                            "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/67245054#comment131192119_67245054",
+                            "body": "how would you do this on a GroupBy?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 37565,
+                        "reputation": 78537,
+                        "user_id": 107409,
+                        "user_type": "registered",
+                        "accept_rate": 83,
+                        "display_name": "Contango"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1622124526,
+                    "last_edit_date": 1622124526,
+                    "creation_date": 1619281849,
+                    "answer_id": 67245054,
+                    "question_id": 60736556,
+                    "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/67245054#67245054",
+                    "body": "<p>With reference to the excellent answer from @saninstein.</p>\n<p>Install numpy_ext from: <a href=\"https://pypi.org/project/numpy-ext/\" rel=\"noreferrer\">https://pypi.org/project/numpy-ext/</a></p>\n<pre><code>import numpy as np\nimport pandas as pd\nfrom numpy_ext import rolling_apply as rolling_apply_ext\n\ndef box_sum(a,b):\n    return np.sum(a) + np.sum(b)\n\ndf = pd.DataFrame({&quot;x&quot;: [1,2,3,4], &quot;y&quot;: [1,2,3,4]})\n\nwindow = 2\ndf[&quot;sum&quot;] = rolling_apply_ext(box_sum, window , df.x.values, df.y.values)\n</code></pre>\n<p>Output:</p>\n<pre><code>print(df.to_string(index=False))\n x  y  sum\n 1  1  NaN\n 2  2  6.0\n 3  3 10.0\n 4  4 14.0\n</code></pre>\n<p>Notes</p>\n<ul>\n<li>The rolling function is timeseries friendly. It defaults to always looking backwards, so the 6 is the sum of present and past values in the array.</li>\n<li>In the sample above, imported <code>rolling_apply</code> as <code>rolling_apply_ext</code> so it cannot possibly interfere with any existing calls to Pandas <code>rolling_apply</code> (thanks to comment by @LudoSchmidt).</li>\n</ul>\n<p>As a side note, I gave up trying to use Pandas. It's fundamentally broken: it handles single-column aggreagate and apply with little problems, but it's a overly complex rube-goldberg machine when trying to get it to work with more two columns or more.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2347166,
+                        "reputation": 349,
+                        "user_id": 2057092,
+                        "user_type": "registered",
+                        "display_name": "Anibal Yeh"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1656580864,
+                    "creation_date": 1656580864,
+                    "answer_id": 72813312,
+                    "question_id": 60736556,
+                    "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/72813312#72813312",
+                    "body": "<p>How about this?</p>\n<pre><code>ggg = pd.DataFrame({&quot;a&quot;:[1,2,3,4,5,6,7], &quot;b&quot;:[7,6,5,4,3,2,1]})\n\ndef my_rolling_apply2(df, fun, window):\n    prepend = [None] * (window - 1)\n    end = len(df) - window\n    mid = map(lambda start: fun(df[start:start + window]), np.arange(0,end))\n    last =  fun(df[end:])\n    return [*prepend, *mid, last]\n\nmy_rolling_apply2(ggg, lambda df: (df[&quot;a&quot;].max(), df[&quot;b&quot;].min()), 3)\n</code></pre>\n<p>And result is:</p>\n<pre><code>[None, None, (3, 5), (4, 4), (5, 3), (6, 2), (7, 1)]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1018445,
+                        "reputation": 838,
+                        "user_id": 1029466,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "Hamid Fadishei"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1661101389,
+                    "creation_date": 1661101389,
+                    "answer_id": 73436556,
+                    "question_id": 60736556,
+                    "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/73436556#73436556",
+                    "body": "<p>For performing a rolling window operation with access to all columns of a dataframe, you can pass <code>mehtod='table'</code> to <code>rolling()</code>. Example:</p>\n<pre><code>import pandas as pd\nimport numpy as np\nfrom numba import jit\n\ndf = pd.DataFrame({'a': [1, 2, 3, 4, 5, 6], 'b': [1, 3, 5, 7, 9, 11]})\n\n@jit\ndef f(w):\n    # we have access to both columns of the dataframe here\n    return np.max(w), np.min(w)\n\ndf.rolling(3, method='table').apply(f, raw=True, engine='numba')\n</code></pre>\n<p>It should be noted that <code>method='table'</code> requires numba engine (<code>pip install numba</code>). The <code>@jit</code> part in the example is not mandatory but helps with performance. The result of the above example code will be:</p>\n<div class=\"s-table-container\">\n<table class=\"s-table\">\n<thead>\n<tr>\n<th>a</th>\n<th>b</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>NaN</td>\n<td>NaN</td>\n</tr>\n<tr>\n<td>NaN</td>\n<td>NaN</td>\n</tr>\n<tr>\n<td>5.0</td>\n<td>1.0</td>\n</tr>\n<tr>\n<td>7.0</td>\n<td>2.0</td>\n</tr>\n<tr>\n<td>9.0</td>\n<td>3.0</td>\n</tr>\n<tr>\n<td>11.0</td>\n<td>4.0</td>\n</tr>\n</tbody>\n</table>\n</div>"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 13763773,
+                                "reputation": 1230,
+                                "user_id": 12497820,
+                                "user_type": "registered",
+                                "display_name": "Suthiro"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1706155635,
+                            "post_id": 77871538,
+                            "comment_id": 137293150,
+                            "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/77871538#comment137293150_77871538",
+                            "body": "This works, but one needs to compute rolling more than once, so the solution is (very) slow for large datasets."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 18987333,
+                        "reputation": 11,
+                        "user_id": 13857322,
+                        "user_type": "registered",
+                        "display_name": "manbui"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1706085511,
+                    "last_edit_date": 1706085511,
+                    "creation_date": 1706085409,
+                    "answer_id": 77871538,
+                    "question_id": 60736556,
+                    "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns/77871538#77871538",
+                    "body": "<pre><code>(df['price'] * df['nQty']).rolling(2).sum() / df['nQty'].rolling(2).sum()\n\n# output\n    stamp\n1900-01-01 02:59:47.000282          NaN\n1900-01-01 03:00:01.042391    87.598798\n1900-01-01 03:00:01.630182    87.510000\n1900-01-01 03:00:01.635150    87.993890\n1900-01-01 03:00:01.914104    88.000000\ndtype: float64\n</code></pre>\n<p>You can use rolling sum for <code>price*nQty</code> and <code>nQty</code> part then calculating the mean. The same solution can be used with offset window size.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 13763773,
+                "reputation": 1230,
+                "user_id": 12497820,
+                "user_type": "registered",
+                "display_name": "Suthiro"
+            },
+            "comment_count": 3,
+            "is_answered": true,
+            "accepted_answer_id": 60918101,
+            "answer_count": 7,
+            "score": 37,
+            "last_activity_date": 1706085511,
+            "creation_date": 1584523305,
+            "last_edit_date": 1694910518,
+            "question_id": 60736556,
+            "link": "https://stackoverflow.com/questions/60736556/pandas-rolling-apply-using-multiple-columns",
+            "title": "Pandas rolling apply using multiple columns",
+            "body": "<p>I am trying to use a <code>pandas.DataFrame.rolling.apply()</code> rolling function on multiple columns.\nPython version is 3.7, pandas is 1.0.2.</p>\n<pre><code>import pandas as pd\n\n#function to calculate\ndef masscenter(x):\n    print(x); # for debug purposes\n    return 0;\n\n#simple DF creation routine\ndf = pd.DataFrame( [['02:59:47.000282', 87.60, 739],\n                    ['03:00:01.042391', 87.51, 10],\n                    ['03:00:01.630182', 87.51, 10],\n                    ['03:00:01.635150', 88.00, 792],\n                    ['03:00:01.914104', 88.00, 10]], \n                   columns=['stamp', 'price','nQty'])\ndf['stamp'] = pd.to_datetime(df2['stamp'], format='%H:%M:%S.%f')\ndf.set_index('stamp', inplace=True, drop=True)\n</code></pre>\n<p><code>'stamp'</code> is monotonic and unique, <code>'price'</code> is double and contains no NaNs, <code>'nQty'</code> is integer and also contains no NaNs.</p>\n<p>So, I need to calculate rolling 'center of mass', i.e. <code>sum(price*nQty)/sum(nQty)</code>.</p>\n<p>What I tried so far:</p>\n<pre><code>df.apply(masscenter, axis = 1)\n</code></pre>\n<p><code>masscenter</code> is be called 5 times with a single row and the output will be like</p>\n<pre><code>price     87.6\nnQty     739.0\nName: 1900-01-01 02:59:47.000282, dtype: float64\n</code></pre>\n<p>It is desired input to a <code>masscenter</code>, because I can easily access <code>price</code> and <code>nQty</code> using <code>x[0], x[1]</code>. However, I stuck with <code>rolling.apply()</code>\nReading the docs\n<a href=\"https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.rolling.html\" rel=\"nofollow noreferrer\">DataFrame.rolling()</a> and <a href=\"https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.core.window.rolling.Rolling.apply.html\" rel=\"nofollow noreferrer\">rolling.apply()</a>\nI supposed that using <code>'axis'</code> in <code>rolling()</code> and <code>'raw'</code> in <code>apply</code> one achieves similiar behaviour. A naive approach</p>\n<pre><code>rol = df.rolling(window=2)\nrol.apply(masscenter)\n</code></pre>\n<p>prints row by row (increasing number of rows up to window size)</p>\n<pre><code>stamp\n1900-01-01 02:59:47.000282    87.60\n1900-01-01 03:00:01.042391    87.51\ndtype: float64\n</code></pre>\n<p>then</p>\n<pre><code>stamp\n1900-01-01 02:59:47.000282    739.0\n1900-01-01 03:00:01.042391     10.0\ndtype: float64\n</code></pre>\n<p>So, columns is passed to <code>masscenter</code> separately (expected).</p>\n<p>Sadly, in the docs there is barely any info about <code>'axis'</code>. However the next variant was, obviously</p>\n<pre><code>rol = df.rolling(window=2, axis = 1)\nrol.apply(masscenter)\n</code></pre>\n<p>Never calls <code>masscenter</code> and raises <code>ValueError in rol.apply(..)</code></p>\n<pre><code>&gt; Length of passed values is 1, index implies 5\n</code></pre>\n<p>I admit that I'm not sure about <code>'axis'</code> parameter and how it works due to lack of documentation. It is the first part of the question:\n<strong>What is going on here? How to use 'axis' properly? What it is designed for?</strong></p>\n<p>Of course, there were answers previously, namely:</p>\n<p><a href=\"https://stackoverflow.com/questions/13331698/how-to-apply-a-function-to-two-columns-of-pandas-dataframe\">How-to-apply-a-function-to-two-columns-of-pandas-dataframe</a><br>\nIt works for the whole DataFrame, not Rolling.</p>\n<p><a href=\"https://stackoverflow.com/questions/38878917/how-to-invoke-pandas-rolling-apply-with-parameters-from-multiple-column\">How-to-invoke-pandas-rolling-apply-with-parameters-from-multiple-column</a><br>\nThe answer suggests to write my own roll function, but the culprit for me is the same as asked in  <a href=\"https://stackoverflow.com/questions/38878917/how-to-invoke-pandas-rolling-apply-with-parameters-from-multiple-column#comment99035791_38879051\">comments</a>: what if one needs to use offset window size (e.g. <code>'1T'</code>) for non-uniform timestamps?<br>\nI don't like the idea to reinvent the wheel from scratch. Also I'd like to use pandas for everything to prevent inconsistency between sets obtained from pandas and 'self-made roll'.\nThere is another answer to that question, suggessting to populate dataframe separately and calculate whatever I need, but it will not work: the size of stored data will be enormous.\nThe same idea presented here:<br>\n<a href=\"https://stackoverflow.com/questions/59574934/apply-rolling-function-on-pandas-dataframe-with-multiple-arguments\">Apply-rolling-function-on-pandas-dataframe-with-multiple-arguments</a></p>\n<p>Another Q &amp; A posted here<br>\n<a href=\"https://stackoverflow.com/questions/51615849/pandas-using-rolling-on-multiple-columns\">Pandas-using-rolling-on-multiple-columns</a><br>\nIt is good and the closest to my problem, but again, there is no possibility to use offset window sizes (<code>window = '1T'</code>).</p>\n<p>Some of the answers were asked before pandas 1.0 came out, and given that docs could be much better, I hope it is possible to roll over multiple columns simultaneously now.</p>\n<p>The second part of the question is:\n<strong>Is there any possibility to roll over multiple columns simultaneously using pandas 1.0.x with offset window size?</strong></p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5763
+}

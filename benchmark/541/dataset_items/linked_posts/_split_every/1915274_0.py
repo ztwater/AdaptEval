@@ -1,0 +1,3 @@
+def isList(L): # Implement it somehow - returns True or false
+...
+return (list, lambda x:x)[int(islist(L))](result)

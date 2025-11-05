@@ -1,0 +1,220 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "matrix",
+                "numpy"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 3580374,
+                        "reputation": 111083,
+                        "user_id": 2988730,
+                        "user_type": "registered",
+                        "accept_rate": 96,
+                        "display_name": "Mad Physicist"
+                    },
+                    "edited": false,
+                    "score": 2,
+                    "creation_date": 1460062500,
+                    "post_id": 14859458,
+                    "comment_id": 60583269,
+                    "link": "https://stackoverflow.com/questions/14859458/how-to-check-if-all-values-in-the-columns-of-a-numpy-matrix-are-the-same#comment60583269_14859458",
+                    "body": "This problem has been bugging me for a while. While @Ubuntu&#39;s solution is elegant enough, it is not very pleasant to try to run this on a 4096**3 double array only to get a boolean array that hogs whatever memory you had left. I was toying with a pure Python implementation using <code>np.equal(a, a[:, 0, None])</code>, but that ends up with the same problem. I am therefore working on a PR for numpy to add a new function <code>np.same</code> to handle exactly this sort of situation."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3580374,
+                                "reputation": 111083,
+                                "user_id": 2988730,
+                                "user_type": "registered",
+                                "accept_rate": 96,
+                                "display_name": "Mad Physicist"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1452894415,
+                            "post_id": 14860884,
+                            "comment_id": 57383302,
+                            "link": "https://stackoverflow.com/questions/14859458/how-to-check-if-all-values-in-the-columns-of-a-numpy-matrix-are-the-same/14860884#comment57383302_14860884",
+                            "body": "Great answer. Is there a way to do something like this for large arrays without creating the mask array? That must have been the OP&#39;s initial appeal to using <code>reduce</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 64585,
+                                "reputation": 864612,
+                                "user_id": 190597,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "unutbu"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1452898135,
+                            "post_id": 14860884,
+                            "comment_id": 57384875,
+                            "link": "https://stackoverflow.com/questions/14859458/how-to-check-if-all-values-in-the-columns-of-a-numpy-matrix-are-the-same/14860884#comment57384875_14860884",
+                            "body": "I&#39;m not aware of any NumPy method by which you could produce the result without tempory (boolean) arrays. If you are working with a very large array and memory is tight, you could &quot;chunk&quot; the array into pieces (e.g. arrays consisting of N rows) and test each piece separately. Then combine and test the pieces, aggregating the result."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 64585,
+                                "reputation": 864612,
+                                "user_id": 190597,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "unutbu"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1452898143,
+                            "post_id": 14860884,
+                            "comment_id": 57384882,
+                            "link": "https://stackoverflow.com/questions/14859458/how-to-check-if-all-values-in-the-columns-of-a-numpy-matrix-are-the-same/14860884#comment57384882_14860884",
+                            "body": "You might also want to look into <a href=\"http://docs.scipy.org/doc/numpy-1.10.0/reference/generated/numpy.memmap.html\" rel=\"nofollow noreferrer\">numpy.memmap</a>, or <a href=\"http://www.pytables.org/\" rel=\"nofollow noreferrer\">Pytables</a> or <a href=\"http://www.h5py.org/\" rel=\"nofollow noreferrer\">h5py</a> for storing your large array on disk so you can extract and work with one chunk of the array at a time without requiring the whole array be store in memory. That way you might have more space for the temporary arrays NumPy (usually) requires."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3580374,
+                                "reputation": 111083,
+                                "user_id": 2988730,
+                                "user_type": "registered",
+                                "accept_rate": 96,
+                                "display_name": "Mad Physicist"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1453212979,
+                            "post_id": 14860884,
+                            "comment_id": 57495963,
+                            "link": "https://stackoverflow.com/questions/14859458/how-to-check-if-all-values-in-the-columns-of-a-numpy-matrix-are-the-same/14860884#comment57495963_14860884",
+                            "body": "Heh. Thanks to your walkthrough of how reduce works, I was able to figure out a way of using reduce. Posting shortly."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 64585,
+                        "reputation": 864612,
+                        "user_id": 190597,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "unutbu"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": true,
+                    "score": 79,
+                    "last_activity_date": 1360782239,
+                    "last_edit_date": 1360782239,
+                    "creation_date": 1360781711,
+                    "answer_id": 14860884,
+                    "question_id": 14859458,
+                    "link": "https://stackoverflow.com/questions/14859458/how-to-check-if-all-values-in-the-columns-of-a-numpy-matrix-are-the-same/14860884#14860884",
+                    "body": "<pre><code>In [45]: a\nOut[45]: \narray([[1, 1, 0],\n       [1, 0, 0],\n       [1, 0, 0],\n       [1, 1, 0]])\n</code></pre>\n\n<p>Compare each value to the corresponding value in the first row:</p>\n\n<pre><code>In [46]: a == a[0,:]\nOut[46]: \narray([[ True,  True,  True],\n       [ True, False,  True],\n       [ True, False,  True],\n       [ True,  True,  True]], dtype=bool)\n</code></pre>\n\n<p>A column shares a common value if all the values in that column are True:</p>\n\n<pre><code>In [47]: np.all(a == a[0,:], axis = 0)\nOut[47]: array([ True, False,  True], dtype=bool)\n</code></pre>\n\n<hr>\n\n<p>The problem with <code>np.equal.reduce</code> can be seen by micro-analyzing what happens when it is applied to <code>[1, 0, 0, 1]</code>:</p>\n\n<pre><code>In [49]: np.equal.reduce([1, 0, 0, 1])\nOut[50]: True\n</code></pre>\n\n<p>The first two items, <code>1</code> and <code>0</code> are tested for equality and the result is <code>False</code>:</p>\n\n<pre><code>In [51]: np.equal.reduce([False, 0, 1])\nOut[51]: True\n</code></pre>\n\n<p>Now <code>False</code> and <code>0</code> are tested for equality and the result is <code>True</code>:</p>\n\n<pre><code>In [52]: np.equal.reduce([True, 1])\nOut[52]: True\n</code></pre>\n\n<p>But <code>True</code> and 1 are equal, so the total result is <code>True</code>, which is not the desired outcome.</p>\n\n<p>The problem is that <code>reduce</code> tries to accumulate the result \"locally\", while we want a \"global\" test like <code>np.all</code>.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3580374,
+                        "reputation": 111083,
+                        "user_id": 2988730,
+                        "user_type": "registered",
+                        "accept_rate": 96,
+                        "display_name": "Mad Physicist"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 11,
+                    "last_activity_date": 1458870287,
+                    "last_edit_date": 1495539197,
+                    "creation_date": 1453215067,
+                    "answer_id": 34879848,
+                    "question_id": 14859458,
+                    "link": "https://stackoverflow.com/questions/14859458/how-to-check-if-all-values-in-the-columns-of-a-numpy-matrix-are-the-same/34879848#34879848",
+                    "body": "<p>Given ubuntu's awesome explanation, you can use <code>reduce</code> to solve your problem, but you have to apply it to <code>bitwise_and</code> and <code>bitwise_or</code> rather than <code>equal</code>. As a consequence, this will not work with floating point arrays:</p>\n\n<pre><code>In [60]: np.bitwise_and.reduce(a) == a[0]\nOut[60]: array([ True, False,  True], dtype=bool)\n\nIn [61]: np.bitwise_and.reduce(b) == b[0]\nOut[61]: array([ True, False,  True], dtype=bool)\n</code></pre>\n\n<p>Basically, you are comparing the bits of each element in the column. Identical bits are unchanged. Different bits are set to zero. This way, any number that has a zero instead of a one bit will change the reduced value. <code>bitwise_and</code> will not trap the case where bits are introduced rather than removed:</p>\n\n<pre><code>In [62]: c = np.array([[1,0,0],[1,0,0],[1,0,0],[1,1,0]])\n\nIn [63]: c\nOut[63]: \narray([[1, 0, 0],\n       [1, 0, 0],\n       [1, 0, 0],\n       [1, 1, 0]])\n\nIn [64]: np.bitwise_and.reduce(c) == c[0]\nOut[64]: array([ True,  True,  True], dtype=bool)\n</code></pre>\n\n<p>The second coumn is clearly wrong. We need to use <code>bitwise_or</code> to trap new bits:</p>\n\n<pre><code>In [66]: np.bitwise_or.reduce(c) == c[0]\nOut[66]: array([ True, False,  True], dtype=bool)\n</code></pre>\n\n<p><strong>Final Answer</strong></p>\n\n<pre><code>In [69]: np.logical_and(np.bitwise_or.reduce(a) == a[0], np.bitwise_and.reduce(a) == a[0])\nOut[69]: array([ True, False,  True], dtype=bool)\n\nIn [70]: np.logical_and(np.bitwise_or.reduce(b) == b[0], np.bitwise_and.reduce(b) == b[0])\nOut[70]: array([ True, False,  True], dtype=boo\n\nIn [71]: np.logical_and(np.bitwise_or.reduce(c) == c[0], np.bitwise_and.reduce(c) == c[0])\nOut[71]: array([ True, False,  True], dtype=bool)\n</code></pre>\n\n<p>This method is more restrictive and less elegant than ubunut's suggestion of using <code>all</code>, but it has the advantage of not creating enormous temporary arrays if your input is enormous. The temporary arrays should only be as big as the first row of your matrix.</p>\n\n<p><strong>EDIT</strong></p>\n\n<p>Based on this <a href=\"https://stackoverflow.com/questions/21050875/numpy-bitwise-and-reduce-behaving-unexpectedly\">Q/A</a> and <a href=\"https://github.com/numpy/numpy/issues/7060\" rel=\"noreferrer\">the bug I filed with numpy</a>, the solution provided only works because your array contains zeros and ones. As it happens, the <code>bitwise_and.reduce()</code> operations shown can only ever return zero or one because <code>bitwise_and.identity</code> is <code>1</code>, not <code>-1</code>. I am keeping this answer in the hope that <code>numpy</code> gets fixed and the answer becomes valid.</p>\n\n<p><strong>Edit</strong></p>\n\n<p>Looks like there will in fact be a change to numpy soon. Certainly to <code>bitwise_and.identity</code>, and also possibly an optional parameter to reduce.</p>\n\n<p><strong>Edit</strong></p>\n\n<p>Good news everyone. The identity for <code>np.bitwise_and</code> has been set to <code>-1</code> as of version <code>1.12.0</code>.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1868029,
+                                "reputation": 497,
+                                "user_id": 1691072,
+                                "user_type": "registered",
+                                "display_name": "pratikpc"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1647718560,
+                            "post_id": 62122907,
+                            "comment_id": 126443092,
+                            "link": "https://stackoverflow.com/questions/14859458/how-to-check-if-all-values-in-the-columns-of-a-numpy-matrix-are-the-same/62122907#comment126443092_62122907",
+                            "body": "If floating points, I would recommend using np.isclose over == 0"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 15778146,
+                        "reputation": 521,
+                        "user_id": 11385378,
+                        "user_type": "registered",
+                        "display_name": "phntm"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1590961793,
+                    "creation_date": 1590961793,
+                    "answer_id": 62122907,
+                    "question_id": 14859458,
+                    "link": "https://stackoverflow.com/questions/14859458/how-to-check-if-all-values-in-the-columns-of-a-numpy-matrix-are-the-same/62122907#62122907",
+                    "body": "<p>Not as elegant but may also work in the example above.  </p>\n\n<pre><code>a = np.array([[1,1,0],[1,-1,0],[1,0,0],[1,1,0]])\n</code></pre>\n\n<p>take the difference between the each row and the one above it</p>\n\n<pre><code>np.diff(a,axis=0)==0 \n\narray([[ True, False,  True],\n       [ True, False,  True],\n       [ True, False,  True]])    \n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 26294914,
+                        "reputation": 81,
+                        "user_id": 19961322,
+                        "user_type": "registered",
+                        "display_name": "neuro630"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1665104748,
+                    "last_edit_date": 1665104748,
+                    "creation_date": 1665104098,
+                    "answer_id": 73981311,
+                    "question_id": 14859458,
+                    "link": "https://stackoverflow.com/questions/14859458/how-to-check-if-all-values-in-the-columns-of-a-numpy-matrix-are-the-same/73981311#73981311",
+                    "body": "<p>A general solution that allows for equality comparison across any arbitrary axis/combination of axes, as well as floating point tolerances as in np.isclose with the keyword arguments rtol and atol:</p>\n<pre><code>def isconst(x, axis=None, **kwargs):\n    if axis is None:\n        x = x.reshape(-1)\n    else:\n        if isinstance(axis, int):\n            axis = [axis]\n        axis = sorted([d % x.ndim for d in axis])[::-1]\n        for d in axis:\n            x = np.moveaxis(x, d, -1)\n        x = x.reshape(*x.shape[:-len(axis)],-1)\n        \n    return np.isclose(x[...,:-1], x[...,1:], **kwargs).all(axis=-1)\n</code></pre>\n<p>Example:</p>\n<pre><code>&gt;&gt;&gt; a = np.array([[[1.0,1.0,0.9],\n...                [1.0,1.1,1.1]],\n...               [[1.0,1.0,1.0],\n...                [0.99999,1.0,1.09999]]])\n&gt;&gt;&gt; isconst(a, axis=0)\narray([[ True,  True, False],\n       [ True, False,  True]])\n&gt;&gt;&gt; isconst(a, axis=0, rtol=1.0e-8)\narray([[ True,  True, False],\n       [False, False, False]])\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 953694,
+                "reputation": 3587,
+                "user_id": 979377,
+                "user_type": "registered",
+                "accept_rate": 86,
+                "display_name": "tobigue"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 14860884,
+            "answer_count": 4,
+            "score": 48,
+            "last_activity_date": 1665104748,
+            "creation_date": 1360776783,
+            "last_edit_date": 1360782118,
+            "question_id": 14859458,
+            "link": "https://stackoverflow.com/questions/14859458/how-to-check-if-all-values-in-the-columns-of-a-numpy-matrix-are-the-same",
+            "title": "How to check if all values in the columns of a numpy matrix are the same?",
+            "body": "<p>I want to check if all values in the columns of a numpy array/matrix are the same.\nI tried to use <code>reduce</code> of the <a href=\"http://docs.scipy.org/doc/numpy/reference/ufuncs.html\" rel=\"noreferrer\">ufunc</a> <code>equal</code>, but it doesn't seem to work in all cases:</p>\n\n<pre><code>In [55]: a = np.array([[1,1,0],[1,-1,0],[1,0,0],[1,1,0]])\n\nIn [56]: a\nOut[56]: \narray([[ 1,  1,  0],\n       [ 1, -1,  0],\n       [ 1,  0,  0],\n       [ 1,  1,  0]])\n\nIn [57]: np.equal.reduce(a)\nOut[57]: array([ True, False,  True], dtype=bool)\n\nIn [58]: a = np.array([[1,1,0],[1,0,0],[1,0,0],[1,1,0]])\n\nIn [59]: a\nOut[59]: \narray([[1, 1, 0],\n       [1, 0, 0],\n       [1, 0, 0],\n       [1, 1, 0]])\n\nIn [60]: np.equal.reduce(a)\nOut[60]: array([ True,  True,  True], dtype=bool)\n</code></pre>\n\n<p>Why does the middle column in the second case also evaluate to <code>True</code>, while it should be <code>False</code>?</p>\n\n<p>Thanks for any help!</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6891
+}

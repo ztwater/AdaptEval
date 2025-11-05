@@ -1,0 +1,45 @@
+cases = [
+    "http://www.google.com",
+    "https://www.google.com",
+    "http://google.com",
+    "https://google.com",
+    "www.google.com",
+    "google.com",
+    "http://www.google.com/~as_db3.2123/134-1a",
+    "https://www.google.com/~as_db3.2123/134-1a",
+    "http://google.com/~as_db3.2123/134-1a",
+    "https://google.com/~as_db3.2123/134-1a",
+    "www.google.com/~as_db3.2123/134-1a",
+    "google.com/~as_db3.2123/134-1a",
+    # .co.uk top level
+    "http://www.google.co.uk",
+    "https://www.google.co.uk",
+    "http://google.co.uk",
+    "https://google.co.uk",
+    "www.google.co.uk",
+    "google.co.uk",
+    "http://www.google.co.uk/~as_db3.2123/134-1a",
+    "https://www.google.co.uk/~as_db3.2123/134-1a",
+    "http://google.co.uk/~as_db3.2123/134-1a",
+    "https://google.co.uk/~as_db3.2123/134-1a",
+    "www.google.co.uk/~as_db3.2123/134-1a",
+    "google.co.uk/~as_db3.2123/134-1a",
+    "https://...",
+    "https://..",
+    "https://.",
+    "https://.google.com",
+    "https://..google.com",
+    "https://...google.com",
+    "https://.google..com",
+    "https://.google...com",
+    "https://...google..com",
+    "https://...google...com",
+    ".google.com",
+    ".google.co.",
+    "https://google.co."
+]
+for c in cases:
+    if regex.match(c):
+        print(c, regex.match(c).span()[1] - regex.match(c).span()[0] == len(c))
+    else:
+        print(c, False)

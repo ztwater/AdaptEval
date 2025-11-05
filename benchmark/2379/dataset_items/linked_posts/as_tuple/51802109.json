@@ -1,0 +1,148 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "python-3.x",
+                "python-dataclasses"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 6931568,
+                        "reputation": 52517,
+                        "user_id": 5320906,
+                        "user_type": "registered",
+                        "display_name": "snakecharmerb"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1534060262,
+                    "post_id": 51802109,
+                    "comment_id": 90569086,
+                    "link": "https://stackoverflow.com/questions/51802109/why-is-dataclasses-astuple-returning-a-deepcopy-of-class-attributes#comment90569086_51802109",
+                    "body": "At a guess, this is to avoid aliasing issues, so if some code mutates the values in the copied object, the change doesn&#39;t reflect in the &#39;original&#39; object in the dataclass."
+                },
+                {
+                    "owner": {
+                        "account_id": 3796566,
+                        "reputation": 1190,
+                        "user_id": 3151462,
+                        "user_type": "registered",
+                        "accept_rate": 70,
+                        "display_name": "Shihao Xu"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1611434975,
+                    "post_id": 51802109,
+                    "comment_id": 116452101,
+                    "link": "https://stackoverflow.com/questions/51802109/why-is-dataclasses-astuple-returning-a-deepcopy-of-class-attributes#comment116452101_51802109",
+                    "body": "wonder will this API provide an argument so that we don&#39;t always deep copy."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 386425,
+                                "reputation": 56219,
+                                "user_id": 744178,
+                                "user_type": "registered",
+                                "display_name": "jwodder"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1534095272,
+                            "post_id": 51802661,
+                            "comment_id": 90577524,
+                            "link": "https://stackoverflow.com/questions/51802109/why-is-dataclasses-astuple-returning-a-deepcopy-of-class-attributes/51802661#comment90577524_51802661",
+                            "body": "The behavior <i>is</i> documented; it&#39;s what the line &quot;dataclasses, dicts, lists, and tuples are recursed into&quot; is referring to."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 429341,
+                                "reputation": 66510,
+                                "user_id": 812183,
+                                "user_type": "registered",
+                                "accept_rate": 77,
+                                "display_name": "anthony sottile"
+                            },
+                            "reply_to_user": {
+                                "account_id": 386425,
+                                "reputation": 56219,
+                                "user_id": 744178,
+                                "user_type": "registered",
+                                "display_name": "jwodder"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1534097588,
+                            "post_id": 51802661,
+                            "comment_id": 90578117,
+                            "link": "https://stackoverflow.com/questions/51802109/why-is-dataclasses-astuple-returning-a-deepcopy-of-class-attributes/51802661#comment90578117_51802661",
+                            "body": "@jwodder it would make sense for an implementation from a consistency standpoint to deep copy all of the attributes -- that said it doesn&#39;t explicitly state that non-list/non-dict/non-tuples are deep copied."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15006223,
+                                "reputation": 142,
+                                "user_id": 10832217,
+                                "user_type": "registered",
+                                "display_name": "thomast"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1695571259,
+                            "post_id": 51802661,
+                            "comment_id": 136039117,
+                            "link": "https://stackoverflow.com/questions/51802109/why-is-dataclasses-astuple-returning-a-deepcopy-of-class-attributes/51802661#comment136039117_51802661",
+                            "body": "it is now documented: &quot;dataclasses, dicts, lists, and tuples are recursed into. Other objects are copied with copy.deepcopy()&quot;"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 429341,
+                        "reputation": 66510,
+                        "user_id": 812183,
+                        "user_type": "registered",
+                        "accept_rate": 77,
+                        "display_name": "anthony sottile"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": true,
+                    "score": 5,
+                    "last_activity_date": 1534012644,
+                    "creation_date": 1534012644,
+                    "answer_id": 51802661,
+                    "question_id": 51802109,
+                    "link": "https://stackoverflow.com/questions/51802109/why-is-dataclasses-astuple-returning-a-deepcopy-of-class-attributes/51802661#51802661",
+                    "body": "<p>This seems to be an <a href=\"https://docs.python.org/3/library/dataclasses.html#dataclasses.astuple\" rel=\"noreferrer\">undocumented</a> behaviour of <code>astuple</code> (and <code>asdict</code> it seems as well).</p>\n\n<blockquote>\n  <h3><code>dataclasses.astuple(*, tuple_factory=tuple)</code></h3>\n  \n  <p>Converts the dataclass <code>instance</code> to a tuple (by using the factory function <code>tuple_factory</code>). Each dataclass is converted to a tuple of its field values. dataclasses, dicts, lists, and tuples are recursed into.</p>\n</blockquote>\n\n<p>Here's <a href=\"https://github.com/python/cpython/blob/13990745350d9332103b37c2425fa9977716db4b/Lib/dataclasses.py#L1016-L1029\" rel=\"noreferrer\">the source</a>:</p>\n\n<pre><code>def _asdict_inner(obj, dict_factory):\n    if _is_dataclass_instance(obj):\n        result = []\n        for f in fields(obj):\n            value = _asdict_inner(getattr(obj, f.name), dict_factory)\n            result.append((f.name, value))\n        return dict_factory(result)\n    elif isinstance(obj, (list, tuple)):\n        return type(obj)(_asdict_inner(v, dict_factory) for v in obj)\n    elif isinstance(obj, dict):\n        return type(obj)((_asdict_inner(k, dict_factory), _asdict_inner(v, dict_factory))\n                          for k, v in obj.items())\n    else:\nreturn copy.deepcopy(obj)\n</code></pre>\n\n<p>The deepcopy here seems intentional, though probably should be documented.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 2801729,
+                "reputation": 1359,
+                "user_id": 2409868,
+                "user_type": "registered",
+                "accept_rate": 88,
+                "display_name": "lemi57ssss"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "accepted_answer_id": 51802661,
+            "answer_count": 1,
+            "score": 7,
+            "last_activity_date": 1534335311,
+            "creation_date": 1534008504,
+            "last_edit_date": 1534335311,
+            "question_id": 51802109,
+            "link": "https://stackoverflow.com/questions/51802109/why-is-dataclasses-astuple-returning-a-deepcopy-of-class-attributes",
+            "title": "Why is dataclasses.astuple returning a deepcopy of class attributes?",
+            "body": "<p>In the code below the <code>astuple</code> function is carrying out a deep copy of a class attribute of the dataclass. Why is it not producing the same result as the function <code>my_tuple</code>? </p>\n\n<pre><code>import copy\nimport dataclasses\n\n\n@dataclasses.dataclass\nclass Demo:\n    a_number: int\n    a_bool: bool\n    classy: 'YOhY'\n\n    def my_tuple(self):\n        return self.a_number, self.a_bool, self.classy\n\nclass YOhY:\n    def __repr__(self):\n        return (self.__class__.__qualname__ + f\" id={id(self)}\")\n\n\nwhy = YOhY()\nprint(why)  # YOhY id=4369078368\n\ndemo = Demo(1, True, why)\nprint(demo)  # Demo(a_number=1, a_bool=True, classy=YOhY id=4369078368)\n\nuntrupled = demo.my_tuple()\nprint(untrupled)  # YOhY id=4369078368\n\ntrupled = dataclasses.astuple(demo)\nprint(trupled)  # YOhY id=4374460064\n\ntrupled2 = trupled\nprint(trupled2)  # YOhY id=4374460064\n\ntrupled3 = copy.copy(trupled)\nprint(trupled3)  # YOhY id=4374460064\n\ntrupled4 = copy.deepcopy(trupled)\nprint(trupled4)  # YOhY id=4374460176\n</code></pre>\n\n<p><strong>Footnote</strong></p>\n\n<p>As <a href=\"https://stackoverflow.com/users/812183/anthony-sottile\">Anthony Sottile's</a> excellent response makes clear this is the behavior coded into Python 3.7. Anyone expecting astuple to unpack the same way as collections.namedtuple will need to replace it with a method similar to <code>Demo.my_tuple</code>. The following code is less fragile than my_tuple because it will not need modification if the fields of the dataclass are changed. On the other hand it won't work if <code>__slots__</code> are in use.</p>\n\n<p>Both versions of the code pose a threat whenever a <code>__hash__</code> method is present in the class or its superclasses. See the Python 3.7 documentation for <code>unsafe_hash</code> in particular the two paragraphs beginning 'Here are the rules governing implicit creation of a <code>__hash__()</code> method'.</p>\n\n<pre><code>def unsafe_astuple(self):\n    return tuple([self.__dict__[field.name] for field in dataclasses.fields(self)])\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5406
+}

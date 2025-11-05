@@ -1,0 +1,153 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "numpy",
+                "audio",
+                "ffmpeg",
+                "mp3"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3594075,
+                                "reputation": 9735,
+                                "user_id": 2999346,
+                                "user_type": "registered",
+                                "display_name": "francis"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1569606557,
+                            "post_id": 53633178,
+                            "comment_id": 102665085,
+                            "link": "https://stackoverflow.com/questions/53633177/how-to-read-a-mp3-audio-file-into-a-numpy-array-save-a-numpy-array-to-mp3/53633178#comment102665085_53633178",
+                            "body": "Great! For linux users, the output/argument <code>tags</code> can be added to read/write to retreive and save metadatas as shown on <a href=\"https://github.com/jiaaro/pydub/issues/44\" rel=\"nofollow noreferrer\">github.com/jiaaro/pydub/issues/44</a> . Add <code>tags=mediainfo(f).get(&#39;TAG&#39;, {})</code> to read and <code>export(f, format=&quot;mp3&quot;, bitrate=&quot;320k&quot;, tags=tags)</code> to write."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6527533,
+                                "reputation": 4694,
+                                "user_id": 5049813,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Pro Q"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1637791127,
+                            "post_id": 53633178,
+                            "comment_id": 123923549,
+                            "link": "https://stackoverflow.com/questions/53633177/how-to-read-a-mp3-audio-file-into-a-numpy-array-save-a-numpy-array-to-mp3/53633178#comment123923549_53633178",
+                            "body": "Some extra dependencies (that can&#39;t just be installed with pip on Windows) may be needed in order to use this solution. See <a href=\"https://github.com/jiaaro/pydub/issues/348\" rel=\"nofollow noreferrer\">github.com/jiaaro/pydub/issues/348</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1522906,
+                        "reputation": 44396,
+                        "user_id": 1422096,
+                        "user_type": "registered",
+                        "accept_rate": 63,
+                        "display_name": "Basj"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 40,
+                    "last_activity_date": 1568041623,
+                    "last_edit_date": 1568041623,
+                    "creation_date": 1544015610,
+                    "answer_id": 53633178,
+                    "question_id": 53633177,
+                    "link": "https://stackoverflow.com/questions/53633177/how-to-read-a-mp3-audio-file-into-a-numpy-array-save-a-numpy-array-to-mp3/53633178#53633178",
+                    "body": "<p>Calling <code>ffmpeg</code> and manually parsing its <code>stdout</code> as suggested in many posts about reading a MP3 is a tedious task (many corner cases because different number of channels are possible, etc.), so here is a working solution using <code>pydub</code> (you need to <code>pip install pydub</code> first).</p>\n\n<p>This code allows to read a MP3 to a numpy array / write a numpy array to a MP3 file <strong>with a similar API than <code>scipy.io.wavfile.read/write</code></strong>:</p>\n\n<pre><code>import pydub \nimport numpy as np\n\ndef read(f, normalized=False):\n    \"\"\"MP3 to numpy array\"\"\"\n    a = pydub.AudioSegment.from_mp3(f)\n    y = np.array(a.get_array_of_samples())\n    if a.channels == 2:\n        y = y.reshape((-1, 2))\n    if normalized:\n        return a.frame_rate, np.float32(y) / 2**15\n    else:\n        return a.frame_rate, y\n\ndef write(f, sr, x, normalized=False):\n    \"\"\"numpy array to MP3\"\"\"\n    channels = 2 if (x.ndim == 2 and x.shape[1] == 2) else 1\n    if normalized:  # normalized array - each item should be a float in [-1, 1)\n        y = np.int16(x * 2 ** 15)\n    else:\n        y = np.int16(x)\n    song = pydub.AudioSegment(y.tobytes(), frame_rate=sr, sample_width=2, channels=channels)\n    song.export(f, format=\"mp3\", bitrate=\"320k\")\n</code></pre>\n\n<p>Notes:</p>\n\n<ul>\n<li>It only works for 16-bit files for now (even if 24-bit WAV files are pretty common, I've rarely seen 24-bit MP3 files... Does this exist?)</li>\n<li><code>normalized=True</code> allows to work with a float array (each item in [-1,1))</li>\n</ul>\n\n<p>Usage example:</p>\n\n<pre><code>sr, x = read('test.mp3')\nprint(x)\n\n#[[-225  707]\n# [-234  782]\n# [-205  755]\n# ..., \n# [ 303   89]\n# [ 337   69]\n# [ 274   89]]\n\nwrite('out2.mp3', sr, x)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 19619372,
+                                "reputation": 164,
+                                "user_id": 14360159,
+                                "user_type": "registered",
+                                "display_name": "Joran"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1635567800,
+                            "post_id": 67970510,
+                            "comment_id": 123339212,
+                            "link": "https://stackoverflow.com/questions/53633177/how-to-read-a-mp3-audio-file-into-a-numpy-array-save-a-numpy-array-to-mp3/67970510#comment123339212_67970510",
+                            "body": "These all in one packages are great when just quickly implementing something for an experiment, but in my opinion, using them is even worse than just copy-pasting something like @Basj&#39;s answer. (+1 anyways)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 20115653,
+                                "reputation": 566,
+                                "user_id": 14751182,
+                                "user_type": "registered",
+                                "display_name": "Adam Jen\u010da"
+                            },
+                            "reply_to_user": {
+                                "account_id": 19619372,
+                                "reputation": 164,
+                                "user_id": 14360159,
+                                "user_type": "registered",
+                                "display_name": "Joran"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1635778378,
+                            "post_id": 67970510,
+                            "comment_id": 123377759,
+                            "link": "https://stackoverflow.com/questions/53633177/how-to-read-a-mp3-audio-file-into-a-numpy-array-save-a-numpy-array-to-mp3/67970510#comment123377759_67970510",
+                            "body": "Yes... But it works and if you don&#39;t care about speed or efficiency of your code, it&#39;s the easiest solution."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 20115653,
+                        "reputation": 566,
+                        "user_id": 14751182,
+                        "user_type": "registered",
+                        "display_name": "Adam Jen\u010da"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1623762775,
+                    "last_edit_date": 1623762775,
+                    "creation_date": 1623674876,
+                    "answer_id": 67970510,
+                    "question_id": 53633177,
+                    "link": "https://stackoverflow.com/questions/53633177/how-to-read-a-mp3-audio-file-into-a-numpy-array-save-a-numpy-array-to-mp3/67970510#67970510",
+                    "body": "<p>You can use audio2numpy library.\nInstall with</p>\n<pre><code>pip install audio2numpy\n</code></pre>\n<p>Then, your code would be:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import audio2numpy as a2n\nx,sr=a2n.audio_from_file(&quot;test.mp3&quot;)\n</code></pre>\n<p>For writing, use @Basj 's answer</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 1522906,
+                "reputation": 44396,
+                "user_id": 1422096,
+                "user_type": "registered",
+                "accept_rate": 63,
+                "display_name": "Basj"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 53633178,
+            "answer_count": 2,
+            "score": 27,
+            "last_activity_date": 1623762775,
+            "creation_date": 1544015610,
+            "last_edit_date": 1568041545,
+            "question_id": 53633177,
+            "link": "https://stackoverflow.com/questions/53633177/how-to-read-a-mp3-audio-file-into-a-numpy-array-save-a-numpy-array-to-mp3",
+            "title": "How to read a MP3 audio file into a numpy array / save a numpy array to MP3?",
+            "body": "<p><strong>Is there a way to read/write a MP3 audio file into/from a <code>numpy</code> array with a similar API to <a href=\"https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.io.wavfile.read.html\" rel=\"noreferrer\">scipy.io.wavfile.read</a> and <a href=\"https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.io.wavfile.write.html\" rel=\"noreferrer\">scipy.io.wavfile.write</a>:</strong></p>\n\n<pre><code>sr, x = wavfile.read('test.wav')\nwavfile.write('test2.wav', sr, x)\n</code></pre>\n\n<p><strong>?</strong></p>\n\n<p>Note: <code>pydub</code>'s <code>AudioSegment</code> object doesn't give direct access to a numpy array.</p>\n\n<p><sup>PS: I have already read <a href=\"https://stackoverflow.com/questions/2356779/importing-sound-files-into-python-as-numpy-arrays-alternatives-to-audiolab\">Importing sound files into Python as NumPy arrays (alternatives to audiolab)</a>, tried all the answers, including those which requires to <code>Popen</code> ffmpeg and read the content from stdout pipe, etc. I have also read <a href=\"https://stackoverflow.com/questions/38192663/trying-to-convert-an-mp3-file-to-a-numpy-array-and-ffmpeg-just-hangs\">Trying to convert an mp3 file to a Numpy Array, and ffmpeg just hangs</a>, etc., and tried the main answers, but there was no simple solution. After spending hours on this, I'm posting it here with \"Answer your own question \u2013 share your knowledge, Q&amp;A-style\". I have also read <a href=\"https://stackoverflow.com/questions/38015319/how-to-create-a-numpy-array-from-a-pydub-audiosegment\">How to create a numpy array from a pydub AudioSegment?</a> but this does not easily cover the multi channel case, etc.</sup></p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7890
+}

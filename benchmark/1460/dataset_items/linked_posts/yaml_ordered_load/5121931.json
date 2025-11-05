@@ -1,0 +1,801 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "dictionary",
+                "serialization",
+                "yaml",
+                "pyyaml"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 294068,
+                                "reputation": 40898,
+                                "user_id": 597742,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "ncoghlan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1298735544,
+                            "post_id": 5121963,
+                            "comment_id": 5752074,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/5121963#comment5752074_5121963",
+                            "body": "If you want to include the <code>key_node.start_mark</code> attribute in your error message, I don&#39;t see any obvious way to simplify your central construction loop. If you try to make use of the fact that the <code>OrderedDict</code> constructor will accept an iterable of key, value pairs, you lose access to that detail when generating the error message."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 280775,
+                                "reputation": 5677,
+                                "user_id": 576671,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "theAlse"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1370329381,
+                            "post_id": 5121963,
+                            "comment_id": 24409324,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/5121963#comment24409324_5121963",
+                            "body": "has anyone tested this code properly? I can not get it to work in my application!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2632452,
+                                "reputation": 1604,
+                                "user_id": 2278047,
+                                "user_type": "registered",
+                                "display_name": "Colonel Panic"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1381961216,
+                            "post_id": 5121963,
+                            "comment_id": 28780525,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/5121963#comment28780525_5121963",
+                            "body": "Example Usage:   ordered_dict = yaml.load( &#39;&#39;&#39; b: 1 a: 2 &#39;&#39;&#39;, Loader=OrderedDictYAMLLoader)  # ordered_dict = OrderedDict([(&#39;b&#39;, 1), (&#39;a&#39;, 2)])  Unfortunately my edit to the post was rejected, so please excuse lack of formatting."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 10118664,
+                                "reputation": 123,
+                                "user_id": 7476443,
+                                "user_type": "registered",
+                                "display_name": "Ryan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1486077566,
+                            "post_id": 5121963,
+                            "comment_id": 71203676,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/5121963#comment71203676_5121963",
+                            "body": "This implementation breaks loading of <a href=\"http://yaml.org/type/omap.html\" rel=\"nofollow noreferrer\">ordered mapping types</a>.  To fix this, you can just remove the second call to <code>add_constructor</code> in your <code>__init__</code> method."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 16009,
+                        "reputation": 2313,
+                        "user_id": 34443,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Eric Naeseth"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": true,
+                    "score": 15,
+                    "last_activity_date": 1527263675,
+                    "last_edit_date": 1527263675,
+                    "creation_date": 1298663712,
+                    "answer_id": 5121963,
+                    "question_id": 5121931,
+                    "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/5121963#5121963",
+                    "body": "<p><strong>Note</strong>: there is a library, based on the following answer, which implements also the CLoader and CDumpers: <a href=\"https://github.com/Phynix/yamlloader\" rel=\"nofollow noreferrer\">Phynix/yamlloader</a></p>\n\n<p>I doubt very much that this is the best way to do it, but this is the way I came up with, and it does work. Also available <a href=\"https://gist.github.com/844388\" rel=\"nofollow noreferrer\">as a gist</a>.</p>\n\n<pre><code>import yaml\nimport yaml.constructor\n\ntry:\n    # included in standard lib from Python 2.7\n    from collections import OrderedDict\nexcept ImportError:\n    # try importing the backported drop-in replacement\n    # it's available on PyPI\n    from ordereddict import OrderedDict\n\nclass OrderedDictYAMLLoader(yaml.Loader):\n    \"\"\"\n    A YAML loader that loads mappings into ordered dictionaries.\n    \"\"\"\n\n    def __init__(self, *args, **kwargs):\n        yaml.Loader.__init__(self, *args, **kwargs)\n\n        self.add_constructor(u'tag:yaml.org,2002:map', type(self).construct_yaml_map)\n        self.add_constructor(u'tag:yaml.org,2002:omap', type(self).construct_yaml_map)\n\n    def construct_yaml_map(self, node):\n        data = OrderedDict()\n        yield data\n        value = self.construct_mapping(node)\n        data.update(value)\n\n    def construct_mapping(self, node, deep=False):\n        if isinstance(node, yaml.MappingNode):\n            self.flatten_mapping(node)\n        else:\n            raise yaml.constructor.ConstructorError(None, None,\n                'expected a mapping node, but found %s' % node.id, node.start_mark)\n\n        mapping = OrderedDict()\n        for key_node, value_node in node.value:\n            key = self.construct_object(key_node, deep=deep)\n            try:\n                hash(key)\n            except TypeError, exc:\n                raise yaml.constructor.ConstructorError('while constructing a mapping',\n                    node.start_mark, 'found unacceptable key (%s)' % exc, key_node.start_mark)\n            value = self.construct_object(value_node, deep=deep)\n            mapping[key] = value\n        return mapping\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 368313,
+                                "reputation": 7606,
+                                "user_id": 715042,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "Michael"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1428244627,
+                            "post_id": 18434072,
+                            "comment_id": 47080897,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/18434072#comment47080897_18434072",
+                            "body": "This should be added upstream actually."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 368313,
+                                "reputation": 7606,
+                                "user_id": 715042,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "Michael"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1428247194,
+                            "post_id": 18434072,
+                            "comment_id": 47081661,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/18434072#comment47081661_18434072",
+                            "body": "Justed filed a pull request with your changes. <a href=\"https://github.com/yaml/pyyaml/pull/12\" rel=\"nofollow noreferrer\">github.com/yaml/pyyaml/pull/12</a> Let&#39;s hope for a merge."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 165360,
+                                "reputation": 4598,
+                                "user_id": 388739,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "Mark LeMoine"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1438850479,
+                            "post_id": 18434072,
+                            "comment_id": 51621898,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/18434072#comment51621898_18434072",
+                            "body": "Really wish the author was more active, the last commit was 4 years ago. This change would be a godsend to me."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3218249,
+                        "reputation": 1108,
+                        "user_id": 2716301,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "EricGreg"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1377467281,
+                    "creation_date": 1377467281,
+                    "answer_id": 18434072,
+                    "question_id": 5121931,
+                    "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/18434072#18434072",
+                    "body": "<p>On my For PyYaml installation for Python 2.7 I updated __init__.py, constructor.py, and loader.py. Now supports object_pairs_hook option for load commands. Diff of changes I made is below.</p>\n\n<pre><code>__init__.py\n\n$ diff __init__.py Original\n64c64\n&lt; def load(stream, Loader=Loader, **kwds):\n---\n&gt; def load(stream, Loader=Loader):\n69c69\n&lt;     loader = Loader(stream, **kwds)\n---\n&gt;     loader = Loader(stream)\n75c75\n&lt; def load_all(stream, Loader=Loader, **kwds):\n---\n&gt; def load_all(stream, Loader=Loader):\n80c80\n&lt;     loader = Loader(stream, **kwds)\n---\n&gt;     loader = Loader(stream)\n\nconstructor.py\n\n$ diff constructor.py Original\n20,21c20\n&lt;     def __init__(self, object_pairs_hook=dict):\n&lt;         self.object_pairs_hook = object_pairs_hook\n---\n&gt;     def __init__(self):\n27,29d25\n&lt;     def create_object_hook(self):\n&lt;         return self.object_pairs_hook()\n&lt;\n54,55c50,51\n&lt;         self.constructed_objects = self.create_object_hook()\n&lt;         self.recursive_objects = self.create_object_hook()\n---\n&gt;         self.constructed_objects = {}\n&gt;         self.recursive_objects = {}\n129c125\n&lt;         mapping = self.create_object_hook()\n---\n&gt;         mapping = {}\n400c396\n&lt;         data = self.create_object_hook()\n---\n&gt;         data = {}\n595c591\n&lt;             dictitems = self.create_object_hook()\n---\n&gt;             dictitems = {}\n602c598\n&lt;             dictitems = value.get('dictitems', self.create_object_hook())\n---\n&gt;             dictitems = value.get('dictitems', {})\n\nloader.py\n\n$ diff loader.py Original\n13c13\n&lt;     def __init__(self, stream, **constructKwds):\n---\n&gt;     def __init__(self, stream):\n18c18\n&lt;         BaseConstructor.__init__(self, **constructKwds)\n---\n&gt;         BaseConstructor.__init__(self)\n23c23\n&lt;     def __init__(self, stream, **constructKwds):\n---\n&gt;     def __init__(self, stream):\n28c28\n&lt;         SafeConstructor.__init__(self, **constructKwds)\n---\n&gt;         SafeConstructor.__init__(self)\n33c33\n&lt;     def __init__(self, stream, **constructKwds):\n---\n&gt;     def __init__(self, stream):\n38c38\n&lt;         Constructor.__init__(self, **constructKwds)\n---\n&gt;         Constructor.__init__(self)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 464876,
+                                "reputation": 4052,
+                                "user_id": 2052889,
+                                "user_type": "registered",
+                                "accept_rate": 36,
+                                "display_name": "Shuman"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1456816701,
+                            "post_id": 21048064,
+                            "comment_id": 59109584,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/21048064#comment59109584_21048064",
+                            "body": "any explanations for this answer?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 344684,
+                                "reputation": 3851,
+                                "user_id": 677122,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Midnighter"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1493391012,
+                            "post_id": 21048064,
+                            "comment_id": 74412132,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/21048064#comment74412132_21048064",
+                            "body": "Or even better <code>from six import iteritems</code> and then change it to <code>iteritems(data)</code> so that it works equally well in Python 2 &amp; 3."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2918938,
+                                "reputation": 6670,
+                                "user_id": 2501624,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "aldel"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1505261146,
+                            "post_id": 21048064,
+                            "comment_id": 79336620,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/21048064#comment79336620_21048064",
+                            "body": "This seems to be using undocumented features of PyYAML (<code>represent_dict</code> and <code>DEFAULT_MAPPING_TAG</code>). Is this because the documentation is incomplete, or are these features unsupported and subject to change without notice?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 429341,
+                                "reputation": 66510,
+                                "user_id": 812183,
+                                "user_type": "registered",
+                                "accept_rate": 77,
+                                "display_name": "anthony sottile"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1523462303,
+                            "post_id": 21048064,
+                            "comment_id": 86574634,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/21048064#comment86574634_21048064",
+                            "body": "Note that for <code>dict_constructor</code> you&#39;ll need to call <code>loader.flatten_mapping(node)</code> or you won&#39;t be able to load <code>&lt;&lt;: *...</code> (merge syntax)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3404900,
+                                "reputation": 399,
+                                "user_id": 2856227,
+                                "user_type": "registered",
+                                "display_name": "schaffe"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1557189476,
+                            "post_id": 21048064,
+                            "comment_id": 98672593,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/21048064#comment98672593_21048064",
+                            "body": "@brice-m-dempsey can you add any example how to use your code? It does not seem to work in my case (Python 3.7)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 342731,
+                                "reputation": 351046,
+                                "user_id": 674039,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "wim"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1578844752,
+                            "post_id": 21048064,
+                            "comment_id": 105563496,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/21048064#comment105563496_21048064",
+                            "body": "\u20131  This breaks <code>yaml</code> module.  See <a href=\"https://yaml.org/type/merge.html\" rel=\"nofollow noreferrer\">yaml.org/type/merge.html</a> for an example of valid markup which subsequently fails to load."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2289410,
+                        "reputation": 2101,
+                        "user_id": 2012682,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Brice M. Dempsey"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": false,
+                    "score": 57,
+                    "last_activity_date": 1456816864,
+                    "last_edit_date": 1456816864,
+                    "creation_date": 1389367563,
+                    "answer_id": 21048064,
+                    "question_id": 5121931,
+                    "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/21048064#21048064",
+                    "body": "<p>The yaml module allow you to specify custom 'representers' to convert Python objects to text and 'constructors' to reverse the process.</p>\n\n<pre><code>_mapping_tag = yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG\n\ndef dict_representer(dumper, data):\n    return dumper.represent_dict(data.iteritems())\n\ndef dict_constructor(loader, node):\n    return collections.OrderedDict(loader.construct_pairs(node))\n\nyaml.add_representer(collections.OrderedDict, dict_representer)\nyaml.add_constructor(_mapping_tag, dict_constructor)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 280556,
+                                "reputation": 928,
+                                "user_id": 576333,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "Randy"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1406649638,
+                            "post_id": 21912744,
+                            "comment_id": 38907802,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/21912744#comment38907802_21912744",
+                            "body": "This implementation breaks YAML merge tags, BTW"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 327694,
+                                "reputation": 6832,
+                                "user_id": 650222,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "coldfix"
+                            },
+                            "reply_to_user": {
+                                "account_id": 280556,
+                                "reputation": 928,
+                                "user_id": 576333,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "Randy"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1406663957,
+                            "post_id": 21912744,
+                            "comment_id": 38915869,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/21912744#comment38915869_21912744",
+                            "body": "@Randy Thanks. I didn&#39;t run in that scenario before, but now I added a fix to handle this as well (I hope)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4935,
+                                "reputation": 2463,
+                                "user_id": 7666,
+                                "user_type": "registered",
+                                "display_name": "Arne Babenhauserheide"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1429189657,
+                            "post_id": 21912744,
+                            "comment_id": 47488920,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/21912744#comment47488920_21912744",
+                            "body": "This would have saved me horrible hacks in a yaml based charactersheet I wrote a handful of years ago. Maybe it\u2019s time to revisit that. I hope something like this goes upstream eventually!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1373414,
+                                "reputation": 73747,
+                                "user_id": 1307905,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Anthon"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4935,
+                                "reputation": 2463,
+                                "user_id": 7666,
+                                "user_type": "registered",
+                                "display_name": "Arne Babenhauserheide"
+                            },
+                            "edited": false,
+                            "score": 9,
+                            "creation_date": 1433959543,
+                            "post_id": 21912744,
+                            "comment_id": 49580433,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/21912744#comment49580433_21912744",
+                            "body": "@ArneBabenhauserheide I am not sure if PyPI is upstream enough, but take a look at <a href=\"https://pypi.python.org/pypi/ruamel.yaml\" rel=\"nofollow noreferrer\">ruamel.yaml</a> (I am the author of that) if you think it does."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3716,
+                                "reputation": 3688,
+                                "user_id": 5397,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "Martin Del Vecchio"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1517329444,
+                            "post_id": 21912744,
+                            "comment_id": 84047109,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/21912744#comment84047109_21912744",
+                            "body": "@coldfix, the ordered_dump() isn&#39;t working for me.  The simple items are coming out properly, but the nested dictionaries are not.  For example:  swagger: &#39;2.0&#39; info:   description: My API   version: v1   title: My API   contact: {name: Company, url: &#39;<a href=\"https://api.company.com\" rel=\"nofollow noreferrer\">api.company.com</a>&#39;, email: company@company.com}  Any ideas why this might be?  Thanks."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 327694,
+                                "reputation": 6832,
+                                "user_id": 650222,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "coldfix"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3716,
+                                "reputation": 3688,
+                                "user_id": 5397,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "Martin Del Vecchio"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1517331027,
+                            "post_id": 21912744,
+                            "comment_id": 84048073,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/21912744#comment84048073_21912744",
+                            "body": "@MartinDelVecchio what doesn&#39;t work exactly? If you don&#39;t like the formatting, try passing <code>default_flow_style=False</code> as keyword argument."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3716,
+                                "reputation": 3688,
+                                "user_id": 5397,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "Martin Del Vecchio"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1517345180,
+                            "post_id": 21912744,
+                            "comment_id": 84055761,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/21912744#comment84055761_21912744",
+                            "body": "I figured that out, but StackOverflow wouldn&#39;t let me edit my comment too many times.  Without default_flow_style=False, the YAML syntax was incorrect.  With it, it is correct.  Thanks!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 327694,
+                                "reputation": 6832,
+                                "user_id": 650222,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "coldfix"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3716,
+                                "reputation": 3688,
+                                "user_id": 5397,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "Martin Del Vecchio"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1517405919,
+                            "post_id": 21912744,
+                            "comment_id": 84082105,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/21912744#comment84082105_21912744",
+                            "body": "@MartinDelVecchio It&#39;s still correct YAML syntax without, just less pretty."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2537002,
+                                "reputation": 595,
+                                "user_id": 2203825,
+                                "user_type": "registered",
+                                "display_name": "PT Huynh"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1539931480,
+                            "post_id": 21912744,
+                            "comment_id": 92687070,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/21912744#comment92687070_21912744",
+                            "body": "To achieve yaml.safe_load, just make loader inherit from SafeLoader <code>def ordered_load(stream, Loader=yaml.SafeLoader, object_pairs_hook=OrderedDict):</code>  In PyYAML 4.1 and newer, the <code>yaml.load()</code> API will act like <code>yaml.safe_load()</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1592734,
+                                "reputation": 2674,
+                                "user_id": 1475706,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "orodbhen"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1551364181,
+                            "post_id": 21912744,
+                            "comment_id": 96620462,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/21912744#comment96620462_21912744",
+                            "body": "When used with a file that contains <code>jinja</code> templates, this results in <code>unhashable type: collections.OrderedDict</code>. I presume that the custom loader generates and <code>OrderedDict</code>, which it then attempts to process again, but can&#39;t, because it&#39;s not hashable."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1592734,
+                                "reputation": 2674,
+                                "user_id": 1475706,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "orodbhen"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1560260759,
+                            "post_id": 21912744,
+                            "comment_id": 99671984,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/21912744#comment99671984_21912744",
+                            "body": "Perhaps something has changed in the <code>yaml</code> upstream code, but the ordered loader no longer works. The loaded data is definitely being sorted."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 327694,
+                        "reputation": 6832,
+                        "user_id": 650222,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "coldfix"
+                    },
+                    "comment_count": 11,
+                    "is_accepted": false,
+                    "score": 189,
+                    "last_activity_date": 1608203415,
+                    "last_edit_date": 1608203415,
+                    "creation_date": 1392911251,
+                    "answer_id": 21912744,
+                    "question_id": 5121931,
+                    "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/21912744#21912744",
+                    "body": "<h2>Python &gt;= 3.6</h2>\n<p>In python 3.6+, it seems that dict <em>loading</em> order is preserved by default without special dictionary types. The default <em>Dumper</em>, on the other hand, sorts dictionaries by key. Starting with <code>pyyaml 5.1</code>, you can turn this off by passing <code>sort_keys=False</code>:</p>\n<pre><code>a = dict(zip(&quot;unsorted&quot;, &quot;unsorted&quot;))\ns = yaml.safe_dump(a, sort_keys=False)\nb = yaml.safe_load(s)\n\nassert list(a.keys()) == list(b.keys())  # True\n</code></pre>\n<p>This can work due to the <a href=\"https://docs.python.org/3.6/whatsnew/3.6.html#new-dict-implementation\" rel=\"noreferrer\">new dict implementation</a> that has been in use in pypy for some time. While still considered an implementation detail in CPython 3.6, &quot;the insertion-order preserving nature of dicts has been declared an official part of the Python language spec&quot; as of 3.7+, see <a href=\"https://docs.python.org/3/whatsnew/3.7.html\" rel=\"noreferrer\">What's New In Python 3.7</a>.</p>\n<p>Note that this is still undocumented from PyYAML side, so you shouldn't rely on this for safety critical applications.</p>\n<h2>Original answer (compatible with all known versions)</h2>\n<p>I like @James' <a href=\"https://stackoverflow.com/a/21048064/650222\">solution</a> for its simplicity. However, it changes the default global <code>yaml.Loader</code> class, which can lead to troublesome side effects. Especially, when writing library code this is a bad idea. Also, it doesn't directly work with <code>yaml.safe_load()</code>.</p>\n<p>Fortunately, the solution can be improved without much effort:</p>\n<pre><code>import yaml\nfrom collections import OrderedDict\n\ndef ordered_load(stream, Loader=yaml.SafeLoader, object_pairs_hook=OrderedDict):\n    class OrderedLoader(Loader):\n        pass\n    def construct_mapping(loader, node):\n        loader.flatten_mapping(node)\n        return object_pairs_hook(loader.construct_pairs(node))\n    OrderedLoader.add_constructor(\n        yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,\n        construct_mapping)\n    return yaml.load(stream, OrderedLoader)\n\n# usage example:\nordered_load(stream, yaml.SafeLoader)\n</code></pre>\n<p>For serialization, you could use the following funcion:</p>\n<pre><code>def ordered_dump(data, stream=None, Dumper=yaml.SafeDumper, **kwds):\n    class OrderedDumper(Dumper):\n        pass\n    def _dict_representer(dumper, data):\n        return dumper.represent_mapping(\n            yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,\n            data.items())\n    OrderedDumper.add_representer(OrderedDict, _dict_representer)\n    return yaml.dump(data, stream, OrderedDumper, **kwds)\n\n# usage:\nordered_dump(data, Dumper=yaml.SafeDumper)\n</code></pre>\n<p>In each case, you could also make the custom subclasses global, so that they don't have to be recreated on each call.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3153335,
+                                "reputation": 37105,
+                                "user_id": 2666289,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "Holt"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1594720577,
+                            "post_id": 30763929,
+                            "comment_id": 111217556,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/30763929#comment111217556_30763929",
+                            "body": "That&#39;s pretty nice if you already have a YAML file, but how do you do that using a Python structure? I tried using <code>CommentedMap</code> directly but it does not work, and <code>OrderedDict</code> puts <code>!!omap</code> everywhere which is not very user-friendly."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1373414,
+                                "reputation": 73747,
+                                "user_id": 1307905,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Anthon"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3153335,
+                                "reputation": 37105,
+                                "user_id": 2666289,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "Holt"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1594801991,
+                            "post_id": 30763929,
+                            "comment_id": 111250650,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/30763929#comment111250650_30763929",
+                            "body": "I am not sure why CommentedMap did not work for you. Can you post a question with your (minimalized) code and tag it ruamel.yaml? That way I will be notified and answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3153335,
+                                "reputation": 37105,
+                                "user_id": 2666289,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "Holt"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1594802149,
+                            "post_id": 30763929,
+                            "comment_id": 111250723,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/30763929#comment111250723_30763929",
+                            "body": "Sorry, I think it&#39;s because I tried to save the <code>CommentedMap</code> with <code>safe=True</code> in <code>YAML</code>, which did not work (using <code>safe=False</code> works). I also had issue with <code>CommentedMap</code> not being modifiable, but I cannot reproduce it now... I&#39;ll open a new question if I encounter this issue again."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1373414,
+                                "reputation": 73747,
+                                "user_id": 1307905,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Anthon"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3153335,
+                                "reputation": 37105,
+                                "user_id": 2666289,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "Holt"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1594802285,
+                            "post_id": 30763929,
+                            "comment_id": 111250790,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/30763929#comment111250790_30763929",
+                            "body": "You should be using <code>yaml = YAML()</code>, you get the round-trip parser/dumper and that is derivative of the safe parser/dumper that knows about CommentedMap/Seq etc."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4245435,
+                                "reputation": 1924,
+                                "user_id": 3474247,
+                                "user_type": "registered",
+                                "display_name": "serge.v"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1636726555,
+                            "post_id": 30763929,
+                            "comment_id": 123640405,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/30763929#comment123640405_30763929",
+                            "body": "In fact it is possible to preserve key order (but obviously not comments) in safe mode too! Say if I need to dump a plain dict to .yaml and keep the key order then yaml = YAML(typ=&#39;safe&#39;, pure=True); yaml.sort_base_mapping_type_on_output = False; will do the trick. However, setting of sort_base_mapping_type_on_output should be done immediately after yaml creation or at least before any dumping, otherwise it is not propagated to the representer. Still you can always do yaml.representer.sort_base_mapping_type_on_output = False."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1373414,
+                                "reputation": 73747,
+                                "user_id": 1307905,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Anthon"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4245435,
+                                "reputation": 1924,
+                                "user_id": 3474247,
+                                "user_type": "registered",
+                                "display_name": "serge.v"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1636730674,
+                            "post_id": 30763929,
+                            "comment_id": 123642232,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/30763929#comment123642232_30763929",
+                            "body": "@serge.v That is a side effect of you using a more modern version of Python than was current when this answer was given. The underlying <code>dict()</code> in Python preserves order nowadays, but it didn&#39;t use to."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1373414,
+                        "reputation": 73747,
+                        "user_id": 1307905,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "Anthon"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": false,
+                    "score": 29,
+                    "last_activity_date": 1549964208,
+                    "last_edit_date": 1549964208,
+                    "creation_date": 1433959327,
+                    "answer_id": 30763929,
+                    "question_id": 5121931,
+                    "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/30763929#30763929",
+                    "body": "<h1>2015 (and later) option:</h1>\n\n<p><a href=\"https://pypi.python.org/pypi/ruamel.yaml\" rel=\"noreferrer\">ruamel.yaml</a> is a drop in replacement for PyYAML (disclaimer: I am the author of that package). Preserving the order of the mappings was one of the things added in the first version (0.1) back in 2015. Not only does it preserve the order of your dictionaries, it will also preserve comments, anchor names, tags and does support the YAML 1.2 specification (released 2009)</p>\n\n<p>The specification says that the ordering is not guaranteed, but of course there is ordering in the YAML file and the appropriate parser can just hold on to that and transparently generate an object that keeps the ordering. You just need to choose the right parser, loader and dumper\u00b9:</p>\n\n<pre><code>import sys\nfrom ruamel.yaml import YAML\n\nyaml_str = \"\"\"\\\n3: abc\nconf:\n    10: def\n    3: gij     # h is missing\nmore:\n- what\n- else\n\"\"\"\n\nyaml = YAML()\ndata = yaml.load(yaml_str)\ndata['conf'][10] = 'klm'\ndata['conf'][3] = 'jig'\nyaml.dump(data, sys.stdout)\n</code></pre>\n\n<p>will give you:</p>\n\n<pre><code>3: abc\nconf:\n  10: klm\n  3: jig       # h is missing\nmore:\n- what\n- else\n</code></pre>\n\n<p><code>data</code> is of type <code>CommentedMap</code> which functions like a dict, but has extra information that is kept around until being dumped (including the preserved comment!)</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2625503,
+                        "reputation": 25,
+                        "user_id": 2272594,
+                        "user_type": "registered",
+                        "display_name": "Adam Murphy"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1436274530,
+                    "last_edit_date": 1436274530,
+                    "creation_date": 1436201251,
+                    "answer_id": 31251354,
+                    "question_id": 5121931,
+                    "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/31251354#31251354",
+                    "body": "<p>here's a simple solution that also checks for duplicated top level keys in your map.</p>\n\n<pre><code>import yaml\nimport re\nfrom collections import OrderedDict\n\ndef yaml_load_od(fname):\n    \"load a yaml file as an OrderedDict\"\n    # detects any duped keys (fail on this) and preserves order of top level keys\n    with open(fname, 'r') as f:\n        lines = open(fname, \"r\").read().splitlines()\n        top_keys = []\n        duped_keys = []\n        for line in lines:\n            m = re.search(r'^([A-Za-z0-9_]+) *:', line)\n            if m:\n                if m.group(1) in top_keys:\n                    duped_keys.append(m.group(1))\n                else:\n                    top_keys.append(m.group(1))\n        if duped_keys:\n            raise Exception('ERROR: duplicate keys: {}'.format(duped_keys))\n    # 2nd pass to set up the OrderedDict\n    with open(fname, 'r') as f:\n        d_tmp = yaml.load(f)\n    return OrderedDict([(key, d_tmp[key]) for key in top_keys])\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 366774,
+                                "reputation": 2606,
+                                "user_id": 712522,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Mr. B"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1518198963,
+                            "post_id": 35523899,
+                            "comment_id": 84422068,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/35523899#comment84422068_35523899",
+                            "body": "I don&#39;t know if tis&#39; the same author or not, but check out <code>yodl</code> on github."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2182951,
+                        "reputation": 678,
+                        "user_id": 1932023,
+                        "user_type": "registered",
+                        "display_name": "Alex Chekunkov"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 11,
+                    "last_activity_date": 1527269640,
+                    "last_edit_date": 1527269640,
+                    "creation_date": 1455974769,
+                    "answer_id": 35523899,
+                    "question_id": 5121931,
+                    "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/35523899#35523899",
+                    "body": "<p><strong>Update</strong>: the library was deprecated in favor of the <a href=\"https://github.com/Phynix/yamlloader\" rel=\"nofollow noreferrer\">yamlloader</a> (which is based on the yamlordereddictloader)</p>\n\n<p>I've just found a Python library (<a href=\"https://pypi.python.org/pypi/yamlordereddictloader/0.1.1\" rel=\"nofollow noreferrer\">https://pypi.python.org/pypi/yamlordereddictloader/0.1.1</a>) which was created based on answers to this question and is quite simple to use:</p>\n\n<pre><code>import yaml\nimport yamlordereddictloader\n\ndatas = yaml.load(open('myfile.yml'), Loader=yamlordereddictloader.Loader)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1143729,
+                                "reputation": 23607,
+                                "user_id": 1126971,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "John Smith Optional"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1589808109,
+                            "post_id": 48900849,
+                            "comment_id": 109431385,
+                            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/48900849#comment109431385_48900849",
+                            "body": "Thank you for this! For some reason, even with Python 3.8 the order was not respected with PyYaml. oyaml solved this for me immediately."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 342731,
+                        "reputation": 351046,
+                        "user_id": 674039,
+                        "user_type": "registered",
+                        "accept_rate": 94,
+                        "display_name": "wim"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 61,
+                    "last_activity_date": 1698194782,
+                    "last_edit_date": 1698194782,
+                    "creation_date": 1519200389,
+                    "answer_id": 48900849,
+                    "question_id": 5121931,
+                    "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts/48900849#48900849",
+                    "body": "<p><a href=\"https://github.com/wimglenn/oyaml\" rel=\"nofollow noreferrer\"><code>oyaml</code></a> is a drop-in replacement for <a href=\"https://github.com/yaml/pyyaml\" rel=\"nofollow noreferrer\">PyYAML</a> which preserves dict ordering. Both Python 2 and Python 3 are supported. Just <code>pip install oyaml</code>, and import as shown below:</p>\n<pre><code>import oyaml as yaml\n</code></pre>\n<p>You'll no longer be annoyed by screwed-up mappings when dumping/loading.</p>\n<p><sub><em>Note:</em> I'm the author of oyaml.</sub></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 16009,
+                "reputation": 2313,
+                "user_id": 34443,
+                "user_type": "registered",
+                "accept_rate": 100,
+                "display_name": "Eric Naeseth"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 5121963,
+            "answer_count": 8,
+            "score": 151,
+            "last_activity_date": 1698194782,
+            "creation_date": 1298663532,
+            "last_edit_date": 1510184083,
+            "question_id": 5121931,
+            "link": "https://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts",
+            "title": "In Python, how can you load YAML mappings as OrderedDicts?",
+            "body": "<p>I'd like to get <a href=\"http://pyyaml.org/\" rel=\"noreferrer\">PyYAML</a>'s loader to load mappings (and ordered mappings) into the Python 2.7+ <a href=\"http://docs.python.org/library/collections.html#collections.OrderedDict\" rel=\"noreferrer\">OrderedDict</a> type, instead of the vanilla <code>dict</code> and the list of pairs it currently uses.</p>\n\n<p>What's the best way to do that?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7217
+}

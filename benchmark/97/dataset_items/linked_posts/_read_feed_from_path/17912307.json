@@ -1,0 +1,189 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "unicode",
+                "utf-8"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 27502,
+                                "reputation": 14383,
+                                "user_id": 72668,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Martlark"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1688951329,
+                            "post_id": 17912392,
+                            "comment_id": 135139181,
+                            "link": "https://stackoverflow.com/questions/17912307/u-ufeff-in-python-string/17912392#comment135139181_17912392",
+                            "body": "the linux command &#39;dos2unix&#39; can be used to convert both the BOM and line endings to what unix / linux expects."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3102159,
+                        "reputation": 1900,
+                        "user_id": 2626001,
+                        "user_type": "registered",
+                        "display_name": "swstephe"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1375042238,
+                    "creation_date": 1375042238,
+                    "answer_id": 17912392,
+                    "question_id": 17912307,
+                    "link": "https://stackoverflow.com/questions/17912307/u-ufeff-in-python-string/17912392#17912392",
+                    "body": "<p>That character is the <a href=\"http://en.wikipedia.org/wiki/Byte_order_mark\" rel=\"noreferrer\">BOM</a> or \"Byte Order Mark\".  It is usually received as the first few bytes of a file, telling you how to interpret the encoding of the rest of the data.  You can simply remove the character to continue.  Although, since the error says you were trying to convert to 'ascii', you should probably pick another encoding for whatever you were trying to do.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2188218,
+                        "reputation": 12118,
+                        "user_id": 1936075,
+                        "user_type": "registered",
+                        "accept_rate": 70,
+                        "display_name": "theodox"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1375055313,
+                    "last_edit_date": 1495542890,
+                    "creation_date": 1375042519,
+                    "answer_id": 17912440,
+                    "question_id": 17912307,
+                    "link": "https://stackoverflow.com/questions/17912307/u-ufeff-in-python-string/17912440#17912440",
+                    "body": "<p>The content you're scraping is encoded in unicode rather than ascii text, and you're getting a character that doesn't convert to ascii.  The right 'translation' depends on what the original web page thought it was.  <a href=\"http://docs.python.org/2/howto/unicode.html\" rel=\"nofollow noreferrer\">Python's unicode page</a> gives the background on how it works. </p>\n\n<p>Are you trying to print the result or stick it in a file? The error suggests it's <em>writing</em> the data that's causing the problem, not reading it. <a href=\"https://stackoverflow.com/questions/1058302/unicode-problems-with-web-pages-in-pythons-urllib\">This question</a> is a good place to look for the fixes.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 246417,
+                                "reputation": 17893,
+                                "user_id": 520567,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "akostadinov"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1635860995,
+                            "post_id": 17912811,
+                            "comment_id": 123401256,
+                            "link": "https://stackoverflow.com/questions/17912307/u-ufeff-in-python-string/17912811#comment123401256_17912811",
+                            "body": "yes, <a href=\"https://www.unicode.org/faq/utf_bom.html#bom6\" rel=\"nofollow noreferrer\">unicode.org/faq/utf_bom.html#bom6</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 84277,
+                        "reputation": 172355,
+                        "user_id": 235698,
+                        "user_type": "registered",
+                        "display_name": "Mark Tolonen"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": true,
+                    "score": 323,
+                    "last_activity_date": 1540182889,
+                    "last_edit_date": 1540182889,
+                    "creation_date": 1375044977,
+                    "answer_id": 17912811,
+                    "question_id": 17912307,
+                    "link": "https://stackoverflow.com/questions/17912307/u-ufeff-in-python-string/17912811#17912811",
+                    "body": "<p>The Unicode character <code>U+FEFF</code> is the byte order mark, or BOM, and is used to tell the difference between big- and little-endian UTF-16 encoding.  If you decode the web page using the right codec, Python will remove it for you.  Examples:</p>\n\n<pre><code>#!python2\n#coding: utf8\nu = u'ABC'\ne8 = u.encode('utf-8')        # encode without BOM\ne8s = u.encode('utf-8-sig')   # encode with BOM\ne16 = u.encode('utf-16')      # encode with BOM\ne16le = u.encode('utf-16le')  # encode without BOM\ne16be = u.encode('utf-16be')  # encode without BOM\nprint 'utf-8     %r' % e8\nprint 'utf-8-sig %r' % e8s\nprint 'utf-16    %r' % e16\nprint 'utf-16le  %r' % e16le\nprint 'utf-16be  %r' % e16be\nprint\nprint 'utf-8  w/ BOM decoded with utf-8     %r' % e8s.decode('utf-8')\nprint 'utf-8  w/ BOM decoded with utf-8-sig %r' % e8s.decode('utf-8-sig')\nprint 'utf-16 w/ BOM decoded with utf-16    %r' % e16.decode('utf-16')\nprint 'utf-16 w/ BOM decoded with utf-16le  %r' % e16.decode('utf-16le')\n</code></pre>\n\n<p>Note that <code>EF BB BF</code> is a UTF-8-encoded BOM.  It is not required for UTF-8, but serves only as a signature (usually on Windows).</p>\n\n<p>Output:</p>\n\n<pre><code>utf-8     'ABC'\nutf-8-sig '\\xef\\xbb\\xbfABC'\nutf-16    '\\xff\\xfeA\\x00B\\x00C\\x00'    # Adds BOM and encodes using native processor endian-ness.\nutf-16le  'A\\x00B\\x00C\\x00'\nutf-16be  '\\x00A\\x00B\\x00C'\n\nutf-8  w/ BOM decoded with utf-8     u'\\ufeffABC'    # doesn't remove BOM if present.\nutf-8  w/ BOM decoded with utf-8-sig u'ABC'          # removes BOM if present.\nutf-16 w/ BOM decoded with utf-16    u'ABC'          # *requires* BOM to be present.\nutf-16 w/ BOM decoded with utf-16le  u'\\ufeffABC'    # doesn't remove BOM if present.\n</code></pre>\n\n<p>Note that the <code>utf-16</code> codec <em>requires</em> BOM to be present, or Python won't know if the data is big- or little-endian.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 10663644,
+                        "reputation": 139,
+                        "user_id": 7850896,
+                        "user_type": "registered",
+                        "accept_rate": 25,
+                        "display_name": "Jagdish Chauhan"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -3,
+                    "last_activity_date": 1491917028,
+                    "creation_date": 1491917028,
+                    "answer_id": 43347257,
+                    "question_id": 17912307,
+                    "link": "https://stackoverflow.com/questions/17912307/u-ufeff-in-python-string/43347257#43347257",
+                    "body": "<p>This problem arise basically when you save your python code in a <strong>UTF-8 or UTF-16 encoding</strong> because python add some special character at the beginning of the code automatically (which is not shown by the text editors) to identify the encoding format. But, when you try to execute the code it gives you the syntax error in line 1 i.e, start of code because <strong>python compiler understands ASCII encoding</strong>.\nwhen you view the code of file using <strong>read()</strong> function you can see at the begin of the returned code <strong>'\\ufeff'</strong> is shown.\nThe one simplest solution to this problem is just by <strong>changing the encoding back to ASCII encoding</strong>(for this you can copy your code to a notepad and save it Remember! choose the ASCII encoding...\nHope this will help.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 361794,
+                        "reputation": 19795,
+                        "user_id": 704616,
+                        "user_type": "registered",
+                        "accept_rate": 77,
+                        "display_name": "siebz0r"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 644,
+                    "last_activity_date": 1520421912,
+                    "creation_date": 1520421912,
+                    "answer_id": 49150749,
+                    "question_id": 17912307,
+                    "link": "https://stackoverflow.com/questions/17912307/u-ufeff-in-python-string/49150749#49150749",
+                    "body": "<p>I ran into this on Python 3 and found this question (and <a href=\"https://stackoverflow.com/a/17912811/704616\">solution</a>).\nWhen opening a file, Python 3 supports the encoding keyword to automatically handle the encoding.</p>\n\n<p>Without it, the BOM is included in the read result:</p>\n\n<pre><code>&gt;&gt;&gt; f = open('file', mode='r')\n&gt;&gt;&gt; f.read()\n'\\ufefftest'\n</code></pre>\n\n<p>Giving the correct encoding, the BOM is omitted in the result:</p>\n\n<pre><code>&gt;&gt;&gt; f = open('file', mode='r', encoding='utf-8-sig')\n&gt;&gt;&gt; f.read()\n'test'\n</code></pre>\n\n<p>Just my 2 cents.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4808577,
+                        "reputation": 3236,
+                        "user_id": 3882744,
+                        "user_type": "registered",
+                        "accept_rate": 70,
+                        "display_name": "caot"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1582745646,
+                    "last_edit_date": 1582745646,
+                    "creation_date": 1582744481,
+                    "answer_id": 60420979,
+                    "question_id": 17912307,
+                    "link": "https://stackoverflow.com/questions/17912307/u-ufeff-in-python-string/60420979#60420979",
+                    "body": "<p>Here is based on the answer from Mark Tolonen. The string included different languages of the word 'test' that's separated by '|', so you can see the difference.</p>\n\n<pre><code>u = u'ABCtest\u03b2\u8c9d\u5854\uc704m\u00e1sb\u00eata|test|\u0627\u062e\u062a\u0628\u0627\u0631|\u6d4b\u8bd5|\u6e2c\u8a66|\u30c6\u30b9\u30c8|\u092a\u0930\u0940\u0915\u094d\u0937\u093e|\u0d2a\u0d30\u0d3f\u0d36\u0d4b\u0d27\u0d28|\u05e4\u05bc\u05e8\u05d5\u05d1\u05d9\u05e8\u05df|ki\u1ec3m tra|\u00d6l\u00e7ek|'\ne8 = u.encode('utf-8')        # encode without BOM\ne8s = u.encode('utf-8-sig')   # encode with BOM\ne16 = u.encode('utf-16')      # encode with BOM\ne16le = u.encode('utf-16le')  # encode without BOM\ne16be = u.encode('utf-16be')  # encode without BOM\nprint('utf-8     %r' % e8)\nprint('utf-8-sig %r' % e8s)\nprint('utf-16    %r' % e16)\nprint('utf-16le  %r' % e16le)\nprint('utf-16be  %r' % e16be)\nprint()\nprint('utf-8  w/ BOM decoded with utf-8     %r' % e8s.decode('utf-8'))\nprint('utf-8  w/ BOM decoded with utf-8-sig %r' % e8s.decode('utf-8-sig'))\nprint('utf-16 w/ BOM decoded with utf-16    %r' % e16.decode('utf-16'))\nprint('utf-16 w/ BOM decoded with utf-16le  %r' % e16.decode('utf-16le'))\n</code></pre>\n\n<p>Here is a test run:</p>\n\n<pre><code>&gt;&gt;&gt; u = u'ABCtest\u03b2\u8c9d\u5854\uc704m\u00e1sb\u00eata|test|\u0627\u062e\u062a\u0628\u0627\u0631|\u6d4b\u8bd5|\u6e2c\u8a66|\u30c6\u30b9\u30c8|\u092a\u0930\u0940\u0915\u094d\u0937\u093e|\u0d2a\u0d30\u0d3f\u0d36\u0d4b\u0d27\u0d28|\u05e4\u05bc\u05e8\u05d5\u05d1\u05d9\u05e8\u05df|ki\u1ec3m tra|\u00d6l\u00e7ek|'\n&gt;&gt;&gt; e8 = u.encode('utf-8')        # encode without BOM\n&gt;&gt;&gt; e8s = u.encode('utf-8-sig')   # encode with BOM\n&gt;&gt;&gt; e16 = u.encode('utf-16')      # encode with BOM\n&gt;&gt;&gt; e16le = u.encode('utf-16le')  # encode without BOM\n&gt;&gt;&gt; e16be = u.encode('utf-16be')  # encode without BOM\n&gt;&gt;&gt; print('utf-8     %r' % e8)\nutf-8     b'ABCtest\\xce\\xb2\\xe8\\xb2\\x9d\\xe5\\xa1\\x94\\xec\\x9c\\x84m\\xc3\\xa1sb\\xc3\\xaata|test|\\xd8\\xa7\\xd8\\xae\\xd8\\xaa\\xd8\\xa8\\xd8\\xa7\\xd8\\xb1|\\xe6\\xb5\\x8b\\xe8\\xaf\\x95|\\xe6\\xb8\\xac\\xe8\\xa9\\xa6|\\xe3\\x83\\x86\\xe3\\x82\\xb9\\xe3\\x83\\x88|\\xe0\\xa4\\xaa\\xe0\\xa4\\xb0\\xe0\\xa5\\x80\\xe0\\xa4\\x95\\xe0\\xa5\\x8d\\xe0\\xa4\\xb7\\xe0\\xa4\\xbe|\\xe0\\xb4\\xaa\\xe0\\xb4\\xb0\\xe0\\xb4\\xbf\\xe0\\xb4\\xb6\\xe0\\xb5\\x8b\\xe0\\xb4\\xa7\\xe0\\xb4\\xa8|\\xd7\\xa4\\xd6\\xbc\\xd7\\xa8\\xd7\\x95\\xd7\\x91\\xd7\\x99\\xd7\\xa8\\xd7\\x9f|ki\\xe1\\xbb\\x83m tra|\\xc3\\x96l\\xc3\\xa7ek|'\n&gt;&gt;&gt; print('utf-8-sig %r' % e8s)\nutf-8-sig b'\\xef\\xbb\\xbfABCtest\\xce\\xb2\\xe8\\xb2\\x9d\\xe5\\xa1\\x94\\xec\\x9c\\x84m\\xc3\\xa1sb\\xc3\\xaata|test|\\xd8\\xa7\\xd8\\xae\\xd8\\xaa\\xd8\\xa8\\xd8\\xa7\\xd8\\xb1|\\xe6\\xb5\\x8b\\xe8\\xaf\\x95|\\xe6\\xb8\\xac\\xe8\\xa9\\xa6|\\xe3\\x83\\x86\\xe3\\x82\\xb9\\xe3\\x83\\x88|\\xe0\\xa4\\xaa\\xe0\\xa4\\xb0\\xe0\\xa5\\x80\\xe0\\xa4\\x95\\xe0\\xa5\\x8d\\xe0\\xa4\\xb7\\xe0\\xa4\\xbe|\\xe0\\xb4\\xaa\\xe0\\xb4\\xb0\\xe0\\xb4\\xbf\\xe0\\xb4\\xb6\\xe0\\xb5\\x8b\\xe0\\xb4\\xa7\\xe0\\xb4\\xa8|\\xd7\\xa4\\xd6\\xbc\\xd7\\xa8\\xd7\\x95\\xd7\\x91\\xd7\\x99\\xd7\\xa8\\xd7\\x9f|ki\\xe1\\xbb\\x83m tra|\\xc3\\x96l\\xc3\\xa7ek|'\n&gt;&gt;&gt; print('utf-16    %r' % e16)\nutf-16    b\"\\xff\\xfeA\\x00B\\x00C\\x00t\\x00e\\x00s\\x00t\\x00\\xb2\\x03\\x9d\\x8cTX\\x04\\xc7m\\x00\\xe1\\x00s\\x00b\\x00\\xea\\x00t\\x00a\\x00|\\x00t\\x00e\\x00s\\x00t\\x00|\\x00'\\x06.\\x06*\\x06(\\x06'\\x061\\x06|\\x00Km\\xd5\\x8b|\\x00,nf\\x8a|\\x00\\xc60\\xb90\\xc80|\\x00*\\t0\\t@\\t\\x15\\tM\\t7\\t&gt;\\t|\\x00*\\r0\\r?\\r6\\rK\\r'\\r(\\r|\\x00\\xe4\\x05\\xbc\\x05\\xe8\\x05\\xd5\\x05\\xd1\\x05\\xd9\\x05\\xe8\\x05\\xdf\\x05|\\x00k\\x00i\\x00\\xc3\\x1em\\x00 \\x00t\\x00r\\x00a\\x00|\\x00\\xd6\\x00l\\x00\\xe7\\x00e\\x00k\\x00|\\x00\"\n&gt;&gt;&gt; print('utf-16le  %r' % e16le)\nutf-16le  b\"A\\x00B\\x00C\\x00t\\x00e\\x00s\\x00t\\x00\\xb2\\x03\\x9d\\x8cTX\\x04\\xc7m\\x00\\xe1\\x00s\\x00b\\x00\\xea\\x00t\\x00a\\x00|\\x00t\\x00e\\x00s\\x00t\\x00|\\x00'\\x06.\\x06*\\x06(\\x06'\\x061\\x06|\\x00Km\\xd5\\x8b|\\x00,nf\\x8a|\\x00\\xc60\\xb90\\xc80|\\x00*\\t0\\t@\\t\\x15\\tM\\t7\\t&gt;\\t|\\x00*\\r0\\r?\\r6\\rK\\r'\\r(\\r|\\x00\\xe4\\x05\\xbc\\x05\\xe8\\x05\\xd5\\x05\\xd1\\x05\\xd9\\x05\\xe8\\x05\\xdf\\x05|\\x00k\\x00i\\x00\\xc3\\x1em\\x00 \\x00t\\x00r\\x00a\\x00|\\x00\\xd6\\x00l\\x00\\xe7\\x00e\\x00k\\x00|\\x00\"\n&gt;&gt;&gt; print('utf-16be  %r' % e16be)\nutf-16be  b\"\\x00A\\x00B\\x00C\\x00t\\x00e\\x00s\\x00t\\x03\\xb2\\x8c\\x9dXT\\xc7\\x04\\x00m\\x00\\xe1\\x00s\\x00b\\x00\\xea\\x00t\\x00a\\x00|\\x00t\\x00e\\x00s\\x00t\\x00|\\x06'\\x06.\\x06*\\x06(\\x06'\\x061\\x00|mK\\x8b\\xd5\\x00|n,\\x8af\\x00|0\\xc60\\xb90\\xc8\\x00|\\t*\\t0\\t@\\t\\x15\\tM\\t7\\t&gt;\\x00|\\r*\\r0\\r?\\r6\\rK\\r'\\r(\\x00|\\x05\\xe4\\x05\\xbc\\x05\\xe8\\x05\\xd5\\x05\\xd1\\x05\\xd9\\x05\\xe8\\x05\\xdf\\x00|\\x00k\\x00i\\x1e\\xc3\\x00m\\x00 \\x00t\\x00r\\x00a\\x00|\\x00\\xd6\\x00l\\x00\\xe7\\x00e\\x00k\\x00|\"\n&gt;&gt;&gt; print()\n\n&gt;&gt;&gt; print('utf-8  w/ BOM decoded with utf-8     %r' % e8s.decode('utf-8'))\nutf-8  w/ BOM decoded with utf-8     '\\ufeffABCtest\u03b2\u8c9d\u5854\uc704m\u00e1sb\u00eata|test|\u0627\u062e\u062a\u0628\u0627\u0631|\u6d4b\u8bd5|\u6e2c\u8a66|\u30c6\u30b9\u30c8|\u092a\u0930\u0940\u0915\u094d\u0937\u093e|\u0d2a\u0d30\u0d3f\u0d36\u0d4b\u0d27\u0d28|\u05e4\u05bc\u05e8\u05d5\u05d1\u05d9\u05e8\u05df|ki\u1ec3m tra|\u00d6l\u00e7ek|'\n&gt;&gt;&gt; print('utf-8  w/ BOM decoded with utf-8-sig %r' % e8s.decode('utf-8-sig'))\nutf-8  w/ BOM decoded with utf-8-sig 'ABCtest\u03b2\u8c9d\u5854\uc704m\u00e1sb\u00eata|test|\u0627\u062e\u062a\u0628\u0627\u0631|\u6d4b\u8bd5|\u6e2c\u8a66|\u30c6\u30b9\u30c8|\u092a\u0930\u0940\u0915\u094d\u0937\u093e|\u0d2a\u0d30\u0d3f\u0d36\u0d4b\u0d27\u0d28|\u05e4\u05bc\u05e8\u05d5\u05d1\u05d9\u05e8\u05df|ki\u1ec3m tra|\u00d6l\u00e7ek|'\n&gt;&gt;&gt; print('utf-16 w/ BOM decoded with utf-16    %r' % e16.decode('utf-16'))\nutf-16 w/ BOM decoded with utf-16    'ABCtest\u03b2\u8c9d\u5854\uc704m\u00e1sb\u00eata|test|\u0627\u062e\u062a\u0628\u0627\u0631|\u6d4b\u8bd5|\u6e2c\u8a66|\u30c6\u30b9\u30c8|\u092a\u0930\u0940\u0915\u094d\u0937\u093e|\u0d2a\u0d30\u0d3f\u0d36\u0d4b\u0d27\u0d28|\u05e4\u05bc\u05e8\u05d5\u05d1\u05d9\u05e8\u05df|ki\u1ec3m tra|\u00d6l\u00e7ek|'\n&gt;&gt;&gt; print('utf-16 w/ BOM decoded with utf-16le  %r' % e16.decode('utf-16le'))\nutf-16 w/ BOM decoded with utf-16le  '\\ufeffABCtest\u03b2\u8c9d\u5854\uc704m\u00e1sb\u00eata|test|\u0627\u062e\u062a\u0628\u0627\u0631|\u6d4b\u8bd5|\u6e2c\u8a66|\u30c6\u30b9\u30c8|\u092a\u0930\u0940\u0915\u094d\u0937\u093e|\u0d2a\u0d30\u0d3f\u0d36\u0d4b\u0d27\u0d28|\u05e4\u05bc\u05e8\u05d5\u05d1\u05d9\u05e8\u05df|ki\u1ec3m tra|\u00d6l\u00e7ek|'\n</code></pre>\n\n<p>It's worth to know that only both <code>utf-8-sig</code> and <code>utf-16</code> get back the original string after both <code>encode</code> and <code>decode</code>.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 2798415,
+                "reputation": 4814,
+                "user_id": 2407162,
+                "user_type": "registered",
+                "accept_rate": 87,
+                "display_name": "James Hallen"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 17912811,
+            "answer_count": 6,
+            "score": 332,
+            "last_activity_date": 1708010644,
+            "creation_date": 1375041766,
+            "last_edit_date": 1609579877,
+            "question_id": 17912307,
+            "link": "https://stackoverflow.com/questions/17912307/u-ufeff-in-python-string",
+            "title": "u&#39;\\ufeff&#39; in Python string",
+            "body": "<p>I got an error with the following exception message:</p>\n<pre><code>UnicodeEncodeError: 'ascii' codec can't encode character u'\\ufeff' in\nposition 155: ordinal not in range(128)\n</code></pre>\n<p>Not sure what <code>u'\\ufeff'</code> is, it shows up when I'm web scraping. How can I remedy the situation? The <code>.replace()</code> string method doesn't work on it.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9827
+}

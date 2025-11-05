@@ -1,0 +1,637 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "pickle"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 90866,
+                        "reputation": 8149,
+                        "user_id": 249878,
+                        "user_type": "registered",
+                        "accept_rate": 90,
+                        "display_name": "yurib"
+                    },
+                    "edited": false,
+                    "score": 2,
+                    "creation_date": 1444445773,
+                    "post_id": 33049688,
+                    "comment_id": 53920304,
+                    "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key#comment53920304_33049688",
+                    "body": "maybe i&#39;m missing something, but it looks like you&#39;re assuming each value has a size of a single byte, why do you think this is guaranteed? and why are you trying to unpickle individual values manually? was the file created using the pickle module?"
+                },
+                {
+                    "owner": {
+                        "account_id": 6845305,
+                        "reputation": 1057,
+                        "user_id": 5264310,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Xcecution"
+                    },
+                    "reply_to_user": {
+                        "account_id": 90866,
+                        "reputation": 8149,
+                        "user_id": 249878,
+                        "user_type": "registered",
+                        "accept_rate": 90,
+                        "display_name": "yurib"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1444446143,
+                    "post_id": 33049688,
+                    "comment_id": 53920368,
+                    "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key#comment53920368_33049688",
+                    "body": "Right, i didn&#39;t notice but if I remove the &quot;m.seek(-5000, io.SEEK_END)&quot; part i got an EOFError. I thought that solved it but now you mention that I&#39;m more confused. Should I edit the Question?"
+                },
+                {
+                    "owner": {
+                        "account_id": 6845305,
+                        "reputation": 1057,
+                        "user_id": 5264310,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Xcecution"
+                    },
+                    "reply_to_user": {
+                        "account_id": 90866,
+                        "reputation": 8149,
+                        "user_id": 249878,
+                        "user_type": "registered",
+                        "accept_rate": 90,
+                        "display_name": "yurib"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1444446879,
+                    "post_id": 33049688,
+                    "comment_id": 53920484,
+                    "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key#comment53920484_33049688",
+                    "body": "Oh and yes, the file was created using the dump() function from the pickle module"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 6845305,
+                                "reputation": 1057,
+                                "user_id": 5264310,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Xcecution"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1444447864,
+                            "post_id": 33049877,
+                            "comment_id": 53920641,
+                            "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/33049877#comment53920641_33049877",
+                            "body": "The file contains 5000 lists. I was trying to store each list in every component of the array."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6845305,
+                                "reputation": 1057,
+                                "user_id": 5264310,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Xcecution"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1444449584,
+                            "post_id": 33049877,
+                            "comment_id": 53920919,
+                            "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/33049877#comment53920919_33049877",
+                            "body": "Hi, I could solve the problem. I&#39;m not sure how,  but I just removed the &quot;fp&quot; variable and the I put &quot;while m.tell() &lt; sz:&quot; instead of &quot;while fp &lt; sz:&quot;. Thank you anyway :), and if you know the reason of this &quot;solution&quot; I would be thankful if you could explain it to me."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 90866,
+                        "reputation": 8149,
+                        "user_id": 249878,
+                        "user_type": "registered",
+                        "accept_rate": 90,
+                        "display_name": "yurib"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1444446876,
+                    "creation_date": 1444446876,
+                    "answer_id": 33049877,
+                    "question_id": 33049688,
+                    "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/33049877#33049877",
+                    "body": "<p>I am not completely sure what you're trying to achieve by seeking to a specific offset and attempting to load individual values manually, the typical usage of the <code>pickle</code> module is:</p>\n\n<pre><code># save data to a file\nwith open('myfile.pickle','wb') as fout:\n    pickle.dump([1,2,3],fout)\n\n# read data from a file\nwith open('myfile.pickle') as fin:\n    print pickle.load(fin)\n\n# output\n&gt;&gt; [1, 2, 3]\n</code></pre>\n\n<p>If you dumped a list, you'll load a list, there's no need to load each item individually.</p>\n\n<p>you're saying that you got an error before you were seeking to the -5000 offset, maybe the file you're trying to read is corrupted.</p>\n\n<p>If you have access to the original data, I suggest you try saving it to a new file and reading it as in the example.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2762926,
+                        "reputation": 34692,
+                        "user_id": 2379433,
+                        "user_type": "registered",
+                        "display_name": "Mike McKerns"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 29,
+                    "last_activity_date": 1444571558,
+                    "last_edit_date": 1495540326,
+                    "creation_date": 1444480339,
+                    "answer_id": 33054024,
+                    "question_id": 33049688,
+                    "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/33054024#33054024",
+                    "body": "<p>pickling is recursive, not sequential.  Thus, to pickle a list, <code>pickle</code> will start to pickle the containing list, then pickle the first element\u2026 diving into the first element and pickling dependencies and sub-elements until the first element is serialized. Then moves on to the next element of the list, and so on, until it finally finishes the list and finishes serializing the enclosing list.  In short, it's hard to treat a recursive pickle as sequential, except for some special cases.  It's better to use a smarter pattern on your <code>dump</code>, if you want to <code>load</code> in a special way.</p>\n\n<p>The most common pickle, it to pickle everything with a single <code>dump</code> to a file -- but then you have to <code>load</code> everything at once with a single <code>load</code>.  However, if you open a file handle and do multiple <code>dump</code> calls (e.g. one for each element of the list, or a tuple of selected elements), then your <code>load</code> will mirror that\u2026 you open the file handle and do multiple <code>load</code> calls until you have all the list elements and can reconstruct the list.  It's still not easy to selectively <code>load</code> only certain list elements, however.  To do that, you'd probably have to store your list elements as a <code>dict</code> (with the index of the element or chunk as the key) using a package like <code>klepto</code>, which can break up a pickled <code>dict</code> into several files transparently, and enables easy loading of specific elements.</p>\n\n<p><a href=\"https://stackoverflow.com/questions/20716812\">Saving and loading multiple objects in pickle file?</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 6968463,
+                                "reputation": 4544,
+                                "user_id": 5345646,
+                                "user_type": "registered",
+                                "accept_rate": 95,
+                                "display_name": "Mooncrater"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1601972671,
+                            "post_id": 44422239,
+                            "comment_id": 113564962,
+                            "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/44422239#comment113564962_44422239",
+                            "body": "Hmmm. Can you look at <a href=\"https://stackoverflow.com/questions/64220956/javascript-blob-to-download-a-binary-file-creating-corrupted-files?noredirect=1#comment113563699_64220956\">this</a> question? There is a similar error, but the circumstances are different."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 258827,
+                        "reputation": 8144,
+                        "user_id": 541262,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "mishaF"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 26,
+                    "last_activity_date": 1496867527,
+                    "creation_date": 1496867527,
+                    "answer_id": 44422239,
+                    "question_id": 33049688,
+                    "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/44422239#44422239",
+                    "body": "<p>This may not be relevant to your specific issue, but I had a similar problem when the pickle archive had been created using <code>gzip</code>.</p>\n\n<p>For example if a compressed pickle archive is made like this,</p>\n\n<pre><code>import gzip, pickle\nwith gzip.open('test.pklz', 'wb') as ofp:\n    pickle.dump([1,2,3], ofp)\n</code></pre>\n\n<p>Trying to open it throws the errors</p>\n\n<pre><code> with open('test.pklz', 'rb') as ifp:\n     print(pickle.load(ifp))\nTraceback (most recent call last):\n  File \"&lt;stdin&gt;\", line 2, in &lt;module&gt;\n_pickle.UnpicklingError: invalid load key, ''.\n</code></pre>\n\n<p>But, if the pickle file is opened using <code>gzip</code> all is harmonious</p>\n\n<pre><code>with gzip.open('test.pklz', 'rb') as ifp:\n    print(pickle.load(ifp))\n\n[1, 2, 3]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 16567,
+                                "reputation": 3671,
+                                "user_id": 36253,
+                                "user_type": "registered",
+                                "accept_rate": 59,
+                                "display_name": "balu"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1600275064,
+                            "post_id": 53306038,
+                            "comment_id": 113039024,
+                            "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/53306038#comment113039024_53306038",
+                            "body": "This happened to me. I was sharing memory between two processes and used pickle to continuously read/write data from/to that memory. Unfortunately, I had forgotten to use a lock, so I ended up having a race condition where <code>pickle.loads()</code> sometimes failed because the data was corrupted (i.e. it was read while it was being overridden by the other process)."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 472537,
+                        "reputation": 342,
+                        "user_id": 881070,
+                        "user_type": "registered",
+                        "display_name": "foladev"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 14,
+                    "last_activity_date": 1542217625,
+                    "creation_date": 1542217625,
+                    "answer_id": 53306038,
+                    "question_id": 33049688,
+                    "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/53306038#53306038",
+                    "body": "<p>If you transferred these files through disk or other means, it is likely they were not saved properly.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4646394,
+                                "reputation": 645,
+                                "user_id": 3956024,
+                                "user_type": "registered",
+                                "display_name": "fepegar"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1607455268,
+                            "post_id": 64530374,
+                            "comment_id": 115276617,
+                            "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/64530374#comment115276617_64530374",
+                            "body": "I also had this issue. It turned out that the file that was meant to be downloaded from Dropbox didn&#39;t exist anymore, and that <code>&lt;</code> is part of the HTML website downloaded instead, saying something like &quot;Sorry, this file has been deleted&quot;."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 15972684,
+                        "reputation": 9,
+                        "user_id": 11526353,
+                        "user_type": "registered",
+                        "display_name": "carloslme"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1603674557,
+                    "creation_date": 1603674557,
+                    "answer_id": 64530374,
+                    "question_id": 33049688,
+                    "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/64530374#64530374",
+                    "body": "<p>I had a similar error but with different context when I uploaded a *.p file to Google Drive. I tried to use it later in a Google Colab session, and got this error:</p>\n<pre><code>    1 with open(&quot;/tmp/train.p&quot;, mode='rb') as training_data:\n----&gt; 2     train = pickle.load(training_data)\nUnpicklingError: invalid load key, '&lt;'.\n</code></pre>\n<p>I solved it by compressing the file, upload it and then unzip on the session.\nIt looks like the pickle file is not saved correctly when you upload/download it so it gets corrupted.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5784123,
+                                "reputation": 330,
+                                "user_id": 4563935,
+                                "user_type": "registered",
+                                "display_name": "Ray"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1648429004,
+                            "post_id": 67141340,
+                            "comment_id": 126614269,
+                            "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/67141340#comment126614269_67141340",
+                            "body": "Just to add a comment. I downloaded a large file from github -- and encounter the error message &quot;_pickle.UnpicklingError: invalid load key&quot;. Later I found the large file is broken. I need to download it again and make sure the <code>sha256sum</code> is the same"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 18811666,
+                                "reputation": 919,
+                                "user_id": 13719735,
+                                "user_type": "registered",
+                                "display_name": "analytical_prat"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1670247849,
+                            "post_id": 67141340,
+                            "comment_id": 131825227,
+                            "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/67141340#comment131825227_67141340",
+                            "body": "True for machine learning models that are being downloaded from HuggingFace or other resource."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11289411,
+                                "reputation": 102,
+                                "user_id": 8279065,
+                                "user_type": "registered",
+                                "display_name": "Daniel Tcho\u0144"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1693284690,
+                            "post_id": 67141340,
+                            "comment_id": 135736714,
+                            "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/67141340#comment135736714_67141340",
+                            "body": "Thanks for the tip about <code>git lfs</code>! In my case, <code>sudo apt-get install git-lfs</code>, <code>git lfs install</code>, and <code>git lfs pull</code> was enough."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5868390,
+                                "reputation": 21419,
+                                "user_id": 4621513,
+                                "user_type": "registered",
+                                "accept_rate": 77,
+                                "display_name": "mkrieger1"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1711887902,
+                            "post_id": 67141340,
+                            "comment_id": 137954924,
+                            "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/67141340#comment137954924_67141340",
+                            "body": "This does not seem to have anything to do with the problem in the question."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4123889,
+                        "reputation": 1850,
+                        "user_id": 3383543,
+                        "user_type": "registered",
+                        "display_name": "Ahmad AlMughrabi"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 38,
+                    "last_activity_date": 1651827142,
+                    "last_edit_date": 1651827142,
+                    "creation_date": 1618682280,
+                    "answer_id": 67141340,
+                    "question_id": 33049688,
+                    "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/67141340#67141340",
+                    "body": "<p>I solved my issue by:</p>\n<ul>\n<li>Remove the cloned project</li>\n<li>Install <a href=\"https://git-lfs.github.com/\" rel=\"noreferrer\">git lfs</a>: <code>sudo apt-get install git-lfs</code></li>\n<li>Set up git lfs for your user account: <code>git lfs install</code></li>\n<li>Clone the project again.</li>\n</ul>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1020826,
+                        "reputation": 131,
+                        "user_id": 1031224,
+                        "user_type": "registered",
+                        "display_name": "isilpekel"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1618932410,
+                    "creation_date": 1618932410,
+                    "answer_id": 67181892,
+                    "question_id": 33049688,
+                    "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/67181892#67181892",
+                    "body": "<p>I received a similar error while loading a pickled sklearn model. The problem was that the pickle is created via sklearn.externals.joblib and i was trying to load it via standard pickle library. Using joblib has solved my problem.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": -1,
+                                "reputation": 1,
+                                "user_id": -1,
+                                "user_type": "moderator",
+                                "display_name": "Community"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1638341442,
+                            "post_id": 70179242,
+                            "comment_id": 124059600,
+                            "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/70179242#comment124059600_70179242",
+                            "body": "Your answer could be improved with additional supporting information. Please <a href=\"https://stackoverflow.com/posts/70179242/edit\">edit</a> to add further details, such as citations or documentation, so that others can confirm that your answer is correct. You can find more information on how to write good answers <a href=\"/help/how-to-answer\">in the help center</a>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 8088514,
+                        "reputation": 37,
+                        "user_id": 7544691,
+                        "user_type": "registered",
+                        "display_name": "zahid hasan"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1638334099,
+                    "creation_date": 1638334099,
+                    "answer_id": 70179242,
+                    "question_id": 33049688,
+                    "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/70179242#70179242",
+                    "body": "<p>I just encountered that issue which was initiated by the bad pickle file (not fully copied).</p>\n<p>My solution: Check the pickle file status (corrupted or not).</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 21763512,
+                                "reputation": 429,
+                                "user_id": 16067738,
+                                "user_type": "registered",
+                                "display_name": "LunaticXXD10"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1654204583,
+                            "post_id": 71403288,
+                            "comment_id": 128042321,
+                            "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/71403288#comment128042321_71403288",
+                            "body": "what is the use of using the close() function to close the file when you are opening it with &#39;with&#39; statement??? This answer dosent help.."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4285668,
+                                "reputation": 603,
+                                "user_id": 3503565,
+                                "user_type": "registered",
+                                "display_name": "DSBLR"
+                            },
+                            "reply_to_user": {
+                                "account_id": 21763512,
+                                "reputation": 429,
+                                "user_id": 16067738,
+                                "user_type": "registered",
+                                "display_name": "LunaticXXD10"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1656986513,
+                            "post_id": 71403288,
+                            "comment_id": 128696886,
+                            "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/71403288#comment128696886_71403288",
+                            "body": "what error you are getting when you are executing the above code ?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 21763512,
+                                "reputation": 429,
+                                "user_id": 16067738,
+                                "user_type": "registered",
+                                "display_name": "LunaticXXD10"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1660752080,
+                            "post_id": 71403288,
+                            "comment_id": 129608353,
+                            "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/71403288#comment129608353_71403288",
+                            "body": "getting a &#39;close() function is useless here&#39; error"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4285668,
+                                "reputation": 603,
+                                "user_id": 3503565,
+                                "user_type": "registered",
+                                "display_name": "DSBLR"
+                            },
+                            "reply_to_user": {
+                                "account_id": 21763512,
+                                "reputation": 429,
+                                "user_id": 16067738,
+                                "user_type": "registered",
+                                "display_name": "LunaticXXD10"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1660784719,
+                            "post_id": 71403288,
+                            "comment_id": 129616949,
+                            "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/71403288#comment129616949_71403288",
+                            "body": "@LunaticXXD10 standard syntax to be followed. Developer will understand the syntax is multiline."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4285668,
+                        "reputation": 603,
+                        "user_id": 3503565,
+                        "user_type": "registered",
+                        "display_name": "DSBLR"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": -2,
+                    "last_activity_date": 1646789119,
+                    "creation_date": 1646789119,
+                    "answer_id": 71403288,
+                    "question_id": 33049688,
+                    "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/71403288#71403288",
+                    "body": "<ol>\n<li><p>Close the opened file</p>\n<p><code>filepath = 'model_v1.pkl' with open(filepath, 'rb') as f: p = cPickle.Unpickler(f) model = p.load() f.close()</code></p>\n</li>\n<li><p>If step 1 doesn't work; restart the session</p>\n</li>\n</ol>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": -1,
+                                "reputation": 1,
+                                "user_id": -1,
+                                "user_type": "moderator",
+                                "display_name": "Community"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1658790358,
+                            "post_id": 73104667,
+                            "comment_id": 129134624,
+                            "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/73104667#comment129134624_73104667",
+                            "body": "Your answer could be improved with additional supporting information. Please <a href=\"https://stackoverflow.com/posts/73104667/edit\">edit</a> to add further details, such as citations or documentation, so that others can confirm that your answer is correct. You can find more information on how to write good answers <a href=\"/help/how-to-answer\">in the help center</a>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 22037692,
+                        "reputation": 15,
+                        "user_id": 16303934,
+                        "user_type": "registered",
+                        "display_name": "Prasant kumar"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -3,
+                    "last_activity_date": 1658729379,
+                    "last_edit_date": 1658729379,
+                    "creation_date": 1658729332,
+                    "answer_id": 73104667,
+                    "question_id": 33049688,
+                    "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/73104667#73104667",
+                    "body": "<p><strong>Pickling error - _pickle.UnpicklingError: invalid load key, '&lt;'.</strong> <br>\nThis kind of error comes when Weights are complete or some problem with the Weights/ Pickle file because of which UnPickling of weights giving Error.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 46051,
+                        "reputation": 36926,
+                        "user_id": 135946,
+                        "user_type": "registered",
+                        "accept_rate": 92,
+                        "display_name": "Bostone"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1669241918,
+                    "creation_date": 1669241918,
+                    "answer_id": 74553560,
+                    "question_id": 33049688,
+                    "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/74553560#74553560",
+                    "body": "<p>In my case, I ran into this issue due to multiple processes trying to read from the same pickled file. The first of these actually creates a pickle (write operation) and some quick threads start reading from it too soon. Just by retrying the read when catching these 2 errors <code>EOFError, UnpicklingError</code> I don't see these errors anymore</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 15813772,
+                        "reputation": 1562,
+                        "user_id": 12285101,
+                        "user_type": "registered",
+                        "display_name": "Reut"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1695111994,
+                    "creation_date": 1695111994,
+                    "answer_id": 77132862,
+                    "question_id": 33049688,
+                    "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/77132862#77132862",
+                    "body": "<p>I had this error from very &quot;simple&quot; mistake, I was saving my pickle wrongly, using to_csv instead of to_pickle:</p>\n<pre><code>import pandas as pd\n\n#led to error:\ndf.to_csv('my_file.pkl')\n\n#correct way:\ndf.to_pickle('my_file.pkl')\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 8311526,
+                                "reputation": 828,
+                                "user_id": 6684751,
+                                "user_type": "registered",
+                                "display_name": "arun n a"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1696831363,
+                            "post_id": 77239780,
+                            "comment_id": 136198163,
+                            "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/77239780#comment136198163_77239780",
+                            "body": "As it\u2019s currently written, your answer is unclear. Please <a href=\"https://stackoverflow.com/posts/77239780/edit\">edit</a> to add additional details that will help others understand how this addresses the question asked. You can find more information on how to write good answers <a href=\"/help/how-to-answer\">in the help center</a>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 16873501,
+                        "reputation": 7,
+                        "user_id": 13248994,
+                        "user_type": "registered",
+                        "display_name": "Michael James"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -2,
+                    "last_activity_date": 1696531188,
+                    "creation_date": 1696531188,
+                    "answer_id": 77239780,
+                    "question_id": 33049688,
+                    "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key/77239780#77239780",
+                    "body": "<p>Simple check: incorrect file extension to load_pickle() in pandas.</p>\n<p>For example, if your file is called my_pickle.pkl on disc, but you call pd.load_pickle(my_pickle.csv) by mistake, you'll get this error.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 6845305,
+                "reputation": 1057,
+                "user_id": 5264310,
+                "user_type": "registered",
+                "accept_rate": 100,
+                "display_name": "Xcecution"
+            },
+            "comment_count": 3,
+            "is_answered": true,
+            "accepted_answer_id": 33054024,
+            "answer_count": 13,
+            "score": 83,
+            "last_activity_date": 1711888071,
+            "creation_date": 1444444853,
+            "last_edit_date": 1711888071,
+            "question_id": 33049688,
+            "link": "https://stackoverflow.com/questions/33049688/what-causes-the-error-pickle-unpicklingerror-invalid-load-key",
+            "title": "What causes the error &quot;_pickle.UnpicklingError: invalid load key, &#39; &#39;.&quot;?",
+            "body": "<p>I'm trying to store 5000 data elements on an array. This 5000 elements are stored on an existinng file (therefore it's not empty).</p>\n<p>But I'm getting an error.</p>\n<p>Code</p>\n<pre><code>def array():\n    name = 'puntos.df4'\n\n    m = open(name, 'rb')\n    v = []*5000\n\n    m.seek(-5000, io.SEEK_END)\n    fp = m.tell()\n    sz = os.path.getsize(name)\n\n    while fp &lt; sz:\n        pt = pickle.load(m)\n        v.append(pt)\n\n    m.close()\n    return v\n</code></pre>\n<p>Output:</p>\n<pre class=\"lang-none prettyprint-override\"><code>line 23, in array\npt = pickle.load(m)\n_pickle.UnpicklingError: invalid load key, ''.\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9266
+}

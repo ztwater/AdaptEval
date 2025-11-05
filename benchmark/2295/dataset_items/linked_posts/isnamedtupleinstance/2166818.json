@@ -1,0 +1,490 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "introspection",
+                "namedtuple",
+                "isinstance"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 20130,
+                        "reputation": 281891,
+                        "user_id": 47773,
+                        "user_type": "registered",
+                        "accept_rate": 52,
+                        "display_name": "Matthew Flaschen"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1264825084,
+                    "post_id": 2166818,
+                    "comment_id": 2111906,
+                    "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple#comment2111906_2166818",
+                    "body": "Do you need to know absolutely, or is a heuristic okay?  If the latter, you can check e.g. obj._asdict.__doc__ == &#39;Return a new OrderedDict which maps field names to their values&#39; (possibly other factors too)."
+                },
+                {
+                    "owner": {
+                        "account_id": 22422,
+                        "reputation": 83464,
+                        "user_id": 55246,
+                        "user_type": "registered",
+                        "accept_rate": 69,
+                        "display_name": "Sridhar Ratnakumar"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1264825591,
+                    "post_id": 2166818,
+                    "comment_id": 2111934,
+                    "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple#comment2111934_2166818",
+                    "body": "Absolutely, of course. But since I&#39;d be using this &quot;check&quot; in an <code>assert</code> statement only (I am writing an extention to namedtuples .. which mixin asserts that it is used with a namedtuple as its sibling base class), heuristic check may also be fine. I think it is worth adding your  <code>__doc__</code> check to Alex&#39;s code below."
+                },
+                {
+                    "owner": {
+                        "account_id": 18469,
+                        "reputation": 166666,
+                        "user_id": 42346,
+                        "user_type": "registered",
+                        "display_name": "mechanical_meat"
+                    },
+                    "edited": false,
+                    "score": 4,
+                    "creation_date": 1264825969,
+                    "post_id": 2166818,
+                    "comment_id": 2111954,
+                    "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple#comment2111954_2166818",
+                    "body": "FWIW, this is filed as a &quot;bug&quot; (not sure I agree with that):  <a href=\"http://bugs.python.org/issue7796\" rel=\"nofollow noreferrer\">bugs.python.org/issue7796</a>"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 22422,
+                                "reputation": 83464,
+                                "user_id": 55246,
+                                "user_type": "registered",
+                                "accept_rate": 69,
+                                "display_name": "Sridhar Ratnakumar"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1264825505,
+                            "post_id": 2166841,
+                            "comment_id": 2111928,
+                            "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple/2166841#comment2111928_2166841",
+                            "body": "Correct. I was also wondering why the generated type was not derived from a marker class <code>NamedTuple</code> whose definition would simply be <code>class NamedTuple(tuple): pass</code> .. just to make it easy for us to check if an object is a namedtuple or not."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 65561,
+                                "reputation": 75437,
+                                "user_id": 192839,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Mike Graham"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1264886427,
+                            "post_id": 2166841,
+                            "comment_id": 2114954,
+                            "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple/2166841#comment2114954_2166841",
+                            "body": "Why should the designers of namedtuple make it typecheckable, Sridhar? Typechecking is generally to be avoided in Python and in this case doesn&#39;t tell you anything at all useful\u2014a namedtuple with <code>x</code> and <code>y</code> fields and one with <code>cost</code>, <code>price</code>, and <code>quantity</code> fields aren&#39;t going to be interchangeable. The only level to which they are interchangeable is that they are both tuples.  Even in the use case of working with the classes generated by the namedtuple factory, they are just normal classes for good reason and can be used just like a similar hand-made class."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 22422,
+                                "reputation": 83464,
+                                "user_id": 55246,
+                                "user_type": "registered",
+                                "accept_rate": 69,
+                                "display_name": "Sridhar Ratnakumar"
+                            },
+                            "reply_to_user": {
+                                "account_id": 65561,
+                                "reputation": 75437,
+                                "user_id": 192839,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Mike Graham"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1264887135,
+                            "post_id": 2166841,
+                            "comment_id": 2114997,
+                            "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple/2166841#comment2114997_2166841",
+                            "body": "@Mike: I am writing an extention to named tuples .. which mixin asserts that it is used with a named tuple as its sibling base class. So I only need it for asserting that the mixin is not misused with other types."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 65561,
+                                "reputation": 75437,
+                                "user_id": 192839,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Mike Graham"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1264888235,
+                            "post_id": 2166841,
+                            "comment_id": 2115062,
+                            "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple/2166841#comment2115062_2166841",
+                            "body": "@Srindhar: You don&#39;t really need to check that this is an instance of a class generated by namedtuple, you only need it to work with your mixin. A dumb user writing broken code can&#39;t be fixed by checks, and a smart user using your code will only be potentially hampered by them.   (Also, since <code>assert</code>s aren&#39;t guaranteed to run, they are not the right tool for checking for something you need to check.)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 22422,
+                                "reputation": 83464,
+                                "user_id": 55246,
+                                "user_type": "registered",
+                                "accept_rate": 69,
+                                "display_name": "Sridhar Ratnakumar"
+                            },
+                            "reply_to_user": {
+                                "account_id": 65561,
+                                "reputation": 75437,
+                                "user_id": 192839,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Mike Graham"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1264903000,
+                            "post_id": 2166841,
+                            "comment_id": 2115826,
+                            "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple/2166841#comment2115826_2166841",
+                            "body": "@Mike: The mixin does not <i>require</i> the check which is only needed for assertion. <a href=\"http://en.wikipedia.org/wiki/Assertion_(computing)#Assertions_in_design_by_contract\" rel=\"nofollow noreferrer\">en.wikipedia.org/wiki/&hellip;</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 212787,
+                                "reputation": 11045,
+                                "user_id": 465838,
+                                "user_type": "registered",
+                                "accept_rate": 68,
+                                "display_name": "Russ"
+                            },
+                            "reply_to_user": {
+                                "account_id": 65561,
+                                "reputation": 75437,
+                                "user_id": 192839,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Mike Graham"
+                            },
+                            "edited": false,
+                            "score": 13,
+                            "creation_date": 1318448311,
+                            "post_id": 2166841,
+                            "comment_id": 9426734,
+                            "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple/2166841#comment9426734_2166841",
+                            "body": "@MikeGraham ancient post, but... one reason for typechecking a <code>namedtuple</code> is if you want to serialize/marshal an instance of it.  Marshalling a <code>namedtuple</code> would be done much differently than a generic tuple, since you&#39;d want to preserve the names somehow."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 65561,
+                                "reputation": 75437,
+                                "user_id": 192839,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Mike Graham"
+                            },
+                            "reply_to_user": {
+                                "account_id": 212787,
+                                "reputation": 11045,
+                                "user_id": 465838,
+                                "user_type": "registered",
+                                "accept_rate": 68,
+                                "display_name": "Russ"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1318540060,
+                            "post_id": 2166841,
+                            "comment_id": 9446926,
+                            "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple/2166841#comment9446926_2166841",
+                            "body": "@Russ, I see what you mean, though I&#39;m not certain I fully agree. The names of the field are part of the schema, not part of the data. You should know the names of the fields <i>a priori</i> when dealing with namedtuples. If they&#39;re dynamic, you should probably be using a dict, not a namedtuple. (One might point out that nametuples have order. The simple, though wrongheaded, response to this is to point out collections.OrderedDict.) If you want to use an inferred schema rather than an explicit schema for your serialization, well, I think you&#39;re in for a world of hurt! Good luck!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1486150,
+                                "reputation": 29127,
+                                "user_id": 1394393,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "jpmc26"
+                            },
+                            "reply_to_user": {
+                                "account_id": 65561,
+                                "reputation": 75437,
+                                "user_id": 192839,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Mike Graham"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1439324756,
+                            "post_id": 2166841,
+                            "comment_id": 51811958,
+                            "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple/2166841#comment51811958_2166841",
+                            "body": "@MikeGraham For <code>json.dumps</code>. Or any other occasion where you want to do some operation differently."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 21648099,
+                                "reputation": 861,
+                                "user_id": 15969124,
+                                "user_type": "registered",
+                                "display_name": "Xuehai Pan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1680169118,
+                            "post_id": 2166841,
+                            "comment_id": 133853584,
+                            "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple/2166841#comment133853584_2166841",
+                            "body": "<code>type(x).__bases__[0] != tuple</code> gives false negative. Someone may subclass a <code>NamedTuple</code> like <code>class Point(NamedTuple(&#39;Point&#39;, [(&#39;x&#39;, float), (&#39;y&#39;, float)])): pass</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 34048,
+                        "reputation": 869830,
+                        "user_id": 95810,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "Alex Martelli"
+                    },
+                    "comment_count": 9,
+                    "is_accepted": true,
+                    "score": 58,
+                    "last_activity_date": 1416387398,
+                    "last_edit_date": 1416387398,
+                    "creation_date": 1264825278,
+                    "answer_id": 2166841,
+                    "question_id": 2166818,
+                    "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple/2166841#2166841",
+                    "body": "<p>Calling the <em>function</em> <code>collections.namedtuple</code> gives you a new type that's a subclass of <code>tuple</code> (and no other classes) with a member named <code>_fields</code> that's a tuple whose items are all strings.  So you could check for each and every one of these things:</p>\n\n<pre><code>def isnamedtupleinstance(x):\n    t = type(x)\n    b = t.__bases__\n    if len(b) != 1 or b[0] != tuple: return False\n    f = getattr(t, '_fields', None)\n    if not isinstance(f, tuple): return False\n    return all(type(n)==str for n in f)\n</code></pre>\n\n<p>it IS possible to get a false positive from this, but only if somebody's going out of their way to make a type that looks a <strong>lot</strong> like a named tuple but isn't one;-).</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 22422,
+                                "reputation": 83464,
+                                "user_id": 55246,
+                                "user_type": "registered",
+                                "accept_rate": 69,
+                                "display_name": "Sridhar Ratnakumar"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1264825862,
+                            "post_id": 2166847,
+                            "comment_id": 2111950,
+                            "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple/2166847#comment2111950_2166847",
+                            "body": "My reply to Matthew above explains where I am using this check."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 81115,
+                        "reputation": 33611,
+                        "user_id": 228936,
+                        "user_type": "registered",
+                        "display_name": "Tor Valamo"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1264825335,
+                    "creation_date": 1264825335,
+                    "answer_id": 2166847,
+                    "question_id": 2166818,
+                    "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple/2166847#2166847",
+                    "body": "<p>If you need to check before calling namedtuple specific functions on it, then just call them and catch the exception instead. That's the preferred way to do it in python.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3344799,
+                        "reputation": 37964,
+                        "user_id": 2810305,
+                        "user_type": "registered",
+                        "accept_rate": 69,
+                        "display_name": "Lutz Prechelt"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1403282271,
+                    "last_edit_date": 1403282271,
+                    "creation_date": 1403280352,
+                    "answer_id": 24331427,
+                    "question_id": 2166818,
+                    "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple/24331427#24331427",
+                    "body": "<p>I use</p>\n\n<pre><code>isinstance(x, tuple) and isinstance(x.__dict__, collections.abc.Mapping)\n</code></pre>\n\n<p>which to me appears to best reflect the dictionary aspect of the nature of named tuples.\nIt appears robust against some conceivable future changes too and might also work with many third-party namedtuple-ish classes, if such things happen to exist.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 891012,
+                                "reputation": 2495,
+                                "user_id": 929289,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Brian Wylie"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1519146506,
+                            "post_id": 41371622,
+                            "comment_id": 84786483,
+                            "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple/41371622#comment84786483_41371622",
+                            "body": "Unless I&#39;m missing something this appears to be the best and most concise answer. A namedtuple creates a new type and isinstance will check if something is that type."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2972580,
+                                "reputation": 866,
+                                "user_id": 2524350,
+                                "user_type": "registered",
+                                "display_name": "minexew"
+                            },
+                            "edited": false,
+                            "score": 24,
+                            "creation_date": 1537733105,
+                            "post_id": 41371622,
+                            "comment_id": 91881557,
+                            "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple/41371622#comment91881557_41371622",
+                            "body": "This is different from the accepted answer -- this one checks for an instance of a <i>specific</i> namedtuple, while the accepted answer checks for an instance of <i>any</i> namedtuple."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1050176,
+                        "reputation": 8653,
+                        "user_id": 1054322,
+                        "user_type": "registered",
+                        "accept_rate": 64,
+                        "display_name": "MatrixManAtYrService"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 36,
+                    "last_activity_date": 1571760880,
+                    "last_edit_date": 1571760880,
+                    "creation_date": 1482971287,
+                    "answer_id": 41371622,
+                    "question_id": 2166818,
+                    "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple/41371622#41371622",
+                    "body": "<p>If you want to determine whether an object is an instance of a specific namedtuple, you can do this: </p>\n\n<pre><code>from collections import namedtuple\n\nSomeThing = namedtuple('SomeThing', 'prop another_prop')\nSomeOtherThing = namedtuple('SomeOtherThing', 'prop still_another_prop')\n\na = SomeThing(1, 2)\n\nisinstance(a, SomeThing) # True\nisinstance(a, SomeOtherThing) # False\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 9599886,
+                                "reputation": 3805,
+                                "user_id": 7127824,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "techkuz"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1593678780,
+                            "post_id": 49325922,
+                            "comment_id": 110865918,
+                            "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple/49325922#comment110865918_49325922",
+                            "body": "it doesn&#39;t have <code>__dict__</code> anymore"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 192250,
+                        "reputation": 655,
+                        "user_id": 433287,
+                        "user_type": "registered",
+                        "display_name": "jvdillon"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1521219246,
+                    "creation_date": 1521219246,
+                    "answer_id": 49325922,
+                    "question_id": 2166818,
+                    "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple/49325922#49325922",
+                    "body": "<p>Improving on what Lutz posted:</p>\n\n<pre><code>def isinstance_namedtuple(x):                                                               \n  return (isinstance(x, tuple) and                                                  \n          isinstance(getattr(x, '__dict__', None), collections.Mapping) and         \n          getattr(x, '_fields', None) is not None)                                  \n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 9599886,
+                        "reputation": 3805,
+                        "user_id": 7127824,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "techkuz"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 10,
+                    "last_activity_date": 1593780648,
+                    "last_edit_date": 1593780648,
+                    "creation_date": 1593680164,
+                    "answer_id": 62692640,
+                    "question_id": 2166818,
+                    "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple/62692640#62692640",
+                    "body": "<p>3.7+</p>\n<pre><code>def isinstance_namedtuple(obj) -&gt; bool:\n    return (\n            isinstance(obj, tuple) and\n            hasattr(obj, '_asdict') and\n            hasattr(obj, '_fields')\n    )\n\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1223533,
+                        "reputation": 13855,
+                        "user_id": 1189651,
+                        "user_type": "registered",
+                        "display_name": "bformet"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1594199547,
+                    "creation_date": 1594199547,
+                    "answer_id": 62791381,
+                    "question_id": 2166818,
+                    "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple/62791381#62791381",
+                    "body": "<p>IMO this might be the best solution for <em>Python 3.6</em> and later.</p>\n<p>You can set a custom <code>__module__</code> when you instantiate your namedtuple, and check for it later</p>\n<pre class=\"lang-py prettyprint-override\"><code>from collections import namedtuple\n\n# module parameter added in python 3.6\nnamespace = namedtuple(&quot;namespace&quot;, &quot;foo bar&quot;, module=__name__ + &quot;.namespace&quot;)\n</code></pre>\n<p>then check for <code>__module__</code></p>\n<p><code>if getattr(x, &quot;__module__&quot;, None) == &quot;xxxx.namespace&quot;:</code></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 22422,
+                "reputation": 83464,
+                "user_id": 55246,
+                "user_type": "registered",
+                "accept_rate": 69,
+                "display_name": "Sridhar Ratnakumar"
+            },
+            "comment_count": 3,
+            "is_answered": true,
+            "accepted_answer_id": 2166841,
+            "answer_count": 7,
+            "score": 62,
+            "last_activity_date": 1594199547,
+            "creation_date": 1264824763,
+            "last_edit_date": 1547716537,
+            "question_id": 2166818,
+            "link": "https://stackoverflow.com/questions/2166818/how-to-check-if-an-object-is-an-instance-of-a-namedtuple",
+            "title": "How to check if an object is an instance of a namedtuple?",
+            "body": "<p>How do I check if an object is an instance of a <a href=\"http://docs.python.org/dev/library/collections.html#namedtuple-factory-function-for-tuples-with-named-fields\" rel=\"noreferrer\">Named tuple</a>?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5628
+}

@@ -1,0 +1,193 @@
+{
+    "items": [
+        {
+            "tags": [
+                "openssl",
+                "ssl-certificate",
+                "ca",
+                "python-ldap"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 301110,
+                        "reputation": 100291,
+                        "user_id": 608639,
+                        "user_type": "registered",
+                        "accept_rate": 64,
+                        "display_name": "jww"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1428905891,
+                    "post_id": 29528794,
+                    "comment_id": 47344186,
+                    "link": "https://stackoverflow.com/questions/29528794/how-do-i-force-python-ldap-to-validate-verify-an-ssl-certificate-when-using-sta#comment47344186_29528794",
+                    "body": "<i>&quot;I&#39;d also like to check for a CRL, but that&#39;s a different matter&quot;</i> - be careful with this. You could be setting yourself up for a DoS due to missing/broken CRLs and OCSP responders. Mozilla turned it off for a while because it had such a negative effect on the user experience. Stapled responses would probably be the way to go."
+                },
+                {
+                    "owner": {
+                        "account_id": 50008,
+                        "reputation": 17302,
+                        "user_id": 149076,
+                        "user_type": "registered",
+                        "accept_rate": 71,
+                        "display_name": "Jim Dennis"
+                    },
+                    "reply_to_user": {
+                        "account_id": 301110,
+                        "reputation": 100291,
+                        "user_id": 608639,
+                        "user_type": "registered",
+                        "accept_rate": 64,
+                        "display_name": "jww"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1428907701,
+                    "post_id": 29528794,
+                    "comment_id": 47344926,
+                    "link": "https://stackoverflow.com/questions/29528794/how-do-i-force-python-ldap-to-validate-verify-an-ssl-certificate-when-using-sta#comment47344926_29528794",
+                    "body": "In my case this will be working in an environment that provides their own CA and manages their own CRLs.  It&#39;s all internal."
+                },
+                {
+                    "owner": {
+                        "account_id": 301110,
+                        "reputation": 100291,
+                        "user_id": 608639,
+                        "user_type": "registered",
+                        "accept_rate": 64,
+                        "display_name": "jww"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1428909851,
+                    "post_id": 29528794,
+                    "comment_id": 47345941,
+                    "link": "https://stackoverflow.com/questions/29528794/how-do-i-force-python-ldap-to-validate-verify-an-ssl-certificate-when-using-sta#comment47345941_29528794",
+                    "body": "I might be the bearer of bad news...  Python-LDAP can use OpenSSL. But the calls one typically utilizes or encounters for certificate handling are not present. For example, I get 0 hits for <code>cd python-ldap; grep -R -i ca_certs *; grep -R -i wrap_socket *; grep -R -i certs_reqs *</code>. You might want to reach out to the developers to see their position. They may say something like &quot;the code is meant to be run in the same security boundary as the ldap server. So we use a certificate for confidentiality, but we don&#39;t verify the server or employ server authentication because there&#39;s no active MitM&quot;."
+                },
+                {
+                    "owner": {
+                        "account_id": 1315690,
+                        "reputation": 2743,
+                        "user_id": 1262629,
+                        "user_type": "registered",
+                        "display_name": "Laszlo Valko"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1429368838,
+                    "post_id": 29528794,
+                    "comment_id": 47572248,
+                    "link": "https://stackoverflow.com/questions/29528794/how-do-i-force-python-ldap-to-validate-verify-an-ssl-certificate-when-using-sta#comment47572248_29528794",
+                    "body": "According to their web page, Python-LDAP wraps OpenLDAP (and not OpenSSL directly). As far as I remember, the OpenLDAP client library can be configured via environment variables, so I&#39;d expect this feature to work, even if Python-LDAP has no specific provisions for it, or even if they exist but do not work. How you get the error message back is an interesting part, but it should not continue with the connection. I&#39;d test the same search and environmental settings from CLI as well, eg with <code>ldapsearch</code>. <code>man ldap.conf</code> shows the names of the environmental variables expected."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 50008,
+                                "reputation": 17302,
+                                "user_id": 149076,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Jim Dennis"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1429403642,
+                            "post_id": 29722445,
+                            "comment_id": 47583162,
+                            "link": "https://stackoverflow.com/questions/29528794/how-do-i-force-python-ldap-to-validate-verify-an-ssl-certificate-when-using-sta/29722445#comment47583162_29722445",
+                            "body": "On my Mac under MacOS 10.9.5, I was not getting any warning or failure.  On a Linux VM under CentOS 6.5, last I checked, I&#39;m getting the behavior you describe here (at least up to the point where it &quot;it always raises the exception&quot;).  I&#39;ll try the <code>ld.set_option(ldap.OPT_X_TLS_NEWCTX, 0)</code> setting and adjusting some of my <code>brew</code> libraries.  (I&#39;m using Python 2.7.9 as noted above; my LDAP/OpenSSL is either MacOS default or corporate loaded --- I haven&#39;t messed with either of those."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 50008,
+                                "reputation": 17302,
+                                "user_id": 149076,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Jim Dennis"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1429403670,
+                            "post_id": 29722445,
+                            "comment_id": 47583176,
+                            "link": "https://stackoverflow.com/questions/29528794/how-do-i-force-python-ldap-to-validate-verify-an-ssl-certificate-when-using-sta/29722445#comment47583176_29722445",
+                            "body": "Omikron,  you are definitely the front runner for the bounty so far. ;)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3161353,
+                                "reputation": 4108,
+                                "user_id": 2672392,
+                                "user_type": "registered",
+                                "display_name": "Omikron"
+                            },
+                            "reply_to_user": {
+                                "account_id": 50008,
+                                "reputation": 17302,
+                                "user_id": 149076,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Jim Dennis"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1429440039,
+                            "post_id": 29722445,
+                            "comment_id": 47591098,
+                            "link": "https://stackoverflow.com/questions/29528794/how-do-i-force-python-ldap-to-validate-verify-an-ssl-certificate-when-using-sta/29722445#comment47591098_29722445",
+                            "body": "I have added the output of otool, it seems like the OpenSSL version does not matter here, because my python-ldap is linked to 0.9.8z not to 1.0.1l."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3161353,
+                        "reputation": 4108,
+                        "user_id": 2672392,
+                        "user_type": "registered",
+                        "display_name": "Omikron"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": true,
+                    "score": 10,
+                    "last_activity_date": 1429439716,
+                    "last_edit_date": 1495535320,
+                    "creation_date": 1429388757,
+                    "answer_id": 29722445,
+                    "question_id": 29528794,
+                    "link": "https://stackoverflow.com/questions/29528794/how-do-i-force-python-ldap-to-validate-verify-an-ssl-certificate-when-using-sta/29722445#29722445",
+                    "body": "<p>Your code works for me as expected. Actually, I had exactly the opposite problem, when I executed your code for the first time. It <em>always</em> said 'certificate verify failed'. Adding the following lines fixed this:</p>\n\n<pre><code># Force libldap to create a new SSL context (must be last TLS option!)\nld.set_option(ldap.OPT_X_TLS_NEWCTX, 0)\n</code></pre>\n\n<p>Now when I use the wrong CA certificate or one that has been modified as you described it, the result is this error message:</p>\n\n<pre><code>Traceback (most recent call last):\n  File \"ldap_ssl.py\", line 28, in &lt;module&gt;\n    ld.start_tls_s()\n  File \"/Library/Python/2.7/site-packages/python_ldap-2.4.19-py2.7-macosx-10.10-intel.egg/ldap/ldapobject.py\", line 571, in start_tls_s\n    return self._ldap_call(self._l.start_tls_s)\n  File \"/Library/Python/2.7/site-packages/python_ldap-2.4.19-py2.7-macosx-10.10-intel.egg/ldap/ldapobject.py\", line 106, in _ldap_call\n    result = func(*args,**kwargs)\nldap.CONNECT_ERROR: {'info': 'error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed (unable to get local issuer certificate)', 'desc': 'Connect error'}\n</code></pre>\n\n<p>When I use the right CA certificate, the output is like yours.</p>\n\n<hr>\n\n<p>Now the interesting question is: What are the differences between our setups and especially which difference causes this strange behaviour on your machine?</p>\n\n<p>My setup is:</p>\n\n<ul>\n<li>Mac OS X 10.10 </li>\n<li>Python 2.7.6 </li>\n<li>python-ldap 2.4.19 (manual installation)</li>\n<li>OpenLDAP 2.4.39 (via Homebrew) </li>\n<li>OpenSSL 1.0.1l (via Homebrew)</li>\n</ul>\n\n<p>I have a local OpenLDAP running, installed with Homebrew:</p>\n\n<pre><code>brew install homebrew/dupes/openldap --with-berkeley-db\n</code></pre>\n\n<p>On Yosemite python-ldap is quite buggy when installed with pip (see <a href=\"https://stackoverflow.com/questions/28095513/python-ldap-set-option-not-working-on-yosemite\">Python-ldap set_option not working on Yosemite</a>), therefore I had to download the tarball and compile/install it, which was fortunately pretty easy, because I already had the OpenLDAP installation with current libs/headers:</p>\n\n<p>First edit the [_ldap] section in <strong>setup.cfg</strong> like this:</p>\n\n<pre><code>[_ldap]\nlibrary_dirs = /usr/local/opt/openldap/lib /usr/lib /usr/local/lib\ninclude_dirs = /usr/local/opt/openldap/include /usr/include/sasl /usr/include /usr/local/include\nextra_compile_args = -g -arch x86_64\nextra_objects = \nlibs = ldap_r lber sasl2 ssl crypto\n</code></pre>\n\n<p>Some header files are in Mac OS SDK, link the directory (change the path according to your version) to /usr/include:</p>\n\n<pre><code>sudo ln -s /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/ /usr/include\n</code></pre>\n\n<p>Then build and install:</p>\n\n<pre><code>python setup.py build\nsudo python setup.py install\n</code></pre>\n\n<p>The output of otool shows that python-ldap is now linked to the libraries of OpenLDAP 2.4.39 and OpenSSL 0.9.8:</p>\n\n<pre><code>$ otool -L /Library/Python/2.7/site-packages/python_ldap-2.4.19-py2.7-macosx-10.10-intel.egg/_ldap.so\n/Library/Python/2.7/site-packages/python_ldap-2.4.19-py2.7-macosx-10.10-intel.egg/_ldap.so:\n    /usr/local/lib/libldap_r-2.4.2.dylib (compatibility version 13.0.0, current version 13.2.0)\n    /usr/local/lib/liblber-2.4.2.dylib (compatibility version 13.0.0, current version 13.2.0)\n    /usr/lib/libsasl2.2.dylib (compatibility version 3.0.0, current version 3.15.0)\n    /usr/lib/libssl.0.9.8.dylib (compatibility version 0.9.8, current version 0.9.8)\n    /usr/lib/libcrypto.0.9.8.dylib (compatibility version 0.9.8, current version 0.9.8)\n    /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1213.0.0)\n</code></pre>\n\n<p>An alternative approach for building python-ldap is to install only the OpenLDAP libraries and headers needed for building: <a href=\"http://projects.skurfer.com/posts/2011/python_ldap_lion/\" rel=\"nofollow noreferrer\">http://projects.skurfer.com/posts/2011/python_ldap_lion/</a></p>\n\n<p>All these steps should work under Mavericks as well and I assume using the latest OpenLDAP and OpenSSL libraries will solve your problem. </p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 50008,
+                "reputation": 17302,
+                "user_id": 149076,
+                "user_type": "registered",
+                "accept_rate": 71,
+                "display_name": "Jim Dennis"
+            },
+            "comment_count": 4,
+            "is_answered": true,
+            "accepted_answer_id": 29722445,
+            "answer_count": 1,
+            "score": 10,
+            "last_activity_date": 1429439716,
+            "creation_date": 1428547139,
+            "last_edit_date": 1495540973,
+            "question_id": 29528794,
+            "link": "https://stackoverflow.com/questions/29528794/how-do-i-force-python-ldap-to-validate-verify-an-ssl-certificate-when-using-sta",
+            "title": "How do I force Python LDAP to validate/verify an SSL certificate when using .start_tls_s()",
+            "body": "<p>I've been trying to use <a href=\"http://www.python-ldap.org/\" rel=\"nofollow noreferrer\">Python-LDAP</a> (version 2.4.19) under MacOS X 10.9.5 and Python 2.7.9</p>\n\n<p>I want to validate my connection to a given LDAP server after I've called the <code>.start_tls_s()</code> (or to have the method raise and exception if the certificate cannot be verified).  (I'd also like to check for a CRL, but that's a different matter).</p>\n\n<p>Here's my code:</p>\n\n<pre><code>#!python\n#!/usr/bin/env python\nimport ConfigParser, os, sys\nimport ldap\n\nCACERTFILE='./ca_ldap.bad'\n## CACERTFILE='./ca_ldap.crt'\n\nconfig = ConfigParser.ConfigParser()\nconfig.read(os.path.expanduser('~/.ssh/creds.ini'))\nuid = config.get('LDAP', 'uid')\npwd = config.get('LDAP', 'pwd')\nsvr = config.get('LDAP', 'svr')\nbdn = config.get('LDAP', 'bdn')\n\nld = ldap.initialize(svr)\nld.protocol_version=ldap.VERSION3\nld.set_option(ldap.OPT_DEBUG_LEVEL, 255 )\nld.set_option(ldap.OPT_PROTOCOL_VERSION, 3)\nld.set_option(ldap.OPT_X_TLS_CACERTFILE, CACERTFILE)\nld.set_option(ldap.OPT_X_TLS_DEMAND, True )\nld.set_option(ldap.OPT_X_TLS_REQUIRE_CERT, ldap.OPT_X_TLS_HARD)\n\n## From: https://stackoverflow.com/a/7810308/149076\n## and : http://python-ldap.cvs.sourceforge.net/viewvc/python-ldap/python-ldap/Demo/initialize.py?revision=1.14&amp;view=markup\n\nld.start_tls_s()\n\nfor each in dir(ldap):\n    if 'OPT_X_TLS' in each:\n        try:\n            print '\\t*** %s: %s' % (each, ld.get_option((getattr(ldap, each))))\n        except Exception, e:\n            print &gt;&gt; sys.stderr, '... Except %s: %s\\n' % (each, e)\n\nld.simple_bind_s(uid, pwd)\nresults = ld.search_s(bdn, ldap.SCOPE_SUBTREE)\n\nprint 'Found %s entries under %s' % (len(results), bdn)\nsys.exit()\n</code></pre>\n\n<p>As noted in the comments I have copied most of this from <a href=\"https://stackoverflow.com/a/7810308/149076\">https://stackoverflow.com/a/7810308/149076</a> and from <a href=\"http://python-ldap.cvs.sourceforge.net/viewvc/python-ldap/python-ldap/Demo/initialize.py?revision=1.14&amp;view=markup\" rel=\"nofollow noreferrer\">http://python-ldap.cvs.sourceforge.net/viewvc/python-ldap/python-ldap/Demo/initialize.py?revision=1.14&amp;view=markup</a> ... though I have tried many variations and sequences of this.</p>\n\n<p>As shown I have two files which represent a <em>bad</em> certificate and one which should work (it's actually taken from one of our systems which is configured to run <a href=\"https://fedorahosted.org/sssd/\" rel=\"nofollow noreferrer\">sssd</a> (System Security Services Daemon) which is presumed to be checking this correctly.</p>\n\n<p>In the \"bad\" copy I've simply replaced the first character of each key line with the letter 'x' on the assumption that this would corrupt the CA key and cause any code attempting to verify a chain of signatures to fail.</p>\n\n<p>However, it seems that the Python LDAP code ignores this; even if I set it to <code>/dev/null</code> or an entirely bogus path my code still runs, still binds to the LDAP server and still completes my search request.</p>\n\n<p>So the question is, how do I get this to \"fail\" as intended (or, more broadly, how do I prevent my code from being vulnerable to MITM (Mallory) attacks?</p>\n\n<p>If it's of any consequence in this discussion here's my OpenSSL version:</p>\n\n<pre><code>$ openssl version\nOpenSSL 0.9.8za 5 Jun 2014\n</code></pre>\n\n<p>The LDAP server is running OpenLDAP, but I don't know any details about its version nor configuration.</p>\n\n<p>Here's sample output from my code:</p>\n\n<pre><code>    *** OPT_X_TLS: 0\n    *** OPT_X_TLS_ALLOW: 0\n    *** OPT_X_TLS_CACERTDIR: None\n    *** OPT_X_TLS_CACERTFILE: /bogus/null\n    *** OPT_X_TLS_CERTFILE: None\n    *** OPT_X_TLS_CIPHER_SUITE: None\n    *** OPT_X_TLS_CRLCHECK: 0\n    *** OPT_X_TLS_CRLFILE: None\n    *** OPT_X_TLS_CRL_ALL: 1\n    *** OPT_X_TLS_CRL_NONE: {'info_version': 1, 'extensions': ('X_OPENLDAP', 'THREAD_SAFE', 'SESSION_THREAD_SAFE', 'OPERATION_THREAD_SAFE', 'X_OPENLDAP_THREAD_SAFE'), 'vendor_version': 20428, 'protocol_version': 3, 'vendor_name': 'OpenLDAP', 'api_version': 3001}\n    *** OPT_X_TLS_CRL_PEER: 3\n... Except OPT_X_TLS_CTX: unknown option 24577\n\n    *** OPT_X_TLS_DEMAND: 1\n    *** OPT_X_TLS_DHFILE: None\n    *** OPT_X_TLS_HARD: 3\n    *** OPT_X_TLS_KEYFILE: None\n    *** OPT_X_TLS_NEVER: {'info_version': 1, 'extensions': ('X_OPENLDAP', 'THREAD_SAFE', 'SESSION_THREAD_SAFE', 'OPERATION_THREAD_SAFE', 'X_OPENLDAP_THREAD_SAFE'), 'vendor_version': 20428, 'protocol_version': 3, 'vendor_name': 'OpenLDAP', 'api_version': 3001}\n... Except OPT_X_TLS_NEWCTX: unknown option 24591\n\n    *** OPT_X_TLS_PACKAGE: OpenSSL\n    *** OPT_X_TLS_PROTOCOL_MIN: 0\n    *** OPT_X_TLS_RANDOM_FILE: None\n    *** OPT_X_TLS_REQUIRE_CERT: 1\n    *** OPT_X_TLS_TRY: 0\n\nFound 883 entries under [... redacted ...]\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7634
+}

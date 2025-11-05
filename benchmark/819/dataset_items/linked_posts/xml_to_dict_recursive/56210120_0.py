@@ -1,0 +1,17 @@
+     <A>
+        <B>
+            <BB>inAB</BB>
+            <C>
+                <D>
+                    <E>
+                        inABCDE
+                    </E>
+                    <E>value2</E>
+                    <E>value3</E>
+                </D>
+                <inCout-ofD>123</inCout-ofD>
+            </C>
+        </B>
+        <B>abc</B>
+        <F>F</F>
+    </A>

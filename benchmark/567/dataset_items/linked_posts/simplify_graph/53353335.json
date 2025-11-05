@@ -1,0 +1,200 @@
+{
+    "items": [
+        {
+            "tags": [
+                "networkx"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 4826702,
+                        "reputation": 1190,
+                        "user_id": 3896008,
+                        "user_type": "registered",
+                        "display_name": "lifezbeautiful"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1630308768,
+                    "post_id": 53353335,
+                    "comment_id": 121911412,
+                    "link": "https://stackoverflow.com/questions/53353335/networkx-remove-node-and-reconnect-edges#comment121911412_53353335",
+                    "body": "Not sure why all the answers assumed something to do with node degree. Aren&#39;t we talking about a generic graph here where we want to remove some nodes from a list of flagged nodes?"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 8615531,
+                                "reputation": 1362,
+                                "user_id": 6452525,
+                                "user_type": "registered",
+                                "accept_rate": 20,
+                                "display_name": "Rahat Zaman"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1674705206,
+                            "post_id": 62429138,
+                            "comment_id": 132772969,
+                            "link": "https://stackoverflow.com/questions/53353335/networkx-remove-node-and-reconnect-edges/62429138#comment132772969_62429138",
+                            "body": "I don&#39;t think that this is a generalized answer. There can be many nodes with same degree or the graph can be more complex."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 15217632,
+                        "reputation": 489,
+                        "user_id": 10980510,
+                        "user_type": "registered",
+                        "display_name": "mjkvaak"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1592397278,
+                    "creation_date": 1592397278,
+                    "answer_id": 62429138,
+                    "question_id": 53353335,
+                    "link": "https://stackoverflow.com/questions/53353335/networkx-remove-node-and-reconnect-edges/62429138#62429138",
+                    "body": "<p>I don't know if my solution is any better than Ryan already suggested, but I'm posting a function here, since it tries to tackle the question from a different perspective. They key is, that in a <code>graph 1 &gt; 2 &gt; 3</code> the node <code>2</code> has degree 2 (i.e. has 2 edges connected to it). Generally speaking, to simplify a graph in the sense of the question that was asked would then mean getting rid of all such nodes with degree 2. The below function does exactly that.</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>def simplifyGraph(G):\n    ''' Loop over the graph until all nodes of degree 2 have been removed and their incident edges fused '''\n\n    g = G.copy()\n\n    while any(degree==2 for _, degree in g.degree):\n\n        g0 = g.copy() #&lt;- simply changing g itself would cause error `dictionary changed size during iteration` \n        for node, degree in g.degree():\n            if degree==2:\n\n                if g.is_directed(): #&lt;-for directed graphs\n                    a0,b0 = list(g.in_edges(node))[0]\n                    a1,b1 = list(g.out_edges(node))[0]\n\n                else:\n                    edges = g.edges(node)\n                    edges = list(edges.__iter__())\n                    a0,b0 = edges[0]\n                    a1,b1 = edges[1]\n\n                e0 = a0 if a0!=node else b0\n                e1 = a1 if a1!=node else b1\n\n                g0.remove_node(node)\n                g0.add_edge(e0, e1)\n        g = g0\n\n    return g\n</code></pre>\n\n<p>An example:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>&gt;&gt;&gt; G = nx.DiGraph()\n&gt;&gt;&gt; G.add_edges_from([(1,2),(2,3)])\n&gt;&gt;&gt; list(G.edges)\n[(1, 2), (2, 3)]\n\n&gt;&gt;&gt; g = simplifyGraph(G)\n&gt;&gt;&gt; list(g.edges)\n[(1, 3)]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4826702,
+                                "reputation": 1190,
+                                "user_id": 3896008,
+                                "user_type": "registered",
+                                "display_name": "lifezbeautiful"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1630308694,
+                            "post_id": 66615218,
+                            "comment_id": 121911385,
+                            "link": "https://stackoverflow.com/questions/53353335/networkx-remove-node-and-reconnect-edges/66615218#comment121911385_66615218",
+                            "body": "what exactly do you mean by a &quot;huge complex MultiGraph&quot;? Could you provide a reproducible example? I think the OP&#39;s solution is generic and should work all the time,"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 20941321,
+                                "reputation": 21,
+                                "user_id": 15385307,
+                                "user_type": "registered",
+                                "display_name": "sauce_interstellaire"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4826702,
+                                "reputation": 1190,
+                                "user_id": 3896008,
+                                "user_type": "registered",
+                                "display_name": "lifezbeautiful"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1630414500,
+                            "post_id": 66615218,
+                            "comment_id": 121945435,
+                            "link": "https://stackoverflow.com/questions/53353335/networkx-remove-node-and-reconnect-edges/66615218#comment121945435_66615218",
+                            "body": "Hi, unfortunately, I was working on vascular anatomical networks that were proprietary to the research group I was working with, so I cannot share the data I was working with.  Also, I thought at the time that it was a Multigraph, but this was an error since it is only a undirected graph. I&#39;ve edited the word Multigraph out of my post."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4826702,
+                                "reputation": 1190,
+                                "user_id": 3896008,
+                                "user_type": "registered",
+                                "display_name": "lifezbeautiful"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1630424797,
+                            "post_id": 66615218,
+                            "comment_id": 121950377,
+                            "link": "https://stackoverflow.com/questions/53353335/networkx-remove-node-and-reconnect-edges/66615218#comment121950377_66615218",
+                            "body": "I see, thanks for the explanation and the update!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 20941321,
+                        "reputation": 21,
+                        "user_id": 15385307,
+                        "user_type": "registered",
+                        "display_name": "sauce_interstellaire"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1636125960,
+                    "last_edit_date": 1636125960,
+                    "creation_date": 1615649305,
+                    "answer_id": 66615218,
+                    "question_id": 53353335,
+                    "link": "https://stackoverflow.com/questions/53353335/networkx-remove-node-and-reconnect-edges/66615218#66615218",
+                    "body": "<p>I tried using mjvaak's answer on a huge complex Graph but it didn't work since it was creating edges with nodes that did not exist anymore. I fixed it by simply taking the edges from g0.</p>\n<p>So I changed:</p>\n<pre><code>edges = g.edges(node)\n</code></pre>\n<p>for:</p>\n<pre><code>edges = g0.edges(node)\n</code></pre>\n<p>The fixed code is thus the following:</p>\n<pre class=\"lang-py prettyprint-override\"><code>def simplifyGraph(G):\n''' Loop over the graph until all nodes of degree 2 have been removed and their incident edges fused '''\n\ng = G.copy()\n\nwhile any(degree==2 for _, degree in g.degree):\n\n    g0 = g.copy() #&lt;- simply changing g itself would cause error `dictionary changed size during iteration` \n    for node, degree in g.degree():\n        if degree==2:\n\n            if g.is_directed(): #&lt;-for directed graphs\n                a0,b0 = list(g0.in_edges(node))[0]\n                a1,b1 = list(g0.out_edges(node))[0]\n\n            else:\n                edges = g0.edges(node)\n                edges = list(edges.__iter__())\n                a0,b0 = edges[0]\n                a1,b1 = edges[1]\n\n            e0 = a0 if a0!=node else b0\n            e1 = a1 if a1!=node else b1\n\n            g0.remove_node(node)\n            g0.add_edge(e0, e1)\n    g = g0\n\nreturn g\n\n</code></pre>\n<p>Thank you mjkvaak for the solution! It just needed a slight modification for bigger graphs.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2576947,
+                        "reputation": 691,
+                        "user_id": 2234396,
+                        "user_type": "registered",
+                        "display_name": "aleksk"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1670220035,
+                    "last_edit_date": 1670220035,
+                    "creation_date": 1670219226,
+                    "answer_id": 74683853,
+                    "question_id": 53353335,
+                    "link": "https://stackoverflow.com/questions/53353335/networkx-remove-node-and-reconnect-edges/74683853#74683853",
+                    "body": "<p>Here is a general solution to the problem, where a user can supply any condition on a node to remove the node and recombine the graph. In a comment I have also placed some code that will allow a user to recombine edges with different weights.</p>\n<pre class=\"lang-py prettyprint-override\"><code>import networkx as nx\nfrom itertools import combinations\n\ndef simplify_graph_with_predicate(G: nx.Graph, node_removal_predicate: callable):\n    '''\n    Loop over the graph until all nodes that match the supplied predicate \n    have been removed and their incident edges fused.\n    '''\n    g = G.copy()\n    while any(node_removal_predicate(node) for node in g.nodes):\n\n        g0 = g.copy()\n\n        for node in g.nodes:\n            if node_removal_predicate(node):\n\n                if g.is_directed():\n                    in_edges_containing_node = list(g0.in_edges(node))\n                    out_edges_containing_node = list(g0.out_edges(node))\n\n                    for in_src, _ in in_edges_containing_node:\n                        for _, out_dst in out_edges_containing_node:\n                            g0.add_edge(in_src, out_dst)\n                            # dist = nx.shortest_path_length(\n                            #   g0, in_src, out_dst, weight='weight'\n                            # )\n                            # g0.add_edge(in_src, out_dst, weight=dist)\n                else:\n                    edges_containing_node = g.edges(node)\n                    dst_to_link = [e[1] for e in edges_containing_node]\n                    dst_pairs_to_link = list(combinations(dst_to_link, r = 2))\n                    for pair in dst_pairs_to_link:\n                        g0.add_edge(pair[0], pair[1])\n                        # dist = nx.shortest_path_length(\n                        # g0, pair[0], pair[1], weight='weight'\n                        # )\n                        # g0.add_edge(pair[0], pair[1], weight=dist)\n                \n                g0.remove_node(node)\n                break\n        g = g0\n    return g\n</code></pre>\n<p>Example Usage 1 (provided example):</p>\n<pre class=\"lang-py prettyprint-override\"><code>g = nx.DiGraph()\ng.add_edges_from([(1,2),(2,3)])\nres = simplify_graph_with_predicate(g, lambda node: node == 2)\nprint(res.edges) # output: [(1,3)]\n</code></pre>\n<p>Example Usage 2:</p>\n<pre class=\"lang-py prettyprint-override\"><code>g = nx.DiGraph()\ng.add_edge(&quot;node_one&quot;, &quot;node_two&quot;)\ng.add_edge(&quot;node_two&quot;, &quot;node_three&quot;)\nres = simplify_graph_with_predicate(g, lambda node: &quot;two&quot; in node)\nprint(res.edges) # output: [('node_one', 'node_three')]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7542340,
+                        "reputation": 700,
+                        "user_id": 5726546,
+                        "user_type": "registered",
+                        "display_name": "Sigmatics"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1705066656,
+                    "creation_date": 1705066656,
+                    "answer_id": 77806973,
+                    "question_id": 53353335,
+                    "link": "https://stackoverflow.com/questions/53353335/networkx-remove-node-and-reconnect-edges/77806973#77806973",
+                    "body": "<p>Simple solution for DiGraph:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import networkx as nx\n\ng = nx.DiGraph()\ng.add_edges_from([(1,2),(2,3),(1,3),(3,4),(2,4)])\n\nnode = 2\n\nfor in_src, _ in g.in_edges(node):\n    for _, out_dst in g.out_edges(node):\n        g.add_edge(in_src, out_dst)\n\ng.remove_node(node)\n\nprint(g.edges)\n\n</code></pre>\n<p>Output:</p>\n<pre><code>[(1, 3), (1, 4), (3, 4)]\n</code></pre>\n<p>This is a simplified version of the solution by sauce_interstellaire for directed graphs.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 1879816,
+                "reputation": 6406,
+                "user_id": 1700270,
+                "user_type": "registered",
+                "accept_rate": 51,
+                "display_name": "ryantuck"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "answer_count": 4,
+            "score": 13,
+            "last_activity_date": 1705066656,
+            "creation_date": 1542473221,
+            "question_id": 53353335,
+            "link": "https://stackoverflow.com/questions/53353335/networkx-remove-node-and-reconnect-edges",
+            "title": "NetworkX - remove node and reconnect edges",
+            "body": "<p>I have a node in a graph that acts as a sort of 'temporary connector' node. I'd like to remove that node and update the edges in the graph so that all of its immediate predecessors point to its immediate successors.</p>\n\n<p><strong>Is there baked-in functionality to do that in <code>networkx</code>, or will I need to roll my own solution?</strong></p>\n\n<p>Example:</p>\n\n<p>I have a graph <code>1 &gt; 2 &gt; 3</code>. I'd like to remove node <code>2</code> and end up with the graph <code>1 &gt; 3</code>.</p>\n\n<p>Here's how I am currently doing it:</p>\n\n<pre><code>In [230]: g = nx.DiGraph()\n\nIn [231]: g.add_edges_from([(1,2),(2,3)])\n\nIn [232]: g.edges()\nOut[232]: [(1, 2), (2, 3)]\n\nIn [233]: predecessors = g.predecessors(2)\n\nIn [234]: successors = g.successors(2)\n\nIn [235]: new_edges = [(p,s) for p in predecessors for s in successors]\n\nIn [236]: new_edges\nOut[236]: [(1, 3)]\n\nIn [237]: g.remove_node(2)\n\nIn [238]: g.add_edges_from(new_edges)\n\nIn [239]: g.nodes()\nOut[239]: [1, 3]\n\nIn [240]: g.edges()\nOut[240]: [(1, 3)]\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9035
+}

@@ -1,0 +1,208 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "matplotlib"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4060,
+                                "reputation": 304570,
+                                "user_id": 5987,
+                                "user_type": "registered",
+                                "accept_rate": 55,
+                                "display_name": "Mark Ransom"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1326946353,
+                            "post_id": 8920216,
+                            "comment_id": 11161253,
+                            "link": "https://stackoverflow.com/questions/8919719/how-to-plot-a-complex-polygon/8920216#comment11161253_8920216",
+                            "body": "This definitely creates a polygon, but not one with a hole in it."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 330232,
+                                "reputation": 954,
+                                "user_id": 654222,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Matt"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4060,
+                                "reputation": 304570,
+                                "user_id": 5987,
+                                "user_type": "registered",
+                                "accept_rate": 55,
+                                "display_name": "Mark Ransom"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1326982113,
+                            "post_id": 8920216,
+                            "comment_id": 11170377,
+                            "link": "https://stackoverflow.com/questions/8919719/how-to-plot-a-complex-polygon/8920216#comment11170377_8920216",
+                            "body": "I don&#39;t think I understand &quot;hole in it&quot;.  I thought you meant hollow.  The size of the hole, as I was imagining it, would be determined by where you put y2 in relation to y1."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 330232,
+                        "reputation": 954,
+                        "user_id": 654222,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "Matt"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1326982860,
+                    "last_edit_date": 1326982860,
+                    "creation_date": 1326938902,
+                    "answer_id": 8920216,
+                    "question_id": 8919719,
+                    "link": "https://stackoverflow.com/questions/8919719/how-to-plot-a-complex-polygon/8920216#8920216",
+                    "body": "<p>How about fill_between()?</p>\n\n<p><a href=\"http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.fill_between\" rel=\"nofollow noreferrer\">http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.fill_between</a></p>\n\n<p>I'm not sure exactly how to pull off a polygon, but it works like this</p>\n\n<pre><code>import numpy as np\nimport matplotlib.pylab as plt\n\nx=np.arange(-3,3.5,.5)\ny1=-x**2+9\ny2=-x**2+10\nplt.fill_between(x,y1,y2)\n</code></pre>\n\n<p><img src=\"https://i.stack.imgur.com/11fZf.png\" alt=\"results\"></p>\n\n<p>You should be able to build up your figure one fill_between at a time until you have what you want.</p>\n\n<p>Or possibly <a href=\"http://matplotlib.sourceforge.net/api/path_api.html#module-matplotlib.path\" rel=\"nofollow noreferrer\">path</a>.  Check out these <a href=\"http://matplotlib.sourceforge.net/users/screenshots.html\" rel=\"nofollow noreferrer\">screenshots</a> and see if anything seems close.</p>\n\n<p>Edit:  You might mean a hole like this</p>\n\n<pre><code>import numpy as np\nimport matplotlib.pylab as plt\n\nx=np.arange(-3,3.5,.5)\ny1=-x**2+9\ny2=0\nplt.fill_between(x,y1,y2)\ncirc=plt.Circle((0,4),2,color='w')\nax=plt.gca()\nax.add_patch(circ)\nplt.show()\n</code></pre>\n\n<p><img src=\"https://i.stack.imgur.com/rZIEE.png\" alt=\"enter image description here\"></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4977220,
+                                "reputation": 113,
+                                "user_id": 7731398,
+                                "user_type": "registered",
+                                "display_name": "fra_pero"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1603358871,
+                            "post_id": 21393565,
+                            "comment_id": 114014379,
+                            "link": "https://stackoverflow.com/questions/8919719/how-to-plot-a-complex-polygon/21393565#comment114014379_21393565",
+                            "body": "Great! But if you set alpha&lt;1, then the seam is again visible, unless you specify also lw=0."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4977220,
+                                "reputation": 113,
+                                "user_id": 7731398,
+                                "user_type": "registered",
+                                "display_name": "fra_pero"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1603358968,
+                            "post_id": 21393565,
+                            "comment_id": 114014430,
+                            "link": "https://stackoverflow.com/questions/8919719/how-to-plot-a-complex-polygon/21393565#comment114014430_21393565",
+                            "body": "What about if I set alpha&lt;1 but I only want the external edges? Maybe I should post a new question."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2067197,
+                        "reputation": 1449,
+                        "user_id": 1842491,
+                        "user_type": "registered",
+                        "accept_rate": 93,
+                        "display_name": "Shay"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 1,
+                    "last_activity_date": 1390863825,
+                    "creation_date": 1390863825,
+                    "answer_id": 21393565,
+                    "question_id": 8919719,
+                    "link": "https://stackoverflow.com/questions/8919719/how-to-plot-a-complex-polygon/21393565#21393565",
+                    "body": "<p>Old question, but ...</p>\n\n<p>Just explicitly close your exterior and interior boundaries and sum them together. Technically, there will be a seam, but you won't see it (IF you provide a color argument--not exactly sure why this is the case).</p>\n\n<pre><code>#!/usr/bin/env python3\n\nimport matplotlib.pyplot as plt\n\n# a 4x4 box (counterclockwise)\next_x = [2, -2, -2, 2, 2]\next_y = [2, 2, -2, -2, 2]\n\n# a 2x2 hole in the box (clockwise)\nint_x = [item/2.0 for item in ext_x][::-1]\nint_y = [item/2.0 for item in ext_y][::-1]\n\n# if you don't specify a color, you will see a seam\nplt.fill(ext_x+int_x, ext_y+int_y, color='blue')\n\nplt.show()\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 19061,
+                                "reputation": 187329,
+                                "user_id": 44330,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "Jason S"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1569106221,
+                            "post_id": 21914335,
+                            "comment_id": 102489412,
+                            "link": "https://stackoverflow.com/questions/8919719/how-to-plot-a-complex-polygon/21914335#comment102489412_21914335",
+                            "body": "yay! Thank you for posting, this is very simple."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2894160,
+                        "reputation": 161,
+                        "user_id": 2885755,
+                        "user_type": "registered",
+                        "display_name": "Jasper"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 15,
+                    "last_activity_date": 1629986119,
+                    "last_edit_date": 1629986119,
+                    "creation_date": 1392914986,
+                    "answer_id": 21914335,
+                    "question_id": 8919719,
+                    "link": "https://stackoverflow.com/questions/8919719/how-to-plot-a-complex-polygon/21914335#21914335",
+                    "body": "<p>You can actually plot polygons with holes in matplotlib. The trick is to use Path and PathPatch. For example:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>import matplotlib.pyplot as plt\nfrom matplotlib.patches import PathPatch\nfrom matplotlib.path import Path\n\naxes = plt.gca()\n\npath = Path([(2,2)      ,(2,-2)     ,(-2,-2)    ,(-2,2)     ,(0,0)         ,(1,0)      ,(-1,1)     ,(-1,-1)    ,(0,0)         ],\n            [Path.MOVETO,Path.LINETO,Path.LINETO,Path.LINETO,Path.CLOSEPOLY,Path.MOVETO,Path.LINETO,Path.LINETO,Path.CLOSEPOLY])\npatch = PathPatch(path)\naxes.set_xlim(-3,3)\naxes.set_ylim(-3,3)\naxes.add_patch(patch)\n\nplt.savefig('example.png')\nplt.close('all')\n</code></pre>\n<p>The above results in</p>\n<p><a href=\"https://i.stack.imgur.com/lEiMc.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/lEiMc.png\" alt=\"this example\" /></a>\nNote that winding order seems to be important.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 483276,
+                        "reputation": 458,
+                        "user_id": 898213,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "yohai"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1578340353,
+                    "creation_date": 1578340353,
+                    "answer_id": 59618130,
+                    "question_id": 8919719,
+                    "link": "https://stackoverflow.com/questions/8919719/how-to-plot-a-complex-polygon/59618130#59618130",
+                    "body": "<p>Coming late, but I patched @Matt's answer with <a href=\"https://sgillies.net/2010/04/06/painting-punctured-polygons-with-matplotlib.html\" rel=\"nofollow noreferrer\">this approach</a> to produce this code code (also in <a href=\"https://gist.github.com/yohai/81c5854eaa4f8eb5ad2256acd17433c8\" rel=\"nofollow noreferrer\">this gist</a>):</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>import numpy as np\nfrom matplotlib.path import Path\nfrom matplotlib.patches import PathPatch\n\n\ndef patchify(polys):\n    \"\"\"Returns a matplotlib patch representing the polygon with holes.\n\n    polys is an iterable (i.e list) of polygons, each polygon is a numpy array\n    of shape (2, N), where N is the number of points in each polygon. The first\n    polygon is assumed to be the exterior polygon and the rest are holes. The\n    first and last points of each polygon may or may not be the same.\n\n    This is inspired by\n    https://sgillies.net/2010/04/06/painting-punctured-polygons-with-matplotlib.html\n\n    Example usage:\n    ext = np.array([[-4, 4, 4, -4, -4], [-4, -4, 4, 4, -4]])\n    t = -np.linspace(0, 2 * np.pi)\n    hole1 = np.array([2 + 0.4 * np.cos(t), 2 + np.sin(t)])\n    hole2 = np.array([np.cos(t) * (1 + 0.2 * np.cos(4 * t + 1)),\n                      np.sin(t) * (1 + 0.2 * np.cos(4 * t))])\n    hole2 = np.array([-2 + np.cos(t) * (1 + 0.2 * np.cos(4 * t)),\n                      1 + np.sin(t) * (1 + 0.2 * np.cos(4 * t))])\n    hole3 = np.array([np.cos(t) * (1 + 0.5 * np.cos(4 * t)),\n                      -2 + np.sin(t)])\n    holes = [ext, hole1, hole2, hole3]\n    patch = patchify([ext, hole1, hole2, hole3])\n    ax = plt.gca()\n    ax.add_patch(patch)\n    ax.set_xlim([-6, 6])\n    ax.set_ylim([-6, 6])\n    \"\"\"\n\n    def reorder(poly, cw=True):\n        \"\"\"Reorders the polygon to run clockwise or counter-clockwise\n        according to the value of cw. It calculates whether a polygon is\n        cw or ccw by summing (x2-x1)*(y2+y1) for all edges of the polygon,\n        see https://stackoverflow.com/a/1165943/898213.\n        \"\"\"\n        # Close polygon if not closed\n        if not np.allclose(poly[:, 0], poly[:, -1]):\n            poly = np.c_[poly, poly[:, 0]]\n        direction = ((poly[0] - np.roll(poly[0], 1)) *\n                     (poly[1] + np.roll(poly[1], 1))).sum() &lt; 0\n        if direction == cw:\n            return poly\n        else:\n            return poly[::-1]\n\n    def ring_coding(n):\n        \"\"\"Returns a list of len(n) of this format:\n        [MOVETO, LINETO, LINETO, ..., LINETO, LINETO CLOSEPOLY]\n        \"\"\"\n        codes = [Path.LINETO] * n\n        codes[0] = Path.MOVETO\n        codes[-1] = Path.CLOSEPOLY\n        return codes\n\n    ccw = [True] + ([False] * (len(polys) - 1))\n    polys = [reorder(poly, c) for poly, c in zip(polys, ccw)]\n    codes = np.concatenate([ring_coding(p.shape[1]) for p in polys])\n    vertices = np.concatenate(polys, axis=1)\n    return PathPatch(Path(vertices.T, codes))\n\n\n\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 272056,
+                "reputation": 567,
+                "user_id": 562934,
+                "user_type": "registered",
+                "accept_rate": 43,
+                "display_name": "arkottke"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 21393565,
+            "answer_count": 4,
+            "score": 6,
+            "last_activity_date": 1629986119,
+            "creation_date": 1326934359,
+            "question_id": 8919719,
+            "link": "https://stackoverflow.com/questions/8919719/how-to-plot-a-complex-polygon",
+            "title": "How to plot a complex polygon?",
+            "body": "<p>I am reading data in from a GIS database and creating a map with mpl_toolkits.basemap and matplotlib. Some of the data creates complex polygons (defined by an exterior and interior rings). However, I haven't been able to track down how to create a polygon with holes. Is this even possible with matplotlib? Is there another method for creating this image?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8166
+}

@@ -1,0 +1,6 @@
+def wrap_elem(parent, elem)
+    parent_index = list(parent).index(elem)
+    parent.remove(elem)
+    new_elem = ET.Element('div', attrib={'class': 'wrapper'})
+    parent.insert(parent_index, new_elem)
+    new_elem.append(elem)

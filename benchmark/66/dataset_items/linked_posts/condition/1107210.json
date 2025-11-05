@@ -1,0 +1,234 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "lambda"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 21978,
+                        "reputation": 99198,
+                        "user_id": 53850,
+                        "user_type": "registered",
+                        "display_name": "sykora"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1247188221,
+                    "last_edit_date": 1495541887,
+                    "creation_date": 1247188221,
+                    "answer_id": 1107232,
+                    "question_id": 1107210,
+                    "link": "https://stackoverflow.com/questions/1107210/python-create-function-in-a-loop-capturing-the-loop-variable/1107232#1107232",
+                    "body": "<p>All the lambdas end up being bound to the last one. See this question for a longer answer:</p>\n\n<p><a href=\"https://stackoverflow.com/questions/452610/how-do-i-create-a-list-of-python-lambdas-in-a-list-comprehension-for-loop\">How do I create a list of Python lambdas (in a list comprehension/for loop)?</a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 25014,
+                        "reputation": 134627,
+                        "user_id": 64004,
+                        "user_type": "registered",
+                        "accept_rate": 62,
+                        "display_name": "gahooa"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1247188241,
+                    "creation_date": 1247188241,
+                    "answer_id": 1107234,
+                    "question_id": 1107210,
+                    "link": "https://stackoverflow.com/questions/1107210/python-create-function-in-a-loop-capturing-the-loop-variable/1107234#1107234",
+                    "body": "<p>Considering the final value of <code>i == 9</code></p>\n\n<p>Like any good python function, it's going to use the value of the variable in the scope it was defined.  Perhaps <code>lambda: varname</code> (being that it is a language construct) binds to the name, not the value, and evaluates that name at runtime?</p>\n\n<p>Similar to:</p>\n\n<pre><code>i = 9\ndef foo():\n    print i\n\ni = 10\nfoo()\n</code></pre>\n\n<p><sup>I'd be quite interested in finding out of my answer is correct</sup></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 20689,
+                                "reputation": 100295,
+                                "user_id": 49701,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "Evan Fosmark"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1247188545,
+                            "post_id": 1107243,
+                            "comment_id": 922213,
+                            "link": "https://stackoverflow.com/questions/1107210/python-create-function-in-a-loop-capturing-the-loop-variable/1107243#comment922213_1107243",
+                            "body": "I agree. Partial application is the way to go here."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 42191,
+                                "reputation": 6452,
+                                "user_id": 122851,
+                                "user_type": "registered",
+                                "display_name": "sunqiang"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1247189182,
+                            "post_id": 1107243,
+                            "comment_id": 922244,
+                            "link": "https://stackoverflow.com/questions/1107210/python-create-function-in-a-loop-capturing-the-loop-variable/1107243#comment922244_1107243",
+                            "body": "here partial(f,i) stands for partial(f,b=i) not partial(f,a=i). so it&#39;s not the same thing as the original post. Partial function application &#39;from the right&#39; (<a href=\"http://www.gossamer-threads.com/lists/python/dev/715103\" rel=\"nofollow noreferrer\">gossamer-threads.com/lists/python/dev/715103</a>) has been rejected two times."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 31883,
+                        "reputation": 4229,
+                        "user_id": 87908,
+                        "user_type": "registered",
+                        "accept_rate": 54,
+                        "display_name": "Ryan"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 20,
+                    "last_activity_date": 1247188404,
+                    "creation_date": 1247188404,
+                    "answer_id": 1107243,
+                    "question_id": 1107210,
+                    "link": "https://stackoverflow.com/questions/1107210/python-create-function-in-a-loop-capturing-the-loop-variable/1107243#1107243",
+                    "body": "<p>lambdas in python are closures.... the arguments you give it aren't going to be evaluated until the lambda is evaluated.  At that time, i=9 regardless, because your iteration is finished.</p>\n\n<p>The behavior you're looking for can be achieved with functools.partial</p>\n\n<pre><code>import functools\n\ndef f(a,b):\n    return a*b\n\nfuncs = []\n\nfor i in range(0,10):\n    funcs.append(functools.partial(f,i))\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1895,
+                        "reputation": 122146,
+                        "user_id": 2611,
+                        "user_type": "registered",
+                        "display_name": "ars"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 10,
+                    "last_activity_date": 1247240624,
+                    "last_edit_date": 1247240624,
+                    "creation_date": 1247188734,
+                    "answer_id": 1107260,
+                    "question_id": 1107210,
+                    "link": "https://stackoverflow.com/questions/1107210/python-create-function-in-a-loop-capturing-the-loop-variable/1107260#1107260",
+                    "body": "<p>There's only one <code>i</code> which is bound to each lambda, contrary to what you think.  This is a common mistake.  </p>\n\n<p>One way to get what you want is:</p>\n\n<pre><code>for i in range(0,10):\n    funcs.append(lambda x, i=i: f(i, x))\n</code></pre>\n\n<p>Now you're creating a default parameter <code>i</code> in each lambda closure and binding to it the current <em>value</em> of the looping variable <code>i</code>.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1895,
+                                "reputation": 122146,
+                                "user_id": 2611,
+                                "user_type": "registered",
+                                "display_name": "ars"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1247191922,
+                            "post_id": 1107333,
+                            "comment_id": 922364,
+                            "link": "https://stackoverflow.com/questions/1107210/python-create-function-in-a-loop-capturing-the-loop-variable/1107333#comment922364_1107333",
+                            "body": "I haven&#39;t seen this one before.  Kind of neat."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 34048,
+                                "reputation": 869830,
+                                "user_id": 95810,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Alex Martelli"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1247192214,
+                            "post_id": 1107333,
+                            "comment_id": 922374,
+                            "link": "https://stackoverflow.com/questions/1107210/python-create-function-in-a-loop-capturing-the-loop-variable/1107333#comment922374_1107333",
+                            "body": "@ars, bit of an overkill for most cases actually (in Python), but it IS what one would naturally do in (say) Scheme, so I guess it <i>is</i> kinda neat;-)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1895,
+                                "reputation": 122146,
+                                "user_id": 2611,
+                                "user_type": "registered",
+                                "display_name": "ars"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1247205331,
+                            "post_id": 1107333,
+                            "comment_id": 922890,
+                            "link": "https://stackoverflow.com/questions/1107210/python-create-function-in-a-loop-capturing-the-loop-variable/1107333#comment922890_1107333",
+                            "body": "Right, I can&#39;t immediately think of a case where I would prefer it, but  a fun construction nonetheless.  :-)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6317514,
+                                "reputation": 1329,
+                                "user_id": 6425831,
+                                "user_type": "registered",
+                                "display_name": "saolof"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1691606766,
+                            "post_id": 1107333,
+                            "comment_id": 135515818,
+                            "link": "https://stackoverflow.com/questions/1107210/python-create-function-in-a-loop-capturing-the-loop-variable/1107333#comment135515818_1107333",
+                            "body": "There is one case where this naturally pops up: when you use map(range..., lambda i: ...)  instead of for loops and list comprehensions. Functional code in general is very good at avoiding capture bugs because you only capture immutable state"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 34048,
+                        "reputation": 869830,
+                        "user_id": 95810,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "Alex Martelli"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 15,
+                    "last_activity_date": 1247191009,
+                    "creation_date": 1247191009,
+                    "answer_id": 1107333,
+                    "question_id": 1107210,
+                    "link": "https://stackoverflow.com/questions/1107210/python-create-function-in-a-loop-capturing-the-loop-variable/1107333#1107333",
+                    "body": "<p>Yep, the usual \"scoping problem\" (actually a binding-later-than-you want problem, but it's often called by that name). You've already gotten the two best (because simplest) answers -- the \"fake default\" <code>i=i</code> solution, and <code>functools.partial</code>, so I'm only giving the third one of the classic three, the \"factory lambda\":</p>\n\n<pre><code>for i in range(0,10):\n    funcs.append((lambda i: lambda x: f(i, x))(i))\n</code></pre>\n\n<p>Personally I'd go with <code>i=i</code> if there's no risk of the functions in <code>funcs</code> being accidentally called with 2 parameters instead of just 1, but the factory function approach is worth considering when you need something a little bit richer than just pre-binding one arg.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 877432,
+                "reputation": 5386,
+                "user_id": 119400,
+                "user_type": "registered",
+                "accept_rate": 80,
+                "display_name": "Dan Lorenc"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "closed_date": 1660608347,
+            "accepted_answer_id": 1107243,
+            "answer_count": 5,
+            "score": 16,
+            "last_activity_date": 1579441549,
+            "creation_date": 1247187685,
+            "last_edit_date": 1579441549,
+            "question_id": 1107210,
+            "link": "https://stackoverflow.com/questions/1107210/python-create-function-in-a-loop-capturing-the-loop-variable",
+            "closed_reason": "Duplicate",
+            "title": "Python create function in a loop capturing the loop variable",
+            "body": "<p>What's going on here?  I'm trying to create a list of functions:</p>\n\n<pre><code>def f(a,b):\n    return a*b\n\nfuncs = []\n\nfor i in range(0,10):\n    funcs.append(lambda x:f(i,x))\n</code></pre>\n\n<p>This isn't doing what I expect.  I would expect the list to act like this:</p>\n\n<pre><code>funcs[3](3) = 9\nfuncs[0](5) = 0\n</code></pre>\n\n<p>But all the functions in the list seem to be identical, and be setting the fixed value to be 9:</p>\n\n<pre><code>funcs[3](3) = 27\nfuncs[3](1) = 9\n\nfuncs[2](6) = 54\n</code></pre>\n\n<p>Any ideas?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9873
+}

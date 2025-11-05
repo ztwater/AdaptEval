@@ -1,0 +1,51 @@
+{
+    "items": [
+        {
+            "tags": [
+                "xml",
+                "python-3.x",
+                "minidom"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 2356497,
+                        "reputation": 2172,
+                        "user_id": 2064185,
+                        "user_type": "registered",
+                        "display_name": "spky"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1466961974,
+                    "creation_date": 1466961974,
+                    "answer_id": 38041194,
+                    "question_id": 38015864,
+                    "link": "https://stackoverflow.com/questions/38015864/python-xml-dom-minidom-please-dont-escape-my-strings/38041194#38041194",
+                    "body": "<p>Thinking further about my problem here, I had one idea:</p>\n\n<p>Isn't it possible to define a new type of Node?</p>\n\n<p>Indeed - it is!</p>\n\n<pre><code>from xml.dom import minidom\n\nSNOWMAN = '&amp;#x2603;&amp;#xfe0e;'\n\nimp = minidom.getDOMImplementation()\ndom = imp.createDocument(None, 'root', None)\n</code></pre>\n\n<p>So, I define my own Node there:</p>\n\n<pre><code>class RawText(minidom.Text):\n    def writexml(self, writer, indent='', addindent='', newl=''):\n        '''\n        patching minidom.Text.writexml:1087\n        the original calls minidom._write_data:302\n        below is a combined version of both, but without the '&amp;' replacements and so on..\n        '''\n        if self.data:\n            writer.write('{}{}{}'.format(indent, self.data, newl))\n</code></pre>\n\n<p>After that I write some helper function for the original <code>minidom.Document</code> to create new Nodes of my own type. </p>\n\n<pre><code>def createRawTextNode(data):\n    '''\n    helper function for minidom.Document:1519 to create Nodes of RawText\n    see minidom.Document.createTextNode:1656\n    '''\n    if not isinstance(data, str):\n        raise TypeError('node contents must be a string')\n    r = RawText()\n    r.data = data\n    r.ownerDocument = dom  # there is no self\n    return r\n\n# ... and attach the helper function\ndom.createRawTextNode = createRawTextNode\n</code></pre>\n\n<p>And then, continue as if nothing happened:</p>\n\n<pre><code>root = dom.documentElement\n\nevil = dom.createElement('evil')\nroot.appendChild(evil)\nevil.appendChild(dom.createTextNode(SNOWMAN))\n\ngood = dom.createElement('good')\nroot.appendChild(good)\n# use helper function to create Nodes of RawText\ngood.appendChild(dom.createRawTextNode(SNOWMAN))\n\n# yay, works! |o_0|\nprint(dom.toprettyxml(indent=' '))\n</code></pre>\n\n<p>Finally it does what I want!</p>\n\n<p>Both escaped and unescaped Strings in my output without trouble.</p>\n\n<pre><code>&lt;?xml version=\"1.0\" ?&gt;\n&lt;root&gt;\n &lt;evil&gt;&amp;amp;#x2603;&amp;amp;#xfe0e;&lt;/evil&gt;\n &lt;good&gt;&amp;#x2603;&amp;#xfe0e;&lt;/good&gt;\n&lt;/root&gt;\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 2356497,
+                "reputation": 2172,
+                "user_id": 2064185,
+                "user_type": "registered",
+                "display_name": "spky"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "answer_count": 1,
+            "score": 0,
+            "last_activity_date": 1466961974,
+            "creation_date": 1466778655,
+            "question_id": 38015864,
+            "link": "https://stackoverflow.com/questions/38015864/python-xml-dom-minidom-please-dont-escape-my-strings",
+            "title": "Python xml.dom.minidom - Please don&#39;t escape my Strings",
+            "body": "<p>I am using the <a href=\"https://docs.python.org/3/library/xml.dom.minidom.html\" rel=\"nofollow\">minidom</a> module to create XML Documents from my data. </p>\n\n<p>At the moment I'm struggling to find some pythonic way to prevent minidom from escaping my Strings I put in there..</p>\n\n<p>Cause of all evil is the <code>_write_data</code> method (on line 302 in the module):</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>def _write_data(writer, data):\n    \"Writes datachars to writer.\"\n    if data:\n        data = data.replace(\"&amp;\", \"&amp;amp;\").replace(\"&lt;\", \"&amp;lt;\"). \\\n                    replace(\"\\\"\", \"&amp;quot;\").replace(\"&gt;\", \"&amp;gt;\")\n        writer.write(data)\n</code></pre>\n\n<p>All I want is the <code>data</code> without those <code>replace</code>ments.</p>\n\n<hr>\n\n<p>I found some way to prevent this by monkeypathing two functions:</p>\n\n<ul>\n<li><code>writexml</code> of the parent node</li>\n<li>and within that patch: \n\n<ul>\n<li><code>_write_data</code></li>\n</ul></li>\n</ul>\n\n<p>I've prepared some example:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>from xml.dom import minidom\n\nSNOWMAN = '&amp;#x2603;&amp;#xfe0e;'\n\nimp = minidom.getDOMImplementation()\ndom = imp.createDocument(None, 'root', None)\nroot = dom.documentElement\n\nevil = dom.createElement('evil')\nroot.appendChild(evil)\n# this does unwanted double escaping:\nevil.appendChild(dom.createTextNode(SNOWMAN))\n\n# now for something completely different ...\n# this is some way to fix this:\ngood = dom.createElement('good')\nroot.appendChild(good)\n\n# - store original ``writexml`` and ``_write_data``\noriginal_writexml = good.writexml\noriginal_write_data = minidom._write_data\n\n\ndef fake_writexml(writer, indent, addindent, newl):\n    def fake_writedata(writer, data):\n        if data:\n            writer.write(data)\n\n    # - overwrite ``_write_data``\n    minidom._write_data = fake_writedata\n\n    # - call original ``writexml``\n    # -&gt; which itself calls the now patched ``_write_data``\n    original_writexml(writer, indent, addindent, newl)\n\n    # - reset ``_write_data`` again\n    minidom._write_data = original_write_data\n\n# - overwrite ``writexml``\ngood.writexml = fake_writexml\n\n# - do stuff\ngood.appendChild(dom.createTextNode(SNOWMAN))\n\n# -&gt; yay, it works!\nprint(dom.toprettyxml(indent=' '))\n\n# - reset ``writexml`` again\ngood.writexml = original_writexml\n# -&gt; returns trash again..\nprint(dom.toprettyxml(indent=' '))\n</code></pre>\n\n<p>It will produce this output:</p>\n\n<pre class=\"lang-xml prettyprint-override\"><code>&lt;?xml version=\"1.0\" ?&gt;\n&lt;root&gt;\n &lt;evil&gt;&amp;amp;#x2603;&amp;amp;#xfe0e;&lt;/evil&gt;\n &lt;good&gt;&amp;#x2603;&amp;#xfe0e;&lt;/good&gt;\n&lt;/root&gt;\n\n&lt;?xml version=\"1.0\" ?&gt;\n&lt;root&gt;\n &lt;evil&gt;&amp;amp;#x2603;&amp;amp;#xfe0e;&lt;/evil&gt;\n &lt;good&gt;&amp;amp;#x2603;&amp;amp;#xfe0e;&lt;/good&gt;\n&lt;/root&gt;\n</code></pre>\n\n<p>Personally I don't think this is good code, as it messes around with the internals of <code>minidom</code>, and you have to be careful not to make any mistakes.</p>\n\n<p>Please show me the most pythonic solution to that problem you can come up with - so I can finally enjoy the Snowmans ;-) </p>\n\n<p>&#x2603;&#xfe0e;</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5421
+}

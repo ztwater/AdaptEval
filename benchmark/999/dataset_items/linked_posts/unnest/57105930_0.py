@@ -1,0 +1,2 @@
+df = pd.DataFrame({'A': [1, 2], 'B': [[1, 2], [1, 2]]})
+df.explode('B')

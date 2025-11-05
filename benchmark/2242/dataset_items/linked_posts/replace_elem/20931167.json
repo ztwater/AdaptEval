@@ -1,0 +1,128 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "elementtree"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 81464,
+                                "reputation": 31111,
+                                "user_id": 229686,
+                                "user_type": "registered",
+                                "accept_rate": 58,
+                                "display_name": "edA-qa mort-ora-y"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1388915376,
+                            "post_id": 20931505,
+                            "comment_id": 31431603,
+                            "link": "https://stackoverflow.com/questions/20931167/how-to-replace-an-element-in-a-tree-elementtree-markdown/20931505#comment31431603_20931505",
+                            "body": "This looks like it should work. Though I tried a variant of doing a double iteration instead, iterate over all parents, then inner-loop of children. I didn&#39;t want that a second/later pass might not have all the parents set."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 314979,
+                        "reputation": 305995,
+                        "user_id": 748858,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "mgilson"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": true,
+                    "score": 10,
+                    "last_activity_date": 1388909926,
+                    "last_edit_date": 1495540179,
+                    "creation_date": 1388909926,
+                    "answer_id": 20931505,
+                    "question_id": 20931167,
+                    "link": "https://stackoverflow.com/questions/20931167/how-to-replace-an-element-in-a-tree-elementtree-markdown/20931505#20931505",
+                    "body": "<p>This is a bit of a tricky one.  First, you'll need to get the parent element as described in <a href=\"https://stackoverflow.com/a/2170994/748858\">this previous question</a>.</p>\n\n<pre><code>parent_map = dict((c, p) for p in tree.getiterator() for c in p)\n</code></pre>\n\n<p>If you can get markdown to use <code>lxml</code>, this is a little easier -- I believe that <code>lxml</code> elements know their parents already.</p>\n\n<p>Now, when you get your element from iterating, you can also get the parent:</p>\n\n<pre><code>for elem in list(tree.getiterator('pre')):\n    parent = parent_map[elem]\n    wrap_elem(parent, elem)\n</code></pre>\n\n<p>Note that I've turned the iterator from the tree into a list -- We don't want to modify the tree while iterating over it.  That could be trouble.</p>\n\n<p>Finally, you're in position to move the element around:</p>\n\n<pre><code>def wrap_elem(parent, elem)\n    parent_index = list(parent).index(elem)\n    parent.remove(elem)\n    new_elem = ET.Element('div', attrib={'class': 'wrapper'})\n    parent.insert(parent_index, new_elem)\n    new_elem.append(elem)\n</code></pre>\n\n<p>*Note that I haven't tested this code exactly... let me know if you find any bugs.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1289655,
+                        "reputation": 1838,
+                        "user_id": 1241980,
+                        "user_type": "registered",
+                        "display_name": "Lyfing"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1388918499,
+                    "creation_date": 1388918499,
+                    "answer_id": 20932594,
+                    "question_id": 20931167,
+                    "link": "https://stackoverflow.com/questions/20931167/how-to-replace-an-element-in-a-tree-elementtree-markdown/20932594#20932594",
+                    "body": "<p>In my experience, you can use the method below to get what you want:<br>\n<code>xml.etree.ElementTree.SubElement</code>( I will just call it <code>ET.Subelement</code>)  <a href=\"http://docs.python.org/2/library/xml.etree.elementtree.html#xml.etree.ElementTree.SubElement\" rel=\"nofollow\">http://docs.python.org/2/library/xml.etree.elementtree.html#xml.etree.ElementTree.SubElement</a>  </p>\n\n<p>Here is the steps:<br>\nBefore your iteration, you should get the parent element of these iterated element first, store it into variable <code>parent</code>.</p>\n\n<p>Then,<br>\n1, store the element <code>&lt;pre class='inner'&gt;...&lt;/pre&gt;</code> into a variable <code>temp</code></p>\n\n<p>2, add a new subelement <code>div</code> into <code>parent</code>: </p>\n\n<pre><code>div = ET.SubElement(parent, 'div')\n</code></pre>\n\n<p>and set the attrib of <code>div</code>:</p>\n\n<pre><code>div.set('class','wrapper')\n</code></pre>\n\n<p>3, add the element in step 1 as a subelement of <code>div</code>,</p>\n\n<pre><code>ET.SubElement(div, temp)  \n</code></pre>\n\n<p>4, delete the element in step 1:</p>\n\n<pre><code>parent.remove(temp)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 10117126,
+                        "reputation": 9,
+                        "user_id": 7475435,
+                        "user_type": "registered",
+                        "display_name": "Eric Karnowski"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1505831566,
+                    "creation_date": 1505831566,
+                    "answer_id": 46303175,
+                    "question_id": 20931167,
+                    "link": "https://stackoverflow.com/questions/20931167/how-to-replace-an-element-in-a-tree-elementtree-markdown/46303175#46303175",
+                    "body": "<p>Another solution that works for me, similar to lyfing's. \nCopy the element into a temp; retag the original element with the wanted outer tag and clear it, then append the copy into the original.</p>\n\n<pre><code>import copy\n\ntemp = copy.deepcopy(elem)\nelem.tag = \"div\"\nelem.set(\"class\",\"wrapper\")\nelem.clear()\nelem.append(temp)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 12697897,
+                        "reputation": 2735,
+                        "user_id": 9225733,
+                        "user_type": "registered",
+                        "display_name": "Caveman"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1580509293,
+                    "last_edit_date": 1580509293,
+                    "creation_date": 1580508972,
+                    "answer_id": 60011956,
+                    "question_id": 20931167,
+                    "link": "https://stackoverflow.com/questions/20931167/how-to-replace-an-element-in-a-tree-elementtree-markdown/60011956#60011956",
+                    "body": "<p>Something like this works for one:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>for i, element in enumerate(parent):\n    if is_the_one_you_want_to_replace(element):\n        parent.remove(element)\n        parent.insert(i, new_element)\n        break\n</code></pre>\n\n<p>Something like this works for many:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>replacement_map = {}\n\nfor i, element in enumerate(parent):\n    if is_an_element_you_want_to_replace(element):\n        replacement_map[i] = el_to_remove, el_to_add\n\nfor index, (el_to_remove, el_to_add) in replacement_map.items():\n    parent.remove(el_to_remove)\n    parent.insert(index, el_to_add)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 81464,
+                "reputation": 31111,
+                "user_id": 229686,
+                "user_type": "registered",
+                "accept_rate": 58,
+                "display_name": "edA-qa mort-ora-y"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 20931505,
+            "answer_count": 4,
+            "score": 3,
+            "last_activity_date": 1580509293,
+            "creation_date": 1388906525,
+            "question_id": 20931167,
+            "link": "https://stackoverflow.com/questions/20931167/how-to-replace-an-element-in-a-tree-elementtree-markdown",
+            "title": "How to replace an element in a tree? (elementtree/markdown)",
+            "body": "<p>How can I replace an element during iteration in an elementtree? I'm writing a treeprocessor for markdown and would like to wrap an element.</p>\n\n<pre><code>&lt;pre class='inner'&gt;...&lt;/pre&gt;\n</code></pre>\n\n<p>Should become</p>\n\n<pre><code>&lt;div class='wrapper'&gt;&lt;pre class='inner'&gt;...&lt;/pre&gt;&lt;/div&gt;\n</code></pre>\n\n<p>I use <code>getiterator('pre')</code> to find the elements, but I don't know how to wrap it. The trouble point is replacing the found element with the new wrapper, but preserving the existing one as the child.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5719
+}

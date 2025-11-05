@@ -1,0 +1,996 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "numpy",
+                "image-processing",
+                "gaussianblur"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "user_type": "does_not_exist",
+                        "display_name": "user1196549"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1629450688,
+                    "post_id": 29731726,
+                    "comment_id": 121695419,
+                    "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy#comment121695419_29731726",
+                    "body": "Applying a precomputed kernel is not necessarily the right option if you are after efficiency (it is probably the worst). Check Lucas van Vliet or Deriche. And use separability !"
+                },
+                {
+                    "owner": {
+                        "account_id": 1522906,
+                        "reputation": 44396,
+                        "user_id": 1422096,
+                        "user_type": "registered",
+                        "accept_rate": 63,
+                        "display_name": "Basj"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1695898793,
+                    "post_id": 29731726,
+                    "comment_id": 136086704,
+                    "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy#comment136086704_29731726",
+                    "body": "The current answers are good, but is there nowadays a built-in one-liner solution available in either numpy or scipy.ndimage? (to avoid rolling our own Gaussian kernel code)?"
+                },
+                {
+                    "owner": {
+                        "account_id": 9897892,
+                        "reputation": 58642,
+                        "user_id": 7328782,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "Cris Luengo"
+                    },
+                    "reply_to_user": {
+                        "account_id": 1522906,
+                        "reputation": 44396,
+                        "user_id": 1422096,
+                        "user_type": "registered",
+                        "accept_rate": 63,
+                        "display_name": "Basj"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1695913334,
+                    "post_id": 29731726,
+                    "comment_id": 136089932,
+                    "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy#comment136089932_29731726",
+                    "body": "@Basj What is your goal? If you are looking to apply a Gaussian filter to an image, you should use any of the pre-existing functions to do so. Don\u2019t build a 2D kernel and run a generic 2D convolution because that is way too expensive. The filter is separable, and therefore specialized code will compute the filter much more efficiently than the generic convolution code."
+                },
+                {
+                    "owner": {
+                        "account_id": 3072614,
+                        "reputation": 13784,
+                        "user_id": 2602877,
+                        "user_type": "registered",
+                        "display_name": "Christoph Rackwitz"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1696002304,
+                    "post_id": 29731726,
+                    "comment_id": 136102554,
+                    "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy#comment136102554_29731726",
+                    "body": "besides that, existing answers already satisfy that bounty text: there is at least one answer that presents some library function that returns a gaussian kernel. the only &quot;extra&quot; is lifting it from 1-D to n-D"
+                },
+                {
+                    "owner": {
+                        "account_id": 1522906,
+                        "reputation": 44396,
+                        "user_id": 1422096,
+                        "user_type": "registered",
+                        "accept_rate": 63,
+                        "display_name": "Basj"
+                    },
+                    "reply_to_user": {
+                        "account_id": 9897892,
+                        "reputation": 58642,
+                        "user_id": 7328782,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "Cris Luengo"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1696255501,
+                    "post_id": 29731726,
+                    "comment_id": 136126047,
+                    "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy#comment136126047_29731726",
+                    "body": "@CrisLuengo My bounty reason is: is there a ready-to-use function like <code>np.something.gaussian_kernel(size=(10,10), sigma=0.5)</code> or the same in scipy? (instead of having to define it manually with one the current answers). Sometimes we need this independently from convolve."
+                },
+                {
+                    "owner": {
+                        "account_id": 9897892,
+                        "reputation": 58642,
+                        "user_id": 7328782,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "Cris Luengo"
+                    },
+                    "reply_to_user": {
+                        "account_id": 1522906,
+                        "reputation": 44396,
+                        "user_id": 1422096,
+                        "user_type": "registered",
+                        "accept_rate": 63,
+                        "display_name": "Basj"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1696258632,
+                    "post_id": 29731726,
+                    "comment_id": 136126715,
+                    "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy#comment136126715_29731726",
+                    "body": "@Basj I don&#39;t know of such a function in Scipy, I would search the docs but I assume you&#39;ve already done that. DIPlib does have <code>dip.CreateGauss</code>, but it&#39;s not on your short-list of packages."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5625409,
+                                "reputation": 199,
+                                "user_id": 4453999,
+                                "user_type": "registered",
+                                "display_name": "trueter"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1493037836,
+                            "post_id": 29731818,
+                            "comment_id": 74226125,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/29731818#comment74226125_29731818",
+                            "body": "Why do you take the square root of the outer product (i.e. <code>kernel_raw = np.sqrt(np.outer(kern1d, kern1d))</code>) and don&#39;t just multiply them? I feel like I am missing something here.."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 413111,
+                                "reputation": 3830,
+                                "user_id": 786559,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Ciprian Tomoiag\u0103"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1518529379,
+                            "post_id": 29731818,
+                            "comment_id": 84536901,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/29731818#comment84536901_29731818",
+                            "body": "could you give some details, please, about how your function works ? Why do you need <code>np.diff(st.norm.cdf(x))</code> ?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 413111,
+                                "reputation": 3830,
+                                "user_id": 786559,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Ciprian Tomoiag\u0103"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1518530546,
+                            "post_id": 29731818,
+                            "comment_id": 84537714,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/29731818#comment84537714_29731818",
+                            "body": "also, your implementation gives results that are different from anyone else&#39;s on the page :("
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2578520,
+                                "reputation": 1512,
+                                "user_id": 2235701,
+                                "user_type": "registered",
+                                "display_name": "FuzzyDuck"
+                            },
+                            "reply_to_user": {
+                                "account_id": 413111,
+                                "reputation": 3830,
+                                "user_id": 786559,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Ciprian Tomoiag\u0103"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1553466590,
+                            "post_id": 29731818,
+                            "comment_id": 97384124,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/29731818#comment97384124_29731818",
+                            "body": "@CiprianTomoiag\u0103, returning to this answer after a long time, and you&#39;re  right, this answer is wrong :(. The square root should not be there, and I have also defined the interval inconsistently with how most people would understand it. I&#39;ll update this answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2578520,
+                                "reputation": 1512,
+                                "user_id": 2235701,
+                                "user_type": "registered",
+                                "display_name": "FuzzyDuck"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5625409,
+                                "reputation": 199,
+                                "user_id": 4453999,
+                                "user_type": "registered",
+                                "display_name": "trueter"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1553466627,
+                            "post_id": 29731818,
+                            "comment_id": 97384135,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/29731818#comment97384135_29731818",
+                            "body": "@trueter, you&#39;re right, the square root should not be there. I&#39;m fixing the answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2578520,
+                                "reputation": 1512,
+                                "user_id": 2235701,
+                                "user_type": "registered",
+                                "display_name": "FuzzyDuck"
+                            },
+                            "reply_to_user": {
+                                "account_id": 413111,
+                                "reputation": 3830,
+                                "user_id": 786559,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Ciprian Tomoiag\u0103"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1553466813,
+                            "post_id": 29731818,
+                            "comment_id": 97384165,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/29731818#comment97384165_29731818",
+                            "body": "@CiprianTomoiag\u0103, the reason for the <code>np.diff(st.norm.cdf(x))</code> is to capture the probability mass at the discretisation points. If we just take the probability density, we&#39;re not being quite accurate. Look at this link: <a href=\"https://homepages.inf.ed.ac.uk/rbf/HIPR2/gsmooth.htm\" rel=\"nofollow noreferrer\">homepages.inf.ed.ac.uk/rbf/HIPR2/gsmooth.htm</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1004826,
+                                "reputation": 2862,
+                                "user_id": 1018861,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "TomNorway"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1562859704,
+                            "post_id": 29731818,
+                            "comment_id": 100520212,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/29731818#comment100520212_29731818",
+                            "body": "The nsig (standard deviation) argument in the edited answer is no longer used in this function. Please edit the answer to provide a correct response or remove it, as it is currently tricking users for this rather common procedure."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2578520,
+                                "reputation": 1512,
+                                "user_id": 2235701,
+                                "user_type": "registered",
+                                "display_name": "FuzzyDuck"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1562943096,
+                            "post_id": 29731818,
+                            "comment_id": 100551530,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/29731818#comment100551530_29731818",
+                            "body": "Good point TomNorway. Think it&#39;s actually more correct to leave <code>nsig</code> in and use it to construct <code>x</code>. Answer edited."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 133226,
+                                "reputation": 627,
+                                "user_id": 1840212,
+                                "user_type": "registered",
+                                "display_name": "TheBamf"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1638999766,
+                            "post_id": 29731818,
+                            "comment_id": 124239684,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/29731818#comment124239684_29731818",
+                            "body": "Note that if you are filtering a &#39;normal&#39; image, i.e. one that has been created by integrating a continuous function over a grid of pixels (e.g. a photograph), then you should <i>not</i> use an integrated kernel (like the one given in this answer). Instead you should use evaluate the kernel function at the centre of each kernel pixel (as in some of the answers <a href=\"https://stackoverflow.com/a/43346070/1840212\">below</a> and as done by <a href=\"https://github.com/scipy/scipy/blob/fcdc3d7b7c1b950d874ac3e890cccde3e2de1c6c/scipy/ndimage/filters.py#L181\" rel=\"nofollow noreferrer\">scipy</a>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2578520,
+                        "reputation": 1512,
+                        "user_id": 2235701,
+                        "user_type": "registered",
+                        "display_name": "FuzzyDuck"
+                    },
+                    "comment_count": 9,
+                    "is_accepted": true,
+                    "score": 36,
+                    "last_activity_date": 1587083496,
+                    "last_edit_date": 1587083496,
+                    "creation_date": 1429457143,
+                    "answer_id": 29731818,
+                    "question_id": 29731726,
+                    "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/29731818#29731818",
+                    "body": "<p>Do you want to use the Gaussian kernel for e.g. image smoothing? If so, there's a function <a href=\"http://docs.scipy.org/doc/scipy-0.15.1/reference/generated/scipy.ndimage.filters.gaussian_filter.html#scipy.ndimage.filters.gaussian_filter\" rel=\"noreferrer\"><code>gaussian_filter()</code></a> in scipy:</p>\n\n<p><strong>Updated answer</strong></p>\n\n<p>This should work - while it's still not 100% accurate, it attempts to account for the probability mass within each cell of the grid. I think that using the probability density at the midpoint of each cell is slightly less accurate, especially for small kernels. See <a href=\"https://homepages.inf.ed.ac.uk/rbf/HIPR2/gsmooth.htm\" rel=\"noreferrer\">https://homepages.inf.ed.ac.uk/rbf/HIPR2/gsmooth.htm</a> for an example.</p>\n\n<pre><code>import numpy as np\nimport scipy.stats as st\n\ndef gkern(kernlen=21, nsig=3):\n    \"\"\"Returns a 2D Gaussian kernel.\"\"\"\n\n    x = np.linspace(-nsig, nsig, kernlen+1)\n    kern1d = np.diff(st.norm.cdf(x))\n    kern2d = np.outer(kern1d, kern1d)\n    return kern2d/kern2d.sum()\n</code></pre>\n\n<p>Testing it on the example in Figure 3 from the link:</p>\n\n<pre><code>gkern(5, 2.5)*273\n</code></pre>\n\n<p>gives</p>\n\n<pre><code>array([[ 1.0278445 ,  4.10018648,  6.49510362,  4.10018648,  1.0278445 ],\n       [ 4.10018648, 16.35610171, 25.90969361, 16.35610171,  4.10018648],\n       [ 6.49510362, 25.90969361, 41.0435344 , 25.90969361,  6.49510362],\n       [ 4.10018648, 16.35610171, 25.90969361, 16.35610171,  4.10018648],\n       [ 1.0278445 ,  4.10018648,  6.49510362,  4.10018648,  1.0278445 ]])\n</code></pre>\n\n<p><strong>The original (accepted) answer below accepted is wrong</strong>\nThe square root is unnecessary, and the definition of the interval is incorrect.</p>\n\n<pre><code>import numpy as np\nimport scipy.stats as st\n\ndef gkern(kernlen=21, nsig=3):\n    \"\"\"Returns a 2D Gaussian kernel array.\"\"\"\n\n    interval = (2*nsig+1.)/(kernlen)\n    x = np.linspace(-nsig-interval/2., nsig+interval/2., kernlen+1)\n    kern1d = np.diff(st.norm.cdf(x))\n    kernel_raw = np.sqrt(np.outer(kern1d, kern1d))\n    kernel = kernel_raw/kernel_raw.sum()\n    return kernel\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 365970,
+                                "reputation": 365,
+                                "user_id": 711213,
+                                "user_type": "registered",
+                                "accept_rate": 54,
+                                "display_name": "Rojin"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1456027893,
+                            "post_id": 29733040,
+                            "comment_id": 58753766,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/29733040#comment58753766_29733040",
+                            "body": "How do you specify the value for Sigma?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 485561,
+                        "reputation": 227434,
+                        "user_id": 901925,
+                        "user_type": "registered",
+                        "display_name": "hpaulj"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1429463183,
+                    "creation_date": 1429463183,
+                    "answer_id": 29733040,
+                    "question_id": 29731726,
+                    "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/29733040#29733040",
+                    "body": "<p><code>linalg.norm</code> takes an <code>axis</code> parameter.  With a little experimentation I found I could calculate the norm for all combinations of rows with </p>\n\n<pre><code>np.linalg.norm(x[None,:,:]-x[:,None,:],axis=2)\n</code></pre>\n\n<p>It expands <code>x</code> into a 3d array of all differences, and takes the norm on the last dimension.</p>\n\n<p>So I can apply this to your code by adding the <code>axis</code> parameter to your <code>Gaussian</code>:</p>\n\n<pre><code>def Gaussian(x,z,sigma,axis=None):\n    return np.exp((-(np.linalg.norm(x-z, axis=axis)**2))/(2*sigma**2))\n\nx=np.arange(12).reshape(3,4)\nGaussianMatrix(x,1)\n</code></pre>\n\n<p>produces</p>\n\n<pre><code>array([[  1.00000000e+00,   1.26641655e-14,   2.57220937e-56],\n       [  1.26641655e-14,   1.00000000e+00,   1.26641655e-14],\n       [  2.57220937e-56,   1.26641655e-14,   1.00000000e+00]])\n</code></pre>\n\n<p>Matching:</p>\n\n<pre><code>Gaussian(x[None,:,:],x[:,None,:],1,axis=2)\n\narray([[  1.00000000e+00,   1.26641655e-14,   2.57220937e-56],\n       [  1.26641655e-14,   1.00000000e+00,   1.26641655e-14],\n       [  2.57220937e-56,   1.26641655e-14,   1.00000000e+00]])\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7798937,
+                                "reputation": 1007,
+                                "user_id": 6465762,
+                                "user_type": "registered",
+                                "display_name": "clemisch"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1523960469,
+                            "post_id": 29733495,
+                            "comment_id": 86766483,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/29733495#comment86766483_29733495",
+                            "body": "I don&#39;t know the implementation details of the <code>gaussian_filter</code> function, but this method doesn&#39;t result in a 2D gaussian. Plot the central slice of  <code>gkern2(21, 7)</code> logarithmically and you&#39;ll see it isn&#39;t a parabola."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 319064,
+                        "reputation": 35972,
+                        "user_id": 636626,
+                        "user_type": "registered",
+                        "accept_rate": 69,
+                        "display_name": "Nils Werner"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 21,
+                    "last_activity_date": 1429465482,
+                    "creation_date": 1429465482,
+                    "answer_id": 29733495,
+                    "question_id": 29731726,
+                    "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/29733495#29733495",
+                    "body": "<p>You may simply gaussian-filter a simple <a href=\"http://en.wikipedia.org/wiki/Dirac_delta_function\" rel=\"noreferrer\">2D dirac function</a>, the result is then the filter function that was being used:</p>\n\n<pre><code>import numpy as np\nimport scipy.ndimage.filters as fi\n\ndef gkern2(kernlen=21, nsig=3):\n    \"\"\"Returns a 2D Gaussian kernel array.\"\"\"\n\n    # create nxn zeros\n    inp = np.zeros((kernlen, kernlen))\n    # set element at the middle to one, a dirac delta\n    inp[kernlen//2, kernlen//2] = 1\n    # gaussian-smooth the dirac, resulting in a gaussian filter mask\n    return fi.gaussian_filter(inp, nsig)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1816277,
+                                "reputation": 398,
+                                "user_id": 1651296,
+                                "user_type": "registered",
+                                "display_name": "im-a-teapot"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1612889182,
+                            "post_id": 43346070,
+                            "comment_id": 116904189,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/43346070#comment116904189_43346070",
+                            "body": "I&#39;ve tried many algorithms from other answers and this one is the only one who gave the same result as the <code>scipy.ndimage.filters.gaussian_filter</code>. The following are equivalent: <code>gaussian_filter(img_arr, sigma=1)</code> and <code>convolve(img_arr, gkern(9,1))</code>, where <code>from scipy.ndimage.filters import gaussian_filter, convolve</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7798937,
+                                "reputation": 1007,
+                                "user_id": 6465762,
+                                "user_type": "registered",
+                                "display_name": "clemisch"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1816277,
+                                "reputation": 398,
+                                "user_id": 1651296,
+                                "user_type": "registered",
+                                "display_name": "im-a-teapot"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1612975790,
+                            "post_id": 43346070,
+                            "comment_id": 116935369,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/43346070#comment116935369_43346070",
+                            "body": "I still prefer my answer over the other ones, but this specific identity to <code>gaussian_filter</code> might be just because I normalize the kernel to sum==1, whereas the others do not. (just fyi)"
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user1196549"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1629450494,
+                            "post_id": 43346070,
+                            "comment_id": 121695343,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/43346070#comment121695343_43346070",
+                            "body": "For image processing, it is a sin not to use the separability property of the Gaussian kernel and stick to a 2D convolution."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3209747,
+                                "reputation": 1239,
+                                "user_id": 2709971,
+                                "user_type": "registered",
+                                "accept_rate": 57,
+                                "display_name": "Swaroop"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1629640971,
+                            "post_id": 43346070,
+                            "comment_id": 121734989,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/43346070#comment121734989_43346070",
+                            "body": "@YvesDaoust can you explain further?"
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user1196549"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3209747,
+                                "reputation": 1239,
+                                "user_id": 2709971,
+                                "user_type": "registered",
+                                "accept_rate": 57,
+                                "display_name": "Swaroop"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1629665782,
+                            "post_id": 43346070,
+                            "comment_id": 121740503,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/43346070#comment121740503_43346070",
+                            "body": "@Swaroop: trade N&#178; operations per pixel for 2N."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8519,
+                                "reputation": 176775,
+                                "user_id": 15416,
+                                "user_type": "registered",
+                                "accept_rate": 63,
+                                "display_name": "MSalters"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3209747,
+                                "reputation": 1239,
+                                "user_id": 2709971,
+                                "user_type": "registered",
+                                "accept_rate": 57,
+                                "display_name": "Swaroop"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1682329461,
+                            "post_id": 43346070,
+                            "comment_id": 134192370,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/43346070#comment134192370_43346070",
+                            "body": "@Swaroop: More specifically, you can do 2 1-D convolutions, each of length N, instead of 1 2-D convolution of length N&#178;. This is somewhat theoretical because of two reasons: CPU caching cares a lot about locality of reference, and this is Python code. If you really cared about image processing performance, then you&#39;d probably do this on a GPU in native code."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7798937,
+                        "reputation": 1007,
+                        "user_id": 6465762,
+                        "user_type": "registered",
+                        "display_name": "clemisch"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": false,
+                    "score": 56,
+                    "last_activity_date": 1632149572,
+                    "last_edit_date": 1632149572,
+                    "creation_date": 1491914053,
+                    "answer_id": 43346070,
+                    "question_id": 29731726,
+                    "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/43346070#43346070",
+                    "body": "<p>I myself used the accepted answer for my image processing, but I find it (and the other answers) too dependent on other modules. Therefore, here is my compact solution:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import numpy as np\n   \ndef gkern(l=5, sig=1.):\n    &quot;&quot;&quot;\\\n    creates gaussian kernel with side length `l` and a sigma of `sig`\n    &quot;&quot;&quot;\n    ax = np.linspace(-(l - 1) / 2., (l - 1) / 2., l)\n    gauss = np.exp(-0.5 * np.square(ax) / np.square(sig))\n    kernel = np.outer(gauss, gauss)\n    return kernel / np.sum(kernel)\n</code></pre>\n<p>Edit: Changed arange to linspace to handle even side lengths</p>\n<p>Edit: Use separability for faster computation, thank you <a href=\"https://stackoverflow.com/users/1196549/yves-daoust\">Yves Daoust</a>.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 413111,
+                                "reputation": 3830,
+                                "user_id": 786559,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Ciprian Tomoiag\u0103"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1518614233,
+                            "post_id": 46526319,
+                            "comment_id": 84577895,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/46526319#comment84577895_46526319",
+                            "body": "I think you meant <code>np.linspace(-(size &#47;&#47; 2), size &#47;&#47; 2)</code>. Otherwise, the interval is a bit longer on the left side of zero (because <code>(-21) &#47;&#47; 2 = -11</code>, whereas <code>21 &#47;&#47; 2 = 10</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2000008,
+                                "reputation": 11105,
+                                "user_id": 1791279,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "rth"
+                            },
+                            "reply_to_user": {
+                                "account_id": 413111,
+                                "reputation": 3830,
+                                "user_id": 786559,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Ciprian Tomoiag\u0103"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1518616176,
+                            "post_id": 46526319,
+                            "comment_id": 84579202,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/46526319#comment84579202_46526319",
+                            "body": "@CiprianTomoiag\u0103 Thanks, fixed."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7798937,
+                                "reputation": 1007,
+                                "user_id": 6465762,
+                                "user_type": "registered",
+                                "display_name": "clemisch"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1523960591,
+                            "post_id": 46526319,
+                            "comment_id": 86766558,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/46526319#comment86766558_46526319",
+                            "body": "It gives an array with shape (50, 50) every time due to your use of <code>linspace</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3877596,
+                                "reputation": 3045,
+                                "user_id": 3211143,
+                                "user_type": "registered",
+                                "accept_rate": 54,
+                                "display_name": "Ludovic C"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1538185179,
+                            "post_id": 46526319,
+                            "comment_id": 92066932,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/46526319#comment92066932_46526319",
+                            "body": "I beleive it must be x = np.linspace(- (size // 2), size // 2, size)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2000008,
+                        "reputation": 11105,
+                        "user_id": 1791279,
+                        "user_type": "registered",
+                        "accept_rate": 83,
+                        "display_name": "rth"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1518713889,
+                    "last_edit_date": 1518713889,
+                    "creation_date": 1506950438,
+                    "answer_id": 46526319,
+                    "question_id": 29731726,
+                    "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/46526319#46526319",
+                    "body": "<p>A 2D gaussian kernel matrix can be computed with numpy broadcasting,</p>\n\n<pre><code>def gaussian_kernel(size=21, sigma=3):\n    \"\"\"Returns a 2D Gaussian kernel.\n    Parameters\n    ----------\n    size : float, the kernel size (will be square)\n\n    sigma : float, the sigma Gaussian parameter\n\n    Returns\n    -------\n    out : array, shape = (size, size)\n      an array with the centered gaussian kernel\n    \"\"\"\n    x = np.linspace(- (size // 2), size // 2)\n    x /= np.sqrt(2)*sigma\n    x2 = x**2\n    kernel = np.exp(- x2[:, None] - x2[None, :])\n    return kernel / kernel.sum()\n</code></pre>\n\n<p>For small kernel sizes this should be reasonably fast.</p>\n\n<p><strong>Note:</strong> this makes changing the sigma parameter easier with respect to the accepted answer.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1004826,
+                                "reputation": 2862,
+                                "user_id": 1018861,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "TomNorway"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1562862892,
+                            "post_id": 46892763,
+                            "comment_id": 100521732,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/46892763#comment100521732_46892763",
+                            "body": "Your answer is easily the fastest that I have found, even when employing numba on a variation of @rth&#39;s answer. In addition I suggest removing the reshape and adding a optional normalisation step. Modified code <a href=\"https://gist.github.com/thomasaarholt/267ec4fff40ca9dff1106490ea3b7567\" rel=\"nofollow noreferrer\">here</a>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6909769,
+                                "reputation": 944,
+                                "user_id": 5306152,
+                                "user_type": "registered",
+                                "display_name": "Alessandro Trinca Tornidor"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1640655439,
+                            "post_id": 46892763,
+                            "comment_id": 124626324,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/46892763#comment124626324_46892763",
+                            "body": "Now (SciPy 1.7.1) you must import gaussian() from <code>scipy.signal.windows</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15453248,
+                                "reputation": 535,
+                                "user_id": 14559854,
+                                "user_type": "registered",
+                                "display_name": "Javier TG"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1647615019,
+                            "post_id": 46892763,
+                            "comment_id": 126422122,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/46892763#comment126422122_46892763",
+                            "body": "great answer :), sidenote: I noted that using <code>gkern1d[:,None] @ gkern1d[None]</code> instead of <code>np.outer(gkern1d, gkern1d)</code> is a little faster."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2069688,
+                                "reputation": 5689,
+                                "user_id": 1977614,
+                                "user_type": "registered",
+                                "accept_rate": 58,
+                                "display_name": "SKPS"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1698960835,
+                            "post_id": 46892763,
+                            "comment_id": 136474443,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/46892763#comment136474443_46892763",
+                            "body": "Would have been nice if the colorbar was also in the plot"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5646608,
+                        "reputation": 554,
+                        "user_id": 4527807,
+                        "user_type": "registered",
+                        "display_name": "Teddy Hartanto"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 33,
+                    "last_activity_date": 1508772353,
+                    "last_edit_date": 1508772353,
+                    "creation_date": 1508771428,
+                    "answer_id": 46892763,
+                    "question_id": 29731726,
+                    "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/46892763#46892763",
+                    "body": "<p>I'm trying to improve on <a href=\"https://stackoverflow.com/a/29731818/4527807\">FuzzyDuck's answer</a> here. I think this approach is shorter and easier to understand. Here I'm using <code>signal.scipy.gaussian</code> to get the 2D gaussian kernel.</p>\n\n<pre><code>import numpy as np\nfrom scipy import signal\n\ndef gkern(kernlen=21, std=3):\n    \"\"\"Returns a 2D Gaussian kernel array.\"\"\"\n    gkern1d = signal.gaussian(kernlen, std=std).reshape(kernlen, 1)\n    gkern2d = np.outer(gkern1d, gkern1d)\n    return gkern2d\n</code></pre>\n\n<p>Plotting it using <code>matplotlib.pyplot</code>:</p>\n\n<pre><code>import matplotlib.pyplot as plt\nplt.imshow(gkern(21), interpolation='none')\n</code></pre>\n\n<p><a href=\"https://i.stack.imgur.com/lpPQe.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/lpPQe.png\" alt=\"Gaussian kernel plotted using matplotlib\"></a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 11703029,
+                        "reputation": 137,
+                        "user_id": 8567437,
+                        "user_type": "registered",
+                        "display_name": "Dodo"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1511202503,
+                    "creation_date": 1511202503,
+                    "answer_id": 47398759,
+                    "question_id": 29731726,
+                    "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/47398759#47398759",
+                    "body": "<p>Building up on Teddy Hartanto's answer. You can just calculate your own one dimensional Gaussian functions and then use <code>np.outer</code> to calculate the two dimensional one. Very fast and efficient way.</p>\n\n<p>With the code below you can also use different Sigmas for every dimension</p>\n\n<pre><code>import numpy as np\ndef generate_gaussian_mask(shape, sigma, sigma_y=None):\n    if sigma_y==None:\n        sigma_y=sigma\n    rows, cols = shape\n\n    def get_gaussian_fct(size, sigma):\n        fct_gaus_x = np.linspace(0,size,size)\n        fct_gaus_x = fct_gaus_x-size/2\n        fct_gaus_x = fct_gaus_x**2\n        fct_gaus_x = fct_gaus_x/(2*sigma**2)\n        fct_gaus_x = np.exp(-fct_gaus_x)\n        return fct_gaus_x\n\n    mask = np.outer(get_gaussian_fct(rows,sigma), get_gaussian_fct(cols,sigma_y))\n    return mask\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 10227463,
+                                "reputation": 9135,
+                                "user_id": 7549483,
+                                "user_type": "registered",
+                                "display_name": "ProfDFrancis"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1554064684,
+                            "post_id": 52044409,
+                            "comment_id": 97605536,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/52044409#comment97605536_52044409",
+                            "body": "Hi Saruj, This is great and I have just stolen it. Works beautifully. One edit though: the &quot;2*sigma**2&quot; needs to be in parentheses, so that the sigma is on the denominator. That makes sure the gaussian gets wider when you increase sigma. I&#39;ve proposed the edit."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5188656,
+                                "reputation": 316,
+                                "user_id": 4152248,
+                                "user_type": "registered",
+                                "accept_rate": 0,
+                                "display_name": "Suraj Singh"
+                            },
+                            "reply_to_user": {
+                                "account_id": 10227463,
+                                "reputation": 9135,
+                                "user_id": 7549483,
+                                "user_type": "registered",
+                                "display_name": "ProfDFrancis"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1554452031,
+                            "post_id": 52044409,
+                            "comment_id": 97765379,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/52044409#comment97765379_52044409",
+                            "body": "Hi, Eureka. Thanks for the suggestion :)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9897892,
+                                "reputation": 58642,
+                                "user_id": 7328782,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Cris Luengo"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1686496924,
+                            "post_id": 52044409,
+                            "comment_id": 134803404,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/52044409#comment134803404_52044409",
+                            "body": "This is the worst example of the rainbow color map I\u2019ve seen. What\u2019s that square around the bell? Why does the central part look like a cross? The code seems to do the right thing, so either the data plotted is something else, or the color map is <i>really</i> bad."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2069688,
+                                "reputation": 5689,
+                                "user_id": 1977614,
+                                "user_type": "registered",
+                                "accept_rate": 58,
+                                "display_name": "SKPS"
+                            },
+                            "reply_to_user": {
+                                "account_id": 9897892,
+                                "reputation": 58642,
+                                "user_id": 7328782,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Cris Luengo"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1698961106,
+                            "post_id": 52044409,
+                            "comment_id": 136474477,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/52044409#comment136474477_52044409",
+                            "body": "@CrisLuengo There simply isn&#39;t enough resolution (small kernel here)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2069688,
+                                "reputation": 5689,
+                                "user_id": 1977614,
+                                "user_type": "registered",
+                                "accept_rate": 58,
+                                "display_name": "SKPS"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1698961262,
+                            "post_id": 52044409,
+                            "comment_id": 136474512,
+                            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/52044409#comment136474512_52044409",
+                            "body": "@SurajSingh You probably would not need <code>np.sqrt</code> since you are squaring the diff in the next step. Please see if my edit makes sense."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5188656,
+                        "reputation": 316,
+                        "user_id": 4152248,
+                        "user_type": "registered",
+                        "accept_rate": 0,
+                        "display_name": "Suraj Singh"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1698961315,
+                    "last_edit_date": 1698961315,
+                    "creation_date": 1535391512,
+                    "answer_id": 52044409,
+                    "question_id": 29731726,
+                    "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/52044409#52044409",
+                    "body": "<p>I tried using numpy only. Here is the code</p>\n<pre><code>def get_gauss_kernel(size=3,sigma=1):\n    center=(int)(size/2)\n    kernel=np.zeros((size,size))\n    for i in range(size):\n       for j in range(size):\n          diff_sq = (i-center)**2+(j-center)**2\n          kernel[i,j]=np.exp(-diff_sq/(2*sigma**2))\n    return kernel/np.sum(kernel)\n</code></pre>\n<p>You can visualise the result using:</p>\n<pre><code>plt.imshow(get_gauss_kernel(5,1))\n</code></pre>\n<p><a href=\"https://i.stack.imgur.com/X8VHo.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/X8VHo.png\" alt=\"Here is the output\" /></a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1734232,
+                        "reputation": 6685,
+                        "user_id": 1587156,
+                        "user_type": "registered",
+                        "accept_rate": 67,
+                        "display_name": "Vinoj John Hosan"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1572424162,
+                    "creation_date": 1572424162,
+                    "answer_id": 58621239,
+                    "question_id": 29731726,
+                    "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/58621239#58621239",
+                    "body": "<p>If you are a computer vision engineer and you need heatmap for a particular point as Gaussian distribution(especially for keypoint detection on image)</p>\n\n<pre><code>def gaussian_heatmap(center = (2, 2), image_size = (10, 10), sig = 1):\n    \"\"\"\n    It produces single gaussian at expected center\n    :param center:  the mean position (X, Y) - where high value expected\n    :param image_size: The total image size (width, height)\n    :param sig: The sigma value\n    :return:\n    \"\"\"\n    x_axis = np.linspace(0, image_size[0]-1, image_size[0]) - center[0]\n    y_axis = np.linspace(0, image_size[1]-1, image_size[1]) - center[1]\n    xx, yy = np.meshgrid(x_axis, y_axis)\n    kernel = np.exp(-0.5 * (np.square(xx) + np.square(yy)) / np.square(sig))\n    return kernel\n</code></pre>\n\n<p><strong>The usage and output</strong></p>\n\n<pre><code>kernel = gaussian_heatmap(center = (2, 2), image_size = (10, 10), sig = 1)\nplt.imshow(kernel)\nprint(\"max at :\", np.unravel_index(kernel.argmax(), kernel.shape))\nprint(\"kernel shape\", kernel.shape)\n</code></pre>\n\n<p>max at : (2, 2)</p>\n\n<p>kernel shape (10, 10)</p>\n\n<p><a href=\"https://i.stack.imgur.com/yBuLm.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/yBuLm.png\" alt=\"Gaussian distribution at mean (2,2) and sigma 1.0\"></a></p>\n\n<pre><code>kernel = gaussian_heatmap(center = (25, 40), image_size = (100, 50), sig = 5)\nplt.imshow(kernel)\nprint(\"max at :\", np.unravel_index(kernel.argmax(), kernel.shape))\nprint(\"kernel shape\", kernel.shape)\n</code></pre>\n\n<p>max at : (40, 25)</p>\n\n<p>kernel shape (50, 100)</p>\n\n<p><a href=\"https://i.stack.imgur.com/GMEqj.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/GMEqj.png\" alt=\"Gaussian distribution mean at \"></a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4898471,
+                        "reputation": 208,
+                        "user_id": 5770520,
+                        "user_type": "registered",
+                        "display_name": "Prasad Raghavendra"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1585403067,
+                    "last_edit_date": 1585403067,
+                    "creation_date": 1585402108,
+                    "answer_id": 60901761,
+                    "question_id": 29731726,
+                    "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/60901761#60901761",
+                    "body": "<p>As I didn't find what I was looking for, I coded my own one-liner. You can modify it accordingly (according to the dimensions and the standard deviation).</p>\n\n<p>Here is the one-liner function for a 3x5 patch for example.</p>\n\n<pre><code>from scipy import signal\n\ndef gaussian2D(patchHeight, patchWidth, stdHeight=1, stdWidth=1):\n    gaussianWindow = signal.gaussian(patchHeight, stdHeight).reshape(-1, 1)@signal.gaussian(patchWidth, stdWidth).reshape(1, -1)\n    return gaussianWindow\n\nprint(gaussian2D(3, 5))\n</code></pre>\n\n<p>You get an output like this:</p>\n\n<pre><code>[[0.082085   0.36787944 0.60653066 0.36787944 0.082085  ]\n[0.13533528  0.60653066 1.         0.60653066 0.13533528]\n[0.082085   0.36787944 0.60653066 0.36787944 0.082085  ]]\n</code></pre>\n\n<p>You can read more about scipy's Gaussian <a href=\"https://docs.scipy.org/doc/scipy-1.0.0/reference/generated/scipy.signal.gaussian.html\" rel=\"nofollow noreferrer\">here</a>.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2106101,
+                        "reputation": 553,
+                        "user_id": 1872400,
+                        "user_type": "registered",
+                        "display_name": "user__42"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1635243237,
+                    "last_edit_date": 1635243237,
+                    "creation_date": 1600369776,
+                    "answer_id": 63944757,
+                    "question_id": 29731726,
+                    "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/63944757#63944757",
+                    "body": "<p>Adapting th accepted answer by FuzzyDuck to match the results of this website: <a href=\"http://dev.theomader.com/gaussian-kernel-calculator/\" rel=\"nofollow noreferrer\">http://dev.theomader.com/gaussian-kernel-calculator/</a> I now present this definition to you:</p>\n<pre><code>import numpy as np\nimport scipy.stats as st\n\ndef gkern(kernlen=21, sig=3):\n    &quot;&quot;&quot;Returns a 2D Gaussian kernel.&quot;&quot;&quot;\n\n    x = np.linspace(-(kernlen/2)/sig, (kernlen/2)/sig, kernlen+1)\n    kern1d = np.diff(st.norm.cdf(x))\n    kern2d = np.outer(kern1d, kern1d)\n    return kern2d/kern2d.sum()\n\nprint(gkern(kernlen=5, sig=1))\n</code></pre>\n<p>output:</p>\n<pre><code>[[0.003765   0.015019   0.02379159 0.015019   0.003765  ]\n [0.015019   0.05991246 0.0949073  0.05991246 0.015019  ]\n [0.02379159 0.0949073  0.15034262 0.0949073  0.02379159]\n [0.015019   0.05991246 0.0949073  0.05991246 0.015019  ]\n [0.003765   0.015019   0.02379159 0.015019   0.003765  ]]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 15671328,
+                        "reputation": 11,
+                        "user_id": 11307741,
+                        "user_type": "registered",
+                        "display_name": "Etienne Dejoie"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1601502897,
+                    "creation_date": 1601502897,
+                    "answer_id": 64146284,
+                    "question_id": 29731726,
+                    "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/64146284#64146284",
+                    "body": "<p>A good way to do that is to use the gaussian_filter function to recover the kernel.\nFor instance:</p>\n<pre><code>indicatrice = np.zeros((5,5))\nindicatrice[2,2] = 1\ngaussian_kernel = gaussian_filter(indicatrice, sigma=1)\ngaussian_kernel/=gaussian_kernel[2,2]\n</code></pre>\n<p>This gives</p>\n<pre><code>array[[0.02144593, 0.08887207, 0.14644428, 0.08887207, 0.02144593],\n       [0.08887207, 0.36828649, 0.60686612, 0.36828649, 0.08887207],\n       [0.14644428, 0.60686612, 1.        , 0.60686612, 0.14644428],\n       [0.08887207, 0.36828649, 0.60686612, 0.36828649, 0.08887207],\n       [0.02144593, 0.08887207, 0.14644428, 0.08887207, 0.02144593]]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 151321,
+                        "reputation": 26154,
+                        "user_id": 365102,
+                        "user_type": "registered",
+                        "accept_rate": 94,
+                        "display_name": "Mateen Ulhaq"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1614398518,
+                    "creation_date": 1614398518,
+                    "answer_id": 66395479,
+                    "question_id": 29731726,
+                    "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/66395479#66395479",
+                    "body": "<p>Yet another implementation.</p>\n<p>This is normalized so that for <code>sigma &gt; 1</code> and sufficiently large <code>win_size</code>, the total sum of the kernel elements equals <code>1</code>.</p>\n<pre><code>def gaussian_kernel(win_size, sigma):\n    t = np.arange(win_size)\n    x, y = np.meshgrid(t, t)\n    o = (win_size - 1) / 2\n    r = np.sqrt((x - o)**2 + (y - o)**2)\n    scale = 1 / (sigma**2 * 2 * np.pi)\n    return scale * np.exp(-0.5 * (r / sigma)**2)\n</code></pre>\n<p>To generate a 5x5 kernel:</p>\n<pre><code>gaussian_kernel(win_size=5, sigma=1)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 12934056,
+                        "reputation": 405,
+                        "user_id": 9352077,
+                        "user_type": "registered",
+                        "display_name": "Mew"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1645039371,
+                    "creation_date": 1645039371,
+                    "answer_id": 71148102,
+                    "question_id": 29731726,
+                    "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy/71148102#71148102",
+                    "body": "<p>I took a similar approach to <a href=\"https://stackoverflow.com/a/29733495/9352077\">Nils Werner's answer</a> -- since convolution of any kernel with a Kronecker delta results in the kernel itself centered around that Kronecker delta -- but I made it slightly more general to deal with both odd and even dimensions. In three lines:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import scipy.ndimage as scim\n\ndef gaussian_kernel(dimension: int, sigma: float):\n    dirac = np.zeros((dimension,dimension))\n    dirac[(dimension-1)//2:dimension//2+1, (dimension-1)//2:dimension//2+1] = 1.0 / (1 + 3 * ((dimension + 1) % 2))\n    return scim.gaussian_filter(dirac, sigma=sigma)\n</code></pre>\n<p>The second line creates either a single <code>1.0</code> in the middle of the matrix (if the dimension is odd), or a square of four <code>0.25</code> elements (if the dimension is even). The division could be moved to the third line too; the result is normalised either way.</p>\n<p>For those who like to have the kernel the matrix with one (odd) or four (even) <code>1.0</code> element(s) in the middle instead of normalisation, this works:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import scipy.ndimage as scim\n\ndef gaussian_kernel(dimension: int, sigma: float, ones_in_the_middle=False):\n    dirac = np.zeros((dimension,dimension))\n    dirac[(dimension-1)//2:dimension//2+1, (dimension-1)//2:dimension//2+1] = 1.0\n    kernel = scim.gaussian_filter(dirac, sigma=sigma)\n    divisor = kernel[(dimension-1)//2, (dimension-1)//2] if ones_in_the_middle else 1 + 3 * ((dimension + 1) % 2)\n    return kernel/divisor\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 4212156,
+                "reputation": 4029,
+                "user_id": 3449534,
+                "user_type": "registered",
+                "accept_rate": 70,
+                "display_name": "hidemyname"
+            },
+            "comment_count": 6,
+            "is_answered": true,
+            "accepted_answer_id": 29731818,
+            "answer_count": 14,
+            "score": 54,
+            "last_activity_date": 1698961315,
+            "creation_date": 1429456545,
+            "last_edit_date": 1686496608,
+            "question_id": 29731726,
+            "link": "https://stackoverflow.com/questions/29731726/how-to-calculate-a-gaussian-kernel-matrix-efficiently-in-numpy",
+            "title": "How to calculate a Gaussian kernel matrix efficiently in numpy?",
+            "body": "<pre><code>def GaussianMatrix(X,sigma):\n    row,col=X.shape\n    GassMatrix=np.zeros(shape=(row,row))\n    X=np.asarray(X)\n    i=0\n    for v_i in X:\n        j=0\n        for v_j in X:\n            GassMatrix[i,j]=Gaussian(v_i.T,v_j.T,sigma)\n            j+=1\n        i+=1\n    return GassMatrix\ndef Gaussian(x,z,sigma):\n    return np.exp((-(np.linalg.norm(x-z)**2))/(2*sigma**2))\n</code></pre>\n\n<p>This is my current way. Is there any way I can use matrix operation to do this? X is the data points.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7670
+}

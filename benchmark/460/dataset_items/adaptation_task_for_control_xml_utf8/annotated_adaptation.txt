@@ -1,0 +1,124 @@
+[
+    {
+        "id": 0,
+        "type": "Method_Signature.Encap",
+        "description": "Encapsulate the code within a function named 'control_xml_utf8' with parameters 'filepath' and 'module'.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_encapsulate"
+        ]
+    },
+    {
+        "id": 1,
+        "type": "Logic.Ins_Cond",
+        "description": "Add a check for 'HAS_LXML_LIBRARY' and handle errors using 'module.fail_json'.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [
+                    "HAS_LXML_LIBRARY",
+                    "LXML_LIBRARY_IMPORT_ERROR"
+                ],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": [
+                "ansible.module_utils.basic.missing_required_lib"
+            ]
+        },
+        "associated_tests": [
+            "test_control_xml_utf8_library_missing"
+        ]
+    },
+    {
+        "id": 2,
+        "type": "Logic.Upd_Const",
+        "description": "Update the source file path to concatenate 'filepath' with 'control.xml'.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_target_path_change"
+        ]
+    },
+    {
+        "id": 3,
+        "type": "Logic.Upd_Call",
+        "description": "Add 'strip_cdata=False' to the XMLParser configuration.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": [
+                "etree.XMLParser"
+            ]
+        },
+        "associated_tests": [
+            "test_strip_cdata_argument_missing"
+        ]
+    },
+    {
+        "id": 4,
+        "type": "Logic.Upd_Const",
+        "description": "Change the output file name from 'output.xml' to 'control_utf8.xml'.",
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        },
+        "associated_tests": [
+            "test_rename_output_file"
+        ]
+    }
+]

@@ -1,0 +1,149 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "pickle",
+                "cloudpickle"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 1891393,
+                        "reputation": 9518,
+                        "user_id": 1709364,
+                        "user_type": "registered",
+                        "display_name": "jasonharper"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1675140714,
+                    "post_id": 75292769,
+                    "comment_id": 132859659,
+                    "link": "https://stackoverflow.com/questions/75292769/cloudpickle-unexpectly-import-my-local-module-when-it-is-not-necessary#comment132859659_75292769",
+                    "body": "<code>cloudpickle</code>, by default, only stores actual functions (rather than merely recording their module name and reimporting, as <code>pickle</code> does) in cases where it thinks this extra effort is actually needed: interactively-defined functions, and functions defined in the <code>__main__</code> module.  Your imported function looks like something that the normal <code>pickle</code> strategy would work with, so that&#39;s what gets used.  You can call <code>cloudpickle.register_pickle_by_value(module)</code> to override this behavior."
+                },
+                {
+                    "owner": {
+                        "account_id": 3725792,
+                        "reputation": 1417,
+                        "user_id": 3099733,
+                        "user_type": "registered",
+                        "display_name": "link89"
+                    },
+                    "reply_to_user": {
+                        "account_id": 1891393,
+                        "reputation": 9518,
+                        "user_id": 1709364,
+                        "user_type": "registered",
+                        "display_name": "jasonharper"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1675141271,
+                    "post_id": 75292769,
+                    "comment_id": 132859742,
+                    "link": "https://stackoverflow.com/questions/75292769/cloudpickle-unexpectly-import-my-local-module-when-it-is-not-necessary#comment132859742_75292769",
+                    "body": "I didn&#39;t get the idea. What&#39;s the different between <code>in_add</code> and <code>out_add</code>? They are in the same file and the only difference is it is one defined in another method (closure) and the other define in module."
+                },
+                {
+                    "owner": {
+                        "account_id": 1891393,
+                        "reputation": 9518,
+                        "user_id": 1709364,
+                        "user_type": "registered",
+                        "display_name": "jasonharper"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1675141824,
+                    "post_id": 75292769,
+                    "comment_id": 132859803,
+                    "link": "https://stackoverflow.com/questions/75292769/cloudpickle-unexpectly-import-my-local-module-when-it-is-not-necessary#comment132859803_75292769",
+                    "body": "<code>in_add</code> is something that normal <code>pickle</code> couldn&#39;t handle, due to not having a globally-defined name; <code>cloudpickle</code> recognizes that fact, and encodes the actual function definition instead of just the name.  <code>out_add</code> is something that normal <code>pickle</code> could handle just fine (assuming that the same module is available to the program doing the unpickling), so <code>cloudpickle</code> doesn&#39;t think it needs to do anything special with it."
+                },
+                {
+                    "owner": {
+                        "account_id": 3725792,
+                        "reputation": 1417,
+                        "user_id": 3099733,
+                        "user_type": "registered",
+                        "display_name": "link89"
+                    },
+                    "reply_to_user": {
+                        "account_id": 1891393,
+                        "reputation": 9518,
+                        "user_id": 1709364,
+                        "user_type": "registered",
+                        "display_name": "jasonharper"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1675142284,
+                    "post_id": 75292769,
+                    "comment_id": 132859848,
+                    "link": "https://stackoverflow.com/questions/75292769/cloudpickle-unexpectly-import-my-local-module-when-it-is-not-necessary#comment132859848_75292769",
+                    "body": "@jasonharper I see. Thank you for the explaination. Is it possible to tell <code>cloudpickle</code> to encode <code>out_add</code> the way it do to <code>in_add</code> ? For example, use decorators?"
+                },
+                {
+                    "owner": {
+                        "account_id": 1891393,
+                        "reputation": 9518,
+                        "user_id": 1709364,
+                        "user_type": "registered",
+                        "display_name": "jasonharper"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1675142515,
+                    "post_id": 75292769,
+                    "comment_id": 132859877,
+                    "link": "https://stackoverflow.com/questions/75292769/cloudpickle-unexpectly-import-my-local-module-when-it-is-not-necessary#comment132859877_75292769",
+                    "body": "I answered that in my first comment.  It doesn&#39;t appear possible to override the behavior for a specific function, only for an entire module."
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 3725792,
+                        "reputation": 1417,
+                        "user_id": 3099733,
+                        "user_type": "registered",
+                        "display_name": "link89"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1690271755,
+                    "last_edit_date": 1690271755,
+                    "creation_date": 1675144293,
+                    "answer_id": 75293155,
+                    "question_id": 75292769,
+                    "link": "https://stackoverflow.com/questions/75292769/cloudpickle-unexpectly-import-my-local-module-when-it-is-not-necessary/75293155#75293155",
+                    "body": "<p>I figure out a solution according to @jasonharper's explanation\uff1a</p>\n<blockquote>\n<p><code>in_add</code> is something that normal <code>pickle</code> couldn't handle, due to not having a globally-defined name; <code>cloudpickle</code> recognizes that fact, and encodes the actual function definition instead of just the name. <code>out_add</code> is something that normal <code>pickle</code> could handle just fine (assuming that the same module is available to the program doing the unpickling), so <code>cloudpickle</code> doesn't think it needs to do anything special with it.</p>\n</blockquote>\n<p>Just change the definition of <code>out_add</code> to</p>\n<pre class=\"lang-py prettyprint-override\"><code>def __export_remote_functions():\n\n  def add(a, b):\n    return a + b\n\n  def prod(a, b):\n    return a * b\n  return (add, prod)\n\n(add, prod) = __export_remote_functions()\n\nexecutor.run_python_fn(add)(1, 2)\n</code></pre>\n<p>And now everything is fine.</p>\n<p>For functions that gonna to be executed remotely should be defined this way, and you need to ensure they must not depends on any functions or classes defined in the local module directly (global modules are OK, just ensure they are also installed in the remote python).</p>\n<p>A good practice is to create a dedicated <code>remote</code> package under your project and ensure all methods and classes in the package are defined by this special way, and don't import anything outside the <code>remote</code> package.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 3725792,
+                "reputation": 1417,
+                "user_id": 3099733,
+                "user_type": "registered",
+                "display_name": "link89"
+            },
+            "comment_count": 5,
+            "is_answered": true,
+            "answer_count": 1,
+            "score": 0,
+            "last_activity_date": 1690271755,
+            "creation_date": 1675140001,
+            "last_edit_date": 1675145802,
+            "question_id": 75292769,
+            "link": "https://stackoverflow.com/questions/75292769/cloudpickle-unexpectly-import-my-local-module-when-it-is-not-necessary",
+            "title": "cloudpickle: unexpectly import my local module when it is not necessary",
+            "body": "<p>In file ai2_kit/domain.py</p>\n<pre class=\"lang-py prettyprint-override\"><code>def fun(ctx):\n    def in_add(a, b):\n        print (a+b)\n\n    ctx.executor.run_python_fn(in_add)(1, 2)   # this pass\n    ctx.executor.run_python_fn(out_add)(1, 2)  # this failed, the error is: ModuleNotFoundError: No module named 'ai2_kit'\n\ndef out_add(a, b):\n    print(a+b)\n</code></pre>\n<p>the method <code>run_python_fn</code> is defined in ai2_kit/executor.py , the basic idea is use  <code>python -c</code> to execute a python script on remote machine.</p>\n<pre class=\"lang-py prettyprint-override\"><code>    def run_python_script(self, script: str):\n        return self.connector.run('python -c {}'.format(shlex.quote(script)))\n\n    def run_python_fn(self, fn: T, python_cmd=None) -&gt; T:\n        def remote_fn(*args, **kwargs):\n            dumped_fn = base64.b64encode(cloudpickle.dumps(lambda: fn(*args, **kwargs), protocol=pickle.DEFAULT_PROTOCOL)) \n            script = '''import base64,pickle; pickle.loads(base64.b64decode({}))()'''.format(repr(dumped_fn))\n            self.run_python_script(script=script, python_cmd=python_cmd)\n</code></pre>\n<p>I have no idea why  it will import <code>ai2_kit</code> when use a function outside of current function,  the method <code>out_add</code> doesn't have any external dependencies. Is there any method to workaround this problem? Thank you! Both local and remote python is v3.9.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9426
+}

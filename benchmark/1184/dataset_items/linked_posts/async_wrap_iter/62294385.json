@@ -1,0 +1,199 @@
+{
+    "items": [
+        {
+            "tags": [
+                "async-await",
+                "python-asyncio",
+                "concurrent.futures"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 8701781,
+                                "reputation": 1476,
+                                "user_id": 6511361,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "yan-hic"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1592399337,
+                            "post_id": 62297994,
+                            "comment_id": 110411088,
+                            "link": "https://stackoverflow.com/questions/62294385/synchronous-generator-in-asyncio/62297994#comment110411088_62297994",
+                            "body": "Would the first approach avoid loading all items in memory ?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1752028,
+                                "reputation": 149537,
+                                "user_id": 1600898,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "user4815162342"
+                            },
+                            "reply_to_user": {
+                                "account_id": 8701781,
+                                "reputation": 1476,
+                                "user_id": 6511361,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "yan-hic"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1592403584,
+                            "post_id": 62297994,
+                            "comment_id": 110413591,
+                            "link": "https://stackoverflow.com/questions/62294385/synchronous-generator-in-asyncio/62297994#comment110413591_62297994",
+                            "body": "@YannickEinsweiler The second approach assumed that items would be processed faster than they would be extracted from the blocking iterator. I&#39;ve now amended the answer to fix that by using a queue with fixed capacity and replacing <code>call_soon_threadsafe</code> with <code>run_coroutine_threadsafe</code> which provides back-pressure."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8701781,
+                                "reputation": 1476,
+                                "user_id": 6511361,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "yan-hic"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1592427817,
+                            "post_id": 62297994,
+                            "comment_id": 110425906,
+                            "link": "https://stackoverflow.com/questions/62294385/synchronous-generator-in-asyncio/62297994#comment110425906_62297994",
+                            "body": "That did it ! Great."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1279707,
+                                "reputation": 504,
+                                "user_id": 1234111,
+                                "user_type": "registered",
+                                "display_name": "Vinicius Fortuna"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1606020696,
+                            "post_id": 62297994,
+                            "comment_id": 114829871,
+                            "link": "https://stackoverflow.com/questions/62294385/synchronous-generator-in-asyncio/62297994#comment114829871_62297994",
+                            "body": "I appreciate the solution. However one problem is that if the caller of <code>yield_queue_items</code> throws during the iteration, <code>iter_to_queue</code> will never end, since the put call will get stuck.  You need a way for <code>yield_queue_items</code> to signal to <code>iter_to_queue</code> whether it should proceed."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1752028,
+                                "reputation": 149537,
+                                "user_id": 1600898,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "user4815162342"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1279707,
+                                "reputation": 504,
+                                "user_id": 1234111,
+                                "user_type": "registered",
+                                "display_name": "Vinicius Fortuna"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1606036528,
+                            "post_id": 62297994,
+                            "comment_id": 114832347,
+                            "link": "https://stackoverflow.com/questions/62294385/synchronous-generator-in-asyncio/62297994#comment114832347_62297994",
+                            "body": "@ViniciusFortuna That&#39;s a general problem with iterators that refer to underlying resources, and would also happen on any abandoning of the iteration (<code>break</code> out of the loop), not just on exception. It&#39;s not trivial to fix, you can either use try/finally in <code>yield_queue_items()</code> to stop <code>iter_to_queue</code>, but then you&#39;re depending on GC&#39;s finalization. The other option is to return a context manager which must be entered for iteration to begin - then leaving the context manager can signal <code>iter_to_queue</code> to stop. If you post a question about that case, I can expand the code from this question."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1011481,
+                                "reputation": 336,
+                                "user_id": 2930529,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "MindV0rtex"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1667245533,
+                            "post_id": 62297994,
+                            "comment_id": 131120321,
+                            "link": "https://stackoverflow.com/questions/62294385/synchronous-generator-in-asyncio/62297994#comment131120321_62297994",
+                            "body": "@user4815162342 I am interested in this case using a context manager - is it still OK to ask this question?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1752028,
+                                "reputation": 149537,
+                                "user_id": 1600898,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "user4815162342"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1011481,
+                                "reputation": 336,
+                                "user_id": 2930529,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "MindV0rtex"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1667295227,
+                            "post_id": 62297994,
+                            "comment_id": 131129211,
+                            "link": "https://stackoverflow.com/questions/62294385/synchronous-generator-in-asyncio/62297994#comment131129211_62297994",
+                            "body": "@MindV0rtex I&#39;m a bit out of shape regarding asyncio, but it would still make sense to ask the question, someone else could pick it up. Also, do take a look at the excellent aiostream library, I believe it already has the necessary context managers."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1752028,
+                        "reputation": 149537,
+                        "user_id": 1600898,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "user4815162342"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": true,
+                    "score": 9,
+                    "last_activity_date": 1592403518,
+                    "last_edit_date": 1592403518,
+                    "creation_date": 1591773969,
+                    "answer_id": 62297994,
+                    "question_id": 62294385,
+                    "link": "https://stackoverflow.com/questions/62294385/synchronous-generator-in-asyncio/62297994#62297994",
+                    "body": "<p><code>run_in_executor</code> doesn't work on generators because it is designed for blocking functions. While a generator is a valid function, it returns immediately when called, providing an object that the caller is supposed to exhaust through repeated invocations of <code>next</code>. (This is what Python's <code>for</code> loop does under the hood.) To use a blocking generator from async code, you have two choices:</p>\n\n<ul>\n<li>wrap each <em>step</em> of the iteration (each individual call to <code>next</code>) in a separate call to <code>run_in_executor</code>, or</li>\n<li>start a <code>for</code> loop in a separate thread and use a queue to transfer the objects to an async consumer.</li>\n</ul>\n\n<p>Either approach can be abstracted into a function that accepts an iterator and returns an equivalent async iterator. This is an implementation of the second approach:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>import asyncio, threading\n\ndef async_wrap_iter(it):\n    \"\"\"Wrap blocking iterator into an asynchronous one\"\"\"\n    loop = asyncio.get_event_loop()\n    q = asyncio.Queue(1)\n    exception = None\n    _END = object()\n\n    async def yield_queue_items():\n        while True:\n            next_item = await q.get()\n            if next_item is _END:\n                break\n            yield next_item\n        if exception is not None:\n            # the iterator has raised, propagate the exception\n            raise exception\n\n    def iter_to_queue():\n        nonlocal exception\n        try:\n            for item in it:\n                # This runs outside the event loop thread, so we\n                # must use thread-safe API to talk to the queue.\n                asyncio.run_coroutine_threadsafe(q.put(item), loop).result()\n        except Exception as e:\n            exception = e\n        finally:\n            asyncio.run_coroutine_threadsafe(q.put(_END), loop).result()\n\n    threading.Thread(target=iter_to_queue).start()\n    return yield_queue_items()\n</code></pre>\n\n<p>It can be tested with a trivial sync iterator that uses <code>time.time()</code> to block and an async heartbeat function to prove that the event loop is running:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code># async_wrap_iter definition as above\n\nimport time\n\ndef test_iter():\n    for i in range(5):\n        yield i\n        time.sleep(1)\n\nasync def test():\n    ait = async_wrap_iter(test_iter())\n    async for i in ait:\n        print(i)\n\nasync def heartbeat():\n    while True:\n        print('alive')\n        await asyncio.sleep(.1)\n\nasync def main():\n    asyncio.create_task(heartbeat())\n    await test()\n\nasyncio.run(main())\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 1355012,
+                "reputation": 2369,
+                "user_id": 1522429,
+                "user_type": "registered",
+                "accept_rate": 61,
+                "display_name": "abhinavkulkarni"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 62297994,
+            "answer_count": 1,
+            "score": 4,
+            "last_activity_date": 1592403518,
+            "creation_date": 1591751990,
+            "last_edit_date": 1591753349,
+            "question_id": 62294385,
+            "link": "https://stackoverflow.com/questions/62294385/synchronous-generator-in-asyncio",
+            "title": "Synchronous generator in asyncio",
+            "body": "<p>I have the following scenario:</p>\n\n<ol>\n<li>I have a blocking, synchronous generator</li>\n<li>I have an non-blocking, async function</li>\n</ol>\n\n<p>I would like to run blocking generator (executed in a <code>ThreadPool</code>) and the <code>async</code> function on the event loop. How do I achieve this?</p>\n\n<p>The following function simply prints the output from the generator, not from <code>sleep</code> function.</p>\n\n<p>Thanks!</p>\n\n<pre><code>from concurrent.futures import ThreadPoolExecutor\n\nimport numpy as np\nimport asyncio\nimport time\n\n\ndef f():\n    while True:\n        r = np.random.randint(0, 3)\n        time.sleep(r)\n        yield r\n\n\nasync def gen():\n    loop = asyncio.get_event_loop()\n    executor = ThreadPoolExecutor()\n    gen = await loop.run_in_executor(executor, f)\n    for item in gen:\n        print(item)\n        print('Inside generator')\n\n\nasync def sleep():\n    while True:\n        await asyncio.sleep(1)\n        print('Inside async sleep')\n\n\nasync def combine():\n    await asyncio.gather(sleep(), gen())\n\n\ndef main():\n    loop = asyncio.get_event_loop()\n    loop.run_until_complete(combine())\n\n\nif __name__ == '__main__':\n    main()\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7803
+}

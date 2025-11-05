@@ -1,0 +1,112 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "matplotlib"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 8044275,
+                        "reputation": 26243,
+                        "user_id": 6064933,
+                        "user_type": "registered",
+                        "accept_rate": 73,
+                        "display_name": "jdhao"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1516290993,
+                    "post_id": 25068384,
+                    "comment_id": 83636107,
+                    "link": "https://stackoverflow.com/questions/25068384/bbox-to-anchor-and-loc-in-matplotlib#comment83636107_25068384",
+                    "body": "<a href=\"https://stackoverflow.com/a/43439132/6064933\">This post</a> give a more clear answer."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4828324,
+                                "reputation": 733,
+                                "user_id": 3897208,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "user3897208"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1406848005,
+                            "post_id": 25069717,
+                            "comment_id": 39003277,
+                            "link": "https://stackoverflow.com/questions/25068384/bbox-to-anchor-and-loc-in-matplotlib/25069717#comment39003277_25069717",
+                            "body": "Thank you. It works. However it appears to me that fig.legend with bbox_to_anchor does not work very well with savefig with bbox_inches=&#39;tight&#39;. It still cuts off a portion of the legend. If I drop the bbox_inches=&#39;tight&#39; param from savefig, it works"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2227095,
+                        "reputation": 10704,
+                        "user_id": 3753754,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Gabriel"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": true,
+                    "score": 70,
+                    "last_activity_date": 1406844319,
+                    "creation_date": 1406844319,
+                    "answer_id": 25069717,
+                    "question_id": 25068384,
+                    "link": "https://stackoverflow.com/questions/25068384/bbox-to-anchor-and-loc-in-matplotlib/25069717#25069717",
+                    "body": "<p>When <code>bbox_to_anchor</code> and <code>loc</code> are used together, the <code>loc</code> argument will inform matplotlib which part of the bounding box of the legend should be placed at the arguments of <code>bbox_to_anchor</code>.  For example (I've simplified the command a bit), the three options below will produce different locations for your legend,  </p>\n\n<pre><code> fig.legend([line1], ['series1'], bbox_to_anchor=[0.5, 0.5], loc='center')\n fig.legend([line1], ['series1'], bbox_to_anchor=[0.5, 0.5], loc='center left')\n fig.legend([line1], ['series1'], bbox_to_anchor=[0.5, 0.5], loc='center right')\n</code></pre>\n\n<p>The first command will put the center of the bounding box at axes coordinates 0.5,0.5.  The second will put the center left edge of the bounding box at the same coordinates (i.e. shift the legend to the right).  Finally, the third option will put the center right edge of the bounding box at the coordinates (i.e. shift the legend to the left).</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5149286,
+                        "reputation": 331575,
+                        "user_id": 4124317,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "ImportanceOfBeingErnest"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 37,
+                    "last_activity_date": 1475336142,
+                    "last_edit_date": 1495542370,
+                    "creation_date": 1475336142,
+                    "answer_id": 39808427,
+                    "question_id": 25068384,
+                    "link": "https://stackoverflow.com/questions/25068384/bbox-to-anchor-and-loc-in-matplotlib/39808427#39808427",
+                    "body": "<p>The explanation of @Gabriel is slightly misleading. <code>bbox_to_anchor=[x0, y0]</code> will create a bounding box with <strong>lower left</strong> corner at position <code>[x0, y0]</code>. The extend of the bounding box is zero - being equivalent to <code>bbox_to_anchor=[x0, y0, 0, 0]</code>. The legend will then be placed 'inside' this box and overlapp it according to the specified <code>loc</code> parameter. So <code>loc</code> specifies where inside the box the legend sits.</p>\n\n<p>Also see this question <a href=\"https://stackoverflow.com/questions/39803385/what-does-a-4-element-tuple-argument-for-bbox-to-anchor-mean-in-matplotlib/39806180#39806180\">What does a 4-element tuple argument for &#39;bbox_to_anchor&#39; mean in matplotlib?</a></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 4828324,
+                "reputation": 733,
+                "user_id": 3897208,
+                "user_type": "registered",
+                "accept_rate": 50,
+                "display_name": "user3897208"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 25069717,
+            "answer_count": 2,
+            "score": 52,
+            "last_activity_date": 1515283876,
+            "creation_date": 1406838768,
+            "last_edit_date": 1515283876,
+            "question_id": 25068384,
+            "link": "https://stackoverflow.com/questions/25068384/bbox-to-anchor-and-loc-in-matplotlib",
+            "title": "bbox_to_anchor and loc in matplotlib",
+            "body": "<p>I came across <code>matplotlib</code> code which customizes legend location using keywords <code>loc</code> and <code>bbox_to_anchor</code>. For example :</p>\n\n<pre><code>fig.legend([line1, line2], ['series1', 'series2'], bbox_to_anchor=[0.5, 0.5], \n           loc='center', ncol=2)\n</code></pre>\n\n<p>I have seen variation of above where <code>bbox_to_anchor</code> is used after <code>loc</code>.</p>\n\n<p>I understand the purpose of using <code>bbox_to_anchor</code> and <code>loc</code> separately. However, is there any benefit of using both in the same legend specification?  From my understanding and usage, it appears to me that if <code>bbox_to_anchor</code> is specified, then the <code>loc</code> parameter is pretty much don't care. </p>\n\n<p>Can anyone confirm this? I don't see any documentation regarding this.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5481
+}

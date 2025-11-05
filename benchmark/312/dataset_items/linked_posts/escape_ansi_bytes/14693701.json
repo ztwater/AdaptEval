@@ -1,0 +1,681 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "string",
+                "escaping",
+                "ansi-escape"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 48444,
+                        "reputation": 8192,
+                        "user_id": 143931,
+                        "user_type": "registered",
+                        "accept_rate": 57,
+                        "display_name": "fuenfundachtzig"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1434639617,
+                    "post_id": 14693701,
+                    "comment_id": 49875166,
+                    "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python#comment49875166_14693701",
+                    "body": "possible duplicate of <a href=\"http://stackoverflow.com/questions/13506033/filtering-out-ansi-escape-sequences\">Filtering out ANSI escape sequences</a>"
+                },
+                {
+                    "owner": {
+                        "account_id": 5719288,
+                        "reputation": 53069,
+                        "user_id": 4518274,
+                        "user_type": "registered",
+                        "display_name": "Thomas Dickey"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1679874222,
+                    "post_id": 14693701,
+                    "comment_id": 133794195,
+                    "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python#comment133794195_14693701",
+                    "body": "sure - same question, a few months later."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 6539656,
+                                "reputation": 11711,
+                                "user_id": 5057736,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "Pavel_K"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1647357519,
+                            "post_id": 14693789,
+                            "comment_id": 126348008,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/14693789#comment126348008_14693789",
+                            "body": "Does your solution support all Fe Escape sequences? I am testing it with Java. CSI seems to work, but OSC seems not. This is my example: <code>var input = &quot;some text \\u001B]0;this is the window title BEL&quot;; var output = input.replaceAll(&quot;\\u001B(?:[@-Z\\\\\\\\-_]|\\\\[[0-?]*[ -&#47;]*[@-~])&quot;, &quot;ZZZ&quot;);    System.out.println(output);</code> Output is <code>some text ZZZ0;this is the window title BEL</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089172,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "reply_to_user": {
+                                "account_id": 6539656,
+                                "reputation": 11711,
+                                "user_id": 5057736,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "Pavel_K"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1647382263,
+                            "post_id": 14693789,
+                            "comment_id": 126356425,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/14693789#comment126356425_14693789",
+                            "body": "@Pavel_K see the last paragraph in my answer."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 35417,
+                        "reputation": 1089172,
+                        "user_id": 100297,
+                        "user_type": "moderator",
+                        "display_name": "Martijn Pieters"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 259,
+                    "last_activity_date": 1647382667,
+                    "last_edit_date": 1647382667,
+                    "creation_date": 1360005172,
+                    "answer_id": 14693789,
+                    "question_id": 14693701,
+                    "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/14693789#14693789",
+                    "body": "<p>Delete them with a regular expression:</p>\n<pre><code>import re\n\n# 7-bit C1 ANSI sequences\nansi_escape = re.compile(r'''\n    \\x1B  # ESC\n    (?:   # 7-bit C1 Fe (except CSI)\n        [@-Z\\\\-_]\n    |     # or [ for CSI, followed by a control sequence\n        \\[\n        [0-?]*  # Parameter bytes\n        [ -/]*  # Intermediate bytes\n        [@-~]   # Final byte\n    )\n''', re.VERBOSE)\nresult = ansi_escape.sub('', sometext)\n</code></pre>\n<p>or, without the <code>VERBOSE</code> flag, in condensed form:</p>\n<pre><code>ansi_escape = re.compile(r'\\x1B(?:[@-Z\\\\-_]|\\[[0-?]*[ -/]*[@-~])')\nresult = ansi_escape.sub('', sometext)\n</code></pre>\n<p>Demo:</p>\n<pre><code>&gt;&gt;&gt; import re\n&gt;&gt;&gt; ansi_escape = re.compile(r'\\x1B(?:[@-Z\\\\-_]|\\[[0-?]*[ -/]*[@-~])')\n&gt;&gt;&gt; sometext = 'ls\\r\\n\\x1b[00m\\x1b[01;31mexamplefile.zip\\x1b[00m\\r\\n\\x1b[01;31m'\n&gt;&gt;&gt; ansi_escape.sub('', sometext)\n'ls\\r\\nexamplefile.zip\\r\\n'\n</code></pre>\n<p>The above regular expression covers all 7-bit ANSI C1 escape sequences, but <em>not</em> the 8-bit C1 escape sequence openers. The latter are never used in today's UTF-8 world where the same range of bytes have a different meaning.</p>\n<p>If you do need to cover the 8-bit codes too (and are then, presumably, working with <code>bytes</code> values) then the regular expression becomes a bytes pattern like this:</p>\n<pre><code># 7-bit and 8-bit C1 ANSI sequences\nansi_escape_8bit = re.compile(br'''\n    (?: # either 7-bit C1, two bytes, ESC Fe (omitting CSI)\n        \\x1B\n        [@-Z\\\\-_]\n    |   # or a single 8-bit byte Fe (omitting CSI)\n        [\\x80-\\x9A\\x9C-\\x9F]\n    |   # or CSI + control codes\n        (?: # 7-bit CSI, ESC [ \n            \\x1B\\[\n        |   # 8-bit CSI, 9B\n            \\x9B\n        )\n        [0-?]*  # Parameter bytes\n        [ -/]*  # Intermediate bytes\n        [@-~]   # Final byte\n    )\n''', re.VERBOSE)\nresult = ansi_escape_8bit.sub(b'', somebytesvalue)\n</code></pre>\n<p>which can be condensed down to</p>\n<pre><code># 7-bit and 8-bit C1 ANSI sequences\nansi_escape_8bit = re.compile(\n    br'(?:\\x1B[@-Z\\\\-_]|[\\x80-\\x9A\\x9C-\\x9F]|(?:\\x1B\\[|\\x9B)[0-?]*[ -/]*[@-~])'\n)\nresult = ansi_escape_8bit.sub(b'', somebytesvalue)\n</code></pre>\n<p>For more information, see:</p>\n<ul>\n<li>the <a href=\"https://en.wikipedia.org/wiki/ANSI_escape_code\" rel=\"noreferrer\">ANSI escape codes overview</a> on Wikipedia</li>\n<li><a href=\"http://www.ecma-international.org/publications/standards/Ecma-048.htm\" rel=\"noreferrer\">ECMA-48 standard, 5th edition</a> (especially sections 5.3 and 5.4)</li>\n</ul>\n<p>The example you gave contains 4 CSI (Control Sequence Introducer) codes, as marked by the <code>\\x1B[</code> or <em>ESC <code>[</code></em> opening bytes, and each contains a SGR (Select Graphic Rendition) code, because they each end in <code>m</code>. The parameters (separated by <code>;</code> semicolons) in between those tell your terminal what graphic rendition attributes to use. So for each <code>\\x1B[....m</code> sequence, the 3 codes that are used are:</p>\n<ul>\n<li>0 (or <code>00</code> in this example): <em>reset</em>, disable all attributes</li>\n<li>1 (or <code>01</code> in the example): <em>bold</em></li>\n<li>31: <em>red</em> (foreground)</li>\n</ul>\n<p>However, there is more to ANSI than just CSI SGR codes. With CSI alone you can also control the cursor, clear lines or the whole display, or scroll (provided the terminal supports this of course). And beyond CSI, there are codes to select alternative fonts (<code>SS2</code> and <code>SS3</code>), to send 'private messages' (think passwords), to communicate with the terminal (<code>DCS</code>), the OS (<code>OSC</code>), or the application itself (<code>APC</code>, a way for applications to piggy-back custom control codes on to the communication stream), and further codes to help define strings (<code>SOS</code>, Start of String, <code>ST</code> String Terminator) or to reset everything back to a base state (<code>RIS</code>). The above regexes cover all of these.</p>\n<p>Note that the above regex only removes the ANSI C1 codes, however, and not any additional data that those codes may be marking up (such as the strings sent between an OSC opener and the terminating ST code). Removing those would require additional work outside the scope of this answer.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089172,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1564054901,
+                            "post_id": 18873267,
+                            "comment_id": 100909957,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/18873267#comment100909957_18873267",
+                            "body": "The question doesn&#39;t ask for whitespace to be removed, only <b>ANSI</b> escape codes. Your translation of sarnold&#39;s <code>string.translate()</code> option is not exactly idiomatic either (why use <code>while</code> when <code>for</code> over <code>xrange()</code> would do, e.g. <code>&#39;&#39;.join([chr(i) for i in range(0x20)])</code>), and not applicable to Python 3 (where you could just use <code>dict.fromkeys(range(0x20)))</code> as the <code>string.translate()</code> map)."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3300069,
+                        "reputation": 119,
+                        "user_id": 2776442,
+                        "user_type": "registered",
+                        "display_name": "Neodied"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -3,
+                    "last_activity_date": 1379510634,
+                    "last_edit_date": 1495542862,
+                    "creation_date": 1379510049,
+                    "answer_id": 18873267,
+                    "question_id": 14693701,
+                    "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/18873267#18873267",
+                    "body": "<p>if you want to remove the <code>\\r\\n</code> bit, you can pass the string through this function (<a href=\"https://stackoverflow.com/a/8115378\">written by sarnold</a>):</p>\n\n<pre><code>def stripEscape(string):\n    \"\"\" Removes all escape sequences from the input string \"\"\"\n    delete = \"\"\n    i=1\n    while (i&lt;0x20):\n        delete += chr(i)\n        i += 1\n    t = string.translate(None, delete)\n    return t\n</code></pre>\n\n<p>Careful though, this will lump together the text in front and behind the escape sequences. So, using Martijn's filtered string <code>'ls\\r\\nexamplefile.zip\\r\\n'</code>, you will get <code>lsexamplefile.zip</code>. Note the <code>ls</code> in front of the desired filename.</p>\n\n<p>I would use the stripEscape function first to remove the escape sequences, then pass the output to Martijn's regular expression, which would avoid concatenating the unwanted bit.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5719288,
+                                "reputation": 53069,
+                                "user_id": 4518274,
+                                "user_type": "registered",
+                                "display_name": "Thomas Dickey"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1469829575,
+                            "post_id": 33925425,
+                            "comment_id": 64717066,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/33925425#comment64717066_33925425",
+                            "body": "It misses OSC (both beginning and end)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1490833,
+                                "reputation": 2185,
+                                "user_id": 1397947,
+                                "user_type": "registered",
+                                "accept_rate": 20,
+                                "display_name": "Jeff"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5719288,
+                                "reputation": 53069,
+                                "user_id": 4518274,
+                                "user_type": "registered",
+                                "display_name": "Thomas Dickey"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1470274569,
+                            "post_id": 33925425,
+                            "comment_id": 64886884,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/33925425#comment64886884_33925425",
+                            "body": "OSC is in ECMA-48 sec. 5.6 - what is the point of bring that up here?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5719288,
+                                "reputation": 53069,
+                                "user_id": 4518274,
+                                "user_type": "registered",
+                                "display_name": "Thomas Dickey"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1470297458,
+                            "post_id": 33925425,
+                            "comment_id": 64895046,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/33925425#comment64895046_33925425",
+                            "body": "OSC is an &quot;ANSI escape sequence&quot;, is frequently used, and would begin with a different pattern.  Your answer is <b>incomplete</b>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 165449,
+                                "reputation": 57905,
+                                "user_id": 388916,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Hubro"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1483085488,
+                            "post_id": 33925425,
+                            "comment_id": 69987551,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/33925425#comment69987551_33925425",
+                            "body": "This doesn&#39;t work for color codes produced by <code>bluetoothctl</code>, example: <code>\\x1b[0;94m</code>. Making the expression case insensitive or replacing <code>1B</code> with <code>1b</code> in the pattern made no difference. I&#39;m using Python and the line <code>re.compile(r&#39;&#47;(\\x9b|\\x1b\\[)[0-?]*[ -\\&#47;]*[@-~]&#47;&#39;, re.I)</code>. Then I&#39;m doing <code>pattern.sub(&quot;&quot;, my_string)</code> which doesn&#39;t accomplish anything. Am I doing something wrong?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 165449,
+                                "reputation": 57905,
+                                "user_id": 388916,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Hubro"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1483085881,
+                            "post_id": 33925425,
+                            "comment_id": 69987693,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/33925425#comment69987693_33925425",
+                            "body": "(I was too slow to edit my previous comment). I assume your pattern is using features not available in Python&#39;s <code>re</code> module?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 165449,
+                                "reputation": 57905,
+                                "user_id": 388916,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Hubro"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1483085998,
+                            "post_id": 33925425,
+                            "comment_id": 69987738,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/33925425#comment69987738_33925425",
+                            "body": "NOPE, my bad, just turns out you gotta remove the <code>&#47;</code> delimiters from the string before giving it to Python."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 519017,
+                                "reputation": 1502,
+                                "user_id": 2468458,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Rodrigo Oliveira"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1506885021,
+                            "post_id": 33925425,
+                            "comment_id": 79985994,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/33925425#comment79985994_33925425",
+                            "body": "<code>(\\x9B|\\x1B\\[)[0-?]*[ -&#47;]*[@-~]</code> will work too: <code>[ -\\&#47;]</code> escaping is redundant."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089172,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1563987512,
+                            "post_id": 33925425,
+                            "comment_id": 100885894,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/33925425#comment100885894_33925425",
+                            "body": "I see three issues with this answer: 1) <code>&#47;...&#47;</code> is <i>not Python syntax</i>, but rather syntax you&#39;d use in VI or Perl or awk. 2) the <code>\\x9B</code> opener (for CSI codes) is incompatible with UTF-8 and so now rarely used, and ESC <code>[</code> is preferred and 3) your pattern only covers CSI codes, not the whole range of ANSI escapes (which not only includes OSC, which Thomas Dickly mentions, but SS2, SS3, DCS, ST, OSC, SOS, PM, APC and RIS as well)!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 44188,
+                                "reputation": 3664,
+                                "user_id": 129550,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "fuzzyTew"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1648193740,
+                            "post_id": 33925425,
+                            "comment_id": 126567164,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/33925425#comment126567164_33925425",
+                            "body": "Is this answer still relevent now that the main answer has been updated?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8113406,
+                                "reputation": 3279,
+                                "user_id": 6112685,
+                                "user_type": "registered",
+                                "display_name": "Abhay"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1673533346,
+                            "post_id": 33925425,
+                            "comment_id": 132524355,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/33925425#comment132524355_33925425",
+                            "body": "It consist of non-global RegExp argument"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1490833,
+                        "reputation": 2185,
+                        "user_id": 1397947,
+                        "user_type": "registered",
+                        "accept_rate": 20,
+                        "display_name": "Jeff"
+                    },
+                    "comment_count": 10,
+                    "is_accepted": false,
+                    "score": 54,
+                    "last_activity_date": 1647072663,
+                    "last_edit_date": 1647072663,
+                    "creation_date": 1448481723,
+                    "answer_id": 33925425,
+                    "question_id": 14693701,
+                    "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/33925425#33925425",
+                    "body": "<p>The accepted answer only takes into account ANSI Standardized escape sequences that are formatted to alter foreground colors &amp; text style.\nMany sequences do not end in <code>'m'</code>, such as: cursor positioning, erasing, and scroll regions. The pattern bellow attempts to cover all cases beyond setting foreground color and text-style.</p>\n<br>\n<h6><em>Below is the regular expression for ANSI standardized control sequences:</em></h6>\n<pre><code>/(\\x9B|\\x1B\\[)[0-?]*[ -\\/]*[@-~]/\n</code></pre>\n<hr />\n<br>\n<h5>Additional References:</h5>\n<ul>\n<li><em><a href=\"http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-048.pdf\" rel=\"nofollow noreferrer\" title=\"Control Functions for Coded Character Sets \">ECMA-48 Section 5.4</a></em></li>\n<li><em><a href=\"https://en.wikipedia.org/wiki/ANSI_escape_code#CSI_codes\" rel=\"nofollow noreferrer\" title=\"ANSI escape code\">ANSI escape code</a></em></li>\n</ul>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2791926,
+                                "reputation": 633,
+                                "user_id": 2402008,
+                                "user_type": "registered",
+                                "display_name": "Andrew Gelnar"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1470830659,
+                            "post_id": 38662876,
+                            "comment_id": 65107296,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/38662876#comment65107296_38662876",
+                            "body": "Why have you left the <code>&#47;</code> escaped in the second to last character set <code>[ -\\&#47;]</code>?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 519017,
+                                "reputation": 1502,
+                                "user_id": 2468458,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Rodrigo Oliveira"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2791926,
+                                "reputation": 633,
+                                "user_id": 2402008,
+                                "user_type": "registered",
+                                "display_name": "Andrew Gelnar"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1506884942,
+                            "post_id": 38662876,
+                            "comment_id": 79985980,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/38662876#comment79985980_38662876",
+                            "body": "@AndrewGelnar @&#201;douardLopez <code>[ -&#47;]</code> will suffice."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089172,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1563987570,
+                            "post_id": 38662876,
+                            "comment_id": 100885911,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/38662876#comment100885911_38662876",
+                            "body": "My regex has long since been expanded to cover all of ANSI C1 codes (7 bits) and I added a separate 8-bit variant as well today."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 423151,
+                        "reputation": 41935,
+                        "user_id": 802365,
+                        "user_type": "registered",
+                        "accept_rate": 59,
+                        "display_name": "&#201;douard Lopez"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 45,
+                    "last_activity_date": 1564479088,
+                    "last_edit_date": 1564479088,
+                    "creation_date": 1469807467,
+                    "answer_id": 38662876,
+                    "question_id": 14693701,
+                    "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/38662876#38662876",
+                    "body": "<h3>Function</h3>\n\n<p>Based on <a href=\"https://stackoverflow.com/q/14693701/802365#14693789\">Martijn Pieters\u2666's answer</a> with <a href=\"https://stackoverflow.com/q/14693701/802365#33925425\">Jeff's regexp</a>.</p>\n\n<pre><code>def escape_ansi(line):\n    ansi_escape = re.compile(r'(?:\\x1B[@-_]|[\\x80-\\x9F])[0-?]*[ -/]*[@-~]')\n    return ansi_escape.sub('', line)\n</code></pre>\n\n<h3>Test</h3>\n\n<pre><code>def test_remove_ansi_escape_sequence(self):\n    line = '\\t\\u001b[0;35mBlabla\\u001b[0m                                  \\u001b[0;36m172.18.0.2\\u001b[0m'\n\n    escaped_line = escape_ansi(line)\n\n    self.assertEqual(escaped_line, '\\tBlabla                                  172.18.0.2')\n</code></pre>\n\n<hr>\n\n<h3>Testing</h3>\n\n<p>If you want to run it by yourself, use <code>python3</code> (better unicode support, blablabla). Here is how the test file should be:</p>\n\n<pre><code>import unittest\nimport re\n\ndef escape_ansi(line):\n    \u2026\n\nclass TestStringMethods(unittest.TestCase):\n    def test_remove_ansi_escape_sequence(self):\n    \u2026\n\nif __name__ == '__main__':\n    unittest.main()\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089172,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1563987613,
+                            "post_id": 45448194,
+                            "comment_id": 100885933,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/45448194#comment100885933_45448194",
+                            "body": "That spec is also not complete, the standard allows for a lot of expansion that VT100 didn&#39;t use but other terminals do, and your regex is overly verbose for the purpose."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089172,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1563996046,
+                            "post_id": 45448194,
+                            "comment_id": 100889634,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/45448194#comment100889634_45448194",
+                            "body": "Your pattern has several weird discrepancies as well; ESC-<code>O</code> (SS3) &#39;shifts&#39; the terminal into an alternate font mode, and the next byte is interpreted in that specific mode. The possible values in that mode are not limited to <code>m</code>, <code>n</code>, <code>l</code>, or <code>p</code> through <code>z</code>. I&#39;d not even strip the byte following SS3. SS2 is basically the same functionality (just a different font), but your regex doesn&#39;t pull in the next byte."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089172,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1563996153,
+                            "post_id": 45448194,
+                            "comment_id": 100889681,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/45448194#comment100889681_45448194",
+                            "body": "Last but not least, your regex fails to actually <i>remove the full ANSI codes in the question example</i>, as it leaves behind the <code>m</code> final byte."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 245219,
+                        "reputation": 361,
+                        "user_id": 518590,
+                        "user_type": "registered",
+                        "accept_rate": 33,
+                        "display_name": "kfir"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 10,
+                    "last_activity_date": 1501624045,
+                    "creation_date": 1501624045,
+                    "answer_id": 45448194,
+                    "question_id": 14693701,
+                    "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/45448194#45448194",
+                    "body": "<p>The suggested regex didn't do the trick for me so I created one of my own.\nThe following is a python regex that I created based on the spec found <a href=\"http://ascii-table.com/ansi-escape-sequences-vt-100.php\" rel=\"noreferrer\">here</a></p>\n\n<pre><code>ansi_regex = r'\\x1b(' \\\n             r'(\\[\\??\\d+[hl])|' \\\n             r'([=&lt;&gt;a-kzNM78])|' \\\n             r'([\\(\\)][a-b0-2])|' \\\n             r'(\\[\\d{0,2}[ma-dgkjqi])|' \\\n             r'(\\[\\d+;\\d+[hfy]?)|' \\\n             r'(\\[;?[hf])|' \\\n             r'(#[3-68])|' \\\n             r'([01356]n)|' \\\n             r'(O[mlnp-z]?)|' \\\n             r'(/Z)|' \\\n             r'(\\d+)|' \\\n             r'(\\[\\?\\d;\\d0c)|' \\\n             r'(\\d;\\dR))'\nansi_escape = re.compile(ansi_regex, flags=re.IGNORECASE)\n</code></pre>\n\n<p>I tested my regex on the following snippet (basically a copy paste from the ascii-table.com page)</p>\n\n<pre><code>\\x1b[20h    Set\n\\x1b[?1h    Set\n\\x1b[?3h    Set\n\\x1b[?4h    Set\n\\x1b[?5h    Set\n\\x1b[?6h    Set\n\\x1b[?7h    Set\n\\x1b[?8h    Set\n\\x1b[?9h    Set\n\\x1b[20l    Set\n\\x1b[?1l    Set\n\\x1b[?2l    Set\n\\x1b[?3l    Set\n\\x1b[?4l    Set\n\\x1b[?5l    Set\n\\x1b[?6l    Set\n\\x1b[?7l    Reset\n\\x1b[?8l    Reset\n\\x1b[?9l    Reset\n\\x1b=   Set\n\\x1b&gt;   Set\n\\x1b(A  Set\n\\x1b)A  Set\n\\x1b(B  Set\n\\x1b)B  Set\n\\x1b(0  Set\n\\x1b)0  Set\n\\x1b(1  Set\n\\x1b)1  Set\n\\x1b(2  Set\n\\x1b)2  Set\n\\x1bN   Set\n\\x1bO   Set\n\\x1b[m  Turn\n\\x1b[0m Turn\n\\x1b[1m Turn\n\\x1b[2m Turn\n\\x1b[4m Turn\n\\x1b[5m Turn\n\\x1b[7m Turn\n\\x1b[8m Turn\n\\x1b[1;2    Set\n\\x1b[1A Move\n\\x1b[2B Move\n\\x1b[3C Move\n\\x1b[4D Move\n\\x1b[H  Move\n\\x1b[;H Move\n\\x1b[4;3H   Move\n\\x1b[f  Move\n\\x1b[;f Move\n\\x1b[1;2    Move\n\\x1bD   Move/scroll\n\\x1bM   Move/scroll\n\\x1bE   Move\n\\x1b7   Save\n\\x1b8   Restore\n\\x1bH   Set\n\\x1b[g  Clear\n\\x1b[0g Clear\n\\x1b[3g Clear\n\\x1b#3  Double-height\n\\x1b#4  Double-height\n\\x1b#5  Single\n\\x1b#6  Double\n\\x1b[K  Clear\n\\x1b[0K Clear\n\\x1b[1K Clear\n\\x1b[2K Clear\n\\x1b[J  Clear\n\\x1b[0J Clear\n\\x1b[1J Clear\n\\x1b[2J Clear\n\\x1b5n  Device\n\\x1b0n  Response:\n\\x1b3n  Response:\n\\x1b6n  Get\n\\x1b[c  Identify\n\\x1b[0c Identify\n\\x1b[?1;20c Response:\n\\x1bc   Reset\n\\x1b#8  Screen\n\\x1b[2;1y   Confidence\n\\x1b[2;2y   Confidence\n\\x1b[2;9y   Repeat\n\\x1b[2;10y  Repeat\n\\x1b[0q Turn\n\\x1b[1q Turn\n\\x1b[2q Turn\n\\x1b[3q Turn\n\\x1b[4q Turn\n\\x1b&lt;   Enter/exit\n\\x1b=   Enter\n\\x1b&gt;   Exit\n\\x1bF   Use\n\\x1bG   Use\n\\x1bA   Move\n\\x1bB   Move\n\\x1bC   Move\n\\x1bD   Move\n\\x1bH   Move\n\\x1b12  Move\n\\x1bI  \n\\x1bK  \n\\x1bJ  \n\\x1bZ  \n\\x1b/Z \n\\x1bOP \n\\x1bOQ \n\\x1bOR \n\\x1bOS \n\\x1bA  \n\\x1bB  \n\\x1bC  \n\\x1bD  \n\\x1bOp \n\\x1bOq \n\\x1bOr \n\\x1bOs \n\\x1bOt \n\\x1bOu \n\\x1bOv \n\\x1bOw \n\\x1bOx \n\\x1bOy \n\\x1bOm \n\\x1bOl \n\\x1bOn \n\\x1bOM \n\\x1b[i \n\\x1b[1i\n\\x1b[4i\n\\x1b[5i\n</code></pre>\n\n<p>Hopefully this will help others :)</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089172,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1563996259,
+                            "post_id": 55737595,
+                            "comment_id": 100889729,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/55737595#comment100889729_55737595",
+                            "body": "That&#39;s not really the same problem though. There are <i>loads</i> of different libraries that might produce custom objects that wrap a string, we don&#39;t need answers here for every variant that needs conversion to string before a regex works on them."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3912201,
+                                "reputation": 6047,
+                                "user_id": 3237176,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "dothebart"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1621413082,
+                            "post_id": 55737595,
+                            "comment_id": 119485254,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/55737595#comment119485254_55737595",
+                            "body": "Thats exactly what I was searching for. If you do sub-process control you get bytes; <code>out.decode(&quot;utf-8&quot;)</code> will clash with ansi control codes raising: <code>UnicodeDecodeError: &#39;utf-8&#39; codec can&#39;t decode byte 0xf7 in position 13894: invalid start byte</code> and the regex won&#39;t work on the bytes object."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 14241554,
+                        "reputation": 167,
+                        "user_id": 10287733,
+                        "user_type": "registered",
+                        "display_name": "Rory"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1555546938,
+                    "creation_date": 1555546938,
+                    "answer_id": 55737595,
+                    "question_id": 14693701,
+                    "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/55737595#55737595",
+                    "body": "<p>If it helps future Stack Overflowers, I was using <a href=\"https://github.com/kennethreitz/crayons\" rel=\"nofollow noreferrer\">the crayons library</a> to give my Python output a bit more visual impact, which is advantageous as it works on both Windows and Linux platforms.  However I was both displaying onscreen as well as appending to log files, and the escape sequences were impacting legibility of the log files, so wanted to strip them out.  However the escape sequences inserted by crayons produced an error:</p>\n\n<pre><code>expected string or bytes-like object\n</code></pre>\n\n<p>The solution was to cast the parameter to a string, so only a tiny modification to the commonly accepted answer was needed:</p>\n\n<pre><code>def escape_ansi(line):\n    ansi_escape = re.compile(r'(\\x9B|\\x1B\\[)[0-?]*[ -/]*[@-~]')\n    return ansi_escape.sub('', str(line))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5050792,
+                                "reputation": 1691,
+                                "user_id": 6271889,
+                                "user_type": "registered",
+                                "display_name": "Leonardo"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1613965550,
+                            "post_id": 65295458,
+                            "comment_id": 117229755,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/65295458#comment117229755_65295458",
+                            "body": "This code doesn&#39;t do anything: <code>repr(decoded_string)</code> yelds  <code>&quot;&#39;ls\\\\r\\\\n\\\\x1b[00m\\\\x1b[01;31mexamplefile.zip\\\\x1b[00m\\\\r\\\\&zwnj;&#8203;n\\\\x1b[01;31m&#39;&quot;</code>, while using the <code>\\x1B(?:[@-Z\\\\-_]|\\[[0-?]*[ -&#47;]*[@-~])</code> regex yields <code>&quot;&#39;ls\\\\r\\\\nexamplefile.zip\\\\r\\\\n&#39;&quot;</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8320070,
+                                "reputation": 23,
+                                "user_id": 6252099,
+                                "user_type": "registered",
+                                "display_name": "Vova Ignatov"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5050792,
+                                "reputation": 1691,
+                                "user_id": 6271889,
+                                "user_type": "registered",
+                                "display_name": "Leonardo"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1614069442,
+                            "post_id": 65295458,
+                            "comment_id": 117264883,
+                            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/65295458#comment117264883_65295458",
+                            "body": "There were no requests for a change of string representation In original post. It is enough for printing or passing to some api methond"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 8320070,
+                        "reputation": 23,
+                        "user_id": 6252099,
+                        "user_type": "registered",
+                        "display_name": "Vova Ignatov"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": -4,
+                    "last_activity_date": 1607975152,
+                    "creation_date": 1607975152,
+                    "answer_id": 65295458,
+                    "question_id": 14693701,
+                    "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/65295458#65295458",
+                    "body": "<p>For 2020 with python 3.5 it as easy as <code>string.encode().decode('ascii')</code></p>\n<pre class=\"lang-py prettyprint-override\"><code>ascii_string = 'ls\\r\\n\\x1b[00m\\x1b[01;31mexamplefile.zip\\x1b[00m\\r\\n\\x1b[01;31m'\ndecoded_string = ascii_string.encode().decode('ascii')\nprint(decoded_string) \n\n&gt;ls\n&gt;examplefile.zip\n&gt;\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 13795134,
+                        "reputation": 3020,
+                        "user_id": 10440128,
+                        "user_type": "registered",
+                        "display_name": "milahu"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1649424842,
+                    "last_edit_date": 1649424842,
+                    "creation_date": 1649293484,
+                    "answer_id": 71775190,
+                    "question_id": 14693701,
+                    "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/71775190#71775190",
+                    "body": "<p>none of the regex solutions worked in my case with <a href=\"https://en.wikipedia.org/wiki/ANSI_escape_code#OSC_(Operating_System_Command)_sequences\" rel=\"nofollow noreferrer\">OSC sequences</a> (<code>\\x1b]</code>)</p>\n<p>to actually render the visible output, you will need a terminal emulator like <a href=\"https://github.com/selectel/pyte\" rel=\"nofollow noreferrer\">pyte</a></p>\n<pre class=\"lang-py prettyprint-override\"><code>#! /usr/bin/env python3\n\nimport pyte # terminal emulator: render terminal output to visible characters\n\npyte_screen = pyte.Screen(80, 24)\npyte_stream = pyte.ByteStream(pyte_screen)\n\nbytes_ = b''.join([\n  b'$ cowsay hello\\r\\n', b'\\x1b[?2004l', b'\\r', b' _______\\r\\n',\n  b'&lt; hello &gt;\\r\\n', b' -------\\r\\n', b'        \\\\   ^__^\\r\\n',\n  b'         \\\\  (oo)\\\\_______\\r\\n', b'            (__)\\\\       )\\\\/\\\\\\r\\n',\n  b'                ||----w |\\r\\n', b'                ||     ||\\r\\n',\n  b'\\x1b]0;user@laptop1:/tmp\\x1b\\\\', b'\\x1b]7;file://laptop1/tmp\\x1b\\\\', b'\\x1b[?2004h$ ',\n])\npyte_stream.feed(bytes_)\n\n# pyte_screen.display always has 80x24 characters, padded with whitespace\n# -&gt; use rstrip to remove trailing whitespace from all lines\ntext = (&quot;&quot;.join([line.rstrip() + &quot;\\n&quot; for line in pyte_screen.display])).strip() + &quot;\\n&quot;\nprint(&quot;text&quot;, text)\n\nprint(&quot;cursor&quot;, pyte_screen.cursor.y, pyte_screen.cursor.x)\nprint(&quot;title&quot;, pyte_screen.title)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5831602,
+                        "reputation": 91,
+                        "user_id": 4595893,
+                        "user_type": "registered",
+                        "display_name": "y.tk"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1697531934,
+                    "creation_date": 1697531934,
+                    "answer_id": 77307376,
+                    "question_id": 14693701,
+                    "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/77307376#77307376",
+                    "body": "<p>my case when i use pexect.</p>\n<pre><code>child.sendline(&quot;ls backup&quot;)\nchild.expect(r&quot;[0-9]{8}_[0-9]{4}.*&quot;)\nprint(child.after.split()) \n-&gt; NG  ['20231016_1603\\x1b[0m', '\\x1b[01;34m20231016_1606\\x1b[0m']\n\n* Add ls option\nchild.sendline(&quot;ls  --color=never backup&quot;)\nchild.expect(r&quot;[0-9]{8}_[0-9]{4}.*&quot;)\nprint(child.after.split()) \n-&gt; OK!  ['20231016_1603', '20231016_1606']\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 8451895,
+                        "reputation": 9437,
+                        "user_id": 6340496,
+                        "user_type": "registered",
+                        "display_name": "s3dev"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1709730947,
+                    "last_edit_date": 1709730947,
+                    "creation_date": 1709729484,
+                    "answer_id": 78114529,
+                    "question_id": 14693701,
+                    "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python/78114529#78114529",
+                    "body": "<p>Just for a different approach from regex, this function  iterates the bytes of a string (more specifically an <code>io.StringIO</code> stream) in search of the <a href=\"https://en.wikipedia.org/wiki/ANSI_escape_code#CSI_(Control_Sequence_Introducer)_sequences\" rel=\"nofollow noreferrer\">CSI</a> <code>\\x1b</code>, and 'fast-forwards' until the final byte of <code>'m'</code> is found. Any remaining characters are returned by the function. More specifically, <em>yielded</em> as a generator.</p>\n<blockquote>\n<p>This is designed for ANSI <em>colour sequences</em> <strong>only</strong>.</p>\n</blockquote>\n<h3>Code:</h3>\n<pre><code>import io\n\ndef strip_ansi_colour(text: str) -&gt; iter:\n    &quot;&quot;&quot;Strip ANSI colour sequences from a string.\n\n    Args:\n        text (str): Text string to be stripped.\n\n    Returns:\n        iter[str]: A generator for each returned character. Note,\n        this will include newline characters.\n\n    &quot;&quot;&quot;\n    buff = io.StringIO(text)\n    while (b := buff.read(1)):\n        if b == '\\x1b':\n            while (b := buff.read(1)) != 'm': continue\n        else:\n            yield b\n</code></pre>\n<h3>Example using OP's string:</h3>\n<pre><code>&gt;&gt;&gt; s = 'ls\\r\\n\\x1b[00m\\x1b[01;31mexamplefile.zip\\x1b[00m\\r\\n\\x1b[01;31m'\n&gt;&gt;&gt; ''.join(strip_ansi_colour(s))[2:].strip()  # Trim ls and newlines\n\n'examplefile.zip'\n</code></pre>\n<h3>Example 2:</h3>\n<pre><code>&gt;&gt;&gt; s = '\\x1b[93;m\\x1b[40;m\\x1b[22;m\\nFoo, spam and eggs.\\x1b[0m\\n'\n&gt;&gt;&gt; ''.join(strip_ansi_colour(s))\n\n'\\nFoo, spam and eggs.\\n'\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 1696354,
+                "reputation": 2271,
+                "user_id": 1557674,
+                "user_type": "registered",
+                "accept_rate": 67,
+                "display_name": "SpartaSixZero"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "accepted_answer_id": 14693789,
+            "answer_count": 10,
+            "score": 142,
+            "last_activity_date": 1709730947,
+            "creation_date": 1360004824,
+            "last_edit_date": 1647071575,
+            "question_id": 14693701,
+            "link": "https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python",
+            "title": "How can I remove the ANSI escape sequences from a string in python",
+            "body": "<h5>Here is a snippet that includes my string.</h5>\n<pre><code>'ls\\r\\n\\x1b[00m\\x1b[01;31mexamplefile.zip\\x1b[00m\\r\\n\\x1b[01;31m'\n</code></pre>\n<hr />\n<p>The string was returned from an SSH command that I executed. I can't use the string in its current state because it contains ANSI standardized escape sequences. How can I programmatically remove the escape sequences so that the only part of the string remaining is <strong><code>'examplefile.zip'</code></strong>.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9535
+}

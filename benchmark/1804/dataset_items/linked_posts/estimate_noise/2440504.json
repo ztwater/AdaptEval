@@ -1,0 +1,312 @@
+{
+    "items": [
+        {
+            "tags": [
+                "image-processing",
+                "estimation",
+                "noise"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 66802,
+                                "reputation": 4783,
+                                "user_id": 195787,
+                                "user_type": "registered",
+                                "accept_rate": 65,
+                                "display_name": "Royi"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1268611237,
+                            "post_id": 2442222,
+                            "comment_id": 2430764,
+                            "link": "https://stackoverflow.com/questions/2440504/noise-estimation-noise-measurement-in-image/2442222#comment2430764_2442222",
+                            "body": "To make things clearer, Let&#39;s say I have an Image Matrix - I. In Matlab syntax I would write:  NoisyImage = I + 5 * randn(size(I)); Now, I want to estimate the variance of the noise - 25 (Assuming no noise at I).  Now, the method should be reliable with much smaller factors (Variance) of the noise and later on to estimate at some degree the noise level of an practical image (With the Independent Noise Model)  Thanks.  P.S. Could you point me where should I look for it at the article? Do you know any others?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1924167,
+                                "reputation": 23943,
+                                "user_id": 1735003,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "P-Gn"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1439981790,
+                            "post_id": 2442222,
+                            "comment_id": 52081548,
+                            "link": "https://stackoverflow.com/questions/2440504/noise-estimation-noise-measurement-in-image/2442222#comment52081548_2442222",
+                            "body": "Would you care giving a full reference of the paper? The link you provided is now dead. Thx."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3028181,
+                                "reputation": 2202,
+                                "user_id": 2567725,
+                                "user_type": "registered",
+                                "accept_rate": 68,
+                                "display_name": "olha"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1924167,
+                                "reputation": 23943,
+                                "user_id": 1735003,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "P-Gn"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1481294042,
+                            "post_id": 2442222,
+                            "comment_id": 69332287,
+                            "link": "https://stackoverflow.com/questions/2440504/noise-estimation-noise-measurement-in-image/2442222#comment69332287_2442222",
+                            "body": "@user1735003 Maybe it&#39;s this paper: <a href=\"http://redwood.berkeley.edu/w/images/6/69/08-atick-nc-1992.pdf\" rel=\"nofollow noreferrer\">redwood.berkeley.edu/w/images/6/69/08-atick-nc-1992.pdf</a>  (just assumption from dead link url)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 83718,
+                        "reputation": 4063,
+                        "user_id": 234547,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "meduz"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1530002873,
+                    "last_edit_date": 1530002873,
+                    "creation_date": 1268572198,
+                    "answer_id": 2442222,
+                    "question_id": 2440504,
+                    "link": "https://stackoverflow.com/questions/2440504/noise-estimation-noise-measurement-in-image/2442222#2442222",
+                    "body": "<p>The problem of characterizing signal from noise is not easy. From your question, a first try would be to characterize second order statistics: natural images are known to have pixel to pixel correlations that are -by definition- not present in white noise.</p>\n\n<p>In Fourier space the correlation corresponds to the energy spectrum. It is known that for natural images, it decreases as 1/f^2 . To quantify noise, I would therefore recommend to compute the correlation coefficient of the spectrum of your image with both hypothesis (flat and 1/f^2), so that you extract the coefficient.</p>\n\n<p>Some functions to start you up:</p>\n\n<pre><code>import numpy\ndef get_grids(N_X, N_Y):\n    from numpy import mgrid\n    return mgrid[-1:1:1j*N_X, -1:1:1j*N_Y]\n\ndef frequency_radius(fx, fy):\n    R2 = fx**2 + fy**2\n    (N_X, N_Y) = fx.shape\n    R2[N_X/2, N_Y/2]= numpy.inf\n\n    return numpy.sqrt(R2)\n\ndef enveloppe_color(fx, fy, alpha=1.0):\n    # 0.0, 0.5, 1.0, 2.0 are resp. white, pink, red, brown noise\n    # (see http://en.wikipedia.org/wiki/1/f_noise )\n    # enveloppe\n    return 1. / frequency_radius(fx, fy)**alpha #\n\nimport scipy\nimage = scipy.lena()\nN_X, N_Y = image.shape\nfx, fy = get_grids(N_X, N_Y)\npink_spectrum = enveloppe_color(fx, fy)\n\nfrom scipy.fftpack import fft2\npower_spectrum = numpy.abs(fft2(image))**2\n</code></pre>\n\n<p>I recommend <a href=\"http://www.rctn.org/w/images/6/69/08-atick-nc-1992.pdf\" rel=\"nofollow noreferrer\">this wonderful paper</a> for more details.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5168102,
+                                "reputation": 7486,
+                                "user_id": 4137497,
+                                "user_type": "registered",
+                                "display_name": "tsveti_iko"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1529070428,
+                            "post_id": 25436112,
+                            "comment_id": 88755618,
+                            "link": "https://stackoverflow.com/questions/2440504/noise-estimation-noise-measurement-in-image/25436112#comment88755618_25436112",
+                            "body": "This actually works! If you get sigma &gt; 10.0, then you have a noisy image, otherwise - not. Also, to make it work on colored images as well, just convert them to grayscale like this: <code>import cv2</code> <code>img = cv2.imread(img_path)</code> <code>img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</code> <code>noise = estimate_noise(img_gray)</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5168102,
+                                "reputation": 7486,
+                                "user_id": 4137497,
+                                "user_type": "registered",
+                                "display_name": "tsveti_iko"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1529070626,
+                            "post_id": 25436112,
+                            "comment_id": 88755738,
+                            "link": "https://stackoverflow.com/questions/2440504/noise-estimation-noise-measurement-in-image/25436112#comment88755738_25436112",
+                            "body": "And don&#39;t forget to <code>import math</code>, <code>import numpy as np</code> and <code>from scipy.signal import convolve2d</code> ;)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5168102,
+                                "reputation": 7486,
+                                "user_id": 4137497,
+                                "user_type": "registered",
+                                "display_name": "tsveti_iko"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1529071053,
+                            "post_id": 25436112,
+                            "comment_id": 88756002,
+                            "link": "https://stackoverflow.com/questions/2440504/noise-estimation-noise-measurement-in-image/25436112#comment88756002_25436112",
+                            "body": "Also the provided PDF link doesn&#39;t work - use this instead: <a href=\"https://www.sciencedirect.com/science/article/pii/S1077314296900600\" rel=\"nofollow noreferrer\">sciencedirect.com/science/article/pii/S1077314296900600</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 12238769,
+                                "reputation": 742,
+                                "user_id": 8932411,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "M. D. P"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5168102,
+                                "reputation": 7486,
+                                "user_id": 4137497,
+                                "user_type": "registered",
+                                "display_name": "tsveti_iko"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1549083449,
+                            "post_id": 25436112,
+                            "comment_id": 95786394,
+                            "link": "https://stackoverflow.com/questions/2440504/noise-estimation-noise-measurement-in-image/25436112#comment95786394_25436112",
+                            "body": "&quot;sigma&quot; what does this value means ??  It should we high or low ??  Is it possible to capture image without any noise if we are using DSLR ???? @tsveti_iko"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5168102,
+                                "reputation": 7486,
+                                "user_id": 4137497,
+                                "user_type": "registered",
+                                "display_name": "tsveti_iko"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1549276544,
+                            "post_id": 25436112,
+                            "comment_id": 95831577,
+                            "link": "https://stackoverflow.com/questions/2440504/noise-estimation-noise-measurement-in-image/25436112#comment95831577_25436112",
+                            "body": "<code>sigma</code> is the noise factor, so it should be low (lower than 10) if you want an image without noise. I didn&#39;t experiment with DSLR, so I can&#39;t tell about that"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9657799,
+                                "reputation": 1428,
+                                "user_id": 7166834,
+                                "user_type": "registered",
+                                "accept_rate": 54,
+                                "display_name": "pylearner"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1588756957,
+                            "post_id": 25436112,
+                            "comment_id": 109018289,
+                            "link": "https://stackoverflow.com/questions/2440504/noise-estimation-noise-measurement-in-image/25436112#comment109018289_25436112",
+                            "body": "can we use the sigma as a parameter for denosing the same image ?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 21213,
+                                "reputation": 684,
+                                "user_id": 51386,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "yves"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1643193434,
+                            "post_id": 25436112,
+                            "comment_id": 125272804,
+                            "link": "https://stackoverflow.com/questions/2440504/noise-estimation-noise-measurement-in-image/25436112#comment125272804_25436112",
+                            "body": "original PDF link does not work, information from original paper can be found in other <a href=\"https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.173.1644&amp;rep=rep1&amp;type=pdf\" rel=\"nofollow noreferrer\">article</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1061058,
+                        "reputation": 6817,
+                        "user_id": 1062679,
+                        "user_type": "registered",
+                        "accept_rate": 87,
+                        "display_name": "user2398029"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": false,
+                    "score": 35,
+                    "last_activity_date": 1408655899,
+                    "creation_date": 1408655899,
+                    "answer_id": 25436112,
+                    "question_id": 2440504,
+                    "link": "https://stackoverflow.com/questions/2440504/noise-estimation-noise-measurement-in-image/25436112#25436112",
+                    "body": "<p>You can use the following method to estimate the noise variance (this implementation works for grayscale images only):</p>\n\n<pre><code>def estimate_noise(I):\n\n  H, W = I.shape\n\n  M = [[1, -2, 1],\n       [-2, 4, -2],\n       [1, -2, 1]]\n\n  sigma = np.sum(np.sum(np.absolute(convolve2d(I, M))))\n  sigma = sigma * math.sqrt(0.5 * math.pi) / (6 * (W-2) * (H-2))\n\n  return sigma\n</code></pre>\n\n<p>Reference: J. Immerk\u00e6r, \u201cFast Noise Variance Estimation\u201d, Computer Vision and Image Understanding, Vol. 64, No. 2, pp. 300-302, Sep. 1996  [<a href=\"http://www.kyxk.net/att.php?p.490.43283.358.pdf\" rel=\"noreferrer\">PDF</a>]</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 66802,
+                                "reputation": 4783,
+                                "user_id": 195787,
+                                "user_type": "registered",
+                                "accept_rate": 65,
+                                "display_name": "Royi"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1530077679,
+                            "post_id": 51052046,
+                            "comment_id": 89100973,
+                            "link": "https://stackoverflow.com/questions/2440504/noise-estimation-noise-measurement-in-image/51052046#comment89100973_51052046",
+                            "body": "Hi, There is indeed Donoho&#39;s method based on wavelet (Median of the power of the HH). I might add its implementation in MATLAB. Thank You."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 16642618,
+                                "reputation": 83,
+                                "user_id": 12027725,
+                                "user_type": "registered",
+                                "display_name": "Adam Saleem"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1695494710,
+                            "post_id": 51052046,
+                            "comment_id": 136033147,
+                            "link": "https://stackoverflow.com/questions/2440504/noise-estimation-noise-measurement-in-image/51052046#comment136033147_51052046",
+                            "body": "I am getting the estimate_noise of my images between 30-38, how would I know if this noise is acceptable or not as I don&#39;t have anything to compare it with, what would be the value of an image with very less noise?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 515225,
+                        "reputation": 3451,
+                        "user_id": 1116627,
+                        "user_type": "registered",
+                        "display_name": "lotif"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 10,
+                    "last_activity_date": 1530051191,
+                    "creation_date": 1530051191,
+                    "answer_id": 51052046,
+                    "question_id": 2440504,
+                    "link": "https://stackoverflow.com/questions/2440504/noise-estimation-noise-measurement-in-image/51052046#51052046",
+                    "body": "<p>Scikit Image has an estimate sigma function that works pretty well:</p>\n\n<p><a href=\"http://scikit-image.org/docs/dev/api/skimage.restoration.html#skimage.restoration.estimate_sigma\" rel=\"noreferrer\">http://scikit-image.org/docs/dev/api/skimage.restoration.html#skimage.restoration.estimate_sigma</a></p>\n\n<p>it also works with color images, you just need to set <code>multichannel=True</code> and  <code>average_sigmas=True</code>:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>import cv2\nfrom skimage.restoration import estimate_sigma\n\ndef estimate_noise(image_path):\n    img = cv2.imread(image_path)\n    return estimate_sigma(img, multichannel=True, average_sigmas=True)\n</code></pre>\n\n<p>High numbers mean low noise.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 66802,
+                "reputation": 4783,
+                "user_id": 195787,
+                "user_type": "registered",
+                "accept_rate": 65,
+                "display_name": "Royi"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "answer_count": 3,
+            "score": 28,
+            "last_activity_date": 1530051191,
+            "creation_date": 1268523121,
+            "last_edit_date": 1268524191,
+            "question_id": 2440504,
+            "link": "https://stackoverflow.com/questions/2440504/noise-estimation-noise-measurement-in-image",
+            "title": "Noise Estimation / Noise Measurement in Image",
+            "body": "<p>I want to estimate the noise in an image.</p>\n\n<p>Let's assume the model of an Image + White Noise.\nNow I want to estimate the Noise Variance.</p>\n\n<p>My method is to calculate the Local Variance (3*3 up to 21*21 Blocks) of the image and then find areas where the Local Variance is fairly constant (By calculating the Local Variance of the Local Variance Matrix).\nI assume those areas are \"Flat\" hence the Variance is almost \"Pure\" noise.</p>\n\n<p>Yet I don't get constant results.</p>\n\n<p>Is there a better way?</p>\n\n<p>Thanks.</p>\n\n<p>P.S.\nI can't assume anything about the Image but the independent noise (Which isn't true for real image yet let's assume it).</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6616
+}

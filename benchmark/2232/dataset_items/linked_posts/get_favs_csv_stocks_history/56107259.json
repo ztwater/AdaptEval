@@ -1,0 +1,128 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "python-3.x",
+                "scikit-learn",
+                "save",
+                "pre-trained-model"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 4715891,
+                        "reputation": 660,
+                        "user_id": 3815029,
+                        "user_type": "registered",
+                        "display_name": "ashish14"
+                    },
+                    "edited": false,
+                    "score": 2,
+                    "creation_date": 1557734684,
+                    "post_id": 56107259,
+                    "comment_id": 98849709,
+                    "link": "https://stackoverflow.com/questions/56107259/how-to-save-a-trained-model-by-scikit-learn#comment98849709_56107259",
+                    "body": "Read this documentation <a href=\"https://scikit-learn.org/stable/modules/model_persistence.html\" rel=\"nofollow noreferrer\">scikit-learn.org/stable/modules/model_persistence.html</a>"
+                },
+                {
+                    "owner": {
+                        "account_id": 3514875,
+                        "reputation": 1923,
+                        "user_id": 7602468,
+                        "user_type": "registered",
+                        "display_name": "p._phidot_"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1624804095,
+                    "post_id": 56107259,
+                    "comment_id": 120451862,
+                    "link": "https://stackoverflow.com/questions/56107259/how-to-save-a-trained-model-by-scikit-learn#comment120451862_56107259",
+                    "body": "Is any of the answers shared is acceptable? If OP had found a better solution I&#39;m (honestly) really interested to learn one.. | coz I&#39;m exploring options beyond scikit, <a href=\"https://mathematica.stackexchange.com/questions/56319/how-can-i-export-my-learned-classiferfunction-and-predictorfunctions/245950#245950\">here</a> is an entry that I&#39;ve worked with.."
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 9032043,
+                        "reputation": 1128,
+                        "user_id": 6729283,
+                        "user_type": "registered",
+                        "accept_rate": 70,
+                        "display_name": "Eric"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 11,
+                    "last_activity_date": 1557733183,
+                    "creation_date": 1557733183,
+                    "answer_id": 56107708,
+                    "question_id": 56107259,
+                    "link": "https://stackoverflow.com/questions/56107259/how-to-save-a-trained-model-by-scikit-learn/56107708#56107708",
+                    "body": "<p>You can save and load the model using the pickle operation to serialize your machine learning algorithms and save the serialized format to a file.</p>\n\n<pre><code>import pickle\n# save the model to disk\nfilename = 'gpr_model.sav'\npickle.dump(gpr, open(filename, 'wb')) \n\n# load the model from disk\nloaded_model = pickle.load(open(filename, 'rb'))\n</code></pre>\n\n<p>Hope it helps!</p>\n\n<p><a href=\"https://machinelearningmastery.com/save-load-machine-learning-models-python-scikit-learn/\" rel=\"noreferrer\">source</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2453488,
+                                "reputation": 5529,
+                                "user_id": 5605919,
+                                "user_type": "registered",
+                                "display_name": "pplonski"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1593023333,
+                            "post_id": 56107843,
+                            "comment_id": 110637509,
+                            "link": "https://stackoverflow.com/questions/56107259/how-to-save-a-trained-model-by-scikit-learn/56107843#comment110637509_56107843",
+                            "body": "One more thing, you can add <code>compress=3</code> while <code>joblib.dump</code> this will result in a smaller file. You can check the example <a href=\"https://mljar.com/blog/save-load-random-forest/\" rel=\"nofollow noreferrer\">here</a> the compression decreases the file size ~5 times."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 14311463,
+                        "reputation": 8663,
+                        "user_id": 10337630,
+                        "user_type": "registered",
+                        "display_name": "sentence"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 73,
+                    "last_activity_date": 1557736394,
+                    "last_edit_date": 1557736394,
+                    "creation_date": 1557733718,
+                    "answer_id": 56107843,
+                    "question_id": 56107259,
+                    "link": "https://stackoverflow.com/questions/56107259/how-to-save-a-trained-model-by-scikit-learn/56107843#56107843",
+                    "body": "<p>You can use:</p>\n\n<p><strong>1. <a href=\"https://docs.python.org/3/library/pickle.html\" rel=\"noreferrer\"><code>pickle</code></a></strong></p>\n\n<pre><code>from sklearn import svm\nfrom sklearn import datasets\n\niris = datasets.load_iris()\nX, y = iris.data, iris.target\n\nclf = svm.SVC()\nclf.fit(X, y)  \n\n##########################\n# SAVE-LOAD using pickle #\n##########################\nimport pickle\n\n# save\nwith open('model.pkl','wb') as f:\n    pickle.dump(clf,f)\n\n# load\nwith open('model.pkl', 'rb') as f:\n    clf2 = pickle.load(f)\n\nclf2.predict(X[0:1])\n</code></pre>\n\n<p><strong>2. <a href=\"https://joblib.readthedocs.io/en/latest/\" rel=\"noreferrer\"><code>joblib</code></a></strong></p>\n\n<p>From <a href=\"https://scikit-learn.org/stable/modules/model_persistence.html\" rel=\"noreferrer\"><code>scikit-learn</code> documentation</a>:</p>\n\n<blockquote>\n  <p>In the specific case of scikit-learn, it may be better to use joblib\u2019s\n  replacement of pickle (dump &amp; load), which is more efficient on\n  objects that carry large numpy arrays internally as is often the case\n  for fitted scikit-learn estimators, but can only pickle to the disk\n  and not to a string:</p>\n</blockquote>\n\n<pre><code>from sklearn import svm\nfrom sklearn import datasets\n\niris = datasets.load_iris()\nX, y = iris.data, iris.target\n\nclf = svm.SVC()\nclf.fit(X, y)  \n\n##########################\n# SAVE-LOAD using joblib #\n##########################\nimport joblib\n\n# save\njoblib.dump(clf, \"model.pkl\") \n\n# load\nclf2 = joblib.load(\"model.pkl\")\n\nclf2.predict(X[0:1])\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 15925546,
+                "reputation": 433,
+                "user_id": 11491242,
+                "user_type": "registered",
+                "display_name": "Long"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "closed_date": 1629728665,
+            "answer_count": 2,
+            "score": 42,
+            "last_activity_date": 1563960294,
+            "creation_date": 1557731141,
+            "last_edit_date": 1563960294,
+            "question_id": 56107259,
+            "link": "https://stackoverflow.com/questions/56107259/how-to-save-a-trained-model-by-scikit-learn",
+            "closed_reason": "Duplicate",
+            "title": "How to save a trained model by scikit-learn?",
+            "body": "<p>I am trying to re-create the prediction of a trained model but I don't know how to save a model.\nFor example, I want to save the trained Gaussian processing regressor model and recreate the prediction after I trained the model.\nThe package I used to train model is scikit-learn.</p>\n\n<pre><code>kernel = DotProduct() + WhiteKernel()\ngpr = GaussianProcessRegressor(kernel=kernel,random_state=0)\ngpr.fit(X,y)\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5754
+}

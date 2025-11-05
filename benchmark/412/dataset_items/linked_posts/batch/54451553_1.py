@@ -1,0 +1,2 @@
+>>>list(batch_iterable(range(0,5)), 2)
+[(0, 1), (2, 3), (4,)]

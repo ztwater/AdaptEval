@@ -1,0 +1,200 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "arrays",
+                "numpy",
+                "image-processing"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 6428404,
+                        "reputation": 22582,
+                        "user_id": 5087436,
+                        "user_type": "registered",
+                        "display_name": "alkasm"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1498948235,
+                    "post_id": 44865023,
+                    "comment_id": 76711296,
+                    "link": "https://stackoverflow.com/questions/44865023/how-can-i-create-a-circular-mask-for-a-numpy-array#comment76711296_44865023",
+                    "body": "That&#39;s actually not Euclidean distance. Should be the square root of that sum. And yes I think you&#39;re right, should be <code>center_row</code> and <code>center_col</code> not <code>total...</code> I think this code would produce a quarter circle mask centered at the top left, not a centered circle mask in your image (note <code>dist_from_center</code> is still wrong in that case)."
+                },
+                {
+                    "owner": {
+                        "user_type": "does_not_exist",
+                        "display_name": "user7469692"
+                    },
+                    "reply_to_user": {
+                        "account_id": 6428404,
+                        "reputation": 22582,
+                        "user_id": 5087436,
+                        "user_type": "registered",
+                        "display_name": "alkasm"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1499020627,
+                    "post_id": 44865023,
+                    "comment_id": 76726366,
+                    "link": "https://stackoverflow.com/questions/44865023/how-can-i-create-a-circular-mask-for-a-numpy-array#comment76726366_44865023",
+                    "body": "@AlexanderReynolds yes it is forming a quarter circle mask, could you please explain how you determine that &amp; could  you please explain <code>np.ogrid</code> in simpler terms, all the explanations on web regarding <code>np.ogrid</code> are going way above my head."
+                },
+                {
+                    "owner": {
+                        "account_id": 6428404,
+                        "reputation": 22582,
+                        "user_id": 5087436,
+                        "user_type": "registered",
+                        "display_name": "alkasm"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1499020688,
+                    "post_id": 44865023,
+                    "comment_id": 76726380,
+                    "link": "https://stackoverflow.com/questions/44865023/how-can-i-create-a-circular-mask-for-a-numpy-array#comment76726380_44865023",
+                    "body": "Sure, I was on mobile when I saw this so didn&#39;t write a full answer, I figured someone else would have by the time I got home but I guess not. I&#39;ll go for it."
+                },
+                {
+                    "owner": {
+                        "user_type": "does_not_exist",
+                        "display_name": "user7469692"
+                    },
+                    "reply_to_user": {
+                        "account_id": 6428404,
+                        "reputation": 22582,
+                        "user_id": 5087436,
+                        "user_type": "registered",
+                        "display_name": "alkasm"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1499022204,
+                    "post_id": 44865023,
+                    "comment_id": 76726833,
+                    "link": "https://stackoverflow.com/questions/44865023/how-can-i-create-a-circular-mask-for-a-numpy-array#comment76726833_44865023",
+                    "body": "@AlexanderReynolds Thanks, I will be waiting for your response."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2606262,
+                                "reputation": 5380,
+                                "user_id": 2257377,
+                                "user_type": "registered",
+                                "display_name": "el3ien"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1599402135,
+                            "post_id": 44874588,
+                            "comment_id": 112757895,
+                            "link": "https://stackoverflow.com/questions/44865023/how-can-i-create-a-circular-mask-for-a-numpy-array/44874588#comment112757895_44874588",
+                            "body": "+1 . I added <code>if h % 2 == 0: h=h+1</code> and <code>if w % 2 == 0: w=w+1</code> on top, so it wont cut the last col and row of on even numbers."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6428404,
+                        "reputation": 22582,
+                        "user_id": 5087436,
+                        "user_type": "registered",
+                        "display_name": "alkasm"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": true,
+                    "score": 106,
+                    "last_activity_date": 1581112127,
+                    "last_edit_date": 1581112127,
+                    "creation_date": 1499024674,
+                    "answer_id": 44874588,
+                    "question_id": 44865023,
+                    "link": "https://stackoverflow.com/questions/44865023/how-can-i-create-a-circular-mask-for-a-numpy-array/44874588#44874588",
+                    "body": "<p>The algorithm you got online is partly wrong, at least for your purposes. If we have the following image, we want it masked like so:</p>\n\n<p><a href=\"https://i.stack.imgur.com/Tr5bL.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/Tr5bL.png\" alt=\"Image to mask\"></a> <a href=\"https://i.stack.imgur.com/Hcsl9.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/Hcsl9.png\" alt=\"Masked image\"></a></p>\n\n<p>The easiest way to create a mask like this is how your algorithm goes about it, but it's not presented in the way that you want, nor does it give you the ability to modify it in an easy way. What we need to do is look at the coordinates for each pixel in the image, and get a true/false value for whether or not that pixel is within the radius. For example, here's a zoomed in picture showing the circle radius and the pixels that were strictly within that radius:</p>\n\n<p><a href=\"https://i.stack.imgur.com/L4ExH.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/L4ExH.png\" alt=\"Pixels inside the radius\"></a></p>\n\n<p>Now, to figure out which pixels lie inside the circle, we'll need the indices of each pixel in the image. The function <a href=\"https://docs.scipy.org/doc/numpy/reference/generated/numpy.ogrid.html\" rel=\"noreferrer\"><code>np.ogrid()</code></a> gives two vectors, each containing the pixel locations (or indices): there's a column vector for the column indices and a row vector for the row indices:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>&gt;&gt;&gt; np.ogrid[:4,:5]\n[array([[0],\n       [1],\n       [2],\n       [3]]), array([[0, 1, 2, 3, 4]])]\n</code></pre>\n\n<p>This format is useful for <a href=\"https://docs.scipy.org/doc/numpy-1.10.0/user/basics.broadcasting.html\" rel=\"noreferrer\">broadcasting</a> so that if we use them in certain functions, it will actually create a grid of all the indices instead of just those two vectors. We can thus use <code>np.ogrid()</code> to create the indices (or pixel coordinates) of the image, and then check each pixel coordinate to see if it's inside or outside the circle. In order to tell whether it's inside the center, we can simply find the Euclidean distance from the center to every pixel location, and then if that distance is less than the circle radius, we'll mark that as <em>included</em> in the mask, and if it's greater than that, we'll <em>exclude</em> it from the mask.</p>\n\n<p>Now we've got everything we need to make a function that creates this mask. Furthermore we'll add a little bit of nice functionality to it; we can send in the center and the radius, or have it automatically calculate them.</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>def create_circular_mask(h, w, center=None, radius=None):\n\n    if center is None: # use the middle of the image\n        center = (int(w/2), int(h/2))\n    if radius is None: # use the smallest distance between the center and image walls\n        radius = min(center[0], center[1], w-center[0], h-center[1])\n\n    Y, X = np.ogrid[:h, :w]\n    dist_from_center = np.sqrt((X - center[0])**2 + (Y-center[1])**2)\n\n    mask = dist_from_center &lt;= radius\n    return mask\n</code></pre>\n\n<p>In this case, <code>dist_from_center</code> is a matrix the same height and width that is specified. It broadcasts the column and row index vectors into a matrix, where the value at each location is the distance from the center. If we were to visualize this matrix as an image (scaling it into the proper range), then it would be a gradient radiating from the center we specify:</p>\n\n<p><a href=\"https://i.stack.imgur.com/oL7Hy.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/oL7Hy.png\" alt=\"Distance gradient\"></a></p>\n\n<p>So when we compare it to <code>radius</code>, it's identical to thresholding this gradient image. </p>\n\n<p>Note that the final mask is a matrix of booleans; <code>True</code> if that location is within the radius from the specified center, <code>False</code> otherwise. So we can then use this mask as an indicator for a region of pixels we care about, or we can take the opposite of that boolean (<code>~</code> in <code>numpy</code>) to select the pixels outside that region. So using this function to color pixels outside the circle black, like I did up at the top of this post, is as simple as:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>h, w = img.shape[:2]\nmask = create_circular_mask(h, w)\nmasked_img = img.copy()\nmasked_img[~mask] = 0\n</code></pre>\n\n<p>But if we wanted to create a circular mask at a different point than the center, we could specify it (note that the function is expecting the center coordinates in <code>x, y</code> order, not the indexing <code>row, col = y, x</code> order):</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>center = (int(w/4), int(h/4))\nmask = create_circular_mask(h, w, center=center)\n</code></pre>\n\n<p>Which, since we're not giving a radius, would give us the largest radius so that the circle would still fit in the image bounds:</p>\n\n<p><a href=\"https://i.stack.imgur.com/TiMey.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/TiMey.png\" alt=\"Off-center mask\"></a></p>\n\n<p>Or we could let it calculate the center but use a specified radius:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>radius = h/4\nmask = create_circular_mask(h, w, radius=radius)\n</code></pre>\n\n<p>Giving us a centered circle with a radius that doesn't extend exactly to the smallest dimension:</p>\n\n<p><a href=\"https://i.stack.imgur.com/zqfsW.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/zqfsW.png\" alt=\"Specified radius mask\"></a></p>\n\n<p>And finally, we could specify any radius and center we wanted, including a radius that extends outside the image bounds (and the center can even be outside the image bounds!):</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>center = (int(w/4), int(h/4))\nradius = h/2\nmask = create_circular_mask(h, w, center=center, radius=radius)\n</code></pre>\n\n<p><a href=\"https://i.stack.imgur.com/ynq4N.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/ynq4N.png\" alt=\"Off-center, larger radius mask\"></a> </p>\n\n<p>What the algorithm you found online does is equivalent to setting the center to <code>(0, 0)</code> and setting the radius to <code>h</code>:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>mask = create_circular_mask(h, w, center=(0, 0), radius=h)\n</code></pre>\n\n<p><a href=\"https://i.stack.imgur.com/8PPu1.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/8PPu1.png\" alt=\"Quarter-circle mask\"></a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 8991167,
+                                "reputation": 170,
+                                "user_id": 6703017,
+                                "user_type": "registered",
+                                "display_name": "bottledatthesource"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1702703856,
+                            "post_id": 61196668,
+                            "comment_id": 136929832,
+                            "link": "https://stackoverflow.com/questions/44865023/how-can-i-create-a-circular-mask-for-a-numpy-array/61196668#comment136929832_61196668",
+                            "body": "for me it seems your inequalities should be reversed. <code>if mask[x,y] &gt; r:</code> &amp; <code>elif mask[x,y] &lt;= r:</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 9365387,
+                        "reputation": 41,
+                        "user_id": 9947451,
+                        "user_type": "registered",
+                        "display_name": "Justine Haupt"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1586832908,
+                    "last_edit_date": 1586832908,
+                    "creation_date": 1586811614,
+                    "answer_id": 61196668,
+                    "question_id": 44865023,
+                    "link": "https://stackoverflow.com/questions/44865023/how-can-i-create-a-circular-mask-for-a-numpy-array/61196668#61196668",
+                    "body": "<p>I'd like to offer a way to do this that doesn't involve the np.ogrid() function. I'll crop an image called \"robot.jpg\", which is 491 x 491 pixels. For readability I'm not going to define as many variables as I would in a real program:</p>\n\n<p>Import libraries:</p>\n\n<pre><code>import matplotlib.pyplot as plt\nfrom matplotlib import image\nimport numpy as np\n</code></pre>\n\n<p>Import the image, which I'll call \"z\". This is a color image so I'm also pulling out just a single color channel. Following that, I'll display it:</p>\n\n<pre><code>z = image.imread('robot.jpg')  \nz = z[:,:,1]\n\nzimg = plt.imshow(z,cmap=\"gray\")\nplt.show()\n</code></pre>\n\n<p><a href=\"https://i.stack.imgur.com/Aia6o.png\" rel=\"nofollow noreferrer\">robot.jpg as displayed by matplotlib.pyplot</a></p>\n\n<p>To wind up with a numpy array (image matrix) with a circle in it to use as a mask, I'm going to start with this:</p>\n\n<pre><code>x = np.linspace(-10, 10, 491)\ny = np.linspace(-10, 10, 491)\nx, y = np.meshgrid(x, y)\nx_0 = -3\ny_0 = -6\nmask = np.sqrt((x-x_0)**2+(y-y_0)**2)\n</code></pre>\n\n<p>Note the equation of a circle on that last line, where x_0 and y_0 are defining the center point of the circle in a grid which is 491 elements tall and wide. Because I defined the grid to go from -10 to 10 in both x and y, it is within that system of units that x_0 and x_y set the center point of the circle with respect to the center of the image.</p>\n\n<p>To see what that produces I run:</p>\n\n<pre><code>maskimg = plt.imshow(mask,cmap=\"gray\")\nplt.show()\n</code></pre>\n\n<p><a href=\"https://i.stack.imgur.com/l5ftT.png\" rel=\"nofollow noreferrer\">Our \"proto\" masking circle</a></p>\n\n<p>To turn that into an actual binary-valued mask, I'm just going to take every pixel below a certain value and set it to 0, and take every pixel above a certain value and set it to 256. The \"certain value\" will determine the radius of the circle in the same units defined above, so I'll call that 'r'. Here I'll set 'r' to something and then loop through every pixel in the mask to determine if it should be \"on\" or \"off\":</p>\n\n<pre><code>r = 7\nfor x in range(0,490):\n        for y in range(0,490):\n                if mask[x,y] &lt; r:\n                        mask[x,y] = 0\n                elif mask[x,y] &gt;= r:\n                        mask[x,y] = 256\n\nmaskimg = plt.imshow(mask,cmap=\"gray\")\nplt.show()\n</code></pre>\n\n<p><a href=\"https://i.stack.imgur.com/D67ZE.png\" rel=\"nofollow noreferrer\">The mask</a></p>\n\n<p>Now I'll just multiply the mask by the image element-wise, then display the result:</p>\n\n<pre><code>z_masked = np.multiply(z,mask)\n\nzimg_masked = plt.imshow(z_masked,cmap=\"gray\")\nplt.show()\n</code></pre>\n\n<p>To invert the mask I can just swap the 0 and the 256 in the thresholding loop above, and if I do that I get:</p>\n\n<p><a href=\"https://i.stack.imgur.com/unwfS.png\" rel=\"nofollow noreferrer\">Masked version of robot.jpg</a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 14283367,
+                        "reputation": 627,
+                        "user_id": 10317376,
+                        "user_type": "registered",
+                        "display_name": "Shep Bryan"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1679615821,
+                    "last_edit_date": 1679615821,
+                    "creation_date": 1639010630,
+                    "answer_id": 70283438,
+                    "question_id": 44865023,
+                    "link": "https://stackoverflow.com/questions/44865023/how-can-i-create-a-circular-mask-for-a-numpy-array/70283438#70283438",
+                    "body": "<p>The other answers work, but they are slow, so I will propose an answer using <a href=\"https://scikit-image.org/docs/stable/api/skimage.draw.html?highlight=disk#skimage.draw.disk\" rel=\"nofollow noreferrer\">skimage.draw.disk</a>. Using this is faster and I find it simple to use. Simply specify the center of the circle and radius then use the output to create a mask</p>\n<pre class=\"lang-py prettyprint-override\"><code>import numpy as np\nfrom skimage.draw import disk\nmask = np.zeros((10, 10), dtype=np.uint8)\nrow = 4\ncol = 5\nradius = 5\n# modern scikit uses a tuple for center\nrr, cc = disk((row, col), radius)\nmask[rr, cc] = 1\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "user_type": "does_not_exist",
+                "display_name": "user7469692"
+            },
+            "comment_count": 4,
+            "is_answered": true,
+            "accepted_answer_id": 44874588,
+            "answer_count": 3,
+            "score": 35,
+            "last_activity_date": 1679615821,
+            "creation_date": 1498939902,
+            "last_edit_date": 1581111838,
+            "question_id": 44865023,
+            "link": "https://stackoverflow.com/questions/44865023/how-can-i-create-a-circular-mask-for-a-numpy-array",
+            "title": "How can I create a circular mask for a numpy array?",
+            "body": "<p>I am trying to circular mask an image in Python. I found some example code on the web, but I'm not sure how to change the maths to get my circle in the correct place.</p>\n\n<p>I have an image <code>image_data</code> of type <code>numpy.ndarray</code> with shape <code>(3725, 4797, 3)</code>:</p>\n\n<pre><code>total_rows, total_cols, total_layers = image_data.shape\nX, Y = np.ogrid[:total_rows, :total_cols]\ncenter_row, center_col = total_rows/2, total_cols/2\ndist_from_center = (X - total_rows)**2 + (Y - total_cols)**2\nradius = (total_rows/2)**2\ncircular_mask = (dist_from_center &gt; radius)\n</code></pre>\n\n<p>I see that this code applies <em>euclidean distance</em> to calculate <code>dist_from_center</code>, but I don't understand the <code>X - total_rows</code> and <code>Y - total_cols</code> part. This produces a mask that is a quarter of a circle, centered on the top-left of the image.</p>\n\n<p>What role are <code>X</code> and <code>Y</code> playing on the circle? And how can I modify this code to produce a mask that is centered somewhere else in the image instead?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9558
+}

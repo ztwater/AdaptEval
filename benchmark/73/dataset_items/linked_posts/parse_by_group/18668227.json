@@ -1,0 +1,520 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "namespaces",
+                "argparse"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 808621,
+                        "reputation": 360780,
+                        "user_id": 908494,
+                        "user_type": "registered",
+                        "accept_rate": 25,
+                        "display_name": "abarnert"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1378511845,
+                    "post_id": 18668227,
+                    "comment_id": 27494010,
+                    "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces#comment27494010_18668227",
+                    "body": "I&#39;m not sure how you expect this to work. As you&#39;ve written it, <code>filter1</code> and <code>filter2</code> are on the top-level parser, not in some child parser named <code>filter</code>. How could argparse know that you want it to act as a child of each sub-parser, when it isn&#39;t?"
+                },
+                {
+                    "owner": {
+                        "account_id": 231940,
+                        "reputation": 91771,
+                        "user_id": 496445,
+                        "user_type": "registered",
+                        "accept_rate": 97,
+                        "display_name": "jdi"
+                    },
+                    "reply_to_user": {
+                        "account_id": 808621,
+                        "reputation": 360780,
+                        "user_id": 908494,
+                        "user_type": "registered",
+                        "accept_rate": 25,
+                        "display_name": "abarnert"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1378512626,
+                    "post_id": 18668227,
+                    "comment_id": 27494190,
+                    "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces#comment27494190_18668227",
+                    "body": "@abarnert: I should probably reformat my example based on your question. Because really the structure I put together is not appropriate, as you have pointed out. My goal really is to be able to apply groups of options to subparsers, and have them parse into a namespace. It would be nice if they could be common, which is why I tried using the parent structure."
+                },
+                {
+                    "owner": {
+                        "account_id": 808621,
+                        "reputation": 360780,
+                        "user_id": 908494,
+                        "user_type": "registered",
+                        "accept_rate": 25,
+                        "display_name": "abarnert"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1378513290,
+                    "post_id": 18668227,
+                    "comment_id": 27494306,
+                    "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces#comment27494306_18668227",
+                    "body": "So you&#39;re looking for something like <code>pip</code>, <code>git</code>, etc., where there are, in addition to top-level global options, and options specific to each subcommand, also options shared by multiple different subcommands (e.g., the <code>--verbose</code>, <code>--upgrade</code>, and <code>--user</code> options to <code>pip</code>, respectively), and be able to represent that sharing directly instead of making it implicit (by copying option groups to multiple subparsers)?"
+                },
+                {
+                    "owner": {
+                        "account_id": 808621,
+                        "reputation": 360780,
+                        "user_id": 908494,
+                        "user_type": "registered",
+                        "accept_rate": 25,
+                        "display_name": "abarnert"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1378513517,
+                    "post_id": 18668227,
+                    "comment_id": 27494339,
+                    "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces#comment27494339_18668227",
+                    "body": "Or you just want exactly what <code>add_argument_group</code> does (and you&#39;re fine copying the group around), except that you want the grouped arguments to appear in a sub-namespace in the results? Because that one would be very easy with a post-processor: for each group, create a sub-namespace, iterate the main namespace, and each argument that&#39;s a member of the group, move it to the sub-namespace. But making that work with sub-parsers will be a bit more complicated, if you need that as well."
+                },
+                {
+                    "owner": {
+                        "account_id": 231940,
+                        "reputation": 91771,
+                        "user_id": 496445,
+                        "user_type": "registered",
+                        "accept_rate": 97,
+                        "display_name": "jdi"
+                    },
+                    "reply_to_user": {
+                        "account_id": 808621,
+                        "reputation": 360780,
+                        "user_id": 908494,
+                        "user_type": "registered",
+                        "accept_rate": 25,
+                        "display_name": "abarnert"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1378515951,
+                    "post_id": 18668227,
+                    "comment_id": 27494751,
+                    "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces#comment27494751_18668227",
+                    "body": "@abarnert: Yep, you are right. I should be using an argument group, and doing post processing after the fact. Thanks for the answer!"
+                },
+                {
+                    "owner": {
+                        "account_id": 1486414,
+                        "reputation": 14855,
+                        "user_id": 1394590,
+                        "user_type": "registered",
+                        "accept_rate": 79,
+                        "display_name": "bgusach"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1430312956,
+                    "post_id": 18668227,
+                    "comment_id": 48010187,
+                    "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces#comment48010187_18668227",
+                    "body": "Offtopic, once you try <code>docopt</code>, you will never ever go back to argparse/optparse/whatever..."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 231940,
+                                "reputation": 91771,
+                                "user_id": 496445,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "jdi"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1378515880,
+                            "post_id": 18668600,
+                            "comment_id": 27494737,
+                            "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces/18668600#comment27494737_18668600",
+                            "body": "Yep this pretty much answers my question. I had first started by looking at groups, and it seems to only group them in terms of help, out of the box. So you have explained that it does require some manual post processing, which is fine. Just needed to see an example like this showing that is it the required approach with argparse. Thanks!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 808621,
+                                "reputation": 360780,
+                                "user_id": 908494,
+                                "user_type": "registered",
+                                "accept_rate": 25,
+                                "display_name": "abarnert"
+                            },
+                            "reply_to_user": {
+                                "account_id": 231940,
+                                "reputation": 91771,
+                                "user_id": 496445,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "jdi"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1378516451,
+                            "post_id": 18668600,
+                            "comment_id": 27494828,
+                            "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces/18668600#comment27494828_18668600",
+                            "body": "@jdi: As I said in the answer, I think extending argparse through subclassing instead of postprocessing might be easier here. Group objects are something you could easily build on to do more, with little change to the parser object. And that&#39;s probably more idiomatic, too. But whichever one you feel more comfortable with is probably fine."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 808621,
+                        "reputation": 360780,
+                        "user_id": 908494,
+                        "user_type": "registered",
+                        "accept_rate": 25,
+                        "display_name": "abarnert"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 10,
+                    "last_activity_date": 1378515112,
+                    "creation_date": 1378515112,
+                    "answer_id": 18668600,
+                    "question_id": 18668227,
+                    "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces/18668600#18668600",
+                    "body": "<p>I'm not entirely sure what you're asking, but I think what you want is for an <a href=\"http://docs.python.org/3/library/argparse.html#argument-groups\">argument group</a> or <a href=\"http://docs.python.org/3/library/argparse.html#sub-commands\">sub-command</a> to put its arguments into a sub-namespace.</p>\n\n<p>As far as I know, <code>argparse</code> does not do this out of the box. But it really isn't hard to do by postprocessing the result, as long as you're willing to dig under the covers a bit. (I'm guessing it's even easier to do it by subclassing <code>ArgumentParser</code>, but you explicitly said you don't want to do that, so I didn't try that.)</p>\n\n<pre><code>parser = argparse.ArgumentParser()\nparser.add_argument('--foo')\nbreakfast = parser.add_argument_group('breakfast')\nbreakfast.add_argument('--spam')\nbreakfast.add_argument('--eggs')\nargs = parser.parse_args()\n</code></pre>\n\n<p>Now, the list of all destinations for <code>breakfast</code> options is:</p>\n\n<pre><code>[action.dest for action in breakfast._group_actions]\n</code></pre>\n\n<p>And the key-value pairs in <code>args</code> is:</p>\n\n<pre><code>args._get_kwargs()\n</code></pre>\n\n<p>So, all we have to to is move the ones that match. It'll be a little easier if we construct dictionaries to create the namespaces from:</p>\n\n<pre><code>breakfast_options = [action.dest for action in breakfast._group_actions]\ntop_names = {name: value for (name, value) in args._get_kwargs()\n             if name not in breakfast_options}\nbreakfast_names = {name: value for (name, value) in args._get_kwargs()\n                   if name in breakfast_options}\ntop_names['breakfast'] = argparse.Namespace(**breakfast_names)\ntop_namespace = argparse.Namespace(**top_names)\n</code></pre>\n\n<p>And that's it; <code>top_namespace</code> looks like:</p>\n\n<pre><code>Namespace(breakfast=Namespace(eggs=None, spam='7'), foo='bar')\n</code></pre>\n\n<hr>\n\n<p>Of course in this case, we've got one static group. What if you wanted a more general solution? Easy. <code>parser._action_groups</code> is a list of all groups, but the first two are the global positional and keyword groups. So, just iterate over <code>parser._action_groups[2:]</code>, and do the same thing for each that you did for <code>breakfast</code> above.</p>\n\n<hr>\n\n<p>What about sub-commands instead of groups? Similar, but the details are different. If you've kept around each <code>subparser</code> object, it's just whole other <code>ArgumentParser</code>. If not, but you did keep the <code>subparsers</code> object, it's a special type of <code>Action</code>, whose <code>choices</code> is a dict whose keys are the subparser names and whose values are the subparsers themselves. If you kept neither\u2026 start at <code>parser._subparsers</code> and figure it out from there.</p>\n\n<p>At any rate, once you know how to find the names you want to move and where you want to move them, it's the same as with groups.</p>\n\n<hr>\n\n<p>If you've got, in addition to global args and/or groups and subparser-specific args and/or groups, some groups that are shared by multiple subparsers\u2026 then conceptually it gets tricky, because each subparser ends up with references to the same group, and you can't move it to al of them. But fortunately, you're only dealing with exactly one subparser (or none), so you can just ignore the other subparsers and move any shared group under the selected subparser (and any group that <em>doesn't</em> exist in the selected subparser, either leave at the top, or throw away, or pick one subparser arbitrarily).</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 231940,
+                                "reputation": 91771,
+                                "user_id": 496445,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "jdi"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1378543847,
+                            "post_id": 18669652,
+                            "comment_id": 27499552,
+                            "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces/18669652#comment27499552_18669652",
+                            "body": "This is a cool example of how to get it parsing via monkey patching... although the downside is that it uses the known/unknown args approach, which means the filters are not documented or managed through argparse."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 485561,
+                        "reputation": 227434,
+                        "user_id": 901925,
+                        "user_type": "registered",
+                        "display_name": "hpaulj"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1378531248,
+                    "last_edit_date": 1378531248,
+                    "creation_date": 1378527508,
+                    "answer_id": 18669652,
+                    "question_id": 18668227,
+                    "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces/18669652#18669652",
+                    "body": "<p>In this script I have modified the <code>__call__</code> method of the argparse._SubParsersAction.  Instead of passing the <code>namespace</code> on to the subparser, it passes a new one.  It then adds that to the main <code>namespace</code>.  I only change 3 lines of <code>__call__</code>.</p>\n\n<pre><code>import argparse\n\ndef mycall(self, parser, namespace, values, option_string=None):\n    parser_name = values[0]\n    arg_strings = values[1:]\n\n    # set the parser name if requested\n    if self.dest is not argparse.SUPPRESS:\n        setattr(namespace, self.dest, parser_name)\n\n    # select the parser\n    try:\n        parser = self._name_parser_map[parser_name]\n    except KeyError:\n        args = {'parser_name': parser_name,\n                'choices': ', '.join(self._name_parser_map)}\n        msg = _('unknown parser %(parser_name)r (choices: %(choices)s)') % args\n        raise argparse.ArgumentError(self, msg)\n\n    # CHANGES\n    # parse all the remaining options into a new namespace\n    # store any unrecognized options on the main namespace, so that the top\n    # level parser can decide what to do with them\n    newspace = argparse.Namespace()\n    newspace, arg_strings = parser.parse_known_args(arg_strings, newspace)\n    setattr(namespace, 'subspace', newspace) # is there a better 'dest'?\n\n    if arg_strings:\n        vars(namespace).setdefault(argparse._UNRECOGNIZED_ARGS_ATTR, [])\n        getattr(namespace, argparse._UNRECOGNIZED_ARGS_ATTR).extend(arg_strings)\n\nargparse._SubParsersAction.__call__ = mycall\n\n# Main parser\nmain_parser = argparse.ArgumentParser()\nmain_parser.add_argument(\"--common\")\n\n# sub commands\nsubparsers = main_parser.add_subparsers(dest='command')\n\nparser_a = subparsers.add_parser('command_a')\nparser_a.add_argument(\"--foo\")\nparser_a.add_argument(\"--bar\")\n\nparser_b = subparsers.add_parser('command_b')\nparser_b.add_argument(\"--biz\")\nparser_b.add_argument(\"--baz\")\n\n# parse\ninput = 'command_a --foo bar --bar val --filter extra'.split()\nnamespace = main_parser.parse_known_args(input)\nprint namespace\n\ninput = '--common test command_b --biz bar --baz val'.split()\nnamespace = main_parser.parse_args(input)\nprint namespace\n</code></pre>\n\n<p>This produces:</p>\n\n<pre><code>(Namespace(command='command_a', common=None, \n    subspace=Namespace(bar='val', foo='bar')), \n['--filter', 'extra'])\n\nNamespace(command='command_b', common='test', \n    subspace=Namespace(baz='val', biz='bar'))\n</code></pre>\n\n<p>I used <code>parse_known_args</code> to test how extra strings are passed back to the main parser.</p>\n\n<p>I dropped the <code>parents</code> stuff because it does not add anything to this namespace change.  it is just a convenient way of defining a set of arguments that several subparsers use.  <code>argparse</code> does not keep a record of which arguments were added via <code>parents</code>, and which were added directly.  It is not a grouping tool</p>\n\n<p><code>argument_groups</code> don't help much either.  They are used by the Help formatter, but not by <code>parse_args</code>.</p>\n\n<p>I could subclass <code>_SubParsersAction</code> (instead of reassigning <code>__call__</code>), but then I'd have change the <code>main_parse.register</code>.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 231940,
+                                "reputation": 91771,
+                                "user_id": 496445,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "jdi"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1378598485,
+                            "post_id": 18677482,
+                            "comment_id": 27513018,
+                            "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces/18677482#comment27513018_18677482",
+                            "body": "Yep. I&#39;m going to accept this one instead of the previously accepted answer because this really does solve my goal using features of argparse (the custom action). And actually... the dot-notation &quot;dest&quot; was exactly what I was hoping for initially. Thanks!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 231940,
+                                "reputation": 91771,
+                                "user_id": 496445,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "jdi"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1378600431,
+                            "post_id": 18677482,
+                            "comment_id": 27513275,
+                            "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces/18677482#comment27513275_18677482",
+                            "body": "I made some additions to your GroupedAction, to have it clean up the top-level original attribute, and also optionally derive the group/field from the options: <a href=\"http://pastebin.com/qgQBBuvP\" rel=\"nofollow noreferrer\">pastebin.com/qgQBBuvP</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 808621,
+                                "reputation": 360780,
+                                "user_id": 908494,
+                                "user_type": "registered",
+                                "accept_rate": 25,
+                                "display_name": "abarnert"
+                            },
+                            "reply_to_user": {
+                                "account_id": 231940,
+                                "reputation": 91771,
+                                "user_id": 496445,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "jdi"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1378747820,
+                            "post_id": 18677482,
+                            "comment_id": 27556318,
+                            "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces/18677482#comment27556318_18677482",
+                            "body": "@jdi: This is exactly what I meant when I said it would probably be better to extend argparse with custom parsing by subclassing; I only showed how to do it otherwise because your question implied that you didn&#39;t want to do it this way. I agree that this is a great answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 231940,
+                                "reputation": 91771,
+                                "user_id": 496445,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "jdi"
+                            },
+                            "reply_to_user": {
+                                "account_id": 808621,
+                                "reputation": 360780,
+                                "user_id": 908494,
+                                "user_type": "registered",
+                                "accept_rate": 25,
+                                "display_name": "abarnert"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1378760191,
+                            "post_id": 18677482,
+                            "comment_id": 27562264,
+                            "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces/18677482#comment27562264_18677482",
+                            "body": "@abarnert: I don&#39;t think I ever implied that I didn&#39;t want an option that subclassed. Just the opposite actually. I was asking about using built in facilities, which subclassing does fulfill.  Since it works directly with existing parsing logic. I have found though that this approach has led to a bit more work overall because when you do one custom action then you have to do more, to handle happens, bool consts, etc. But it is working."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 485561,
+                                "reputation": 227434,
+                                "user_id": 901925,
+                                "user_type": "registered",
+                                "display_name": "hpaulj"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1378767666,
+                            "post_id": 18677482,
+                            "comment_id": 27564869,
+                            "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces/18677482#comment27564869_18677482",
+                            "body": "How about, instead, creating a custom Namespace class, one that takes a <code>dest</code> like <code>group.dest</code>, and creates the required nested objects?  The Namespace class as defined is very simple.  As long as your new class works with <code>getattr</code>, <code>hasattr</code> and <code>setattr</code> it can be a lot fancier."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 12109326,
+                                "reputation": 484,
+                                "user_id": 10421103,
+                                "user_type": "registered",
+                                "display_name": "LeanMan"
+                            },
+                            "reply_to_user": {
+                                "account_id": 231940,
+                                "reputation": 91771,
+                                "user_id": 496445,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "jdi"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1639791155,
+                            "post_id": 18677482,
+                            "comment_id": 124446395,
+                            "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces/18677482#comment124446395_18677482",
+                            "body": "@jdi How has this design stood the test of time?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 231940,
+                                "reputation": 91771,
+                                "user_id": 496445,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "jdi"
+                            },
+                            "reply_to_user": {
+                                "account_id": 12109326,
+                                "reputation": 484,
+                                "user_id": 10421103,
+                                "user_type": "registered",
+                                "display_name": "LeanMan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1639880080,
+                            "post_id": 18677482,
+                            "comment_id": 124460738,
+                            "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces/18677482#comment124460738_18677482",
+                            "body": "@LeanMan I can&#39;t really say since I haven&#39;t done anything like this again in recent years."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 485561,
+                        "reputation": 227434,
+                        "user_id": 901925,
+                        "user_type": "registered",
+                        "display_name": "hpaulj"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": true,
+                    "score": 16,
+                    "last_activity_date": 1378585528,
+                    "last_edit_date": 1378585528,
+                    "creation_date": 1378584749,
+                    "answer_id": 18677482,
+                    "question_id": 18668227,
+                    "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces/18677482#18677482",
+                    "body": "<p>If the focus is on just putting selected arguments in their own <code>namespace</code>, and the use of subparsers (and parents) is incidental to the issue, this custom action might do the trick.</p>\n\n<pre><code>class GroupedAction(argparse.Action):    \n    def __call__(self, parser, namespace, values, option_string=None):\n        group,dest = self.dest.split('.',2)\n        groupspace = getattr(namespace, group, argparse.Namespace())\n        setattr(groupspace, dest, values)\n        setattr(namespace, group, groupspace)\n</code></pre>\n\n<p>There are various ways of specifying the <code>group</code> name.  It could be passed as an argument when defining the Action.  It could be added as parameter.  Here I chose to parse it from the <code>dest</code> (so <code>namespace.filter.filter1</code> can get the value of <code>filter.filter1</code>.</p>\n\n<pre><code># Main parser\nmain_parser = argparse.ArgumentParser()\nmain_parser.add_argument(\"-common\")\n\nfilter_parser = argparse.ArgumentParser(add_help=False)\nfilter_parser.add_argument(\"--filter1\", action=GroupedAction, dest='filter.filter1', default=argparse.SUPPRESS)\nfilter_parser.add_argument(\"--filter2\", action=GroupedAction, dest='filter.filter2', default=argparse.SUPPRESS)\n\nsubparsers = main_parser.add_subparsers(help='sub-command help')\n\nparser_a = subparsers.add_parser('command_a', help=\"command_a help\", parents=[filter_parser])\nparser_a.add_argument(\"--foo\")\nparser_a.add_argument(\"--bar\")\nparser_a.add_argument(\"--bazers\", action=GroupedAction, dest='anotherGroup.bazers', default=argparse.SUPPRESS)\n...\nnamespace = main_parser.parse_args()\nprint namespace\n</code></pre>\n\n<p>I had to add <code>default=argparse.SUPPRESS</code> so a <code>bazers=None</code> entry does not appear in the main namespace.   </p>\n\n<p>Result:</p>\n\n<pre><code>&gt;&gt;&gt; python PROG command_a --foo bar --filter1 val --bazers val\nNamespace(anotherGroup=Namespace(bazers='val'), \n    bar=None, common=None, \n    filter=Namespace(filter1='val'), \n    foo='bar')\n</code></pre>\n\n<p>If you need default entries in the nested namespaces, you could define the namespace before hand:</p>\n\n<pre><code>filter_namespace = argparse.Namespace(filter1=None, filter2=None)\nnamespace = argparse.Namespace(filter=filter_namespace)\nnamespace = main_parser.parse_args(namespace=namespace)\n</code></pre>\n\n<p>result as before, except for:</p>\n\n<pre><code>filter=Namespace(filter1='val', filter2=None)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 231940,
+                                "reputation": 91771,
+                                "user_id": 496445,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "jdi"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1378849348,
+                            "post_id": 18709860,
+                            "comment_id": 27600891,
+                            "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces/18709860#comment27600891_18709860",
+                            "body": "Oh cool. I didn&#39;t even consider just subclassing the Namespace. I like this in general, but since your last answer, I have found some benefit in also subclassing things like the ArgumentGroup to set a default metavar that matches the field, and also to register the custom actions. I&#39;m sure this custom namespace makes sense in combination."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 485561,
+                        "reputation": 227434,
+                        "user_id": 901925,
+                        "user_type": "registered",
+                        "display_name": "hpaulj"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1378836187,
+                    "last_edit_date": 1378836187,
+                    "creation_date": 1378780255,
+                    "answer_id": 18709860,
+                    "question_id": 18668227,
+                    "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces/18709860#18709860",
+                    "body": "<p>Nesting with <code>Action</code> subclasses is fine for one type of Action, but is a nuisance if you need to subclass  several types (store,  store true, append, etc).  Here's another idea - subclass Namespace.  Do the same sort of name split and setattr, but do it in the Namespace rather than the Action.  Then just create an instance of the new class, and pass it to <code>parse_args</code>.  </p>\n\n<pre><code>class Nestedspace(argparse.Namespace):\n    def __setattr__(self, name, value):\n        if '.' in name:\n            group,name = name.split('.',1)\n            ns = getattr(self, group, Nestedspace())\n            setattr(ns, name, value)\n            self.__dict__[group] = ns\n        else:\n            self.__dict__[name] = value\n\np = argparse.ArgumentParser()\np.add_argument('--foo')\np.add_argument('--bar', dest='test.bar')\nprint(p.parse_args('--foo test --bar baz'.split()))\n\nns = Nestedspace()\nprint(p.parse_args('--foo test --bar baz'.split(), ns))\np.add_argument('--deep', dest='test.doo.deep')\nargs = p.parse_args('--foo test --bar baz --deep doodod'.split(), Nestedspace())\nprint(args)\nprint(args.test.doo)\nprint(args.test.doo.deep)\n</code></pre>\n\n<p>producing:</p>\n\n<pre><code>Namespace(foo='test', test.bar='baz')\nNestedspace(foo='test', test=Nestedspace(bar='baz'))\nNestedspace(foo='test', test=Nestedspace(bar='baz', doo=Nestedspace(deep='doodod')))\nNestedspace(deep='doodod')\ndoodod\n</code></pre>\n\n<p>The <code>__getattr__</code> for this namespace (needed for actions like count and append) could be:</p>\n\n<pre><code>def __getattr__(self, name):\n    if '.' in name:\n        group,name = name.split('.',1)\n        try:\n            ns = self.__dict__[group]\n        except KeyError:\n            raise AttributeError\n        return getattr(ns, name)\n    else:\n        raise AttributeError\n</code></pre>\n\n<p>I've proposed several other options, but like this the best.  It puts the storage details where they belong, in the Namespace, not the parser.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1110800,
+                        "reputation": 49,
+                        "user_id": 1101290,
+                        "user_type": "registered",
+                        "display_name": "user1101290"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1430312757,
+                    "last_edit_date": 1430312757,
+                    "creation_date": 1381713781,
+                    "answer_id": 19352223,
+                    "question_id": 18668227,
+                    "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces/19352223#19352223",
+                    "body": "<p>Please check out the <a href=\"http://pythonhosted.org//argpext/\" rel=\"nofollow\">argpext module</a> on <a href=\"https://pypi.python.org/pypi/argpext/1.3.2\" rel=\"nofollow\">PyPi</a>, it may help you!</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1198411,
+                        "reputation": 469,
+                        "user_id": 1199891,
+                        "user_type": "registered",
+                        "display_name": "sphakka"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1400080110,
+                    "creation_date": 1400080110,
+                    "answer_id": 23658555,
+                    "question_id": 18668227,
+                    "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces/23658555#23658555",
+                    "body": "<p>Starting from abarnert's answer, I put together the following MWE++ ;-) that handles multiple configuration groups with similar option names.</p>\n\n<pre><code>#!/usr/bin/env python2\nimport argparse, re\n\ncmdl_skel = {\n    'description'       : 'An example of multi-level argparse usage.',\n    'opts'              : {\n        '--foo' : {\n            'type'    : int,\n            'default' : 0,\n            'help'    : 'foo help main',\n        },\n        '--bar' : {\n            'type'    : str,\n            'default' : 'quux',\n            'help'    : 'bar help main',\n        },\n    },\n    # Assume your program uses sub-programs with their options. Argparse will\n    # first digest *all* defs, so opts with the same name across groups are\n    # forbidden. The trick is to use the module name (=&gt; group.title) as\n    # pseudo namespace which is stripped off at group parsing\n    'groups' : [\n        {   'module'        : 'mod1',\n            'description'   : 'mod1 description',\n            'opts'          : {\n                '--mod1-foo, --mod1.foo'  : {\n                    'type'    : int,\n                    'default' : 0,\n                    'help'    : 'foo help for mod1'\n                },\n            },\n        },\n        {   'module'        : 'mod2',\n            'description'   : 'mod2 description',\n            'opts'          : {\n                '--mod2-foo, --mod2.foo'  : {\n                    'type'    : int,\n                    'default' : 1,\n                    'help'    : 'foo help for mod2'\n                },\n            },\n        },\n    ],\n    'args'              : {\n        'arg1'  : {\n            'type'    : str,\n            'help'    : 'arg1 help',\n        },\n        'arg2'  : {\n            'type'    : str,\n            'help'    : 'arg2 help',\n        },\n    }\n}\n\n\ndef parse_args ():\n    def _parse_group (parser, opt, **optd):\n        # digest variants\n        optv = re.split('\\s*,\\s*', opt)\n        # this may rise exceptions...\n        parser.add_argument(*optv, **optd)\n\n    errors = {}\n    parser = argparse.ArgumentParser(description=cmdl_skel['description'],\n                formatter_class=argparse.ArgumentDefaultsHelpFormatter)\n\n    # it'd be nice to loop in a single run over zipped lists, but they have\n    # different lenghts...\n    for opt in cmdl_skel['opts'].keys():\n        _parse_group(parser, opt, **cmdl_skel['opts'][opt])\n\n    for arg in cmdl_skel['args'].keys():\n        _parse_group(parser, arg, **cmdl_skel['args'][arg])\n\n    for grp in cmdl_skel['groups']:\n        group = parser.add_argument_group(grp['module'], grp['description'])\n        for mopt in grp['opts'].keys():\n            _parse_group(group, mopt, **grp['opts'][mopt])\n\n    args = parser.parse_args()\n\n    all_group_opts = []\n    all_group_names = {}\n    for group in parser._action_groups[2:]:\n        gtitle = group.title\n        group_opts = [action.dest for action in group._group_actions]\n        all_group_opts += group_opts\n        group_names = {\n            # remove the leading pseudo-namespace\n            re.sub(\"^%s_\" % gtitle, '', name) : value\n                for (name, value) in args._get_kwargs()\n                    if name in group_opts\n        }\n        # build group namespace\n        all_group_names[gtitle] = argparse.Namespace(**group_names)\n\n    # rebuild top namespace\n    top_names = {\n        name: value for (name, value) in args._get_kwargs()\n            if name not in all_group_opts\n    }\n    top_names.update(**all_group_names)\n    top_namespace = argparse.Namespace(**top_names)\n\n    return top_namespace\n\n\ndef main():\n    args = parse_args()\n\n    print(str(args))\n    print(args.bar)\n    print(args.mod1.foo)\n\n\nif __name__ == '__main__':\n    main()\n</code></pre>\n\n<p>Then you can call it like this (mnemonic: <code>--mod1-...</code> are options for \"mod1\", etc.):</p>\n\n<pre><code>$ ./argparse_example.py one two --bar=three --mod1-foo=11231 --mod2.foo=46546\nNamespace(arg1='one', arg2='two', bar='three', foo=0, mod1=Namespace(foo=11231), mod2=Namespace(foo=46546))\nthree\n11231\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3398900,
+                        "reputation": 662,
+                        "user_id": 2851704,
+                        "user_type": "registered",
+                        "accept_rate": 33,
+                        "display_name": "Ali250"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1560775268,
+                    "creation_date": 1560775268,
+                    "answer_id": 56631542,
+                    "question_id": 18668227,
+                    "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces/56631542#56631542",
+                    "body": "<p>Based on the answer by @abarnert, I wrote a simple function that does what the OP wants:</p>\n\n<pre><code>from argparse import Namespace, ArgumentParser\n\n\ndef parse_args(parser):\n    assert isinstance(parser, ArgumentParser)\n    args = parser.parse_args()\n\n    # the first two argument groups are 'positional_arguments' and 'optional_arguments'\n    pos_group, optional_group = parser._action_groups[0], parser._action_groups[1]\n    args_dict = args._get_kwargs()\n    pos_optional_arg_names = [arg.dest for arg in pos_group._group_actions] + [arg.dest for arg in optional_group._group_actions]\n    pos_optional_args = {name: value for name, value in args_dict if name in pos_optional_arg_names}\n    other_group_args = dict()\n\n    # If there are additional argument groups, add them as nested namespaces\n    if len(parser._action_groups) &gt; 2:\n        for group in parser._action_groups[2:]:\n            group_arg_names = [arg.dest for arg in group._group_actions]\n            other_group_args[group.title] = Namespace(**{name: value for name, value in args_dict if name in group_arg_names})\n\n    # combine the positiona/optional args and the group args\n    combined_args = pos_optional_args\n    combined_args.update(other_group_args)\n    return Namespace(**combined_args)\n</code></pre>\n\n<p>You just give it the <code>ArgumentParser</code> instance and it returns a nested <code>NameSpace</code> according to the group structure of the arguments.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 231940,
+                "reputation": 91771,
+                "user_id": 496445,
+                "user_type": "registered",
+                "accept_rate": 97,
+                "display_name": "jdi"
+            },
+            "comment_count": 6,
+            "is_answered": true,
+            "accepted_answer_id": 18677482,
+            "answer_count": 7,
+            "score": 17,
+            "last_activity_date": 1560775268,
+            "creation_date": 1378511583,
+            "last_edit_date": 1495541864,
+            "question_id": 18668227,
+            "link": "https://stackoverflow.com/questions/18668227/argparse-subcommands-with-nested-namespaces",
+            "title": "argparse subcommands with nested namespaces",
+            "body": "<p>Does <a href=\"http://docs.python.org/2.7/library/argparse.html\" rel=\"noreferrer\">argparse</a> provide built-in facilities for having it parse groups or parsers into their own namespaces? I feel like I must be missing an option somewhere.</p>\n\n<p><em>Edit</em>: This example is probably not exactly what I should be doing to structure the parser to meet my goal, but it was what I worked out so far. My specific goal is to be able to give subparsers groups of options that are parsed into namespace fields. The idea I had with parent was simply to use common options for this same purpose.</p>\n\n<p>Example:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>import argparse\n\n# Main parser\nmain_parser = argparse.ArgumentParser()\nmain_parser.add_argument(\"-common\")\n\n# filter parser\nfilter_parser = argparse.ArgumentParser(add_help=False)\nfilter_parser.add_argument(\"-filter1\")\nfilter_parser.add_argument(\"-filter2\")\n\n# sub commands\nsubparsers = main_parser.add_subparsers(help='sub-command help')\n\nparser_a = subparsers.add_parser('command_a', help=\"command_a help\", parents=[filter_parser])\nparser_a.add_argument(\"-foo\")\nparser_a.add_argument(\"-bar\")\n\nparser_b = subparsers.add_parser('command_b', help=\"command_b help\", parents=[filter_parser])\nparser_b.add_argument(\"-biz\")\nparser_b.add_argument(\"-baz\")\n\n# parse\nnamespace = main_parser.parse_args()\nprint namespace\n</code></pre>\n\n<p>This is what I get, obviously:</p>\n\n<pre><code>$ python test.py command_a -foo bar -filter1 val\nNamespace(bar=None, common=None, filter1='val', filter2=None, foo='bar')\n</code></pre>\n\n<p>But this is what I am really after:</p>\n\n<pre><code>Namespace(bar=None, common=None, foo='bar', \n          filter=Namespace(filter1='val', filter2=None))\n</code></pre>\n\n<p>And then even more groups of options already parsed into namespaces:</p>\n\n<pre><code>Namespace(common=None, \n          foo='bar', bar=None,  \n          filter=Namespace(filter1='val', filter2=None),\n          anotherGroup=Namespace(bazers='val'),\n          anotherGroup2=Namespace(fooers='val'),\n          )\n</code></pre>\n\n<p>I've found a <a href=\"https://stackoverflow.com/questions/15782948/how-to-have-sub-parser-arguments-in-separate-namespace-with-argparse\">related question here</a> but it involves some custom parsing and seems to only covers a really specific circumstance.</p>\n\n<p>Is there an option somewhere to tell argparse to parse certain groups into namespaced fields?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9860
+}

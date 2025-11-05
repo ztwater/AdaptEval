@@ -1,0 +1,154 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "numpy"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 6428404,
+                        "reputation": 22582,
+                        "user_id": 5087436,
+                        "user_type": "registered",
+                        "display_name": "alkasm"
+                    },
+                    "edited": false,
+                    "score": 2,
+                    "creation_date": 1498039548,
+                    "post_id": 44672029,
+                    "comment_id": 76330097,
+                    "link": "https://stackoverflow.com/questions/44672029/difference-between-numpy-linalg-solve-and-numpy-linalg-lu-solve#comment76330097_44672029",
+                    "body": "How is this redundant? Not every LU-decomposition goes immediately into a solver. Similarly, if you&#39;re working with LU matrices then you have a solver you can use with your current matrix forms."
+                },
+                {
+                    "owner": {
+                        "account_id": 1253923,
+                        "reputation": 2789,
+                        "user_id": 1213793,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "Tengis"
+                    },
+                    "reply_to_user": {
+                        "account_id": 6428404,
+                        "reputation": 22582,
+                        "user_id": 5087436,
+                        "user_type": "registered",
+                        "display_name": "alkasm"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1498083904,
+                    "post_id": 44672029,
+                    "comment_id": 76358452,
+                    "link": "https://stackoverflow.com/questions/44672029/difference-between-numpy-linalg-solve-and-numpy-linalg-lu-solve#comment76358452_44672029",
+                    "body": "why would you want to have a LU-decomposition if not for solving am equation system?"
+                },
+                {
+                    "owner": {
+                        "account_id": 6428404,
+                        "reputation": 22582,
+                        "user_id": 5087436,
+                        "user_type": "registered",
+                        "display_name": "alkasm"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1498108554,
+                    "post_id": 44672029,
+                    "comment_id": 76364683,
+                    "link": "https://stackoverflow.com/questions/44672029/difference-between-numpy-linalg-solve-and-numpy-linalg-lu-solve#comment76364683_44672029",
+                    "body": "Well you can get other information from an LU-decomposition---determinant, rank, etc. But I&#39;ve seen it mostly used in the other direction---creating a LU matrix and then solving a system with it."
+                },
+                {
+                    "owner": {
+                        "account_id": 1253923,
+                        "reputation": 2789,
+                        "user_id": 1213793,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "Tengis"
+                    },
+                    "reply_to_user": {
+                        "account_id": 6428404,
+                        "reputation": 22582,
+                        "user_id": 5087436,
+                        "user_type": "registered",
+                        "display_name": "alkasm"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1498110194,
+                    "post_id": 44672029,
+                    "comment_id": 76365357,
+                    "link": "https://stackoverflow.com/questions/44672029/difference-between-numpy-linalg-solve-and-numpy-linalg-lu-solve#comment76365357_44672029",
+                    "body": "For these information <code>numpy.linalg</code> offers the appropriate functions."
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 3594075,
+                        "reputation": 9735,
+                        "user_id": 2999346,
+                        "user_type": "registered",
+                        "display_name": "francis"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 11,
+                    "last_activity_date": 1498173673,
+                    "last_edit_date": 1498173673,
+                    "creation_date": 1498171484,
+                    "answer_id": 44710451,
+                    "question_id": 44672029,
+                    "link": "https://stackoverflow.com/questions/44672029/difference-between-numpy-linalg-solve-and-numpy-linalg-lu-solve/44710451#44710451",
+                    "body": "<p>Indeed you are right: <strong>chaining scipy's <code>scipy.linalg.lu_factor()</code> and <code>scipy.linalg.lu_solve()</code> is perfectly equivalent to numpy's <code>numpy.linalg.solve()</code>.</strong> Nevertheless, <strong>having access to the LU decomposition is a great advantage in practical situations.</strong></p>\n\n<p>First, let's proove the equivalence. <a href=\"https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.solve.html\" rel=\"noreferrer\"><code>numpy.linalg.solve()</code></a> states that:</p>\n\n<blockquote>\n  <p>The solutions are computed using LAPACK routine _gesv</p>\n</blockquote>\n\n<p>Indeed, the <a href=\"https://github.com/numpy/numpy/tree/master/numpy/linalg\" rel=\"noreferrer\">github repository of numpy</a> contains a lite version of LAPACK.\nThen, let's take a look at the source of <a href=\"http://www.netlib.org/lapack/explore-html/d8/d72/dgesv_8f_source.html\" rel=\"noreferrer\"><code>dgesv</code></a> of LAPACK. The LU factorization of the matrix is computed and used to solve the linear system. Indeed, the source code of the function is very clear: appart for input checking, it boils down to calling <code>dgetrf</code> (LU factorization) and <code>dgetrs</code>. Finally, <a href=\"https://github.com/scipy/scipy/blob/v0.14.0/scipy/linalg/decomp_lu.py#L17\" rel=\"noreferrer\"><code>scipy.linalg.lu_factor()</code></a> and <a href=\"https://github.com/scipy/scipy/blob/v0.19.0/scipy/linalg/decomp_lu.py#L75-L125\" rel=\"noreferrer\"><code>scipy.linalg.lu_solve()</code></a> respectively wraps <code>dgetrf</code> and <code>dgetrs</code>, featuring lines like <code>getrf, = get_lapack_funcs(('getrf',), (a1,))</code> and <code>getrs, = get_lapack_funcs(('getrs',), (lu, b1))</code>. </p>\n\n<p>As noticed by  @Alexander Reynolds , the LU decomposition can be useful to compute the determinant and the rank of the matrix. Indeed, regarding the determinant, <strong><code>numpy.det</code> call the LU factorization _getrf !</strong> See the <a href=\"https://github.com/numpy/numpy/blob/v1.12.0/numpy/linalg/umath_linalg.c.src#L1095\" rel=\"noreferrer\">source of numpy.linalg</a>. Nevertheless, numpy compute the rank of matrices using the SVD decomposition. </p>\n\n<p>But computing the rank using LU is not the only reason for exposing interfaces to <code>dgetrf</code> and <code>dgetrs</code>. There are indeed common situations where caling <code>dgetrf</code> once, keeping the LU factorization in memory and calling <code>dgetrs</code> many times is a decisive advantage. Look at <strong><a href=\"https://en.wikipedia.org/wiki/Iterative_refinement\" rel=\"noreferrer\">iterative refinement</a></strong> for instance. It must be noticed that <strong>computing the LU factorization takes much more time (N^3) than solving a linear system using the factorization (N^2).</strong></p>\n\n<p>Let's take a look at the <strong><a href=\"https://en.wikipedia.org/wiki/Newton&#39;s_method\" rel=\"noreferrer\">Newton-Raphson method</a> to solve a system of coupled non-linear equation</strong> F(x)=0 where F: R^N->R^N. Performing a Newton-Raphson iteration requires solving a linear system where the matrix is the Jacobian matrix J:</p>\n\n<p><img src=\"https://latex.codecogs.com/gif.latex?J%28x_i%29.x_%7Bi&plus;1%7D%3DJ%28x_i%29.x_i-f%28x_i%29\" alt=\"\"></p>\n\n<p>where x_{i+1} is the unknown. The Jacobian J(x_i) is often expensive to compute, not to mension the fact that the system must be solved. As a result, <strong>quasi Newton methods</strong> are often considered, where approximations of the Jacobian are built. A straightforward idea is not to update the Jacobian matrix every iteration and keep iterating as long as a norm of the residu decreases. <strong>In such a process, <code>dgetrf</code> is called from time to time, while <code>dgetrs</code> is called once for every iteration.</strong> See <a href=\"https://dianafea.com/manuals/d943/Analys/node386.html\" rel=\"noreferrer\">there</a> for a scheme. Let's look at an exemple : let's try to solve x^2=1 starting at x_0=2. For 4 iterations of the Newton method, we get f(x_4)=9.2e-8 and f(x_5)&lt;1e-13. But if the Jacobian is updated once every ten iterations, only two evaluations of the Jacobian are required to get f(x_12)=5.7e-11 and f(x_13)=2.2e-14. </p>\n\n<p><a href=\"https://i.stack.imgur.com/ciX98.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/ciX98m.png\" alt=\"enter image description here\"></a> <a href=\"https://i.stack.imgur.com/azsKg.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/azsKgm.png\" alt=\"enter image description here\"></a></p>\n\n<p>There are even more efficient strategies which consist in <strong>updating the LU decomposition once every iteration without factoring any matrix.</strong> See <a href=\"http://www.ams.org/journals/mcom/1982-38-158/S0025-5718-1982-0645663-8/S0025-5718-1982-0645663-8.pdf\" rel=\"noreferrer\">\"Direct Secant Updates of Matrix Factorizations\"</a> of Denis and Marwil and <a href=\"https://users.wpi.edu/~walker/Papers/qn_methods_for_stiff_ODEs,SISSC_6,1985,297-313.pdf\" rel=\"noreferrer\">\"EXPERIMENTS WITH QUASI-NEWTON METHODS IN SOLVING STIFF ODE SYSTEMS\"</a> by Brown et. al.</p>\n\n<p>As a result, in <a href=\"https://en.wikiversity.org/wiki/Nonlinear_finite_elements\" rel=\"noreferrer\">non-linear finite element analysis</a>, the assembly of the tangent stiffness is not always evaluated every Newton iteration (<a href=\"http://www.code-aster.org/doc/v11/en/man_u/u4/u4.51.03.pdf\" rel=\"noreferrer\">option of Code_Aster in paragraph 3.10.2\nMATRICE </a> or <a href=\"https://dianafea.com/manuals/d943/Analys/node386.html\" rel=\"noreferrer\">diana</a> or <a href=\"http://www.nidaeurope.com/free-guides/38-numerical-methods-for-nonlinear-analysis\" rel=\"noreferrer\">here</a> or <a href=\"https://www.sharcnet.ca/Software/Ansys/16.2.3/en-us/help/ans_thry/thy_tool10.html\" rel=\"noreferrer\">there</a>. </p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 8382566,
+                        "reputation": 805,
+                        "user_id": 6293961,
+                        "user_type": "registered",
+                        "accept_rate": 60,
+                        "display_name": "W. Zhu"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1632030011,
+                    "creation_date": 1632030011,
+                    "answer_id": 69240590,
+                    "question_id": 44672029,
+                    "link": "https://stackoverflow.com/questions/44672029/difference-between-numpy-linalg-solve-and-numpy-linalg-lu-solve/69240590#69240590",
+                    "body": "<p>The time complexity of <code>solve</code> is O(n\u00b3), while that of <code>lu_solve</code> is O(n\u00b2). But that of <code>lu_factor</code> is O(n\u00b3). So, when you have many systems <code>Ax=b</code> with the same <code>A</code> but different <code>b</code>s, it is more efficient to <code>lu_factor</code> once and <code>lu_solve</code> than to use <code>solve</code>.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 1253923,
+                "reputation": 2789,
+                "user_id": 1213793,
+                "user_type": "registered",
+                "accept_rate": 78,
+                "display_name": "Tengis"
+            },
+            "comment_count": 4,
+            "is_answered": true,
+            "answer_count": 2,
+            "score": 5,
+            "last_activity_date": 1632030011,
+            "creation_date": 1498037196,
+            "last_edit_date": 1498110268,
+            "question_id": 44672029,
+            "link": "https://stackoverflow.com/questions/44672029/difference-between-numpy-linalg-solve-and-numpy-linalg-lu-solve",
+            "title": "Difference between numpy.linalg.solve and numpy.linalg.lu_solve",
+            "body": "<p>To solve a linear matrix equation one can use <code>numpy.linalg.solve</code>\nwhich implements LAPACK routine <a href=\"http://www.netlib.org/lapack/explore-html/d7/d3b/group__double_g_esolve_ga5ee879032a8365897c3ba91e3dc8d512.html#ga5ee879032a8365897c3ba91e3dc8d512\" rel=\"noreferrer\">*gesv</a>. </p>\n\n<p>According to the documentation </p>\n\n<pre><code>DGESV computes the solution to a real system of linear equations\n    A * X = B,\n where A is an N-by-N matrix and X and B are N-by-NRHS matrices.\n\n The LU decomposition with partial pivoting and row interchanges is\n used to factor A as\n    A = P * L * U,\n where P is a permutation matrix, L is unit lower triangular, and U is\n upper triangular.  The factored form of A is then used to solve the\n system of equations A * X = B.\n</code></pre>\n\n<p>However, we can also use <code>scipy.linalg.lu_factor()</code> and <code>scipy.linalg.lu_solve()</code>\nin order to solve our problem, where <code>lu_factor()</code> is </p>\n\n<pre><code>Compute pivoted LU decomposition of a matrix.\n\nThe decomposition is:\n\nA = P L U\n\nwhere P is a permutation matrix, \nL lower triangular with unit diagonal elements, \nand U upper triangular.\n</code></pre>\n\n<p>So apparently the two methods seem to be redundant. Is there any sense for this redundancy? Seems confusing to me..</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9873
+}

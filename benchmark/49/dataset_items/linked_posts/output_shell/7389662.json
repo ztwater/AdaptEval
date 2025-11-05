@@ -1,0 +1,268 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "command",
+                "subprocess",
+                "pipe",
+                "popen"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 514239,
+                        "reputation": 662,
+                        "user_id": 1317713,
+                        "user_type": "registered",
+                        "display_name": "Leonid"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1402537310,
+                    "post_id": 7389662,
+                    "comment_id": 37315348,
+                    "link": "https://stackoverflow.com/questions/7389662/link-several-popen-commands-with-pipes#comment37315348_7389662",
+                    "body": "Related Question: <a href=\"http://stackoverflow.com/questions/295459/how-do-i-use-subprocess-popen-to-connect-multiple-processes-by-pipes\" title=\"how do i use subprocess popen to connect multiple processes by pipes\">stackoverflow.com/questions/295459/&hellip;</a>"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 514239,
+                                "reputation": 662,
+                                "user_id": 1317713,
+                                "user_type": "registered",
+                                "display_name": "Leonid"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1402537123,
+                            "post_id": 7389857,
+                            "comment_id": 37315312,
+                            "link": "https://stackoverflow.com/questions/7389662/link-several-popen-commands-with-pipes/7389857#comment37315312_7389857",
+                            "body": "Would you please show a full, working example of how to chain three processes together. For example, I am not sure how many times I need to call communicate and when to close <code>stdin</code> and <code>stdout</code> (docs mention closing <code>stdout</code> and the answer below shows closing <code>stdin</code>. Thanks."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 453377,
+                                "reputation": 9972,
+                                "user_id": 850326,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "djhaskin987"
+                            },
+                            "reply_to_user": {
+                                "account_id": 514239,
+                                "reputation": 662,
+                                "user_id": 1317713,
+                                "user_type": "registered",
+                                "display_name": "Leonid"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1440185027,
+                            "post_id": 7389857,
+                            "comment_id": 52185192,
+                            "link": "https://stackoverflow.com/questions/7389662/link-several-popen-commands-with-pipes/7389857#comment52185192_7389857",
+                            "body": "@Leonid you should only need to call communicate <i>once</i> on the last process, since you&#39;ve spawned all of them and chained them together. So, if you have processes <code>p1</code>, <code>p2</code>, ...., <code>pn</code>, just call <code>pn.communicate()</code> at the end."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 279320,
+                        "reputation": 1515,
+                        "user_id": 574408,
+                        "user_type": "registered",
+                        "display_name": "Alex Smith"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 49,
+                    "last_activity_date": 1315849485,
+                    "last_edit_date": 1315849485,
+                    "creation_date": 1315839501,
+                    "answer_id": 7389857,
+                    "question_id": 7389662,
+                    "link": "https://stackoverflow.com/questions/7389662/link-several-popen-commands-with-pipes/7389857#7389857",
+                    "body": "<p>I think you want to instantiate two separate Popen objects here, one for 'ls' and the other for 'sed'. You'll want to pass the first Popen object's <code>stdout</code> attribute as the <code>stdin</code> argument to the 2nd Popen object.</p>\n\n<p>Example:</p>\n\n<pre><code>p1 = subprocess.Popen('ls ...', stdout=subprocess.PIPE)\np2 = subprocess.Popen('sed ...', stdin=p1.stdout, stdout=subprocess.PIPE)\nprint p2.communicate()\n</code></pre>\n\n<p>You can keep chaining this way if you have more commands:</p>\n\n<pre><code>p3 = subprocess.Popen('prog', stdin=p2.stdout, ...)\n</code></pre>\n\n<p>See the <a href=\"http://docs.python.org/library/subprocess.html\" rel=\"noreferrer\">subprocess documentation</a> for more info on how to work with subprocesses.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 514239,
+                                "reputation": 662,
+                                "user_id": 1317713,
+                                "user_type": "registered",
+                                "display_name": "Leonid"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1402536937,
+                            "post_id": 7389886,
+                            "comment_id": 37315266,
+                            "link": "https://stackoverflow.com/questions/7389662/link-several-popen-commands-with-pipes/7389886#comment37315266_7389886",
+                            "body": "The example uses the following line: <code>p1.stdout.close()  # Allow p1 to receive a SIGPIPE if p2 exits.</code>. Should I utilize it as well?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 112612,
+                                "reputation": 90240,
+                                "user_id": 296974,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "glglgl"
+                            },
+                            "reply_to_user": {
+                                "account_id": 514239,
+                                "reputation": 662,
+                                "user_id": 1317713,
+                                "user_type": "registered",
+                                "display_name": "Leonid"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1402539579,
+                            "post_id": 7389886,
+                            "comment_id": 37315878,
+                            "link": "https://stackoverflow.com/questions/7389662/link-several-popen-commands-with-pipes/7389886#comment37315878_7389886",
+                            "body": "@Leonid Yes. If you don&#39;t, <code>p1</code> will try to write and doesn&#39;t get notified about no one listening any longer. As your program still has this file open, but doesn&#39;t read, you get a deadlock."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9721690,
+                                "reputation": 180,
+                                "user_id": 7210223,
+                                "user_type": "registered",
+                                "display_name": "Wotchin"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1666338043,
+                            "post_id": 7389886,
+                            "comment_id": 130917654,
+                            "link": "https://stackoverflow.com/questions/7389662/link-several-popen-commands-with-pipes/7389886#comment130917654_7389886",
+                            "body": "Thanks for your answer. I found out that if I forget to close the stdin, the whole cascaded process will hang."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 112612,
+                                "reputation": 90240,
+                                "user_id": 296974,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "glglgl"
+                            },
+                            "reply_to_user": {
+                                "account_id": 9721690,
+                                "reputation": 180,
+                                "user_id": 7210223,
+                                "user_type": "registered",
+                                "display_name": "Wotchin"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1666372046,
+                            "post_id": 7389886,
+                            "comment_id": 130929425,
+                            "link": "https://stackoverflow.com/questions/7389662/link-several-popen-commands-with-pipes/7389886#comment130929425_7389886",
+                            "body": "@Wotchin Of course. That&#39;s because the first process expects that more data come in, thus doesn&#39;t close its stdout as well, and that happens across the whole pipe. Just the same if you do <code>cat | sort | head</code>: if you don&#39;t press <code>^D</code>, <code>cat</code> waits for more input, <code>sort</code> cannot start and <code>head</code> also not."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 112612,
+                        "reputation": 90240,
+                        "user_id": 296974,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "glglgl"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1489070906,
+                    "last_edit_date": 1489070906,
+                    "creation_date": 1315839608,
+                    "answer_id": 7389886,
+                    "question_id": 7389662,
+                    "link": "https://stackoverflow.com/questions/7389662/link-several-popen-commands-with-pipes/7389886#7389886",
+                    "body": "<p><code>shlex</code> only splits up spaces according to the shell rules, but does not deal with pipes.</p>\n\n<p>It should, however, work this way:</p>\n\n<pre><code>import subprocess\nimport shlex\n\nsp_ls = subprocess.Popen(shlex.split(r'ls -l'), stdin = subprocess.PIPE, stdout = subprocess.PIPE, stderr = subprocess.PIPE)\nsp_sed = subprocess.Popen(shlex.split(r'sed \"s/a/b/g\"'), stdin = sp_ls.stdout, stdout = subprocess.PIPE, stderr = subprocess.PIPE)\nsp_ls.stdin.close() # makes it similiar to /dev/null\noutput = sp_ls.communicate()[0] # which makes you ignore any errors.\nprint output\n</code></pre>\n\n<p>according to <code>help(subprocess)</code>'s</p>\n\n<pre><code>Replacing shell pipe line\n-------------------------\noutput=`dmesg | grep hda`\n==&gt;\np1 = Popen([\"dmesg\"], stdout=PIPE)\np2 = Popen([\"grep\", \"hda\"], stdin=p1.stdout, stdout=PIPE)\noutput = p2.communicate()[0]\n</code></pre>\n\n<p>HTH</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4099650,
+                        "reputation": 945,
+                        "user_id": 3365529,
+                        "user_type": "registered",
+                        "display_name": "hernvnc"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1429553909,
+                    "creation_date": 1429553909,
+                    "answer_id": 29755431,
+                    "question_id": 7389662,
+                    "link": "https://stackoverflow.com/questions/7389662/link-several-popen-commands-with-pipes/29755431#29755431",
+                    "body": "<p>I've made a little function to help with the piping, hope it helps. It will chain Popens as needed.</p>\n\n<pre><code>from subprocess import Popen, PIPE\nimport shlex\n\ndef run(cmd):\n  \"\"\"Runs the given command locally and returns the output, err and exit_code.\"\"\"\n  if \"|\" in cmd:    \n    cmd_parts = cmd.split('|')\n  else:\n    cmd_parts = []\n    cmd_parts.append(cmd)\n  i = 0\n  p = {}\n  for cmd_part in cmd_parts:\n    cmd_part = cmd_part.strip()\n    if i == 0:\n      p[i]=Popen(shlex.split(cmd_part),stdin=None, stdout=PIPE, stderr=PIPE)\n    else:\n      p[i]=Popen(shlex.split(cmd_part),stdin=p[i-1].stdout, stdout=PIPE, stderr=PIPE)\n    i = i +1\n  (output, err) = p[i-1].communicate()\n  exit_code = p[0].wait()\n\n  return str(output), str(err), exit_code\n\noutput, err, exit_code = run(\"ls -lha /var/log | grep syslog | grep gz\")\n\nif exit_code != 0:\n  print \"Output:\"\n  print output\n  print \"Error:\"\n  print err\n  # Handle error here\nelse:\n  # Be happy :D\n  print output\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6122631,
+                        "reputation": 111,
+                        "user_id": 4775706,
+                        "user_type": "registered",
+                        "display_name": "Russell"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1554581890,
+                    "last_edit_date": 1554581890,
+                    "creation_date": 1490139512,
+                    "answer_id": 42940195,
+                    "question_id": 7389662,
+                    "link": "https://stackoverflow.com/questions/7389662/link-several-popen-commands-with-pipes/42940195#42940195",
+                    "body": "<pre><code>\"\"\"\nWhy don't you use shell\n\n\"\"\"\n\ndef output_shell(line):\n\n    try:\n        shell_command = Popen(line, stdout=PIPE, stderr=PIPE, shell=True)\n    except OSError:\n        return None\n    except ValueError:\n        return None\n\n    (output, err) = shell_command.communicate()\n    shell_command.wait()\n    if shell_command.returncode != 0:\n        print \"Shell command failed to execute\"\n        return None\n    return str(output)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 9721690,
+                        "reputation": 180,
+                        "user_id": 7210223,
+                        "user_type": "registered",
+                        "display_name": "Wotchin"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1666338473,
+                    "creation_date": 1666338473,
+                    "answer_id": 74150341,
+                    "question_id": 7389662,
+                    "link": "https://stackoverflow.com/questions/7389662/link-several-popen-commands-with-pipes/74150341#74150341",
+                    "body": "<p>Thank @hernvnc, @glglgl, and @Jacques Gaudin for the answers. I fixed the code from @hernvnc. His version will cause hanging in some scenarios.</p>\n<pre><code>import shlex\nfrom subprocess import PIPE\nfrom subprocess import Popen\ndef run(cmd, input=None):\n    &quot;&quot;&quot;Runs the given command locally and returns the output, err and exit_code.&quot;&quot;&quot;\n    if &quot;|&quot; in cmd:        \n        cmd_parts = cmd.split('|')\n    else:\n        cmd_parts = []\n        cmd_parts.append(cmd)\n    i = 0\n    p = {}\n    for cmd_part in cmd_parts:\n        cmd_part = cmd_part.strip()\n        if i == 0:\n            if input:\n                p[i]=Popen(shlex.split(cmd_part),stdin=PIPE, stdout=PIPE, stderr=PIPE)\n            else:\n                p[i]=Popen(shlex.split(cmd_part),stdin=None, stdout=PIPE, stderr=PIPE)\n        else:\n            p[i]=Popen(shlex.split(cmd_part),stdin=p[i-1].stdout, stdout=PIPE, stderr=PIPE)\n        i = i +1\n    # close the stdin explicitly, otherwise, the following case will hang.\n    if input:\n        p[0].stdin.write(input)\n        p[0].stdin.close()\n    (output, err) = p[i-1].communicate()\n    exit_code = p[0].wait()\n    return str(output), str(err), exit_code\n\n# test case below\ninp = b'[  CMServer State   ]\\n\\nnode        node_ip         instance state\\n--------------------------------------------\\n1  linux172 10.90.56.172    1        Primary\\n2  linux173 10.90.56.173    2        Standby\\n3  linux174 10.90.56.174    3        Standby\\n\\n[    ETCD State     ]\\n\\nnode        node_ip         instance state\\n--------------------------------------------------\\n1  linux172 10.90.56.172    7001     StateFollower\\n2  linux173 10.90.56.173    7002     StateLeader\\n3  linux174 10.90.56.174    7003     StateFollower\\n\\n[   Cluster State   ]\\n\\ncluster_state   : Normal\\nredistributing  : No\\nbalanced        : No\\ncurrent_az      : AZ_ALL\\n\\n[  Datanode State   ]\\n\\nnode        node_ip         instance state            | node        node_ip         instance state            | node        node_ip         instance state\\n------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\n1  linux172 10.90.56.172    6001     P Standby Normal | 2  linux173 10.90.56.173    6002     S Primary Normal | 3  linux174 10.90.56.174    6003     S Standby Normal'\ncmd = &quot;grep -E 'Primary' | tail -1 | awk '{print $3}'&quot;\n\nrun(cmd, input=inp)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "user_type": "does_not_exist",
+                "display_name": "user940797"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "answer_count": 5,
+            "score": 32,
+            "last_activity_date": 1666338473,
+            "creation_date": 1315838636,
+            "question_id": 7389662,
+            "link": "https://stackoverflow.com/questions/7389662/link-several-popen-commands-with-pipes",
+            "title": "link several Popen commands with pipes",
+            "body": "<p>I know how to run a command using cmd = subprocess.Popen and then subprocess.communicate.\nMost of the time I use a string tokenized with shlex.split as 'argv' argument for Popen.\nExample with \"ls -l\":</p>\n\n<pre><code>import subprocess\nimport shlex\nprint subprocess.Popen(shlex.split(r'ls -l'), stdin = subprocess.PIPE, stdout = subprocess.PIPE, stderr = subprocess.PIPE).communicate()[0]\n</code></pre>\n\n<p>However, pipes seem not to work... For instance, the following example returns noting:</p>\n\n<pre><code>import subprocess\nimport shlex\nprint subprocess.Popen(shlex.split(r'ls -l | sed \"s/a/b/g\"'), stdin = subprocess.PIPE, stdout = subprocess.PIPE, stderr = subprocess.PIPE).communicate()[0]\n</code></pre>\n\n<p>Can you tell me what I am doing wrong please?</p>\n\n<p>Thx</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9900
+}

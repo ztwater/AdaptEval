@@ -1,0 +1,8 @@
+print("greeting:", hasattr(Person, 'greeting'))
+print("name:", hasattr(Person, 'name'))
+print("age:", hasattr(Person, 'age'))
+print("gender:", hasattr(Person, 'gender'))
+print("test:", hasattr(Person, 'test'))
+print("__init__:", hasattr(Person, '__init__'))
+print("__str__:", hasattr(Person, '__str__'))
+print("__module__:", hasattr(Person, '__module__'))

@@ -1,0 +1,159 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "pytorch"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4600819,
+                                "reputation": 4950,
+                                "user_id": 3731622,
+                                "user_type": "registered",
+                                "accept_rate": 36,
+                                "display_name": "user3731622"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1692206076,
+                            "post_id": 55869581,
+                            "comment_id": 135593297,
+                            "link": "https://stackoverflow.com/questions/53841509/how-does-adaptive-pooling-in-pytorch-work/55869581#comment135593297_55869581",
+                            "body": "The source code for in AdaptiveAveragePooling.cpp does not show the actual algorithm.  Instead it calls <code>adaptive_avg_pool2d_kernel</code> which is defined somewhere else.  Where is <code>adaptive_avg_pool2d_kernel</code> defined?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3153195,
+                                "reputation": 750,
+                                "user_id": 2666182,
+                                "user_type": "registered",
+                                "accept_rate": 57,
+                                "display_name": "gokul_uf"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4600819,
+                                "reputation": 4950,
+                                "user_id": 3731622,
+                                "user_type": "registered",
+                                "accept_rate": 36,
+                                "display_name": "user3731622"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1712064139,
+                            "post_id": 55869581,
+                            "comment_id": 137972569,
+                            "link": "https://stackoverflow.com/questions/53841509/how-does-adaptive-pooling-in-pytorch-work/55869581#comment137972569_55869581",
+                            "body": "@user3731622 did you manage to find the definition?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4600819,
+                                "reputation": 4950,
+                                "user_id": 3731622,
+                                "user_type": "registered",
+                                "accept_rate": 36,
+                                "display_name": "user3731622"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3153195,
+                                "reputation": 750,
+                                "user_id": 2666182,
+                                "user_type": "registered",
+                                "accept_rate": 57,
+                                "display_name": "gokul_uf"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1714006788,
+                            "post_id": 55869581,
+                            "comment_id": 138184639,
+                            "link": "https://stackoverflow.com/questions/53841509/how-does-adaptive-pooling-in-pytorch-work/55869581#comment138184639_55869581",
+                            "body": "@gokul_uf I did not find the definition"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3912571,
+                        "reputation": 4591,
+                        "user_id": 3237438,
+                        "user_type": "registered",
+                        "display_name": "hkchengrex"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 44,
+                    "last_activity_date": 1590553385,
+                    "last_edit_date": 1590553385,
+                    "creation_date": 1556288349,
+                    "answer_id": 55869581,
+                    "question_id": 53841509,
+                    "link": "https://stackoverflow.com/questions/53841509/how-does-adaptive-pooling-in-pytorch-work/55869581#55869581",
+                    "body": "<p>In general, pooling reduces dimensions. If you want to increase dimensions, you might want to look at <a href=\"https://pytorch.org/docs/stable/nn.html#interpolate\" rel=\"noreferrer\">interpolation</a>.</p>\n\n<p>Anyway, let's talk about adaptive pooling in general. You can look at the source code <a href=\"https://github.com/pytorch/pytorch/blob/master/aten/src/ATen/native/AdaptiveAveragePooling.cpp\" rel=\"noreferrer\">here</a>. Some claimed that adaptive pooling is the same as standard pooling with stride and kernel size calculated from input and output size. Specifically, the following parameters are used:</p>\n\n<ol>\n<li>Stride = <code>(input_size//output_size)</code></li>\n<li>Kernel size = <code>input_size - (output_size-1)*stride</code></li>\n<li>Padding = <code>0</code></li>\n</ol>\n\n<p>These are inversely worked from the pooling <a href=\"http://cs231n.github.io/convolutional-networks/#pool\" rel=\"noreferrer\">formula</a>. While they <em>DO</em> produce output of the desired size, its output is not necessarily the same as that of adaptive pooling. Here is a test snippet:</p>\n\n<pre class=\"lang-python prettyprint-override\"><code>import torch\nimport torch.nn as nn\n\nin_length = 5\nout_length = 3\n\nx = torch.arange(0, in_length).view(1, 1, -1).float()\nprint(x)\n\nstride = (in_length//out_length)\navg_pool = nn.AvgPool1d(\n        stride=stride,\n        kernel_size=(in_length-(out_length-1)*stride),\n        padding=0,\n    )\nadaptive_pool = nn.AdaptiveAvgPool1d(out_length)\n\nprint(avg_pool.stride, avg_pool.kernel_size)\n\ny_avg = avg_pool(x)\ny_ada = adaptive_pool(x)\n\nprint(y_avg)\nprint(y_ada)\n</code></pre>\n\n<p>Output:</p>\n\n<pre><code>tensor([[[0., 1., 2., 3., 4.]]])\n(1,) (3,)\ntensor([[[1., 2., 3.]]])\ntensor([[[0.5000, 2.0000, 3.5000]]])\nError:  1.0\n</code></pre>\n\n<p>Average pooling pools from elements (0, 1, 2), (1, 2, 3) and (2, 3, 4).</p>\n\n<p>Adaptive pooling pools from elements (0, 1), (1, 2, 3) and (3, 4). (Change the code a bit to see that it is not pooling from (2) only)</p>\n\n<ul>\n<li>You can tell adaptive pooling tries to <em>reduce overlapping</em> in pooling.</li>\n<li>The difference can be mitigated using padding with <code>count_include_pad=True</code>, but in general I don't think they can be exactly the same for 2D or higher for all input/output sizes. I would imagine using different paddings for left/right. This is not supported in pooling layers for the moment.</li>\n<li>From a practical perspective it should not matter much. </li>\n<li>Check the <a href=\"https://github.com/pytorch/pytorch/blob/master/aten/src/ATen/native/AdaptiveAveragePooling.cpp\" rel=\"noreferrer\">code</a> for actual implementation.</li>\n</ul>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 9353984,
+                                "reputation": 5559,
+                                "user_id": 6942666,
+                                "user_type": "registered",
+                                "accept_rate": 33,
+                                "display_name": "Eric Wiener"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1602376466,
+                            "post_id": 63603993,
+                            "comment_id": 113700790,
+                            "link": "https://stackoverflow.com/questions/53841509/how-does-adaptive-pooling-in-pytorch-work/63603993#comment113700790_63603993",
+                            "body": "Do you happen to know the reason that padding=0?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 281531,
+                        "reputation": 27904,
+                        "user_id": 577888,
+                        "user_type": "registered",
+                        "accept_rate": 55,
+                        "display_name": "algal"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 32,
+                    "last_activity_date": 1598468029,
+                    "creation_date": 1598468029,
+                    "answer_id": 63603993,
+                    "question_id": 53841509,
+                    "link": "https://stackoverflow.com/questions/53841509/how-does-adaptive-pooling-in-pytorch-work/63603993#63603993",
+                    "body": "<p>As hkchengrex's answer points out, the PyTorch documentation does not explain what rule is used by adaptive pooling layers to determine the size and locations of the pooling kernels. (In fact, there is a <a href=\"https://github.com/pytorch/pytorch/blob/b0424a895c878cb865947164cb0ce9ce3c2e73ef/torch/nn/modules/pooling.py#L944\" rel=\"noreferrer\">fixme in the PyTorch code</a> indicating the documentation needs to be improved.)</p>\n<p>However, the calculation of the kernel sizes and locations <a href=\"https://github.com/pytorch/pytorch/blob/51861cc9b19d9c483598e39932661822a826d3a2/aten/src/ATen/native/AdaptiveAveragePooling.cpp#L44\" rel=\"noreferrer\">is implemented by this cpp function</a> and the key logic is actually in the calls to the functions <code>start_index</code> and <code>end_index</code>, which define the location and offset of the kernels.</p>\n<p>I believe this Python code re-implements that code and shows how kernels are calculated:</p>\n<pre class=\"lang-py prettyprint-override\"><code>from typing import List\nimport math\ndef kernels(ind,outd) -&gt; List:\n    &quot;&quot;&quot;Returns a List [(kernel_offset_start,kernel_length)] defining all the pooling kernels for a 1-D adaptive pooling layer that takes an input of dimension `ind` and yields an output of dimension `outd`&quot;&quot;&quot;\n    def start_index(a,b,c):\n        return math.floor((float(a) * float(c)) / b)\n    def end_index(a,b,c):\n        return math.ceil((float(a + 1) * float(c)) / b)\n    results = []\n    for ow in range(outd):\n        start = start_index(ow,outd,ind)\n        end = end_index(ow,outd,ind)\n        sz = end - start\n        results.append((start,sz))\n    return results\n\ndef kernel_indexes(ind,out) -&gt; List:\n    &quot;&quot;&quot;Returns a List [[*ind]] containing the indexes of the pooling kernels&quot;&quot;&quot;\n    startsLengths = kernels(ind,out)\n    return [list(range(start,start+length)) for (start,length) in startsLengths]\n</code></pre>\n<p>Here are the key points to notice.</p>\n<p>First, it matters a lot whether the input dimension (<code>ind</code>) is an integer multiple of the output dimension (<code>outd</code>).</p>\n<p>Second, when this is the case, then the adaptive layer's kernels are equally-sized and non-overlapping, and are exactly what would be produced by defining kernels and a stride based on the following rule:</p>\n<pre class=\"lang-py prettyprint-override\"><code>stride = ind // outd\nkernel_size = ind - (outd-1)*stride\npadding = 0\n</code></pre>\n<p>In other words, <em>in this case it is possible to reproduce the effect of an adaptive pooling layer by using a non-adaptive pooling layer</em> defined with suitable stride, kernel_size, and padding. (Example further below.)</p>\n<p>Finally, when instead it is the case that the input size is not an integer multiple of the output size, then PyTorch's adaptive pooling rule produces kernels which overlap and are of <em>variable size</em>.</p>\n<p>Since the non-adaptive pooling API does not allow for variably-sized kernels, in this case it seems to me <em>there is no way to reproduce the effect of adaptive pooling by feeding suitable values into a non-adaptive pooling layer</em>.</p>\n<p>Here's an example which shows both cases. This helper function lets us compare what's happening with adapative average pooling layer and an ordinary average pooling layer which uses fixed stride and kernel:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import torch\nimport torch.nn as nn\n\ndef compare1DAdaptivity(ind,outd,inputpattern):\n    c = 1\n    padding = 0\n\n    input = torch.Tensor(inputpattern).view(1,c,ind)\n\n    stride = ind // outd\n    kernel_size = (ind - (outd-1)*stride)\n    avg_pool = nn.AvgPool1d(stride=stride,kernel_size=kernel_size,padding=padding)\n    avg_out = avg_pool(input)\n\n    adap_avg_pool = torch.nn.AdaptiveAvgPool1d(outd)\n    adap_avg_out = adap_avg_pool(input)\n    \n    try:\n        equal_output = torch.allclose(avg_out,adap_avg_out)\n    except:\n        equal_output = False\n\n    print(&quot;input.shape: {}&quot;.format(input.shape))\n    print(&quot;in_dims: {}&quot;.format(ind))\n    print(&quot;out_dims: {}&quot;.format(outd))\n    print(&quot;&quot;)\n    print(&quot;AAL strides: {}&quot;.format(stride))\n    print(&quot;AAL kernel_sizes: {}&quot;.format(kernel_size))\n    print(&quot;AAL pad: {}&quot;.format(padding))\n    print(&quot;&quot;)\n    print(&quot;outputs equal: {}&quot;.format(equal_output))\n    print(&quot;&quot;)\n    print(&quot;AAL input -&gt; output: {} -&gt; {}&quot;.format(input,avg_out))\n    print(&quot;adap input -&gt; output: {} -&gt; {}&quot;.format(input,adap_avg_out))\n    return equal_output\n</code></pre>\n<p>So, to give an example of the first case, where the input dimension is a multiple of the output dimension, we can go from 6 to 3. We can see that the approximate adaptive layer and the true adaptive layer give the same output:</p>\n<pre><code>compare1DAdaptivity(6,3,[1,0,0,0,0]) # =&gt; Tue\nAAL input -&gt; output: tensor([[[1., 0., 0., 0., 0., 0.]]]) -&gt; tensor([[[0.5000, 0.0000, 0.0000]]])\nadap input -&gt; output: tensor([[[1., 0., 0., 0., 0., 0.]]]) -&gt; tensor([[[0.5000, 0.0000, 0.0000]]])\n</code></pre>\n<p>However, this no longer works if we go from 5 to 3.</p>\n<pre><code>compare1DAdaptivity(5,3,[1,0,0,0,0]) # =&gt; False\nAAL input -&gt; output: tensor([[[1., 0., 0., 0., 0.]]]) -&gt; tensor([[[0.3333, 0.0000, 0.0000]]])\nadap input -&gt; output: tensor([[[1., 0., 0., 0., 0.]]]) -&gt; tensor([[[0.5000, 0.0000, 0.0000]]])\n</code></pre>\n<p>But we can reproduce the result of the adaptive layers by manually computing over the indexes:</p>\n<pre class=\"lang-py prettyprint-override\"><code>t = [1,0,0,0,0]; [sum( [t[x] for x in xs] ) / len(xs) for xs in kernel_indexes(5,3)]\n# =&gt; [0.5,0.0,0.0]\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 11158408,
+                "reputation": 621,
+                "user_id": 8189391,
+                "user_type": "registered",
+                "display_name": "S C"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "answer_count": 2,
+            "score": 50,
+            "last_activity_date": 1615792756,
+            "creation_date": 1545169325,
+            "last_edit_date": 1615792756,
+            "question_id": 53841509,
+            "link": "https://stackoverflow.com/questions/53841509/how-does-adaptive-pooling-in-pytorch-work",
+            "title": "How does adaptive pooling in pytorch work?",
+            "body": "<p>Adaptive pooling is a great function, but how does it work?  It seems to be inserting pads or shrinking/expanding kernel sizes in what seems like a pattered but fairly arbitrary way.  The pytorch documentation I can find is not more descriptive than \"put desired output size here.\"  Does anyone know how this works or can point to where it's explained?</p>\n\n<p>Some test code on a 1x1x6 tensor, (1,2,3,4,5,6), with an adaptive output of size 8:</p>\n\n<pre><code>import torch\nimport torch.nn as nn\n\nclass TestNet(nn.Module):\n    def __init__(self):\n        super(TestNet, self).__init__()\n        self.avgpool = nn.AdaptiveAvgPool1d(8)\n\n    def forward(self,x):\n        print(x)\n        x = self.avgpool(x)\n        print(x)\n        return x\n\ndef test():\n    x = torch.Tensor([[[1,2,3,4,5,6]]])\n    net = TestNet()\n    y = net(x)\n    return y\n\ntest()\n</code></pre>\n\n<p>Output:</p>\n\n<pre><code>tensor([[[ 1.,  2.,  3.,  4.,  5.,  6.]]])\ntensor([[[ 1.0000,  1.5000,  2.5000,  3.0000,  4.0000,  4.5000,  5.5000,\n       6.0000]]])\n</code></pre>\n\n<p>If it mirror pads by on the left and right (operating on (1,1,2,3,4,5,6,6)), and has a kernel of 2, then the outputs for all positions except for 4 and 5 make sense, except of course the output isn't the right size.  Is it also padding the 3 and 4 internally?  If so, it's operating on (1,1,2,3,3,4,4,5,6,6), which, if using a size 2 kernel, produces the wrong output size and would also miss a 3.5 output.  Is it changing the size of the kernel?</p>\n\n<p>Am I missing something obvious about the way this works?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9294
+}

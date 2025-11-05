@@ -1,0 +1,644 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "directory"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 11163890,
+                                "reputation": 472,
+                                "user_id": 8193135,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "BlueTrack"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1509706020,
+                            "post_id": 47093793,
+                            "comment_id": 81137194,
+                            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/47093793#comment81137194_47093793",
+                            "body": "I mean in a for loop. Maybe I was wrong...Anyway, the answer do the job perfectly."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4595025,
+                                "reputation": 3673,
+                                "user_id": 3727348,
+                                "user_type": "registered",
+                                "display_name": "taras"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1509706154,
+                            "post_id": 47093793,
+                            "comment_id": 81137284,
+                            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/47093793#comment81137284_47093793",
+                            "body": "yep, this solution will not work in a few cases like:  1) recursion (if there are folders deeper than 1 level) 2) if folder has inner folders but has not files in it"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11163890,
+                                "reputation": 472,
+                                "user_id": 8193135,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "BlueTrack"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1509706247,
+                            "post_id": 47093793,
+                            "comment_id": 81137344,
+                            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/47093793#comment81137344_47093793",
+                            "body": "Which is what I want for this specific case. Thanks."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11311048,
+                                "reputation": 659,
+                                "user_id": 8294130,
+                                "user_type": "registered",
+                                "display_name": "sidcha"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1630065906,
+                            "post_id": 47093793,
+                            "comment_id": 121860620,
+                            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/47093793#comment121860620_47093793",
+                            "body": "Although this answers the question, has many issues! 1. What if root directory is empty? 2. What happens if a directory had all sub directories only? 3. You are converting the generator to a list just to skip the first element which you don&#39;t need to."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4595025,
+                        "reputation": 3673,
+                        "user_id": 3727348,
+                        "user_type": "registered",
+                        "display_name": "taras"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": true,
+                    "score": 16,
+                    "last_activity_date": 1596782462,
+                    "last_edit_date": 1596782462,
+                    "creation_date": 1509705664,
+                    "answer_id": 47093793,
+                    "question_id": 47093561,
+                    "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/47093793#47093793",
+                    "body": "<p>Not sure what kind of error you get, this works perfectly for me:</p>\n<pre><code>import os\n\nroot = 'FOLDER'\nfolders = list(os.walk(root))[1:]\n\nfor folder in folders:\n    # folder example: ('FOLDER/3', [], ['file'])\n    if not folder[2]:\n        os.rmdir(folder[0])\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 9212975,
+                                "reputation": 5180,
+                                "user_id": 6845383,
+                                "user_type": "registered",
+                                "display_name": "Moshe Slavin"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1598516613,
+                            "post_id": 59178861,
+                            "comment_id": 112486138,
+                            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/59178861#comment112486138_59178861",
+                            "body": "You will want to add <code>import shutil</code> to the imports in your answer"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6835964,
+                                "reputation": 475,
+                                "user_id": 5269463,
+                                "user_type": "registered",
+                                "display_name": "Anubioz"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1612889790,
+                            "post_id": 59178861,
+                            "comment_id": 116904465,
+                            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/59178861#comment116904465_59178861",
+                            "body": "You can shoot yourself in a leg with that, since os.listdir does not always correctly return files on network shares (e.g. &quot;hang&quot; nfs being in a process of re-mounting will show 0 in the moment of unmount), shutil.rmtree might leave you without files in those cases..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7608029,
+                                "reputation": 4495,
+                                "user_id": 5770004,
+                                "user_type": "registered",
+                                "display_name": "Gavriel Cohen"
+                            },
+                            "reply_to_user": {
+                                "account_id": 6835964,
+                                "reputation": 475,
+                                "user_id": 5269463,
+                                "user_type": "registered",
+                                "display_name": "Anubioz"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1612893202,
+                            "post_id": 59178861,
+                            "comment_id": 116906053,
+                            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/59178861#comment116906053_59178861",
+                            "body": "Hey @Anubioz, I did not come across the case as you describe, but I learned something, thanks :)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7608029,
+                        "reputation": 4495,
+                        "user_id": 5770004,
+                        "user_type": "registered",
+                        "display_name": "Gavriel Cohen"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1612891925,
+                    "last_edit_date": 1612891925,
+                    "creation_date": 1575471401,
+                    "answer_id": 59178861,
+                    "question_id": 47093561,
+                    "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/59178861#59178861",
+                    "body": "<p>Delete folder only if it is empty:</p>\n<pre><code>import os\nimport shutil\n\nif len(os.listdir(folder_path)) == 0: # Check if the folder is empty\n    shutil.rmtree(folder_path) # If so, delete it\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5394955,
+                                "reputation": 537,
+                                "user_id": 4296448,
+                                "user_type": "registered",
+                                "display_name": "P4C"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1590413578,
+                            "post_id": 61925409,
+                            "comment_id": 109662431,
+                            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/61925409#comment109662431_61925409",
+                            "body": "This does not work for folder with empty child folder. Child folder gets deleted but parent - even though is evaluated after deleting child - still sees the child folder in dirnames. Although topdown=False is nice."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5379308,
+                        "reputation": 193,
+                        "user_id": 6525968,
+                        "user_type": "registered",
+                        "display_name": "Insspb"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1590023515,
+                    "last_edit_date": 1590023515,
+                    "creation_date": 1590022793,
+                    "answer_id": 61925409,
+                    "question_id": 47093561,
+                    "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/61925409#61925409",
+                    "body": "<p>For empty folders deletion you can use this snippet. </p>\n\n<pre><code>import os\n\n\ndef drop_empty_folders(directory):\n    \"\"\"Verify that every empty folder removed in local storage.\"\"\"\n\n    for dirpath, dirnames, filenames in os.walk(directory, topdown=False):\n        if not dirnames and not filenames:\n            os.rmdir(dirpath)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3629120,
+                                "reputation": 7417,
+                                "user_id": 3025856,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Jeremy Caney"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1590983643,
+                            "post_id": 62122002,
+                            "comment_id": 109876426,
+                            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/62122002#comment109876426_62122002",
+                            "body": "Would you mind editing your answer to help readers understand why this approach might be preferable over the accepted answer (or, really, any of the previous three answers)?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2786211,
+                                "reputation": 818,
+                                "user_id": 2397542,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "AnotherHowie"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1600595657,
+                            "post_id": 62122002,
+                            "comment_id": 113132084,
+                            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/62122002#comment113132084_62122002",
+                            "body": "If you are going to use scandir, I think you don&#39;t get as much benefit if you use os.path.isdir() instead of entry.is_dir() - the whole point is that it is faster by not needing additional stat() calls, and os.path.isdir() is doing that stat() call, isn&#39;t it?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15901093,
+                                "reputation": 116,
+                                "user_id": 11473453,
+                                "user_type": "registered",
+                                "display_name": "ChungaBunga"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1654210582,
+                            "post_id": 62122002,
+                            "comment_id": 128043478,
+                            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/62122002#comment128043478_62122002",
+                            "body": "This only removes empty directories directly within the target directory but does not search the directory tree for empty directories to remove."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 18728698,
+                        "reputation": 31,
+                        "user_id": 13654679,
+                        "user_type": "registered",
+                        "display_name": "J&#225;cint Fodor"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1590993818,
+                    "last_edit_date": 1590993818,
+                    "creation_date": 1590956377,
+                    "answer_id": 62122002,
+                    "question_id": 47093561,
+                    "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/62122002#62122002",
+                    "body": "<pre><code>import os\n\ndirectory = r'path-to-directory'\n\nfor entry in os.scandir(directory):\n    if os.path.isdir(entry.path) and not os.listdir(entry.path) :\n        os.rmdir(entry.path)\n</code></pre>\n\n<p>Here you can find a good introduction/explanation to <a href=\"https://github.com/benhoyt/scandir/\" rel=\"nofollow noreferrer\">scandir</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1498881,
+                                "reputation": 175,
+                                "user_id": 1404170,
+                                "user_type": "registered",
+                                "display_name": "mfcallahan"
+                            },
+                            "edited": false,
+                            "score": 13,
+                            "creation_date": 1616525949,
+                            "post_id": 64025990,
+                            "comment_id": 118028859,
+                            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/64025990#comment118028859_64025990",
+                            "body": "<code>os.remove(path)</code> should be <a href=\"https://docs.python.org/3/library/os.html#os.rmdir\" rel=\"nofollow noreferrer\"><code>os.rmdir(path)</code></a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11748689,
+                                "reputation": 130,
+                                "user_id": 8598684,
+                                "user_type": "registered",
+                                "display_name": "Patrick Wu"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1664772826,
+                            "post_id": 64025990,
+                            "comment_id": 130540112,
+                            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/64025990#comment130540112_64025990",
+                            "body": "It does not have to be absolute path. Relative paths also work."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 12235201,
+                                "reputation": 2757,
+                                "user_id": 8929855,
+                                "user_type": "registered",
+                                "display_name": "swimmer"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1665487672,
+                            "post_id": 64025990,
+                            "comment_id": 130707127,
+                            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/64025990#comment130707127_64025990",
+                            "body": "The first two lines in the function can be replaced with a more idiomatic <code>for path, _, _ in os.walk(path_abs, topdown=False)</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 14648691,
+                        "reputation": 185,
+                        "user_id": 10579274,
+                        "user_type": "registered",
+                        "display_name": "Iv&#225;n B."
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 15,
+                    "last_activity_date": 1600857069,
+                    "creation_date": 1600857069,
+                    "answer_id": 64025990,
+                    "question_id": 47093561,
+                    "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/64025990#64025990",
+                    "body": "<p>You can remove all empty folders and subfolder with the following snippet.</p>\n<pre><code>import os\n\n\ndef remove_empty_folders(path_abs):\n    walk = list(os.walk(path_abs))\n    for path, _, _ in walk[::-1]:\n        if len(os.listdir(path)) == 0:\n            os.remove(path)\n\nif __name__ == '__main__':\n    remove_empty_folders(&quot;your-path&quot;)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 19608509,
+                        "reputation": 31,
+                        "user_id": 14351569,
+                        "user_type": "registered",
+                        "display_name": "xoelinho"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1642873554,
+                    "last_edit_date": 1642873554,
+                    "creation_date": 1603764270,
+                    "answer_id": 64547381,
+                    "question_id": 47093561,
+                    "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/64547381#64547381",
+                    "body": "<p>Almost what Iv\u00e1n B. said but with a minor change that worked for me</p>\n<pre class=\"lang-py prettyprint-override\"><code>import os, shutil\npath_abs=('YourPath')\nwalk = list(os.walk(path_abs))\nfor path, _, _ in walk[::-1]:\n    if len(os.listdir(path)) == 0:\n        os.rmdir(path)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1217298,
+                        "reputation": 61,
+                        "user_id": 1184628,
+                        "user_type": "registered",
+                        "accept_rate": 50,
+                        "display_name": "user1184628"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1607347976,
+                    "creation_date": 1607347976,
+                    "answer_id": 65182695,
+                    "question_id": 47093561,
+                    "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/65182695#65182695",
+                    "body": "<pre><code>#LOOP THROUGH ALL SUBFOLDERS FIRST\n\nimport os\nroot = os.getcwd() #CHANGE THIS TO PATH IF REQUIRED\nfolders = sorted(list(os.walk(root))[1:],reverse=True)\nfor folder in folders:\n    try:\n        os.rmdir(folder[0])\n    except OSError as error: \n        print(&quot;Directory '{}' can not be removed&quot;.format(folder[0])) \n</code></pre>\n<p>This should go through all the sub-folders first and remove if empty folders. Not deleting non empty folders that a parent folders.</p>\n<p>I know it an old post but I am old myself !!!</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2774185,
+                                "reputation": 1768,
+                                "user_id": 2388094,
+                                "user_type": "registered",
+                                "display_name": "rayzinnz"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1668186583,
+                            "post_id": 65624165,
+                            "comment_id": 131352535,
+                            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/65624165#comment131352535_65624165",
+                            "body": "This is the best answer, it is the only answer that does not involve make a list of potentially millions of entries."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3055601,
+                        "reputation": 191,
+                        "user_id": 2589286,
+                        "user_type": "registered",
+                        "display_name": "rcgale"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 19,
+                    "last_activity_date": 1699823730,
+                    "last_edit_date": 1699823730,
+                    "creation_date": 1610085910,
+                    "answer_id": 65624165,
+                    "question_id": 47093561,
+                    "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/65624165#65624165",
+                    "body": "<p>A few things to expand on other answers:</p>\n<p>If you use <code>os.walk(topdown=False)</code>, it goes in reverse order, so you encounter the child directories before the parents. Then if you track which directories you've deleted, you can delete parent directories recursively.</p>\n<pre class=\"lang-py prettyprint-override\"><code>import os\n\n\ndef delete_empty_folders(root):\n\n    deleted = set()\n    \n    for current_dir, subdirs, files in os.walk(root, topdown=False):\n\n        still_has_subdirs = False\n        for subdir in subdirs:\n            if os.path.join(current_dir, subdir) not in deleted:\n                still_has_subdirs = True\n                break\n    \n        if not any(files) and not still_has_subdirs:\n            os.rmdir(current_dir)\n            deleted.add(current_dir)\n\n    return deleted\n\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 468289,
+                                "reputation": 183001,
+                                "user_id": 874188,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "tripleee"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1651158532,
+                            "post_id": 68953182,
+                            "comment_id": 127302093,
+                            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/68953182#comment127302093_68953182",
+                            "body": "This seems to duplicate <a href=\"https://stackoverflow.com/a/61925409/874188\">an earlier answer from 2020</a> with a comment pointing out a bug in it."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 11311048,
+                        "reputation": 659,
+                        "user_id": 8294130,
+                        "user_type": "registered",
+                        "display_name": "sidcha"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1630066176,
+                    "creation_date": 1630066176,
+                    "answer_id": 68953182,
+                    "question_id": 47093561,
+                    "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/68953182#68953182",
+                    "body": "<p>This answer fixes issues in the current accepted answer. The major issue there is that the condition to remove a directory has to be <code>not filenames and not dirnames</code>.</p>\n<pre><code>import os\n\ndef remove_empty_directories(root):\n    for dirpath, dirnames, filenames in os.walk(root):\n        if not filenames and not dirnames:\n            os.rmdir(dirpath)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 8172113,
+                        "reputation": 76,
+                        "user_id": 6644417,
+                        "user_type": "registered",
+                        "display_name": "haddagart"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1646676268,
+                    "creation_date": 1646676268,
+                    "answer_id": 71385431,
+                    "question_id": 47093561,
+                    "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/71385431#71385431",
+                    "body": "<p>I suggest that you call this function, It is designed with an optional argument.\nIf you set <code>in_place</code> to <code>False</code> it will not remove the folders it will just return them as a list. Meanwhile, if you set it to <code>True</code> the function will remove the empty folders regardless of the subdirectories tree depth.</p>\n<p><strong>P.S.</strong> In case you need a depth limitation you can analyze it by elements after root path.</p>\n<pre class=\"lang-py prettyprint-override\"><code>import os\nimport shutil\n\ndef purge_dir(dir, in_place=False):\n\n    deleted = []\n    dir_tree = list(os.walk(dir, topdown=False))\n\n    for tree_element in dir_tree:\n        sub_dir = tree_element[0]\n        is_empty = not len(os.listdir(sub_dir))\n        if is_empty:\n            deleted.append(sub_dir)\n\n    if in_place:\n        list(map(os.rmdir, deleted))\n\n    return deleted\n</code></pre>\n<p><em>I suggest</em> that you keep <code>in_place</code> set to <code>False</code> return back the empty folders and use it as you like since it is safer especially for security critical applications.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 468289,
+                                "reputation": 183001,
+                                "user_id": 874188,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "tripleee"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1651158184,
+                            "post_id": 72044262,
+                            "comment_id": 127301936,
+                            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/72044262#comment127301936_72044262",
+                            "body": "That&#39;s rather silly. Probably see also <a href=\"https://stackoverflow.com/questions/3172470/actual-meaning-of-shell-true-in-subprocess\">Actual meaning of <code>shell=True</code> in subprocess</a> (then refactor to take it out)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15264304,
+                                "reputation": 9,
+                                "user_id": 11013421,
+                                "user_type": "registered",
+                                "display_name": "McBeth"
+                            },
+                            "reply_to_user": {
+                                "account_id": 468289,
+                                "reputation": 183001,
+                                "user_id": 874188,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "tripleee"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1651354424,
+                            "post_id": 72044262,
+                            "comment_id": 127346337,
+                            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/72044262#comment127346337_72044262",
+                            "body": "@tripleee Thank you for your comment. You are surely right. But if you don&#39;t add &quot;shell=True&quot; in the subprocess.run command, the script crashes and returns a &quot;FileNotFoundError&quot; error."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 468289,
+                                "reputation": 183001,
+                                "user_id": 874188,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "tripleee"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1651387645,
+                            "post_id": 72044262,
+                            "comment_id": 127349906,
+                            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/72044262#comment127349906_72044262",
+                            "body": "That&#39;s why I added the comment about refactoring. <code>subprocess.run(&quot;echo {} bar&quot;.format(foo), shell=True)</code> refactors to <code>subproces.run([&quot;echo&quot;, foo, &quot;bar&quot;])</code>. This too is a common FAQ, and covered in the linked question."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15264304,
+                                "reputation": 9,
+                                "user_id": 11013421,
+                                "user_type": "registered",
+                                "display_name": "McBeth"
+                            },
+                            "reply_to_user": {
+                                "account_id": 468289,
+                                "reputation": 183001,
+                                "user_id": 874188,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "tripleee"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1651475926,
+                            "post_id": 72044262,
+                            "comment_id": 127365312,
+                            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/72044262#comment127365312_72044262",
+                            "body": "@tripleee Understood. Thank you for your advice."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 15264304,
+                        "reputation": 9,
+                        "user_id": 11013421,
+                        "user_type": "registered",
+                        "display_name": "McBeth"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1651525310,
+                    "last_edit_date": 1651525310,
+                    "creation_date": 1651151371,
+                    "answer_id": 72044262,
+                    "question_id": 47093561,
+                    "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/72044262#72044262",
+                    "body": "<p><strong>If you are on UNIX system</strong>, you can use the &quot;find&quot; command in a python script with subprocess.<br />\nYou search for directories with : -type d<br />\nYou select empty directories with : -empty<br />\nYou delete these directories with : -delete<br />\nYou launch the command with subprocess.run</p>\n<pre><code>import subprocess\n\ncommand = &quot;find {} -type d -empty -delete&quot;.format(folder_path)  \nsubprocess.run(command, shell=True)\n</code></pre>\n<p>It is just 3 lines code.</p>\n<p>Following @tripleee's advice, the code can be written like this :</p>\n<pre><code>import subprocess\npath = &quot;your path here&quot;\ncommand = [&quot;find&quot;, path, &quot;-type&quot;, &quot;d&quot;, &quot;-empty&quot;, &quot;-delete&quot;]\nsubprocess.run(command)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 18452611,
+                        "reputation": 1,
+                        "user_id": 13442297,
+                        "user_type": "registered",
+                        "display_name": "Farnood Faraji"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1660752939,
+                    "creation_date": 1660752939,
+                    "answer_id": 73391782,
+                    "question_id": 47093561,
+                    "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/73391782#73391782",
+                    "body": "<p>This one fixes the problem with all the other answers. It avoids giving you a <code>PermissionDenied</code> error which stops the program from deleting folders.</p>\n<pre class=\"lang-py prettyprint-override\"><code>import os\nimport shutil\n\ndef remove_empty_folders(path_abs):\n    walk = list(os.walk(path_abs))\n    for path, _, _ in walk[::-1]:\n        if len(os.listdir(path)) == 0:\n            shutil.rmtree(path)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6225001,
+                        "reputation": 11,
+                        "user_id": 4843561,
+                        "user_type": "registered",
+                        "display_name": "xfsrg"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1698373749,
+                    "last_edit_date": 1698373749,
+                    "creation_date": 1698373668,
+                    "answer_id": 77371209,
+                    "question_id": 47093561,
+                    "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python/77371209#77371209",
+                    "body": "<p>Here's another version of the @rcgale answer. It replaces the any() loop with a set comparison to check for subdirs.</p>\n<pre class=\"lang-py prettyprint-override\"><code>def remove_empty_dirs(root_path):\n    deleted_dirs = set()\n    for current_dir, subdirs, files in os.walk(root_path, topdown=False):\n        still_has_subdirs = set(subdirs).intersection(deleted_dirs) != set(subdirs)\n\n        if not files and not still_has_subdirs:\n            os.rmdir(current_dir)\n            deleted_dirs.add(current_dir)\n\n    return deleted_dirs\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 11163890,
+                "reputation": 472,
+                "user_id": 8193135,
+                "user_type": "registered",
+                "accept_rate": 64,
+                "display_name": "BlueTrack"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 47093793,
+            "answer_count": 13,
+            "score": 20,
+            "last_activity_date": 1699823730,
+            "creation_date": 1509705006,
+            "last_edit_date": 1579694492,
+            "question_id": 47093561,
+            "link": "https://stackoverflow.com/questions/47093561/remove-empty-folders-python",
+            "title": "Remove empty folders (Python)",
+            "body": "<p>This is the folder tree:</p>\n\n<pre><code>FOLDER\\\\\n       \\\\1\\\\file\n       \\\\2\\\\file\n       \\\\3\\\\\n       \\\\4\\\\file\n</code></pre>\n\n<p>The script should scan (loop) for each folder in FOLDER and check if the sub-folders are empty or not. If they are, they must be deleted.</p>\n\n<p>My code, until now, is this:</p>\n\n<pre><code>folders = ([x[0] for x in os.walk(os.path.expanduser('~\\\\Desktop\\\\FOLDER\\\\DIGITS\\\\'))])\nfolders2= (folders[1:])\n</code></pre>\n\n<p>This scan for folders and, using <code>folders2</code> begin from the firs folder in <code>DIGITS</code>.\nIn <code>DIGITS</code> there are numbered directories: 1,2,3,4,etc</p>\n\n<p>Now what? Tried using <code>os.rmdir</code> but it gives me an error, something about string. In fact, <code>folders2</code> is a list, not a string, just saying...</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9050
+}

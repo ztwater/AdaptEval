@@ -1,0 +1,91 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "types",
+                "python-decorators",
+                "mypy"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 4342327,
+                        "reputation": 146807,
+                        "user_id": 3545273,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Serge Ballesta"
+                    },
+                    "edited": false,
+                    "score": 3,
+                    "creation_date": 1644238827,
+                    "post_id": 71018821,
+                    "comment_id": 125544114,
+                    "link": "https://stackoverflow.com/questions/71018821/property-decorator-type-hints#comment125544114_71018821",
+                    "body": "Interestingly enough, the standard <code>property</code>  decorator, exhibit the expected behaviour and allows mypy to croak about the incorrect type (<i>Expected type &#39;str&#39;, got &#39;float&#39; instead</i>)"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4342327,
+                                "reputation": 146807,
+                                "user_id": 3545273,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Serge Ballesta"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1644241316,
+                            "post_id": 71019053,
+                            "comment_id": 125545069,
+                            "link": "https://stackoverflow.com/questions/71018821/property-decorator-type-hints/71019053#comment125545069_71019053",
+                            "body": "Sorry, I have not installed mypy and only use the  internal tools of PyCharm for type checking. I just meant that PyCharm showed no problem using your code while it correctly does when using the builtin <code>property</code> decorator. As you say that mypy catches this, I have deleted my previous comment, and will delete this one in a while."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 19263344,
+                        "reputation": 4286,
+                        "user_id": 14078758,
+                        "user_type": "registered",
+                        "display_name": "Simon Hawe"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1644239078,
+                    "creation_date": 1644239078,
+                    "answer_id": 71019053,
+                    "question_id": 71018821,
+                    "link": "https://stackoverflow.com/questions/71018821/property-decorator-type-hints/71019053#71019053",
+                    "body": "<p>You can use generics and annotate your functions correspondingly. So you basically define a TypeVar and annotate the function that should be decorated to return that type and also the <strong>get</strong> function to return that type.</p>\n<pre class=\"lang-py prettyprint-override\"><code>from typing import Any, Callable, TypeVar, Generic\nT = TypeVar(&quot;T&quot;)\n\nclass MyProperty(Generic[T]):\n    def __init__(self, getter: Callable[[Any], T]) -&gt; None:\n        self.getter = getter\n\n    def __get__(self, obj, objtype=None) -&gt; T:\n        return self.getter(obj)\n\nclass Person:\n    def __init__(self) -&gt; None:\n        self.x = 7400.5\n\n    @MyProperty\n    def salary(self) -&gt; float:\n        return self.x\n\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 4088741,
+                "reputation": 6660,
+                "user_id": 3357352,
+                "user_type": "registered",
+                "accept_rate": 97,
+                "display_name": "OrenIshShalom"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "answer_count": 1,
+            "score": 3,
+            "last_activity_date": 1644239078,
+            "creation_date": 1644237965,
+            "question_id": 71018821,
+            "link": "https://stackoverflow.com/questions/71018821/property-decorator-type-hints",
+            "title": "@property decorator type hints",
+            "body": "<p>Can I somehow tell <code>mypy</code> the type of my getter (<code>salary</code>) ?</p>\n<pre><code>from typing import Any\nclass MyProperty:\n    def __init__(self, getter) -&gt; None:\n        self.getter = getter\n\n    def __get__(self, obj, objtype=None) -&gt; Any:\n        return self.getter(obj)\n\nclass Person:\n    def __init__(self) -&gt; None:\n        self.x = 7400.5\n\n    @MyProperty\n    def salary(self) -&gt; float:\n        return self.x\n\ndef check(something: str) -&gt; None:\n    # should issue: ... incompatible type float; expected str\n    pass\n\np = Person()\ncheck(p.salary) # &lt;----- Success: no issues found in 1 source file\n</code></pre>\n<p>Note that this is less ambitious than <a href=\"https://stackoverflow.com/questions/47060133/python-3-type-hinting-for-decorator\">this related post</a>.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6320
+}

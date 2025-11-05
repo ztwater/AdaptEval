@@ -1,0 +1,2507 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "list",
+                "duplicates",
+                "list-comprehension",
+                "unique"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 129736,
+                                "reputation": 7959,
+                                "user_id": 328501,
+                                "user_type": "registered",
+                                "display_name": "Jesse Dhillon"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1363971716,
+                            "post_id": 480227,
+                            "comment_id": 22080086,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment22080086_480227",
+                            "body": "Is <code>seen.add</code> really resolved each iteration? Wouldn&#39;t it be resolved once when the list comprehension is parsed and transformed?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11564,
+                                "reputation": 88083,
+                                "user_id": 22364,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Markus Jarderot"
+                            },
+                            "reply_to_user": {
+                                "account_id": 129736,
+                                "reputation": 7959,
+                                "user_id": 328501,
+                                "user_type": "registered",
+                                "display_name": "Jesse Dhillon"
+                            },
+                            "edited": false,
+                            "score": 26,
+                            "creation_date": 1363973080,
+                            "post_id": 480227,
+                            "comment_id": 22080825,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment22080825_480227",
+                            "body": "@JesseDhillon <code>seen.add</code> could have changed between iterations, and the runtime isn&#39;t smart enough to rule that out. To play safe, it has to check the object each time. -- If you look at the bytecode with <code>dis.dis(f)</code>, you can see that it executes <code>LOAD_ATTR</code> for the <code>add</code> member on each iteration. <a href=\"http://ideone.com/tz1Tll\" rel=\"nofollow noreferrer\">ideone.com/tz1Tll</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1255478,
+                                "reputation": 6924,
+                                "user_id": 1243926,
+                                "user_type": "registered",
+                                "accept_rate": 69,
+                                "display_name": "Sergey Orshanskiy"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1387318138,
+                            "post_id": 480227,
+                            "comment_id": 30906367,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment30906367_480227",
+                            "body": "Technically, O(1)  for insertions and lookups is impossible, if you are careful with definitions. If most elements are distinct, hashing is best analyzed as O(log N), not O(1), much like counting the digits in a 64-bit number takes 64 operations."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 465418,
+                                "reputation": 9546,
+                                "user_id": 869482,
+                                "user_type": "registered",
+                                "display_name": "Jens Timmerman"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1394548119,
+                            "post_id": 480227,
+                            "comment_id": 33932747,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment33932747_480227",
+                            "body": "When I try this on a list of lists I get: TypeError: unhashable type: &#39;list&#39;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11564,
+                                "reputation": 88083,
+                                "user_id": 22364,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Markus Jarderot"
+                            },
+                            "reply_to_user": {
+                                "account_id": 465418,
+                                "reputation": 9546,
+                                "user_id": 869482,
+                                "user_type": "registered",
+                                "display_name": "Jens Timmerman"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1394554950,
+                            "post_id": 480227,
+                            "comment_id": 33935799,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment33935799_480227",
+                            "body": "@JensTimmerman Yes. Lists in Python are not hashable, and thus can&#39;t be used for fast look-up. You can either convert the sub-lists to a hashable type (tuple?), or swap <code>set()</code> and <code>seen.add</code> for <code>list()</code> and <code>seen.append</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1843671,
+                                "reputation": 11884,
+                                "user_id": 2441026,
+                                "user_type": "registered",
+                                "accept_rate": 43,
+                                "display_name": "user136036"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1414168757,
+                            "post_id": 480227,
+                            "comment_id": 41726782,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment41726782_480227",
+                            "body": "Your solution is not the fastest one. In Python 3 (did not test 2) this is faster (300k entries list - 0.045s (yours) vs 0.035s (this one):  seen = set(); return [x for x in lines if x not in seen and not seen.add(x)]. I could not find any speed effect of the seen_add line you did."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 26078,
+                                "reputation": 463331,
+                                "user_id": 67579,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "willeM_ Van Onsem"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1432057335,
+                            "post_id": 480227,
+                            "comment_id": 48759680,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment48759680_480227",
+                            "body": "A small comment: the insertion/deletion/member methods on sets in Python are <i>O(n)</i> worst case and <i>O(1)</i> average case: they use a hashset with linked lists as is <a href=\"http://stackoverflow.com/a/3949795/67579\">explained here</a>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1260626,
+                                "reputation": 131601,
+                                "user_id": 1219006,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "jamylak"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1843671,
+                                "reputation": 11884,
+                                "user_id": 2441026,
+                                "user_type": "registered",
+                                "accept_rate": 43,
+                                "display_name": "user136036"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1432102956,
+                            "post_id": 480227,
+                            "comment_id": 48776824,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment48776824_480227",
+                            "body": "@user136036 Please link to your tests. How many times did you run them?<code>seen_add</code> is an improvement but timings can be affected by system resources at the time. Would be interested to see full timings"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1675081,
+                                "reputation": 520,
+                                "user_id": 1540815,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "stevenjackson121"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1475287865,
+                            "post_id": 480227,
+                            "comment_id": 66896709,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment66896709_480227",
+                            "body": "Did you test this solution across Python implementations, or only on CPython? I would be surprised if the seen_add line helped much given PyPy&#39;s JIT for example."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 916098,
+                                "reputation": 3894,
+                                "user_id": 948866,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "Dave"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1475596036,
+                            "post_id": 480227,
+                            "comment_id": 67001196,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment67001196_480227",
+                            "body": "Even on standard CPython (3.5) I see no timing difference.  Timeit gives 3.048, 2.898, 2.852 without seen_add, and 2.960, 3.008, 2.959 with. (All tests run 1000 times on the same list of 50,000 random integers 0-9).  Something seems fishy about the explanation - seen_add should execute the same code as seen.add; both are shown as &lt;built-in method add of set object at 0x01234567&gt;."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11564,
+                                "reputation": 88083,
+                                "user_id": 22364,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Markus Jarderot"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1475599383,
+                            "post_id": 480227,
+                            "comment_id": 67003211,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment67003211_480227",
+                            "body": "It is a micro-optimization. The disassembled code changes from <code>LOAD_DEREF 0 (seen) + LOAD_ATTR 0 (add)</code> to just <code>LOAD_DEREF 1 (seen_add)</code>. Optimizing compilers might do something similar."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8517937,
+                                "reputation": 365,
+                                "user_id": 6385815,
+                                "user_type": "registered",
+                                "display_name": "r4v1"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1512983822,
+                            "post_id": 480227,
+                            "comment_id": 82459323,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment82459323_480227",
+                            "body": "I am not able to understand <code>seen_add(x)</code>. wouldn&#39;t it return <code>None</code> every time? Please explain."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11564,
+                                "reputation": 88083,
+                                "user_id": 22364,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Markus Jarderot"
+                            },
+                            "reply_to_user": {
+                                "account_id": 8517937,
+                                "reputation": 365,
+                                "user_id": 6385815,
+                                "user_type": "registered",
+                                "display_name": "r4v1"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1512999055,
+                            "post_id": 480227,
+                            "comment_id": 82468603,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment82468603_480227",
+                            "body": "@prof.phython Yes. It is just there because <code>if not()</code> is a convenient way to execute the function inline. <code>x in seen or seen_add(x)</code> evaluates to either <code>False</code> or <code>None</code>, both of which turn into <code>True</code> when prefixed by <code>not</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8517937,
+                                "reputation": 365,
+                                "user_id": 6385815,
+                                "user_type": "registered",
+                                "display_name": "r4v1"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1513005803,
+                            "post_id": 480227,
+                            "comment_id": 82472966,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment82472966_480227",
+                            "body": "@MarkusJarderot Okay. But why are we doing <code>(x in seen or seen_add(x))&#39;. wouldn&#39;t only </code>(x in seen)` would work? What does <code>seen_add(x)</code> do in this statement? Thanks"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11564,
+                                "reputation": 88083,
+                                "user_id": 22364,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Markus Jarderot"
+                            },
+                            "reply_to_user": {
+                                "account_id": 8517937,
+                                "reputation": 365,
+                                "user_id": 6385815,
+                                "user_type": "registered",
+                                "display_name": "r4v1"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1513011604,
+                            "post_id": 480227,
+                            "comment_id": 82476640,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment82476640_480227",
+                            "body": "@prof.phython <code>seen_add</code> is a reference to <code>seen.add()</code>, which adds the item the set while the list is being processed. The next time an identical item is found, it will be skipped."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8517937,
+                                "reputation": 365,
+                                "user_id": 6385815,
+                                "user_type": "registered",
+                                "display_name": "r4v1"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1513013938,
+                            "post_id": 480227,
+                            "comment_id": 82477929,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment82477929_480227",
+                            "body": "@MarkusJarderot Yes i can understand that. My only confusion is that why <code>return [x for x in seq if not (x in seen)]</code> cannot work. Why do we need <code>seen.add()</code> to check?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11564,
+                                "reputation": 88083,
+                                "user_id": 22364,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Markus Jarderot"
+                            },
+                            "reply_to_user": {
+                                "account_id": 8517937,
+                                "reputation": 365,
+                                "user_id": 6385815,
+                                "user_type": "registered",
+                                "display_name": "r4v1"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1513079303,
+                            "post_id": 480227,
+                            "comment_id": 82504544,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment82504544_480227",
+                            "body": "@prof.phython It is not there to affect the result. It is there to update the set if the check fails (<code>x in seen</code>)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1053986,
+                                "reputation": 3901,
+                                "user_id": 1057102,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "sleblanc"
+                            },
+                            "edited": false,
+                            "score": 19,
+                            "creation_date": 1557804334,
+                            "post_id": 480227,
+                            "comment_id": 98877358,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment98877358_480227",
+                            "body": "To anyone who is writing Python code, you really should think twice before sacrificing readability and commonly-agreed Python conventions just to squeeze out a few more nanoseconds per loop. Testing with and without <code>seen_add = seen.add</code> yields only a 1% increase in speed. It&#39;s hardly significant."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1843521,
+                                "reputation": 28115,
+                                "user_id": 1672429,
+                                "user_type": "registered",
+                                "accept_rate": 77,
+                                "display_name": "Stefan Pochmann"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1053986,
+                                "reputation": 3901,
+                                "user_id": 1057102,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "sleblanc"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1603236601,
+                            "post_id": 480227,
+                            "comment_id": 113972159,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment113972159_480227",
+                            "body": "@sleblanc What data did you test it with? For <code>seq = list(range(19000))</code> I get ~1.9 ms with <code>seen_add</code> and ~2.3 ms with <code>seen.add</code>. That&#39;s not 1% but about 20%."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1843521,
+                                "reputation": 28115,
+                                "user_id": 1672429,
+                                "user_type": "registered",
+                                "accept_rate": 77,
+                                "display_name": "Stefan Pochmann"
+                            },
+                            "reply_to_user": {
+                                "account_id": 916098,
+                                "reputation": 3894,
+                                "user_id": 948866,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "Dave"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1603237840,
+                            "post_id": 480227,
+                            "comment_id": 113972404,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment113972404_480227",
+                            "body": "@Dave <i>Of course</i> you didn&#39;t see a big difference for that. With 50,000 random integers 0-9, <code>seen.add</code> or <code>seen_add</code> will be called only 10 times, which is insignificant. Try something like the <code>seq = list(range(19000))</code> that I just mentioned."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 151071,
+                                "reputation": 150282,
+                                "user_id": 364696,
+                                "user_type": "registered",
+                                "display_name": "ShadowRanger"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1053986,
+                                "reputation": 3901,
+                                "user_id": 1057102,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "sleblanc"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1640627479,
+                            "post_id": 480227,
+                            "comment_id": 124620299,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment124620299_480227",
+                            "body": "@sleblanc: A couple notes: 1) As Stefan notes, for a case with few/no duplicates, the cost of <code>seen.add</code> is higher (for <code>seq = tuple(range(10000))</code> on Python 3.10.0, <code>%timeit f7(seq)</code> takes around 487 &#181;s, vs. 557 &#181;s w/o caching, 14.4% more). 2) At the time the answer was written, the cost of calling methods was higher; in 3.7+, the <code>LOAD_METHOD</code>/<code>CALL_METHOD</code> opcodes often avoid constructing a bound method in cases like this, but in 3.6 and earlier, it always had to build and discard a bound method; same test, same machine, using 3.6.4 took 602 &#181;s w/caching, 792 &#181;s w/o (31.5% more)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 151071,
+                                "reputation": 150282,
+                                "user_id": 364696,
+                                "user_type": "registered",
+                                "display_name": "ShadowRanger"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1053986,
+                                "reputation": 3901,
+                                "user_id": 1057102,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "sleblanc"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1640627861,
+                            "post_id": 480227,
+                            "comment_id": 124620429,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment124620429_480227",
+                            "body": "@sleblanc: All that said, it&#39;s still clearly a microoptimization that comes at the expense of readability (heck, the ugliness of forcing it into the listcomp in the first place is an ugly microoptimization over a straightforward <code>for</code> loop that would occupy four lines with explicit membership testing controlling modifications to both <code>seen</code> and a <code>list</code> used as the <code>retval</code>). This solution is good if profiling says you really need it (and you&#39;re use pre-Python-3.5 where <code>dict</code> is unordered and <code>OrderedDict</code> is still implemented in Python), but otherwise, the benefits aren&#39;t worth ugly code."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1053986,
+                                "reputation": 3901,
+                                "user_id": 1057102,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "sleblanc"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1640806375,
+                            "post_id": 480227,
+                            "comment_id": 124665079,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment124665079_480227",
+                            "body": "And rewriting it in C++ would yield 100% improvement or more. I don&#39;t see why you&#39;re spending so much time on that. If you truly care about sub-millisecond performance improvements, starting with Python is a dead-end."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 342731,
+                                "reputation": 351046,
+                                "user_id": 674039,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "wim"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1664937002,
+                            "post_id": 480227,
+                            "comment_id": 130581583,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment130581583_480227",
+                            "body": "This needs to be downvoted off the page. Don&#39;t write Python like this."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11564,
+                                "reputation": 88083,
+                                "user_id": 22364,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Markus Jarderot"
+                            },
+                            "reply_to_user": {
+                                "account_id": 342731,
+                                "reputation": 351046,
+                                "user_id": 674039,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "wim"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1664959207,
+                            "post_id": 480227,
+                            "comment_id": 130585599,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment130585599_480227",
+                            "body": "@wim This is just a comparison of speed, not style. <code>f7</code> was the fastest when that article was written. It could easily be written more pythonic, if you don&#39;t care about top speed."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 342731,
+                                "reputation": 351046,
+                                "user_id": 674039,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "wim"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1664990750,
+                            "post_id": 480227,
+                            "comment_id": 130596714,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment130596714_480227",
+                            "body": "@MarkusJarderot  1. Nothing in the question ever asked for speed or suggested performance was a concern, so why suggest the ugly micro-optimizations?  2. Even for an attempt at writing a fast solution this is bad, using <code>list(dict.fromkeys(...))</code> offers a ~45% improvement (timed it with a list of 200 integers between 0-100)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 342731,
+                                "reputation": 351046,
+                                "user_id": 674039,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "wim"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1664991083,
+                            "post_id": 480227,
+                            "comment_id": 130596837,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment130596837_480227",
+                            "body": "Actually the question asked for a &quot;Pythonic idiom&quot;, which this is the opposite of."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4163020,
+                                "reputation": 2840,
+                                "user_id": 3412660,
+                                "user_type": "registered",
+                                "display_name": "Rich Lysakowski PhD"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1667624824,
+                            "post_id": 480227,
+                            "comment_id": 131215993,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#comment131215993_480227",
+                            "body": "This is a weird edge case solution just for performance enhancement.  This is not Pythonic, not mainstream, and not as readable as the other simpler answers.  As many others have commented, it is also NOT the fastest solution.  This is not acceptable as the accepted answer.  I give it a downvote as the &quot;accepted&quot; answer and encourage others to downvote it or vote to have it removed."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 11564,
+                        "reputation": 88083,
+                        "user_id": 22364,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Markus Jarderot"
+                    },
+                    "comment_count": 28,
+                    "is_accepted": true,
+                    "score": 908,
+                    "last_activity_date": 1558773354,
+                    "last_edit_date": 1558773354,
+                    "creation_date": 1232984821,
+                    "answer_id": 480227,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480227#480227",
+                    "body": "<p>Here you have some alternatives: <a href=\"http://www.peterbe.com/plog/uniqifiers-benchmark\" rel=\"noreferrer\">http://www.peterbe.com/plog/uniqifiers-benchmark</a></p>\n\n<p>Fastest one:</p>\n\n<pre><code>def f7(seq):\n    seen = set()\n    seen_add = seen.add\n    return [x for x in seq if not (x in seen or seen_add(x))]\n</code></pre>\n\n<p>Why assign <code>seen.add</code> to <code>seen_add</code> instead of just calling <code>seen.add</code>? Python is a dynamic language, and resolving <code>seen.add</code> each iteration is more costly than resolving a local variable. <code>seen.add</code> could have changed between iterations, and the runtime isn't smart enough to rule that out. To play it safe, it has to check the object each time.</p>\n\n<p>If you plan on using this function a lot on the same dataset, perhaps you would be better off with an ordered set: <a href=\"http://code.activestate.com/recipes/528878/\" rel=\"noreferrer\">http://code.activestate.com/recipes/528878/</a></p>\n\n<p><em>O</em>(1) insertion, deletion and member-check per operation.</p>\n\n<p>(Small additional note: <code>seen.add()</code> always returns <code>None</code>, so the <em><code>or</code></em> above is there only as a way to attempt a set update, and not as an integral part of the logical test.)</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "unbeknown"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1232985086,
+                            "post_id": 480229,
+                            "comment_id": 296970,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480229#comment296970_480229",
+                            "body": "But this doesn&#39;t preserve order!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 23516,
+                                "reputation": 25810,
+                                "user_id": 58994,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Josh Glover"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1232985298,
+                            "post_id": 480229,
+                            "comment_id": 296982,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480229#comment296982_480229",
+                            "body": "Hrm, this is problematic, since I cannot guarantee that equal values are grouped together without looping once over the list, by which time I could have pruned the duplicates."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7094,
+                                "reputation": 44314,
+                                "user_id": 12166,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Rafa\u0142 Dowgird"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1232985412,
+                            "post_id": 480229,
+                            "comment_id": 296989,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480229#comment296989_480229",
+                            "body": "I assumed that &quot;preserving order&quot; implied that the list is actually ordered."
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "unbeknown"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1232985414,
+                            "post_id": 480229,
+                            "comment_id": 296990,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480229#comment296990_480229",
+                            "body": "Ah, yes, I read sortedList as sorted(List) :-( But the input list can be in a different order."
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "unbeknown"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1232985648,
+                            "post_id": 480229,
+                            "comment_id": 297003,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480229#comment297003_480229",
+                            "body": "Maybe the specification of the input list is a little bit unclear. The values don&#39;t even need to be grouped together: [2, 1, 3, 1]. So which values to keep and which to delete?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7094,
+                                "reputation": 44314,
+                                "user_id": 12166,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Rafa\u0142 Dowgird"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1232985796,
+                            "post_id": 480229,
+                            "comment_id": 297007,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480229#comment297007_480229",
+                            "body": "I think that the question should be reattached as a coment under the original question."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15417569,
+                                "reputation": 3357,
+                                "user_id": 11122513,
+                                "user_type": "registered",
+                                "display_name": "igorkf"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1573645650,
+                            "post_id": 480229,
+                            "comment_id": 103947425,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480229#comment103947425_480229",
+                            "body": "What the <code>_</code> is doing in this case?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7094,
+                                "reputation": 44314,
+                                "user_id": 12166,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Rafa\u0142 Dowgird"
+                            },
+                            "reply_to_user": {
+                                "account_id": 15417569,
+                                "reputation": 3357,
+                                "user_id": 11122513,
+                                "user_type": "registered",
+                                "display_name": "igorkf"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1573657285,
+                            "post_id": 480229,
+                            "comment_id": 103953937,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480229#comment103953937_480229",
+                            "body": "@igorkf Ignoring the second element of the pair(s)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3376202,
+                                "reputation": 2689,
+                                "user_id": 2834295,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "mr.bjerre"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1578391194,
+                            "post_id": 480229,
+                            "comment_id": 105414327,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480229#comment105414327_480229",
+                            "body": "This doesn&#39;t work! Try sortedList = [2, 3, 2, 4, 1]"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7223257,
+                                "reputation": 519,
+                                "user_id": 5512900,
+                                "user_type": "registered",
+                                "display_name": "MNB"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1590756938,
+                            "post_id": 480229,
+                            "comment_id": 109809002,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480229#comment109809002_480229",
+                            "body": "However to remove consecutive duplicates from a list/iterable I found this solution to be perfect."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 248321,
+                                "reputation": 61330,
+                                "user_id": 523612,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Karl Knechtel"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1700744421,
+                            "post_id": 480229,
+                            "comment_id": 136693719,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480229#comment136693719_480229",
+                            "body": "This answers a different question that has been asked elsewhere: <a href=\"https://stackoverflow.com/questions/5738901\">stackoverflow.com/questions/5738901</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7094,
+                        "reputation": 44314,
+                        "user_id": 12166,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Rafa\u0142 Dowgird"
+                    },
+                    "comment_count": 11,
+                    "is_accepted": false,
+                    "score": 30,
+                    "last_activity_date": 1683717784,
+                    "last_edit_date": 1683717784,
+                    "creation_date": 1232984834,
+                    "answer_id": 480229,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/480229#480229",
+                    "body": "<pre><code>from itertools import groupby\n\n[key for key, _ in groupby(sortedList)]\n</code></pre>\n<p>The list doesn't even have to be <em>sorted</em>, the sufficient condition is that equal values are grouped together.</p>\n<p><strong>Edit: I assumed that &quot;preserving order&quot; implies that the list is actually ordered. If this is not the case, then the solution from MizardX is the right one.</strong></p>\n<p>Community edit: This is however the most elegant way to &quot;compress duplicate consecutive elements into a single element&quot;.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 97439,
+                                "reputation": 133,
+                                "user_id": 264308,
+                                "user_type": "registered",
+                                "display_name": "code22"
+                            },
+                            "reply_to_user": {
+                                "account_id": 247295,
+                                "reputation": 419,
+                                "user_id": 521921,
+                                "user_type": "registered",
+                                "display_name": "samuel"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1387294088,
+                            "post_id": 6959997,
+                            "comment_id": 30891983,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/6959997#comment30891983_6959997",
+                            "body": "it&#39;s a <a href=\"http://www.python.org/dev/peps/pep-0308/\" rel=\"nofollow noreferrer\">conditional expression</a> so it&#39;s good"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4448924,
+                                "reputation": 4218,
+                                "user_id": 3621464,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "MERose"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1649328844,
+                            "post_id": 6959997,
+                            "comment_id": 126850464,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/6959997#comment126850464_6959997",
+                            "body": "In Python 3, you have to <code>from functools import reduce</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 97439,
+                        "reputation": 133,
+                        "user_id": 264308,
+                        "user_type": "registered",
+                        "display_name": "code22"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1312563985,
+                    "creation_date": 1312563985,
+                    "answer_id": 6959997,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/6959997#6959997",
+                    "body": "<p>If you need one liner then maybe this would help:</p>\n\n<pre><code>reduce(lambda x, y: x + y if y[0] not in x else x, map(lambda x: [x],lst))\n</code></pre>\n\n<p>... should work but correct me if i'm wrong</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 478730,
+                        "reputation": 502,
+                        "user_id": 891004,
+                        "user_type": "registered",
+                        "display_name": "zmk"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1313957052,
+                    "creation_date": 1313957052,
+                    "answer_id": 7140776,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/7140776#7140776",
+                    "body": "<p>For no hashable types (e.g. list of lists), based on MizardX's:</p>\n\n<pre><code>def f7_noHash(seq)\n    seen = set()\n    return [ x for x in seq if str( x ) not in seen and not seen.add( str( x ) )]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 56784,
+                                "reputation": 833,
+                                "user_id": 170102,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Rivka"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1346587545,
+                            "post_id": 7704123,
+                            "comment_id": 16397987,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/7704123#comment16397987_7704123",
+                            "body": "Your solution is nice, but it takes the last appearance of each element. To take the first appearance use: [x for i,x in enumerate(mylist) if x not in mylist[:i]]"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 224936,
+                                "reputation": 43122,
+                                "user_id": 485115,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "Nikita Volkov"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1346857618,
+                            "post_id": 7704123,
+                            "comment_id": 16476557,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/7704123#comment16476557_7704123",
+                            "body": "Since searching in a list is an <code>O(n)</code> operation and you perform it on each item, the resulting complexity of your solution would be <code>O(n^2)</code>. This is just unacceptable for such a trivial problem."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 77139,
+                        "reputation": 1218,
+                        "user_id": 220376,
+                        "user_type": "registered",
+                        "accept_rate": 25,
+                        "display_name": "Saurabh Hirani"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1338207424,
+                    "last_edit_date": 1338207424,
+                    "creation_date": 1318169760,
+                    "answer_id": 7704123,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/7704123#7704123",
+                    "body": "<p>MizardX's answer gives a good collection of multiple approaches.</p>\n\n<p>This is what I came up with while thinking aloud:</p>\n\n<pre><code>mylist = [x for i,x in enumerate(mylist) if x not in mylist[i+1:]]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 275020,
+                                "reputation": 76234,
+                                "user_id": 567620,
+                                "user_type": "registered",
+                                "accept_rate": 72,
+                                "display_name": "ely"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1378323938,
+                            "post_id": 13262682,
+                            "comment_id": 27413927,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/13262682#comment27413927_13262682",
+                            "body": "Also note that it would make it an O(n^2) operation, where as creating a set/dict (which has constant look up time) and adding only previously unseen elements will be linear."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1260626,
+                                "reputation": 131601,
+                                "user_id": 1219006,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "jamylak"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1433690136,
+                            "post_id": 13262682,
+                            "comment_id": 49448412,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/13262682#comment49448412_13262682",
+                            "body": "This is Python 2.6 only I believe. And yes it is O(N^2)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 49541,
+                                "reputation": 18350,
+                                "user_id": 147511,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Glenn Slayden"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1260626,
+                                "reputation": 131601,
+                                "user_id": 1219006,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "jamylak"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1601865083,
+                            "post_id": 13262682,
+                            "comment_id": 113528832,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/13262682#comment113528832_13262682",
+                            "body": "What @jamylak means is that this works in Python 2.7 <b><i>and earlier</i></b> only, not <i>later</i>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1260626,
+                                "reputation": 131601,
+                                "user_id": 1219006,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "jamylak"
+                            },
+                            "reply_to_user": {
+                                "account_id": 49541,
+                                "reputation": 18350,
+                                "user_id": 147511,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Glenn Slayden"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1601941381,
+                            "post_id": 13262682,
+                            "comment_id": 113557304,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/13262682#comment113557304_13262682",
+                            "body": "@GlennSlayden No I meant only Python 2.6. Python 2.6 and earlier (not sure how much earlier exactly). Python 2.6 was more popular at the time so that&#39;s why I said Python 2.6 only in comparison to Python 2.7"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 49541,
+                                "reputation": 18350,
+                                "user_id": 147511,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Glenn Slayden"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1260626,
+                                "reputation": 131601,
+                                "user_id": 1219006,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "jamylak"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1601958545,
+                            "post_id": 13262682,
+                            "comment_id": 113560340,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/13262682#comment113560340_13262682",
+                            "body": "@jamylak Ok, but my point is, not any Python 3.x, which wasn\u2019t clear to me from your Jun 7 2015 comment."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2018146,
+                        "reputation": 1241,
+                        "user_id": 1804929,
+                        "user_type": "registered",
+                        "display_name": "Zhifeng Hu"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1473374437,
+                    "last_edit_date": 1473374437,
+                    "creation_date": 1352258494,
+                    "answer_id": 13262682,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/13262682#13262682",
+                    "body": "<p>You can reference a list comprehension as it is being built by the symbol '_[1]'. <br>For example, the following function unique-ifies a list of elements without changing their order by referencing its list comprehension.</p>\n\n<pre><code>def unique(my_list): \n    return [x for x in my_list if x not in locals()['_[1]']]\n</code></pre>\n\n<p>Demo:</p>\n\n<pre><code>l1 = [1, 2, 3, 4, 1, 2, 3, 4, 5]\nl2 = [x for x in l1 if x not in locals()['_[1]']]\nprint l2\n</code></pre>\n\n<p>Output:</p>\n\n<pre><code>[1, 2, 3, 4, 5]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1745384,
+                                "reputation": 22772,
+                                "user_id": 1595865,
+                                "user_type": "registered",
+                                "accept_rate": 72,
+                                "display_name": "loopbackbee"
+                            },
+                            "edited": false,
+                            "score": 31,
+                            "creation_date": 1395249232,
+                            "post_id": 15990766,
+                            "comment_id": 34254780,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/15990766#comment34254780_15990766",
+                            "body": "It&#39;s worth noting that this runs in <code>n^2</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089182,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 31,
+                            "creation_date": 1425393131,
+                            "post_id": 15990766,
+                            "comment_id": 45938211,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/15990766#comment45938211_15990766",
+                            "body": "Ick. 2 strikes: Using a list for membership testing (slow, O(N) <i>for each test</i>) and using a list comprehension for the side effects (building another list of <code>None</code>references in the process!)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1260626,
+                                "reputation": 131601,
+                                "user_id": 1219006,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "jamylak"
+                            },
+                            "reply_to_user": {
+                                "account_id": 35417,
+                                "reputation": 1089182,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1518853383,
+                            "post_id": 15990766,
+                            "comment_id": 84682463,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/15990766#comment84682463_15990766",
+                            "body": "I agree with @MartijnPieters there&#39;s absolutely <i>no</i> reason for the list comprehension with side effects. Just use a <code>for</code> loop instead"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1433328,
+                        "reputation": 11646,
+                        "user_id": 1355221,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "dansalmo"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 34,
+                    "last_activity_date": 1391314292,
+                    "last_edit_date": 1391314292,
+                    "creation_date": 1365874339,
+                    "answer_id": 15990766,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/15990766#15990766",
+                    "body": "<pre><code>sequence = ['1', '2', '3', '3', '6', '4', '5', '6']\nunique = []\n[unique.append(item) for item in sequence if item not in unique]\n</code></pre>\n\n<p>unique \u2192 <code>['1', '2', '3', '6', '4', '5']</code></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 391909,
+                                "reputation": 58917,
+                                "user_id": 752843,
+                                "user_type": "registered",
+                                "accept_rate": 52,
+                                "display_name": "Richard"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1378235468,
+                            "post_id": 16780848,
+                            "comment_id": 27374581,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/16780848#comment27374581_16780848",
+                            "body": "Your first two answers assume that the order of the list can be rebuilt using a sorting function, but this may not be so."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 340873,
+                                "reputation": 3750,
+                                "user_id": 671130,
+                                "user_type": "registered",
+                                "display_name": "Derek Veit"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1452286427,
+                            "post_id": 16780848,
+                            "comment_id": 57118239,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/16780848#comment57118239_16780848",
+                            "body": "Most answers are focused on performance.  For lists that aren&#39;t large enough to worry about performance, the sorted(set(list1),key=list1.index) is the best thing I&#39;ve seen.  No extra import, no extra function, no extra variable, and it&#39;s fairly simple and readable."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2823109,
+                        "reputation": 401,
+                        "user_id": 2426374,
+                        "user_type": "registered",
+                        "display_name": "shamrock"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 26,
+                    "last_activity_date": 1369690643,
+                    "creation_date": 1369690643,
+                    "answer_id": 16780848,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/16780848#16780848",
+                    "body": "<p>I think if you wanna maintain the order,</p>\n\n<h2>you can try this:</h2>\n\n<pre><code>list1 = ['b','c','d','b','c','a','a']    \nlist2 = list(set(list1))    \nlist2.sort(key=list1.index)    \nprint list2\n</code></pre>\n\n<h2>OR similarly you can do this:</h2>\n\n<pre><code>list1 = ['b','c','d','b','c','a','a']  \nlist2 = sorted(set(list1),key=list1.index)  \nprint list2 \n</code></pre>\n\n<h2>You can also do this:</h2>\n\n<pre><code>list1 = ['b','c','d','b','c','a','a']    \nlist2 = []    \nfor i in list1:    \n    if not i in list2:  \n        list2.append(i)`    \nprint list2\n</code></pre>\n\n<h2>It can also be written as this:</h2>\n\n<pre><code>list1 = ['b','c','d','b','c','a','a']    \nlist2 = []    \n[list2.append(i) for i in list1 if not i in list2]    \nprint list2 \n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 125911,
+                                "reputation": 35304,
+                                "user_id": 322020,
+                                "user_type": "registered",
+                                "accept_rate": 46,
+                                "display_name": "Nakilon"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1371217219,
+                            "post_id": 17016257,
+                            "comment_id": 24754197,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/17016257#comment24754197_17016257",
+                            "body": "Converting to some custom kind of dict just to take keys? Just another crutch."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1422,
+                                "reputation": 89289,
+                                "user_id": 1897,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "Imran"
+                            },
+                            "reply_to_user": {
+                                "account_id": 125911,
+                                "reputation": 35304,
+                                "user_id": 322020,
+                                "user_type": "registered",
+                                "accept_rate": 46,
+                                "display_name": "Nakilon"
+                            },
+                            "edited": false,
+                            "score": 9,
+                            "creation_date": 1371538721,
+                            "post_id": 17016257,
+                            "comment_id": 24846299,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/17016257#comment24846299_17016257",
+                            "body": "@Nakilon I don&#39;t really see how it&#39;s a crutch. It doesn&#39;t expose any mutable state, so its very clean in that sense. Internally, Python sets are implemented with dict()  (<a href=\"http://stackoverflow.com/questions/3949310/how-is-cpythons-set-implemented\" title=\"how is cpythons set implemented\">stackoverflow.com/questions/3949310/&hellip;</a>), so basically you&#39;re just doing what the interpreter would&#39;ve done anyway."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 275020,
+                                "reputation": 76234,
+                                "user_id": 567620,
+                                "user_type": "registered",
+                                "accept_rate": 72,
+                                "display_name": "ely"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1378323756,
+                            "post_id": 17016257,
+                            "comment_id": 27413851,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/17016257#comment27413851_17016257",
+                            "body": "Just use side effects and do <code>[seen.add(x) for x in seq if x not in seen]</code>, or if you don&#39;t like comprehension side effects just use a <code>for</code> loop: <code>for x in seq: seen.add(x) if x not in seen else None</code> (still a one-liner, although in this case I think one-liner-ness is a silly property to try to have in a solution."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2406159,
+                                "reputation": 3276,
+                                "user_id": 2102585,
+                                "user_type": "registered",
+                                "display_name": "flornquake"
+                            },
+                            "reply_to_user": {
+                                "account_id": 275020,
+                                "reputation": 76234,
+                                "user_id": 567620,
+                                "user_type": "registered",
+                                "accept_rate": 72,
+                                "display_name": "ely"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1378774749,
+                            "post_id": 17016257,
+                            "comment_id": 27566456,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/17016257#comment27566456_17016257",
+                            "body": "@EMS That doesn&#39;t preserve order. You could just as well do <code>seen = set(seq)</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 275020,
+                                "reputation": 76234,
+                                "user_id": 567620,
+                                "user_type": "registered",
+                                "accept_rate": 72,
+                                "display_name": "ely"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1378821422,
+                            "post_id": 17016257,
+                            "comment_id": 27585772,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/17016257#comment27585772_17016257",
+                            "body": "Sure, when <code>seen</code> is a <code>set</code>. Just use <code>seen=[]</code> and <code>[seen.append(x) for x in seq if x not in seen]</code> does preserve order."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1843671,
+                                "reputation": 11884,
+                                "user_id": 2441026,
+                                "user_type": "registered",
+                                "accept_rate": 43,
+                                "display_name": "user136036"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1414167810,
+                            "post_id": 17016257,
+                            "comment_id": 41726307,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/17016257#comment41726307_17016257",
+                            "body": "This solution is extremly slower than the mentioned &quot;hack&quot;. For my list of 300k entries over 50x slower."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1260626,
+                                "reputation": 131601,
+                                "user_id": 1219006,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "jamylak"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1418031450,
+                            "post_id": 17016257,
+                            "comment_id": 43163022,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/17016257#comment43163022_17016257",
+                            "body": "I agree its slower, for speed I would definitely use the hack"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 26078,
+                                "reputation": 463331,
+                                "user_id": 67579,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "willeM_ Van Onsem"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1432065643,
+                            "post_id": 17016257,
+                            "comment_id": 48764670,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/17016257#comment48764670_17016257",
+                            "body": "The run-time complexity is strictly speaking <i>O(n^2)</i> worst-case and <i>O(n)</i> average case..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1260626,
+                                "reputation": 131601,
+                                "user_id": 1219006,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "jamylak"
+                            },
+                            "reply_to_user": {
+                                "account_id": 26078,
+                                "reputation": 463331,
+                                "user_id": 67579,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "willeM_ Van Onsem"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1432099373,
+                            "post_id": 17016257,
+                            "comment_id": 48775284,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/17016257#comment48775284_17016257",
+                            "body": "@CommuSoft I agree, although practically it&#39;s almost always O(n) due to the super highly unlikely worst case"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4304972,
+                                "reputation": 1350,
+                                "user_id": 3517600,
+                                "user_type": "registered",
+                                "accept_rate": 63,
+                                "display_name": "MichaelGofron"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1452707722,
+                            "post_id": 17016257,
+                            "comment_id": 57292422,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/17016257#comment57292422_17016257",
+                            "body": "I&#39;m getting a no module named &#39;more_itertools&#39; found. Is the module deprecated?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1260626,
+                                "reputation": 131601,
+                                "user_id": 1219006,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "jamylak"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4304972,
+                                "reputation": 1350,
+                                "user_id": 3517600,
+                                "user_type": "registered",
+                                "accept_rate": 63,
+                                "display_name": "MichaelGofron"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1452733972,
+                            "post_id": 17016257,
+                            "comment_id": 57305072,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/17016257#comment57305072_17016257",
+                            "body": "@MichaelGofron It&#39;s an external library so you have to install it. eg. <code>pip install more_itertools</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 151071,
+                                "reputation": 150282,
+                                "user_id": 364696,
+                                "user_type": "registered",
+                                "display_name": "ShadowRanger"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1422,
+                                "reputation": 89289,
+                                "user_id": 1897,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "Imran"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1640633983,
+                            "post_id": 17016257,
+                            "comment_id": 124622106,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/17016257#comment124622106_17016257",
+                            "body": "@Imran: Internally, Python&#39;s <code>set</code> uses hashtables, but they&#39;re not actually implemented with <code>dict</code>. Back when they were first introduced in Python 2.4, they were wrappers around a <code>dict</code> where all the keys were <code>True</code>, but they diverged <i>rapidly</i> from there, removing the <code>dict</code> wrapping in 2.5 in favor of their own dedicated code that was <i>based</i> on <code>dict</code> but maintained independently, and slowly diverging from <code>dict</code> (mostly it was <code>dict</code> diverging from <code>set</code> as <code>dict</code> added all sorts of optimizations to make it more efficient when used as the <code>__dict__</code> for classes and instances)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 151071,
+                                "reputation": 150282,
+                                "user_id": 364696,
+                                "user_type": "registered",
+                                "display_name": "ShadowRanger"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1422,
+                                "reputation": 89289,
+                                "user_id": 1897,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "Imran"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1640634210,
+                            "post_id": 17016257,
+                            "comment_id": 124622170,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/17016257#comment124622170_17016257",
+                            "body": "@Imran: To be clear, I don&#39;t disagree with your core point (that using <code>dict</code>/<code>OrderedDict</code> for ordered <code>set</code>-like behaviors is a perfectly reasonable thing to do), but you&#39;re not just &quot;doing what the interpreter would have done anyway&quot; (even the code using plain <code>list(dict.fromkeys(iterable))</code> in Python 3.7+ takes about twice as long as using <code>list(set(iterable))</code>, because <code>set</code> is optimized for that use case and <code>dict</code> isn&#39;t, even though they&#39;re both hash tables and in theory should perform identically, save the cost of storing values for the <code>dict</code>)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 248321,
+                                "reputation": 61330,
+                                "user_id": 523612,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Karl Knechtel"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1657058131,
+                            "post_id": 17016257,
+                            "comment_id": 128718171,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/17016257#comment128718171_17016257",
+                            "body": "See also: <a href=\"https://stackoverflow.com/questions/1653970/does-python-have-an-ordered-set\" title=\"does python have an ordered set\">stackoverflow.com/questions/1653970/&hellip;</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1260626,
+                        "reputation": 131601,
+                        "user_id": 1219006,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "jamylak"
+                    },
+                    "comment_count": 14,
+                    "is_accepted": false,
+                    "score": 752,
+                    "last_activity_date": 1688683224,
+                    "last_edit_date": 1688683224,
+                    "creation_date": 1370832433,
+                    "answer_id": 17016257,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/17016257#17016257",
+                    "body": "<p>The best solution varies by Python version and environment constraints:</p>\n<h4>Python 3.7+ (and most interpreters supporting 3.6, as an implementation detail):</h4>\n<p>First introduced in PyPy 2.5.0, and adopted in CPython 3.6 as an implementation detail, before being made a language guarantee in Python 3.7, plain <code>dict</code> is insertion-ordered, and even more efficient than the (also C implemented as of CPython 3.5) <code>collections.OrderedDict</code>. So the fastest solution, by far, is also the simplest:</p>\n<pre><code>&gt;&gt;&gt; items = [1, 2, 0, 1, 3, 2]\n&gt;&gt;&gt; list(dict.fromkeys(items))  # Or [*dict.fromkeys(items)] if you prefer\n[1, 2, 0, 3]\n</code></pre>\n<p>Like <code>list(set(items))</code> this pushes all the work to the C layer (on CPython), but since <code>dict</code>s are insertion ordered, <code>dict.fromkeys</code> doesn't lose ordering. It's slower than <code>list(set(items))</code> (takes 50-100% longer typically), but <em>much</em> faster than any other order-preserving solution (takes about half the time of <a href=\"https://stackoverflow.com/a/480227/364696\">hacks involving use of <code>set</code>s in a listcomp</a>).</p>\n<p><strong>Important note</strong>: The <code>unique_everseen</code> solution from <code>more_itertools</code> (see below) has some unique advantages in terms of laziness and support for non-hashable input items; if you need these features, it's the <em>only</em> solution that will work.</p>\n<h4>Python 3.5 (and all older versions if performance isn't <em>critical</em>)</h4>\n<p>As Raymond <a href=\"https://stackoverflow.com/a/39835527/336527\">pointed out</a>, in CPython 3.5 where <code>OrderedDict</code> is implemented in C, ugly list comprehension hacks are slower than <code>OrderedDict.fromkeys</code> (unless you actually need the list at the end - and even then, only if the input is very short). So on both performance and readability the best solution for CPython 3.5 is the <code>OrderedDict</code> equivalent of the 3.6+ use of plain <code>dict</code>:</p>\n<pre><code>&gt;&gt;&gt; from collections import OrderedDict\n&gt;&gt;&gt; items = [1, 2, 0, 1, 3, 2]\n&gt;&gt;&gt; list(OrderedDict.fromkeys(items))\n[1, 2, 0, 3]\n</code></pre>\n<p>On CPython 3.4 and earlier, this will be slower than some other solutions, so if profiling shows you need a better solution, keep reading.</p>\n<h4>Python 3.4 and earlier, if performance is critical and third-party modules are acceptable</h4>\n<p>As <a href=\"https://stackoverflow.com/a/19279812/1219006\">@abarnert</a> notes, the <a href=\"https://more-itertools.readthedocs.io/en/stable/api.html\" rel=\"noreferrer\"><code>more_itertools</code></a> library (<code>pip install more_itertools</code>) contains a <a href=\"https://more-itertools.readthedocs.io/en/stable/api.html#more_itertools.unique_everseen\" rel=\"noreferrer\"><code>unique_everseen</code></a> function that is built to solve this problem without any <strong>unreadable</strong> (<code>not seen.add</code>) <strong>mutations</strong> in list comprehensions. This is the fastest solution too:</p>\n<pre><code>&gt;&gt;&gt; from more_itertools import unique_everseen\n&gt;&gt;&gt; items = [1, 2, 0, 1, 3, 2]\n&gt;&gt;&gt; list(unique_everseen(items))\n[1, 2, 0, 3]\n</code></pre>\n<p>Just one simple library import and no hacks.</p>\n<p>The module is adapting the itertools recipe <a href=\"https://docs.python.org/3/library/itertools.html#itertools-recipes\" rel=\"noreferrer\"><code>unique_everseen</code></a> which looks like:</p>\n<pre><code>def unique_everseen(iterable, key=None):\n    &quot;List unique elements, preserving order. Remember all elements ever seen.&quot;\n    # unique_everseen('AAAABBBCCDAABBB') --&gt; A B C D\n    # unique_everseen('ABBCcAD', str.lower) --&gt; A B C D\n    seen = set()\n    seen_add = seen.add\n    if key is None:\n        for element in filterfalse(seen.__contains__, iterable):\n            seen_add(element)\n            yield element\n    else:\n        for element in iterable:\n            k = key(element)\n            if k not in seen:\n                seen_add(k)\n                yield element\n</code></pre>\n<p>but unlike the <code>itertools</code> recipe, it supports non-hashable items (at a performance cost; if all elements in <code>iterable</code> are non-hashable, the algorithm becomes <code>O(n\u00b2)</code>, vs. <code>O(n)</code> if they're all hashable).</p>\n<p><strong>Important note</strong>: Unlike all the other solutions here, <code>unique_everseen</code> can be used lazily; the peak memory usage will be the same (eventually, the underlying <code>set</code> grows to the same size), but if you don't <code>list</code>ify the result, you just iterate it, you'll be able to process unique items as they're found, rather than waiting until the entire input has been deduplicated before processing the first unique item.</p>\n<h4>Python 3.4 and earlier, if performance is critical <em>and</em> third party modules are unavailable</h4>\n<p>You have two options:</p>\n<ol>\n<li><p>Copy and paste in <a href=\"https://docs.python.org/3/library/itertools.html#itertools-recipes\" rel=\"noreferrer\">the <code>unique_everseen</code> recipe</a> to your code and use it per the <code>more_itertools</code> example above</p>\n</li>\n<li><p>Use ugly hacks to allow a single listcomp to both check and update a <code>set</code> to track what's been seen:</p>\n<pre><code>seen = set()\n[x for x in seq if x not in seen and not seen.add(x)]\n</code></pre>\n<p>at the expense of relying on the <strong>ugly hack</strong>:</p>\n<pre><code> not seen.add(x)\n</code></pre>\n<p>which relies on the fact that <code>set.add</code> is an in-place method that always returns <code>None</code> so <code>not None</code> evaluates to <code>True</code>.</p>\n</li>\n</ol>\n<p>Note that <em>all</em> of the solutions above are <code>O(n)</code> (save calling <code>unique_everseen</code> on an iterable of non-hashable items, which is <code>O(n\u00b2)</code>, while the others would fail immediately with a <code>TypeError</code>), so all solutions are performant enough when they're not the hottest code path. Which one to use depends on which versions of the language spec/interpreter/third-party modules you can rely on, whether or not performance is critical (don't assume it is; it usually isn't), and most importantly, readability (because if the person who maintains this code later ends up in a murderous mood, your clever micro-optimization probably wasn't worth it).</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 275020,
+                                "reputation": 76234,
+                                "user_id": 567620,
+                                "user_type": "registered",
+                                "accept_rate": 72,
+                                "display_name": "ely"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1378908321,
+                            "post_id": 18729193,
+                            "comment_id": 27624720,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/18729193#comment27624720_18729193",
+                            "body": "Note that performance will get bad when the number of unique elements is very large relative to the total number of elements, since each successive recursive call&#39;s use of <code>filter</code> will barely benefit from the previous call at all. But if the number of unique elements is small relative to the array size, this should perform pretty well."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 275020,
+                        "reputation": 76234,
+                        "user_id": 567620,
+                        "user_type": "registered",
+                        "accept_rate": 72,
+                        "display_name": "ely"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1378909795,
+                    "last_edit_date": 1378909795,
+                    "creation_date": 1378849258,
+                    "answer_id": 18729193,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/18729193#18729193",
+                    "body": "<p>Borrowing the recursive idea used in definining Haskell's <code>nub</code> function for lists, this would be a recursive approach:</p>\n\n<pre><code>def unique(lst):\n    return [] if lst==[] else [lst[0]] + unique(filter(lambda x: x!= lst[0], lst[1:]))\n</code></pre>\n\n<p>e.g.:</p>\n\n<pre><code>In [118]: unique([1,5,1,1,4,3,4])\nOut[118]: [1, 5, 4, 3]\n</code></pre>\n\n<p>I tried it for growing data sizes and saw sub-linear time-complexity (not definitive, but suggests this should be fine for normal data).</p>\n\n<pre><code>In [122]: %timeit unique(np.random.randint(5, size=(1)))\n10000 loops, best of 3: 25.3 us per loop\n\nIn [123]: %timeit unique(np.random.randint(5, size=(10)))\n10000 loops, best of 3: 42.9 us per loop\n\nIn [124]: %timeit unique(np.random.randint(5, size=(100)))\n10000 loops, best of 3: 132 us per loop\n\nIn [125]: %timeit unique(np.random.randint(5, size=(1000)))\n1000 loops, best of 3: 1.05 ms per loop\n\nIn [126]: %timeit unique(np.random.randint(5, size=(10000)))\n100 loops, best of 3: 11 ms per loop\n</code></pre>\n\n<p>I also think it's interesting that this could be readily generalized to uniqueness by other operations. Like this:</p>\n\n<pre><code>import operator\ndef unique(lst, cmp_op=operator.ne):\n    return [] if lst==[] else [lst[0]] + unique(filter(lambda x: cmp_op(x, lst[0]), lst[1:]), cmp_op)\n</code></pre>\n\n<p>For example, you could pass in a function that uses the notion of rounding to the same integer as if it was \"equality\" for uniqueness purposes, like this:</p>\n\n<pre><code>def test_round(x,y):\n    return round(x) != round(y)\n</code></pre>\n\n<p>then unique(some_list, test_round) would provide the unique elements of the list where uniqueness no longer meant traditional equality (which is implied by using any sort of set-based or dict-key-based approach to this problem) but instead meant to take only the first element that rounds to K for each possible integer K that the elements might round to, e.g.:</p>\n\n<pre><code>In [6]: unique([1.2, 5, 1.9, 1.1, 4.2, 3, 4.8], test_round)\nOut[6]: [1.2, 5, 1.9, 4.2, 3]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1770125,
+                        "reputation": 384,
+                        "user_id": 1615108,
+                        "user_type": "registered",
+                        "display_name": "dominecf"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1398406279,
+                    "last_edit_date": 1398406279,
+                    "creation_date": 1380713011,
+                    "answer_id": 19135774,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/19135774#19135774",
+                    "body": "<p>Relatively effective approach with <code>_sorted_</code> a <code>numpy</code> arrays:</p>\n\n<pre><code>b = np.array([1,3,3, 8, 12, 12,12])    \nnumpy.hstack([b[0], [x[0] for x in zip(b[1:], b[:-1]) if x[0]!=x[1]]])\n</code></pre>\n\n<p>Outputs:</p>\n\n<pre><code>array([ 1,  3,  8, 12])\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1260626,
+                                "reputation": 131601,
+                                "user_id": 1219006,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "jamylak"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1433690646,
+                            "post_id": 19279812,
+                            "comment_id": 49448566,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/19279812#comment49448566_19279812",
+                            "body": "I completely overlooked <code>more-itertools</code> this is clearly the best answer. A simple <code>from more_itertools import unique_everseen</code> <code>list(unique_everseen(items))</code> A much faster approach than mine and much better than the accepted answer, I think the library download is worth it. I am going to community wiki my answer and add this in."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 808621,
+                        "reputation": 360780,
+                        "user_id": 908494,
+                        "user_type": "registered",
+                        "accept_rate": 25,
+                        "display_name": "abarnert"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 11,
+                    "last_activity_date": 1381343582,
+                    "last_edit_date": 1381343582,
+                    "creation_date": 1381343229,
+                    "answer_id": 19279812,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/19279812#19279812",
+                    "body": "<p>For another very late answer to another very old question:</p>\n\n<p>The <a href=\"http://docs.python.org/3/library/itertools.html#itertools-recipes\"><code>itertools</code> recipes</a> have a function that does this, using the <code>seen</code> set technique, but:</p>\n\n<ul>\n<li>Handles a standard <code>key</code> function.</li>\n<li>Uses no unseemly hacks.</li>\n<li>Optimizes the loop by pre-binding <code>seen.add</code> instead of looking it up N times. (<code>f7</code> also does this, but some versions don't.)</li>\n<li>Optimizes the loop by using <code>ifilterfalse</code>, so you only have to loop over the unique elements in Python, instead of all of them. (You still iterate over all of them inside <code>ifilterfalse</code>, of course, but that's in C, and much faster.)</li>\n</ul>\n\n<p>Is it actually faster than <code>f7</code>? It depends on your data, so you'll have to test it and see. If you want a list in the end, <code>f7</code> uses a listcomp, and there's no way to do that here. (You can directly <code>append</code> instead of <code>yield</code>ing, or you can feed the generator into the <code>list</code> function, but neither one can be as fast as the LIST_APPEND inside a listcomp.) At any rate, usually, squeezing out a few microseconds is not going to be as important as having an easily-understandable, reusable, already-written function that doesn't require DSU when you want to decorate.</p>\n\n<p>As with all of the recipes, it's also available in <a href=\"https://pypi.python.org/pypi/more-itertools\"><code>more-iterools</code></a>.</p>\n\n<p>If you just want the no-<code>key</code> case, you can simplify it as:</p>\n\n<pre><code>def unique(iterable):\n    seen = set()\n    seen_add = seen.add\n    for element in itertools.ifilterfalse(seen.__contains__, iterable):\n        seen_add(element)\n        yield element\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 396926,
+                                "reputation": 4403,
+                                "user_id": 760767,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Evpok"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1425059762,
+                            "post_id": 23282700,
+                            "comment_id": 45821229,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/23282700#comment45821229_23282700",
+                            "body": "Prefer <code>i,e in enumerate(l)</code> to <code>l[i] for i in range(len(l))</code>."
+                        }
+                    ],
+                    "owner": {
+                        "user_type": "does_not_exist",
+                        "display_name": "user1969453"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1398389311,
+                    "creation_date": 1398389311,
+                    "answer_id": 23282700,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/23282700#23282700",
+                    "body": "<p>You could do a sort of ugly list comprehension hack.</p>\n\n<pre><code>[l[i] for i in range(len(l)) if l.index(l[i]) == i]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 6448488,
+                                "reputation": 51730,
+                                "user_id": 4996248,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "John Coleman"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1483474477,
+                            "post_id": 26794407,
+                            "comment_id": 70109602,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/26794407#comment70109602_26794407",
+                            "body": "Clever use of <code>extend</code> with a generator expression which depends on the thing being extended (so +1), but <code>set(n)</code> is recomputed at each stage (which is linear) and this bumps the overall approach to being quadratic. In fact, this is almost certainly worse than simply using <code>ele in n</code>. Making a set for a single membership test isn&#39;t worth the expense of the set creation. Still -- it is an interesting approach."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1386171,
+                        "reputation": 10909,
+                        "user_id": 1318181,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "kylieCatt"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1415336574,
+                    "creation_date": 1415336574,
+                    "answer_id": 26794407,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/26794407#26794407",
+                    "body": "<pre><code>l = [1,2,2,3,3,...]\nn = []\nn.extend(ele for ele in l if ele not in set(n))\n</code></pre>\n\n<p>A generator expression that uses the O(1) look up of a set to determine whether or not to include an element in the new list.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1444894,
+                        "reputation": 621,
+                        "user_id": 1363756,
+                        "user_type": "registered",
+                        "display_name": "DjangoHeads"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1430203155,
+                    "last_edit_date": 1430203155,
+                    "creation_date": 1430146041,
+                    "answer_id": 29898968,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/29898968#29898968",
+                    "body": "<p>5 x faster reduce variant but more sophisticated</p>\n\n<pre><code>&gt;&gt;&gt; l = [5, 6, 6, 1, 1, 2, 2, 3, 4]\n&gt;&gt;&gt; reduce(lambda r, v: v in r[1] and r or (r[0].append(v) or r[1].add(v)) or r, l, ([], set()))[0]\n[5, 6, 1, 2, 3, 4]\n</code></pre>\n\n<p>Explanation:</p>\n\n<pre><code>default = (list(), set())\n# use list to keep order\n# use set to make lookup faster\n\ndef reducer(result, item):\n    if item not in result[1]:\n        result[0].append(item)\n        result[1].add(item)\n    return result\n\n&gt;&gt;&gt; reduce(reducer, l, default)[0]\n[5, 6, 1, 2, 3, 4]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5888992,
+                        "reputation": 694,
+                        "user_id": 4636182,
+                        "user_type": "registered",
+                        "display_name": "Ilya Prokin"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1431817508,
+                    "creation_date": 1431817508,
+                    "answer_id": 30281633,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/30281633#30281633",
+                    "body": "<p>A simple recursive solution:</p>\n\n<pre><code>def uniquefy_list(a):\n    return uniquefy_list(a[1:]) if a[0] in a[1:] else [a[0]]+uniquefy_list(a[1:]) if len(a)&gt;1 else [a[0]]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1995973,
+                        "reputation": 783,
+                        "user_id": 3869543,
+                        "user_type": "registered",
+                        "accept_rate": 0,
+                        "display_name": "Lei"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1437178854,
+                    "last_edit_date": 1437178854,
+                    "creation_date": 1437178251,
+                    "answer_id": 31486477,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/31486477#31486477",
+                    "body": "<p>If you routinely use <a href=\"http://pandas.pydata.org/\" rel=\"nofollow\"><code>pandas</code></a>, and aesthetics is preferred over performance, then consider the built-in function <code>pandas.Series.drop_duplicates</code>:</p>\n\n<pre><code>    import pandas as pd\n    import numpy as np\n\n    uniquifier = lambda alist: pd.Series(alist).drop_duplicates().tolist()\n\n    # from the chosen answer \n    def f7(seq):\n        seen = set()\n        seen_add = seen.add\n        return [ x for x in seq if not (x in seen or seen_add(x))]\n\n    alist = np.random.randint(low=0, high=1000, size=10000).tolist()\n\n    print uniquifier(alist) == f7(alist)  # True\n</code></pre>\n\n<p>Timing: </p>\n\n<pre><code>    In [104]: %timeit f7(alist)\n    1000 loops, best of 3: 1.3 ms per loop\n    In [110]: %timeit uniquifier(alist)\n    100 loops, best of 3: 4.39 ms per loop\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7622584,
+                        "reputation": 11,
+                        "user_id": 5780203,
+                        "user_type": "registered",
+                        "display_name": "Soham Joshi"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1452618979,
+                    "creation_date": 1452618979,
+                    "answer_id": 34749886,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/34749886#34749886",
+                    "body": "<p>this will preserve order and run in O(n) time. basically the idea is to create a hole wherever there is a duplicate found and sink it down to the bottom. makes use of a read and write pointer. whenever a duplicate is found only the read pointer advances and write pointer stays on the duplicate entry to overwrite it.</p>\n\n<pre><code>def deduplicate(l):\n    count = {}\n    (read,write) = (0,0)\n    while read &lt; len(l):\n        if l[read] in count:\n            read += 1\n            continue\n        count[l[read]] = True\n        l[write] = l[read]\n        read += 1\n        write += 1\n    return l[0:write]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 8614021,
+                                "reputation": 138925,
+                                "user_id": 6451573,
+                                "user_type": "moderator",
+                                "accept_rate": 90,
+                                "display_name": "Jean-Fran&#231;ois Fabre"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1542748623,
+                            "post_id": 35038274,
+                            "comment_id": 93678567,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/35038274#comment93678567_35038274",
+                            "body": "this is O(N**2) complexity + list slicing each time."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7263447,
+                        "reputation": 1873,
+                        "user_id": 5539184,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Rob Murray"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1453900088,
+                    "creation_date": 1453900088,
+                    "answer_id": 35038274,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/35038274#35038274",
+                    "body": "<p>A solution without using imported modules or sets:</p>\n\n<pre><code>text = \"ask not what your country can do for you ask what you can do for your country\"\nsentence = text.split(\" \")\nnoduplicates = [(sentence[i]) for i in range (0,len(sentence)) if sentence[i] not in sentence[:i]]\nprint(noduplicates)\n</code></pre>\n\n<p>Gives output:</p>\n\n<pre><code>['ask', 'not', 'what', 'your', 'country', 'can', 'do', 'for', 'you']\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 105525,
+                                "reputation": 33228,
+                                "user_id": 281545,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Mr_and_Mrs_D"
+                            },
+                            "edited": false,
+                            "score": 10,
+                            "creation_date": 1527770232,
+                            "post_id": 39835527,
+                            "comment_id": 88258804,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/39835527#comment88258804_39835527",
+                            "body": "The only gotcha is that the iterable &quot;elements&quot; must be hashable - would be nice to have the equivalent for iterables with arbitrary elements (as a list of lists)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 239945,
+                                "reputation": 563,
+                                "user_id": 509882,
+                                "user_type": "registered",
+                                "accept_rate": 23,
+                                "display_name": "Arthur"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1547074866,
+                            "post_id": 39835527,
+                            "comment_id": 95071794,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/39835527#comment95071794_39835527",
+                            "body": "Insertion order iteration over a dict provides functionality that services more use-cases than removing duplicates. For example, scientific analyses rely on <b>reproducible</b> computations which non-deterministic dict iteration doesn&#39;t support. Reproducibility is a major current objective in computational scientific modeling, so we welcome this new feature. Although I know it&#39;s trivial to build with a deterministic dict, a high-performance, deterministic <code>set()</code> would help more naive users develop reproducible codes."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3130695,
+                                "reputation": 4450,
+                                "user_id": 2648551,
+                                "user_type": "registered",
+                                "display_name": "colidyre"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1593003465,
+                            "post_id": 39835527,
+                            "comment_id": 110626843,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/39835527#comment110626843_39835527",
+                            "body": "What about using <code>[*dict.fromkeys(&#39;abracadabra&#39;)]</code> (unpacking) instead of calling the function <code>list(...)</code>? In my tests this is faster, although only very small differences can be detected. So I&#39;m not sure if this is just a coincidence."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 186862,
+                                "reputation": 222232,
+                                "user_id": 424499,
+                                "user_type": "registered",
+                                "display_name": "Raymond Hettinger"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3130695,
+                                "reputation": 4450,
+                                "user_id": 2648551,
+                                "user_type": "registered",
+                                "display_name": "colidyre"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1593035452,
+                            "post_id": 39835527,
+                            "comment_id": 110642781,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/39835527#comment110642781_39835527",
+                            "body": "@colidyre Yes, that would work.  The small speed difference is likely due to operators not having to lookup a builtin function.  There is a matter of clarity to considered as well."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 151071,
+                                "reputation": 150282,
+                                "user_id": 364696,
+                                "user_type": "registered",
+                                "display_name": "ShadowRanger"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1640629431,
+                            "post_id": 39835527,
+                            "comment_id": 124620943,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/39835527#comment124620943_39835527",
+                            "body": "@RaymondHettinger: The lookup cost was small (got smaller with 3.8&#39;s <code>LOAD_GLOBAL</code>); main advantage was avoiding constructor code paths (requiring construction of a <code>tuple</code> for <code>args</code> and passing <code>NULL</code> pointer as <code>kwargs</code> <code>dict</code>, then calling both the mostly empty <code>__new__</code> and the <code>__init__</code> separately, the latter of which then has to go through generalized argument parsing code, all to pass 0-1 positional arguments). As of 3.9 though, <code>list()</code> bypasses most of that via the vectorcall protocol, reducing the incremental benefit from 60-70 ns (3.8.5) to 20-30 ns (3.10.0) on my machine."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1252466,
+                                "reputation": 81149,
+                                "user_id": 1212596,
+                                "user_type": "registered",
+                                "accept_rate": 52,
+                                "display_name": "Paul Draper"
+                            },
+                            "reply_to_user": {
+                                "account_id": 105525,
+                                "reputation": 33228,
+                                "user_id": 281545,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "Mr_and_Mrs_D"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1673911264,
+                            "post_id": 39835527,
+                            "comment_id": 132598679,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/39835527#comment132598679_39835527",
+                            "body": "@Mr_and_Mrs_D, it just isn&#39;t possible to deduplicate elements in O(n) without hashing. Deduplicating arbitrary elements would be O(n^2)."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 186862,
+                        "reputation": 222232,
+                        "user_id": 424499,
+                        "user_type": "registered",
+                        "display_name": "Raymond Hettinger"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": false,
+                    "score": 163,
+                    "last_activity_date": 1640629679,
+                    "last_edit_date": 1640629679,
+                    "creation_date": 1475509653,
+                    "answer_id": 39835527,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/39835527#39835527",
+                    "body": "<p><strong>In CPython 3.6+</strong> (and all other Python implementations starting with <strong>Python 3.7+</strong>), dictionaries <a href=\"https://docs.python.org/3/whatsnew/3.7.html#summary-release-highlights\" rel=\"noreferrer\">are ordered</a>, so the way to remove duplicates from an iterable while keeping it in the original order is:</p>\n<pre><code>&gt;&gt;&gt; list(dict.fromkeys('abracadabra'))\n['a', 'b', 'r', 'c', 'd']\n</code></pre>\n<p><strong>In Python 3.5</strong> and below (including <strong>Python 2.7</strong>), use the <a href=\"https://docs.python.org/3/library/collections.html#collections.OrderedDict\" rel=\"noreferrer\"><code>OrderedDict</code></a>. My timings show that this is now both the fastest and shortest of the various approaches for Python 3.5 (when it gained a C implementation; prior to 3.5 it's still the clearest solution, though not the fastest).</p>\n<pre><code>&gt;&gt;&gt; from collections import OrderedDict\n&gt;&gt;&gt; list(OrderedDict.fromkeys('abracadabra'))\n['a', 'b', 'r', 'c', 'd']\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2279032,
+                                "reputation": 788,
+                                "user_id": 2004627,
+                                "user_type": "registered",
+                                "accept_rate": 43,
+                                "display_name": "Alex"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1562330472,
+                            "post_id": 41577279,
+                            "comment_id": 100351221,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/41577279#comment100351221_41577279",
+                            "body": "I do not understand the necessity f&#252;r this line: <code>seen_add = seen.add</code> -- is this needed for the benchmarks?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7040846,
+                                "reputation": 149720,
+                                "user_id": 5393381,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "MSeifert"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2279032,
+                                "reputation": 788,
+                                "user_id": 2004627,
+                                "user_type": "registered",
+                                "accept_rate": 43,
+                                "display_name": "Alex"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1562403911,
+                            "post_id": 41577279,
+                            "comment_id": 100368686,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/41577279#comment100368686_41577279",
+                            "body": "@Alex This is the approach given in <a href=\"https://stackoverflow.com/a/480227/5393381\">this answer</a>. It would make more sense to ask it there. I just used the approach from that answer to compare the timings."
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user3064538"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1589482589,
+                            "post_id": 41577279,
+                            "comment_id": 109320318,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/41577279#comment109320318_41577279",
+                            "body": "can you add the <code>dict.fromkeys()</code> method to your chart please?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7040846,
+                                "reputation": 149720,
+                                "user_id": 5393381,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "MSeifert"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1589494595,
+                            "post_id": 41577279,
+                            "comment_id": 109325795,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/41577279#comment109325795_41577279",
+                            "body": "I&#39;m not really sure if I have the same to do the timings soonish. Do you think it&#39;s much faster than the <code>ordereddict.fromkeys</code>?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9296796,
+                                "reputation": 6865,
+                                "user_id": 6903458,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Roko Mijic"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1591270575,
+                            "post_id": 41577279,
+                            "comment_id": 109995279,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/41577279#comment109995279_41577279",
+                            "body": "&quot;This iteration_utilities.unique_everseen function can also handle unhashable values in the input&quot;  -- yes, this is really important. If you have a list of dicts of dicts of dicts etc this is the only way to do the job, even at small scale."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3767690,
+                                "reputation": 4128,
+                                "user_id": 3130747,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "baxx"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1624191225,
+                            "post_id": 41577279,
+                            "comment_id": 120285732,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/41577279#comment120285732_41577279",
+                            "body": "why use this instead of <code>more_itertools.unique_everseen</code> ? I&#39;m not sure why they bear the same name"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7040846,
+                                "reputation": 149720,
+                                "user_id": 5393381,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "MSeifert"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3767690,
+                                "reputation": 4128,
+                                "user_id": 3130747,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "baxx"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1624192306,
+                            "post_id": 41577279,
+                            "comment_id": 120285995,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/41577279#comment120285995_41577279",
+                            "body": "@baxx if you already have <code>more-itertools</code> then that&#39;s probably better and easier to use the function from more-itertools (less dependencies). If you need to get the optimal performance then <code>iteration_uitilities</code> is (or at least was at the time of writing) significantly faster, it seems like ~2 times faster if I read the graphs correctly. If you don&#39;t care too much about performance: Just use what you want. E.g. there are implementations in other answers here that are pretty short and can probably copy&amp;pasted easily :)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7040846,
+                        "reputation": 149720,
+                        "user_id": 5393381,
+                        "user_type": "registered",
+                        "accept_rate": 84,
+                        "display_name": "MSeifert"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": false,
+                    "score": 16,
+                    "last_activity_date": 1523308570,
+                    "last_edit_date": 1523308570,
+                    "creation_date": 1484078148,
+                    "answer_id": 41577279,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/41577279#41577279",
+                    "body": "<p>Just to add another (very performant) implementation of such a functionality from an external module<sup>1</sup>: <a href=\"https://iteration-utilities.readthedocs.io/en/latest/generated/unique_everseen.html\" rel=\"noreferrer\"><code>iteration_utilities.unique_everseen</code></a>:</p>\n\n<pre><code>&gt;&gt;&gt; from iteration_utilities import unique_everseen\n&gt;&gt;&gt; lst = [1,1,1,2,3,2,2,2,1,3,4]\n\n&gt;&gt;&gt; list(unique_everseen(lst))\n[1, 2, 3, 4]\n</code></pre>\n\n<h1>Timings</h1>\n\n<p>I did some timings (Python 3.6) and these show that it's faster than all other alternatives I tested, including <code>OrderedDict.fromkeys</code>, <code>f7</code> and <code>more_itertools.unique_everseen</code>:</p>\n\n<pre><code>%matplotlib notebook\n\nfrom iteration_utilities import unique_everseen\nfrom collections import OrderedDict\nfrom more_itertools import unique_everseen as mi_unique_everseen\n\ndef f7(seq):\n    seen = set()\n    seen_add = seen.add\n    return [x for x in seq if not (x in seen or seen_add(x))]\n\ndef iteration_utilities_unique_everseen(seq):\n    return list(unique_everseen(seq))\n\ndef more_itertools_unique_everseen(seq):\n    return list(mi_unique_everseen(seq))\n\ndef odict(seq):\n    return list(OrderedDict.fromkeys(seq))\n\nfrom simple_benchmark import benchmark\n\nb = benchmark([f7, iteration_utilities_unique_everseen, more_itertools_unique_everseen, odict],\n              {2**i: list(range(2**i)) for i in range(1, 20)},\n              'list size (no duplicates)')\nb.plot()\n</code></pre>\n\n<p><a href=\"https://i.stack.imgur.com/XLrov.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/XLrov.png\" alt=\"enter image description here\"></a></p>\n\n<p>And just to make sure I also did a test with more duplicates just to check if it makes a difference:</p>\n\n<pre><code>import random\n\nb = benchmark([f7, iteration_utilities_unique_everseen, more_itertools_unique_everseen, odict],\n              {2**i: [random.randint(0, 2**(i-1)) for _ in range(2**i)] for i in range(1, 20)},\n              'list size (lots of duplicates)')\nb.plot()\n</code></pre>\n\n<p><a href=\"https://i.stack.imgur.com/YCx2c.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/YCx2c.png\" alt=\"enter image description here\"></a></p>\n\n<p>And one containing only one value:</p>\n\n<pre><code>b = benchmark([f7, iteration_utilities_unique_everseen, more_itertools_unique_everseen, odict],\n              {2**i: [1]*(2**i) for i in range(1, 20)},\n              'list size (only duplicates)')\nb.plot()\n</code></pre>\n\n<p><a href=\"https://i.stack.imgur.com/SPCcT.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/SPCcT.png\" alt=\"enter image description here\"></a></p>\n\n<p>In all of these cases the <code>iteration_utilities.unique_everseen</code> function is the fastest (on my computer).</p>\n\n<hr>\n\n<p>This <code>iteration_utilities.unique_everseen</code> function can also handle unhashable values in the input (however with an <code>O(n*n)</code> performance instead of the <code>O(n)</code> performance when the values are hashable).</p>\n\n<pre><code>&gt;&gt;&gt; lst = [{1}, {1}, {2}, {1}, {3}]\n\n&gt;&gt;&gt; list(unique_everseen(lst))\n[{1}, {2}, {3}]\n</code></pre>\n\n<hr>\n\n<p><sup>1</sup> Disclaimer: I'm the author of that package.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3767690,
+                                "reputation": 4128,
+                                "user_id": 3130747,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "baxx"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1624191169,
+                            "post_id": 45746808,
+                            "comment_id": 120285710,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/45746808#comment120285710_45746808",
+                            "body": "useful, but doesn&#39;t preserve the ordering. <code>more_itertools.unique_everseen</code> does."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2804247,
+                        "reputation": 107836,
+                        "user_id": 2411802,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "Alexander"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 44,
+                    "last_activity_date": 1544211167,
+                    "last_edit_date": 1544211167,
+                    "creation_date": 1503016508,
+                    "answer_id": 45746808,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/45746808#45746808",
+                    "body": "<p>Not to kick a dead horse (this question is very old and already has lots of good answers), but here is a solution using pandas that is quite fast in many circumstances and is dead simple to use.  </p>\n\n<pre><code>import pandas as pd\n\nmy_list = [0, 1, 2, 3, 4, 1, 2, 3, 5]\n\n&gt;&gt;&gt; pd.Series(my_list).drop_duplicates().tolist()\n# Output:\n# [0, 1, 2, 3, 4, 5]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3197460,
+                        "reputation": 77814,
+                        "user_id": 3620003,
+                        "user_type": "registered",
+                        "accept_rate": 91,
+                        "display_name": "timgeb"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 44,
+                    "last_activity_date": 1542454686,
+                    "last_edit_date": 1542454686,
+                    "creation_date": 1519979033,
+                    "answer_id": 49065241,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/49065241#49065241",
+                    "body": "<p>In <strong>Python 3.7</strong> and above, dictionaries are <a href=\"https://mail.python.org/pipermail/python-dev/2017-December/151283.html\" rel=\"noreferrer\">guaranteed</a> to remember their key insertion order. The answer to <a href=\"https://stackoverflow.com/questions/39980323/are-dictionaries-ordered-in-python-3-6\">this</a> question summarizes the current state of affairs.</p>\n\n<p>The <code>OrderedDict</code> solution thus becomes obsolete and without any import statements we can simply issue:</p>\n\n<pre><code>&gt;&gt;&gt; lst = [1, 2, 1, 3, 3, 2, 4]\n&gt;&gt;&gt; list(dict.fromkeys(lst))\n[1, 2, 3, 4]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3264692,
+                                "reputation": 23974,
+                                "user_id": 2749397,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "gboffi"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1541353441,
+                            "post_id": 53143504,
+                            "comment_id": 93178739,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/53143504#comment93178739_53143504",
+                            "body": "Before posting I  have searched the body of the answers for &#39;place&#39; to no avail. If others have solved the problem in a similar way please alert me and I&#39;ll remove my answer asap."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3197460,
+                                "reputation": 77814,
+                                "user_id": 3620003,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "timgeb"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1589890657,
+                            "post_id": 53143504,
+                            "comment_id": 109466919,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/53143504#comment109466919_53143504",
+                            "body": "You could just use <code>l[:] = &lt;one of the the faster methods&gt;</code> if you wanted an in-place operation, no?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3264692,
+                                "reputation": 23974,
+                                "user_id": 2749397,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "gboffi"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3197460,
+                                "reputation": 77814,
+                                "user_id": 3620003,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "timgeb"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1589930273,
+                            "post_id": 53143504,
+                            "comment_id": 109487740,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/53143504#comment109487740_53143504",
+                            "body": "@timgeb Yes and no\u2026 When I do <code>a=[1]; b=a; a[:]=[2]</code> then <code>b==[2]</code> value is <code>True</code> and we can say that we are doing it in-place, nevertheless what you propose is using new space to have a new list, replace the old data with the new data and mark the old data for garbage collection because is no more referenced by anything,  so saying it&#39;s operating in-place is a little bit stretching the concept wrt what I&#39;ve shown it is possible... is it inefficient? yes, but I&#39;ve told that in advance."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3264692,
+                        "reputation": 23974,
+                        "user_id": 2749397,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "gboffi"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1541352653,
+                    "creation_date": 1541352653,
+                    "answer_id": 53143504,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/53143504#53143504",
+                    "body": "<h3>An in-place method</h3>\n\n<p>This method is quadratic, because we have a linear lookup into the list for every element of the list (to that we have to add the cost of rearranging the list because of the <code>del</code> s).</p>\n\n<p>That said, it is possible to operate in place if we start from the end of the list and proceed toward the origin removing each term that is present in the sub-list at its left</p>\n\n<p>This idea in code is simply</p>\n\n<pre><code>for i in range(len(l)-1,0,-1): \n    if l[i] in l[:i]: del l[i] \n</code></pre>\n\n<hr>\n\n<p><em>A simple test of the implementation</em></p>\n\n<pre><code>In [91]: from random import randint, seed                                                                                            \nIn [92]: seed('20080808') ; l = [randint(1,6) for _ in range(12)] # Beijing Olympics                                                                 \nIn [93]: for i in range(len(l)-1,0,-1): \n    ...:     print(l) \n    ...:     print(i, l[i], l[:i], end='') \n    ...:     if l[i] in l[:i]: \n    ...:          print( ': remove', l[i]) \n    ...:          del l[i] \n    ...:     else: \n    ...:          print() \n    ...: print(l)\n[6, 5, 1, 4, 6, 1, 6, 2, 2, 4, 5, 2]\n11 2 [6, 5, 1, 4, 6, 1, 6, 2, 2, 4, 5]: remove 2\n[6, 5, 1, 4, 6, 1, 6, 2, 2, 4, 5]\n10 5 [6, 5, 1, 4, 6, 1, 6, 2, 2, 4]: remove 5\n[6, 5, 1, 4, 6, 1, 6, 2, 2, 4]\n9 4 [6, 5, 1, 4, 6, 1, 6, 2, 2]: remove 4\n[6, 5, 1, 4, 6, 1, 6, 2, 2]\n8 2 [6, 5, 1, 4, 6, 1, 6, 2]: remove 2\n[6, 5, 1, 4, 6, 1, 6, 2]\n7 2 [6, 5, 1, 4, 6, 1, 6]\n[6, 5, 1, 4, 6, 1, 6, 2]\n6 6 [6, 5, 1, 4, 6, 1]: remove 6\n[6, 5, 1, 4, 6, 1, 2]\n5 1 [6, 5, 1, 4, 6]: remove 1\n[6, 5, 1, 4, 6, 2]\n4 6 [6, 5, 1, 4]: remove 6\n[6, 5, 1, 4, 2]\n3 4 [6, 5, 1]\n[6, 5, 1, 4, 2]\n2 1 [6, 5]\n[6, 5, 1, 4, 2]\n1 5 [6]\n[6, 5, 1, 4, 2]\n\nIn [94]:                                                                                                                             \n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 9305162,
+                        "reputation": 1045,
+                        "user_id": 6909182,
+                        "user_type": "registered",
+                        "display_name": "this.srivastava"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1559035933,
+                    "creation_date": 1559035933,
+                    "answer_id": 56339107,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/56339107#56339107",
+                    "body": "<p>Eliminating the duplicate values in a sequence, but preserve the order of the remaining items. Use of general purpose generator function.</p>\n\n<pre><code># for hashable sequence\ndef remove_duplicates(items):\n    seen = set()\n    for item in items:\n        if item not in seen:\n            yield item\n            seen.add(item)\n\na = [1, 5, 2, 1, 9, 1, 5, 10]\nlist(remove_duplicates(a))\n# [1, 5, 2, 9, 10]\n\n\n\n# for unhashable sequence\ndef remove_duplicates(items, key=None):\n    seen = set()\n    for item in items:\n        val = item if key is None else key(item)\n        if val not in seen:\n            yield item\n            seen.add(val)\n\na = [ {'x': 1, 'y': 2}, {'x': 1, 'y': 3}, {'x': 1, 'y': 2}, {'x': 2, 'y': 4}]\nlist(remove_duplicates(a, key=lambda d: (d['x'],d['y'])))\n# [{'x': 1, 'y': 2}, {'x': 1, 'y': 3}, {'x': 2, 'y': 4}]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 11115038,
+                        "reputation": 284,
+                        "user_id": 9280722,
+                        "user_type": "registered",
+                        "display_name": "Ahmed4end"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1636571394,
+                    "last_edit_date": 1636571394,
+                    "creation_date": 1585980207,
+                    "answer_id": 61024369,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/61024369#61024369",
+                    "body": "<p>here is a simple way to do it:</p>\n<pre><code>list1 = [&quot;hello&quot;, &quot; &quot;, &quot;w&quot;, &quot;o&quot;, &quot;r&quot;, &quot;l&quot;, &quot;d&quot;]\nsorted(set(list1 ), key=list1.index)\n</code></pre>\n<p>that gives the output:</p>\n<pre><code>[&quot;hello&quot;, &quot; &quot;, &quot;w&quot;, &quot;o&quot;, &quot;r&quot;, &quot;l&quot;, &quot;d&quot;]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 6490911,
+                                "reputation": 32569,
+                                "user_id": 5025009,
+                                "user_type": "registered",
+                                "display_name": "seralouk"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1591174679,
+                            "post_id": 62018887,
+                            "comment_id": 109951969,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/62018887#comment109951969_62018887",
+                            "body": "Nice one. I would never imagine using pandas for that but it works"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 19007538,
+                                "reputation": 8501,
+                                "user_id": 13873980,
+                                "user_type": "registered",
+                                "display_name": "Joe Ferndz"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1607146439,
+                            "post_id": 62018887,
+                            "comment_id": 115186856,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/62018887#comment115186856_62018887",
+                            "body": "<code>list(pd.unique(a))</code> will convert it to the normal list that OP would want. upvoted for the pandas solution. Never thought of doing it this way."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 69533,
+                                "reputation": 33443,
+                                "user_id": 202229,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "smci"
+                            },
+                            "reply_to_user": {
+                                "account_id": 19007538,
+                                "reputation": 8501,
+                                "user_id": 13873980,
+                                "user_type": "registered",
+                                "display_name": "Joe Ferndz"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1607572031,
+                            "post_id": 62018887,
+                            "comment_id": 115317081,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/62018887#comment115317081_62018887",
+                            "body": "<code>pd.unique(lst).tolist()</code> is even better idiom. cc: @JoeFerndz"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3689685,
+                                "reputation": 121,
+                                "user_id": 3072581,
+                                "user_type": "registered",
+                                "display_name": "Michael McFarlane"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1714590666,
+                            "post_id": 62018887,
+                            "comment_id": 138244253,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/62018887#comment138244253_62018887",
+                            "body": "I was going to suggest np.unique(..., return_index=True), then sort the index. But this is the same concept and much easier to use/read."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3197460,
+                        "reputation": 77814,
+                        "user_id": 3620003,
+                        "user_type": "registered",
+                        "accept_rate": 91,
+                        "display_name": "timgeb"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1590485414,
+                    "creation_date": 1590485414,
+                    "answer_id": 62018887,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/62018887#62018887",
+                    "body": "<p>pandas users should check out <a href=\"https://pandas.pydata.org/docs/reference/api/pandas.unique.html\" rel=\"noreferrer\"><code>pandas.unique</code></a>.</p>\n\n<pre><code>&gt;&gt;&gt; import pandas as pd\n&gt;&gt;&gt; lst = [1, 2, 1, 3, 3, 2, 4]\n&gt;&gt;&gt; pd.unique(lst)\narray([1, 2, 3, 4])\n</code></pre>\n\n<p>The function returns a NumPy array. If needed, you can convert it to a list with the <a href=\"https://numpy.org/doc/1.18/reference/generated/numpy.ndarray.tolist.html\" rel=\"noreferrer\"><code>tolist</code></a> method.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 8148976,
+                        "reputation": 1774,
+                        "user_id": 6378434,
+                        "user_type": "registered",
+                        "display_name": "Jo\u017ee Ws"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1605601438,
+                    "last_edit_date": 1605601438,
+                    "creation_date": 1590941164,
+                    "answer_id": 62118934,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/62118934#62118934",
+                    "body": "<p>One liner list comprehension:</p>\n<pre><code>values_non_duplicated = [value for index, value in enumerate(values) if value not in values[ : index]]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 8220088,
+                        "reputation": 69,
+                        "user_id": 6184958,
+                        "user_type": "registered",
+                        "display_name": "Franco"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1598156987,
+                    "last_edit_date": 1598156987,
+                    "creation_date": 1598144138,
+                    "answer_id": 63542467,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/63542467#63542467",
+                    "body": "<pre><code>x = [1, 2, 1, 3, 1, 4]\n\n# brute force method\narr = []\nfor i in x:\n  if not i in arr:\n    arr.insert(x[i],i)\n\n# recursive method\ntmp = []\ndef remove_duplicates(j=0):\n    if j &lt; len(x):\n      if not x[j] in tmp:\n        tmp.append(x[j])\n      i = j+1  \n      remove_duplicates(i)\n\n      \n\nremove_duplicates()\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 17476274,
+                                "reputation": 27050,
+                                "user_id": 12671057,
+                                "user_type": "registered",
+                                "display_name": "Kelly Bundy"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1660378699,
+                            "post_id": 68308291,
+                            "comment_id": 129522926,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/68308291#comment129522926_68308291",
+                            "body": "This really needs a benchmark. Function calls are relatively expensive, so I would not at all be surprised if this is <b>slower</b>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 17476274,
+                                "reputation": 27050,
+                                "user_id": 12671057,
+                                "user_type": "registered",
+                                "display_name": "Kelly Bundy"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1660379575,
+                            "post_id": 68308291,
+                            "comment_id": 129523083,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/68308291#comment129523083_68308291",
+                            "body": "I did one now with various sequences and indeed this is much <a href=\"https://tio.run/##nZHdSsQwEIXv@xRzmZS6RBZExH2SsoRCJhpokzYbsT59nZlEEb2zNznzzV9Oun6U1xTPj2s@Dp/TAiUsCGFZUy6iO6F5io6OxmvUdQ49pNmpG276qQP6bogRLnQUpQVkLG85wriDTxl2CJGSGwRPOqZSY@qhiRJzcJqcU7u@1gUR3/@3YMaouFzD87duo4FKJUU72AxNHKsppWWO5TlEXlDdm75/4EIvTRtnRnPthQ8w9l9lxmimxvyE0jvIi7GBX7PPzRVjz5hec2DHFQMUuhn/hWaW7BLw8h5/KuAOSoMOZ8hNrznEosoA/mRtnBa0tvbWBOumjuMT\" rel=\"nofollow noreferrer\">slower</a>. Please show your evidence for your claim that <i>&quot;This improves the performance [...] considerably&quot;</i>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 49541,
+                                "reputation": 18350,
+                                "user_id": 147511,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Glenn Slayden"
+                            },
+                            "reply_to_user": {
+                                "account_id": 17476274,
+                                "reputation": 27050,
+                                "user_id": 12671057,
+                                "user_type": "registered",
+                                "display_name": "Kelly Bundy"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1661221969,
+                            "post_id": 68308291,
+                            "comment_id": 129714382,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/68308291#comment129714382_68308291",
+                            "body": "@KellyBundy Thanks for the feedback; I edited my answer to remove the unsubstantiated claim."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 49541,
+                        "reputation": 18350,
+                        "user_id": 147511,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "Glenn Slayden"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1661221917,
+                    "last_edit_date": 1661221917,
+                    "creation_date": 1625776289,
+                    "answer_id": 68308291,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/68308291#68308291",
+                    "body": "<p><b>1. These solutions are fine\u2026</b><br>\nFor removing duplicates while preserving order, the excellent solution(s) proposed elsewhere on this page:</p>\n<pre class=\"lang-py prettyprint-override\"><code>seen = set()\n[x for x in seq if not (x in seen or seen.add(x))]\n</code></pre>\n<p>and variation(s), e.g.:</p>\n<pre class=\"lang-py prettyprint-override\"><code>seen = set()\n[x for x in seq if x not in seen and not seen.add(x)]\n</code></pre>\n<p>are indeed popular because they are simple, minimalistic, and deploy the correct hashing for optimal efficency. The main complaint about these seems to be that using the invariant <code>None</code> &quot;returned&quot; by method <code>seen.add(x)</code> as a constant (and therefore excess/unnecessary) value in a logical expression\u2014just for its side-effect\u2014is hacky and/or confusing.</p>\n<p><b>2. \u2026but they waste one hash lookup per iteration.</b><br>\nSurprisingly, given the amount of discussion and debate on this topic, there is actually a significant improvement to the code that seems to have been overlooked. As shown, each &quot;test-and-set&quot; iteration requires <strong>two</strong> hash lookups: the first to test membership <code>x not in seen</code> and then again to actually add the value <code>seen.add(x)</code>. Since the first operation guarantees that the second will always be successful, there is a wasteful duplication of effort here. And because the overall technique here is so efficient, the excess hash lookups will likely end up being the most expensive proportion of what little work remains.</p>\n<p><b>3. Instead, let the <code>set</code> do its job!</b><br>\nNotice that the examples above only call <code>set.add</code> with the foreknowledge that doing so will always result in an increase in set membership. The <code>set</code> itself <em>never gets an chance to reject</em> a duplicate; our code snippet has essentially usurped that role for itself. The use of explicit two-step test-and-set code is robbing <code>set</code> of its core ability to exclude those duplicates itself.</p>\n<p><b>4. The single-hash-lookup code:</b><br>\nThe following version <em><strong>cuts the number of hash lookups</strong></em> <em>per iteration</em> <em><strong>in half</strong></em>\u2014from two down to just one.</p>\n<pre class=\"lang-py prettyprint-override\"><code>seen = set()\n[x for x in seq if len(seen) &lt; len(seen.add(x) or seen)]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 17476274,
+                                "reputation": 27050,
+                                "user_id": 12671057,
+                                "user_type": "registered",
+                                "display_name": "Kelly Bundy"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1677250691,
+                            "post_id": 75555568,
+                            "comment_id": 133306404,
+                            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/75555568#comment133306404_75555568",
+                            "body": "Actually... It would be good to vary not just the <i>input</i> size but also the <i>output</i> size. I.e., the amount of duplication. <a href=\"https://stackoverflow.com/a/41577279/12671057\">MSeifert&#39;s answer</a> did that fairly well, with its three plots from &quot;no duplicates&quot; to &quot;only duplicates&quot;."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 144356,
+                        "reputation": 56762,
+                        "user_id": 353337,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "Nico Schl&#246;mer"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1677242378,
+                    "last_edit_date": 1677242378,
+                    "creation_date": 1677235474,
+                    "answer_id": 75555568,
+                    "question_id": 480214,
+                    "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order/75555568#75555568",
+                    "body": "<p>I've compared all relevant answers with <a href=\"https://github.com/pysos/perfplot\" rel=\"nofollow noreferrer\">perfplot</a> and found that,</p>\n<pre class=\"lang-py prettyprint-override\"><code>list(dict.fromkeys(data))\n</code></pre>\n<p>is fastest. This also holds true for small numpy arrays. For larger numpy arrays, <code>pandas.unique</code> is actually fastest.</p>\n<p><a href=\"https://i.stack.imgur.com/FMdit.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/FMdit.png\" alt=\"enter image description here\" /></a></p>\n<hr />\n<p>Code to reproduce the plot:</p>\n<pre class=\"lang-py prettyprint-override\"><code>from collections import OrderedDict\nfrom functools import reduce\nfrom itertools import groupby\n\nimport numpy as np\nimport pandas as pd\nimport perfplot\nfrom more_itertools import unique_everseen as ue\n\n\ndef dict_fromkeys(data):\n    return list(dict.fromkeys(data))\n\n\ndef unique_everseen(data):\n    return list(ue(data))\n\n\ndef seen_add(data):\n    seen = set()\n    seen_add = seen.add\n    return [x for x in data if not (x in seen or seen_add(x))]\n\n\ndef ordereddict_fromkeys(data):\n    return list(OrderedDict.fromkeys(data))\n\n\ndef pandas_drop_duplicates(data):\n    return pd.Series(data).drop_duplicates().tolist()\n\n\ndef pandas_unique(data):\n    return pd.unique(data)\n\n\ndef itertools_groupby(data):\n    return [key for key, _ in groupby(data)]\n\n\ndef reduce_tricks(data):\n    return reduce(\n        lambda r, v: v in r[1] and r or (r[0].append(v) or r[1].add(v)) or r,\n        data,\n        ([], set()),\n    )[0]\n\n\nb = perfplot.bench(\n    setup=lambda n: np.random.randint(100, size=n).tolist(),\n    kernels=[\n        dict_fromkeys,\n        unique_everseen,\n        seen_add,\n        ordereddict_fromkeys,\n        pandas_drop_duplicates,\n        pandas_unique,\n        reduce_tricks,\n    ],\n    n_range=[2**k for k in range(20)],\n)\nb.save(&quot;out.png&quot;)\nb.show()\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 23516,
+                "reputation": 25810,
+                "user_id": 58994,
+                "user_type": "registered",
+                "accept_rate": 79,
+                "display_name": "Josh Glover"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 480227,
+            "answer_count": 31,
+            "score": 1059,
+            "last_activity_date": 1688683224,
+            "creation_date": 1232984638,
+            "last_edit_date": 1665934973,
+            "question_id": 480214,
+            "link": "https://stackoverflow.com/questions/480214/how-do-i-remove-duplicates-from-a-list-while-preserving-order",
+            "title": "How do I remove duplicates from a list, while preserving order?",
+            "body": "<p>How do I remove duplicates from a list, while preserving order? Using a set to remove duplicates destroys the original order.\nIs there a built-in or a Pythonic idiom?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7829
+}

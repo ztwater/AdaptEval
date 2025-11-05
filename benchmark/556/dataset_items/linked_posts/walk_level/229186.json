@@ -1,0 +1,936 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "file",
+                "os.walk"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 145086,
+                        "reputation": 3776,
+                        "user_id": 354633,
+                        "user_type": "registered",
+                        "accept_rate": 84,
+                        "display_name": "antred"
+                    },
+                    "edited": false,
+                    "score": 3,
+                    "creation_date": 1477941969,
+                    "post_id": 229186,
+                    "comment_id": 67952804,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below#comment67952804_229186",
+                    "body": "Another case where the multitude of possible approaches and all the caveats that go with them suggests that this functionality should be added to the Python standard library."
+                },
+                {
+                    "owner": {
+                        "account_id": 1843671,
+                        "reputation": 11884,
+                        "user_id": 2441026,
+                        "user_type": "registered",
+                        "accept_rate": 43,
+                        "display_name": "user136036"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1579871300,
+                    "post_id": 229186,
+                    "comment_id": 105921511,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below#comment105921511_229186",
+                    "body": "<code>files_with_full_path = [f.path for f in os.scandir(dir) if f.is_file()]</code>. In case you need only the filenames use <code>f.name</code> instead of <code>f.path</code>. This is the fastest solution and much faster than any <code>walk</code> or <code>listdir</code>, see <a href=\"https://stackoverflow.com/a/40347279/2441026\">stackoverflow.com/a/40347279/2441026</a>."
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 680,
+                        "reputation": 973690,
+                        "user_id": 893,
+                        "user_type": "registered",
+                        "accept_rate": 84,
+                        "display_name": "Greg Hewgill"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 15,
+                    "last_activity_date": 1224756362,
+                    "creation_date": 1224756362,
+                    "answer_id": 229192,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/229192#229192",
+                    "body": "<p>You could use <a href=\"http://www.python.org/doc/2.5.2/lib/os-file-dir.html\" rel=\"noreferrer\"><code>os.listdir()</code></a> which returns a list of names (for both files and directories) in a given directory. If you need to distinguish between files and directories, call <code>os.stat()</code> on each name.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user1329187"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2705297,
+                                "reputation": 7976,
+                                "user_id": 2335020,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "576i"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1464944849,
+                            "post_id": 229219,
+                            "comment_id": 62703968,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/229219#comment62703968_229219",
+                            "body": "@576i: this does not differentiate between files and directories"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 103538,
+                                "reputation": 14029,
+                                "user_id": 277267,
+                                "user_type": "registered",
+                                "accept_rate": 69,
+                                "display_name": "Daniel F"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1503994658,
+                            "post_id": 229219,
+                            "comment_id": 78826163,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/229219#comment78826163_229219",
+                            "body": "@Alexandr <code>os.path.isfile</code> and <code>os.path.isdir</code> lets you differentiate. I don&#39;t get it, since <code>os.path.isfile</code> is in the sample code since &#39;08 and your comment is from &#39;16. This is clearly the better answer, as you&#39;re not intending to walk a directory, but to list it."
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user1329187"
+                            },
+                            "reply_to_user": {
+                                "account_id": 103538,
+                                "reputation": 14029,
+                                "user_id": 277267,
+                                "user_type": "registered",
+                                "accept_rate": 69,
+                                "display_name": "Daniel F"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1504012173,
+                            "post_id": 229219,
+                            "comment_id": 78838074,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/229219#comment78838074_229219",
+                            "body": "@DanielF, what I meant here is that you need to loop over all items, while <code>walk</code> gives you immediately the separate lists of dirs and files."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 103538,
+                                "reputation": 14029,
+                                "user_id": 277267,
+                                "user_type": "registered",
+                                "accept_rate": 69,
+                                "display_name": "Daniel F"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1504014867,
+                            "post_id": 229219,
+                            "comment_id": 78840064,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/229219#comment78840064_229219",
+                            "body": "Ah, ok. Actually Alex&#39;s answer seems to be better (using <code>.next()</code>) and it&#39;s much closer to your idea."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3733298,
+                                "reputation": 6006,
+                                "user_id": 3104974,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "ascripter"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1558960327,
+                            "post_id": 229219,
+                            "comment_id": 99259885,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/229219#comment99259885_229219",
+                            "body": "Python 3.5 has a <code>os.scandir</code> function which allows more sophisticated file-or-directory-object interaction. See <a href=\"https://stackoverflow.com/a/56325893/3104974\">my answer</a> below"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 12462,
+                        "reputation": 163682,
+                        "user_id": 24545,
+                        "user_type": "registered",
+                        "accept_rate": 99,
+                        "display_name": "Yuval Adam"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": false,
+                    "score": 244,
+                    "last_activity_date": 1224757834,
+                    "last_edit_date": 1224757834,
+                    "creation_date": 1224756938,
+                    "answer_id": 229219,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/229219#229219",
+                    "body": "<p>Don't use os.walk.</p>\n\n<p>Example:</p>\n\n<pre><code>import os\n\nroot = \"C:\\\\\"\nfor item in os.listdir(root):\n    if os.path.isfile(os.path.join(root, item)):\n        print item\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 11219,
+                                "reputation": 10444,
+                                "user_id": 21537,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Setori"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1224812067,
+                            "post_id": 229293,
+                            "comment_id": 97703,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/229293#comment97703_229293",
+                            "body": "Oh i was getting all sort of funny error from that one.  ValueError: too many values to unpack"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 103538,
+                                "reputation": 14029,
+                                "user_id": 277267,
+                                "user_type": "registered",
+                                "accept_rate": 69,
+                                "display_name": "Daniel F"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1503995052,
+                            "post_id": 229293,
+                            "comment_id": 78826407,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/229293#comment78826407_229293",
+                            "body": "Nice! Feels like a hack, though. Like when you turn on an engine but only let it do one revolution and then pull the key to let it die."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8944942,
+                                "reputation": 2141,
+                                "user_id": 6672746,
+                                "user_type": "registered",
+                                "display_name": "Evan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1543279867,
+                            "post_id": 229293,
+                            "comment_id": 93852628,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/229293#comment93852628_229293",
+                            "body": "Stumbled across this; <code>root, dirs, files = os.walk(dir_name).next()</code> gives me <code>AttributeError: &#39;generator&#39; object has no attribute &#39;next&#39;</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1632921,
+                                "reputation": 3789,
+                                "user_id": 1507124,
+                                "user_type": "registered",
+                                "display_name": "CervEd"
+                            },
+                            "reply_to_user": {
+                                "account_id": 8944942,
+                                "reputation": 2141,
+                                "user_id": 6672746,
+                                "user_type": "registered",
+                                "display_name": "Evan"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1551442350,
+                            "post_id": 229293,
+                            "comment_id": 96651444,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/229293#comment96651444_229293",
+                            "body": "@Evan, probably because this is from 2008 and uses Python 2 syntax. In Python 3 you can write <code>root, dirs, files = next(os.walk(dir_name))</code> and then the variables <code>root, dirs, files</code> will only correspond to the variables of the generator at the <code>dir_name</code> level."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 11786,
+                        "reputation": 69859,
+                        "user_id": 1941213,
+                        "user_type": "registered",
+                        "accept_rate": 57,
+                        "display_name": "Alex Coventry"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 28,
+                    "last_activity_date": 1551445030,
+                    "last_edit_date": 1551445030,
+                    "creation_date": 1224758782,
+                    "answer_id": 229293,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/229293#229293",
+                    "body": "<p>The suggestion to use <code>listdir</code> is a good one.  The direct answer to your question in Python 2 is <code>root, dirs, files = os.walk(dir_name).next()</code>.</p>\n\n<p>The equivalent Python 3 syntax is <code>root, dirs, files = next(os.walk(dir_name))</code></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5792,
+                        "reputation": 118085,
+                        "user_id": 9493,
+                        "user_type": "registered",
+                        "display_name": "Brian"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 10,
+                    "last_activity_date": 1319882341,
+                    "last_edit_date": 1319882341,
+                    "creation_date": 1224758945,
+                    "answer_id": 229300,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/229300#229300",
+                    "body": "<p>If you have more complex requirements than just the top directory (eg ignore VCS dirs etc), you can also modify the list of directories to prevent os.walk recursing through them.</p>\n\n<p>ie:</p>\n\n<pre><code>def _dir_list(self, dir_name, whitelist):\n    outputList = []\n    for root, dirs, files in os.walk(dir_name):\n        dirs[:] = [d for d in dirs if is_good(d)]\n        for f in files:\n            do_stuff()\n</code></pre>\n\n<p>Note - be careful to mutate the list, rather than just rebind it.  Obviously os.walk doesn't know about the external rebinding.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 108161,
+                                "reputation": 6729,
+                                "user_id": 287238,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "safetyduck"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1282241148,
+                            "post_id": 234329,
+                            "comment_id": 3686708,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/234329#comment3686708_234329",
+                            "body": "Does this function actually &quot;walk&quot; through the whole structure and then delete the entries below a certain point? Or is something more clever going on? I&#39;m not even sure how to check this with code. --python beginner"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9315,
+                                "reputation": 220410,
+                                "user_id": 17160,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "nosklo"
+                            },
+                            "reply_to_user": {
+                                "account_id": 108161,
+                                "reputation": 6729,
+                                "user_id": 287238,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "safetyduck"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1282246890,
+                            "post_id": 234329,
+                            "comment_id": 3687757,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/234329#comment3687757_234329",
+                            "body": "@mathtick: when some directory on or below the desired level is found, all of its subdirs are removed from the list of subdirs to search next. So they won&#39;t be &quot;walked&quot;."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 89455,
+                                "reputation": 10853,
+                                "user_id": 246801,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "Zach Young"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1350003218,
+                            "post_id": 234329,
+                            "comment_id": 17390464,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/234329#comment17390464_234329",
+                            "body": "I just +1&#39;d this because I was struggling with how to &quot;delete&quot; dirs.  I had tried <code>dirs = []</code> and <code>dirs = None</code> but those didn&#39;t work.  <code>map(dirs.remove, dirs)</code> worked, but with some unwanted &#39;[None]&#39; messages printed.  So, why <code>del dirs[:]</code> specifically?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1273526,
+                                "reputation": 1819,
+                                "user_id": 1354930,
+                                "user_type": "registered",
+                                "accept_rate": 66,
+                                "display_name": "dthor"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1456351138,
+                            "post_id": 234329,
+                            "comment_id": 58911772,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/234329#comment58911772_234329",
+                            "body": "Note that this doesn&#39;t work when using <code>topdown=False</code> in os.walk. See the 4th paragraph in the <a href=\"https://docs.python.org/3.4/library/os.html?highlight=os.walk#os.walk\" rel=\"nofollow noreferrer\">docs</a>: <code>Modifying dirnames when topdown is False has no effect on the behavior of the walk, because in bottom-up mode the directories in dirnames are generated before dirpath itself is generated.</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9315,
+                                "reputation": 220410,
+                                "user_id": 17160,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "nosklo"
+                            },
+                            "reply_to_user": {
+                                "account_id": 89455,
+                                "reputation": 10853,
+                                "user_id": 246801,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "Zach Young"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1538411642,
+                            "post_id": 234329,
+                            "comment_id": 92125302,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/234329#comment92125302_234329",
+                            "body": "@ZacharyYoung <code>dirs = []</code> and <code>dirs = None</code> won&#39;t work because they just create a new unrelated object and assign to the name <code>dirs</code>. The original list object needs to be modified in-place, not the name <code>dirs</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1886776,
+                                "reputation": 3052,
+                                "user_id": 1705829,
+                                "user_type": "registered",
+                                "accept_rate": 43,
+                                "display_name": "Timo"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1608833027,
+                            "post_id": 234329,
+                            "comment_id": 115698220,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/234329#comment115698220_234329",
+                            "body": "How can I print the dirs of level 1 in this python script given a valid folder? Wait, I have to learn to use <b>yield</b>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 10140825,
+                                "reputation": 401,
+                                "user_id": 7490633,
+                                "user_type": "registered",
+                                "display_name": "mgueydan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1619794211,
+                            "post_id": 234329,
+                            "comment_id": 119019975,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/234329#comment119019975_234329",
+                            "body": "This is a great (really!) answer to another question. Therefore the amount of code is much higher than required. Other answers in this thread do the same thing for the specific request with much less code."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 9315,
+                        "reputation": 220410,
+                        "user_id": 17160,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "nosklo"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": true,
+                    "score": 121,
+                    "last_activity_date": 1282246802,
+                    "last_edit_date": 1282246802,
+                    "creation_date": 1224866762,
+                    "answer_id": 234329,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/234329#234329",
+                    "body": "<p>Use the <code>walklevel</code> function.</p>\n\n<pre><code>import os\n\ndef walklevel(some_dir, level=1):\n    some_dir = some_dir.rstrip(os.path.sep)\n    assert os.path.isdir(some_dir)\n    num_sep = some_dir.count(os.path.sep)\n    for root, dirs, files in os.walk(some_dir):\n        yield root, dirs, files\n        num_sep_this = root.count(os.path.sep)\n        if num_sep + level &lt;= num_sep_this:\n            del dirs[:]\n</code></pre>\n\n<p>It works just like <code>os.walk</code>, but you can pass it a <code>level</code> parameter that indicates how deep the recursion will go.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1934235,
+                                "reputation": 2034,
+                                "user_id": 2367867,
+                                "user_type": "registered",
+                                "display_name": "Pieter"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1456565823,
+                            "post_id": 12965151,
+                            "comment_id": 59015562,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/12965151#comment59015562_12965151",
+                            "body": "Won&#39;t this loop through all sub-dir&#39;s and files unnecessarily ?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 63404,
+                        "reputation": 149,
+                        "user_id": 187696,
+                        "user_type": "registered",
+                        "display_name": "Diana G"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1350602107,
+                    "creation_date": 1350602107,
+                    "answer_id": 12965151,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/12965151#12965151",
+                    "body": "<p>You could also do the following:</p>\n\n<pre><code>for path, subdirs, files in os.walk(dir_name):\n    for name in files:\n        if path == \".\": #this will filter the files in the current directory\n             #code here\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 541751,
+                                "reputation": 2041,
+                                "user_id": 910409,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Alecz"
+                            },
+                            "edited": false,
+                            "score": 11,
+                            "creation_date": 1477942878,
+                            "post_id": 20868760,
+                            "comment_id": 67953220,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/20868760#comment67953220_20868760",
+                            "body": "This should have been the accepted answer. Simply adding a &quot;break&quot; after the &quot;for f in files&quot; loop stops the recursiveness. You might also want to make sure that topdown=True."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 21324800,
+                                "reputation": 53,
+                                "user_id": 15697348,
+                                "user_type": "registered",
+                                "display_name": "Steven Marsh"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1626375142,
+                            "post_id": 20868760,
+                            "comment_id": 120883168,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/20868760#comment120883168_20868760",
+                            "body": "I just want to add this comment and say thank you for saving me time at work for giving such a good simplistic answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9634449,
+                                "reputation": 399,
+                                "user_id": 7151084,
+                                "user_type": "registered",
+                                "display_name": "Tomsim"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1687304100,
+                            "post_id": 20868760,
+                            "comment_id": 134917022,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/20868760#comment134917022_20868760",
+                            "body": "same here.  It&#39;s simple and imho straight forward.  I&#39;m just wondering if this behavior is in the function specification."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1934235,
+                        "reputation": 2034,
+                        "user_id": 2367867,
+                        "user_type": "registered",
+                        "display_name": "Pieter"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 70,
+                    "last_activity_date": 1682409472,
+                    "last_edit_date": 1682409472,
+                    "creation_date": 1388580262,
+                    "answer_id": 20868760,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/20868760#20868760",
+                    "body": "<p>I think the solution is actually very simple.</p>\n<p>use</p>\n<pre><code>break\n</code></pre>\n<p>to only do the first iteration of the for loop, there must be a more elegant way.</p>\n<pre><code>for root, dirs, files in os.walk(dir_name):\n    for f in files:\n        ...\n        ...\n    break\n...\n</code></pre>\n<p>The first time you call os.walk, it returns tuples for the current directory, then on the next loop the contents of the next directory.</p>\n<p>Take the original script and just add a <strong>break</strong>.</p>\n<pre><code>def _dir_list(self, dir_name, whitelist):\n    outputList = []\n    for root, dirs, files in os.walk(dir_name):\n        for f in files:\n            if os.path.splitext(f)[1] in whitelist:\n                outputList.append(os.path.join(root, f))\n            else:\n                self._email_to_(&quot;ignore&quot;)\n        break\n    return outputList\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1176846,
+                        "reputation": 5211,
+                        "user_id": 1152643,
+                        "user_type": "registered",
+                        "accept_rate": 50,
+                        "display_name": "Oleg Gryb"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1445517172,
+                    "last_edit_date": 1445517172,
+                    "creation_date": 1403728696,
+                    "answer_id": 24418093,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/24418093#24418093",
+                    "body": "<p>The same idea with <code>listdir</code>, but shorter:</p>\n\n<pre class=\"lang-python prettyprint-override\"><code>[f for f in os.listdir(root_dir) if os.path.isfile(os.path.join(root_dir, f))]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1028568,
+                        "reputation": 61,
+                        "user_id": 1037328,
+                        "user_type": "registered",
+                        "display_name": "Deifyed"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1420567154,
+                    "last_edit_date": 1420567154,
+                    "creation_date": 1420566422,
+                    "answer_id": 27804208,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/27804208#27804208",
+                    "body": "<p>This is how I solved it</p>\n\n<pre><code>if recursive:\n    items = os.walk(target_directory)\nelse:\n    items = [next(os.walk(target_directory))]\n\n...\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2798664,
+                        "reputation": 6651,
+                        "user_id": 2407363,
+                        "user_type": "registered",
+                        "accept_rate": 28,
+                        "display_name": "Kemin Zhou"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1443033746,
+                    "creation_date": 1443033746,
+                    "answer_id": 32747111,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/32747111#32747111",
+                    "body": "<p>There is a catch when using listdir.  The os.path.isdir(identifier) must be an absolute path.  To pick subdirectories you do:</p>\n\n<pre><code>for dirname in os.listdir(rootdir):\n  if os.path.isdir(os.path.join(rootdir, dirname)):\n     print(\"I got a subdirectory: %s\" % dirname)\n</code></pre>\n\n<p>The alternative is to change to the directory to do the testing without the os.path.join().</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user1329187"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1464944964,
+                            "post_id": 36358596,
+                            "comment_id": 62704038,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/36358596#comment62704038_36358596",
+                            "body": "This also works for Python 2. How to get the second level?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2597262,
+                        "reputation": 1778,
+                        "user_id": 2761777,
+                        "user_type": "registered",
+                        "display_name": "Jay Sheth"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1459520021,
+                    "creation_date": 1459520021,
+                    "answer_id": 36358596,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/36358596#36358596",
+                    "body": "<p>In Python 3, I was able to do this:</p>\n\n<pre><code>import os\ndir = \"/path/to/files/\"\n\n#List all files immediately under this folder:\nprint ( next( os.walk(dir) )[2] )\n\n#List all folders immediately under this folder:\nprint ( next( os.walk(dir) )[1] )\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 248860,
+                        "reputation": 2661,
+                        "user_id": 524504,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "masterxilo"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1462290193,
+                    "creation_date": 1462290193,
+                    "answer_id": 37008598,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/37008598#37008598",
+                    "body": "<pre><code>for path, dirs, files in os.walk('.'):\n    print path, dirs, files\n    del dirs[:] # go only one level deep\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7851978,
+                        "reputation": 2480,
+                        "user_id": 5935198,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "alexandre-rousseau"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1472029011,
+                    "creation_date": 1472029011,
+                    "answer_id": 39118773,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/39118773#39118773",
+                    "body": "<p>You can use this snippet</p>\n\n<pre><code>for root, dirs, files in os.walk(directory):\n    if level &gt; 0:\n        # do some stuff\n    else:\n        break\n    level-=1\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1091880,
+                                "reputation": 2195,
+                                "user_id": 1086346,
+                                "user_type": "registered",
+                                "accept_rate": 63,
+                                "display_name": "pauljohn32"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1623650737,
+                            "post_id": 44323989,
+                            "comment_id": 120129143,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/44323989#comment120129143_44323989",
+                            "body": "Helpful, except &quot;\\\\&quot; assumes Windoze OS. Use <code>os.path.sep</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 11030570,
+                        "reputation": 160,
+                        "user_id": 8102025,
+                        "user_type": "registered",
+                        "display_name": "Matt R"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1662626866,
+                    "last_edit_date": 1662626866,
+                    "creation_date": 1496391278,
+                    "answer_id": 44323989,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/44323989#44323989",
+                    "body": "<p>Felt like throwing my 2 pence in.</p>\n<pre><code>baselevel = len(rootdir.split(os.path.sep))\nfor subdirs, dirs, files in os.walk(rootdir):\n    curlevel = len(subdirs.split(os.path.sep))\n    if curlevel &lt;= baselevel + 1:\n        [do stuff]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6973333,
+                        "reputation": 101,
+                        "user_id": 5348858,
+                        "user_type": "registered",
+                        "accept_rate": 25,
+                        "display_name": "Hamsavardhini"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1511257763,
+                    "creation_date": 1511257763,
+                    "answer_id": 47409969,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/47409969#47409969",
+                    "body": "<p>create a list of excludes, use fnmatch to skip the directory structure and do the process</p>\n\n<pre><code>excludes= ['a\\*\\b', 'c\\d\\e']\nfor root, directories, files in os.walk('Start_Folder'):\n    if not any(fnmatch.fnmatch(nf_root, pattern) for pattern in excludes):\n        for root, directories, files in os.walk(nf_root):\n            ....\n            do the process\n            ....\n</code></pre>\n\n<p>same as for 'includes':</p>\n\n<pre><code>if **any**(fnmatch.fnmatch(nf_root, pattern) for pattern in **includes**):\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7147100,
+                        "reputation": 375,
+                        "user_id": 5462449,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "PiMathCLanguage"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1543526300,
+                    "creation_date": 1543526300,
+                    "answer_id": 53547750,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/53547750#53547750",
+                    "body": "<p>Why not simply use a <code>range</code> and <code>os.walk</code> combined with the <code>zip</code>? Is not the best solution, but would work too.</p>\n\n<p>For example like this:</p>\n\n<pre><code># your part before\nfor count, (root, dirs, files) in zip(range(0, 1), os.walk(dir_name)):\n    # logic stuff\n# your later part\n</code></pre>\n\n<p>Works for me on python 3.</p>\n\n<p>Also: A <code>break</code> is simpler too btw. (Look at the answer from @Pieter)</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1693399,
+                        "reputation": 303,
+                        "user_id": 1555328,
+                        "user_type": "registered",
+                        "accept_rate": 90,
+                        "display_name": "Oleg"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1548856795,
+                    "creation_date": 1548856795,
+                    "answer_id": 54442325,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/54442325#54442325",
+                    "body": "<p>A slight change to Alex's answer, but using <code>__next__()</code>:</p>\n\n<p><code>print(next(os.walk('d:/'))[2])</code>\nor\n   <code>print(os.walk('d:/').__next__()[2])</code></p>\n\n<p>with the <code>[2]</code> being the <code>file</code> in <code>root, dirs, file</code> mentioned in other answers</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1843671,
+                                "reputation": 11884,
+                                "user_id": 2441026,
+                                "user_type": "registered",
+                                "accept_rate": 43,
+                                "display_name": "user136036"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1579870965,
+                            "post_id": 56325893,
+                            "comment_id": 105921363,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/56325893#comment105921363_56325893",
+                            "body": "Not only &quot;can&quot; you use, you <b>should</b> use <code>scandir()</code>, as it&#39;s a <i>lot</i> faster than <code>listdir()</code>. See benchmarks here: <a href=\"https://stackoverflow.com/a/40347279/2441026\">stackoverflow.com/a/40347279/2441026</a>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3733298,
+                        "reputation": 6006,
+                        "user_id": 3104974,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "ascripter"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1558959963,
+                    "last_edit_date": 1558959963,
+                    "creation_date": 1558959354,
+                    "answer_id": 56325893,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/56325893#56325893",
+                    "body": "<p>Since <strong>Python 3.5</strong> you can use <a href=\"https://docs.python.org/3.5/library/os.html#os.scandir\" rel=\"noreferrer\"><code>os.scandir</code></a> instead of <a href=\"https://docs.python.org/3.5/library/os.html#os.listdir\" rel=\"noreferrer\"><code>os.listdir</code></a>. Instead of strings you get an iterator of <a href=\"https://docs.python.org/3.5/library/os.html#os.DirEntry\" rel=\"noreferrer\"><code>DirEntry</code></a> objects in return. From the docs:</p>\n\n<blockquote>\n  <p>Using <code>scandir()</code> instead of <code>listdir()</code> can significantly increase the performance of code that also needs file type or file attribute information, because <code>DirEntry</code> objects expose this information if the operating system provides it when scanning a directory. All <code>DirEntry</code> methods may perform a system call, but <code>is_dir()</code> and <code>is_file()</code> usually only require a system call for symbolic links; <code>DirEntry.stat()</code> always requires a system call on Unix but only requires one for symbolic links on Windows.</p>\n</blockquote>\n\n<p>You can access the name of the object via <code>DirEntry.name</code> which is then equivalent to the output of <code>os.listdir</code></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 14704779,
+                                "reputation": 349,
+                                "user_id": 16440873,
+                                "user_type": "registered",
+                                "display_name": "Robin"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1677211300,
+                            "post_id": 56463621,
+                            "comment_id": 133297370,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/56463621#comment133297370_56463621",
+                            "body": "Amazingly simple and workable. Thank you Pedro"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 8627157,
+                        "reputation": 101,
+                        "user_id": 6460022,
+                        "user_type": "registered",
+                        "display_name": "Pedro J. Sola"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1559748664,
+                    "creation_date": 1559748664,
+                    "answer_id": 56463621,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/56463621#56463621",
+                    "body": "<p>root folder changes for every directory os.walk finds. I solver that checking if root == directory</p>\n\n<pre><code>def _dir_list(self, dir_name, whitelist):\n    outputList = []\n    for root, dirs, files in os.walk(dir_name):\n        if root == dir_name: #This only meet parent folder\n            for f in files:\n                if os.path.splitext(f)[1] in whitelist:\n                    outputList.append(os.path.join(root, f))\n                else:\n                    self._email_to_(\"ignore\")\n    return outputList\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 146274,
+                                "reputation": 3909,
+                                "user_id": 356629,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "kenny_k"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1569876288,
+                            "post_id": 58172376,
+                            "comment_id": 102730825,
+                            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/58172376#comment102730825_58172376",
+                            "body": "Hi Rich, welcome to Stack Overflow! Thank you for this code snippet, which might provide some limited short-term help. A proper explanation <a href=\"https://meta.stackexchange.com/questions/114762/explaining-entirely-code-based-answers\">would greatly improve</a> its long-term value by showing why this is a good solution to the problem, and would make it more useful to future readers with other, similar questions. Please <a href=\"https://stackoverflow.com/posts/24187229/edit\">edit</a> your answer to add some explanation, including the assumptions you&#39;ve made."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 16798476,
+                        "reputation": 11,
+                        "user_id": 12144392,
+                        "user_type": "unregistered",
+                        "display_name": "Rich"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1569863380,
+                    "creation_date": 1569863380,
+                    "answer_id": 58172376,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/58172376#58172376",
+                    "body": "<pre><code>import os\n\ndef listFiles(self, dir_name):\n    names = []\n    for root, directory, files in os.walk(dir_name):\n        if root == dir_name:\n            for name in files:\n                names.append(name)\n    return names\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 11784823,
+                        "reputation": 1709,
+                        "user_id": 8622976,
+                        "user_type": "registered",
+                        "display_name": "Alon Barad"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1608709472,
+                    "creation_date": 1608709472,
+                    "answer_id": 65420645,
+                    "question_id": 229186,
+                    "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below/65420645#65420645",
+                    "body": "<p>This is a nice python example</p>\n<pre class=\"lang-py prettyprint-override\"><code>def walk_with_depth(root_path, depth):\n        if depth &lt; 0:\n            for root, dirs, files in os.walk(root_path):\n                yield [root, dirs[:], files]\n\n            return\n\n        elif depth == 0:\n            return\n\n        base_depth = root_path.rstrip(os.path.sep).count(os.path.sep)\n        for root, dirs, files in os.walk(root_path):\n            yield [root, dirs[:], files]\n\n            cur_depth = root.count(os.path.sep)\n            \n            if base_depth + depth &lt;= cur_depth:\n                del dirs[:]\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 11219,
+                "reputation": 10444,
+                "user_id": 21537,
+                "user_type": "registered",
+                "accept_rate": 80,
+                "display_name": "Setori"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "accepted_answer_id": 234329,
+            "answer_count": 21,
+            "score": 138,
+            "last_activity_date": 1682409472,
+            "creation_date": 1224756239,
+            "last_edit_date": 1391807412,
+            "question_id": 229186,
+            "link": "https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below",
+            "title": "os.walk without digging into directories below",
+            "body": "<p>How do I limit <code>os.walk</code> to only return files in the directory I provide it?</p>\n\n<pre><code>def _dir_list(self, dir_name, whitelist):\n    outputList = []\n    for root, dirs, files in os.walk(dir_name):\n        for f in files:\n            if os.path.splitext(f)[1] in whitelist:\n                outputList.append(os.path.join(root, f))\n            else:\n                self._email_to_(\"ignore\")\n    return outputList\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9051
+}

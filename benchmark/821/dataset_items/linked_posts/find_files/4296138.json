@@ -1,0 +1,364 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "path",
+                "wildcard"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 266943,
+                        "reputation": 14567,
+                        "user_id": 554807,
+                        "user_type": "registered",
+                        "accept_rate": 79,
+                        "display_name": "GreenAsJade"
+                    },
+                    "edited": false,
+                    "score": 7,
+                    "creation_date": 1450243950,
+                    "post_id": 4296138,
+                    "comment_id": 56351073,
+                    "link": "https://stackoverflow.com/questions/4296138/use-wildcard-with-os-path-isfile#comment56351073_4296138",
+                    "body": "You should accept an answer to this question..."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 8763540,
+                                "reputation": 1613,
+                                "user_id": 6552776,
+                                "user_type": "registered",
+                                "display_name": "csabinho"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1552912176,
+                            "post_id": 4296146,
+                            "comment_id": 97177661,
+                            "link": "https://stackoverflow.com/questions/4296138/use-wildcard-with-os-path-isfile/4296146#comment97177661_4296146",
+                            "body": "Isn&#39;t that a bit too OS-dependent?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 191900,
+                        "reputation": 66183,
+                        "user_id": 432745,
+                        "user_type": "registered",
+                        "display_name": "pyfunc"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1290936162,
+                    "last_edit_date": 1290936162,
+                    "creation_date": 1290935843,
+                    "answer_id": 4296146,
+                    "question_id": 4296138,
+                    "link": "https://stackoverflow.com/questions/4296138/use-wildcard-with-os-path-isfile/4296146#4296146",
+                    "body": "<p><strong>Wildcards are expanded by shell</strong> and hence you can not use it with os.path.isfile()</p>\n\n<p>If you want to use wildcards, you could use <code>popen with shell = True</code> or <code>os.system()</code> </p>\n\n<pre><code>&gt;&gt;&gt; import os\n&gt;&gt;&gt; os.system('ls')\naliases.sh          \ndefault_bashprofile     networkhelpers          projecthelper.old           pythonhelpers           virtualenvwrapper_bashrc\n0\n&gt;&gt;&gt; os.system('ls *.old')\nprojecthelper.old\n0\n</code></pre>\n\n<p>You could get the same effect with glob module too.</p>\n\n<pre><code>&gt;&gt;&gt; import glob\n&gt;&gt;&gt; glob.glob('*.old')\n['projecthelper.old']\n&gt;&gt;&gt; \n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 191900,
+                                "reputation": 66183,
+                                "user_id": 432745,
+                                "user_type": "registered",
+                                "display_name": "pyfunc"
+                            },
+                            "reply_to_user": {
+                                "account_id": 79477,
+                                "reputation": 129635,
+                                "user_id": 225312,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "user225312"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1290936088,
+                            "post_id": 4296148,
+                            "comment_id": 4662384,
+                            "link": "https://stackoverflow.com/questions/4296138/use-wildcard-with-os-path-isfile/4296148#comment4662384_4296148",
+                            "body": "+1 you just beat me to it while I was trying to pull a complete answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 77675,
+                                "reputation": 21569,
+                                "user_id": 221537,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Peter Hansen"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1290963787,
+                            "post_id": 4296148,
+                            "comment_id": 4664741,
+                            "link": "https://stackoverflow.com/questions/4296138/use-wildcard-with-os-path-isfile/4296148#comment4664741_4296148",
+                            "body": "Unfortunately, without using os.path.isfile() to check the results, you still don&#39;t know whether what you&#39;ve found are directories or files."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 79477,
+                        "reputation": 129635,
+                        "user_id": 225312,
+                        "user_type": "registered",
+                        "accept_rate": 94,
+                        "display_name": "user225312"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 111,
+                    "last_activity_date": 1290935846,
+                    "creation_date": 1290935846,
+                    "answer_id": 4296148,
+                    "question_id": 4296138,
+                    "link": "https://stackoverflow.com/questions/4296138/use-wildcard-with-os-path-isfile/4296148#4296148",
+                    "body": "<p><a href=\"http://docs.python.org/library/glob.html\" rel=\"noreferrer\">glob</a> is what you need.</p>\n\n<pre><code>&gt;&gt;&gt; import glob\n&gt;&gt;&gt; glob.glob('*.rar')   # all rar files within the directory, in this case the current working one\n</code></pre>\n\n<p><code>os.path.isfile()</code> returns <code>True</code> if a path is an existing regular file. So that is used for checking whether a file already exists and doesn't support wildcards. <code>glob</code> does.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 14640853,
+                                "reputation": 138,
+                                "user_id": 10726891,
+                                "user_type": "registered",
+                                "display_name": "NegaOverflow"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1570004110,
+                            "post_id": 4296157,
+                            "comment_id": 102773506,
+                            "link": "https://stackoverflow.com/questions/4296138/use-wildcard-with-os-path-isfile/4296157#comment102773506_4296157",
+                            "body": "Since  <code>os </code> has mostly already been imported, this is  a lean &amp; clean solution for me."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 46582,
+                                "reputation": 1531,
+                                "user_id": 137670,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Tony D"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1617982596,
+                            "post_id": 4296157,
+                            "comment_id": 118472338,
+                            "link": "https://stackoverflow.com/questions/4296138/use-wildcard-with-os-path-isfile/4296157#comment118472338_4296157",
+                            "body": "My case was somewhat different than the OP, but this answer was exactly what I was looking for."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 218448,
+                        "reputation": 5816,
+                        "user_id": 474772,
+                        "user_type": "registered",
+                        "accept_rate": 79,
+                        "display_name": "Mariy"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 10,
+                    "last_activity_date": 1290936562,
+                    "last_edit_date": 1290936562,
+                    "creation_date": 1290936190,
+                    "answer_id": 4296157,
+                    "question_id": 4296138,
+                    "link": "https://stackoverflow.com/questions/4296138/use-wildcard-with-os-path-isfile/4296157#4296157",
+                    "body": "<pre><code>import os\n[x for x in os.listdir(\"your_directory\") if len(x) &gt;= 4 and  x[-4:] == \".rar\"]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2151509,
+                                "reputation": 2420,
+                                "user_id": 1907765,
+                                "user_type": "registered",
+                                "accept_rate": 41,
+                                "display_name": "Lou"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1610387512,
+                            "post_id": 4297946,
+                            "comment_id": 116111496,
+                            "link": "https://stackoverflow.com/questions/4296138/use-wildcard-with-os-path-isfile/4297946#comment116111496_4297946",
+                            "body": "Shouldn&#39;t that be <code>glob.glob</code>?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 77675,
+                                "reputation": 21569,
+                                "user_id": 221537,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Peter Hansen"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2151509,
+                                "reputation": 2420,
+                                "user_id": 1907765,
+                                "user_type": "registered",
+                                "accept_rate": 41,
+                                "display_name": "Lou"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1611510074,
+                            "post_id": 4297946,
+                            "comment_id": 116469129,
+                            "link": "https://stackoverflow.com/questions/4296138/use-wildcard-with-os-path-isfile/4297946#comment116469129_4297946",
+                            "body": "@Lou Sure, in real code, if you like. Code snippets are often simplified for clarity. In this case, an implied &quot;from glob import glob&quot; came first..."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 77675,
+                        "reputation": 21569,
+                        "user_id": 221537,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Peter Hansen"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 19,
+                    "last_activity_date": 1497020816,
+                    "last_edit_date": 1497020816,
+                    "creation_date": 1290964357,
+                    "answer_id": 4297946,
+                    "question_id": 4296138,
+                    "link": "https://stackoverflow.com/questions/4296138/use-wildcard-with-os-path-isfile/4297946#4297946",
+                    "body": "<p>Without using <a href=\"http://docs.python.org/library/os.path.html#os.path.isfile\" rel=\"noreferrer\"><code>os.path.isfile()</code></a> you won't know whether the results returned by <a href=\"http://docs.python.org/library/glob.html\" rel=\"noreferrer\"><code>glob()</code></a> are files or subdirectories, so try something like this instead:</p>\n\n<pre><code>import fnmatch\nimport os\n\ndef find_files(base, pattern):\n    '''Return list of files matching pattern in base folder.'''\n    return [n for n in fnmatch.filter(os.listdir(base), pattern) if\n        os.path.isfile(os.path.join(base, n))]\n\nrar_files = find_files('somedir', '*.rar')\n</code></pre>\n\n<p>You could also just filter the results returned by <code>glob()</code> if you like, and that has the advantage of doing a few extra things relating to unicode and the like.  Check the source in glob.py if it matters.</p>\n\n<pre><code>[n for n in glob(pattern) if os.path.isfile(n)]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 468289,
+                                "reputation": 183001,
+                                "user_id": 874188,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "tripleee"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1470976159,
+                            "post_id": 38177861,
+                            "comment_id": 65177665,
+                            "link": "https://stackoverflow.com/questions/4296138/use-wildcard-with-os-path-isfile/38177861#comment65177665_38177861",
+                            "body": "While this is actually true, this answer would benefit from a more-detailed explanation.  The difference is that <code>iglob</code> returns an iterator, so if you call it once and it returns something, you know there was at least one match."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2087749,
+                        "reputation": 101,
+                        "user_id": 1858272,
+                        "user_type": "registered",
+                        "display_name": "gnetscher"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1467612368,
+                    "creation_date": 1467612368,
+                    "answer_id": 38177861,
+                    "question_id": 4296138,
+                    "link": "https://stackoverflow.com/questions/4296138/use-wildcard-with-os-path-isfile/38177861#38177861",
+                    "body": "<p>iglob is better than glob here since you do not actually want the full list of rar files, but just want to check that one rar exists</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2843025,
+                        "reputation": 3081,
+                        "user_id": 2442196,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Tchotchke"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1481220276,
+                    "creation_date": 1481220276,
+                    "answer_id": 41045989,
+                    "question_id": 4296138,
+                    "link": "https://stackoverflow.com/questions/4296138/use-wildcard-with-os-path-isfile/41045989#41045989",
+                    "body": "<p>If you just care about whether at least one file exists and you don't want a list of the files:</p>\n\n<pre><code>import glob\nimport os\n\ndef check_for_files(filepath):\n    for filepath_object in glob.glob(filepath):\n        if os.path.isfile(filepath_object):\n            return True\n\n    return False\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2737700,
+                        "reputation": 1537,
+                        "user_id": 2359994,
+                        "user_type": "registered",
+                        "display_name": "Som"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1548659419,
+                    "creation_date": 1548659419,
+                    "answer_id": 54397076,
+                    "question_id": 4296138,
+                    "link": "https://stackoverflow.com/questions/4296138/use-wildcard-with-os-path-isfile/54397076#54397076",
+                    "body": "<p>to display full path and filter based on extension,</p>\n\n<pre><code>import os\nonlyfiles = [f for f in os.listdir(file) if len(f) &gt;= 5 and  f[-5:] == \".json\" and isfile(join(file, f))]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 16045373,
+                        "reputation": 1,
+                        "user_id": 11580642,
+                        "user_type": "registered",
+                        "display_name": "SUUSHEN_SENJU"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1559596636,
+                    "last_edit_date": 1559596636,
+                    "creation_date": 1559578796,
+                    "answer_id": 56431135,
+                    "question_id": 4296138,
+                    "link": "https://stackoverflow.com/questions/4296138/use-wildcard-with-os-path-isfile/56431135#56431135",
+                    "body": "<p>Just another method to get the job done using subprocess.</p>\n\n<pre><code>import subprocess\n\ntry:\n        q = subprocess.check_output('ls')\n        if \".rar\" in q:\n             print \"Rar exists\"\nexcept subprocess.CalledProcessError as e:\n        print e.output\n</code></pre>\n\n<p>Reference : <a href=\"https://docs.python.org/2/library/subprocess.html#subprocess.check_output\" rel=\"nofollow noreferrer\">https://docs.python.org/2/library/subprocess.html#subprocess.check_output</a></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 675144,
+                "reputation": 843,
+                "user_id": 519833,
+                "user_type": "unregistered",
+                "display_name": "Alex"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "answer_count": 8,
+            "score": 65,
+            "last_activity_date": 1629687982,
+            "creation_date": 1290935729,
+            "last_edit_date": 1629687982,
+            "question_id": 4296138,
+            "link": "https://stackoverflow.com/questions/4296138/use-wildcard-with-os-path-isfile",
+            "title": "Use wildcard with os.path.isfile()",
+            "body": "<p>I'd like to check if there are any <code>.rar</code> files in a directory. It doesn\u2019t need to be recursive.</p>\n<p>Using wildcard with <code>os.path.isfile()</code> was my best guess, but it doesn't work. What can I do then?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8445
+}

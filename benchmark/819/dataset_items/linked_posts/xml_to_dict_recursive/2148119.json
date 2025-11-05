@@ -1,0 +1,1227 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "xml",
+                "json",
+                "dictionary",
+                "xml-deserialization"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 1449279,
+                        "reputation": 587,
+                        "user_id": 1366734,
+                        "user_type": "registered",
+                        "accept_rate": 0,
+                        "display_name": "Keir"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1504233266,
+                    "post_id": 2148119,
+                    "comment_id": 78945021,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary#comment78945021_2148119",
+                    "body": "str has a few syntax errors. try:str =&#39;&lt;?xml version=&quot;1.0&quot; ?&gt;&lt;person&gt;&lt;name&gt;john&lt;/name&gt;&lt;age&gt;20&lt;/age&gt;&lt;/person&gt;&#39;"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1887671,
+                                "reputation": 13279,
+                                "user_id": 1706564,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Jamie Bull"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1374483912,
+                            "post_id": 2148169,
+                            "comment_id": 25940002,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/2148169#comment25940002_2148169",
+                            "body": "Yes it is. Have reproduced the code here in case it goes again."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 25075,
+                        "reputation": 8926,
+                        "user_id": 64206,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "tgray"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1374484352,
+                    "last_edit_date": 1374484352,
+                    "creation_date": 1264606515,
+                    "answer_id": 2148169,
+                    "question_id": 2148119,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/2148169#2148169",
+                    "body": "<p>Here's a link to an <a href=\"http://code.activestate.com/recipes/116539/\" rel=\"nofollow noreferrer\">ActiveState solution</a> - and the code in case it disappears again.</p>\n\n<pre><code>==================================================\nxmlreader.py:\n==================================================\nfrom xml.dom.minidom import parse\n\n\nclass NotTextNodeError:\n    pass\n\n\ndef getTextFromNode(node):\n    \"\"\"\n    scans through all children of node and gathers the\n    text. if node has non-text child-nodes, then\n    NotTextNodeError is raised.\n    \"\"\"\n    t = \"\"\n    for n in node.childNodes:\n    if n.nodeType == n.TEXT_NODE:\n        t += n.nodeValue\n    else:\n        raise NotTextNodeError\n    return t\n\n\ndef nodeToDic(node):\n    \"\"\"\n    nodeToDic() scans through the children of node and makes a\n    dictionary from the content.\n    three cases are differentiated:\n    - if the node contains no other nodes, it is a text-node\n    and {nodeName:text} is merged into the dictionary.\n    - if the node has the attribute \"method\" set to \"true\",\n    then it's children will be appended to a list and this\n    list is merged to the dictionary in the form: {nodeName:list}.\n    - else, nodeToDic() will call itself recursively on\n    the nodes children (merging {nodeName:nodeToDic()} to\n    the dictionary).\n    \"\"\"\n    dic = {} \n    for n in node.childNodes:\n    if n.nodeType != n.ELEMENT_NODE:\n        continue\n    if n.getAttribute(\"multiple\") == \"true\":\n        # node with multiple children:\n        # put them in a list\n        l = []\n        for c in n.childNodes:\n            if c.nodeType != n.ELEMENT_NODE:\n            continue\n        l.append(nodeToDic(c))\n            dic.update({n.nodeName:l})\n        continue\n\n    try:\n        text = getTextFromNode(n)\n    except NotTextNodeError:\n            # 'normal' node\n            dic.update({n.nodeName:nodeToDic(n)})\n            continue\n\n        # text node\n        dic.update({n.nodeName:text})\n    continue\n    return dic\n\n\ndef readConfig(filename):\n    dom = parse(filename)\n    return nodeToDic(dom)\n\n\n\n\n\ndef test():\n    dic = readConfig(\"sample.xml\")\n\n    print dic[\"Config\"][\"Name\"]\n    print\n    for item in dic[\"Config\"][\"Items\"]:\n    print \"Item's Name:\", item[\"Name\"]\n    print \"Item's Value:\", item[\"Value\"]\n\ntest()\n\n\n\n==================================================\nsample.xml:\n==================================================\n&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n\n&lt;Config&gt;\n    &lt;Name&gt;My Config File&lt;/Name&gt;\n\n    &lt;Items multiple=\"true\"&gt;\n    &lt;Item&gt;\n        &lt;Name&gt;First Item&lt;/Name&gt;\n        &lt;Value&gt;Value 1&lt;/Value&gt;\n    &lt;/Item&gt;\n    &lt;Item&gt;\n        &lt;Name&gt;Second Item&lt;/Name&gt;\n        &lt;Value&gt;Value 2&lt;/Value&gt;\n    &lt;/Item&gt;\n    &lt;/Items&gt;\n\n&lt;/Config&gt;\n\n\n\n==================================================\noutput:\n==================================================\nMy Config File\n\nItem's Name: First Item\nItem's Value: Value 1\nItem's Name: Second Item\nItem's Value: Value 2\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2193986,
+                                "reputation": 893,
+                                "user_id": 1940200,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "mrash"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1431356475,
+                            "post_id": 5807028,
+                            "comment_id": 48448213,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/5807028#comment48448213_5807028",
+                            "body": "U can use &#39;xmltodict&#39; alternatively"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 109741,
+                                "reputation": 6751,
+                                "user_id": 290650,
+                                "user_type": "registered",
+                                "accept_rate": 63,
+                                "display_name": "Eddy"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1445029711,
+                            "post_id": 5807028,
+                            "comment_id": 54166366,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/5807028#comment54166366_5807028",
+                            "body": "I tried this and it&#39;s much faster than xmltodict. For parsing an 80MB xml file it took 7s, with xmltodict it took 90s"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3000083,
+                                "reputation": 9821,
+                                "user_id": 2545732,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Dirk"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1460973567,
+                            "post_id": 5807028,
+                            "comment_id": 60969993,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/5807028#comment60969993_5807028",
+                            "body": "Confirmed... I have not tested this against every edge case but for my rather uncomplicated XML strings, this is pretty fast (about 8 times faster than the <code>xmltodict</code> library). Disadvantage is that you have to host it yourself within your project."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 432113,
+                                "reputation": 454,
+                                "user_id": 816653,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "zhanglistar"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1469440566,
+                            "post_id": 5807028,
+                            "comment_id": 64519452,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/5807028#comment64519452_5807028",
+                            "body": "it seems that this code can&#39;t deal with array as following:&lt;root&gt;   &lt;e /&gt;   &lt;e&gt;text&lt;/e&gt;   &lt;e name=&quot;value&quot; /&gt;   &lt;e name=&quot;value&quot;&gt;text&lt;/e&gt;   &lt;e&gt; &lt;a&gt;text&lt;/a&gt; &lt;b&gt;text&lt;/b&gt; &lt;/e&gt;   &lt;e&gt; &lt;a&gt;text&lt;/a&gt; &lt;a&gt;text&lt;/a&gt; &lt;/e&gt;   &lt;e&gt; text &lt;a&gt;text&lt;/a&gt; &lt;/e&gt; &lt;/root&gt;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2788680,
+                                "reputation": 3214,
+                                "user_id": 2399397,
+                                "user_type": "registered",
+                                "display_name": "Rafael Aguilar"
+                            },
+                            "edited": false,
+                            "score": 12,
+                            "creation_date": 1473786848,
+                            "post_id": 5807028,
+                            "comment_id": 66270315,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/5807028#comment66270315_5807028",
+                            "body": "Hi there, this works perfect, will add just a snippet for those who can&#39;t find <code>cElementTree</code>, just change first line to:  <code>from xml.etree import cElementTree as ElementTree</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6989882,
+                                "reputation": 3387,
+                                "user_id": 5359531,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "user5359531"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1496880649,
+                            "post_id": 5807028,
+                            "comment_id": 75847742,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/5807028#comment75847742_5807028",
+                            "body": "If you have duplicate sub-tags with different attributes, you lose the attributes. For example, I have multiple <code>&lt;Project name=&quot;xyz&quot;&gt;</code> tags, where every <code>name</code> is different; this method drops the <code>name</code> attribute, making it impossible to distinguish the <code>Project</code>&#39;s from each other."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3109815,
+                                "reputation": 1478,
+                                "user_id": 2631840,
+                                "user_type": "registered",
+                                "display_name": "Maksym"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1496928125,
+                            "post_id": 5807028,
+                            "comment_id": 75871194,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/5807028#comment75871194_5807028",
+                            "body": "Down-voting since there are better answers posted below, particularly in handling multiple tags with the same name."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6989882,
+                                "reputation": 3387,
+                                "user_id": 5359531,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "user5359531"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1496937130,
+                            "post_id": 5807028,
+                            "comment_id": 75878346,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/5807028#comment75878346_5807028",
+                            "body": "on a sidenote, if you don&#39;t <i>need</i> to use Python and are just trying to import the XML as a structured object for manipulation, I found that it was much easier to just use R for this as per <a href=\"https://stackoverflow.com/q/17198658/5359531\">this</a> and <a href=\"https://www.tutorialspoint.com/r/r_xml_files.htm\" rel=\"nofollow noreferrer\">this</a>. If you just run <code>library(&quot;XML&quot;); result &lt;- xmlParse(file = &quot;file.xml&quot;); xml_data &lt;- xmlToList(result)</code> you will import your XML as a nested list. Multiple tags with the same name are fine &amp; tag attributes become an extra list item."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 16484502,
+                                "reputation": 327,
+                                "user_id": 11910283,
+                                "user_type": "registered",
+                                "display_name": "Zahra"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1639431187,
+                            "post_id": 5807028,
+                            "comment_id": 124342477,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/5807028#comment124342477_5807028",
+                            "body": "I used xmltodict but gives the error &quot; parser.Parse(xml_input, True) ExpatError: syntax error: line 1, column 0&quot;, I have:                  import xmltodict def handle_artist(_, artist): print(artist[&#39;person&#39;]) return True xmltodict.parse(&#39;activity.xml&#39;,item_depth=2, item_callback=handle_artist) . do you know how to fix this error?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 361057,
+                                "reputation": 2162,
+                                "user_id": 703421,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Eric H."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1649756060,
+                            "post_id": 5807028,
+                            "comment_id": 126950879,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/5807028#comment126950879_5807028",
+                            "body": "I tried it using python 3. The result was wrong for my XML :  empty list. I successfully used dictify (Erik Aronesty&#39;s solution below)."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 359091,
+                        "reputation": 10014,
+                        "user_id": 700276,
+                        "user_type": "registered",
+                        "accept_rate": 76,
+                        "display_name": "James"
+                    },
+                    "comment_count": 10,
+                    "is_accepted": true,
+                    "score": 85,
+                    "last_activity_date": 1564813674,
+                    "last_edit_date": 1564813674,
+                    "creation_date": 1303919899,
+                    "answer_id": 5807028,
+                    "question_id": 2148119,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/5807028#5807028",
+                    "body": "<p>This is a great module that someone created. I've used it several times. \n<a href=\"http://code.activestate.com/recipes/410469-xml-as-dictionary/\" rel=\"noreferrer\">http://code.activestate.com/recipes/410469-xml-as-dictionary/</a></p>\n\n<p>Here is the code from the website just in case the link goes bad. </p>\n\n<pre><code>from xml.etree import cElementTree as ElementTree\n\nclass XmlListConfig(list):\n    def __init__(self, aList):\n        for element in aList:\n            if element:\n                # treat like dict\n                if len(element) == 1 or element[0].tag != element[1].tag:\n                    self.append(XmlDictConfig(element))\n                # treat like list\n                elif element[0].tag == element[1].tag:\n                    self.append(XmlListConfig(element))\n            elif element.text:\n                text = element.text.strip()\n                if text:\n                    self.append(text)\n\n\nclass XmlDictConfig(dict):\n    '''\n    Example usage:\n\n    &gt;&gt;&gt; tree = ElementTree.parse('your_file.xml')\n    &gt;&gt;&gt; root = tree.getroot()\n    &gt;&gt;&gt; xmldict = XmlDictConfig(root)\n\n    Or, if you want to use an XML string:\n\n    &gt;&gt;&gt; root = ElementTree.XML(xml_string)\n    &gt;&gt;&gt; xmldict = XmlDictConfig(root)\n\n    And then use xmldict for what it is... a dict.\n    '''\n    def __init__(self, parent_element):\n        if parent_element.items():\n            self.update(dict(parent_element.items()))\n        for element in parent_element:\n            if element:\n                # treat like dict - we assume that if the first two tags\n                # in a series are different, then they are all different.\n                if len(element) == 1 or element[0].tag != element[1].tag:\n                    aDict = XmlDictConfig(element)\n                # treat like list - we assume that if the first two tags\n                # in a series are the same, then the rest are the same.\n                else:\n                    # here, we put the list in dictionary; the key is the\n                    # tag name the list elements all share in common, and\n                    # the value is the list itself \n                    aDict = {element[0].tag: XmlListConfig(element)}\n                # if the tag has attributes, add those to the dict\n                if element.items():\n                    aDict.update(dict(element.items()))\n                self.update({element.tag: aDict})\n            # this assumes that if you've got an attribute in a tag,\n            # you won't be having any text. This may or may not be a \n            # good idea -- time will tell. It works for the way we are\n            # currently doing XML configuration files...\n            elif element.items():\n                self.update({element.tag: dict(element.items())})\n            # finally, if there are no child tags and no attributes, extract\n            # the text\n            else:\n                self.update({element.tag: element.text})\n</code></pre>\n\n<p>Example usage:</p>\n\n<pre><code>tree = ElementTree.parse('your_file.xml')\nroot = tree.getroot()\nxmldict = XmlDictConfig(root)\n</code></pre>\n\n<p>//Or, if you want to use an XML string:</p>\n\n<pre><code>root = ElementTree.XML(xml_string)\nxmldict = XmlDictConfig(root)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 312775,
+                                "reputation": 12266,
+                                "user_id": 627042,
+                                "user_type": "registered",
+                                "accept_rate": 0,
+                                "display_name": "Erik Aronesty"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1434655305,
+                            "post_id": 7531652,
+                            "comment_id": 49884784,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/7531652#comment49884784_7531652",
+                            "body": "of course, then if there are 2 a&#39;s, this is not a good format."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3000083,
+                                "reputation": 9821,
+                                "user_id": 2545732,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Dirk"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1460967736,
+                            "post_id": 7531652,
+                            "comment_id": 60966089,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/7531652#comment60966089_7531652",
+                            "body": "Looks interesting, but I have not yet figured out how the PicklingTools are meant to be used - is this just a tarball of source code files from which I have to find the right ones for my job and then copy them into my project? No modules to load or anything simpler?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8754174,
+                                "reputation": 558,
+                                "user_id": 6546263,
+                                "user_type": "registered",
+                                "accept_rate": 38,
+                                "display_name": "sqp_125"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1574858377,
+                            "post_id": 7531652,
+                            "comment_id": 104378843,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/7531652#comment104378843_7531652",
+                            "body": "I get:  in <i>peekIntoNextNWSChar     c = self.is</i>.read(1) AttributeError: &#39;str&#39; object has no attribute &#39;read&#39;"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 931767,
+                        "reputation": 71,
+                        "user_id": 961531,
+                        "user_type": "unregistered",
+                        "display_name": "rts1"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1332363811,
+                    "last_edit_date": 1332363811,
+                    "creation_date": 1316793164,
+                    "answer_id": 7531652,
+                    "question_id": 2148119,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/7531652#7531652",
+                    "body": "<p>The most recent versions of the PicklingTools libraries (1.3.0 and 1.3.1) support tools for converting from XML to a Python dict.</p>\n\n<p>The download is available here:  <a href=\"http://www.picklingtools.com/downloads\">PicklingTools 1.3.1</a></p>\n\n<p>There is quite a bit of documentation for the converters <a href=\"http://www.picklingtools.com/html/xmldoc.html\">here</a>: the documentation describes in detail all of the decisions and issues that will arise when converting between XML and Python dictionaries (there are a number of edge cases: attributes, lists, anonymous lists, anonymous dicts, eval, etc. that most converters don't handle).  In general, though,\nthe converters are easy to use.  If an 'example.xml' contains:</p>\n\n<pre><code>&lt;top&gt;\n  &lt;a&gt;1&lt;/a&gt;\n  &lt;b&gt;2.2&lt;/b&gt;\n  &lt;c&gt;three&lt;/c&gt;\n&lt;/top&gt;\n</code></pre>\n\n<p>Then to convert it to a dictionary:</p>\n\n<pre><code>&gt;&gt;&gt; from xmlloader import *\n&gt;&gt;&gt; example = file('example.xml', 'r')   # A document containing XML\n&gt;&gt;&gt; xl = StreamXMLLoader(example, 0)     # 0 = all defaults on operation\n&gt;&gt;&gt; result = xl.expect XML()\n&gt;&gt;&gt; print result\n{'top': {'a': '1', 'c': 'three', 'b': '2.2'}}\n</code></pre>\n\n<p>There are tools for converting in both C++ and Python: the C++ and Python do indentical conversion, but the C++ is about 60x faster</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 411906,
+                        "reputation": 6906,
+                        "user_id": 784669,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "josch"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1330890821,
+                    "creation_date": 1330890821,
+                    "answer_id": 9558269,
+                    "question_id": 2148119,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/9558269#9558269",
+                    "body": "<p>At one point I had to parse and write XML that only consisted of elements without attributes so a 1:1 mapping from XML to dict was possible easily. This is what I came up with in case someone else also doesnt need attributes:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>def xmltodict(element):\n    if not isinstance(element, ElementTree.Element):\n        raise ValueError(\"must pass xml.etree.ElementTree.Element object\")\n\n    def xmltodict_handler(parent_element):\n        result = dict()\n        for element in parent_element:\n            if len(element):\n                obj = xmltodict_handler(element)\n            else:\n                obj = element.text\n\n            if result.get(element.tag):\n                if hasattr(result[element.tag], \"append\"):\n                    result[element.tag].append(obj)\n                else:\n                    result[element.tag] = [result[element.tag], obj]\n            else:\n                result[element.tag] = obj\n        return result\n\n    return {element.tag: xmltodict_handler(element)}\n\n\ndef dicttoxml(element):\n    if not isinstance(element, dict):\n        raise ValueError(\"must pass dict type\")\n    if len(element) != 1:\n        raise ValueError(\"dict must have exactly one root key\")\n\n    def dicttoxml_handler(result, key, value):\n        if isinstance(value, list):\n            for e in value:\n                dicttoxml_handler(result, key, e)\n        elif isinstance(value, basestring):\n            elem = ElementTree.Element(key)\n            elem.text = value\n            result.append(elem)\n        elif isinstance(value, int) or isinstance(value, float):\n            elem = ElementTree.Element(key)\n            elem.text = str(value)\n            result.append(elem)\n        elif value is None:\n            result.append(ElementTree.Element(key))\n        else:\n            res = ElementTree.Element(key)\n            for k, v in value.items():\n                dicttoxml_handler(res, k, v)\n            result.append(res)\n\n    result = ElementTree.Element(element.keys()[0])\n    for key, value in element[element.keys()[0]].items():\n        dicttoxml_handler(result, key, value)\n    return result\n\ndef xmlfiletodict(filename):\n    return xmltodict(ElementTree.parse(filename).getroot())\n\ndef dicttoxmlfile(element, filename):\n    ElementTree.ElementTree(dicttoxml(element)).write(filename)\n\ndef xmlstringtodict(xmlstring):\n    return xmltodict(ElementTree.fromstring(xmlstring).getroot())\n\ndef dicttoxmlstring(element):\n    return ElementTree.tostring(dicttoxml(element))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 388646,
+                                "reputation": 375,
+                                "user_id": 747704,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "M--"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1374484443,
+                            "post_id": 10077069,
+                            "comment_id": 25940245,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10077069#comment25940245_10077069",
+                            "body": "Thx for this code! Additional info: if you use python 2.5 you can&#39;t use dictionary comprehension, so you have to change the line  <code>d = {t.tag: {k:v[0] if len(v) == 1 else v for k, v in dd.iteritems()}}</code>   to  <code>d = { t.tag: dict( (k, v[0] if len(v) == 1 else v) for k, v in dd.iteritems() ) }</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1522906,
+                                "reputation": 44396,
+                                "user_id": 1422096,
+                                "user_type": "registered",
+                                "accept_rate": 63,
+                                "display_name": "Basj"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1392814936,
+                            "post_id": 10077069,
+                            "comment_id": 33131075,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10077069#comment33131075_10077069",
+                            "body": "I have tested nearly 10 snippets / python modules / etc. for that. This one is the best I have found. According to my tests, it is : 1) much faster than <a href=\"https://github.com/martinblech/xmltodict\" rel=\"nofollow noreferrer\">github.com/martinblech/xmltodict</a> (based on XML SAX api)       2) better than <a href=\"https://github.com/mcspring/XML2Dict\" rel=\"nofollow noreferrer\">github.com/mcspring/XML2Dict</a> which has some little issues when several children have same names     3) better than <a href=\"http://code.activestate.com/recipes/410469-xml-as-dictionary/\" rel=\"nofollow noreferrer\">code.activestate.com/recipes/410469-xml-as-dictionary</a>  which had small issues as well    and more important :    4) much shorter code than all the previous ones!    Thanks @K3---rnc"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 312775,
+                                "reputation": 12266,
+                                "user_id": 627042,
+                                "user_type": "registered",
+                                "accept_rate": 0,
+                                "display_name": "Erik Aronesty"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1434655552,
+                            "post_id": 10077069,
+                            "comment_id": 49884949,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10077069#comment49884949_10077069",
+                            "body": "This is, by far, the most comprehensive answer, and it works on &gt; 2.6, and its fairly flexible.  my only issue is that text can change where it resides depending on whether there&#39;s an attribute or not).   i posted an even smaller and more rigid solution as well."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 264683,
+                                "reputation": 2633,
+                                "user_id": 551128,
+                                "user_type": "registered",
+                                "display_name": "serfer2"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1443525221,
+                            "post_id": 10077069,
+                            "comment_id": 53519216,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10077069#comment53519216_10077069",
+                            "body": "If you need to get an ordered dict from an XML file, please, you can use this same example with few modifications (see my response below):  <a href=\"http://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary-in-python/#32842402\" title=\"how to convert an xml string to a dictionary in python\">stackoverflow.com/questions/2148119/&hellip;</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3000083,
+                                "reputation": 9821,
+                                "user_id": 2545732,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Dirk"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1460981738,
+                            "post_id": 10077069,
+                            "comment_id": 60975536,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10077069#comment60975536_10077069",
+                            "body": "This is also pretty nifty and fast when used with <code>cElementTree</code> or <code>lxml.etree</code>. Note that when using Python 3, all <code>.iteritems()</code> have to be changed to <code>.items()</code> (same behaviour but the keyword changed from Python 2 to 3)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 48872,
+                                "reputation": 11110,
+                                "user_id": 145349,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "fjsj"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1564520089,
+                            "post_id": 10077069,
+                            "comment_id": 101056193,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10077069#comment101056193_10077069",
+                            "body": "Beware: high memory usage"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 960513,
+                                "reputation": 7774,
+                                "user_id": 984975,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "AturSams"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1616509724,
+                            "post_id": 10077069,
+                            "comment_id": 118020617,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10077069#comment118020617_10077069",
+                            "body": "The answer that actually works perfectly!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1097085,
+                        "reputation": 6935,
+                        "user_id": 1090455,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "K3---rnc"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": false,
+                    "score": 67,
+                    "last_activity_date": 1460985161,
+                    "last_edit_date": 1460985161,
+                    "creation_date": 1333992223,
+                    "answer_id": 10077069,
+                    "question_id": 2148119,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10077069#10077069",
+                    "body": "<p>The following XML-to-Python-dict snippet parses entities as well as attributes following <a href=\"http://www.xml.com/pub/a/2006/05/31/converting-between-xml-and-json.html\">this XML-to-JSON \"specification\"</a>. It is the most general solution handling all cases of XML.</p>\n\n<pre><code>from collections import defaultdict\n\ndef etree_to_dict(t):\n    d = {t.tag: {} if t.attrib else None}\n    children = list(t)\n    if children:\n        dd = defaultdict(list)\n        for dc in map(etree_to_dict, children):\n            for k, v in dc.items():\n                dd[k].append(v)\n        d = {t.tag: {k:v[0] if len(v) == 1 else v for k, v in dd.items()}}\n    if t.attrib:\n        d[t.tag].update(('@' + k, v) for k, v in t.attrib.items())\n    if t.text:\n        text = t.text.strip()\n        if children or t.attrib:\n            if text:\n              d[t.tag]['#text'] = text\n        else:\n            d[t.tag] = text\n    return d\n</code></pre>\n\n<p>It is used:</p>\n\n<pre><code>from xml.etree import cElementTree as ET\ne = ET.XML('''\n&lt;root&gt;\n  &lt;e /&gt;\n  &lt;e&gt;text&lt;/e&gt;\n  &lt;e name=\"value\" /&gt;\n  &lt;e name=\"value\"&gt;text&lt;/e&gt;\n  &lt;e&gt; &lt;a&gt;text&lt;/a&gt; &lt;b&gt;text&lt;/b&gt; &lt;/e&gt;\n  &lt;e&gt; &lt;a&gt;text&lt;/a&gt; &lt;a&gt;text&lt;/a&gt; &lt;/e&gt;\n  &lt;e&gt; text &lt;a&gt;text&lt;/a&gt; &lt;/e&gt;\n&lt;/root&gt;\n''')\n\nfrom pprint import pprint\npprint(etree_to_dict(e))\n</code></pre>\n\n<p>The output of this example (as per above-linked \"specification\") should be:</p>\n\n<pre><code>{'root': {'e': [None,\n                'text',\n                {'@name': 'value'},\n                {'#text': 'text', '@name': 'value'},\n                {'a': 'text', 'b': 'text'},\n                {'a': ['text', 'text']},\n                {'#text': 'text', 'a': 'text'}]}}\n</code></pre>\n\n<p>Not necessarily pretty, but it is unambiguous, and simpler XML inputs result in simpler JSON. :)</p>\n\n<hr>\n\n<h2>Update</h2>\n\n<p>If you want to do the <strong>reverse</strong>, emit an <strong>XML string from a JSON/dict</strong>, you can use:</p>\n\n<pre><code>try:\n  basestring\nexcept NameError:  # python3\n  basestring = str\n\ndef dict_to_etree(d):\n    def _to_etree(d, root):\n        if not d:\n            pass\n        elif isinstance(d, basestring):\n            root.text = d\n        elif isinstance(d, dict):\n            for k,v in d.items():\n                assert isinstance(k, basestring)\n                if k.startswith('#'):\n                    assert k == '#text' and isinstance(v, basestring)\n                    root.text = v\n                elif k.startswith('@'):\n                    assert isinstance(v, basestring)\n                    root.set(k[1:], v)\n                elif isinstance(v, list):\n                    for e in v:\n                        _to_etree(e, ET.SubElement(root, k))\n                else:\n                    _to_etree(v, ET.SubElement(root, k))\n        else:\n            raise TypeError('invalid type: ' + str(type(d)))\n    assert isinstance(d, dict) and len(d) == 1\n    tag, body = next(iter(d.items()))\n    node = ET.Element(tag)\n    _to_etree(body, node)\n    return ET.tostring(node)\n\npprint(dict_to_etree(d))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 49072,
+                                "reputation": 956,
+                                "user_id": 145978,
+                                "user_type": "registered",
+                                "display_name": "LRE"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1362676472,
+                            "post_id": 10199714,
+                            "comment_id": 21553958,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10199714#comment21553958_10199714",
+                            "body": "also, for future googlenauts - I was able to use this in App Engine, which I had been lead to believe didn&#39;t play nicely with most xml libraries in Python."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1058110,
+                                "reputation": 489,
+                                "user_id": 1060368,
+                                "user_type": "registered",
+                                "display_name": "Samoht"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1364461525,
+                            "post_id": 10199714,
+                            "comment_id": 22255867,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10199714#comment22255867_10199714",
+                            "body": "Thanks it works well. But why is there always the &quot;u&quot; before string ? How to vanish it ?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 261904,
+                                "reputation": 3753,
+                                "user_id": 546404,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Joshua Olson"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1378939776,
+                            "post_id": 10199714,
+                            "comment_id": 27641847,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10199714#comment27641847_10199714",
+                            "body": "The u is just indicating it&#39;s stored unicode string.  It doesn&#39;t affect the value of the string in any way."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 139391,
+                                "reputation": 114511,
+                                "user_id": 344949,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "ypercube\u1d40\u1d39"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1394118821,
+                            "post_id": 10199714,
+                            "comment_id": 33751873,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10199714#comment33751873_10199714",
+                            "body": "Nice. Is there a reverse (dict to xml) function or module?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 277074,
+                                "reputation": 8827,
+                                "user_id": 570826,
+                                "user_type": "registered",
+                                "accept_rate": 61,
+                                "display_name": "A.J."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1394179240,
+                            "post_id": 10199714,
+                            "comment_id": 33781901,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10199714#comment33781901_10199714",
+                            "body": "Can you please tell me how to check for a certain key without exception?? if a key doesnt exist, this OrdererdDict put error."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2455497,
+                                "reputation": 435,
+                                "user_id": 2140828,
+                                "user_type": "registered",
+                                "display_name": "Duther"
+                            },
+                            "reply_to_user": {
+                                "account_id": 139391,
+                                "reputation": 114511,
+                                "user_id": 344949,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "ypercube\u1d40\u1d39"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1411646846,
+                            "post_id": 10199714,
+                            "comment_id": 40787021,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10199714#comment40787021_10199714",
+                            "body": "Nice. And yes, @ypercube, there is a xmldict.unparse() function for the reverse."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 184535,
+                                "reputation": 18291,
+                                "user_id": 1577947,
+                                "user_type": "registered",
+                                "accept_rate": 58,
+                                "display_name": "Jarad"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1442552463,
+                            "post_id": 10199714,
+                            "comment_id": 53136261,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10199714#comment53136261_10199714",
+                            "body": "This might be obvious to some, not to others but anybody writing SOAP definitions, it&#39;s helpful to use this xmltodict module with pprint (pretty print).  Just <code>from pprint import pprint</code> then <code>pprint(xmltodict.parse(&#39;&#39;&#39;your XML&#39;&#39;&#39;))</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 271958,
+                                "reputation": 131576,
+                                "user_id": 562769,
+                                "user_type": "registered",
+                                "accept_rate": 61,
+                                "display_name": "Martin Thoma"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1457953750,
+                            "post_id": 10199714,
+                            "comment_id": 59624314,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10199714#comment59624314_10199714",
+                            "body": "You might want to add <code>import xmltodict</code> so taht one can copy-paste it."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6989882,
+                                "reputation": 3387,
+                                "user_id": 5359531,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "user5359531"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1496881563,
+                            "post_id": 10199714,
+                            "comment_id": 75847955,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10199714#comment75847955_10199714",
+                            "body": "when I try to run <code>xmltodict.parse(&quot;file.xml&quot;)</code> I get <code>xml.parsers.expat.ExpatError: syntax error: line 1, column 0</code>, any ideas what is going on?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1702590,
+                                "reputation": 7018,
+                                "user_id": 1562285,
+                                "user_type": "registered",
+                                "display_name": "Maarten Fabr&#233;"
+                            },
+                            "reply_to_user": {
+                                "account_id": 6989882,
+                                "reputation": 3387,
+                                "user_id": 5359531,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "user5359531"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1500205408,
+                            "post_id": 10199714,
+                            "comment_id": 77225994,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10199714#comment77225994_10199714",
+                            "body": "@user5359531 I think the <code>parse</code> expects a string (or stream), not a filename"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2866179,
+                                "reputation": 485,
+                                "user_id": 2460464,
+                                "user_type": "registered",
+                                "display_name": "user2460464"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1519859192,
+                            "post_id": 10199714,
+                            "comment_id": 85085607,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10199714#comment85085607_10199714",
+                            "body": "This is excellent. I&#39;m at a loss to express how little I like XML. I wish that I had found this years ago (instead of ETree, XPATH, and that awful mess).   As an aside which may help others, I didn&#39;t realize that one cannot pprint.pprint() an OrderedDict (this is the result of xmltodict.parse()).   I used json.loads(json.dumps(&quot;my-XML-string-object&quot;)) to get pprint.pprint() to work.  Again, THANK YOU!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5855106,
+                                "reputation": 2238,
+                                "user_id": 4625475,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Matteo Ferla"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1536940818,
+                            "post_id": 10199714,
+                            "comment_id": 91618090,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10199714#comment91618090_10199714",
+                            "body": "In some complex cases, it does not traverse the whole XML. My case was XML reply from Uniprot --but xmlschema worked though.  So <i>caveat emptor</i>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2219098,
+                                "reputation": 566,
+                                "user_id": 1959016,
+                                "user_type": "registered",
+                                "display_name": "Marcos Dione"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1571904242,
+                            "post_id": 10199714,
+                            "comment_id": 103396125,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10199714#comment103396125_10199714",
+                            "body": "Just a heads up, <code>xmltodict</code> and I think most solutions in this page do not parse external entities."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6138905,
+                                "reputation": 853,
+                                "user_id": 4786904,
+                                "user_type": "registered",
+                                "display_name": "Swedgin"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1587043177,
+                            "post_id": 10199714,
+                            "comment_id": 108357578,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10199714#comment108357578_10199714",
+                            "body": "Great. This also works on <code>QFile</code> objects using <code>PyQt5</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9793201,
+                                "reputation": 216,
+                                "user_id": 7257133,
+                                "user_type": "registered",
+                                "display_name": "Peter"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1588250434,
+                            "post_id": 10199714,
+                            "comment_id": 108830228,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10199714#comment108830228_10199714",
+                            "body": "Thank you very much, your module changes my life. Finally I will not have to deal anymore with XML and ElementTree"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4351840,
+                                "reputation": 66,
+                                "user_id": 3551897,
+                                "user_type": "registered",
+                                "display_name": "btt"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1591178098,
+                            "post_id": 10199714,
+                            "comment_id": 109953856,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10199714#comment109953856_10199714",
+                            "body": "Error: <code>xml.parsers.expat.ExpatError: XML or text declaration not at start of entity</code> It works when I remove the line return before the xml tag <code>&lt;?xml</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1886776,
+                                "reputation": 3052,
+                                "user_id": 1705829,
+                                "user_type": "registered",
+                                "accept_rate": 43,
+                                "display_name": "Timo"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4351840,
+                                "reputation": 66,
+                                "user_id": 3551897,
+                                "user_type": "registered",
+                                "display_name": "btt"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1624563823,
+                            "post_id": 10199714,
+                            "comment_id": 120400436,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10199714#comment120400436_10199714",
+                            "body": "@btt, same error here: Copying your code I get <code>XML or text declaration not at start of entity: line 2, column 0</code>. Your Solution is <a href=\"https://stackoverflow.com/questions/6474741/error-error-parsing-xml-xml-or-text-declaration-not-at-start-of-entity\">here</a> - Lesson learned: <b>do not</b> copy that much"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 75563,
+                                "reputation": 847,
+                                "user_id": 216695,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "shearn89"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1650875880,
+                            "post_id": 10199714,
+                            "comment_id": 127218004,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10199714#comment127218004_10199714",
+                            "body": "Is this module still active in 2022? 90 issues including security ones on GitHub, no updates in about 2 years or so..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11006342,
+                                "reputation": 160,
+                                "user_id": 9109799,
+                                "user_type": "registered",
+                                "display_name": "Loner"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1681467890,
+                            "post_id": 10199714,
+                            "comment_id": 134064798,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10199714#comment134064798_10199714",
+                            "body": "If you want it as a plain dictionary instead of an OrderedDict, just type cast it  <code>dict(xmltodict.parse(...)</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 39410,
+                        "reputation": 13285,
+                        "user_id": 113643,
+                        "user_type": "registered",
+                        "accept_rate": 90,
+                        "display_name": "Martin Blech"
+                    },
+                    "comment_count": 19,
+                    "is_accepted": false,
+                    "score": 397,
+                    "last_activity_date": 1334699484,
+                    "creation_date": 1334699484,
+                    "answer_id": 10199714,
+                    "question_id": 2148119,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/10199714#10199714",
+                    "body": "<p><a href=\"https://github.com/martinblech/xmltodict\" rel=\"noreferrer\">xmltodict</a> (full disclosure: I wrote it) does exactly that:</p>\n\n<pre><code>xmltodict.parse(\"\"\"\n&lt;?xml version=\"1.0\" ?&gt;\n&lt;person&gt;\n  &lt;name&gt;john&lt;/name&gt;\n  &lt;age&gt;20&lt;/age&gt;\n&lt;/person&gt;\"\"\")\n# {u'person': {u'age': u'20', u'name': u'john'}}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2590130,
+                        "reputation": 49,
+                        "user_id": 2245014,
+                        "user_type": "unregistered",
+                        "display_name": "dibrovsd"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1365080966,
+                    "creation_date": 1365080966,
+                    "answer_id": 15812174,
+                    "question_id": 2148119,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/15812174#15812174",
+                    "body": "<pre><code>def xml_to_dict(node):\n    u''' \n    @param node:lxml_node\n    @return: dict \n    '''\n\n    return {'tag': node.tag, 'text': node.text, 'attrib': node.attrib, 'children': {child.tag: xml_to_dict(child) for child in node}}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4101520,
+                        "reputation": 5099,
+                        "user_id": 3413239,
+                        "user_type": "registered",
+                        "accept_rate": 67,
+                        "display_name": "pg2455"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1403221789,
+                    "creation_date": 1403221789,
+                    "answer_id": 24317971,
+                    "question_id": 2148119,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/24317971#24317971",
+                    "body": "<p>@dibrovsd: Solution will not work if the xml have more than one tag with same name</p>\n\n<p>On your line of thought, I have modified the code a bit and written it for general node instead of root:</p>\n\n<pre><code>from collections import defaultdict\ndef xml2dict(node):\n    d, count = defaultdict(list), 1\n    for i in node:\n        d[i.tag + \"_\" + str(count)]['text'] = i.findtext('.')[0]\n        d[i.tag + \"_\" + str(count)]['attrib'] = i.attrib # attrib gives the list\n        d[i.tag + \"_\" + str(count)]['children'] = xml2dict(i) # it gives dict\n     return d\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4793052,
+                        "reputation": 193,
+                        "user_id": 3871670,
+                        "user_type": "registered",
+                        "display_name": "Adam Clark"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1406184359,
+                    "creation_date": 1406184359,
+                    "answer_id": 24926806,
+                    "question_id": 2148119,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/24926806#24926806",
+                    "body": "<p>The code from <a href=\"http://code.activestate.com/recipes/410469-xml-as-dictionary/\" rel=\"nofollow\">http://code.activestate.com/recipes/410469-xml-as-dictionary/</a> works well, but if there are multiple elements that are the same at a given place in the hierarchy it just overrides them.</p>\n\n<p>I added a shim between that looks to see if the element already exists before self.update().  If so, pops the existing entry and creates a lists out of the existing and the new.  Any subsequent duplicates are added to the list.</p>\n\n<p>Not sure if this can be handled more gracefully, but it works:</p>\n\n<pre><code>import xml.etree.ElementTree as ElementTree\n\nclass XmlDictConfig(dict):\n    def __init__(self, parent_element):\n        if parent_element.items():\n            self.updateShim(dict(parent_element.items()))\n        for element in parent_element:\n            if len(element):\n                aDict = XmlDictConfig(element)\n                if element.items():\n                    aDict.updateShim(dict(element.items()))\n                self.updateShim({element.tag: aDict})\n            elif element.items():\n                self.updateShim({element.tag: dict(element.items())})\n            else:\n                self.updateShim({element.tag: element.text.strip()})\n\n    def updateShim (self, aDict ):\n        for key in aDict.keys():\n            if key in self:\n                value = self.pop(key)\n                if type(value) is not list:\n                    listOfDicts = []\n                    listOfDicts.append(value)\n                    listOfDicts.append(aDict[key])\n                    self.update({key: listOfDicts})\n\n                else:\n                    value.append(aDict[key])\n                    self.update({key: value})\n            else:\n                self.update(aDict)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 91073,
+                                "reputation": 1501,
+                                "user_id": 250298,
+                                "user_type": "registered",
+                                "display_name": "MattK"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1452627225,
+                            "post_id": 30923963,
+                            "comment_id": 57250500,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/30923963#comment57250500_30923963",
+                            "body": "I like this solution.  Simple and does not require external libs."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1836681,
+                                "reputation": 1185,
+                                "user_id": 1666926,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "MrMas"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1612398570,
+                            "post_id": 30923963,
+                            "comment_id": 116758011,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/30923963#comment116758011_30923963",
+                            "body": "I also like this answer since it&#39;s all in front of me (no external links). Cheers!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 361057,
+                                "reputation": 2162,
+                                "user_id": 703421,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Eric H."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1649755779,
+                            "post_id": 30923963,
+                            "comment_id": 126950765,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/30923963#comment126950765_30923963",
+                            "body": "I also like it. It gives good results for complex XML, which is not the case for class XmlListConfig above."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 312775,
+                        "reputation": 12266,
+                        "user_id": 627042,
+                        "user_type": "registered",
+                        "accept_rate": 0,
+                        "display_name": "Erik Aronesty"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 46,
+                    "last_activity_date": 1434655609,
+                    "last_edit_date": 1434655609,
+                    "creation_date": 1434655177,
+                    "answer_id": 30923963,
+                    "question_id": 2148119,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/30923963#30923963",
+                    "body": "<p>This lightweight version, while not configurable, is pretty easy to tailor as needed, and works in old pythons.  Also it is rigid - meaning the results are the same regardless of the existence of attributes.</p>\n\n<pre><code>import xml.etree.ElementTree as ET\n\nfrom copy import copy\n\ndef dictify(r,root=True):\n    if root:\n        return {r.tag : dictify(r, False)}\n    d=copy(r.attrib)\n    if r.text:\n        d[\"_text\"]=r.text\n    for x in r.findall(\"./*\"):\n        if x.tag not in d:\n            d[x.tag]=[]\n        d[x.tag].append(dictify(x,False))\n    return d\n</code></pre>\n\n<p>So:</p>\n\n<pre><code>root = ET.fromstring(\"&lt;erik&gt;&lt;a x='1'&gt;v&lt;/a&gt;&lt;a y='2'&gt;w&lt;/a&gt;&lt;/erik&gt;\")\n\ndictify(root)\n</code></pre>\n\n<p>Results in:</p>\n\n<pre><code>{'erik': {'a': [{'x': '1', '_text': 'v'}, {'y': '2', '_text': 'w'}]}}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2303653,
+                        "reputation": 35336,
+                        "user_id": 2023392,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "radtek"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1436994149,
+                    "last_edit_date": 1436994149,
+                    "creation_date": 1436987135,
+                    "answer_id": 31438957,
+                    "question_id": 2148119,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/31438957#31438957",
+                    "body": "<p>You can do this quite easily with lxml. First install it:</p>\n\n<pre><code>[sudo] pip install lxml\n</code></pre>\n\n<p>Here is a recursive function I wrote that does the heavy lifting for you:</p>\n\n<pre><code>from lxml import objectify as xml_objectify\n\n\ndef xml_to_dict(xml_str):\n    \"\"\" Convert xml to dict, using lxml v3.4.2 xml processing library \"\"\"\n    def xml_to_dict_recursion(xml_object):\n        dict_object = xml_object.__dict__\n        if not dict_object:\n            return xml_object\n        for key, value in dict_object.items():\n            dict_object[key] = xml_to_dict_recursion(value)\n        return dict_object\n    return xml_to_dict_recursion(xml_objectify.fromstring(xml_str))\n\nxml_string = \"\"\"&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;&lt;Response&gt;&lt;NewOrderResp&gt;\n&lt;IndustryType&gt;Test&lt;/IndustryType&gt;&lt;SomeData&gt;&lt;SomeNestedData1&gt;1234&lt;/SomeNestedData1&gt;\n&lt;SomeNestedData2&gt;3455&lt;/SomeNestedData2&gt;&lt;/SomeData&gt;&lt;/NewOrderResp&gt;&lt;/Response&gt;\"\"\"\n\nprint xml_to_dict(xml_string)\n</code></pre>\n\n<p>The below variant preserves the parent key / element:</p>\n\n<pre><code>def xml_to_dict(xml_str):\n    \"\"\" Convert xml to dict, using lxml v3.4.2 xml processing library, see http://lxml.de/ \"\"\"\n    def xml_to_dict_recursion(xml_object):\n        dict_object = xml_object.__dict__\n        if not dict_object:  # if empty dict returned\n            return xml_object\n        for key, value in dict_object.items():\n            dict_object[key] = xml_to_dict_recursion(value)\n        return dict_object\n    xml_obj = objectify.fromstring(xml_str)\n    return {xml_obj.tag: xml_to_dict_recursion(xml_obj)}\n</code></pre>\n\n<p>If you want to only return a subtree and convert it to dict, you can use <em>Element.find()</em> to get the subtree and then convert it: </p>\n\n<pre><code>xml_obj.find('.//')  # lxml.objectify.ObjectifiedElement instance\n</code></pre>\n\n<p>See the lxml docs <a href=\"http://lxml.de/\" rel=\"noreferrer\">here</a>. I hope this helps!</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 264683,
+                        "reputation": 2633,
+                        "user_id": 551128,
+                        "user_type": "registered",
+                        "display_name": "serfer2"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1443525073,
+                    "last_edit_date": 1495542396,
+                    "creation_date": 1443525073,
+                    "answer_id": 32842402,
+                    "question_id": 2148119,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/32842402#32842402",
+                    "body": "<p>From @K3---rnc <a href=\"https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary-in-python#10077069\">response</a> (the best for me) I've added a small modifications to get an OrderedDict from an XML text (some times order matters):</p>\n\n<pre><code>def etree_to_ordereddict(t):\nd = OrderedDict()\nd[t.tag] = OrderedDict() if t.attrib else None\nchildren = list(t)\nif children:\n    dd = OrderedDict()\n    for dc in map(etree_to_ordereddict, children):\n        for k, v in dc.iteritems():\n            if k not in dd:\n                dd[k] = list()\n            dd[k].append(v)\n    d = OrderedDict()\n    d[t.tag] = OrderedDict()\n    for k, v in dd.iteritems():\n        if len(v) == 1:\n            d[t.tag][k] = v[0]\n        else:\n            d[t.tag][k] = v\nif t.attrib:\n    d[t.tag].update(('@' + k, v) for k, v in t.attrib.iteritems())\nif t.text:\n    text = t.text.strip()\n    if children or t.attrib:\n        if text:\n            d[t.tag]['#text'] = text\n    else:\n        d[t.tag] = text\nreturn d\n</code></pre>\n\n<p>Following @K3---rnc example, you can use it:</p>\n\n<pre><code>from xml.etree import cElementTree as ET\ne = ET.XML('''\n&lt;root&gt;\n  &lt;e /&gt;\n  &lt;e&gt;text&lt;/e&gt;\n  &lt;e name=\"value\" /&gt;\n  &lt;e name=\"value\"&gt;text&lt;/e&gt;\n  &lt;e&gt; &lt;a&gt;text&lt;/a&gt; &lt;b&gt;text&lt;/b&gt; &lt;/e&gt;\n  &lt;e&gt; &lt;a&gt;text&lt;/a&gt; &lt;a&gt;text&lt;/a&gt; &lt;/e&gt;\n  &lt;e&gt; text &lt;a&gt;text&lt;/a&gt; &lt;/e&gt;\n&lt;/root&gt;\n''')\n\nfrom pprint import pprint\npprint(etree_to_ordereddict(e))\n</code></pre>\n\n<p>Hope it helps ;)</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 9002044,
+                        "reputation": 81,
+                        "user_id": 6710297,
+                        "user_type": "registered",
+                        "display_name": "tiger"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1474059563,
+                    "last_edit_date": 1495541908,
+                    "creation_date": 1474058323,
+                    "answer_id": 39539757,
+                    "question_id": 2148119,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/39539757#39539757",
+                    "body": "<p>Disclaimer:\nThis modified XML parser was inspired by <a href=\"https://stackoverflow.com/a/24926806/1440565\">Adam Clark</a> \nThe original XML parser works for most of simple cases. However, it didn't work for some complicated XML files. I debugged the code line by line and finally fixed some issues. If you find some bugs, please let me know. I am glad to fix it.</p>\n\n<pre><code>class XmlDictConfig(dict):  \n    '''   \n    Note: need to add a root into if no exising    \n    Example usage:\n    &gt;&gt;&gt; tree = ElementTree.parse('your_file.xml')\n    &gt;&gt;&gt; root = tree.getroot()\n    &gt;&gt;&gt; xmldict = XmlDictConfig(root)\n    Or, if you want to use an XML string:\n    &gt;&gt;&gt; root = ElementTree.XML(xml_string)\n    &gt;&gt;&gt; xmldict = XmlDictConfig(root)\n    And then use xmldict for what it is... a dict.\n    '''\n    def __init__(self, parent_element):\n        if parent_element.items():\n            self.updateShim( dict(parent_element.items()) )\n        for element in parent_element:\n            if len(element):\n                aDict = XmlDictConfig(element)\n            #   if element.items():\n            #   aDict.updateShim(dict(element.items()))\n                self.updateShim({element.tag: aDict})\n            elif element.items():    # items() is specialy for attribtes\n                elementattrib= element.items()\n                if element.text:           \n                    elementattrib.append((element.tag,element.text ))     # add tag:text if there exist\n                self.updateShim({element.tag: dict(elementattrib)})\n            else:\n                self.updateShim({element.tag: element.text})\n\n    def updateShim (self, aDict ):\n        for key in aDict.keys():   # keys() includes tag and attributes\n            if key in self:\n                value = self.pop(key)\n                if type(value) is not list:\n                    listOfDicts = []\n                    listOfDicts.append(value)\n                    listOfDicts.append(aDict[key])\n                    self.update({key: listOfDicts})\n                else:\n                    value.append(aDict[key])\n                    self.update({key: value})\n            else:\n                self.update({key:aDict[key]})  # it was self.update(aDict)    \n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2681854,
+                                "reputation": 839,
+                                "user_id": 2317066,
+                                "user_type": "registered",
+                                "accept_rate": 96,
+                                "display_name": "Chris Nielsen"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1485275761,
+                            "post_id": 40754817,
+                            "comment_id": 70853687,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/40754817#comment70853687_40754817",
+                            "body": "This solution is missing some code, such as import and set up. I got the message &#39;str&#39; object has no attribute &#39;tag&#39;"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4630958,
+                        "reputation": 1358,
+                        "user_id": 3753497,
+                        "user_type": "registered",
+                        "accept_rate": 36,
+                        "display_name": "moylop260"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -3,
+                    "last_activity_date": 1479866468,
+                    "creation_date": 1479866468,
+                    "answer_id": 40754817,
+                    "question_id": 2148119,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/40754817#40754817",
+                    "body": "<p>I have a recursive method to get a dictionary from a lxml element</p>\n\n<pre><code>    def recursive_dict(element):\n        return (element.tag.split('}')[1],\n                dict(map(recursive_dict, element.getchildren()),\n                     **element.attrib))\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 14585550,
+                        "reputation": 880,
+                        "user_id": 10534497,
+                        "user_type": "registered",
+                        "display_name": "coder"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1558483431,
+                    "last_edit_date": 1558483431,
+                    "creation_date": 1558285379,
+                    "answer_id": 56210120,
+                    "question_id": 2148119,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/56210120#56210120",
+                    "body": "<p>I have modified one of the answers to my taste and to work with multiple values with the same tag for example consider the following xml code saved in XML.xml file</p>\n\n<pre><code>     &lt;A&gt;\n        &lt;B&gt;\n            &lt;BB&gt;inAB&lt;/BB&gt;\n            &lt;C&gt;\n                &lt;D&gt;\n                    &lt;E&gt;\n                        inABCDE\n                    &lt;/E&gt;\n                    &lt;E&gt;value2&lt;/E&gt;\n                    &lt;E&gt;value3&lt;/E&gt;\n                &lt;/D&gt;\n                &lt;inCout-ofD&gt;123&lt;/inCout-ofD&gt;\n            &lt;/C&gt;\n        &lt;/B&gt;\n        &lt;B&gt;abc&lt;/B&gt;\n        &lt;F&gt;F&lt;/F&gt;\n    &lt;/A&gt;\n</code></pre>\n\n<p>and in python </p>\n\n<pre><code>import xml.etree.ElementTree as ET\n\n\n\n\nclass XMLToDictionary(dict):\n    def __init__(self, parentElement):\n        self.parentElement = parentElement\n        for child in list(parentElement):\n            child.text = child.text if (child.text != None) else  ' '\n            if len(child) == 0:\n                self.update(self._addToDict(key= child.tag, value = child.text.strip(), dict = self))\n            else:\n                innerChild = XMLToDictionary(parentElement=child)\n                self.update(self._addToDict(key=innerChild.parentElement.tag, value=innerChild, dict=self))\n\n    def getDict(self):\n        return {self.parentElement.tag: self}\n\n    class _addToDict(dict):\n        def __init__(self, key, value, dict):\n            if not key in dict:\n                self.update({key: value})\n            else:\n                identical = dict[key] if type(dict[key]) == list else [dict[key]]\n                self.update({key: identical + [value]})\n\n\ntree = ET.parse('./XML.xml')\nroot = tree.getroot()\nparseredDict = XMLToDictionary(root).getDict()\nprint(parseredDict)\n</code></pre>\n\n<p>the output is </p>\n\n<pre><code>{'A': {'B': [{'BB': 'inAB', 'C': {'D': {'E': ['inABCDE', 'value2', 'value3']}, 'inCout-ofD': '123'}}, 'abc'], 'F': 'F'}}\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2656817,
+                                "reputation": 33840,
+                                "user_id": 2297345,
+                                "user_type": "registered",
+                                "accept_rate": 55,
+                                "display_name": "Michael_Scharf"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1636923930,
+                            "post_id": 65639426,
+                            "comment_id": 123681534,
+                            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/65639426#comment123681534_65639426",
+                            "body": "By far the simplest solution!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1517718,
+                        "reputation": 51,
+                        "user_id": 1418315,
+                        "user_type": "registered",
+                        "display_name": "firelion.cis"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1610168117,
+                    "last_edit_date": 1610168117,
+                    "creation_date": 1610167548,
+                    "answer_id": 65639426,
+                    "question_id": 2148119,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/65639426#65639426",
+                    "body": "<p>I wrote a simple recursive function to do the job:</p>\n<pre><code>from xml.etree import ElementTree\nroot = ElementTree.XML(xml_to_convert)\n\ndef xml_to_dict_recursive(root):\n\n    if len(root.getchildren()) == 0:\n        return {root.tag:root.text}\n    else:\n        return {root.tag:list(map(xml_to_dict_recursive, root.getchildren()))}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 11070830,
+                        "reputation": 136,
+                        "user_id": 8129001,
+                        "user_type": "registered",
+                        "display_name": "Tudor Corcimar"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1624995488,
+                    "creation_date": 1624995488,
+                    "answer_id": 68184699,
+                    "question_id": 2148119,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/68184699#68184699",
+                    "body": "<p>An alternative (builds a lists for the same tags in hierarchy):</p>\n<pre class=\"lang-py prettyprint-override\"><code>from xml.etree import cElementTree as ElementTree\n\ndef xml_to_dict(xml, result):\n    for child in xml:\n        if len(child) == 0:\n            result[child.tag] = child.text\n        else:\n            if child.tag in result:\n                if not isinstance(result[child.tag], list):\n                    result[child.tag] = [result[child.tag]]\n                result[child.tag].append(xml_to_dict(child, {}))\n            else:\n                result[child.tag] = xml_to_dict(child, {})\n    return result\n\nxmlTree = ElementTree.parse('my_file.xml')\nxmlRoot = xmlTree.getroot()\ndictRoot = xml_to_dict(xmlRoot, {})\nresult = {xmlRoot.tag: dictRoot}\n\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 24865433,
+                        "reputation": 193,
+                        "user_id": 18740583,
+                        "user_type": "registered",
+                        "display_name": "fvg"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1654947411,
+                    "last_edit_date": 1654947411,
+                    "creation_date": 1654937287,
+                    "answer_id": 72582919,
+                    "question_id": 2148119,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/72582919#72582919",
+                    "body": "<p>Updated method posted by <a href=\"https://stackoverflow.com/users/1418315/firelion-cis\">firelion.cis</a> (since getchildren is deprecated):</p>\n<pre><code>from xml.etree import ElementTree\nroot = ElementTree.XML(xml_to_convert)\n\ndef xml_to_dict_recursive(root):\n\n    if len(list(root)) == 0:\n        return {root.tag:root.text}\n    else:\n        return {root.tag:list(map(xml_to_dict_recursive, list(root)))}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 12024972,
+                        "reputation": 113,
+                        "user_id": 8797229,
+                        "user_type": "registered",
+                        "display_name": "Pengcheng Fan"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1660034001,
+                    "creation_date": 1660034001,
+                    "answer_id": 73288788,
+                    "question_id": 2148119,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/73288788#73288788",
+                    "body": "<pre class=\"lang-py prettyprint-override\"><code>import xml.etree.ElementTree as ET\nroot = ET.parse(xml_filepath).getroot()\n\ndef parse_xml(node):\n    ans = {}\n    for child in node:\n        if len(child) == 0:\n            ans[child.tag] = child.text\n        elif child.tag not in ans:\n            ans[child.tag] = parse_xml(child)\n        elif not isinstance(ans[child.tag], list):\n            ans[child.tag] = [ans[child.tag]]\n            ans[child.tag].append(parse_xml(child))\n        else:\n            ans[child.tag].append(parse_xml(child))\n    return ans\n</code></pre>\n<p>it merges same field into list and squeezes fields containing one child.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6812796,
+                        "reputation": 463,
+                        "user_id": 5242412,
+                        "user_type": "registered",
+                        "display_name": "Krishnadev N"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1680097824,
+                    "last_edit_date": 1680097824,
+                    "creation_date": 1680097186,
+                    "answer_id": 75878025,
+                    "question_id": 2148119,
+                    "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary/75878025#75878025",
+                    "body": "<p>Slightly improved version of <a href=\"https://stackoverflow.com/a/65639426\">fvg's fix</a> of <a href=\"https://stackoverflow.com/a/72582919\">firelion.cis's answer</a>. The function is simple, and works for <strong>simple XML</strong>, and avoids the innermost singleton dictionaries. <strong>NOT</strong> suitable for complex XML with tags, or if the XML have more than one tag with same name.</p>\n<pre><code>from xml.etree import ElementTree\n\n# Replace xml_to_convert below\nroot = ElementTree.XML(xml_to_convert)\n\ndef xml_to_dict(root):\n    if len(root):\n        return {root.tag:{k:v for d in map(xml_to_dict, root)\n                              for k,v in d.items() }}\n    else:\n        return {root.tag:root.text}\n</code></pre>\n<p>Sample XML:</p>\n<pre><code>&lt;student&gt;\n    &lt;FirstName&gt;SMITH&lt;/FirstName&gt;\n    &lt;LastName&gt;JAMES&lt;/LastName&gt;\n    &lt;fees&gt;\n        &lt;Amount&gt;2400&lt;/Amount&gt;\n        &lt;Currency&gt;USD&lt;/Currency&gt;\n    &lt;/fees&gt;\n&lt;/student&gt;\n</code></pre>\n<p>Output <em>(formatted)</em>:</p>\n<pre><code>{'student': {'FirstName': 'SMITH',\n             'LastName': 'JAMES',\n             'fees': {'Amount': '2400', \n                      'Currency': 'USD'}\n            }\n}\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 149209,
+                "reputation": 3363,
+                "user_id": 361526,
+                "user_type": "registered",
+                "accept_rate": 82,
+                "display_name": "user361526"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 5807028,
+            "answer_count": 20,
+            "score": 183,
+            "last_activity_date": 1684962725,
+            "creation_date": 1264606129,
+            "last_edit_date": 1617307137,
+            "question_id": 2148119,
+            "link": "https://stackoverflow.com/questions/2148119/how-to-convert-an-xml-string-to-a-dictionary",
+            "title": "How to convert an XML string to a dictionary?",
+            "body": "<p>I have a program that reads an XML document from a socket. I have the XML document stored in a string which I would like to convert directly to a Python dictionary, the same way it is done in Django's <code>simplejson</code> library.</p>\n<p>Take as an example:</p>\n<pre><code>str =&quot;&lt;?xml version=&quot;1.0&quot; ?&gt;&lt;person&gt;&lt;name&gt;john&lt;/name&gt;&lt;age&gt;20&lt;/age&gt;&lt;/person&quot;\ndic_xml = convert_to_dic(str)\n</code></pre>\n<p>Then <code>dic_xml</code> would look like <code>{'person' : { 'name' : 'john', 'age' : 20 } }</code></p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8464
+}

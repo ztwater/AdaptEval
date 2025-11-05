@@ -1,0 +1,169 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "pandas",
+                "numpy"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 13876072,
+                                "reputation": 1016,
+                                "user_id": 11106507,
+                                "user_type": "registered",
+                                "display_name": "Olli"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1631942610,
+                            "post_id": 69231776,
+                            "comment_id": 122364860,
+                            "link": "https://stackoverflow.com/questions/69231756/how-to-fill-a-numpy-arrays-nan-values-with-the-means-of-their-columns/69231776#comment122364860_69231776",
+                            "body": "Apologies, I was probably unclear. I know how to do this with a dataframe, I want to do the equivalent to a numpy array."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 13876072,
+                                "reputation": 1016,
+                                "user_id": 11106507,
+                                "user_type": "registered",
+                                "display_name": "Olli"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1631942668,
+                            "post_id": 69231776,
+                            "comment_id": 122364873,
+                            "link": "https://stackoverflow.com/questions/69231756/how-to-fill-a-numpy-arrays-nan-values-with-the-means-of-their-columns/69231776#comment122364873_69231776",
+                            "body": "Ah, you edited just after I posted the above comment, thank you very much, this is what I was looking for!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 20724483,
+                                "reputation": 118946,
+                                "user_id": 15239951,
+                                "user_type": "registered",
+                                "display_name": "Corralien"
+                            },
+                            "reply_to_user": {
+                                "account_id": 13876072,
+                                "reputation": 1016,
+                                "user_id": 11106507,
+                                "user_type": "registered",
+                                "display_name": "Olli"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1631942697,
+                            "post_id": 69231776,
+                            "comment_id": 122364877,
+                            "link": "https://stackoverflow.com/questions/69231756/how-to-fill-a-numpy-arrays-nan-values-with-the-means-of-their-columns/69231776#comment122364877_69231776",
+                            "body": "Glad to read that and sorry for the wrong answer!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 20724483,
+                        "reputation": 118946,
+                        "user_id": 15239951,
+                        "user_type": "registered",
+                        "display_name": "Corralien"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": true,
+                    "score": 3,
+                    "last_activity_date": 1631942608,
+                    "last_edit_date": 1631942608,
+                    "creation_date": 1631941872,
+                    "answer_id": 69231776,
+                    "question_id": 69231756,
+                    "link": "https://stackoverflow.com/questions/69231756/how-to-fill-a-numpy-arrays-nan-values-with-the-means-of-their-columns/69231776#69231776",
+                    "body": "<p>You can use <code>np.take</code>:</p>\n<p>Setup a <a href=\"https://stackoverflow.com/help/minimal-reproducible-example\">MRE</a></p>\n<pre><code>df = pd.DataFrame({'A': [1, np.nan, 2, 6], 'B': [5, np.nan, 8, 2]})\n\nm = df.to_numpy()\nprint(m)\n\n# Output\narray([[ 1.,  5.],\n       [nan, nan],\n       [ 2.,  8.],\n       [ 6.,  2.]])\n</code></pre>\n<pre><code>mean = np.nanmean(m, axis=0)\nidx = np.where(np.isnan(m))\nm[idx] = np.take(mean, idx[1])\nprint(m)\n\n# Output\narray([[1., 5.],\n       [3., 5.],\n       [2., 8.],\n       [6., 2.]])\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 13876072,
+                                "reputation": 1016,
+                                "user_id": 11106507,
+                                "user_type": "registered",
+                                "display_name": "Olli"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1631946628,
+                            "post_id": 69232070,
+                            "comment_id": 122365401,
+                            "link": "https://stackoverflow.com/questions/69231756/how-to-fill-a-numpy-arrays-nan-values-with-the-means-of-their-columns/69232070#comment122365401_69232070",
+                            "body": "Oh nice, thank you! that&#39;s a very elegant solution!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1931224,
+                                "reputation": 23916,
+                                "user_id": 1740577,
+                                "user_type": "registered",
+                                "display_name": "I&#39;mahdi"
+                            },
+                            "reply_to_user": {
+                                "account_id": 13876072,
+                                "reputation": 1016,
+                                "user_id": 11106507,
+                                "user_type": "registered",
+                                "display_name": "Olli"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1631946702,
+                            "post_id": 69232070,
+                            "comment_id": 122365419,
+                            "link": "https://stackoverflow.com/questions/69231756/how-to-fill-a-numpy-arrays-nan-values-with-the-means-of-their-columns/69232070#comment122365419_69232070",
+                            "body": "@Olli welcome dude"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1931224,
+                        "reputation": 23916,
+                        "user_id": 1740577,
+                        "user_type": "registered",
+                        "display_name": "I&#39;mahdi"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1631945458,
+                    "creation_date": 1631945458,
+                    "answer_id": 69232070,
+                    "question_id": 69231756,
+                    "link": "https://stackoverflow.com/questions/69231756/how-to-fill-a-numpy-arrays-nan-values-with-the-means-of-their-columns/69232070#69232070",
+                    "body": "<p>You can use <code>np.where</code> like below:</p>\n<pre><code>df = pd.DataFrame({'A': [2, 1, np.nan, 6], 'B': [4, np.nan, 8, np.nan]})\n\na = df.to_numpy()\nprint(a)\n# [[ 2.  4.]\n#  [ 1. nan]\n#  [nan  8.]\n#  [ 6. nan]]\n\na = np.where(np.isnan(a), np.nanmean(a, axis=0), a) \nprint(a)   \n</code></pre>\n<p>Output:</p>\n<pre><code>[[2. 4.]\n [1. 6.]\n [3. 8.]\n [6. 6.]]\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 13876072,
+                "reputation": 1016,
+                "user_id": 11106507,
+                "user_type": "registered",
+                "display_name": "Olli"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 69231776,
+            "answer_count": 2,
+            "score": 2,
+            "last_activity_date": 1631945458,
+            "creation_date": 1631941614,
+            "question_id": 69231756,
+            "link": "https://stackoverflow.com/questions/69231756/how-to-fill-a-numpy-arrays-nan-values-with-the-means-of-their-columns",
+            "title": "How to fill a numpy arrays nan values with the means of their columns?",
+            "body": "<p>I convert part of a pandas dataframe to a numpy array and I want to fill it's values with the mean of the columns, similarily to how I would do the following in pandas:</p>\n<pre><code>df.fillna(df.mean(), inplace = True)\n</code></pre>\n<p>The only way I have been able to do it so far is iterate over the columns.\nIs there another way?</p>\n<p>thank you!</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5374
+}

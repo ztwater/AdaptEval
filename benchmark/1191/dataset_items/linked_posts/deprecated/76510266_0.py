@@ -1,0 +1,13 @@
+from warnings import deprecated
+
+@deprecated("Use Spam instead")
+class Ham: ...
+
+@deprecated("It is pining for the fiords")
+def norwegian_blue(x: int) -> int: ...
+
+@overload
+@deprecated("Only str will be allowed")
+def foo(x: int) -> str: ...
+@overload
+def foo(x: str) -> str: ...

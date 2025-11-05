@@ -1,0 +1,53 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "indexing",
+                "pytorch",
+                "reduction"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 24749980,
+                        "reputation": 976,
+                        "user_id": 18635613,
+                        "user_type": "registered",
+                        "display_name": "draw"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 6,
+                    "last_activity_date": 1650921058,
+                    "creation_date": 1650921058,
+                    "answer_id": 72005790,
+                    "question_id": 72001505,
+                    "link": "https://stackoverflow.com/questions/72001505/how-to-get-unique-elements-and-their-firstly-appeared-indices-of-a-pytorch-tenso/72005790#72005790",
+                    "body": "<p>One possible way to gain such indicies:</p>\n<pre><code>unique, idx, counts = torch.unique(A, dim=1, sorted=True, return_inverse=True, return_counts=True)\n_, ind_sorted = torch.sort(idx, stable=True)\ncum_sum = counts.cumsum(0)\ncum_sum = torch.cat((torch.tensor([0]), cum_sum[:-1]))\nfirst_indicies = ind_sorted[cum_sum]\n</code></pre>\n<p>For tensor <code>A</code> in snippet above:</p>\n<pre><code>print(first_indicies)\n# tensor([0, 1, 2, 4, 3, 6])\n</code></pre>\n<p>Note that <code>unique</code> in this case is equal to:</p>\n<pre><code> tensor([[ 1.,  2.,  2.,  3.,  3.,  4.],\n         [43., 33., 43., 33., 76., 55.]])\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 19044421,
+                "reputation": 161,
+                "user_id": 13903839,
+                "user_type": "registered",
+                "display_name": "ojipadeson"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 72005790,
+            "answer_count": 1,
+            "score": 5,
+            "last_activity_date": 1650921058,
+            "creation_date": 1650898380,
+            "question_id": 72001505,
+            "link": "https://stackoverflow.com/questions/72001505/how-to-get-unique-elements-and-their-firstly-appeared-indices-of-a-pytorch-tenso",
+            "title": "How to get unique elements and their firstly appeared indices of a pytorch tensor?",
+            "body": "<p>Assume a 2*X(always 2 rows) pytorch tensor:</p>\n<pre><code>A = tensor([[ 1.,  2.,  2.,  3.,  3.,  3.,  4.,  4.,  4.],\n            [43., 33., 43., 76., 33., 76., 55., 55., 55.]])\n</code></pre>\n<p><code>torch.unique(A, dim=1)</code> will return:</p>\n<pre><code>tensor([[ 1.,  2.,  2.,  3.,  3.,  4.],\n        [43., 33., 43., 33., 76., 55.]])\n</code></pre>\n<p>But I also need the indices of every unique elements where they firstly appear in original input. In this case, indices should be like:</p>\n<pre><code>tensor([0, 1, 2, 3, 4, 6])\n\n# Explanation\n# A = tensor([[ 1.,  2.,  2.,  3.,  3.,  3.,  4.,  4.,  4.],\n#             [43., 33., 43., 76., 33., 76., 55., 55., 55.]])\n#              (0)  (1)  (2)  (3)  (4)       (6) \n</code></pre>\n<p>It's complex for me because the second row of tensor <code>A</code> may not be nicely sorted:</p>\n<pre><code>A = tensor([[ 1.,  2.,  2.,  3.,  3.,  3.,  4.,  4.,  4.],\n            [43., 33., 43., 76., 33., 76., 55., 55., 55.]])\n                             ^         ^\n</code></pre>\n<p>Is there a simple and efficient method to get the desired indices?</p>\n<p>P.S. It may be useful that the first row of the tensor is always in ascending order.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7553
+}

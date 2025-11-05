@@ -1,0 +1,54 @@
+{
+    "items": [
+        {
+            "tags": [
+                "pandas",
+                "dataframe",
+                "euclidean-distance"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 10833976,
+                        "reputation": 2547,
+                        "user_id": 7967588,
+                        "user_type": "registered",
+                        "display_name": "creanion"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 1,
+                    "last_activity_date": 1656170195,
+                    "last_edit_date": 1656170195,
+                    "creation_date": 1656167852,
+                    "answer_id": 72754753,
+                    "question_id": 72754661,
+                    "link": "https://stackoverflow.com/questions/72754661/find-distance-between-rows-in-pandas-dataframe-but-with-reference-to-1-row/72754753#72754753",
+                    "body": "<p>pairwise_distances wants a first input X - all the points - and then Y - where we want to compute the distance to.</p>\n<p>So for X we have: All the classes. Each feature is one coordinate of its location or in mathematical terms, the class is a vector <em>f</em> = [<em>f</em><em><sub>0</sub>, <em>f</em></em><sub>1</sub>] where each <em>f</em><sub>i</sub> is a feature weight.</p>\n<p>For Y we have: Class 0. We want to compute the distance to Class 0, for each X.</p>\n<p>Just experimenting a bit we can see that</p>\n<pre class=\"lang-py prettyprint-override\"><code>import pandas as pd\nimport numpy as np\nimport io\n\ndf = pd.read_table(io.StringIO(&quot;&quot;&quot;\ny_train     feat1   feat2\n0   9.596113    -7.900107\n1   -1.384157   2.685313\n2   -8.211954   5.214797\n&quot;&quot;&quot;), sep=r&quot;\\s+&quot;)\n\ndf[['feat1', 'feat2']].to_numpy()\n</code></pre>\n<pre><code>array([[ 9.596113, -7.900107],\n       [-1.384157,  2.685313],\n       [-8.211954,  5.214797]])\n</code></pre>\n<pre><code>from sklearn.metrics import pairwise_distances\n\npairwise_distances(df[['feat1', 'feat2']].to_numpy(), [[ 9.596113, -7.900107]])\n</code></pre>\n<pre><code># Output\narray([[ 0.        ],\n       [15.2518014 ],\n       [22.11623741]])\n</code></pre>\n<p>Aha, so let's go ahead and do this properly</p>\n<p>We want an ndim=2 array as input to pairwise_distances in both cases,\nwhich is the reason I use a 2D slice for <code>.loc</code> i.e <code>0:0</code>.\n(And the .to_numpy() equivalents happen automatically, but remember\nto think about how pairwise_distances would handle missing data.)</p>\n<pre><code>df['distance'] = pairwise_distances(df[['feat1', 'feat2']],\n                                    df.loc[0:0, ['feat1', 'feat2']])\ndf\n</code></pre>\n<pre><code>   y_train     feat1     feat2   distance\n0        0  9.596113 -7.900107   0.000000\n1        1 -1.384157  2.685313  15.251801\n2        2 -8.211954  5.214797  22.116237\n</code></pre>\n<p>I've just taken the distance metric that you mentioned in your question. Now that you see how it can be used, you're free to replace it with another metric. The sklearn API is quite flexible w.r.t interchangeable algorithms in this way.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 3268674,
+                "reputation": 357,
+                "user_id": 3330347,
+                "user_type": "registered",
+                "accept_rate": 96,
+                "display_name": "Joe"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 72754753,
+            "answer_count": 1,
+            "score": 1,
+            "last_activity_date": 1656170195,
+            "creation_date": 1656167046,
+            "question_id": 72754661,
+            "link": "https://stackoverflow.com/questions/72754661/find-distance-between-rows-in-pandas-dataframe-but-with-reference-to-1-row",
+            "title": "Find distance between rows in pandas dataframe but with reference to 1 row",
+            "body": "<p>In this pandas dataframe:</p>\n<pre><code>y_train     feat1   feat2\n0   9.596113    -7.900107\n1   -1.384157   2.685313\n2   -8.211954   5.214797\n</code></pre>\n<p>How do I go about adding a &quot;distance from Class 0&quot; column at the end of the dataframe, that returns the distance from y_train=0 for each class (i.e. each row)?  I want to use class 0 as the reference.  In this dataframe, <code>feat 1 = x</code> and <code>feat 2 = y</code></p>\n<p>I tried:</p>\n<pre><code>from sklearn.metrics import pairwise_distances\n\npairwise_distances(df_centroid['feat1'].values, df_centroid['feat2'].values)\n</code></pre>\n<p>but that gave me an error</p>\n<pre><code>ValueError: Expected 2D array, got 1D array instead:\n</code></pre>\n<p>Any help will be greatly appreciated!</p>\n<p>Thanks!</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6158
+}

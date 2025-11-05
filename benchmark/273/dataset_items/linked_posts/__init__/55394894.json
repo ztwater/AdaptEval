@@ -1,0 +1,156 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "numpy",
+                "pyqt",
+                "pyqt5"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 6230247,
+                                "reputation": 4989,
+                                "user_id": 4847250,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "ymmx"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1553794569,
+                            "post_id": 55395346,
+                            "comment_id": 97528013,
+                            "link": "https://stackoverflow.com/questions/55394894/update-qpushbutton-icon-from-an-numpy-array-dont-work/55395346#comment97528013_55395346",
+                            "body": "I think I didn&#39;t understand why we need to make a copy of the matrix to make it works."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8708296,
+                                "reputation": 240279,
+                                "user_id": 6622587,
+                                "user_type": "registered",
+                                "display_name": "eyllanesc"
+                            },
+                            "reply_to_user": {
+                                "account_id": 6230247,
+                                "reputation": 4989,
+                                "user_id": 4847250,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "ymmx"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1553795534,
+                            "post_id": 55395346,
+                            "comment_id": 97528521,
+                            "link": "https://stackoverflow.com/questions/55394894/update-qpushbutton-icon-from-an-numpy-array-dont-work/55395346#comment97528521_55395346",
+                            "body": "@ymmx If you realize your matrix has a dimension of size 4, so in memory there are no matrices but the data is linked, for example a 2x2 matrix: [[a, b], [c, d]] in memory could be a, c, b, d, now imagine a 3-dimensional matrix, although you want to copy data this is intertwined with the 4th dimension that you want to omit"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6230247,
+                                "reputation": 4989,
+                                "user_id": 4847250,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "ymmx"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1553841593,
+                            "post_id": 55395346,
+                            "comment_id": 97543056,
+                            "link": "https://stackoverflow.com/questions/55394894/update-qpushbutton-icon-from-an-numpy-array-dont-work/55395346#comment97543056_55395346",
+                            "body": "But when I do <code>colours[:, :, :3]</code>, as I only take a slice of the array, I should have a copy of it directly, right? Maybe np.array are different than list then?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8708296,
+                                "reputation": 240279,
+                                "user_id": 6622587,
+                                "user_type": "registered",
+                                "display_name": "eyllanesc"
+                            },
+                            "reply_to_user": {
+                                "account_id": 6230247,
+                                "reputation": 4989,
+                                "user_id": 4847250,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "ymmx"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1553841712,
+                            "post_id": 55395346,
+                            "comment_id": 97543107,
+                            "link": "https://stackoverflow.com/questions/55394894/update-qpushbutton-icon-from-an-numpy-array-dont-work/55395346#comment97543107_55395346",
+                            "body": "@ymmx the <code>colours[:, :, :3].data</code> does not copy the value but gives us the memory position"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6230247,
+                                "reputation": 4989,
+                                "user_id": 4847250,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "ymmx"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1553843839,
+                            "post_id": 55395346,
+                            "comment_id": 97543925,
+                            "link": "https://stackoverflow.com/questions/55394894/update-qpushbutton-icon-from-an-numpy-array-dont-work/55395346#comment97543925_55395346",
+                            "body": "Okay, It seems I still have a lot to learn. Thanks for your time."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 8708296,
+                        "reputation": 240279,
+                        "user_id": 6622587,
+                        "user_type": "registered",
+                        "display_name": "eyllanesc"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": true,
+                    "score": 3,
+                    "last_activity_date": 1553768988,
+                    "creation_date": 1553768988,
+                    "answer_id": 55395346,
+                    "question_id": 55394894,
+                    "link": "https://stackoverflow.com/questions/55394894/update-qpushbutton-icon-from-an-numpy-array-dont-work/55395346#55395346",
+                    "body": "<p>You have to copy the numpy array and using a <a href=\"https://stackoverflow.com/a/51608230/6622587\">previous answer</a> you get the following</p>\n\n<pre><code>def updateicon(self):\n    size = QSize(100, 100)\n    CM = np.random.random((10,10))\n    ax = plt.imshow(CM)\n    colours = (ax.cmap(ax.norm( CM )) * 255).astype(np.uint8)\n    im = colours[:, :, :3].copy()\n    image = QImage(im.data, im.shape[1], im.shape[0], im.strides[0], QImage.Format_RGB888)\n    pixmap = QPixmap(image)\n    self.B.setIcon(QIcon(pixmap.scaled(size)))\n    self.B.setIconSize(size)\n</code></pre>\n\n<p><a href=\"https://i.stack.imgur.com/hff3A.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/hff3A.png\" alt=\"enter image description here\"></a></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 6230247,
+                "reputation": 4989,
+                "user_id": 4847250,
+                "user_type": "registered",
+                "accept_rate": 84,
+                "display_name": "ymmx"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 55395346,
+            "answer_count": 1,
+            "score": 1,
+            "last_activity_date": 1553769084,
+            "creation_date": 1553767652,
+            "last_edit_date": 1553769084,
+            "question_id": 55394894,
+            "link": "https://stackoverflow.com/questions/55394894/update-qpushbutton-icon-from-an-numpy-array-dont-work",
+            "title": "Update QpushButton icon from an numpy array don&#39;t work",
+            "body": "<p>I'm trying to make an icon from a numpy array displayed with matplotlib imshow.</p>\n\n<p>I succeed in getting colors from matplotlib into a numpy array of dimension (n*n*4)</p>\n\n<p>I then convert this numpy array to an Qimage then into a Qpixmap in order to update the Icon of a Qpushbutton.</p>\n\n<p>However the icon of the button is not set to the image I created. In fact it doesn't do anything. If I used an image from my hard-drive instead, the icon is correctly updated.</p>\n\n<p>Here a sample of code :</p>\n\n<pre><code>from PyQt5.QtGui import *\nfrom PyQt5.QtWidgets import  *\nfrom PyQt5.QtCore import *\nimport numpy as np\nimport sys\nimport matplotlib.pyplot as plt \n\nclass StimEdit(QMainWindow):\n    def __init__(self, parent=None):\n        super(StimEdit, self).__init__()\n        self.parent = parent\n\n        self.centralWidget = QWidget()\n        self.color = self.centralWidget.palette().color(QPalette.Background)\n        self.setCentralWidget(self.centralWidget)\n        self.mainHBOX_param_scene = QHBoxLayout()\n\n        self.B = QPushButton('')\n        self.B.setFixedSize(100,100)\n        self.B.clicked.connect(self.updateicon)\n        self.mainHBOX_param_scene.addWidget(self.B)\n        self.centralWidget.setLayout(self.mainHBOX_param_scene)\n\n\n    def updateicon(self):\n        CM = np.random.random((10,10))\n        ax = plt.imshow(CM)\n        colours = (ax.cmap(ax.norm( CM )) * 255).astype(np.uint8)\n        ncols, nrows, ncolors = colours.shape\n        # image = QImage(colours.tostring(),ncols, nrows, ncolors,QImage.Format_RGBA8888)\n        image = QImage(colours[:,:,:3].tostring(),ncols, nrows, ncolors-1,QImage.Format_RGB888)\n        rMyIcon = QPixmap(image)\n        self.B.setIcon(QIcon(rMyIcon))\n        self.B.setIconSize(QSize(100, 100))\n        self.parent.processEvents()\n\n\ndef main():\n    app = QApplication(sys.argv)\n    ex = StimEdit(app)\n    ex.show()\n    sys.exit(app.exec_( ))\n\n\nif __name__ == '__main__':\n    main()\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9587
+}

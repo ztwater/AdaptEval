@@ -1,0 +1,115 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "numpy",
+                "opencv",
+                "mediapipe"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 4413714,
+                        "reputation": 3586,
+                        "user_id": 3595907,
+                        "user_type": "registered",
+                        "accept_rate": 76,
+                        "display_name": "DrBwts"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1684411702,
+                    "post_id": 76280685,
+                    "comment_id": 134515488,
+                    "link": "https://stackoverflow.com/questions/76280685/mp-image-call-with-sliced-numpy-array-raises-typeerror-init-incompatib#comment134515488_76280685",
+                    "body": "<code>[:, :, ::-1]</code> I&#39;m guessing you want to convert to BGR?"
+                },
+                {
+                    "owner": {
+                        "account_id": 16828816,
+                        "reputation": 99,
+                        "user_id": 12167344,
+                        "user_type": "registered",
+                        "display_name": "Vladimir Ilyin"
+                    },
+                    "reply_to_user": {
+                        "account_id": 4413714,
+                        "reputation": 3586,
+                        "user_id": 3595907,
+                        "user_type": "registered",
+                        "accept_rate": 76,
+                        "display_name": "DrBwts"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1684412245,
+                    "post_id": 76280685,
+                    "comment_id": 134515595,
+                    "link": "https://stackoverflow.com/questions/76280685/mp-image-call-with-sliced-numpy-array-raises-typeerror-init-incompatib#comment134515595_76280685",
+                    "body": "Yesfrom BGR to RGB for Mediapipe, and it works fine with cv2.cvtColor() instead of slice."
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 27701808,
+                        "reputation": 3079,
+                        "user_id": 21146235,
+                        "user_type": "registered",
+                        "display_name": "motto"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1684413511,
+                    "creation_date": 1684413511,
+                    "answer_id": 76280935,
+                    "question_id": 76280685,
+                    "link": "https://stackoverflow.com/questions/76280685/mp-image-call-with-sliced-numpy-array-raises-typeerror-init-incompatib/76280935#76280935",
+                    "body": "<p>The documentation for the <a href=\"https://developers.google.com/mediapipe/api/solutions/python/mp/Image\" rel=\"noreferrer\">mp.Image constructor</a> could be a little clearer but it only supports &quot;C order&quot; inputs:</p>\n<blockquote>\n<p>Pixels are encoded row-major in an interleaved fashion. [...] Image can be created by copying the data from a numpy ndarray that stores the pixel data continuously</p>\n</blockquote>\n<p><a href=\"https://github.com/google/mediapipe/blob/6cdc6443b6a7ed662744e2a2ce2d58d9c83e6d6f/mediapipe/python/pybind/image_frame_util.h#L38\" rel=\"noreferrer\">Poking around the construction helpers</a> confirms that it's assuming the C order.</p>\n<p>Using <code>[...,::-1]</code> to convert to RGB changes the stride associated with the matrix, so it's effectively no longer contiguous (although the underlying data still is, in some sense).</p>\n<p>Easy fix is to make a copy of the data (e.g. <code>cv_mat[..., ::-1].copy()</code>), or just use <code>cvtColor()</code> as you mentioned, which has minimal overhead but is explicit about what you're doing :-)</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 14980522,
+                        "reputation": 11,
+                        "user_id": 18270301,
+                        "user_type": "registered",
+                        "display_name": "\u4ed8\u548c\u96f7\u540c"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1685974744,
+                    "last_edit_date": 1685974744,
+                    "creation_date": 1685974089,
+                    "answer_id": 76407270,
+                    "question_id": 76280685,
+                    "link": "https://stackoverflow.com/questions/76280685/mp-image-call-with-sliced-numpy-array-raises-typeerror-init-incompatib/76407270#76407270",
+                    "body": "<p>I don't know this is useful or not...or actually relate to the problem being discussed here, But I had similar error and somehow I found a solution. but I really don't understand neither the spec of Open CV nor Media Pipe yet, so I can't explain why. Maybe it's just my things (environment, version inconsistency, my misunderstanding).</p>\n<p>This is the code I got from official document for mp.Image class.</p>\n<pre><code>cv_mat = cv2.imread(&quot;whateva.jpg&quot;)\nimage = mp.Image(image_format=mp.ImageFormat.SRGB, data=cv_mat)\n</code></pre>\n<p><a href=\"https://developers.google.com/mediapipe/api/solutions/python/mp/Image\" rel=\"nofollow noreferrer\">https://developers.google.com/mediapipe/api/solutions/python/mp/Image</a></p>\n<p>Of course I expected that the code will work...because it came from the document, right? But this happened.</p>\n<pre><code>Traceback (most recent call last):\n  File &quot;D:/home/video dev/mp test/mp_test_02.py&quot;, line 86, in &lt;module&gt;\n    image = mp.Image(image_format=mp.ImageFormat.SRGB, data=cv_mat)\nTypeError: __init__(): incompatible constructor arguments. The following argument types are supported:\n    1. mediapipe.python._framework_bindings.image.Image(image_format: mediapipe::ImageFormat_Format, data: numpy.ndarray[numpy.uint8])\n    2. mediapipe.python._framework_bindings.image.Image(image_format: mediapipe::ImageFormat_Format, data: numpy.ndarray[numpy.uint16])\n    3. mediapipe.python._framework_bindings.image.Image(image_format: mediapipe::ImageFormat_Format, data: numpy.ndarray[numpy.float32])\n\nInvoked with: kwargs: image_format=&lt;ImageFormat.SRGB: 1&gt;, data=array([[[16, 19,  0],\n        [12, 19,  3],\n        [12, 19,  1],\n        ...,\n        [11, 18,  2],\n        [14, 16,  2],\n        [14, 18,  3]],\n        ...,\n        [29, 81, 81],\n        [26, 83, 82],\n        [29, 79, 91]]], dtype=uint8)\n</code></pre>\n<p>So I randomly try a couple of things. This worked.</p>\n<pre><code>image = mp.Image(image_format=mp.ImageFormat.SRGB, data=np.asarray(cv_mat))\n</code></pre>\n<p>So I confirmed cv_mat is actually numpy.array. And I got this...</p>\n<pre><code>type(cv_mat)\n&lt;class 'numpy.ndarray'&gt;\ntype(np.asarray(cv_mat))\n&lt;class 'numpy.ndarray'&gt;\ncv_mat.shape\n(1280, 853, 3)\nnp.asarray(cv_mat).shape\n(1280, 853, 3)\n</code></pre>\n<p>I think, return value of cv2.imread is already numpy array, whose type is dtype=uint8...I confirmed it, too. So what's the difference here? np.asarray reallocated memory or something and it worked??</p>\n<p>It worked for some reason but it didn't make me happy because I have no idea why it worked. Do you think is that numpy things that I don't know?</p>\n<p>I'm working on Windows 10, with portable python Ver 3.10.2. Version of media pipe is 0.10.0. numpy version is '1.24.3', by the way. I installed all packages with pip.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 16828816,
+                "reputation": 99,
+                "user_id": 12167344,
+                "user_type": "registered",
+                "display_name": "Vladimir Ilyin"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "answer_count": 2,
+            "score": 0,
+            "last_activity_date": 1685974744,
+            "creation_date": 1684411464,
+            "last_edit_date": 1684415364,
+            "question_id": 76280685,
+            "link": "https://stackoverflow.com/questions/76280685/mp-image-call-with-sliced-numpy-array-raises-typeerror-init-incompatib",
+            "title": "mp.Image() call with sliced numpy array raises TypeError: __init__(): incompatible constructor arguments",
+            "body": "<p>I try to use Mediapipe for detecting hands.</p>\n<p>The code</p>\n<pre class=\"lang-py prettyprint-override\"><code>cv_mat = cv2.imread(&quot;hand.jpg&quot;)\ncv_mat = cv_mat[..., ::-1]\nimage = mp.Image(image_format=mp.ImageFormat.SRGB, data=cv_mat)\n</code></pre>\n<p>does not work with error:</p>\n<pre><code>INFO: Created TensorFlow Lite XNNPACK delegate for CPU.\nTraceback (most recent call last):\n    image = mp.Image(image_format=mp.ImageFormat.SRGB, data=cv_mat)\nTypeError: __init__(): incompatible constructor arguments. The following argument types are supported:\n    1. mediapipe.python._framework_bindings.image.Image(image_format: mediapipe::ImageFormat_Format, data: numpy.ndarray[numpy.uint8])\n    2. mediapipe.python._framework_bindings.image.Image(image_format: mediapipe::ImageFormat_Format, data: numpy.ndarray[numpy.uint16])\n    3. mediapipe.python._framework_bindings.image.Image(image_format: mediapipe::ImageFormat_Format, data: numpy.ndarray[numpy.float32])\n\nInvoked with: kwargs: image_format=&lt;ImageFormat.SRGB: 1&gt;, data=array([[[255, 255, 255],...\n</code></pre>\n<p>if I remove the second line <code>cv_mat = cv_mat[..., ::-1]</code>  - it works.</p>\n<p>Why?</p>\n<p>Does the slice has another type?<br />\nIt works fine in opencv I can change it, wfite to a file etc...</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7661
+}

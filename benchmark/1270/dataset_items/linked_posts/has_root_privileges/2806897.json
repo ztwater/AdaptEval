@@ -1,0 +1,732 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "root",
+                "privileges"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7984,
+                                "reputation": 2559,
+                                "user_id": 14091,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Stan"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1273531445,
+                            "post_id": 2806923,
+                            "comment_id": 2845118,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2806923#comment2845118_2806923",
+                            "body": "I am assuming Paul is worried about different systems using different uids for administrators. Normally id(root) == 0, but it is not a must and on some systems it&#39;s really not equal."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 106165,
+                                "reputation": 43255,
+                                "user_id": 282912,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "msw"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7984,
+                                "reputation": 2559,
+                                "user_id": 14091,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Stan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1273531561,
+                            "post_id": 2806923,
+                            "comment_id": 2845133,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2806923#comment2845133_2806923",
+                            "body": "@Stan: then EAFP would indeed be better"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 50008,
+                                "reputation": 17302,
+                                "user_id": 149076,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Jim Dennis"
+                            },
+                            "edited": false,
+                            "score": 13,
+                            "creation_date": 1273531823,
+                            "post_id": 2806923,
+                            "comment_id": 2845152,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2806923#comment2845152_2806923",
+                            "body": "The assumption that effective UID == 0 means &quot;root&quot; is pretty deeply ingrained into UNIX code (including throughout most UNIX-like kernel sources).  Technically under Linux that assumption is NOT necessarily correct.  The Linux &quot;capabilities&quot; model allows the system to run with more fine-grained controls delegated via process inheritance (lcap2 wrappers) or potentially through extended filesystem attributes.  Also SELinux features could play havoc with such assumptions.  For 99% of the systems out there, geteuid() == 0 is sufficient; for the rest try: ... except: is your friend."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 34048,
+                        "reputation": 869830,
+                        "user_id": 95810,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "Alex Martelli"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 95,
+                    "last_activity_date": 1273531160,
+                    "creation_date": 1273531160,
+                    "answer_id": 2806923,
+                    "question_id": 2806897,
+                    "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2806923#2806923",
+                    "body": "<p><code>os.geteuid</code> gets the effective user id, which is exactly what you want, so I can't think of any better way to perform such a check.  The one bit that's uncertain is that \"root-like' in the title: your code checks for <em>exactly</em> <code>root</code>, no \"like\" about it, and indeed I wouldn't know what \"root-like but not root\" would mean -- so, if you mean something different than \"exactly root\", perhaps you can clarify, thanks!</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 129762,
+                                "reputation": 1025,
+                                "user_id": 328553,
+                                "user_type": "registered",
+                                "display_name": "Florian Diesch"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1273535728,
+                            "post_id": 2806932,
+                            "comment_id": 2845500,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2806932#comment2845500_2806932",
+                            "body": "This is the most portable way and even works under a bit more exotic circumstances, like with SELinux limiting root privileges."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 29634,
+                                "reputation": 12542,
+                                "user_id": 80243,
+                                "user_type": "registered",
+                                "accept_rate": 46,
+                                "display_name": "L\u0332\u0333o\u0332\u0333\u0333n\u0332\u0333\u0333g\u0332\u0333\u0333p\u0332\u0333o\u0332\u0333\u0333k\u0332\u0333\u0333e\u0332\u0333\u0333"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1273536366,
+                            "post_id": 2806932,
+                            "comment_id": 2845533,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2806932#comment2845533_2806932",
+                            "body": "This may actually be worse depending on the situation. Hmm but Florian has a point."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 106165,
+                                "reputation": 43255,
+                                "user_id": 282912,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "msw"
+                            },
+                            "reply_to_user": {
+                                "account_id": 29634,
+                                "reputation": 12542,
+                                "user_id": 80243,
+                                "user_type": "registered",
+                                "accept_rate": 46,
+                                "display_name": "L\u0332\u0333o\u0332\u0333\u0333n\u0332\u0333\u0333g\u0332\u0333\u0333p\u0332\u0333o\u0332\u0333\u0333k\u0332\u0333\u0333e\u0332\u0333\u0333"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1273537229,
+                            "post_id": 2806932,
+                            "comment_id": 2845585,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2806932#comment2845585_2806932",
+                            "body": "@Longpoke - are you referring to the situation where a user may have rename permissions in /etc but - say lack the ability to remove a file from that path? If that is what you mean, then trying to determine what capabilities the user does have in advance is a fool&#39;s errand. Better to structure your code for &quot;transactional&quot; semantics where A and B can be rolled-back if C fails."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 29634,
+                                "reputation": 12542,
+                                "user_id": 80243,
+                                "user_type": "registered",
+                                "accept_rate": 46,
+                                "display_name": "L\u0332\u0333o\u0332\u0333\u0333n\u0332\u0333\u0333g\u0332\u0333\u0333p\u0332\u0333o\u0332\u0333\u0333k\u0332\u0333\u0333e\u0332\u0333\u0333"
+                            },
+                            "reply_to_user": {
+                                "account_id": 106165,
+                                "reputation": 43255,
+                                "user_id": 282912,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "msw"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1273543539,
+                            "post_id": 2806932,
+                            "comment_id": 2845930,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2806932#comment2845930_2806932",
+                            "body": "@msw: I initially thought, &quot;you should just check if you&#39;re root or not and exit&quot;, to avoid any transactional consequence, but SELinux, ACLs, and capabilities definately break that, so I guess the only way to really do it right is what you suggested."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 67043,
+                                "reputation": 1,
+                                "user_id": 196379,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "Paul Hoffman"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1273677302,
+                            "post_id": 2806932,
+                            "comment_id": 2859947,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2806932#comment2859947_2806932",
+                            "body": "Using try/except is fine for os.rename, but isn&#39;t flexible enough for the other thing I mentioned, &quot;installing with apt-get&quot;. I fully agree that euid could fail on permissions-based systems, which is why I asked the question in the first place. However, I don&#39;t think that try/except covers all the issues either."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 106165,
+                                "reputation": 43255,
+                                "user_id": 282912,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "msw"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1273681038,
+                            "post_id": 2806932,
+                            "comment_id": 2860509,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2806932#comment2860509_2806932",
+                            "body": "Agreed about apt-get, see below."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 67043,
+                                "reputation": 1,
+                                "user_id": 196379,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "Paul Hoffman"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1273847050,
+                            "post_id": 2806932,
+                            "comment_id": 2876244,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2806932#comment2876244_2806932",
+                            "body": "I can only mark one answer as &quot;the correct one&quot;, but your addition below (and other riffs on it that I can think of) nail it. Yes, I should be checking for errno.EPERM on each action."
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user749127"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1426262576,
+                            "post_id": 2806932,
+                            "comment_id": 46314327,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2806932#comment46314327_2806932",
+                            "body": "I know this is old, but in the end, you don&#39;t exactly need root privileges, just enough privileges to get the job done. Running as root is simply the easiest way to escalate privileges beyond what Linux and Linux-based OSs give to administrators."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 106165,
+                                "reputation": 43255,
+                                "user_id": 282912,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "msw"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2709791,
+                                "reputation": 1783,
+                                "user_id": 2338522,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Or B"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1426347328,
+                            "post_id": 2806932,
+                            "comment_id": 46339394,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2806932#comment46339394_2806932",
+                            "body": "@OrB That probably means that there is no such file or directory for whatever it is you are trying to do. Please phrase your issue in the form of a <b>new</b> question because your one sentence complaint here doesn&#39;t afford enough information to even guess what you are trying to accomplish nor why it has nothing to do with this answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3100536,
+                                "reputation": 1,
+                                "user_id": 2624770,
+                                "user_type": "registered",
+                                "display_name": "keithpjolley"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1562107621,
+                            "post_id": 2806932,
+                            "comment_id": 100271509,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2806932#comment100271509_2806932",
+                            "body": "Sometimes you need to know if all the parts of the task are going to be successful before you start making changes. I don&#39;t want to do steps 1, 2, and 3 just to find out I can&#39;t do step 4 and hope I can back out what&#39;s been done."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8596660,
+                                "reputation": 349,
+                                "user_id": 6522627,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "aster94"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1586611236,
+                            "post_id": 2806932,
+                            "comment_id": 108192396,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2806932#comment108192396_2806932",
+                            "body": "actually I upvoted for the &quot;Easier to Ask Forgiveness than Permission&quot; principle"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 457313,
+                                "reputation": 290,
+                                "user_id": 856543,
+                                "user_type": "registered",
+                                "display_name": "dericke"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1621957356,
+                            "post_id": 2806932,
+                            "comment_id": 119648344,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2806932#comment119648344_2806932",
+                            "body": "Based on &quot;Flat is better than nested&quot;, wouldn&#39;t it be better to use <code>PermissionError</code> rather than <code>IOError</code> and checking the error code, at least in Python 3.x?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 703628,
+                                "reputation": 14902,
+                                "user_id": 595305,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "mike rodent"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1641928322,
+                            "post_id": 2806932,
+                            "comment_id": 124934859,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2806932#comment124934859_2806932",
+                            "body": "Am I completely mad, or couldn&#39;t this do severe damage to your system, i.e. if you turn out to be root, and renaming /etc/foo causes severe problems!? Mightn&#39;t it be better to see if you can <i>create</i> a dir in /etc: <code>mkdir &#47;etc&#47;my_extremely_silly_and_implausible_directory</code> (and then delete it). I appreciate that having a directory in /etc called &quot;foo&quot; which does something crucial would be the height of silliness and implausibility... but you never know what people get up to!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 106165,
+                        "reputation": 43255,
+                        "user_id": 282912,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "msw"
+                    },
+                    "comment_count": 13,
+                    "is_accepted": true,
+                    "score": 38,
+                    "last_activity_date": 1677716669,
+                    "last_edit_date": 1677716669,
+                    "creation_date": 1273531267,
+                    "answer_id": 2806932,
+                    "question_id": 2806897,
+                    "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2806932#2806932",
+                    "body": "<p>Under the EAFP (<em>Easier to Ask Forgiveness than Permission</em>) principle:</p>\n<pre><code>import errno\n\ntry:\n    os.rename('/etc/foo', '/etc/bar')\nexcept IOError as e:\n    if e[0] == errno.EPERM:\n       sys.exit(&quot;You need root permissions to do this, laterz!&quot;)\n</code></pre>\n<p>If you are concerned about the non-portability of <code>os.geteuid()</code> you probably shouldn't be mucking with <code>/etc</code> anyway.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7984,
+                        "reputation": 2559,
+                        "user_id": 14091,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Stan"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1273531947,
+                    "creation_date": 1273531947,
+                    "answer_id": 2806991,
+                    "question_id": 2806897,
+                    "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2806991#2806991",
+                    "body": "<p>It all depends how portable you want you app to be. If you mean bussiness, the we have to assume that administrator account does not always equal 0. This means that checking for euid 0 is not enough. Problem is, there are situations where one command will behave as if you are root and next will fail with <em>permission denied</em> (think SELinux &amp; co.). Therefore it's really better to fail gracefully and check for EPERM errno whenever it's appropriate.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 50008,
+                        "reputation": 17302,
+                        "user_id": 149076,
+                        "user_type": "registered",
+                        "accept_rate": 71,
+                        "display_name": "Jim Dennis"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1273535586,
+                    "creation_date": 1273535586,
+                    "answer_id": 2807226,
+                    "question_id": 2806897,
+                    "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2807226#2807226",
+                    "body": "<p>If you really want your code to be robust across a wide variety of Linux configurations I'd suggest that you consider the corner cases where someone may be using SELinux, or filesystem ACLs, or the \"capabilities\" features that have been in the Linux kernel since v. 2.2 or so.  Your process might be running under some wrapper that has used SELinux, or some Linux capabilities library, such as <a href=\"http://sites.google.com/site/fullycapable/\" rel=\"noreferrer\" title=\"POSIX 1003.1e capabilities, library and utils\">libcap2</a> <a href=\"http://people.redhat.com/sgrubb/libcap-ng/\" rel=\"noreferrer\" title=\"Linux Posix Capabilities Library: Next Generation\">libcap-ng</a>, or <a href=\"http://www.olafdietsche.de/linux/capability/\" rel=\"noreferrer\" title=\"fscap patches and utils\">fscaps</a> or <a href=\"http://atrey.karlin.mff.cuni.cz/~pavel/elfcap.html\" rel=\"noreferrer\" title=\"elfcap patches and utils\">elfcap</a> via something more exotic like Niels Provos' wonderful and sadly under-appreciated <a href=\"http://www.provos.org/index.php?serendipity[action]=search&amp;serendipity[searchTerm]=systrace&amp;serendipity[searchButton]=%3E\" rel=\"noreferrer\" title=\"systrace results on provos.org\">systrace</a> system.</p>\n\n<p>All of these are ways that you code might be running as non-root and yet your process might have been delegated the necessary access to perform its work without EUID==0.</p>\n\n<p>So I'd suggest that you consider writing your code more Pythonically, by wrapping operations that may fail due to permissions or other issues with exception handling code.  If you're shelling out to perform various operations (e.g. using the <code>subprocess</code> module) you might offer to prefix all such calls with <code>sudo</code> (as a command line, environment, or .rc file option, for example). If it's being run interactively you can offer to re-execute any commands that raise permissions related exceptions using <code>sudo</code> (optionally only if you find <code>sudo</code> on the os.environ['PATH']).</p>\n\n<p>Overall it's true that most Linux and UNIX systems still have most of their administration done by a 'root' privileged user.  However, it's old school and we, as programmers, should try to support newer models.  Trying your operations and letting the exception handling do its job allows your code to work under any system that transparently permits the operations you need, and being aware of and ready to use <code>sudo</code> is a nice touch (as it is, by far, the most widespread tool for controlled delegation of system privileges).</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1486150,
+                                "reputation": 29127,
+                                "user_id": 1394393,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "jpmc26"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1412360041,
+                            "post_id": 2820696,
+                            "comment_id": 41056214,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2820696#comment41056214_2820696",
+                            "body": "Wouldn&#39;t it make more sense to edit this into your other answer?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 106165,
+                        "reputation": 43255,
+                        "user_id": 282912,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "msw"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1273681361,
+                    "last_edit_date": 1273681361,
+                    "creation_date": 1273680958,
+                    "answer_id": 2820696,
+                    "question_id": 2806897,
+                    "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/2820696#2820696",
+                    "body": "<h1>Answer to the second part of the question</h1>\n\n<p>(sorry the comment box was too small)</p>\n\n<p>Paul Hoffman, you are correct, I only addressed one part of your question dealing with intrinsics, but it wouldn't be a worthy scripting language if it couldn't handle <code>apt-get</code>. The preferred library is a tad verbose but it does the job:</p>\n\n<pre><code>&gt;&gt;&gt; apt_get = ['/usr/bin/apt-get', 'install', 'python']\n&gt;&gt;&gt; p = subprocess.Popen(apt_get, stdout=subprocess.PIPE, stderr=subprocess.PIPE)\n&gt;&gt;&gt; p.wait()\n100                 # Houston, we have a problem.\n&gt;&gt;&gt; p.stderr.read()\n'E: Could not open lock file /var/lib/dpkg/lock - open (13: Permission denied)'\n'E: Unable to lock the administration directory (/var/lib/dpkg/), are you root?\\n'\n</code></pre>\n\n<p>But <code>Popen</code> is a generalized tool and can be wrapped for convenience:</p>\n\n<pre><code>$ cat apt.py\nimport errno\nimport subprocess\n\ndef get_install(package):\n    cmd = '/usr/bin/apt-get install'.split()\n    cmd.append(package)\n    output_kw = {'stdout': subprocess.PIPE, 'stderr': subprocess.PIPE}\n    p = subprocess.Popen(cmd, **output_kw)\n    status = p.wait()\n    error = p.stderr.read().lower()\n    if status and 'permission denied' in error:\n        raise OSError(errno.EACCES, 'Permission denied running apt-get')\n    # other conditions here as you require\n$ python\n&gt;&gt;&gt; import apt\n&gt;&gt;&gt; apt.get_install('python')\nTraceback ...\nOSError: [Errno 13] Permission denied running apt-get\n</code></pre>\n\n<p>And now we're back to exception handling. I will decline to comment on the Java-like over-generality of the subprocess module.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1938152,
+                                "reputation": 2770,
+                                "user_id": 1745073,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "blueren"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1570100587,
+                            "post_id": 17655378,
+                            "comment_id": 102811516,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/17655378#comment102811516_17655378",
+                            "body": "This is simple and neat. Thanks!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3547111,
+                                "reputation": 4587,
+                                "user_id": 2962794,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "Br\u014dtsyorfuzthr\u0101x"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1630608635,
+                            "post_id": 17655378,
+                            "comment_id": 122010776,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/17655378#comment122010776_17655378",
+                            "body": "Nice. <code>os.environ.keys()</code> has other information in it I wanted, too!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6257671,
+                                "reputation": 11602,
+                                "user_id": 4865723,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "buhtz"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1636229371,
+                            "post_id": 17655378,
+                            "comment_id": 123502764,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/17655378#comment123502764_17655378",
+                            "body": "This does not work for <code>root</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 295621,
+                                "reputation": 28356,
+                                "user_id": 600135,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "kol"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1645782963,
+                            "post_id": 17655378,
+                            "comment_id": 125967313,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/17655378#comment125967313_17655378",
+                            "body": "There is no need for <code>.keys()</code>, just use <code>if not &#39;SUDO_UID&#39; in os.environ:</code>  --  Thanks!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3048619,
+                        "reputation": 1407,
+                        "user_id": 2583689,
+                        "user_type": "registered",
+                        "display_name": "vossman77"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 11,
+                    "last_activity_date": 1708441741,
+                    "last_edit_date": 1708441741,
+                    "creation_date": 1373894811,
+                    "answer_id": 17655378,
+                    "question_id": 2806897,
+                    "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/17655378#17655378",
+                    "body": "<p>I like to check for sudo in the environmental variables:</p>\n<pre><code>if not 'SUDO_UID' in os.environ:\n    print &quot;this program requires super user priv.&quot;\n    sys.exit(1)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4089970,
+                                "reputation": 899,
+                                "user_id": 3358251,
+                                "user_type": "registered",
+                                "display_name": "Mateo de Mayo"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1593212673,
+                            "post_id": 20153881,
+                            "comment_id": 110710781,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/20153881#comment110710781_20153881",
+                            "body": "Just to clarify, this lets you check if the user has root privileges in a literal sense, but it will not give the instance of the program you are running root acccess if it didn&#39;t have it at launch. You could try something like <a href=\"https://stackoverflow.com/a/3819134/3358251\">this</a> for that."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1296201,
+                        "reputation": 28223,
+                        "user_id": 1247192,
+                        "user_type": "registered",
+                        "display_name": "jcarballo"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 19,
+                    "last_activity_date": 1385151991,
+                    "creation_date": 1385151991,
+                    "answer_id": 20153881,
+                    "question_id": 2806897,
+                    "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/20153881#20153881",
+                    "body": "<p>You can prompt the user for sudo access:</p>\n\n<pre><code>import os, subprocess\n\ndef prompt_sudo():\n    ret = 0\n    if os.geteuid() != 0:\n        msg = \"[sudo] password for %u:\"\n        ret = subprocess.check_call(\"sudo -v -p '%s'\" % msg, shell=True)\n    return ret\n\nif prompt_sudo() != 0:\n    # the user wasn't authenticated as a sudoer, exit?\n</code></pre>\n\n<p>The <code>sudo -v</code> switch update the user's cached credentials (see <code>man sudo</code>).</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2709791,
+                                "reputation": 1783,
+                                "user_id": 2338522,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Or B"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1426345402,
+                            "post_id": 26182889,
+                            "comment_id": 46338762,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/26182889#comment46338762_26182889",
+                            "body": "Bad code. The error thrown here is <code>TypeError</code>, since if you&#39;re not running as root, <code>os.getenv(&quot;SUDO_USER&quot;)</code> return <code>None</code> which is of type <code>NoneType</code>, and you cannot concatenate <code>str</code> and <code>NoneType</code>.  If you want to use <code>os.getenv(&quot;SUDO_USER&quot;)</code> to solve the problem, you should do it like this: <code>if os.getenv(&quot;SUDO_USER&quot;) == None: print &quot;This program need &#39;sudo&#39;&quot;; exit()</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1609802,
+                                "reputation": 130,
+                                "user_id": 2202986,
+                                "user_type": "registered",
+                                "display_name": "Cediddi"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1427497007,
+                            "post_id": 26182889,
+                            "comment_id": 46816601,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/26182889#comment46816601_26182889",
+                            "body": "Thanks for update, This code will only test sudo, not root access. Because it doesn&#39;t check for root, if you log in as root (or you wrote a cronjob like me) you still need to call the script with sudo, because sudo doesn&#39;t ask password on root, I was able fix my cronjob with just calling my python script with sudo."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 452758,
+                                "reputation": 3617,
+                                "user_id": 849365,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Prahlad Yeri"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1456815631,
+                            "post_id": 26182889,
+                            "comment_id": 59109117,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/26182889#comment59109117_26182889",
+                            "body": "A bit late to the party, but this is indeed very useful! When combined with something like <code>os.getenv(&#39;HOME&#39;)</code>, this will tell you whether the current user is a <code>root</code> or <code>sudo</code> which is what generally your script needs to know."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5164233,
+                                "reputation": 4196,
+                                "user_id": 4135063,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "Pedro A"
+                            },
+                            "reply_to_user": {
+                                "account_id": 452758,
+                                "reputation": 3617,
+                                "user_id": 849365,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Prahlad Yeri"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1680707478,
+                            "post_id": 26182889,
+                            "comment_id": 133944491,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/26182889#comment133944491_26182889",
+                            "body": "@PrahladYeri Not sure what you mean about HOME, recall that <code>sudo</code> and <code>sudo -E</code> have different outputs for <code>HOME</code>, and both are sudo."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2290743,
+                        "reputation": 2840,
+                        "user_id": 3314648,
+                        "user_type": "registered",
+                        "accept_rate": 77,
+                        "display_name": "Guillaume"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1427468422,
+                    "last_edit_date": 1427468422,
+                    "creation_date": 1412353458,
+                    "answer_id": 26182889,
+                    "question_id": 2806897,
+                    "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/26182889#26182889",
+                    "body": "<p>My app works with this code:</p>\n\n<pre><code>import os\nuser = os.getenv(\"SUDO_USER\")\nif user is None:\n    print \"This program need 'sudo'\"\n    exit()\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2002072,
+                        "reputation": 1360,
+                        "user_id": 1792865,
+                        "user_type": "registered",
+                        "display_name": "Dmytro"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 15,
+                    "last_activity_date": 1538556491,
+                    "last_edit_date": 1538556491,
+                    "creation_date": 1538551751,
+                    "answer_id": 52621917,
+                    "question_id": 2806897,
+                    "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/52621917#52621917",
+                    "body": "<p>For linux:</p>\n\n<pre><code>def is_root():\n    return os.geteuid() == 0\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 703628,
+                                "reputation": 14902,
+                                "user_id": 595305,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "mike rodent"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1641928182,
+                            "post_id": 69134255,
+                            "comment_id": 124934825,
+                            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/69134255#comment124934825_69134255",
+                            "body": "This answers the question since we&#39;re looking for &quot;root-like&quot; privileges, but why do you need the second part of the <code>if</code> in this case? Isn&#39;t it sufficient to check for the existence of <code>SUDO_UID</code>?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 18575,
+                        "reputation": 8987,
+                        "user_id": 42659,
+                        "user_type": "registered",
+                        "accept_rate": 95,
+                        "display_name": "Thomas"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1631286204,
+                    "creation_date": 1631286204,
+                    "answer_id": 69134255,
+                    "question_id": 2806897,
+                    "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg/69134255#69134255",
+                    "body": "<pre class=\"lang-py prettyprint-override\"><code>import os\n\ndef check_privileges():\n\n    if not os.environ.get(&quot;SUDO_UID&quot;) and os.geteuid() != 0:\n        raise PermissionError(&quot;You need to run this script with sudo or as root.&quot;)\n</code></pre>\n<p><code>SUDO_UID</code> is not available if script is not run with <code>sudo</code>.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 67043,
+                "reputation": 1,
+                "user_id": 196379,
+                "user_type": "registered",
+                "accept_rate": 60,
+                "display_name": "Paul Hoffman"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 2806932,
+            "answer_count": 10,
+            "score": 99,
+            "last_activity_date": 1708441741,
+            "creation_date": 1273530665,
+            "last_edit_date": 1515365586,
+            "question_id": 2806897,
+            "link": "https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg",
+            "title": "What is the best way for checking if the user of a script has root-like privileges?",
+            "body": "<p>I have a Python script that will be doing a lot of things that would require root-level privileges, such as moving files in /etc, installing with apt-get, and so on. I currently have:</p>\n\n<pre><code>if os.geteuid() != 0:\n    exit(\"You need to have root privileges to run this script.\\nPlease try again, this time using 'sudo'. Exiting.\")\n</code></pre>\n\n<p>Is this the best way to do the check? Are there other best practices?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7652
+}

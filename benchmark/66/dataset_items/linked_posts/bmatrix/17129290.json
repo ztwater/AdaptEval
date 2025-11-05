@@ -1,0 +1,404 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "numpy",
+                "latex"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 300328,
+                        "reputation": 112936,
+                        "user_id": 1217358,
+                        "user_type": "registered",
+                        "display_name": "Warren Weckesser"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1371362470,
+                    "last_edit_date": 1371362470,
+                    "creation_date": 1371362161,
+                    "answer_id": 17130617,
+                    "question_id": 17129290,
+                    "link": "https://stackoverflow.com/questions/17129290/numpy-2d-and-1d-array-to-latex-bmatrix/17130617#17130617",
+                    "body": "<p>When you do this:</p>\n\n<pre><code>    for line in array:\n</code></pre>\n\n<p>you are iterating over the first dimension of <code>array</code>.  When the array is 1-D, you end up iterating over the values.  You need to ensure that <code>array</code> is really 2-D before doing this iteration.  One way is to pass the argument through <code>numpy.atleast_2d</code>:</p>\n\n<pre><code>import numpy as np\n\ndef array_to_bmatrix(array):\n    array = np.atleast_2d(array)\n    begin = '\\\\begin{bmatrix} \\n'\n    data = ''\n    for line in array:\n</code></pre>\n\n<p>etc.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 11716318,
+                                "reputation": 198,
+                                "user_id": 8576714,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Dan McCabe"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1588984271,
+                            "post_id": 17131750,
+                            "comment_id": 109120367,
+                            "link": "https://stackoverflow.com/questions/17129290/numpy-2d-and-1d-array-to-latex-bmatrix/17131750#comment109120367_17131750",
+                            "body": "This has problems for matrices with longer rows -- it will insert <code>&#39;\\\\&#39;</code> in the middle of a row because <code>str(a)</code> has a maximum line width. To get around this, I replaced <code>str(a)</code> in your <code>bmatrix</code> function with <code>np.array2string(a, max_line_width=np.infty)</code>, which allows the rows to be their full length. This also gives more control over other string representation choices, like precision and formatting."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1261003,
+                        "reputation": 43047,
+                        "user_id": 1219295,
+                        "user_type": "registered",
+                        "display_name": "Roland Smith"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": true,
+                    "score": 36,
+                    "last_activity_date": 1371375255,
+                    "last_edit_date": 1371375255,
+                    "creation_date": 1371374139,
+                    "answer_id": 17131750,
+                    "question_id": 17129290,
+                    "link": "https://stackoverflow.com/questions/17129290/numpy-2d-and-1d-array-to-latex-bmatrix/17131750#17131750",
+                    "body": "<p>The <code>__str__</code> method of the numpy array already does most of the formatting for you. Let's exploit that;</p>\n\n<pre><code>import numpy as np\n\ndef bmatrix(a):\n    \"\"\"Returns a LaTeX bmatrix\n\n    :a: numpy array\n    :returns: LaTeX bmatrix as a string\n    \"\"\"\n    if len(a.shape) &gt; 2:\n        raise ValueError('bmatrix can at most display two dimensions')\n    lines = str(a).replace('[', '').replace(']', '').splitlines()\n    rv = [r'\\begin{bmatrix}']\n    rv += ['  ' + ' &amp; '.join(l.split()) + r'\\\\' for l in lines]\n    rv +=  [r'\\end{bmatrix}']\n    return '\\n'.join(rv)\n\nA = np.array([[12, 5, 2], [20, 4, 8], [ 2, 4, 3], [ 7, 1, 10]])\nprint bmatrix(A) + '\\n'\n\nB = np.array([[1.2], [3.7], [0.2]])\nprint bmatrix(B) + '\\n'\n\nC = np.array([1.2, 9.3, 0.6, -2.1])\nprint bmatrix(C) + '\\n'\n</code></pre>\n\n<p>This returns:</p>\n\n<pre><code>\\begin{bmatrix}\n  12 &amp; 5 &amp; 2\\\\\n  20 &amp; 4 &amp; 8\\\\\n  2 &amp; 4 &amp; 3\\\\\n  7 &amp; 1 &amp; 10\\\\\n\\end{bmatrix}\n\n\\begin{bmatrix}\n  1.2\\\\\n  3.7\\\\\n  0.2\\\\\n\\end{bmatrix}\n\n\\begin{bmatrix}\n  1.2 &amp; 9.3 &amp; 0.6 &amp; -2.1\\\\\n\\end{bmatrix}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7791136,
+                        "reputation": 103,
+                        "user_id": 5894029,
+                        "user_type": "registered",
+                        "display_name": "HK Tong"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1492179928,
+                    "last_edit_date": 1492179928,
+                    "creation_date": 1492178201,
+                    "answer_id": 43413028,
+                    "question_id": 17129290,
+                    "link": "https://stackoverflow.com/questions/17129290/numpy-2d-and-1d-array-to-latex-bmatrix/43413028#43413028",
+                    "body": "<p>I am not satisfied with using the printed output from Python. The matrix may be too big, which causes wrapping.\nThis is code for to print the LaTeX text for a 2d matrix.</p>\n\n<pre><code>def bmatrix(a):\n    text = r'$\\left[\\begin{array}{*{'\n    text += str(len(a[0]))\n    text += r'}c}'\n    text += '\\n'\n    for x in range(len(a)):\n        for y in range(len(a[x])):\n            text += str(a[x][y])\n            text += r' &amp; '\n        text = text[:-2]\n        text += r'\\\\'\n        text += '\\n'\n    text += r'\\end{array}\\right]$'\n\n    print text\n</code></pre>\n\n<p>Which gives this </p>\n\n<pre><code>$\\left[\\begin{array}{*{16}c}\n2.01 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 \\\\\n0 &amp; 2.01 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -1 &amp; 0 \\\\\n0 &amp; 0 &amp; 2.01 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -1 \\\\\n-1 &amp; 0 &amp; 0 &amp; 2.01 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\\\\n0 &amp; -1 &amp; 0 &amp; 0 &amp; 2.01 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\\\\n0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 2.01 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\\\\n0 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 2.01 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\\\\n0 &amp; 0 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 2.01 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\\\\n0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 2.01 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\\\\n0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 2.01 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 0 \\\\\n0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 2.01 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 \\\\\n0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 2.01 &amp; 0 &amp; 0 &amp; -1 &amp; 0 \\\\\n0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 2.01 &amp; 0 &amp; 0 &amp; -1 \\\\\n-1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 2.01 &amp; 0 &amp; 0 \\\\\n0 &amp; -1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 2.01 &amp; 0 \\\\\n0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 2.01 \\\\\n\\end{array}\\right]$\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1203727,
+                                "reputation": 3617,
+                                "user_id": 1173884,
+                                "user_type": "registered",
+                                "display_name": "Jindra Helcl"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1573037589,
+                            "post_id": 53913955,
+                            "comment_id": 103747875,
+                            "link": "https://stackoverflow.com/questions/17129290/numpy-2d-and-1d-array-to-latex-bmatrix/53913955#comment103747875_53913955",
+                            "body": "Is there a way to save the string instead of printing it using your tool? I&#39;d like to use this in combination with IPython.display.Math (as in here: <a href=\"https://stackoverflow.com/questions/48422762/is-it-possible-to-show-print-output-as-latex-in-jupyter-notebook\" title=\"is it possible to show print output as latex in jupyter notebook\">stackoverflow.com/questions/48422762/&hellip;</a>)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6148489,
+                                "reputation": 111,
+                                "user_id": 4793685,
+                                "user_type": "registered",
+                                "display_name": "Joseph C. Slater"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1203727,
+                                "reputation": 3617,
+                                "user_id": 1173884,
+                                "user_type": "registered",
+                                "display_name": "Jindra Helcl"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1573133471,
+                            "post_id": 53913955,
+                            "comment_id": 103787964,
+                            "link": "https://stackoverflow.com/questions/17129290/numpy-2d-and-1d-array-to-latex-bmatrix/53913955#comment103787964_53913955",
+                            "body": "Not at this moment- but pretty simple to do. I&#39;m absolutely slammed right now. Put a watch on the repository- I&#39;ll try to fix this in a few weeks when I come up for air."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6148489,
+                                "reputation": 111,
+                                "user_id": 4793685,
+                                "user_type": "registered",
+                                "display_name": "Joseph C. Slater"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1203727,
+                                "reputation": 3617,
+                                "user_id": 1173884,
+                                "user_type": "registered",
+                                "display_name": "Jindra Helcl"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1573188180,
+                            "post_id": 53913955,
+                            "comment_id": 103808129,
+                            "link": "https://stackoverflow.com/questions/17129290/numpy-2d-and-1d-array-to-latex-bmatrix/53913955#comment103808129_53913955",
+                            "body": "@Jindra-Helci This works- I had forgotten about it. Not documented well enough. This could be used in the mybinder example on a2l&#39;s github page. ` a = a2l.to_ltx(A, frmt = &#39;{:.2f}&#39;, arraytype = &#39;array&#39;, mathform = True)`"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6148489,
+                                "reputation": 111,
+                                "user_id": 4793685,
+                                "user_type": "registered",
+                                "display_name": "Joseph C. Slater"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1203727,
+                                "reputation": 3617,
+                                "user_id": 1173884,
+                                "user_type": "registered",
+                                "display_name": "Jindra Helcl"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1573273336,
+                            "post_id": 53913955,
+                            "comment_id": 103838218,
+                            "link": "https://stackoverflow.com/questions/17129290/numpy-2d-and-1d-array-to-latex-bmatrix/53913955#comment103838218_53913955",
+                            "body": "0.76 release will work better for you. I added a boolean <code>print_out</code> which when set to false will quietly return the latex in the output. Other important cleanups for your use/application. Readme on pypi is one reve behind- oops. Check doc on github repository with examples updated as well as the mybinder notebook, with updated exampled. Please let me know if this works for you."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6148489,
+                        "reputation": 111,
+                        "user_id": 4793685,
+                        "user_type": "registered",
+                        "display_name": "Joseph C. Slater"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1545757411,
+                    "last_edit_date": 1545757411,
+                    "creation_date": 1545657187,
+                    "answer_id": 53913955,
+                    "question_id": 17129290,
+                    "link": "https://stackoverflow.com/questions/17129290/numpy-2d-and-1d-array-to-latex-bmatrix/53913955#53913955",
+                    "body": "<p>Try <code>array_to_latex (pip install)</code>. I wrote it for this very reason. Please provide your feedback where it falls short. </p>\n\n<p>It has defaults, but also lets you customize formats (exponential, number of decimal places) and handles complex numbers as well and can \"pop\" the results right into your clipboard (no need to copy text dumped to the screen). </p>\n\n<p>Some examples in the github repository. <a href=\"https://github.com/josephcslater/array_to_latex\" rel=\"noreferrer\">https://github.com/josephcslater/array_to_latex</a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6148489,
+                        "reputation": 111,
+                        "user_id": 4793685,
+                        "user_type": "registered",
+                        "display_name": "Joseph C. Slater"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1575990990,
+                    "creation_date": 1575990990,
+                    "answer_id": 59270363,
+                    "question_id": 17129290,
+                    "link": "https://stackoverflow.com/questions/17129290/numpy-2d-and-1d-array-to-latex-bmatrix/59270363#59270363",
+                    "body": "<p>I've made the attempt to make a comprehensive solution so that individuals don't need to write up even a minimal script to get it done. I've put in flexibility for floats, formatting, complex, and Pandas arrays. Please use, and provide feedback to, (array_to_latex)[<a href=\"https://pypi.org/project/array-to-latex/]\" rel=\"nofollow noreferrer\">https://pypi.org/project/array-to-latex/]</a> .</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 9833889,
+                                "reputation": 138,
+                                "user_id": 7672013,
+                                "user_type": "registered",
+                                "display_name": "MetalMathician"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1680693830,
+                            "post_id": 59525342,
+                            "comment_id": 133940427,
+                            "link": "https://stackoverflow.com/questions/17129290/numpy-2d-and-1d-array-to-latex-bmatrix/59525342#comment133940427_59525342",
+                            "body": "The use of joins is a good idea. But your answer does not work. You need two joins, one for the column separators &amp; and one for the row separators \\\\. I edited your answer :)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5972924,
+                        "reputation": 3718,
+                        "user_id": 4694757,
+                        "user_type": "registered",
+                        "display_name": "I_Al-thamary"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1680700268,
+                    "last_edit_date": 1680700268,
+                    "creation_date": 1577676090,
+                    "answer_id": 59525342,
+                    "question_id": 17129290,
+                    "link": "https://stackoverflow.com/questions/17129290/numpy-2d-and-1d-array-to-latex-bmatrix/59525342#59525342",
+                    "body": "<p>In addition, to the answers before, you can generate the latex from the array this way</p>\n<pre><code>from IPython.display import *\nfrom numpy import *\nA = array([[12, 5, 2],\n       [20, 4, 8],\n       [ 2, 4, 3],\n       [ 7, 1,10]])\n\nlatexA = '$$\\n' + r'\\begin{bmatrix}' + '\\n' + (r'\\\\' + '\\n').join('&amp;'.join(str(x) for x in row) for row in A) + '\\n' + r'\\end{bmatrix}' + '\\n' +'$$'\nprint(latexA)\n\ndisplay(Latex(latexA))\n</code></pre>\n<p>print output is as follows.</p>\n<pre><code>$$\n\\begin{bmatrix}\n12&amp;5&amp;2\\\\\n20&amp;4&amp;8\\\\\n2&amp;4&amp;3\\\\\n7&amp;1&amp;10\n\\end{bmatrix}\n$$\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4497083,
+                        "reputation": 341,
+                        "user_id": 3665134,
+                        "user_type": "registered",
+                        "display_name": "macleginn"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1581362763,
+                    "creation_date": 1581362763,
+                    "answer_id": 60157079,
+                    "question_id": 17129290,
+                    "link": "https://stackoverflow.com/questions/17129290/numpy-2d-and-1d-array-to-latex-bmatrix/60157079#60157079",
+                    "body": "<p>Another option is to use sympy: first convert the array to a sympy.Matrix and then use the sympy.latex function.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5642802,
+                        "reputation": 716,
+                        "user_id": 4466012,
+                        "user_type": "registered",
+                        "accept_rate": 64,
+                        "display_name": "GregarityNow"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1608046385,
+                    "last_edit_date": 1608046385,
+                    "creation_date": 1608043775,
+                    "answer_id": 65308213,
+                    "question_id": 17129290,
+                    "link": "https://stackoverflow.com/questions/17129290/numpy-2d-and-1d-array-to-latex-bmatrix/65308213#65308213",
+                    "body": "<p>A further answer, inspired by Roland Smith's answer:</p>\n<pre><code>def matToTex(a, roundn=2, matrixType = &quot;b&quot;,rowVector = False):\n    if type(a) != np.ndarray:\n        raise ValueError(&quot;Input must be np array&quot;)\n    if len(a.shape) &gt; 2:\n        raise ValueError(&quot;matrix can at most display two dimensions&quot;)\n    if matrixType not in [&quot;b&quot;,&quot;p&quot;]:\n        raise ValueError(&quot;matrix can be either type \\&quot;b\\&quot; or type \\&quot;p\\&quot;&quot;)\n    if rowVector:\n        if not (len(a.shape) != 1 or a.shape[0] != 1):\n            raise ValueError(&quot;Cannot rowVector this bad boi, it is not a vector!&quot;)\n    lines = str(a).splitlines()\n    ret = &quot;\\n\\\\begin{&quot;+matrixType+&quot;matrix}\\n&quot;\n    for line in lines:\n        line = re.sub(&quot;\\s+&quot;,&quot;,&quot;,re.sub(&quot;\\[|\\]&quot;,&quot;&quot;,line).strip())\n        nums = line.split(&quot;,&quot;);\n        if roundn != -1:\n            nums = [str(round(float(num),roundn)) for num in nums]\n        if rowVector:\n            ret += &quot; \\\\\\\\\\n&quot;.join(nums)\n        else:\n            ret += &quot; &amp; &quot;.join(nums)+&quot; \\\\\\\\ \\n&quot;\n    ret += &quot;\\n\\\\end{&quot;+matrixType+&quot;matrix}\\n&quot;\n    ret = re.sub(&quot;(\\-){0,1}0.[0]* &quot;,&quot;0 &quot;,ret)\n    print(ret)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 15540876,
+                        "reputation": 61,
+                        "user_id": 11211658,
+                        "user_type": "registered",
+                        "display_name": "apoptosis"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1610706341,
+                    "creation_date": 1610706341,
+                    "answer_id": 65734366,
+                    "question_id": 17129290,
+                    "link": "https://stackoverflow.com/questions/17129290/numpy-2d-and-1d-array-to-latex-bmatrix/65734366#65734366",
+                    "body": "<p>yet another, inspired by Roland Smith's answer\nsupport scientific notation format</p>\n<pre><code>def bmatrix(a):\n    &quot;&quot;&quot;Returns a LaTeX bmatrix\n\n    :a: numpy array\n    :returns: LaTeX bmatrix as a string\n    &quot;&quot;&quot;\n    if len(a.shape) &gt; 2:\n        raise ValueError('bmatrix can at most display two dimensions')\n    temp_string = np.array2string(a, formatter={'float_kind':lambda x: &quot;{:.2e}&quot;.format(x)})\n    lines = temp_string.replace('[', '').replace(']', '').splitlines()\n    rv = [r'\\begin{bmatrix}']\n    rv += ['  ' + ' &amp; '.join(l.split()) + r'\\\\' for l in lines]\n    rv +=  [r'\\end{bmatrix}']\n    return '\\n'.join(rv)\n</code></pre>\n<p>result:</p>\n<pre><code>\\begin{bmatrix}\n  7.53e-04 &amp; -2.93e-04 &amp; 2.04e-04 &amp; 5.30e-05 &amp; 1.84e-01 &amp; -2.43e-05\\\\\n  -2.93e-04 &amp; 1.19e-01 &amp; 2.96e-01 &amp; 2.19e-01 &amp; 1.98e+01 &amp; 8.61e-03\\\\\n  2.04e-04 &amp; 2.96e-01 &amp; 9.60e-01 &amp; 7.42e-01 &amp; 4.03e+01 &amp; 2.45e-02\\\\\n  5.30e-05 &amp; 2.19e-01 &amp; 7.42e-01 &amp; 6.49e-01 &amp; 2.82e+01 &amp; 1.71e-02\\\\\n  1.84e-01 &amp; 1.98e+01 &amp; 4.03e+01 &amp; 2.82e+01 &amp; 5.75e+03 &amp; 1.61e+00\\\\\n  -2.43e-05 &amp; 8.61e-03 &amp; 2.45e-02 &amp; 1.71e-02 &amp; 1.61e+00 &amp; 7.04e-03\\\\\n\\end{bmatrix}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1207232,
+                        "reputation": 1036,
+                        "user_id": 1176573,
+                        "user_type": "registered",
+                        "display_name": "RSW"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1668077196,
+                    "last_edit_date": 1668077196,
+                    "creation_date": 1660628965,
+                    "answer_id": 73369299,
+                    "question_id": 17129290,
+                    "link": "https://stackoverflow.com/questions/17129290/numpy-2d-and-1d-array-to-latex-bmatrix/73369299#73369299",
+                    "body": "<p>If you happen to use <code>qiskit</code> by any chance, you may try a sleek method <code>array_to_latex</code> from <code>qiskit.visualization</code>.</p>\n<p>See <a href=\"https://qiskit.org/documentation/stubs/qiskit.visualization.array_to_latex.html\" rel=\"nofollow noreferrer\">here</a>:</p>\n<h3>Sample snippet:</h3>\n<pre class=\"lang-py prettyprint-override\"><code>from qiskit.visualization import array_to_latex\nimport numpy as np\n\nx = np.zeros(100).reshape(10,10)\n\n\n# Max rows and cols = 24\narray_to_latex(array=x, prefix='Output = ', max_size=(10,10)) # If max_size not set then matrix will have ellipses\n# print latex source only: Source=True\nlatex_source = array_to_latex(array=x, source=True, max_size=(10,10))\n\n# If you are using Jupyter Notebook: \nfrom IPython.display import display, Markdown\ndisplay(Markdown(latex_source))\n</code></pre>\n<h3>Sample output:</h3>\n<p><a href=\"https://i.stack.imgur.com/9lIKK.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/9lIKK.png\" alt=\"enter image description here\" /></a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 18616728,
+                        "reputation": 11,
+                        "user_id": 19654789,
+                        "user_type": "registered",
+                        "display_name": "Jorge Zazueta"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1662496651,
+                    "creation_date": 1662496651,
+                    "answer_id": 73627535,
+                    "question_id": 17129290,
+                    "link": "https://stackoverflow.com/questions/17129290/numpy-2d-and-1d-array-to-latex-bmatrix/73627535#73627535",
+                    "body": "<p>Just to elaborate on macleginn answer.</p>\n<pre><code>import numpy as np\nimport sympy as sym\nfrom IPython.display import display, Math\nA = np.array([[12, 5, 2],\n       [20, 4, 8],\n       [ 2, 4, 3],\n       [ 7, 1,10]])\nA = sym.Matrix(A)\ndisplay(A)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4844548,
+                        "reputation": 108,
+                        "user_id": 3908572,
+                        "user_type": "registered",
+                        "display_name": "GHJGHJJHG"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1706738295,
+                    "last_edit_date": 1706738295,
+                    "creation_date": 1706738178,
+                    "answer_id": 77916632,
+                    "question_id": 17129290,
+                    "link": "https://stackoverflow.com/questions/17129290/numpy-2d-and-1d-array-to-latex-bmatrix/77916632#77916632",
+                    "body": "<p>If you have <code>sympy</code>:</p>\n<pre class=\"lang-py prettyprint-override\"><code>&gt;&gt;&gt; from sympy import Matrix, latex\n&gt;&gt;&gt; M = np.array([[1,2],[3,4]])\n&gt;&gt;&gt; print(latex(Matrix(M)))\n\\left[\\begin{matrix}1 &amp; 2\\\\3 &amp; 4\\end{matrix}\\right]\n</code></pre>\n<p>It's got some other nice utilities to help with this: <a href=\"https://docs.sympy.org/latest/tutorials/intro-tutorial/printing.html\" rel=\"nofollow noreferrer\">https://docs.sympy.org/latest/tutorials/intro-tutorial/printing.html</a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5176310,
+                        "reputation": 2852,
+                        "user_id": 4143312,
+                        "user_type": "registered",
+                        "accept_rate": 71,
+                        "display_name": "Ka Wa Yip"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1713367993,
+                    "creation_date": 1713367993,
+                    "answer_id": 78342177,
+                    "question_id": 17129290,
+                    "link": "https://stackoverflow.com/questions/17129290/numpy-2d-and-1d-array-to-latex-bmatrix/78342177#78342177",
+                    "body": "<p>The following is a safe and sound method to print every numpy array, including your <strong>integer</strong> array and any <strong>float</strong> array, into LaTex's <code>bmatrix</code>:</p>\n<p>Let's say you have a random numpy array:</p>\n<p><code>matrix = np.random.rand(4,4)</code></p>\n<p>which is</p>\n<pre><code>array([[0.07758254, 0.03075972, 0.086804  , 0.49218633],\n       [0.66657323, 0.24237093, 0.80275257, 0.78427021],\n       [0.8932446 , 0.52083966, 0.97440407, 0.19699826],\n       [0.71994741, 0.04357679, 0.4385115 , 0.77400596]])\n</code></pre>\n<p>You want to print this <code>matrix</code> into LaTex's <code>\\bmatrix</code> command. You may also want to control how many significant figures you want.</p>\n<p>You can use the following method to do that:</p>\n<pre><code>def print_bmatrix(matrix, precision=0):\n    matrix = matrix.tolist()\n    print('\\\\begin{bmatrix}')\n    for row in matrix[:-1]:\n        print_row(row,precision)\n    print_last_row(matrix[-1],precision)\n    print('\\\\end{bmatrix}')\n\ndef print_row(row,precision):\n    for item in row[:-1]:\n        print(format(item,'.'+str(precision)+'f'), end=' &amp; ')\n    print(format(row[-1],'.'+str(precision)+'f')+'\\\\\\\\')\n\ndef print_last_row(row,precision):\n    for item in row[:-1]:\n        print(format(item,'.'+str(precision)+'f'), end=' &amp; ')\n    print(format(row[-1],'.'+str(precision)+'f')) \n</code></pre>\n<p>Now you can call:</p>\n<p><code>print_bmatrix(matrix, 3)</code></p>\n<p>where <code>3</code> stands for 3 significant figures. This gives:</p>\n<pre><code>\\begin{bmatrix}\n0.601 &amp; 0.077 &amp; 0.865 &amp; 0.290\\\\\n0.777 &amp; 0.379 &amp; 0.964 &amp; 0.853\\\\\n0.866 &amp; 0.360 &amp; 0.588 &amp; 0.218\\\\\n0.729 &amp; 0.021 &amp; 0.220 &amp; 0.458\n\\end{bmatrix}\n</code></pre>\n<p><a href=\"https://i.stack.imgur.com/3J49u.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/3J49u.png\" alt=\"enter image description here\" /></a></p>\n<p>For your numpy array, which are all integers, you can simply do this:</p>\n<pre><code>A = np.array([[12, 5, 2],\n           [20, 4, 8],\n           [ 2, 4, 3],\n           [ 7, 1,10]])\nprint_bmatrix(A)\n</code></pre>\n<p>This gives:</p>\n<pre><code>\\begin{bmatrix}\n12 &amp; 5 &amp; 2\\\\\n20 &amp; 4 &amp; 8\\\\\n2 &amp; 4 &amp; 3\\\\\n7 &amp; 1 &amp; 10\n\\end{bmatrix}\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 1254429,
+                "reputation": 16029,
+                "user_id": 1214214,
+                "user_type": "registered",
+                "accept_rate": 80,
+                "display_name": "TheMeaningfulEngineer"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 17131750,
+            "answer_count": 13,
+            "score": 18,
+            "last_activity_date": 1713367993,
+            "creation_date": 1371344441,
+            "last_edit_date": 1371352688,
+            "question_id": 17129290,
+            "link": "https://stackoverflow.com/questions/17129290/numpy-2d-and-1d-array-to-latex-bmatrix",
+            "title": "Numpy 2d and 1d array to latex bmatrix",
+            "body": "<p>I'm looking for a clean way to migrate numpy arrays to latex bmatrix. It should work for both 2d arrays and horizontal and vertical 1d array.</p>\n\n<p><strong>Example</strong></p>\n\n<pre><code>A = array([[12, 5, 2],\n           [20, 4, 8],\n           [ 2, 4, 3],\n           [ 7, 1,10]])\n\nprint A              #2d array\nprint A[0]           #horizontal array\nprint A[:,0, None]   #vertical array\n\narray_to_bmatrix(A)\narray_to_bmatrix(A[0])\narray_to_bmatrix(A[:,0, None])\n</code></pre>\n\n<p>Out:</p>\n\n<pre><code>[[12  5  2]\n [20  4  8]\n [ 2  4  3]\n [ 7  1 10]]\n\n[12  5  2]\n\n[[12]\n [20]\n [ 2]\n [ 7]]\n\n\\begin{bmatrix} \n 12.000 &amp; 5.000 &amp; 2.000 &amp; \\\\\n 20.000 &amp; 4.000 &amp; 8.000 &amp; \\\\\n 2.000 &amp; 4.000 &amp; 3.000 &amp; \\\\\n 7.000 &amp; 1.000 &amp; 10.000 &amp; \\\\\n\\end{bmatrix}\n\n\\begin{bmatrix} \n 12.000 &amp; 5.000 &amp; 2.000\n\\end{bmatrix}\n\n\\begin{bmatrix} \n 12.000 &amp; \\\\\n 20.000 &amp; \\\\\n 2.000 &amp; \\\\\n 7.000 &amp; \\\\\n\\end{bmatrix}\n</code></pre>\n\n<p><strong>Attempt of solution</strong></p>\n\n<pre><code>def array_to_bmatrix(array):\n    begin = '\\\\begin{bmatrix} \\n'\n    data = ''\n    for line in array:        \n        if line.size == 1:\n            data = data + ' %.3f &amp;'%line\n            data = data + r' \\\\'\n            data = data + '\\n'\n            continue\n        for element in line:\n            data = data + ' %.3f &amp;'%element\n\n        data = data + r' \\\\'\n        data = data + '\\n'\n    end = '\\end{bmatrix}'\n    print begin + data + end  \n</code></pre>\n\n<p>This solution works for vertical and 2d arrays, however it outputs horizontal arrays as vertical ones.</p>\n\n<pre><code>array_to_bmatrix(A[0])\n</code></pre>\n\n<p>Out:</p>\n\n<pre><code>\\begin{bmatrix} \n 12.000 &amp; \\\\\n 5.000 &amp; \\\\\n 2.000 &amp; \\\\\n\\end{bmatrix}\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9871
+}

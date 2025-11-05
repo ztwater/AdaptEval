@@ -1,0 +1,109 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "pytorch",
+                "computation-graph"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 18335095,
+                                "reputation": 780,
+                                "user_id": 13352657,
+                                "user_type": "registered",
+                                "display_name": "dingus"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1655094743,
+                            "post_id": 72303030,
+                            "comment_id": 128240148,
+                            "link": "https://stackoverflow.com/questions/72301628/find-pytorch-model-parameters-that-dont-contribute-to-loss/72303030#comment128240148_72303030",
+                            "body": "Thanks this makes sense! Also would note that even if you can find the non-contributing tensors, disabling gradient for them doesn&#39;t actually resolve the DDP error in the question (or at least didn&#39;t for me!). Seems like we&#39;d need to actually remove them from the model, or enable the find_unused_parameters DDP option."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3431506,
+                        "reputation": 11398,
+                        "user_id": 2913106,
+                        "user_type": "registered",
+                        "accept_rate": 74,
+                        "display_name": "flawr"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": true,
+                    "score": 3,
+                    "last_activity_date": 1652956870,
+                    "last_edit_date": 1652956870,
+                    "creation_date": 1652956561,
+                    "answer_id": 72303030,
+                    "question_id": 72301628,
+                    "link": "https://stackoverflow.com/questions/72301628/find-pytorch-model-parameters-that-dont-contribute-to-loss/72303030#72303030",
+                    "body": "<p>By default, PyTorch tensors that are the result of some computation record their history, that is their ancestors. This is needed for the backward pass to compute the gradient.</p>\n<p>We can make use of this to find all tensors that contribute to some new tensors by just going through the whole history.</p>\n<p>Note that this works for a static network that always has the same architecture. As soon as you have conditionals that e.g. depend on some intermediate value this won't work, and I claim in that case it is impossible to find what tensors are involved in advance. (It's similar to the halting problem.)</p>\n<pre><code>import torch\nimport torch.nn as nn\n# Example of a simple network\nclass Net(nn.Module):\n    def __init__(self):\n        super().__init__()\n        self.x = nn.Parameter(torch.tensor([999999.0]))  # not contributing\n        self.layers = nn.ModuleList([nn.Sequential(nn.Linear(1, 4), nn.Linear(4, 1)) for _ in range(3)])\n    def forward(self, x):\n        for m in self.layers: x = m(x) + x\n        return x\n\nnet = Net()\nx = torch.ones((1, 1))\n# compute the forward pass to create the computation graph\ny = net(x)\n\n# use computation graph to find all contributing tensors\ndef get_contributing_params(y, top_level=True):\n    nf = y.grad_fn.next_functions if top_level else y.next_functions\n    for f, _ in nf:\n        try:\n            yield f.variable\n        except AttributeError:\n            pass  # node has no tensor\n        if f is not None:\n            yield from get_contributing_params(f, top_level=False)\n\ncontributing_parameters = set(get_contributing_params(y))\nall_parameters = set(net.parameters())\nnon_contributing = all_parameters - contributing_parameters\nprint(non_contributing)  # returns the [999999.0] tensor\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": -1,
+                                "reputation": 1,
+                                "user_id": -1,
+                                "user_type": "moderator",
+                                "display_name": "Community"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1686907408,
+                            "post_id": 76482750,
+                            "comment_id": 134865925,
+                            "link": "https://stackoverflow.com/questions/72301628/find-pytorch-model-parameters-that-dont-contribute-to-loss/76482750#comment134865925_76482750",
+                            "body": "As it\u2019s currently written, your answer is unclear. Please <a href=\"https://stackoverflow.com/posts/76482750/edit\">edit</a> to add additional details that will help others understand how this addresses the question asked. You can find more information on how to write good answers <a href=\"/help/how-to-answer\">in the help center</a>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 11842964,
+                        "reputation": 11,
+                        "user_id": 22078795,
+                        "user_type": "registered",
+                        "display_name": "shashikant verma"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1686834018,
+                    "creation_date": 1686834018,
+                    "answer_id": 76482750,
+                    "question_id": 72301628,
+                    "link": "https://stackoverflow.com/questions/72301628/find-pytorch-model-parameters-that-dont-contribute-to-loss/76482750#76482750",
+                    "body": "<p>Yes turning of gradients doesn't work. How those layers can be removed dynamically if they are not used. For example in a Progressively growing discriminator.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 18335095,
+                "reputation": 780,
+                "user_id": 13352657,
+                "user_type": "registered",
+                "display_name": "dingus"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 72303030,
+            "answer_count": 2,
+            "score": 2,
+            "last_activity_date": 1686834018,
+            "creation_date": 1652951026,
+            "last_edit_date": 1652956621,
+            "question_id": 72301628,
+            "link": "https://stackoverflow.com/questions/72301628/find-pytorch-model-parameters-that-dont-contribute-to-loss",
+            "title": "Find PyTorch model parameters that don&#39;t contribute to loss",
+            "body": "<p>In PyTorch (v1.10) Distibuted DataParallel, unused parameters in a model that don't contribute to the final loss can raise a RuntimeError (as mentioned in <a href=\"https://stackoverflow.com/questions/67783991/pytorch-runtimeerror-expected-to-have-finished-reduction-in-the-prior-iteratio\">this other question</a>, <a href=\"https://discuss.pytorch.org/t/need-help-runtimeerror-expected-to-have-finished-reduction-in-the-prior-iteration-before-starting-a-new-one/119247\" rel=\"nofollow noreferrer\">this PyTorch forums thread</a>).</p>\n<blockquote>\n<p><em>&quot;RuntimeError: Expected to have finished reduction in the prior iteration before starting a new one. This error indicates that your module has parameters that were not used in producing loss. You can enable unused parameter detection by passing the keyword argument <code>find_unused_parameters=True</code> to <code>torch.nn.parallel.DistributedDataParallel</code>, and by making sure all <code>forward</code> function outputs participate in calculating loss.&quot;</em></p>\n</blockquote>\n<p>Although it's possible to inspect which parameters are affected at error-time (as mentioned above, or setting env var <code>TORCH_DISTRIBUTED_DEBUG=&quot;INFO&quot;</code>), it seems like there should be a way to statically inspect a model to locate (and presumably prune or disable gradient on) parameters that aren't contributing to the current loss objective?</p>\n<p>So given a <code>torch.nn.Module</code>-based <code>model</code> whose <code>forward()</code> function returns some <code>loss</code> tensor (maybe alongside others) - How can we programmatically, before starting to train, find all parameters (including nested modules) that aren't contributing to <code>loss</code>?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9653
+}

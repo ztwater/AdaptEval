@@ -1,0 +1,445 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "lambda",
+                "closures"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 2507664,
+                        "reputation": 1014,
+                        "user_id": 2180879,
+                        "user_type": "registered",
+                        "accept_rate": 71,
+                        "display_name": "Skiptomylu"
+                    },
+                    "edited": false,
+                    "score": 11,
+                    "creation_date": 1410369652,
+                    "post_id": 3431676,
+                    "comment_id": 40302634,
+                    "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension#comment40302634_3431676",
+                    "body": "as a reminder to myself: <a href=\"http://docs.python-guide.org/en/latest/writing/gotchas/#late-binding-closures\" rel=\"nofollow noreferrer\">docs.python-guide.org/en/latest/writing/gotchas/&hellip;</a>"
+                },
+                {
+                    "owner": {
+                        "account_id": 248321,
+                        "reputation": 61329,
+                        "user_id": 523612,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Karl Knechtel"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1660802135,
+                    "post_id": 3431676,
+                    "comment_id": 129619515,
+                    "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension#comment129619515_3431676",
+                    "body": "Note that the problem might not appear to occur using a <i>generator</i>, if you then iterate over the generator and call each function. This is because everything is lazily evaluated, and thus happens equally &quot;late&quot; as the binding. The iteration variable for the loop increments, the next function or lambda is immediately created, and then said function or lambda is immediately called - with the current iteration value. The same applies for generator expressions. See <a href=\"https://stackoverflow.com/questions/49633868\">stackoverflow.com/questions/49633868</a> for an example."
+                },
+                {
+                    "owner": {
+                        "account_id": 1522906,
+                        "reputation": 44396,
+                        "user_id": 1422096,
+                        "user_type": "registered",
+                        "accept_rate": 63,
+                        "display_name": "Basj"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1686141622,
+                    "post_id": 3431676,
+                    "comment_id": 134758084,
+                    "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension#comment134758084_3431676",
+                    "body": "Solution: replace <code>lambda: i</code> by <code>lambda i=i: i</code>. Your code is now <code>for i in range(3): functions.append(lambda i=i: i)</code>."
+                },
+                {
+                    "owner": {
+                        "account_id": 474651,
+                        "reputation": 15072,
+                        "user_id": 884463,
+                        "user_type": "registered",
+                        "accept_rate": 89,
+                        "display_name": "David Tonhofer"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1711564834,
+                    "post_id": 3431676,
+                    "comment_id": 137924453,
+                    "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension#comment137924453_3431676",
+                    "body": "Basically &quot;i is not local to the loop but a global variable&quot;. At <a href=\"https://docs.python-guide.org/writing/gotchas/#late-binding-closures\" rel=\"nofollow noreferrer\">Late Binding Closures gotchas</a> we read <i>Python\u2019s closures are late binding. This means that the values of variables used in closures are looked up at the time the inner function is called.</i> Though correct, the real problem is that Python has closures <i>and</i> mutable state <i>and</i> variables that are not declared (why??!!), leading to code becoming hard to read. <a href=\"https://peps.python.org/pep-3104/\" rel=\"nofollow noreferrer\">PEP-3104</a> is interesting to read in that context."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 370669,
+                                "reputation": 28945,
+                                "user_id": 718762,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "alwbtc"
+                            },
+                            "edited": false,
+                            "score": 17,
+                            "creation_date": 1534607396,
+                            "post_id": 3431699,
+                            "comment_id": 90770638,
+                            "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension/3431699#comment90770638_3431699",
+                            "body": "how do you know how to fix these things?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 13634501,
+                                "reputation": 23050,
+                                "user_id": 9835872,
+                                "user_type": "registered",
+                                "display_name": "ruohola"
+                            },
+                            "reply_to_user": {
+                                "account_id": 370669,
+                                "reputation": 28945,
+                                "user_id": 718762,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "alwbtc"
+                            },
+                            "edited": false,
+                            "score": 11,
+                            "creation_date": 1551817330,
+                            "post_id": 3431699,
+                            "comment_id": 96776676,
+                            "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension/3431699#comment96776676_3431699",
+                            "body": "@alwbtc it&#39;s mostly just experience, most people have faced these things on their own at some point."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 16236676,
+                                "reputation": 1274,
+                                "user_id": 11724014,
+                                "user_type": "registered",
+                                "display_name": "Vincent B&#233;net"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1596007976,
+                            "post_id": 3431699,
+                            "comment_id": 111667379,
+                            "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension/3431699#comment111667379_3431699",
+                            "body": "Can you explain why it is working please? (You save me on callback generated in loop, arguments was allways the lasts of the loop so thank you!)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1143565,
+                                "reputation": 516556,
+                                "user_id": 1126841,
+                                "user_type": "registered",
+                                "display_name": "chepner"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1708356541,
+                            "post_id": 3431699,
+                            "comment_id": 137547493,
+                            "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension/3431699#comment137547493_3431699",
+                            "body": "Both examples would be slightly less confusing if the function parameter had a different name than the global variable ultimately provided as an argument. <code>def f(i_local=i) return i_local</code> and <code>def make_f(i_local): def f(): return i_local; return f</code>, for example."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 34048,
+                        "reputation": 869830,
+                        "user_id": 95810,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "Alex Martelli"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": true,
+                    "score": 276,
+                    "last_activity_date": 1552246256,
+                    "last_edit_date": 1552246256,
+                    "creation_date": 1281208179,
+                    "answer_id": 3431699,
+                    "question_id": 3431676,
+                    "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension/3431699#3431699",
+                    "body": "<p>You're running into a problem with <em>late binding</em> -- each function looks up <code>i</code> as late as possible (thus, when called after the end of the loop, <code>i</code> will be set to <code>2</code>).  </p>\n\n<p>Easily fixed by forcing early binding: change <code>def f():</code> to <code>def f(i=i):</code> like this:</p>\n\n<pre><code>def f(i=i):\n    return i\n</code></pre>\n\n<p>Default values (the right-hand <code>i</code> in <code>i=i</code> is a default value for argument name <code>i</code>, which is the left-hand <code>i</code> in <code>i=i</code>) are looked up at <code>def</code> time, not at <code>call</code> time, so essentially they're a way to specifically looking for early binding.</p>\n\n<p>If you're worried about <code>f</code> getting an extra argument (and thus potentially being called erroneously), there's a more sophisticated way which involved using a closure as a \"function factory\":</p>\n\n<pre><code>def make_f(i):\n    def f():\n        return i\n    return f\n</code></pre>\n\n<p>and in your loop use <code>f = make_f(i)</code> instead of the <code>def</code> statement.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 248321,
+                                "reputation": 61329,
+                                "user_id": 523612,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Karl Knechtel"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1660901428,
+                            "post_id": 55091901,
+                            "comment_id": 129648069,
+                            "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension/55091901#comment129648069_55091901",
+                            "body": "The original code <i>already</i> uses closures - and the closures are only ever created behind the scenes by Python. It&#39;s just that each function created in the loop in the OP, generates its closure from <i>the same</i> local namespace; whereas each call to <code>f_factory</code> creates a new stack frame with new local variables, which each closure will use separately. We can still modify <code>i</code> *within <code>f_factory</code> after creating (but before returning) <code>f</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1265583,
+                        "reputation": 41759,
+                        "user_id": 1222951,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "Aran-Fey"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 72,
+                    "last_activity_date": 1555662113,
+                    "last_edit_date": 1555662113,
+                    "creation_date": 1552248519,
+                    "answer_id": 55091901,
+                    "question_id": 3431676,
+                    "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension/55091901#55091901",
+                    "body": "<h2>The Explanation</h2>\n\n<p>The issue here is that the value of <code>i</code> is not saved when the function <code>f</code> is created. Rather, <code>f</code> looks up the value of <code>i</code> when it is <em>called</em>.</p>\n\n<p>If you think about it, this behavior makes perfect sense. In fact, it's the only reasonable way functions can work. Imagine you have a function that accesses a global variable, like this:</p>\n\n<pre><code>global_var = 'foo'\n\ndef my_function():\n    print(global_var)\n\nglobal_var = 'bar'\nmy_function()\n</code></pre>\n\n<p>When you read this code, you would - of course - expect it to print \"bar\", not \"foo\", because the value of <code>global_var</code> has changed after the function was declared. The same thing is happening in your own code: By the time you call <code>f</code>, the value of <code>i</code> has changed and been set to <code>2</code>.</p>\n\n<h2>The Solution</h2>\n\n<p>There are actually many ways to solve this problem. Here are a few options:</p>\n\n<ul>\n<li><h3>Force early binding of <code>i</code> by using it as a default argument</h3>\n\n<p>Unlike closure variables (like <code>i</code>), default arguments are evaluated immediately when the function is defined:</p>\n\n<pre><code>for i in range(3):\n    def f(i=i):  # &lt;- right here is the important bit\n        return i\n\n    functions.append(f)\n</code></pre>\n\n<p>To give a little bit of insight into how/why this works: A function's default arguments are stored as an attribute of the function; thus the <em>current</em> value of <code>i</code> is snapshotted and saved.</p>\n\n<pre><code>&gt;&gt;&gt; i = 0\n&gt;&gt;&gt; def f(i=i):\n...     pass\n&gt;&gt;&gt; f.__defaults__  # this is where the current value of i is stored\n(0,)\n&gt;&gt;&gt; # assigning a new value to i has no effect on the function's default arguments\n&gt;&gt;&gt; i = 5\n&gt;&gt;&gt; f.__defaults__\n(0,)\n</code></pre></li>\n<li><h3>Use a function factory to capture the current value of <code>i</code> in a closure</h3>\n\n<p>The root of your problem is that <code>i</code> is a variable that can change. We can work around this problem by creating <em>another</em> variable that is guaranteed to never change - and the easiest way to do this is a <em>closure</em>:</p>\n\n<pre><code>def f_factory(i):\n    def f():\n        return i  # i is now a *local* variable of f_factory and can't ever change\n    return f\n\nfor i in range(3):           \n    f = f_factory(i)\n    functions.append(f)\n</code></pre></li>\n<li><h3>Use <code>functools.partial</code> to bind the current value of <code>i</code> to <code>f</code></h3>\n\n<p><a href=\"https://docs.python.org/3/library/functools.html#functools.partial\" rel=\"noreferrer\"><code>functools.partial</code></a> lets you attach arguments to an existing function. In a way, it too is a kind of function factory.</p>\n\n<pre><code>import functools\n\ndef f(i):\n    return i\n\nfor i in range(3):    \n    f_with_i = functools.partial(f, i)  # important: use a different variable than \"f\"\n    functions.append(f_with_i)\n</code></pre></li>\n</ul>\n\n<p><strong>Caveat:</strong> These solutions only work if you <em>assign</em> a new value to the variable. If you <em>modify</em> the object stored in the variable, you'll experience the same problem again:</p>\n\n<pre><code>&gt;&gt;&gt; i = []  # instead of an int, i is now a *mutable* object\n&gt;&gt;&gt; def f(i=i):\n...     print('i =', i)\n...\n&gt;&gt;&gt; i.append(5)  # instead of *assigning* a new value to i, we're *mutating* it\n&gt;&gt;&gt; f()\ni = [5]\n</code></pre>\n\n<p>Notice how <code>i</code> still changed even though we turned it into a default argument! If your code <em>mutates</em> <code>i</code>, then you must bind a <em>copy</em> of <code>i</code> to your function, like so:</p>\n\n<ul>\n<li><code>def f(i=i.copy()):</code></li>\n<li><code>f = f_factory(i.copy())</code></li>\n<li><code>f_with_i = functools.partial(f, i.copy())</code></li>\n</ul>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 474651,
+                                "reputation": 15072,
+                                "user_id": 884463,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "David Tonhofer"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1711572207,
+                            "post_id": 66088572,
+                            "comment_id": 137925578,
+                            "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension/66088572#comment137925578_66088572",
+                            "body": "Why would you want to do that though? The <code>i</code> is local to <code>f_factory()</code> and should be used only for creating the closure?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 17720126,
+                        "reputation": 161,
+                        "user_id": 12865378,
+                        "user_type": "registered",
+                        "display_name": "DMeneses"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1711558910,
+                    "last_edit_date": 1711558910,
+                    "creation_date": 1612704989,
+                    "answer_id": 66088572,
+                    "question_id": 3431676,
+                    "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension/66088572#66088572",
+                    "body": "<p>To add onto @Aran-Fey's excellent answer, in the second solution you might also wish to modify the variable inside your function which can be accomplished with the keyword <a href=\"https://docs.python.org/3/reference/simple_stmts.html#grammar-token-python-grammar-nonlocal_stmt\" rel=\"nofollow noreferrer\"><code>nonlocal</code></a>:</p>\n<pre><code>def f_factory(i):\n    def f(offset):\n      nonlocal i\n      i += offset\n      return i\n    return f\n\nfor i in range(3):           \n    f = f_factory(i)\n    print(f(10))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": -1,
+                                "reputation": 1,
+                                "user_id": -1,
+                                "user_type": "moderator",
+                                "display_name": "Community"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1641256078,
+                            "post_id": 70572194,
+                            "comment_id": 124754136,
+                            "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension/70572194#comment124754136_70572194",
+                            "body": "Your answer could be improved with additional supporting information. Please <a href=\"https://stackoverflow.com/posts/70572194/edit\">edit</a> to add further details, such as citations or documentation, so that others can confirm that your answer is correct. You can find more information on how to write good answers <a href=\"/help/how-to-answer\">in the help center</a>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 19791843,
+                        "reputation": 1,
+                        "user_id": 14494697,
+                        "user_type": "registered",
+                        "display_name": "Martin Theodorus Mathew"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1641249501,
+                    "creation_date": 1641249501,
+                    "answer_id": 70572194,
+                    "question_id": 3431676,
+                    "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension/70572194#70572194",
+                    "body": "<p>You can try like this:</p>\n<pre><code>l=[]\nfor t in range(10):\n    def up(y):\n        print(y)\n    l.append(up)\nl[5]('printing in 5th function')\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1888781,
+                                "reputation": 2110,
+                                "user_id": 1707427,
+                                "user_type": "registered",
+                                "display_name": "S&#246;ren"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1665943186,
+                            "post_id": 74023921,
+                            "comment_id": 130812360,
+                            "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension/74023921#comment130812360_74023921",
+                            "body": "OP <b>wants</b> to create a list of functions. Not a list of numbers."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 16756434,
+                        "reputation": 1,
+                        "user_id": 12112285,
+                        "user_type": "registered",
+                        "display_name": "Chunie"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -4,
+                    "last_activity_date": 1665641537,
+                    "last_edit_date": 1665641537,
+                    "creation_date": 1665470172,
+                    "answer_id": 74023921,
+                    "question_id": 3431676,
+                    "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension/74023921#74023921",
+                    "body": "<p>just modify the last line for</p>\n<pre><code>functions.append(f())\n</code></pre>\n<p>Edit: This is because <code>f</code> is a function - python treats functions as first-class citizens and you can pass them around in variables to be called later on. So what your original code is doing is appending the function itself to the list, while what you want to do is append the <em>results</em> of the function to the list, which is what the line above achieves by calling the function.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 9014815,
+                        "reputation": 805,
+                        "user_id": 6718081,
+                        "user_type": "registered",
+                        "display_name": "K4liber"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1669670275,
+                    "creation_date": 1669670275,
+                    "answer_id": 74606554,
+                    "question_id": 3431676,
+                    "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension/74606554#74606554",
+                    "body": "<p>You have to save the each of the <code>i</code> value in a separate space in memory e.g.:</p>\n<pre><code>class StaticValue:\n    val = None\n\n    def __init__(self, value: int):\n        StaticValue.val = value\n\n    @staticmethod\n    def get_lambda():\n        return lambda x: x*StaticValue.val\n\n\nclass NotStaticValue:\n    def __init__(self, value: int):\n        self.val = value\n\n    def get_lambda(self):\n        return lambda x: x*self.val\n\n\nif __name__ == '__main__':\n    def foo():\n        return [lambda x: x*i for i in range(4)]\n\n    def bar():\n        return [StaticValue(i).get_lambda() for i in range(4)]\n\n    def foo_repaired():\n        return [NotStaticValue(i).get_lambda() for i in range(4)]\n\n    print([x(2) for x in foo()])\n    print([x(2) for x in bar()])\n    print([x(2) for x in foo_repaired()])\n\nResult:\n[6, 6, 6, 6]\n[6, 6, 6, 6]\n[0, 2, 4, 6]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1522906,
+                        "reputation": 44396,
+                        "user_id": 1422096,
+                        "user_type": "registered",
+                        "accept_rate": 63,
+                        "display_name": "Basj"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1686141843,
+                    "creation_date": 1686141843,
+                    "answer_id": 76423445,
+                    "question_id": 3431676,
+                    "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension/76423445#76423445",
+                    "body": "<p>For those coming to this question using <code>lambda</code>:</p>\n<p>The solution is simply to replace <code>lambda: i</code> by <code>lambda i=i: i</code>.</p>\n<pre><code>functions = []\nfor i in range(3): \n    functions.append(lambda i=i: i)\nprint([f() for f in functions])\n# [0, 1, 2]\n</code></pre>\n<p>Example use-case: <a href=\"https://stackoverflow.com/questions/76423307/how-to-have-a-lambda-function-evaluate-a-variable-now-and-not-postponed\">How to have a lambda function evaluate a variable now (and not postponed)</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 387513,
+                                "reputation": 120381,
+                                "user_id": 745903,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "leftaroundabout"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1715179819,
+                            "post_id": 78021712,
+                            "comment_id": 138304439,
+                            "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension/78021712#comment138304439_78021712",
+                            "body": "I agree, the last option is the best one. (Well, rather the <i>least horrible</i> one...)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 11570681,
+                        "reputation": 1499,
+                        "user_id": 8477566,
+                        "user_type": "registered",
+                        "display_name": "Jake Levi"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1708356003,
+                    "creation_date": 1708356003,
+                    "answer_id": 78021712,
+                    "question_id": 3431676,
+                    "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension/78021712#78021712",
+                    "body": "<p>The problem is that <code>i</code> gets bound to the loop variable, which changes on every iteration. There are various solutions to this problem, with varying levels of readability. Of the 4 snippets below, the bottom 3 are all correct, but I think only the bottom one is the most readable:</p>\n<pre class=\"lang-py prettyprint-override\"><code># Original: wrong\nf_list = [\n    (lambda x: x + i) for i in range(10)\n]\nprint([f(3) for f in f_list])\n\n# Correct, but not so intuitive\nf_list = [\n    (lambda x, i=i: x + i) for i in range(10)\n]\nprint([f(3) for f in f_list])\n\n# More intuitive, but not so readable\nf_list = [\n    (lambda i: (lambda x: x + i))(i) for i in range(10)\n]\nprint([f(3) for f in f_list])\n\n# More readable\nget_f = lambda i: (lambda x: x + i)\nf_list = [\n    get_f(i) for i in range(10)\n]\nprint([f(3) for f in f_list])\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 474651,
+                        "reputation": 15072,
+                        "user_id": 884463,
+                        "user_type": "registered",
+                        "accept_rate": 89,
+                        "display_name": "David Tonhofer"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1711569682,
+                    "last_edit_date": 1711569682,
+                    "creation_date": 1711557726,
+                    "answer_id": 78233289,
+                    "question_id": 3431676,
+                    "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension/78233289#78233289",
+                    "body": "<h2>Not an answer, but a note.</h2>\n<p>This phenomenon can also be observed outside of a loop, where it becomes quite clear what happens:</p>\n<pre class=\"lang-python prettyprint-override\"><code>g = 'hello'\n\ndef foo():\n    return lambda x : (g,x)\n\nf = foo()\n\nprint(f('world')); g = 'goodbye'; print(f('earth'))\n</code></pre>\n<p>We (evidently?) get:</p>\n<pre class=\"lang-text prettyprint-override\"><code>('hello', 'world')\n('goodbye', 'earth')\n</code></pre>\n<p>Or one can look at the code in the question, but add printout by calling <a href=\"https://realpython.com/python-namespaces-scope/#the-globals-function\" rel=\"nofollow noreferrer\"><code>locals()</code> and <code>globals()</code></a></p>\n<pre class=\"lang-python prettyprint-override\"><code>functions = []\n\nprint(f&quot;Before loop: local i = {locals().get('i')}, global i = {globals().get('i')}&quot;)\n\nfor i in range(3):\n    print(f&quot;Inside loop: local i = {locals().get('i')}, global i = {globals().get('i')}&quot;)\n    def f():\n        print(f&quot;Inside f(): local i = {locals().get('i')}, global i = {globals().get('i')}&quot;)\n        return i\n    functions.append(f)\n\nprint(f&quot;After loop: local i = {locals().get('i')}, global i = {globals().get('i')}&quot;)\n\nprint([f() for f in functions])\n</code></pre>\n<p>We get the following, explaining a lot:</p>\n<pre class=\"lang-text prettyprint-override\"><code>Before loop: local i = None, global i = None\nInside loop: local i = 0, global i = 0\nInside loop: local i = 1, global i = 1\nInside loop: local i = 2, global i = 2\nAfter loop: local i = 2, global i = 2\nInside f(): local i = None, global i = 2\nInside f(): local i = None, global i = 2\nInside f(): local i = None, global i = 2\n[2, 2, 2]\n</code></pre>\n<p>Ultimately it is down to the fact that the <code>i</code> of the loop in the question is not <em>local to the loop</em> but <em>global to the program</em> (and that languages with mutable state with closures bolted-one have awkward corners). Also, the 'problematic' decision to design a post-ALGOL60 ALGOL-style language where variables need not be properly declared doesn't help, i.e. it makes reading a Python program quite difficult (not to mention large-ish Python programs economically hazardous). Apparently <a href=\"https://peps.python.org/pep-3104/#required-variable-declaration\" rel=\"nofollow noreferrer\">PEP-3104</a> had an idea for a necessary improvement in 2006, but it wasn't taken up.</p>\n<h2>Bonus round: Java</h2>\n<p>As I was unsure what Java would do, here is same problem as it appears in Java. Note that the compiler needs to do extra effort to detect whether the variable the closure sees is mutable (non-final) and visible in an outside context or just local or final. The whole phenomenon is not just accidental.</p>\n<pre class=\"lang-java prettyprint-override\"><code>package org.example;\n\nimport java.util.*;\n\npublic class Main {\n\n\n    private static String mutableOuterContextString;\n\n    private static void print(String str) {\n        System.out.println(&quot;  '&quot; + str + &quot;'&quot;);\n    }\n\n    private static void printStringWithIdentity(String str) {\n        System.out.println(&quot;  &quot; + stringWithIdentity(str));\n    }\n\n    private static String stringWithIdentity(String str) {\n        return &quot;'&quot; + str + &quot;' at &quot; + Objects.toIdentityString(str);\n    }\n\n    private final static List&lt;String&gt; numberStrings = Collections.unmodifiableList(Arrays.asList(&quot;one&quot;, &quot;two&quot;, &quot;three&quot;));\n\n    // Here, closures will use the 'reference to String' as given\n    // by 'str' at 'closure build time'. Each has been given a specific 'str'.\n    // At 'closure call time', the closures created will properly print\n    // &quot;one&quot;, &quot;two&quot;, &quot;three&quot;.\n    // This corresponds to &quot;function returning function&quot; approach in Python.\n\n    public static List&lt;Runnable&gt; one_two_three_as_expected_1() {\n        final List&lt;Runnable&gt; funcs = new ArrayList&lt;&gt;();\n        numberStrings.forEach(str -&gt; funcs.add(\n                () -&gt; print(str)\n        ));\n        return funcs;\n    }\n\n    // This is the same code as above, just more explicit.\n\n    public static List&lt;Runnable&gt; one_two_three_as_expected_2() {\n        final List&lt;Runnable&gt; funcs = new ArrayList&lt;&gt;();\n        for (final String str : numberStrings) {\n            funcs.add(\n                    () -&gt; print(str)\n            );\n        }\n        return funcs;\n    }\n\n    // This is the same code as above, just even more explicit.\n    // The closure is in fact &quot;just a class&quot; created by the compiler.\n\n    private static class RunnableX implements Runnable {\n\n        private final String str;\n\n        public RunnableX(final String str) {\n            this.str = str;\n        }\n\n        @Override\n        public void run() {\n            print(str);\n        }\n    }\n\n    public static List&lt;Runnable&gt; one_two_three_as_expected_3() {\n        final List&lt;Runnable&gt; funcs = new ArrayList&lt;&gt;();\n        for (final String str : numberStrings) {\n            funcs.add(new RunnableX(str));\n        }\n        return funcs;\n    }\n\n    // As in Python, an interaction between &quot;mutable state in an\n    // outside context&quot; and closures leads to surprises.\n    //\n    // Syntactically, there is not much difference between the\n    // closure closing over a local/final variable (str) or a\n    // mutable variable from the outside context (mutableOuterContextString)\n    // but the compiler must create some different code indeed.\n\n    public static List&lt;Runnable&gt; threethreethree_by_accessing_outside_context_1() {\n        final List&lt;Runnable&gt; funcs = new ArrayList&lt;&gt;();\n        for (final String str : numberStrings) {\n            mutableOuterContextString = str;\n            funcs.add(\n                    () -&gt; printStringWithIdentity(mutableOuterContextString)\n            );\n        }\n        return funcs;\n    }\n\n\n    // This should be the same code as above, just more explicit.\n    // The closure is in fact &quot;just a class&quot; created by the compiler.\n\n    private static class RunnableY implements Runnable {\n\n        @Override\n        public void run() {\n            printStringWithIdentity(mutableOuterContextString);\n        }\n    }\n\n    public static List&lt;Runnable&gt; threethreethree_by_accessing_outside_context_2() {\n        final List&lt;Runnable&gt; funcs = new ArrayList&lt;&gt;();\n        for (final String str : numberStrings) {\n            mutableOuterContextString = str;\n            funcs.add(new RunnableY());\n        }\n        return funcs;\n    }\n\n    // If the try to reproduce the &quot;three three three&quot; effect with a\n    // variable in the local context, we get something that will not compile:\n    // &quot;Variable used in lambda expression should be final or effectively final&quot;\n    // at &quot;System.out.println(curString2)&quot;\n\n    /*\n    public static List&lt;Runnable&gt; three_three_three_this_will_not_compile() {\n        final List&lt;Runnable&gt; funcs = new ArrayList&lt;&gt;();\n        String curString2;\n        for (final String str : numberStrings) {\n            curString2 = str;\n            funcs.add(() -&gt; print(curString2)); // &lt;--- won't compile\n        }\n        return funcs;\n    }\n    */\n\n    // Fixing it Python-style\n    // Note that we do not even need to declare a local variable inside the build_..() method.\n    // Directly using the variable &quot;outerStr&quot; that has been passed-in is good enough.\n    // It is not important whether it has been declared &quot;final&quot; or not in the method declaration.\n\n    public static Runnable build_closure_with_its_own_local_variable(final String outerStr) {\n        System.out.println(&quot;  Creating closure with a local reference for &quot; + stringWithIdentity(outerStr));\n        return () -&gt; printStringWithIdentity(outerStr);\n    }\n\n    public static List&lt;Runnable&gt; three_three_three_fixed() {\n        final List&lt;Runnable&gt; funcs = new ArrayList&lt;&gt;();\n        for (final String str : numberStrings) {\n            mutableOuterContextString = str;\n            funcs.add(build_closure_with_its_own_local_variable(mutableOuterContextString));\n        }\n        return funcs;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(&quot;Print 'one', 'two', 'three' as expected, take 1&quot;);\n        one_two_three_as_expected_1().forEach(r -&gt; r.run());\n        System.out.println(&quot;Print 'one', 'two', 'three' as expected, take 2&quot;);\n        one_two_three_as_expected_2().forEach(r -&gt; r.run());\n        System.out.println(&quot;Print 'one', 'two', 'three' as expected, take 3&quot;);\n        one_two_three_as_expected_3().forEach(r -&gt; r.run());\n        System.out.println(&quot;Print 'three', 'three', 'three', unexpectedly, take 1&quot;);\n        threethreethree_by_accessing_outside_context_1().forEach(r -&gt; r.run());\n        System.out.println(&quot;Print 'three', 'three', 'three', unexpectedly, take 2&quot;);\n        threethreethree_by_accessing_outside_context_2().forEach(r -&gt; r.run());\n        System.out.println(&quot;Print 'one', 'two', 'three' again by creating a local variable&quot;);\n        three_three_three_fixed().forEach(r -&gt; r.run());\n    }\n}\n</code></pre>\n<p><strong>Output</strong></p>\n<pre class=\"lang-none prettyprint-override\"><code>Print 'one', 'two', 'three' as expected, take 1\n  'one'\n  'two'\n  'three'\nPrint 'one', 'two', 'three' as expected, take 2\n  'one'\n  'two'\n  'three'\nPrint 'one', 'two', 'three' as expected, take 3\n  'one'\n  'two'\n  'three'\nPrint 'three', 'three', 'three', unexpectedly, take 1\n  'three' at java.lang.String@77459877\n  'three' at java.lang.String@77459877\n  'three' at java.lang.String@77459877\nPrint 'three', 'three', 'three', unexpectedly, take 2\n  'three' at java.lang.String@77459877\n  'three' at java.lang.String@77459877\n  'three' at java.lang.String@77459877\nPrint 'one', 'two', 'three' again by creating a local variable\n  Creating closure with a local reference for 'one' at java.lang.String@87aac27\n  Creating closure with a local reference for 'two' at java.lang.String@6ce253f1\n  Creating closure with a local reference for 'three' at java.lang.String@77459877\n  'one' at java.lang.String@87aac27\n  'two' at java.lang.String@6ce253f1\n  'three' at java.lang.String@77459877\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 46800,
+                "reputation": 7955,
+                "user_id": 138352,
+                "user_type": "registered",
+                "accept_rate": 87,
+                "display_name": "sharvey"
+            },
+            "comment_count": 4,
+            "is_answered": true,
+            "accepted_answer_id": 3431699,
+            "answer_count": 9,
+            "score": 218,
+            "last_activity_date": 1711569682,
+            "creation_date": 1281207873,
+            "last_edit_date": 1711563593,
+            "question_id": 3431676,
+            "link": "https://stackoverflow.com/questions/3431676/creating-functions-or-lambdas-in-a-loop-or-comprehension",
+            "title": "Creating functions (or lambdas) in a loop (or comprehension)",
+            "body": "<p>I'm trying to create functions inside of a loop:</p>\n<pre class=\"lang-python prettyprint-override\"><code>functions = []\n\nfor i in range(3):\n    def f():\n        return i\n    functions.append(f)\n</code></pre>\n<p>Alternatively, with lambda:</p>\n<pre class=\"lang-python prettyprint-override\"><code>functions = []\n\nfor i in range(3):\n    functions.append(lambda: i)\n</code></pre>\n<p>The problem is that all functions end up being the same. Instead of returning 0, 1, and 2, all three functions return 2:</p>\n<pre class=\"lang-python prettyprint-override\"><code>print([f() for f in functions])\n</code></pre>\n<ul>\n<li>Expected output: <code>[0, 1, 2]</code></li>\n<li>Actual output:   <code>[2, 2, 2]</code></li>\n</ul>\n<p>Why is this happening, and what should I do to get 3 different functions that output 0, 1, and 2 respectively?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7628
+}

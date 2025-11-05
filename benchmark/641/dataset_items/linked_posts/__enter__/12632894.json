@@ -1,0 +1,318 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "attr",
+                "with-statement"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 381980,
+                        "reputation": 29810,
+                        "user_id": 736937,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "jedwards"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1348800510,
+                    "post_id": 12632894,
+                    "comment_id": 17035485,
+                    "link": "https://stackoverflow.com/questions/12632894/why-doesnt-getattr-work-with-exit#comment17035485_12632894",
+                    "body": "Something is going on here, in your class definition you make <code>FileHolder</code> a subclass of <code>object</code>.  But in your code below it, it says that <code>a</code> is a <code>file</code> object.  Thats not consistent."
+                },
+                {
+                    "owner": {
+                        "account_id": 333457,
+                        "reputation": 6680,
+                        "user_id": 659346,
+                        "user_type": "registered",
+                        "accept_rate": 79,
+                        "display_name": "GP89"
+                    },
+                    "reply_to_user": {
+                        "account_id": 381980,
+                        "reputation": 29810,
+                        "user_id": 736937,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "jedwards"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1348800767,
+                    "post_id": 12632894,
+                    "comment_id": 17035542,
+                    "link": "https://stackoverflow.com/questions/12632894/why-doesnt-getattr-work-with-exit#comment17035542_12632894",
+                    "body": "@jedwards Honestly it isn&#39;t. Test it yourself :)"
+                },
+                {
+                    "owner": {
+                        "account_id": 131457,
+                        "reputation": 15847,
+                        "user_id": 331473,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Adam Wagner"
+                    },
+                    "reply_to_user": {
+                        "account_id": 381980,
+                        "reputation": 29810,
+                        "user_id": 736937,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "jedwards"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1348800858,
+                    "post_id": 12632894,
+                    "comment_id": 17035557,
+                    "link": "https://stackoverflow.com/questions/12632894/why-doesnt-getattr-work-with-exit#comment17035557_12632894",
+                    "body": "@jedwards, the <code>__exit__</code> is from the <code>file</code> object assigned to <code>self.f</code>, if you ask <code>type(a)</code>, you&#39;ll get <code>FileHolder</code>."
+                },
+                {
+                    "owner": {
+                        "account_id": 381980,
+                        "reputation": 29810,
+                        "user_id": 736937,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "jedwards"
+                    },
+                    "reply_to_user": {
+                        "account_id": 131457,
+                        "reputation": 15847,
+                        "user_id": 331473,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Adam Wagner"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1348801815,
+                    "post_id": 12632894,
+                    "comment_id": 17035717,
+                    "link": "https://stackoverflow.com/questions/12632894/why-doesnt-getattr-work-with-exit#comment17035717_12632894",
+                    "body": "@Adam, you&#39;re right -- I actually didn&#39;t create the class (I did something like <code>class FileHolder(object): pass</code>) -- serves me right."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 333457,
+                                "reputation": 6680,
+                                "user_id": 659346,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "GP89"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1348801663,
+                            "post_id": 12632972,
+                            "comment_id": 17035684,
+                            "link": "https://stackoverflow.com/questions/12632894/why-doesnt-getattr-work-with-exit/12632972#comment17035684_12632972",
+                            "body": "It does beg the question though, why does <code>__enter__</code> not get an <code>AttributeError</code>? unless it looks for exit first which seems unlikely"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1241689,
+                                "reputation": 174419,
+                                "user_id": 1204143,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "nneonneo"
+                            },
+                            "reply_to_user": {
+                                "account_id": 333457,
+                                "reputation": 6680,
+                                "user_id": 659346,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "GP89"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1348801846,
+                            "post_id": 12632972,
+                            "comment_id": 17035723,
+                            "link": "https://stackoverflow.com/questions/12632894/why-doesnt-getattr-work-with-exit/12632972#comment17035723_12632972",
+                            "body": "As @korylprince&#39;s answer indicates, <code>__exit__</code> is looked up first, so that they don&#39;t run into issues with calling <code>__enter__</code> without a functional <code>__exit__</code>. You can see the exact CPython implementation <a href=\"http://hg.python.org/cpython/file/198382b4bcd0/Python/ceval.c#l2545\" rel=\"nofollow noreferrer\">here</a>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1241689,
+                        "reputation": 174419,
+                        "user_id": 1204143,
+                        "user_type": "registered",
+                        "accept_rate": 64,
+                        "display_name": "nneonneo"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1348816472,
+                    "last_edit_date": 1348816472,
+                    "creation_date": 1348800694,
+                    "answer_id": 12632972,
+                    "question_id": 12632894,
+                    "link": "https://stackoverflow.com/questions/12632894/why-doesnt-getattr-work-with-exit/12632972#12632972",
+                    "body": "<p>The <code>with</code> statement opcode <code>SETUP_WITH</code> looks up <code>__exit__</code> as a \"special method lookup\", which ignores <code>__getattr__</code> and <code>__getattribute__</code> on new-style classes (but not on old-style classes). See <a href=\"http://mail.python.org/pipermail/python-dev/2009-May/089535.html\" rel=\"nofollow\">this mailing list thread</a> for more information, where they discuss adding the special method lookup semantics to <code>with</code> (which they eventually do). See also <a href=\"http://docs.python.org/reference/datamodel.html#special-method-lookup-for-new-style-classes\" rel=\"nofollow\">special method lookup for new-style classes</a> for a detailed discussion on why these special methods are looked up in this way.</p>\n\n<p>In particular, special method lookup <em>also</em> bypasses <code>__getattr__</code> on the type object. So, even though the documentation says the method is looked up as <code>type(mgr).__exit__</code>, this code doesn't work:</p>\n\n<pre><code>class M(type):\n    def __getattr__(*args): return lambda: 0\n\nclass X(object):\n    __metaclass__ = M\n\nx = X()\ntype(x).__exit__ # works, returns a lambda\n\nwith x: pass # fails, AttributeError\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1241689,
+                                "reputation": 174419,
+                                "user_id": 1204143,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "nneonneo"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1348801197,
+                            "post_id": 12632973,
+                            "comment_id": 17035602,
+                            "link": "https://stackoverflow.com/questions/12632894/why-doesnt-getattr-work-with-exit/12632973#comment17035602_12632973",
+                            "body": "Surprisingly, the documentation is not-quite-right on this one -- special method lookup also ignores <code>type(x).__getattr__</code>. See my answer..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 154611,
+                                "reputation": 3009,
+                                "user_id": 370662,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "korylprince"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1348801464,
+                            "post_id": 12632973,
+                            "comment_id": 17035648,
+                            "link": "https://stackoverflow.com/questions/12632894/why-doesnt-getattr-work-with-exit/12632973#comment17035648_12632973",
+                            "body": "I can&#39;t say for sure. My only guess is it&#39;s that way by design. It might be something to ask on the mailing list."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1241689,
+                                "reputation": 174419,
+                                "user_id": 1204143,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "nneonneo"
+                            },
+                            "reply_to_user": {
+                                "account_id": 333457,
+                                "reputation": 6680,
+                                "user_id": 659346,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "GP89"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1348801718,
+                            "post_id": 12632973,
+                            "comment_id": 17035693,
+                            "link": "https://stackoverflow.com/questions/12632894/why-doesnt-getattr-work-with-exit/12632973#comment17035693_12632973",
+                            "body": "@GP89: I did some more digging; it&#39;s by design. See <a href=\"http://docs.python.org/reference/datamodel.html#special-method-lookup-for-new-style-classes\" rel=\"nofollow noreferrer\">here</a> for the full reasoning."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 154611,
+                                "reputation": 3009,
+                                "user_id": 370662,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "korylprince"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1241689,
+                                "reputation": 174419,
+                                "user_id": 1204143,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "nneonneo"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1348801816,
+                            "post_id": 12632973,
+                            "comment_id": 17035718,
+                            "link": "https://stackoverflow.com/questions/12632894/why-doesnt-getattr-work-with-exit/12632973#comment17035718_12632973",
+                            "body": "I also did some digging in the mailing list @nneonneo mention. Here is a short summary: <a href=\"http://mail.python.org/pipermail/python-dev/2009-May/089576.html\" rel=\"nofollow noreferrer\">mail.python.org/pipermail/python-dev/2009-May/089576.html</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 154611,
+                        "reputation": 3009,
+                        "user_id": 370662,
+                        "user_type": "registered",
+                        "accept_rate": 92,
+                        "display_name": "korylprince"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": true,
+                    "score": 5,
+                    "last_activity_date": 1359998796,
+                    "last_edit_date": 1359998796,
+                    "creation_date": 1348800711,
+                    "answer_id": 12632973,
+                    "question_id": 12632894,
+                    "link": "https://stackoverflow.com/questions/12632894/why-doesnt-getattr-work-with-exit/12632973#12632973",
+                    "body": "<p>I can't say for sure, but after reading over the PEP describing the with statement:</p>\n\n<p><a href=\"http://www.python.org/dev/peps/pep-0343/\" rel=\"nofollow\">http://www.python.org/dev/peps/pep-0343/</a></p>\n\n<p>This jumped out at me:</p>\n\n<pre><code>A new statement is proposed with the syntax:\n\n    with EXPR as VAR:\n        BLOCK\n\n....\n\nThe translation of the above statement is:\n\n    mgr = (EXPR)\n    exit = type(mgr).__exit__  # Not calling it yet\n    value = type(mgr).__enter__(mgr)\n\n....\n</code></pre>\n\n<p>Right there. The with statement does not call <code>__getattr__(__exit__)</code> but calls <code>type(a).__exit__</code> which does not exist giving the error.</p>\n\n<p>So you just need to define those:</p>\n\n<pre><code>class FileHolder(object):                                                                                                                 \n    def __init__(self,*args,**kwargs):\n        self.f= file(*args,**kwargs)\n\n    def __enter__(self,*args,**kwargs):\n        return self.f.__enter__(*args,**kwargs)\n\n    def __exit__(self,*args,**kwargs):\n        self.f.__exit__(*args,**kwargs)\n\n    def __getattr__(self,item):\n        return getattr(self.f,item)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 11105514,
+                        "reputation": 581,
+                        "user_id": 8152782,
+                        "user_type": "registered",
+                        "display_name": "henry zhu"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1620619012,
+                    "creation_date": 1620619012,
+                    "answer_id": 67464600,
+                    "question_id": 12632894,
+                    "link": "https://stackoverflow.com/questions/12632894/why-doesnt-getattr-work-with-exit/67464600#67464600",
+                    "body": "<p>The previous answers has explained the fact that <code>__getattr__</code> does not work with <code>__enter__</code> and <code>__exit__</code>. I'm here to give my thinking of why it <strong>SHOULD NOT</strong> work.</p>\n<p>The only reason we define <code>__enter__</code> and <code>__exit__</code> methods on an object is that we need to use it in <code>with</code> statement. The two methods help us get and release a resource implicitly, so we usually define them like this:</p>\n<pre class=\"lang-py prettyprint-override\"><code>class Resource(object):\n    ...\n    def __enter__(self):\n        return self\n            \n    def __exit__(self, *exc):\n        self.close()\n</code></pre>\n<p>then you can write some code like this:</p>\n<pre class=\"lang-py prettyprint-override\"><code>with Resource() as resource:  # __enter__ is called and returns a value as `resource`\n    do_something_with_resource()\n    # `resource.__exit__` is called\n</code></pre>\n<p>As you have noticed, the resource we get and release is exactly an instance of the class we defined.</p>\n<p>What if we hold a resource as an attribute and proxy its <code>__enter__</code> and <code>__exit__</code> with <code>__getattr__</code>? We write some code like this:</p>\n<pre class=\"lang-py prettyprint-override\"><code>class ResourceProxy(object):\n    def __init__(self):\n        self._resource = Resource()\n\n    def __getattr__(self, key):\n        return getattr(self._resource, key)\n</code></pre>\n<p>Assuming <code>__getattr__</code> works fine with <code>__enter__</code> and <code>__exit__</code>, here is what will happen in <code>with</code> statement:</p>\n<pre class=\"lang-py prettyprint-override\"><code>with ResourceProxy() as resource:  # proxied __enter__ is called\n    # now `resource` is NOT a ResourceProxy instance, because what we called is `_resource.__enter__`\n    do_something_with_resource()\n    # `_resource.__exit__` is called and closed itself properly. \n    # Here is nothing to do with ResourceProxy, because it has never enter `with` context\n</code></pre>\n<p>The behavior above is strange and probably not as the user expected, for the following two reasons:</p>\n<ol>\n<li>the resource entered into <code>with</code> context is not the object we sent in.</li>\n<li>when exiting <code>with</code> context, <code>__exit__</code> method of the proxied object is called, instead of the outer object we sent in. You may think it might help if we add an <code>__exit__</code> definition on the outer class, but the answer is not, because the outer class has never enter <code>with</code> context.</li>\n</ol>\n<p>To conclude, if we make <code>__getattr__</code> works with <code>__enter__</code> and <code>__exit__</code>, it will result in bad behaviors. It's not a good design.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 333457,
+                "reputation": 6680,
+                "user_id": 659346,
+                "user_type": "registered",
+                "accept_rate": 79,
+                "display_name": "GP89"
+            },
+            "comment_count": 4,
+            "is_answered": true,
+            "accepted_answer_id": 12632973,
+            "answer_count": 3,
+            "score": 5,
+            "last_activity_date": 1620619012,
+            "creation_date": 1348800046,
+            "last_edit_date": 1495535449,
+            "question_id": 12632894,
+            "link": "https://stackoverflow.com/questions/12632894/why-doesnt-getattr-work-with-exit",
+            "title": "Why doesn&#39;t __getattr__ work with __exit__?",
+            "body": "<p>I came across this as a bit of a surprise while trying to work out another <a href=\"https://stackoverflow.com/questions/12627297/why-does-one-file-object-flush-but-the-other-one-doesnt\">question</a>.</p>\n\n<p>This seemed extremely odd to me, I thought it was worth asking the question. Why doesn't <code>__getattr__</code> appear to work with <code>with</code>?</p>\n\n<p>if I make this object:</p>\n\n<pre><code>class FileHolder(object):\n    def __init__(self,*args,**kwargs):\n        self.f= file(*args,**kwargs)\n\n    def __getattr__(self,item):\n        return getattr(self.f,item)\n</code></pre>\n\n<p>and using it with <code>with</code>,</p>\n\n<pre><code>&gt;&gt;&gt; a= FileHolder(\"a\",\"w\")\n&gt;&gt;&gt; a.write\n&lt;built-in method write of file object at 0x018D75F8&gt;\n&gt;&gt;&gt; with a as f:\n...   print f\n...\nTraceback (most recent call last):\n  File \"&lt;stdin&gt;\", line 1, in &lt;module&gt;\nAttributeError: __exit__\n&gt;&gt;&gt; a.__exit__\n&lt;built-in method __exit__ of file object at 0x018D75F8&gt;\n</code></pre>\n\n<p>Why does this happen?</p>\n\n<h2>EDIT</h2>\n\n<pre><code>&gt;&gt;&gt; object.__exit__\nTraceback (most recent call last):\n  File \"&lt;stdin&gt;\", line 1, in &lt;module&gt;\nAttributeError: type object 'object' has no attribute '__exit__'\n</code></pre>\n\n<p>It definitely isn't inheriting <code>__exit__</code></p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8880
+}

@@ -1,0 +1,265 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "gps",
+                "coordinates",
+                "coordinate-transformation"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 354053,
+                        "reputation": 140969,
+                        "user_id": 1209279,
+                        "user_type": "registered",
+                        "accept_rate": 91,
+                        "display_name": "Levon"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1338564442,
+                    "post_id": 10852955,
+                    "comment_id": 14135767,
+                    "link": "https://stackoverflow.com/questions/10852955/python-batch-convert-gps-positions-to-lat-lon-decimals#comment14135767_10852955",
+                    "body": "What would be the corresponding output for the coordinate you provided. Also, the latitude has 3 numeric fields, the longitude 2 .. is that typical for how these are specified (and constant in your data)? What have you tried so far?"
+                },
+                {
+                    "owner": {
+                        "account_id": 416127,
+                        "reputation": 18729,
+                        "user_id": 791335,
+                        "user_type": "registered",
+                        "accept_rate": 73,
+                        "display_name": "Darwin Tech"
+                    },
+                    "reply_to_user": {
+                        "account_id": 354053,
+                        "reputation": 140969,
+                        "user_id": 1209279,
+                        "user_type": "registered",
+                        "accept_rate": 91,
+                        "display_name": "Levon"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1338564656,
+                    "post_id": 10852955,
+                    "comment_id": 14135870,
+                    "link": "https://stackoverflow.com/questions/10852955/python-batch-convert-gps-positions-to-lat-lon-decimals#comment14135870_10852955",
+                    "body": "So I want to generate to floats: <code>0&#176;25&#39;30&quot;S, 91&#176;7&#39;W</code> -&gt; <code>0.425</code>, <code>91.116667</code>. It seems like the data may or may not have minutes associated. Where there is none then I can assume 0."
+                },
+                {
+                    "owner": {
+                        "account_id": 392349,
+                        "reputation": 292,
+                        "user_id": 753558,
+                        "user_type": "registered",
+                        "accept_rate": 50,
+                        "display_name": "Renat Zaripov"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1393534506,
+                    "post_id": 10852955,
+                    "comment_id": 33486751,
+                    "link": "https://stackoverflow.com/questions/10852955/python-batch-convert-gps-positions-to-lat-lon-decimals#comment33486751_10852955",
+                    "body": "Longitude         180 W   = -180         180 E   =  180       Latitude         90 N   =   90         90 S   =  -90      Example must give -0.425, -91.116667. Check this by searching 0&#176;25&#39;30&quot;S, 91&#176;7&#39;W in the Google Maps for example."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 416127,
+                                "reputation": 18729,
+                                "user_id": 791335,
+                                "user_type": "registered",
+                                "accept_rate": 73,
+                                "display_name": "Darwin Tech"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1338569020,
+                            "post_id": 10853677,
+                            "comment_id": 14137613,
+                            "link": "https://stackoverflow.com/questions/10852955/python-batch-convert-gps-positions-to-lat-lon-decimals/10853677#comment14137613_10853677",
+                            "body": "Thankyou. Let me see what I can do with this as it is."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 35133,
+                        "reputation": 17156,
+                        "user_id": 99377,
+                        "user_type": "registered",
+                        "accept_rate": 83,
+                        "display_name": "Jon-Eric"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1338567177,
+                    "last_edit_date": 1338567177,
+                    "creation_date": 1338566479,
+                    "answer_id": 10853677,
+                    "question_id": 10852955,
+                    "link": "https://stackoverflow.com/questions/10852955/python-batch-convert-gps-positions-to-lat-lon-decimals/10853677#10853677",
+                    "body": "<p>This converts your input string to your expected output. It can handle minutes and seconds not being present.</p>\n\n<p>Currently, it does not account for North/South, East/West. If you'll tell me how you'd like those handled, I'll update the answer.</p>\n\n<pre><code># -*- coding: latin-1 -*-\nimport re\n\nPATTERN = re.compile(r\"\"\"(?P&lt;lat_deg&gt;\\d+)\u00b0      # Latitude Degrees\n                         (?:(?P&lt;lat_min&gt;\\d+)')? # Latitude Minutes (Optional)\n                         (?:(?P&lt;lat_sec&gt;\\d+)\")? # Latitude Seconds (Optional)\n                         (?P&lt;north_south&gt;[NS])  # North or South\n                         ,[ ]\n                         (?P&lt;lon_deg&gt;\\d+)\u00b0      # Longitude Degrees\n                         (?:(?P&lt;lon_min&gt;\\d+)')? # Longitude Minutes (Optional)\n                         (?:(?P&lt;lon_sec&gt;\\d+)\")? # Longitude Seconds (Optional)\n                         (?P&lt;east_west&gt;[EW])    # East or West\n                      \"\"\", re.VERBOSE)\n\nLAT_FIELDS = (\"lat_deg\", \"lat_min\", \"lat_sec\")\nLON_FIELDS = (\"lon_deg\", \"lon_min\", \"lon_sec\")\n\ndef parse_dms_string(s, out_type=float):\n    \"\"\"\n    Convert a string of the following form to a tuple of out_type latitude, longitude.\n\n    Example input:\n    0\u00b025'30\"S, 91\u00b07'W\n    \"\"\"\n    values = PATTERN.match(s).groupdict()\n\n    return tuple(sum(out_type(values[field] or 0) / out_type(60 ** idx) for idx, field in enumerate(field_names)) for field_names in (LAT_FIELDS, LON_FIELDS))\n\n\nINPUT = \"\"\"0\u00b025'30\"S, 91\u00b07'W\"\"\"\n\nprint parse_dms_string(INPUT) # Prints: (0.42500000000000004, 91.11666666666666)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 354053,
+                                "reputation": 140969,
+                                "user_id": 1209279,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "Levon"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1338576106,
+                            "post_id": 10854324,
+                            "comment_id": 14139986,
+                            "link": "https://stackoverflow.com/questions/10852955/python-batch-convert-gps-positions-to-lat-lon-decimals/10854324#comment14139986_10854324",
+                            "body": "+1 for not making my head hurt .. &quot;Simple is better than complex.&quot;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1832659,
+                                "reputation": 3652,
+                                "user_id": 1875861,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "rom"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1439287061,
+                            "post_id": 10854324,
+                            "comment_id": 51787523,
+                            "link": "https://stackoverflow.com/questions/10852955/python-batch-convert-gps-positions-to-lat-lon-decimals/10854324#comment51787523_10854324",
+                            "body": "almost perfect... the directions are reversed... <code>direction = {&#39;N&#39;:1, &#39;S&#39;:-1, &#39;E&#39;: 1, &#39;W&#39;:-1}</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 43930,
+                                "reputation": 21087,
+                                "user_id": 128618,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "tree em"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1563461502,
+                            "post_id": 10854324,
+                            "comment_id": 100715915,
+                            "link": "https://stackoverflow.com/questions/10852955/python-batch-convert-gps-positions-to-lat-lon-decimals/10854324#comment100715915_10854324",
+                            "body": "how to change the code for this  <code>27&#176;29&#39;04.2&quot;N\t89&#176;19&#39;44.6&quot;E</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1205307,
+                        "reputation": 34919,
+                        "user_id": 1175101,
+                        "user_type": "registered",
+                        "accept_rate": 82,
+                        "display_name": "fraxel"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 19,
+                    "last_activity_date": 1517573544,
+                    "last_edit_date": 1517573544,
+                    "creation_date": 1338569182,
+                    "answer_id": 10854324,
+                    "question_id": 10852955,
+                    "link": "https://stackoverflow.com/questions/10852955/python-batch-convert-gps-positions-to-lat-lon-decimals/10854324#10854324",
+                    "body": "<p>This approach can deal with seconds and minutes being absent, and I think handles the compass directions correctly: </p>\n\n<pre><code># -*- coding: latin-1 -*-\n\ndef conversion(old):\n    direction = {'N':1, 'S':-1, 'E': 1, 'W':-1}\n    new = old.replace(u'\u00b0',' ').replace('\\'',' ').replace('\"',' ')\n    new = new.split()\n    new_dir = new.pop()\n    new.extend([0,0,0])\n    return (int(new[0])+int(new[1])/60.0+int(new[2])/3600.0) * direction[new_dir]\n\nlat, lon = u'''0\u00b025'30\"S, 91\u00b07'W'''.split(', ')\nprint conversion(lat), conversion(lon)\n#Output:\n0.425 91.1166666667\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 354053,
+                        "reputation": 140969,
+                        "user_id": 1209279,
+                        "user_type": "registered",
+                        "accept_rate": 91,
+                        "display_name": "Levon"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1338633803,
+                    "last_edit_date": 1338633803,
+                    "creation_date": 1338603613,
+                    "answer_id": 10859325,
+                    "question_id": 10852955,
+                    "link": "https://stackoverflow.com/questions/10852955/python-batch-convert-gps-positions-to-lat-lon-decimals/10859325#10859325",
+                    "body": "<p>A simple approach (given that I taught myself about regular expressions just today because of this problem). Deals with missing fields and compass directions.</p>\n\n<pre><code># -*- coding: latin-1 -*-\nimport re\ns = \"\"\"0\u00b025'30\"S, 91\u00b07'W\"\"\"\n\ndef compLat_Long(degs, mins, secs, comp_dir):\n    return (degs + (mins / 60) + (secs / 3600)) * comp_dir\n\ndef extract_DegMinSec(data):   \n    m = re.search(r'(\\d+\u00b0)*(\\d+\\')*(\\d+\")*', data.strip())\n    deg, mins, secs = [0.0 if m.group(i) is None else float(m.group(i)[:-1]) for i in range(1, 4)]\n    comp_dir = 1 if data[-1] in ('W', 'S') else -1\n    return deg, mins, secs, comp_dir \n\ns1, s2 = s.split(',')\ndms1 = extract_DegMinSec(s1)\ndms2 = extract_DegMinSec(s2)\nprint('{:7.4f}  {:7.4f}'.format(compLat_Long(*dms1), compLat_Long(*dms2)))\n</code></pre>\n\n<p>yields</p>\n\n<pre><code> 0.4250  91.1167\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 16981203,
+                        "reputation": 235,
+                        "user_id": 12283084,
+                        "user_type": "registered",
+                        "display_name": "victoria55"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1614060804,
+                    "creation_date": 1614060804,
+                    "answer_id": 66327983,
+                    "question_id": 10852955,
+                    "link": "https://stackoverflow.com/questions/10852955/python-batch-convert-gps-positions-to-lat-lon-decimals/66327983#66327983",
+                    "body": "<p>You can use the function <a href=\"https://docs.dataprep.ai/user_guide/clean/clean_lat_long.html\" rel=\"nofollow noreferrer\"><code>clean_lat_long()</code></a> from the library <a href=\"https://dataprep.ai/\" rel=\"nofollow noreferrer\">DataPrep</a> if your data is in a DataFrame. Install DataPrep with <code>pip install dataprep</code>.</p>\n<pre class=\"lang-py prettyprint-override\"><code>from dataprep.clean import clean_lat_long\ndf = pd.DataFrame({&quot;coord&quot;: [&quot;&quot;&quot;0\u00b025'30&quot;S, 91\u00b07'W&quot;&quot;&quot;, &quot;&quot;&quot;27\u00b029'04.2&quot;N   89\u00b019'44.6&quot;E&quot;&quot;&quot;]})\n\ndf2 = clean_lat_long(df, &quot;coord&quot;, split=True)\n# print(df2)\n                        coord  latitude  longitude\n0           0\u00b025'30&quot;S, 91\u00b07'W   -0.4250   -91.1167\n1  27\u00b029'04.2&quot;N\\t89\u00b019'44.6&quot;E   27.4845    89.3291\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 23385964,
+                        "reputation": 1,
+                        "user_id": 17451317,
+                        "user_type": "registered",
+                        "display_name": "SSorin"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1637270674,
+                    "creation_date": 1637270674,
+                    "answer_id": 70026920,
+                    "question_id": 10852955,
+                    "link": "https://stackoverflow.com/questions/10852955/python-batch-convert-gps-positions-to-lat-lon-decimals/70026920#70026920",
+                    "body": "<p>Try this one, which deals with one coordinate (latitude or longitude) at a time. It's able to return valid results for coordinates with compass directions placed at the beginning or end of the coordinate and &quot;,&quot; as decimal separator, and returns the original string if it's not able to decode the input.</p>\n<pre><code>def dec(coord):\n    c = coord.upper()\n    s = 1\n    if c.find('S')&gt;0 or c.find('W')&gt;0:\n        s = -1\n    c = c.replace('N','').replace('E','').replace('S','').replace('W','').replace(',','.').replace(u'\u00b0',' ').replace('\\'',' ').replace('&quot;',' ')\n    a = c.split()\n    a.extend([0,0,0])\n    try:\n        return s*(float(a[0])+float(a[1])/60.0+float(a[2])/3600.0) \n    except:\n        return coord\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 416127,
+                "reputation": 18729,
+                "user_id": 791335,
+                "user_type": "registered",
+                "accept_rate": 73,
+                "display_name": "Darwin Tech"
+            },
+            "comment_count": 3,
+            "is_answered": true,
+            "answer_count": 5,
+            "score": 11,
+            "last_activity_date": 1637270674,
+            "creation_date": 1338563775,
+            "last_edit_date": 1338638673,
+            "question_id": 10852955,
+            "link": "https://stackoverflow.com/questions/10852955/python-batch-convert-gps-positions-to-lat-lon-decimals",
+            "title": "Python - Batch convert GPS positions to Lat Lon decimals",
+            "body": "<p>Hi I have a legacy db with some positional data. The fields are just text fields with strings like this <code>0\u00b025'30\"S, 91\u00b07'W</code>. Is there some way I can convert these to two floating point numbers for <code>Decimal Latitude</code> and <code>Decimal Longitude</code>?</p>\n\n<p>EDIT:</p>\n\n<p>So an example would be:  <code>0\u00b025'30\"S, 91\u00b07'W</code> -> <code>0.425</code>, <code>91.116667</code> where the original single field position yields two floats.</p>\n\n<p>Any help much appreciated.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9590
+}

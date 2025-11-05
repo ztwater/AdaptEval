@@ -1,0 +1,53 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "ssl",
+                "ldap"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 1704246,
+                        "reputation": 3661,
+                        "user_id": 1563654,
+                        "user_type": "registered",
+                        "accept_rate": 42,
+                        "display_name": "Daniel Watrous"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1467341341,
+                    "creation_date": 1467341341,
+                    "answer_id": 38136255,
+                    "question_id": 38130767,
+                    "link": "https://stackoverflow.com/questions/38130767/python-ldap-tls-error-when-ldap-opt-x-tls-require-cert-set-to-ldap-opt-x-tls-nev/38136255#38136255",
+                    "body": "<p>From the python-ldap mailing list:</p>\n\n<blockquote>\n  <p>If you want to set connection-specific TLS parameters you must use</p>\n  \n  <p><code>self.ld.set_option(ldap.OPT_X_TLS_NEWCTX, 0)</code></p>\n  \n  <p>as last call to setoption() with TLS parameter.</p>\n</blockquote>\n\n<p>I ended up with this, which works for both cases</p>\n\n<pre><code>    try:\n        self.ld = ldap.initialize(self.ldap_host)\n        if self.configuration['verify_ssl']['verify']:\n            self.ld.set_option(ldap.OPT_X_TLS_CACERTFILE, self.configuration['verify_ssl']['use'])\n        else:\n            self.ld.set_option(ldap.OPT_X_TLS_REQUIRE_CERT, ldap.OPT_X_TLS_NEVER)\n        self.ld.ldap.set_option(ldap.OPT_X_TLS_NEWCTX, 0)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 1704246,
+                "reputation": 3661,
+                "user_id": 1563654,
+                "user_type": "registered",
+                "accept_rate": 42,
+                "display_name": "Daniel Watrous"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "answer_count": 1,
+            "score": 1,
+            "last_activity_date": 1467341341,
+            "creation_date": 1467311475,
+            "question_id": 38130767,
+            "link": "https://stackoverflow.com/questions/38130767/python-ldap-tls-error-when-ldap-opt-x-tls-require-cert-set-to-ldap-opt-x-tls-nev",
+            "title": "Python LDAP TLS error when ldap.OPT_X_TLS_REQUIRE_CERT set to ldap.OPT_X_TLS_NEVER",
+            "body": "<p>When using python-ldap I am setting ldap.OPT_X_TLS_REQUIRE_CERT set to ldap.OPT_X_TLS_NEVER, but I still get a TLS error. I've tried ldap.set_option and the version you see below. Both produce the same error.</p>\n\n<pre><code>class adldap_connection:\n    def __init__(self, configuration, secure):\n        self.configuration = configuration\n        self.secure = secure\n        self.ldap_host_template = string.Template(self.configuration['host'])\n        if self.secure:\n            self.ldap_host = self.ldap_host_template.substitute(port=self.configuration['secure_port'])\n        else:\n            self.ldap_host = self.ldap_host_template.substitute(port=self.configuration['standard_port'])\n\n    def __enter__(self):\n        try:\n            self.ld = ldap.initialize(self.ldap_host)\n            if self.configuration['verify_ssl']['verify']:\n                self.ld.set_option(ldap.OPT_X_TLS_CACERTFILE, self.configuration['verify_ssl']['use'])\n                print \"ldap.OPT_X_TLS_CACERTFILE = %d\" % ldap.OPT_X_TLS_CACERTFILE\n            else:\n                self.ld.set_option(ldap.OPT_X_TLS_REQUIRE_CERT, ldap.OPT_X_TLS_NEVER)\n                print \"ldap.OPT_X_TLS_REQUIRE_CERT = %d\" % ldap.OPT_X_TLS_REQUIRE_CERT\n                print \"ldap.OPT_X_TLS_NEVER = %d\" % ldap.OPT_X_TLS_NEVER\n                #ldap.set_option(ldap.OPT_X_TLS_NEWCTX, 0)\n\n            self.ld.simple_bind_s(self.configuration['binduser'], self.configuration['bindpassword'])\n        except ldap.LDAPError, error_message:\n            print \"Couldn't Connect. %s \" % error_message\n            print \"Using CA: %s\" % self.configuration['verify_ssl']['use']\n            if (self.configuration['verify_ssl']['use']):\n                print \"File exists: %s\" % os.path.exists(self.configuration['verify_ssl']['use'])\n        return self.ld\n\n    def __exit__(self, exc_type, exc_value, traceback):\n        self.ld.unbind_s()\n</code></pre>\n\n<p>I get this exception</p>\n\n<pre><code>ldap.OPT_X_TLS_REQUIRE_CERT = 24582\nldap.OPT_X_TLS_NEVER = 0\nCouldn't Connect. {'info': \"TLS error -8179:Peer's Certificate issuer is not recognized.\", 'desc': \"Can't contact LDAP server\"}\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7633
+}

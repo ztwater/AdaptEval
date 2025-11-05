@@ -1,0 +1,1217 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "list",
+                "sorting",
+                "median"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 278210,
+                        "reputation": 177367,
+                        "user_id": 572670,
+                        "user_type": "registered",
+                        "accept_rate": 92,
+                        "display_name": "amit"
+                    },
+                    "edited": false,
+                    "score": 2,
+                    "creation_date": 1402175392,
+                    "post_id": 24101524,
+                    "comment_id": 37176432,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python#comment37176432_24101524",
+                    "body": "<a href=\"http://en.wikipedia.org/wiki/Selection_algorithm\" rel=\"nofollow noreferrer\">Selection Algorithm</a>"
+                },
+                {
+                    "owner": {
+                        "account_id": 1962115,
+                        "reputation": 59441,
+                        "user_id": 1763356,
+                        "user_type": "registered",
+                        "accept_rate": 79,
+                        "display_name": "Veedrac"
+                    },
+                    "edited": false,
+                    "score": 14,
+                    "creation_date": 1402190331,
+                    "post_id": 24101524,
+                    "comment_id": 37178479,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python#comment37178479_24101524",
+                    "body": "The answers here are good, so I think I want this to be roughly a canonical answer for finding medians, <a href=\"http://stackoverflow.com/questions/10482339/how-to-find-median\">largely so I could close this</a>. Note that that question has <i>30 thousand</i> views. I&#39;d appreciate if this question wasn&#39;t closed or obliviated in any manner so that it can stay on the search results and suck up those views instead."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 310683,
+                                "reputation": 605,
+                                "user_id": 623805,
+                                "user_type": "registered",
+                                "accept_rate": 29,
+                                "display_name": "J..y B..y"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1560260015,
+                            "post_id": 24101534,
+                            "comment_id": 99671542,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101534#comment99671542_24101534",
+                            "body": "It is highly inefficient though: sorting is much more work in the worst case (Theta(n lg n)) than selecting the median (Theta(n))..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4974350,
+                                "reputation": 4046,
+                                "user_id": 4001177,
+                                "user_type": "registered",
+                                "display_name": "Golden Lion"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1604515022,
+                            "post_id": 24101534,
+                            "comment_id": 114372947,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101534#comment114372947_24101534",
+                            "body": "(I wrote a function with uses mod to determine if an even split can occur) def median(values):   &quot;&quot;&quot;Get the median of a list of values    Args:     values (iterable of float): A list of numbers    Returns:     float   &quot;&quot;&quot;   # Write the median() function   values=values.sort()   n = len(values)   if n%2==0:     median1 = values[n//2]      median2 = values[n//2 - 1]      median = (median1 + median2)/2   else:     median = values[n//2]    return median  print(median([1,2,4,3,5]))"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4581597,
+                        "reputation": 926,
+                        "user_id": 3718382,
+                        "user_type": "registered",
+                        "display_name": "swolfe"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 75,
+                    "last_activity_date": 1604650099,
+                    "last_edit_date": 1604650099,
+                    "creation_date": 1402178952,
+                    "answer_id": 24101534,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101534#24101534",
+                    "body": "<p>The <code>sorted()</code> function is very helpful for this. Use the sorted function\nto order the list, then simply return the middle value (or average the two middle\nvalues if the list contains an even amount of elements).</p>\n<pre><code>def median(lst):\n    sortedLst = sorted(lst)\n    lstLen = len(lst)\n    index = (lstLen - 1) // 2\n   \n    if (lstLen % 2):\n        return sortedLst[index]\n    else:\n        return (sortedLst[index] + sortedLst[index + 1])/2.0\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5002524,
+                                "reputation": 755,
+                                "user_id": 4021086,
+                                "user_type": "registered",
+                                "display_name": "Will S"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1449571917,
+                            "post_id": 24101593,
+                            "comment_id": 56054640,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101593#comment56054640_24101593",
+                            "body": "Simple utility functions probably shouldn&#39;t mutate any arguments (Especially if the function name is a noun IMO). Also using sorted over .sort() means the argument doesn&#39;t have to be a list. It could be any iterator."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5002524,
+                                "reputation": 755,
+                                "user_id": 4021086,
+                                "user_type": "registered",
+                                "display_name": "Will S"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1449574142,
+                            "post_id": 24101593,
+                            "comment_id": 56056195,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101593#comment56056195_24101593",
+                            "body": "My point was about the function mutating the list. I mentioned supporting any iterable as a nice side-affect of sorted, but that&#39;s not it&#39;s main benefit. I for one would expect median(list) to work like almost all other builtins or mathematical functions. next() mutates, but I can&#39;t think of any others. Surprise mutation is a pain in the ass for debugging."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2456564,
+                                "reputation": 178824,
+                                "user_id": 2141635,
+                                "user_type": "registered",
+                                "accept_rate": 69,
+                                "display_name": "Padraic Cunningham"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5002524,
+                                "reputation": 755,
+                                "user_id": 4021086,
+                                "user_type": "registered",
+                                "display_name": "Will S"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1449574285,
+                            "post_id": 24101593,
+                            "comment_id": 56056286,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101593#comment56056286_24101593",
+                            "body": "@WillS, how is it a surprise when it is documented?  What if you are dealing with large data or you have restricted amounts of memory and you cannot make a copy of the list, what then?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5002524,
+                                "reputation": 755,
+                                "user_id": 4021086,
+                                "user_type": "registered",
+                                "display_name": "Will S"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1449575219,
+                            "post_id": 24101593,
+                            "comment_id": 56056895,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101593#comment56056895_24101593",
+                            "body": "Make the function expect a sorted list and document that. <code>mylist.sort(); middle(mylist)</code>, but then it&#39;s undeniably a matter of taste. I just think mutation in general should be reserved for methods as far as is possible. The reason list.sort() returns None instead of the list itself is to make the behaviour as obvious and clear as possible. Hiding everything in documentation is like hiding stuff in small-print."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5002524,
+                                "reputation": 755,
+                                "user_id": 4021086,
+                                "user_type": "registered",
+                                "display_name": "Will S"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2456564,
+                                "reputation": 178824,
+                                "user_id": 2141635,
+                                "user_type": "registered",
+                                "accept_rate": 69,
+                                "display_name": "Padraic Cunningham"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1449575592,
+                            "post_id": 24101593,
+                            "comment_id": 56057139,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101593#comment56057139_24101593",
+                            "body": "Let us <a href=\"http://chat.stackoverflow.com/rooms/97277/discussion-between-will-s-and-padraic-cunningham\">continue this discussion in chat</a>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2456564,
+                        "reputation": 178824,
+                        "user_id": 2141635,
+                        "user_type": "registered",
+                        "accept_rate": 69,
+                        "display_name": "Padraic Cunningham"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": false,
+                    "score": 12,
+                    "last_activity_date": 1431853300,
+                    "last_edit_date": 1431853300,
+                    "creation_date": 1402181337,
+                    "answer_id": 24101593,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101593#24101593",
+                    "body": "<p>You can use the <code>list.sort</code> to avoid creating new lists with <code>sorted</code> and sort the lists in place.</p>\n\n<p>Also you should not use <code>list</code> as a variable name as it shadows  python's own <a href=\"https://docs.python.org/2/tutorial/datastructures.html#more-on-lists\" rel=\"noreferrer\">list</a>.</p>\n\n<pre><code>def median(l):\n    half = len(l) // 2\n    l.sort()\n    if not len(l) % 2:\n        return (l[half - 1] + l[half]) / 2.0\n    return l[half]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 46623,
+                                "reputation": 10672,
+                                "user_id": 137783,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "dartdog"
+                            },
+                            "edited": false,
+                            "score": 10,
+                            "creation_date": 1402184831,
+                            "post_id": 24101655,
+                            "comment_id": 37177678,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101655#comment37177678_24101655",
+                            "body": "While it is not writing a function, it is still a more &quot;pythonic&quot; solution imho"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1962115,
+                                "reputation": 59441,
+                                "user_id": 1763356,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Veedrac"
+                            },
+                            "reply_to_user": {
+                                "account_id": 46623,
+                                "reputation": 10672,
+                                "user_id": 137783,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "dartdog"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1402185746,
+                            "post_id": 24101655,
+                            "comment_id": 37177779,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101655#comment37177779_24101655",
+                            "body": "@dartdog Not really; it&#39;s unadvisable to coerce to a Numpy array without good reason. You&#39;ve coerced types and, worse, lost support for arbitrary types."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 46623,
+                                "reputation": 10672,
+                                "user_id": 137783,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "dartdog"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1402189388,
+                            "post_id": 24101655,
+                            "comment_id": 37178336,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101655#comment37178336_24101655",
+                            "body": "Points taken, useful."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089172,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1424992791,
+                            "post_id": 24101655,
+                            "comment_id": 45790988,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101655#comment45790988_24101655",
+                            "body": "The function is much more laborious than it needs to be, though."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 408085,
+                                "reputation": 9342,
+                                "user_id": 778533,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "tommy.carstensen"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1429637828,
+                            "post_id": 24101655,
+                            "comment_id": 47688746,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101655#comment47688746_24101655",
+                            "body": "@a-j Martijn is right. You can replace <code>if len(lst) %2 == 0:</code> with <code>else:</code>. And you can replace <code>return lst[((len(lst)+1)&#47;2)-1]</code> with <code>return lst[len(lst)&#47;&#47;2]</code> and <code>return float(sum(lst[(len(lst)&#47;2)-1:(len(lst)&#47;2)+1]))&#47;2.0</code> with <code>i = len(lst)&#47;&#47;2; return (lst[i - 1] + lst[i])&#47;2</code>. There is also no need to do <code>len(lst)</code> more than once. Replace all entries with <code>n</code> and do <code>n = len(lst)</code> as the first thing."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 417728,
+                                "reputation": 582,
+                                "user_id": 793889,
+                                "user_type": "registered",
+                                "display_name": "Alex Harvey"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1441790988,
+                            "post_id": 24101655,
+                            "comment_id": 52812470,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101655#comment52812470_24101655",
+                            "body": "<a href=\"https://www.python.org/dev/peps/pep-0450/\" rel=\"nofollow noreferrer\">PEP 450</a> makes a good argument against not using a library. You will eventually make a mistake."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 904672,
+                                "reputation": 987,
+                                "user_id": 939803,
+                                "user_type": "registered",
+                                "accept_rate": 59,
+                                "display_name": "Filipe Manuel"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1515152605,
+                            "post_id": 24101655,
+                            "comment_id": 83201373,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101655#comment83201373_24101655",
+                            "body": "For those who can&#39;t or don&#39;t want install <code>numpy</code> package, <code>statistics.median</code> works very well."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3744512,
+                        "reputation": 19211,
+                        "user_id": 3113477,
+                        "user_type": "registered",
+                        "accept_rate": 97,
+                        "display_name": "A.J. Uppal"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": false,
+                    "score": 198,
+                    "last_activity_date": 1639695227,
+                    "last_edit_date": 1639695227,
+                    "creation_date": 1402183983,
+                    "answer_id": 24101655,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101655#24101655",
+                    "body": "<p>(Works with <strong><a href=\"/questions/tagged/python-2.x\" class=\"post-tag\" title=\"show questions tagged &#39;python-2.x&#39;\" rel=\"tag\">python-2.x</a></strong>):</p>\n<pre><code>def median(lst):\n    n = len(lst)\n    s = sorted(lst)\n    return (s[n//2-1]/2.0+s[n//2]/2.0, s[n//2])[n % 2] if n else None\n</code></pre>\n<hr />\n<pre><code>&gt;&gt;&gt; median([-5, -5, -3, -4, 0, -1])\n-3.5\n</code></pre>\n<hr />\n<p><a href=\"http://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html\" rel=\"noreferrer\"><code>numpy.median()</code></a>:</p>\n<pre><code>&gt;&gt;&gt; from numpy import median\n&gt;&gt;&gt; median([1, -4, -1, -1, 1, -3])\n-1.0\n</code></pre>\n<hr />\n<p>For <a href=\"/questions/tagged/python-3.x\" class=\"post-tag\" title=\"show questions tagged &#39;python-3.x&#39;\" rel=\"tag\">python-3.x</a>, use <a href=\"https://docs.python.org/3/library/statistics.html#statistics.median\" rel=\"noreferrer\"><code>statistics.median</code></a>:</p>\n<pre><code>&gt;&gt;&gt; from statistics import median\n&gt;&gt;&gt; median([5, 2, 3, 8, 9, -2])\n4.0\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1255879,
+                                "reputation": 12798,
+                                "user_id": 1215344,
+                                "user_type": "registered",
+                                "display_name": "james-see"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1560722789,
+                            "post_id": 24101797,
+                            "comment_id": 99818860,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101797#comment99818860_24101797",
+                            "body": "Perfect, worked for me to add it to <code>pip3 install itunizer</code> to add median data to the query results. Cheers"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 14673482,
+                                "reputation": 631,
+                                "user_id": 10597330,
+                                "user_type": "registered",
+                                "display_name": "GilbertS"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1582389859,
+                            "post_id": 24101797,
+                            "comment_id": 106764424,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101797#comment106764424_24101797",
+                            "body": "What if you want to find median of a sorted array. So you cannot use built in function statistics.median because it will slow down while sorting again"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1962115,
+                                "reputation": 59441,
+                                "user_id": 1763356,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Veedrac"
+                            },
+                            "reply_to_user": {
+                                "account_id": 14673482,
+                                "reputation": 631,
+                                "user_id": 10597330,
+                                "user_type": "registered",
+                                "display_name": "GilbertS"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1582401699,
+                            "post_id": 24101797,
+                            "comment_id": 106767924,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101797#comment106767924_24101797",
+                            "body": "@GilbertS Then look at the middle element, or average the middle two."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1962115,
+                        "reputation": 59441,
+                        "user_id": 1763356,
+                        "user_type": "registered",
+                        "accept_rate": 79,
+                        "display_name": "Veedrac"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 331,
+                    "last_activity_date": 1546771928,
+                    "last_edit_date": 1546771928,
+                    "creation_date": 1402186123,
+                    "answer_id": 24101797,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24101797#24101797",
+                    "body": "<p>Python 3.4 has <a href=\"https://docs.python.org/3/library/statistics.html#statistics.median\" rel=\"noreferrer\"><code>statistics.median</code></a>:</p>\n\n<blockquote>\n  <p>Return the median (middle value) of numeric data.</p>\n  \n  <p>When the number of data points is odd, return the middle data point.\n  When the number of data points is even, the median is interpolated by taking the average of the two middle values:</p>\n\n<pre><code>&gt;&gt;&gt; median([1, 3, 5])\n3\n&gt;&gt;&gt; median([1, 3, 5, 7])\n4.0\n</code></pre>\n</blockquote>\n\n<p>Usage:</p>\n\n<pre><code>import statistics\n\nitems = [6, 1, 8, 2, 3]\n\nstatistics.median(items)\n#&gt;&gt;&gt; 3\n</code></pre>\n\n<p>It's pretty careful with types, too:</p>\n\n<pre><code>statistics.median(map(float, items))\n#&gt;&gt;&gt; 3.0\n\nfrom decimal import Decimal\nstatistics.median(map(Decimal, items))\n#&gt;&gt;&gt; Decimal('3')\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 83409,
+                                "reputation": 1173,
+                                "user_id": 233871,
+                                "user_type": "registered",
+                                "display_name": "Max"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1534522083,
+                            "post_id": 24102011,
+                            "comment_id": 90749450,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24102011#comment90749450_24102011",
+                            "body": "So why even think about this if sort() is faster?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1962115,
+                                "reputation": 59441,
+                                "user_id": 1763356,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Veedrac"
+                            },
+                            "reply_to_user": {
+                                "account_id": 83409,
+                                "reputation": 1173,
+                                "user_id": 233871,
+                                "user_type": "registered",
+                                "display_name": "Max"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1534592115,
+                            "post_id": 24102011,
+                            "comment_id": 90766547,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24102011#comment90766547_24102011",
+                            "body": "@Max If you&#39;re using PyPy, or some type you can&#39;t <code>sort</code> easily, or willing to write a C extension for speed, etc."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1962115,
+                        "reputation": 59441,
+                        "user_id": 1763356,
+                        "user_type": "registered",
+                        "accept_rate": 79,
+                        "display_name": "Veedrac"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 11,
+                    "last_activity_date": 1402188574,
+                    "creation_date": 1402188574,
+                    "answer_id": 24102011,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/24102011#24102011",
+                    "body": "<p>You can try the <a href=\"http://en.wikipedia.org/wiki/Quickselect\" rel=\"noreferrer\">quickselect</a> algorithm if faster average-case running times are needed. Quickselect has average (and best) case performance <code>O(n)</code>, although it can end up <code>O(n\u00b2)</code> on a bad day.</p>\n\n<p>Here's an implementation with a randomly chosen pivot:</p>\n\n<pre><code>import random\n\ndef select_nth(n, items):\n    pivot = random.choice(items)\n\n    lesser = [item for item in items if item &lt; pivot]\n    if len(lesser) &gt; n:\n        return select_nth(n, lesser)\n    n -= len(lesser)\n\n    numequal = items.count(pivot)\n    if numequal &gt; n:\n        return pivot\n    n -= numequal\n\n    greater = [item for item in items if item &gt; pivot]\n    return select_nth(n, greater)\n</code></pre>\n\n<p>You can trivially turn this into a method to find medians:</p>\n\n<pre><code>def median(items):\n    if len(items) % 2:\n        return select_nth(len(items)//2, items)\n\n    else:\n        left  = select_nth((len(items)-1) // 2, items)\n        right = select_nth((len(items)+1) // 2, items)\n\n        return (left + right) / 2\n</code></pre>\n\n<p>This is very unoptimised, but it's not likely that even an optimised version will outperform Tim Sort (CPython's built-in <code>sort</code>) because that's <em>really fast</em>. I've tried before and I lost.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 441885,
+                                "reputation": 60711,
+                                "user_id": 832230,
+                                "user_type": "registered",
+                                "display_name": "Asclepius"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1644466182,
+                            "post_id": 26362998,
+                            "comment_id": 125616287,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/26362998#comment125616287_26362998",
+                            "body": "This has avoidable duplication of function calls which can be very expensive in time."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5174251,
+                        "reputation": 17,
+                        "user_id": 4141934,
+                        "user_type": "registered",
+                        "display_name": "Fred Beck"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1413295921,
+                    "creation_date": 1413295921,
+                    "answer_id": 26362998,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/26362998#26362998",
+                    "body": "<p>I defined a median function for a list of numbers as</p>\n\n<pre><code>def median(numbers):\n    return (sorted(numbers)[int(round((len(numbers) - 1) / 2.0))] + sorted(numbers)[int(round((len(numbers) - 1) // 2.0))]) / 2.0\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 186937,
+                                "reputation": 3847,
+                                "user_id": 424632,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "musiphil"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1444285993,
+                            "post_id": 29870273,
+                            "comment_id": 53840484,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/29870273#comment53840484_29870273",
+                            "body": "<code>float(sum(\u2026) &#47; 2)</code> should be replaced with <code>sum(\u2026) &#47; 2.0</code>; otherwise, if <code>sum(\u2026)</code> is an integer, you&#39;ll get a float version of the integer quotient. For example: <code>float(sum([3, 4]) &#47; 2)</code> is <code>3.0</code>, but <code>sum([3, 4]) &#47; 2.0</code> is <code>3.5</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3197248,
+                                "reputation": 483,
+                                "user_id": 2700168,
+                                "user_type": "registered",
+                                "display_name": "Chris L. Barnes"
+                            },
+                            "reply_to_user": {
+                                "account_id": 186937,
+                                "reputation": 3847,
+                                "user_id": 424632,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "musiphil"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1509996468,
+                            "post_id": 29870273,
+                            "comment_id": 81238667,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/29870273#comment81238667_29870273",
+                            "body": "For completeness, @musiphil: only in python 2, and only if you haven&#39;t done <code>from __future__ import division</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6204155,
+                        "reputation": 147,
+                        "user_id": 4832830,
+                        "user_type": "unregistered",
+                        "display_name": "Batuhan Ulug"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 13,
+                    "last_activity_date": 1474297398,
+                    "last_edit_date": 1474297398,
+                    "creation_date": 1429993084,
+                    "answer_id": 29870273,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/29870273#29870273",
+                    "body": "<p>Here's a cleaner solution:</p>\n\n<pre><code>def median(lst):\n    quotient, remainder = divmod(len(lst), 2)\n    if remainder:\n        return sorted(lst)[quotient]\n    return sum(sorted(lst)[quotient - 1:quotient + 1]) / 2.\n</code></pre>\n\n<p>Note: Answer changed to incorporate suggestion in comments.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6343336,
+                        "reputation": 29,
+                        "user_id": 4924626,
+                        "user_type": "registered",
+                        "display_name": "\u042e\u0440\u0438\u0439 \u041c\u043e\u0439\u0434\u043e\u043c \u041a\u0438\u0435\u0432"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1432216545,
+                    "creation_date": 1432216545,
+                    "answer_id": 30375878,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/30375878#30375878",
+                    "body": "<p><strong>median Function</strong></p>\n\n<pre><code>def median(midlist):\n    midlist.sort()\n    lens = len(midlist)\n    if lens % 2 != 0: \n        midl = (lens / 2)\n        res = midlist[midl]\n    else:\n        odd = (lens / 2) -1\n        ev = (lens / 2) \n        res = float(midlist[odd] + midlist[ev]) / float(2)\n    return res\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7678081,
+                        "reputation": 91,
+                        "user_id": 5818263,
+                        "user_type": "registered",
+                        "display_name": "user5818263"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1453338104,
+                    "last_edit_date": 1495541891,
+                    "creation_date": 1453334428,
+                    "answer_id": 34913011,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/34913011#34913011",
+                    "body": "<p>I posted my solution at <a href=\"https://stackoverflow.com/questions/10806303/python-implementation-of-median-of-medians-algorithm/34911527#34911527\">Python implementation of &quot;median of medians&quot; algorithm</a> , which is a little bit faster than using sort().  My solution uses 15 numbers per column, for a speed ~5N which is faster than the speed ~10N of using 5 numbers per column.  The optimal speed is ~4N, but I could be wrong about it.</p>\n\n<p>Per Tom's request in his comment, I added my code here, for reference.  I believe the critical part for speed is using 15 numbers per column, instead of 5.</p>\n\n<pre><code>#!/bin/pypy\n#\n# TH @stackoverflow, 2016-01-20, linear time \"median of medians\" algorithm\n#\nimport sys, random\n\n\nitems_per_column = 15\n\n\ndef find_i_th_smallest( A, i ):\n    t = len(A)\n    if(t &lt;= items_per_column):\n        # if A is a small list with less than items_per_column items, then:\n        #\n        # 1. do sort on A\n        # 2. find i-th smallest item of A\n        #\n        return sorted(A)[i]\n    else:\n        # 1. partition A into columns of k items each. k is odd, say 5.\n        # 2. find the median of every column\n        # 3. put all medians in a new list, say, B\n        #\n        B = [ find_i_th_smallest(k, (len(k) - 1)/2) for k in [A[j:(j + items_per_column)] for j in range(0,len(A),items_per_column)]]\n\n        # 4. find M, the median of B\n        #\n        M = find_i_th_smallest(B, (len(B) - 1)/2)\n\n\n        # 5. split A into 3 parts by M, { &lt; M }, { == M }, and { &gt; M }\n        # 6. find which above set has A's i-th smallest, recursively.\n        #\n        P1 = [ j for j in A if j &lt; M ]\n        if(i &lt; len(P1)):\n            return find_i_th_smallest( P1, i)\n        P3 = [ j for j in A if j &gt; M ]\n        L3 = len(P3)\n        if(i &lt; (t - L3)):\n            return M\n        return find_i_th_smallest( P3, i - (t - L3))\n\n\n# How many numbers should be randomly generated for testing?\n#\nnumber_of_numbers = int(sys.argv[1])\n\n\n# create a list of random positive integers\n#\nL = [ random.randint(0, number_of_numbers) for i in range(0, number_of_numbers) ]\n\n\n# Show the original list\n#\n# print L\n\n\n# This is for validation\n#\n# print sorted(L)[int((len(L) - 1)/2)]\n\n\n# This is the result of the \"median of medians\" function.\n# Its result should be the same as the above.\n#\nprint find_i_th_smallest( L, (len(L) - 1) / 2)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 90162,
+                        "reputation": 58444,
+                        "user_id": 248296,
+                        "user_type": "registered",
+                        "accept_rate": 72,
+                        "display_name": "warvariuc"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1457092250,
+                    "creation_date": 1457092250,
+                    "answer_id": 35795334,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/35795334#35795334",
+                    "body": "<pre><code>def median(array):\n    \"\"\"Calculate median of the given list.\n    \"\"\"\n    # TODO: use statistics.median in Python 3\n    array = sorted(array)\n    half, odd = divmod(len(array), 2)\n    if odd:\n        return array[half]\n    return (array[half - 1] + array[half]) / 2.0\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 8524150,
+                        "reputation": 31,
+                        "user_id": 6390076,
+                        "user_type": "registered",
+                        "display_name": "BynderRox"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1464339161,
+                    "creation_date": 1464339161,
+                    "answer_id": 37479057,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/37479057#37479057",
+                    "body": "<p>Here what I came up with during this exercise in Codecademy:</p>\n\n<pre><code>def median(data):\n    new_list = sorted(data)\n    if len(new_list)%2 &gt; 0:\n        return new_list[len(new_list)/2]\n    elif len(new_list)%2 == 0:\n        return (new_list[(len(new_list)/2)] + new_list[(len(new_list)/2)-1]) /2.0\n\nprint median([1,2,3,4,5,9])\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 363391,
+                                "reputation": 222042,
+                                "user_id": 707111,
+                                "user_type": "moderator",
+                                "accept_rate": 100,
+                                "display_name": "Ry-"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1528490028,
+                            "post_id": 41836964,
+                            "comment_id": 88543482,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/41836964#comment88543482_41836964",
+                            "body": "Is this bubble sort? Why?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8658606,
+                                "reputation": 588,
+                                "user_id": 6481925,
+                                "user_type": "registered",
+                                "display_name": "ravi tanwar"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1541222592,
+                            "post_id": 41836964,
+                            "comment_id": 93151533,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/41836964#comment93151533_41836964",
+                            "body": "why are you swapping values ?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7546947,
+                        "reputation": 1769,
+                        "user_id": 5729613,
+                        "user_type": "registered",
+                        "accept_rate": 72,
+                        "display_name": "I Like"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": -2,
+                    "last_activity_date": 1485284736,
+                    "creation_date": 1485284736,
+                    "answer_id": 41836964,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/41836964#41836964",
+                    "body": "<p>Here's the tedious way to find median without using the <code>median</code> function: </p>\n\n<pre><code>def median(*arg):\n    order(arg)\n    numArg = len(arg)\n    half = int(numArg/2)\n    if numArg/2 ==half:\n        print((arg[half-1]+arg[half])/2)\n    else:\n        print(int(arg[half]))\n\ndef order(tup):\n    ordered = [tup[i] for i in range(len(tup))]\n    test(ordered)\n    while(test(ordered)):\n        test(ordered)\n    print(ordered)\n\n\ndef test(ordered):\n    whileloop = 0 \n    for i in range(len(ordered)-1):\n        print(i)\n        if (ordered[i]&gt;ordered[i+1]):\n            print(str(ordered[i]) + ' is greater than ' + str(ordered[i+1]))\n            original = ordered[i+1]\n            ordered[i+1]=ordered[i]\n            ordered[i]=original\n            whileloop = 1 #run the loop again if you had to switch values\n    return whileloop\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1619089,
+                        "reputation": 857,
+                        "user_id": 1496061,
+                        "user_type": "registered",
+                        "display_name": "Dan"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1493830499,
+                    "creation_date": 1493830499,
+                    "answer_id": 43765931,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/43765931#43765931",
+                    "body": "<p>I had some problems with lists of float values. I ended up using a code snippet from the python3 <a href=\"https://docs.python.org/3/library/statistics.html#statistics.median\" rel=\"nofollow noreferrer\">statistics.median</a> and is working perfect with float values without imports. <a href=\"https://github.com/python/cpython/blob/3.6/Lib/statistics.py\" rel=\"nofollow noreferrer\">source</a></p>\n\n<pre><code>def calculateMedian(list):\n    data = sorted(list)\n    n = len(data)\n    if n == 0:\n        return None\n    if n % 2 == 1:\n        return data[n // 2]\n    else:\n        i = n // 2\n        return (data[i - 1] + data[i]) / 2\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 14552,
+                        "reputation": 87023,
+                        "user_id": 30038,
+                        "user_type": "registered",
+                        "accept_rate": 96,
+                        "display_name": "Vlad Bezden"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 19,
+                    "last_activity_date": 1677947918,
+                    "last_edit_date": 1677947918,
+                    "creation_date": 1516555356,
+                    "answer_id": 48369590,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/48369590#48369590",
+                    "body": "<p>Of course in Python3 you can use built in functions, but if you are using Python2 or just would like to create your own you can do something like this. The trick here is to use ~ operator that flip positive number to negative. For instance ~2 -&gt; -3 and using negative in for list in Python will count items from the end. So if you have mid == 2 then it will take third element from beginning and third item from the end.</p>\n<pre><code>def median(data):\n    data.sort()\n    mid = len(data) // 2\n    return (data[mid] + data[~mid]) / 2.0\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5532713,
+                        "reputation": 21,
+                        "user_id": 4392190,
+                        "user_type": "registered",
+                        "display_name": "vk123"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1518976815,
+                    "creation_date": 1518976815,
+                    "answer_id": 48854874,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/48854874#48854874",
+                    "body": "<pre><code>def midme(list1):\n\n    list1.sort()\n    if len(list1)%2&gt;0:\n            x = list1[int((len(list1)/2))]\n    else:\n            x = ((list1[int((len(list1)/2))-1])+(list1[int(((len(list1)/2)))]))/2\n    return x\n\n\nmidme([4,5,1,7,2])\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1483797,
+                                "reputation": 4068,
+                                "user_id": 1392490,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "rollstuhlfahrer"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1523051818,
+                            "post_id": 49701475,
+                            "comment_id": 86416566,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/49701475#comment86416566_49701475",
+                            "body": "While this code may answer the question, providing additional context regarding why and/or how this code answers the question improves its long-term value."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 13304388,
+                                "reputation": 47,
+                                "user_id": 9604772,
+                                "user_type": "registered",
+                                "display_name": "Luke Willey"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1483797,
+                                "reputation": 4068,
+                                "user_id": 1392490,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "rollstuhlfahrer"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1523057993,
+                            "post_id": 49701475,
+                            "comment_id": 86418322,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/49701475#comment86418322_49701475",
+                            "body": "I&#39;m very sorry! I just started, Stack Overflow, and I don&#39;t know how to add a summary...."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8643622,
+                                "reputation": 6345,
+                                "user_id": 6471538,
+                                "user_type": "registered",
+                                "display_name": "Robert Columbia"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1523065307,
+                            "post_id": 49701475,
+                            "comment_id": 86419561,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/49701475#comment86419561_49701475",
+                            "body": "Click the &quot;Edit&quot; link below your post and add a summary, then save."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 13304388,
+                        "reputation": 47,
+                        "user_id": 9604772,
+                        "user_type": "registered",
+                        "display_name": "Luke Willey"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1523051796,
+                    "last_edit_date": 1523051796,
+                    "creation_date": 1523051721,
+                    "answer_id": 49701475,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/49701475#49701475",
+                    "body": "<pre><code>def median(array):\n    if len(array) &lt; 1:\n        return(None)\n    if len(array) % 2 == 0:\n        median = (array[len(array)//2-1: len(array)//2+1])\n        return sum(median) / len(median)\n    else:\n        return(array[len(array)//2])\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 14418050,
+                        "reputation": 91,
+                        "user_id": 10414939,
+                        "user_type": "registered",
+                        "display_name": "Bulent"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 9,
+                    "last_activity_date": 1556120708,
+                    "last_edit_date": 1556120708,
+                    "creation_date": 1537899754,
+                    "answer_id": 52504560,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/52504560#52504560",
+                    "body": "<pre><code>def median(x):\n    x = sorted(x)\n    listlength = len(x) \n    num = listlength//2\n    if listlength%2==0:\n        middlenum = (x[num]+x[num-1])/2\n    else:\n        middlenum = x[num]\n    return middlenum\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3845998,
+                                "reputation": 1672,
+                                "user_id": 3187537,
+                                "user_type": "registered",
+                                "display_name": "Saurabh Jain"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1546507486,
+                            "post_id": 53673144,
+                            "comment_id": 94874902,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/53673144#comment94874902_53673144",
+                            "body": "Median requires you to sort your array before you find the midpoint."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11446782,
+                                "reputation": 1495,
+                                "user_id": 8390408,
+                                "user_type": "registered",
+                                "display_name": "Farhan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1549469538,
+                            "post_id": 53673144,
+                            "comment_id": 95915568,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/53673144#comment95915568_53673144",
+                            "body": "<code>sList</code> return the sorted array. Doesn&#39;t return the median"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 11446782,
+                        "reputation": 1495,
+                        "user_id": 8390408,
+                        "user_type": "registered",
+                        "display_name": "Farhan"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": -3,
+                    "last_activity_date": 1546714688,
+                    "last_edit_date": 1546714688,
+                    "creation_date": 1544199067,
+                    "answer_id": 53673144,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/53673144#53673144",
+                    "body": "<p>It is very simple;</p>\n\n<pre><code>def median(alist):\n    #to find median you will have to sort the list first\n    sList = sorted(alist)\n    first = 0\n    last = len(sList)-1\n    midpoint = (first + last)//2\n    return midpoint\n</code></pre>\n\n<p>And you can use the return value like this <code>median = median(anyList)</code></p>\n"
+                },
+                {
+                    "owner": {
+                        "user_type": "does_not_exist",
+                        "display_name": "user1464878"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1566803552,
+                    "creation_date": 1566803552,
+                    "answer_id": 57653285,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/57653285#57653285",
+                    "body": "<pre><code>import numpy as np\ndef get_median(xs):\n        mid = len(xs) // 2  # Take the mid of the list\n        if len(xs) % 2 == 1: # check if the len of list is odd\n            return sorted(xs)[mid] #if true then mid will be median after sorting\n        else:\n            #return 0.5 * sum(sorted(xs)[mid - 1:mid + 1])\n            return 0.5 * np.sum(sorted(xs)[mid - 1:mid + 1]) #if false take the avg of mid\nprint(get_median([7, 7, 3, 1, 4, 5]))\nprint(get_median([1,2,3, 4,5]))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 10843733,
+                                "reputation": 732,
+                                "user_id": 7974073,
+                                "user_type": "registered",
+                                "display_name": "Chandan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1636138266,
+                            "post_id": 60238109,
+                            "comment_id": 123485699,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/60238109#comment123485699_60238109",
+                            "body": "The logic needs to be corrected , some of the below answers [upvoted] has the correct logic ,  &quot;even&quot;  check needs to be done on length , else it fails for  ex . for [1,2,3]  it returns 2.5 expected answer is 2."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 17768655,
+                        "reputation": 7,
+                        "user_id": 12902872,
+                        "user_type": "registered",
+                        "display_name": "fati"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1633835323,
+                    "last_edit_date": 1633835323,
+                    "creation_date": 1581764606,
+                    "answer_id": 60238109,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/60238109#60238109",
+                    "body": "<p><strong>Function median</strong>:</p>\n<pre><code>def median(d):\n    d=np.sort(d)\n    n2=int(len(d)/2)\n    r=n2%2\n    if (r==0):\n        med=d[n2] \n    else:\n        med=(d[n2] + d[n2+1]) / 2\n    return med\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 10430020,
+                        "reputation": 456,
+                        "user_id": 7715212,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "Gabriel123"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1587557235,
+                    "creation_date": 1587557235,
+                    "answer_id": 61364742,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/61364742#61364742",
+                    "body": "<p>In case you need additional information on the distribution of your list, the percentile method will probably be useful. And a median value corresponds to the 50th percentile of a list:</p>\n\n<pre><code>import numpy as np\na = np.array([1,2,3,4,5,6,7,8,9])\nmedian_value = np.percentile(a, 50) # return 50th percentile\nprint median_value \n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 16624757,
+                        "reputation": 1330,
+                        "user_id": 12014156,
+                        "user_type": "registered",
+                        "display_name": "conmak"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1588880801,
+                    "creation_date": 1588880801,
+                    "answer_id": 61666463,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/61666463#61666463",
+                    "body": "<p>A more generalized approach for median (and percentiles) would be:</p>\n\n<pre><code>def get_percentile(data, percentile):\n    # Get the number of observations\n    cnt=len(data)\n    # Sort the list\n    data=sorted(data)\n    # Determine the split point\n    i=(cnt-1)*percentile\n    # Find the `floor` of the split point\n    diff=i-int(i)\n    # Return the weighted average of the value above and below the split point\n    return data[int(i)]*(1-diff)+data[int(i)+1]*(diff)\n\n# Data\ndata=[1,2,3,4,5]\n# For the median\nprint(get_percentile(data=data, percentile=.50))\n# &gt; 3\nprint(get_percentile(data=data, percentile=.75))\n# &gt; 4\n\n# Note the weighted average difference when an int is not returned by the percentile\nprint(get_percentile(data=data, percentile=.51))\n# &gt; 3.04\n\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 11878656,
+                        "reputation": 682,
+                        "user_id": 8692957,
+                        "user_type": "registered",
+                        "display_name": "The AG"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1644466043,
+                    "last_edit_date": 1644466043,
+                    "creation_date": 1593991018,
+                    "answer_id": 62747318,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/62747318#62747318",
+                    "body": "<p>A simple function to return the median of the given list:</p>\n<pre class=\"lang-py prettyprint-override\"><code>def median(lst):\n    lst = sorted(lst)  # Sort the list first\n    if len(lst) % 2 == 0:  # Checking if the length is even\n        # Applying formula which is sum of middle two divided by 2\n        return (lst[len(lst) // 2] + lst[(len(lst) - 1) // 2]) / 2\n    else:\n        # If length is odd then get middle value\n        return lst[len(lst) // 2]\n</code></pre>\n<p>Some examples with the <code>median</code> function:</p>\n<pre class=\"lang-py prettyprint-override\"><code>&gt;&gt;&gt; median([9, 12, 20, 21, 34, 80])  # Even\n20.5\n&gt;&gt;&gt; median([9, 12, 80, 21, 34])  # Odd\n21\n</code></pre>\n<p>If you want to use library you can just simply do:</p>\n<pre class=\"lang-py prettyprint-override\"><code>&gt;&gt;&gt; import statistics\n&gt;&gt;&gt; statistics.median([9, 12, 20, 21, 34, 80])  # Even\n20.5\n&gt;&gt;&gt; statistics.median([9, 12, 80, 21, 34])  # Odd\n21\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 12191040,
+                        "reputation": 196,
+                        "user_id": 8898509,
+                        "user_type": "registered",
+                        "display_name": "Rt.Tong"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1644466094,
+                    "last_edit_date": 1644466094,
+                    "creation_date": 1600309935,
+                    "answer_id": 63930431,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/63930431#63930431",
+                    "body": "<p>Just two lines are enough.</p>\n<pre><code>def get_median(arr):\n    '''\n    Calculate the median of a sequence.\n    :param arr: list\n    :return: int or float\n    '''\n    arr = sorted(arr)\n    return arr[len(arr)//2] if len(arr) % 2 else (arr[len(arr)//2] + arr[len(arr)//2-1])/2\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 12511931,
+                        "reputation": 4143,
+                        "user_id": 9106684,
+                        "user_type": "registered",
+                        "display_name": "duyuanchao"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1644466310,
+                    "last_edit_date": 1644466310,
+                    "creation_date": 1601829370,
+                    "answer_id": 64197204,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/64197204#64197204",
+                    "body": "<p>Implement it:</p>\n<pre><code>def median(numbers):\n    &quot;&quot;&quot;\n    Calculate median of a list numbers.\n    :param numbers: the numbers to be calculated.\n    :return: median value of numbers.\n\n    &gt;&gt;&gt; median([1, 3, 3, 6, 7, 8, 9])\n    6\n    &gt;&gt;&gt; median([1, 2, 3, 4, 5, 6, 8, 9])\n    4.5\n    &gt;&gt;&gt; import statistics\n    &gt;&gt;&gt; import random\n    &gt;&gt;&gt; numbers = random.sample(range(-50, 50), k=100)\n    &gt;&gt;&gt; statistics.median(numbers) == median(numbers)\n    True\n    &quot;&quot;&quot;\n    numbers = sorted(numbers)\n    mid_index = len(numbers) // 2\n    return (\n        (numbers[mid_index] + numbers[mid_index - 1]) / 2 if mid_index % 2 == 0\n        else numbers[mid_index]\n    )\n\n\nif __name__ == &quot;__main__&quot;:\n    from doctest import testmod\n\n    testmod()\n</code></pre>\n<p><a href=\"https://github.com/examplehub/Python/blob/master/maths/median.py\" rel=\"nofollow noreferrer\">source from</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 8959242,
+                                "reputation": 3168,
+                                "user_id": 6682517,
+                                "user_type": "registered",
+                                "display_name": "Sergey Shubin"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1604645528,
+                            "post_id": 64709867,
+                            "comment_id": 114415482,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/64709867#comment114415482_64709867",
+                            "body": "Welcome to Stack Overflow! Please, check that your solution was not already proposed as another answer like this <a href=\"https://stackoverflow.com/a/24101534/6682517\">one</a>. Also <code>if len(a) &#47; 2 != int</code> is always <code>True</code> because integer or float <i>value</i> cannot be equal to integer <i>class</i>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 19910292,
+                        "reputation": 9,
+                        "user_id": 14588434,
+                        "user_type": "registered",
+                        "display_name": "CodingCuber"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1644466650,
+                    "last_edit_date": 1644466650,
+                    "creation_date": 1604644312,
+                    "answer_id": 64709867,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/64709867#64709867",
+                    "body": "<p>What I did was this:</p>\n<pre><code>def median(a):\n    a = sorted(a)\n    if len(a) / 2 != int:\n        return a[len(a) / 2]\n    else:\n        return (a[len(a) / 2] + a[(len(a) / 2) - 1]) / 2\n</code></pre>\n<p><strong>Explanation:</strong> Basically if the number of items in the list is odd, return the middle number, otherwise, if you half an even list, python automatically rounds the higher number so we know the number before that will be one less (since we sorted it) and we can add the default higher number and the number lower than it and divide them by 2 to find the median.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 16615247,
+                        "reputation": 29,
+                        "user_id": 12007117,
+                        "user_type": "registered",
+                        "display_name": "Romesh Borawake"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1644466548,
+                    "last_edit_date": 1644466548,
+                    "creation_date": 1619500634,
+                    "answer_id": 67277343,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/67277343#67277343",
+                    "body": "<p>Simply, Create a Median Function with an argument as a list of the number and call the function.</p>\n<pre><code>def median(l):\n    l = sorted(l)\n    lent = len(l)\n    if (lent % 2) == 0:\n        m = int(lent / 2)\n        result = l[m]\n    else:\n        m = int(float(lent / 2) - 0.5)\n        result = l[m]\n    return result\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 441885,
+                                "reputation": 60711,
+                                "user_id": 832230,
+                                "user_type": "registered",
+                                "display_name": "Asclepius"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1644466634,
+                            "post_id": 70422609,
+                            "comment_id": 125616358,
+                            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/70422609#comment125616358_70422609",
+                            "body": "Does this require a sorted array?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 20307144,
+                        "reputation": 903,
+                        "user_id": 14895107,
+                        "user_type": "registered",
+                        "display_name": "Abhimanyu Sharma"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1640007136,
+                    "creation_date": 1640007136,
+                    "answer_id": 70422609,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/70422609#70422609",
+                    "body": "<p>Try This</p>\n<pre><code>import math\ndef find_median(arr):\n    if len(arr)%2==1:\n        med=math.ceil(len(arr)/2)-1\n        return arr[med]\n    else:\n        return -1\nprint(find_median([1,2,3,4,5,6,7,8]))\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 13045207,
+                        "reputation": 1104,
+                        "user_id": 9427260,
+                        "user_type": "registered",
+                        "display_name": "Devil"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1710319054,
+                    "creation_date": 1710319054,
+                    "answer_id": 78152267,
+                    "question_id": 24101524,
+                    "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python/78152267#78152267",
+                    "body": "<h2>Using Numpy : Fastest way</h2>\n<pre><code>import numpy as np\nm = np.median([0, 2, 5, 6, 8, 9, 9])\nprint(&quot;ans:&quot;, m)\n# ans: 6.0\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 4213621,
+                "reputation": 2899,
+                "user_id": 3450574,
+                "user_type": "registered",
+                "display_name": "ChucksPlace"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "answer_count": 29,
+            "score": 285,
+            "last_activity_date": 1710319054,
+            "creation_date": 1402175045,
+            "last_edit_date": 1402187567,
+            "question_id": 24101524,
+            "link": "https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python",
+            "title": "Finding median of list in Python",
+            "body": "<p>How do you find the median of a list in Python? The list can be of any size and the numbers are not guaranteed to be in any particular order.</p>\n\n<p>If the list contains an even number of elements, the function should return the average of the middle two.</p>\n\n<p>Here are some examples (sorted for display purposes):</p>\n\n<pre><code>median([1]) == 1\nmedian([1, 1]) == 1\nmedian([1, 1, 2, 4]) == 1.5\nmedian([0, 2, 5, 6, 8, 9, 9]) == 6\nmedian([0, 0, 0, 0, 4, 4, 6, 8]) == 2\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8458
+}

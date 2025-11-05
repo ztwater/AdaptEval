@@ -1,0 +1,10 @@
+-- Checking for module 'gstreamer-base-0.10'
+--   No package 'gstreamer-base-0.10' found
+-- Checking for module 'gstreamer-video-0.10'
+--   No package 'gstreamer-video-0.10' found
+-- Checking for module 'gstreamer-app-0.10'
+--   No package 'gstreamer-app-0.10' found
+-- Checking for module 'gstreamer-riff-0.10'
+--   No package 'gstreamer-riff-0.10' found
+-- Checking for module 'gstreamer-pbutils-0.10'
+--   No package 'gstreamer-pbutils-0.10' found

@@ -1,0 +1,154 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "function",
+                "arguments",
+                "code-inspection"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 1530005,
+                        "reputation": 247845,
+                        "user_id": 1427416,
+                        "user_type": "registered",
+                        "accept_rate": 56,
+                        "display_name": "BrenBarn"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1398195668,
+                    "post_id": 23228664,
+                    "comment_id": 35538110,
+                    "link": "https://stackoverflow.com/questions/23228664/how-to-check-which-arguments-a-function-method-takes#comment35538110_23228664",
+                    "body": "Look at <a href=\"https://docs.python.org/2/library/inspect.html#inspect.getargspec\" rel=\"nofollow noreferrer\"><code>inspect.getargspec</code></a> and other functions in that module."
+                },
+                {
+                    "owner": {
+                        "account_id": 1814662,
+                        "reputation": 52313,
+                        "user_id": 1650012,
+                        "user_type": "registered",
+                        "accept_rate": 67,
+                        "display_name": "kramer65"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1398196377,
+                    "post_id": 23228664,
+                    "comment_id": 35538482,
+                    "link": "https://stackoverflow.com/questions/23228664/how-to-check-which-arguments-a-function-method-takes#comment35538482_23228664",
+                    "body": "I understand that there&#39;s a duplicate of this, but I simply didn&#39;t find it because I didn&#39;t know what a signature is. I can imagine there are more people with the same deficit, so I would propose to leave this question open for future readers."
+                },
+                {
+                    "owner": {
+                        "account_id": 118410,
+                        "reputation": 63849,
+                        "user_id": 309412,
+                        "user_type": "registered",
+                        "accept_rate": 74,
+                        "display_name": "Lie Ryan"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1398204702,
+                    "post_id": 23228664,
+                    "comment_id": 35542712,
+                    "link": "https://stackoverflow.com/questions/23228664/how-to-check-which-arguments-a-function-method-takes#comment35542712_23228664",
+                    "body": "@kramer65: duplicate questions are not deleted for the reasons you mentioned, basically the duplicate questions are kept to become link baits for search engine for people that uses different search keywords than the canonical answer."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1109016,
+                                "reputation": 2385,
+                                "user_id": 1099820,
+                                "user_type": "registered",
+                                "accept_rate": 49,
+                                "display_name": "Brian Reinhold"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1651265740,
+                            "post_id": 23228684,
+                            "comment_id": 127331907,
+                            "link": "https://stackoverflow.com/questions/23228664/how-to-check-which-arguments-a-function-method-takes/23228684#comment127331907_23228684",
+                            "body": "I just get a series of errors when I do all forms of inspect. &#39;No signature found ...&#39; but I know the method takes arguments"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089202,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1109016,
+                                "reputation": 2385,
+                                "user_id": 1099820,
+                                "user_type": "registered",
+                                "accept_rate": 49,
+                                "display_name": "Brian Reinhold"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1651334469,
+                            "post_id": 23228684,
+                            "comment_id": 127342525,
+                            "link": "https://stackoverflow.com/questions/23228664/how-to-check-which-arguments-a-function-method-takes/23228684#comment127342525_23228684",
+                            "body": "@BrianReinhold: examples please? Are you trying to use this on a  built-in object perhaps?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 35417,
+                        "reputation": 1089202,
+                        "user_id": 100297,
+                        "user_type": "moderator",
+                        "display_name": "Martijn Pieters"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 40,
+                    "last_activity_date": 1398197818,
+                    "last_edit_date": 1398197818,
+                    "creation_date": 1398195652,
+                    "answer_id": 23228684,
+                    "question_id": 23228664,
+                    "link": "https://stackoverflow.com/questions/23228664/how-to-check-which-arguments-a-function-method-takes/23228684#23228684",
+                    "body": "<p>You can use <a href=\"https://docs.python.org/2/library/inspect.html#inspect.getargspec\" rel=\"noreferrer\"><code>inspect.getargspec()</code></a> to see what arguments are accepted, and any default values for keyword arguments.</p>\n\n<p>Demo:</p>\n\n<pre><code>&gt;&gt;&gt; def foo(bar, baz, spam='eggs', **kw): pass\n... \n&gt;&gt;&gt; import inspect\n&gt;&gt;&gt; inspect.getargspec(foo)\nArgSpec(args=['bar', 'baz', 'spam'], varargs=None, keywords='kw', defaults=('eggs',))\n&gt;&gt;&gt; inspect.getargspec(foo).args\n['bar', 'baz', 'spam']\n</code></pre>\n\n<p>In Python 3, you want to use <a href=\"https://docs.python.org/3/library/inspect.html#inspect.getfullargspec\" rel=\"noreferrer\"><code>inspect.getfullargspec()</code></a> as this method supports new Python 3 function argument features:</p>\n\n<pre><code>&gt;&gt;&gt; def foo(bar: str, baz: list, spam: str = 'eggs', *, monty: str = 'python', **kw) -&gt; None: pass\n... \n&gt;&gt;&gt; import inspect\n&gt;&gt;&gt; inspect.getfullargspec(foo)\nFullArgSpec(args=['bar', 'baz', 'spam'], varargs=None, varkw='kw', defaults=('eggs',), kwonlyargs=['monty'], kwonlydefaults={'monty': 'python'}, annotations={'baz': &lt;class 'list'&gt;, 'return': None, 'spam': &lt;class 'str'&gt;, 'monty': &lt;class 'str'&gt;, 'bar': &lt;class 'str'&gt;})\n</code></pre>\n\n<p><code>inspect.getargspec()</code> should be considered deprecated in Python 3. </p>\n\n<p>Python 3.4 adds the <a href=\"https://docs.python.org/3/library/inspect.html#introspecting-callables-with-the-signature-object\" rel=\"noreferrer\"><code>inspect.Signature()</code> object</a>:</p>\n\n<pre><code>&gt;&gt;&gt; inspect.signature(foo)\n&lt;inspect.Signature object at 0x100bda588&gt;\n&gt;&gt;&gt; str(inspect.signature(foo))\n\"(bar:str, baz:list, spam:str='eggs', *, monty:str='python', **kw) -&gt; None\"\n&gt;&gt;&gt; inspect.signature(foo).parameters\nmappingproxy(OrderedDict([('bar', &lt;Parameter at 0x100bd67c8 'bar'&gt;), ('baz', &lt;Parameter at 0x100bd6ea8 'baz'&gt;), ('spam', &lt;Parameter at 0x100bd69f8 'spam'&gt;), ('monty', &lt;Parameter at 0x100bd6c28 'monty'&gt;), ('kw', &lt;Parameter at 0x100bd6548 'kw'&gt;)]))\n</code></pre>\n\n<p>and many more interesting options to play with signatures.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 1814662,
+                "reputation": 52313,
+                "user_id": 1650012,
+                "user_type": "registered",
+                "accept_rate": 67,
+                "display_name": "kramer65"
+            },
+            "comment_count": 3,
+            "is_answered": true,
+            "closed_date": 1398209693,
+            "accepted_answer_id": 23228684,
+            "answer_count": 1,
+            "score": 20,
+            "last_activity_date": 1398243473,
+            "creation_date": 1398195584,
+            "last_edit_date": 1398243473,
+            "question_id": 23228664,
+            "link": "https://stackoverflow.com/questions/23228664/how-to-check-which-arguments-a-function-method-takes",
+            "closed_reason": "Duplicate",
+            "title": "How to check which arguments a function/method takes?",
+            "body": "<p>To keep a couple modules I'm building in Python a bit consistent I want to do some automated code checking. For this I want to check the modules for their functions and the arguments the functions take. I can use hasattr() to check whether the module actually contains the expected functions. So far so good.</p>\n\n<p>I now want to see which arguments the functions take. It would be enough to simply see the variable names. I have no idea how I would be able to do this though. Does anybody know how I can get the names of the arguments a function takes?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5964
+}

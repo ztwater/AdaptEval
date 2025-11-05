@@ -1,0 +1,161 @@
+{
+    "items": [
+        {
+            "tags": [
+                "kubernetes",
+                "airflow",
+                "amazon-eks"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5026876,
+                                "reputation": 321,
+                                "user_id": 4038506,
+                                "user_type": "registered",
+                                "accept_rate": 55,
+                                "display_name": "Ricc"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1552509212,
+                            "post_id": 55149915,
+                            "comment_id": 97041809,
+                            "link": "https://stackoverflow.com/questions/55149113/kubernetespodoperator-pod-in-version-v1-cannot-be-handled-as-a-pod-v1-pod-s/55149915#comment97041809_55149915",
+                            "body": "yea it works guess it wrong format parsing mess it up"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5026876,
+                                "reputation": 321,
+                                "user_id": 4038506,
+                                "user_type": "registered",
+                                "accept_rate": 55,
+                                "display_name": "Ricc"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1553017525,
+                            "post_id": 55149915,
+                            "comment_id": 97226937,
+                            "link": "https://stackoverflow.com/questions/55149113/kubernetespodoperator-pod-in-version-v1-cannot-be-handled-as-a-pod-v1-pod-s/55149915#comment97226937_55149915",
+                            "body": "can u check this <a href=\"https://stackoverflow.com/questions/55230150/no-such-file-or-directory-airflow-xcom-return-json\" title=\"no such file or directory airflow xcom return json\">stackoverflow.com/questions/55230150/&hellip;</a>?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 13021257,
+                        "reputation": 1847,
+                        "user_id": 10675601,
+                        "user_type": "registered",
+                        "display_name": "Frank Yucheng Gu"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1552505592,
+                    "creation_date": 1552505592,
+                    "answer_id": 55149915,
+                    "question_id": 55149113,
+                    "link": "https://stackoverflow.com/questions/55149113/kubernetespodoperator-pod-in-version-v1-cannot-be-handled-as-a-pod-v1-pod-s/55149915#55149915",
+                    "body": "<p>Ah, great to find another using Airflow on EKS!! </p>\n\n<p>I am also running a similar Airflow workload and can confirm that KubernetesPodOperator is supported with AWS EKS. </p>\n\n<p>Looking at the response, I think perhaps the API call to create the pod either got mangled or your python code included incorrect argument types when instantiating the KubernetesPodOperator.</p>\n\n<p>I decoded your pod definition (correct me if wrong):</p>\n\n<pre><code>---\napiVersion: v1\nkind: Pod\nmetadata:\n  name: fail-422f98fc\n  labels: {}\n  annotations: {}\nspec:\n  containers:\n  - name: base\n    image: python:3.6.6-stretch\n    command: echo\n    imagePullPolicy: IfNotPresent\n    args: '10'\n  restartPolicy: Never\n  nodeSelector: {}\n  volumes: []\n  serviceAccountName: default\n  affinity: {}\n</code></pre>\n\n<p>Your should wrap your \"command\" and \"args\" in square brackets as below:</p>\n\n<pre><code>---\napiVersion: v1\nkind: Pod\nmetadata:\n  name: fail-422f98fc\n  labels: {}\n  annotations: {}\nspec:\n  containers:\n  - name: base\n    image: python:3.6.6-stretch\n    command: ['echo']\n    imagePullPolicy: IfNotPresent\n    args: ['10']\n  restartPolicy: Never\n  nodeSelector: {}\n  volumes: []\n  serviceAccountName: default\n  affinity: {}\n</code></pre>\n\n<p>Hope this helps!</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 9049946,
+                                "reputation": 4815,
+                                "user_id": 6740589,
+                                "user_type": "registered",
+                                "display_name": "subtleseeker"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1626350708,
+                            "post_id": 66517921,
+                            "comment_id": 120872764,
+                            "link": "https://stackoverflow.com/questions/55149113/kubernetespodoperator-pod-in-version-v1-cannot-be-handled-as-a-pod-v1-pod-s/66517921#comment120872764_66517921",
+                            "body": "This is weird, but this was the issue for me too. I was building a test pod in minikube v1.22.0."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1713048,
+                        "reputation": 1394,
+                        "user_id": 1570688,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "bluelurker"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1615129491,
+                    "creation_date": 1615129491,
+                    "answer_id": 66517921,
+                    "question_id": 55149113,
+                    "link": "https://stackoverflow.com/questions/55149113/kubernetespodoperator-pod-in-version-v1-cannot-be-handled-as-a-pod-v1-pod-s/66517921#66517921",
+                    "body": "<p>I got this error when the value of the environment variable was not surrounded with quotes.</p>\n<pre><code>- name: sonic\n    image: nginx\n    env:\n    - name: NGINX_PORT\n      value: 8080    // &quot;8080&quot;  fixed it\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4373999,
+                                "reputation": 1006,
+                                "user_id": 3567477,
+                                "user_type": "registered",
+                                "display_name": "Surendra Babu Parchuru"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1675107913,
+                            "post_id": 73544849,
+                            "comment_id": 132853734,
+                            "link": "https://stackoverflow.com/questions/55149113/kubernetespodoperator-pod-in-version-v1-cannot-be-handled-as-a-pod-v1-pod-s/73544849#comment132853734_73544849",
+                            "body": "for me also it is spacing issue , we should make sure provided proper indentation"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 21026996,
+                        "reputation": 55,
+                        "user_id": 15452154,
+                        "user_type": "registered",
+                        "display_name": "John"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1661872713,
+                    "creation_date": 1661872713,
+                    "answer_id": 73544849,
+                    "question_id": 55149113,
+                    "link": "https://stackoverflow.com/questions/55149113/kubernetespodoperator-pod-in-version-v1-cannot-be-handled-as-a-pod-v1-pod-s/73544849#73544849",
+                    "body": "<p>I had that error while I didn't put space between &quot;containerPort:&quot; and the port number</p>\n<pre><code> spec:\n   containers:\n    - name: webserver1\n     image: nginx:1.6\n     ports:\n       - containerPort:80 // &quot;- containerPort: 80&quot; fixed it\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 5026876,
+                "reputation": 321,
+                "user_id": 4038506,
+                "user_type": "registered",
+                "accept_rate": 55,
+                "display_name": "Ricc"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "answer_count": 3,
+            "score": 8,
+            "last_activity_date": 1661872713,
+            "creation_date": 1552502326,
+            "question_id": 55149113,
+            "link": "https://stackoverflow.com/questions/55149113/kubernetespodoperator-pod-in-version-v1-cannot-be-handled-as-a-pod-v1-pod-s",
+            "title": "KubernetesPodOperator Pod in version \\&quot;v1\\&quot; cannot be handled as a Pod: v1.Pod.Spec",
+            "body": "<p>Using Airflow to run the KubernetesPodOperator on AWS EKS\ngetting kubernetes.client.rest.ApiException: (400), states that Pod in version \\\"v1\\\" cannot be handled as a Pod: v1.Pod.Spec.\nIs aws-eks not supporting this type of pod creation?</p>\n\n<p>Here is the full log</p>\n\n<pre><code>[2019-03-13 01:13:47,991] {models.py:1593} INFO - Executing \n&lt;Task(KubernetesPodOperator): failing-task&gt; on 2019-03- \n13T01:12:33.980710+00:00\n[2019-03-13 01:13:47,991] {base_task_runner.py:118} INFO - Running: \n['bash', '-c', 'airflow run testkuberete2 failing-task 2019-03- \n13T01:12:33.980710+00:00 --job_id 20 --raw -sd DAGS_FOLDER/test- \nkubepodopptest5.py --cfg_path /tmp/tmpmwb4uzk0']\n[2019-03-13 01:13:48,415] {base_task_runner.py:101} INFO - Job 20: \nSubtask failing-task [2019-03-13 01:13:48,415] {settings.py:174} INFO - \nsettings.configure_orm(): Using pool settings. pool_size=5, \npool_recycle=3600, pid=408\n[2019-03-13 01:13:48,864] {base_task_runner.py:101} INFO - Job 20: \nSubtask failing-task [2019-03-13 01:13:48,863] {__init__.py:51} INFO - \nUsing executor CeleryExecutor\n[2019-03-13 01:13:49,115] {base_task_runner.py:101} INFO - Job 20: \nSubtask failing-task [2019-03-13 01:13:49,114] {models.py:273} INFO - \nFilling up the DagBag from /usr/local/airflow/dags/test- \nkubepodopptest5.py\n[2019-03-13 01:13:49,473] {base_task_runner.py:101} INFO - Job 20: \nSubtask failing-task [2019-03-13 01:13:49,473] {cli.py:520} INFO - \nRunning &lt;TaskInstance: testkuberete2.failing-task 2019-03- \n13T01:12:33.980710+00:00 [running]&gt; on host airflow-worker-1.airflow- \nworker.rguonew.svc.cluster.local\n</code></pre>\n\n<p>I wrote some custom log to inspect what got send to the EKS:</p>\n\n<pre><code>[2019-03-13 01:13:49,782] {logging_mixin.py:95} INFO - [2019-03-13 \n01:13:49,781] {api_client.py:117} ERROR - header_params {Accept \napplication/json}\n[2019-03-13 01:13:49,782] {logging_mixin.py:95} INFO - [2019-03-13 \n01:13:49,782] {api_client.py:117} ERROR - header_params {Content-Type \napplication/json}\n[2019-03-13 01:13:49,782] {logging_mixin.py:95} INFO - [2019-03-13 \n01:13:49,782] {api_client.py:117} ERROR - header_params {User-Agent \nSwagger-Codegen/8.0.1/python}\n\n [2019-03-13 01:13:49,782] {logging_mixin.py:95} INFO - [2019-03-13 \n 01:13:49,782] {api_client.py:128} ERROR - resource_path {namespace \n rguonew}\n\n[2019-03-13 01:13:49,782] {logging_mixin.py:95} INFO - [2019-03-13 \n   01:13:49,782] {api_client.py:151} ERROR - body {{'apiVersion': 'v1', \n   'kind': 'Pod', 'metadata': {'name': 'fail-422f98fc', 'labels': {}, \n    'annotations': {}}, 'spec': {'containers': [{'name': 'base', \n  'image': \n   'python:3.6.6-stretch', 'command': 'echo', 'imagePullPolicy': \n   'IfNotPresent', 'args': '10'}], 'restartPolicy': 'Never', \n   'nodeSelector': {}, 'volumes': [], 'serviceAccountName': 'default', \n    'affinity': {}}}}\n\n[2019-03-13 01:13:49,782] {logging_mixin.py:95} INFO - [2019-03-13 \n01:13:49,782] {api_client.py:155} ERROR - url \n{https://xxxxxxxxxxxx.xxxx.us-east- \n1.eks.amazonaws.com/api/v1/namespaces/rguonew/pods}\n[2019-03-13 01:13:49,838] {logging_mixin.py:95} INFO - [2019-03-13 \n01:13:49,823] {pod_launcher.py:58} ERROR - Exception when attempting to \ncreate Namespaced Pod.\n</code></pre>\n\n<blockquote>\n  <p>Traceback</p>\n</blockquote>\n\n<pre><code>Traceback (most recent call last):\nFile \"/usr/local/lib/python3.6/site- \npackages/airflow/contrib/kubernetes/pod_launcher.py\", line 55, in \nrun_pod_async\nresp = self._client.create_namespaced_pod(body=req, \nnamespace=pod.namespace)\nFile \"/usr/local/lib/python3.6/site- \npackages/kubernetes/client/apis/core_v1_api.py\", line 6115, in \ncreate_namespaced_pod\n(data) = self.create_namespaced_pod_with_http_info(namespace, body, \n**kwargs)\n\nFile \"/usr/local/lib/python3.6/site- \npackages/kubernetes/client/apis/core_v1_api.py\", line 6206, in \ncreate_namespaced_pod_with_http_info\ncollection_formats=collection_formats)\nFile \"/usr/local/lib/python3.6/site- \npackages/kubernetes/client/api_client.py\", line 329, in call_api\n_return_http_data_only, collection_formats, _preload_content, \n_request_timeout)\nFile \"/usr/local/lib/python3.6/site-packages/kubernetes/client/ap\n\ni_client.py\", line 163, in __call_api\n    _request_timeout=_request_timeout)\n  File \"/usr/local/lib/python3.6/site- \npackages/kubernetes/client/api_client.py\", line 372, in request\n    body=body)\n  File \"/usr/local/lib/python3.6/site- \npackages/kubernetes/client/rest.py\", line 266, in POST\n    body=body)\n  File \"/usr/local/lib/python3.6/site- \npackages/kubernetes/client/rest.py\", line 222, in request\n    raise ApiException(http_resp=r)\nkubernetes.client.rest.ApiException: (400)\nReason: Bad Request\n</code></pre>\n\n<p><strong>The Response:</strong></p>\n\n<pre><code>HTTP response headers: HTTPHeaderDict({'Audit-Id': '96f8ffee-3e65-47a7- \nbb3c-fe519281ee45', 'Content-Type': 'application/json', 'Date': 'Wed, \n13 Mar 2019 01:13:49 GMT', 'Content-Length': '491'})\nHTTP response body: {\"kind\":\"Status\",\"apiVersion\":\"v1\",\"metadata\": \n{},\"status\":\"Failure\",\"message\":\"Pod in version \\\"v1\\\" cannot be \nhandled as a Pod: v1.Pod.Spec: v1.PodSpec.Containers: []v1.Container: \nv1.Container.Command: []string: decode slice: expect [ or n, but found \n\\\", error found in #10 byte of ...|ommand\\\": \\\"echo\\\", \\\"im|..., bigger \ncontext ...|se\\\", \\\"image\\\": \\\"python:3.6.6-stretch\\\", \\\"command\\\": \n\\\"echo\\\", \\\"imagePullPolicy\\\": \\\"IfNotPresent\\\", \\\"args\\\": \n|...\",\"reason\":\"BadRequest\",\"code\":400}\n[2019-03-13 01:13:49,838] {logging_mixin.py:95} INFO - \n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8363
+}

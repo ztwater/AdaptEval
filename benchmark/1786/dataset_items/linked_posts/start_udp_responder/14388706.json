@@ -1,0 +1,1845 @@
+{
+    "items": [
+        {
+            "tags": [
+                "linux",
+                "windows",
+                "sockets",
+                "unix",
+                "portability"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1373587345,
+                            "post_id": 14388707,
+                            "comment_id": 25624997,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment25624997_14388707",
+                            "body": "There&#39;s a TON of good information here.  Sadly some of the details are wrong."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "edited": false,
+                            "score": 11,
+                            "creation_date": 1373588024,
+                            "post_id": 14388707,
+                            "comment_id": 25625153,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment25625153_14388707",
+                            "body": "For example, &quot;source address&quot; really should be &quot;local address&quot;, the next three fields likewise.  Binding with <code>INADDR_ANY</code> doesn&#39;t bind existing local addresses, but all future ones as well.  <code>listen</code> certainly creates sockets with the same exact protocol, local address, and local port, even though you said that isn&#39;t possible."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "edited": false,
+                            "score": 10,
+                            "creation_date": 1374835868,
+                            "post_id": 14388707,
+                            "comment_id": 26108255,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment26108255_14388707",
+                            "body": "@Ben Source and Destination are the official terms used for IP addressing (to which I primary refer). Local and Remote would make no sense, since the Remote address can in fact be a &quot;Local&quot; address and the opposite of Destination is Source and not Local. I don&#39;t know what your issue is with <code>INADDR_ANY</code>, I <b>never</b> said it would not bind to future addresses. And <code>listen</code> does not create any sockets at all, which makes your whole sentence a little bit strange."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1374844676,
+                            "post_id": 14388707,
+                            "comment_id": 26113391,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment26113391_14388707",
+                            "body": "@Mecki: It&#39;s actually the <code>listen</code>/<code>accept</code> pair that works together to create sockets.  As far as <code>source</code> and <code>destination</code>, sockets are bidirectional.  Identifying the <i>socket</i> using the terminology from only <i>half the packets</i> is bad.  A packet has a source and destination address, but a connection (and therefore also a connected socket) has a local and a peer address."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1374844844,
+                            "post_id": 14388707,
+                            "comment_id": 26113513,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment26113513_14388707",
+                            "body": "And where you said about <code>INADDR_ANY</code> -- &quot;it is bound to all <i>existing</i> local addresses&quot; should be changed to &quot;it is bound to all local addresses, existing <b>and future</b>&quot;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1374846013,
+                            "post_id": 14388707,
+                            "comment_id": 26114315,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment26114315_14388707",
+                            "body": "@Ben When a new address is added to the system, it is also an &quot;existing local address&quot;, it just started to exist. I did not say &quot;to all <b>currently</b> existing local addresses&quot;. Actually I even say that the socket is in fact really bound to the <i>wildcard</i>, which means the socket is bound to whatever matches this wildcard, now, tomorrow and in hundred years. Similar for source and destination, you are just nitpicking here. Do you have any real technical contribution to make?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "edited": false,
+                            "score": 10,
+                            "creation_date": 1374846968,
+                            "post_id": 14388707,
+                            "comment_id": 26115049,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment26115049_14388707",
+                            "body": "@Mecki: You really think that the word <i>existing</i> includes things that do not exist now but will in the future?  Source and destination is not a nitpick.  When incoming packets are matched to a socket, you&#39;re saying that the destination address in the packet will be matched against a &quot;source&quot; address of the socket?  That&#39;s wrong and you know it, you already said that <i>source</i> and <i>destination</i> are opposites.  The <i>local</i> address on the socket is matched against the <i>destination address</i> of incoming packets, and placed in the <i>source</i> address on outgoing packets."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1374847052,
+                            "post_id": 14388707,
+                            "comment_id": 26115119,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment26115119_14388707",
+                            "body": "And you still haven&#39;t dealt with <code>listen</code>/<code>accept</code>, which creates a huge exception to your claims concerning uniqueness of the protocol/source address/source port set (more properly protocol/local address/local port)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1374852179,
+                            "post_id": 14388707,
+                            "comment_id": 26118703,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment26118703_14388707",
+                            "body": "@Ben If <i>existing</i> is confusing you, and I think you are the only one it is confusing, go and change it; I won&#39;t. And the dest addr of an incoming packet <b>IS</b> matched against the src addr of the socket, that&#39;s not wrong, since the src addr of a socket in my answer <b>IS</b> exactly what you call the local addr. A socket just has an address it is bound to and whether you name it src addr or local addr doesn&#39;t change the fact what it is, how it works, or what it is used for."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 205831,
+                                "reputation": 45909,
+                                "user_id": 454780,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "trusktr"
+                            },
+                            "reply_to_user": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1376899183,
+                            "post_id": 14388707,
+                            "comment_id": 26865842,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment26865842_14388707",
+                            "body": "@Mecki&#39;s answer makes sense @BenVoigt. You&#39;re right Ben: the source on one machine is the destination on another and vice versa, but irrelevant in this case. Mecki is talking about <code>SO_REUSEPORT</code> and <code>SO_REUSEADDR</code> on one machine, not on two machines; from the perspective of a single machine (after all, in most cases you only control one machine (your server) which talks to other machines you don&#39;t control (clients))."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "reply_to_user": {
+                                "account_id": 205831,
+                                "reputation": 45909,
+                                "user_id": 454780,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "trusktr"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1376921658,
+                            "post_id": 14388707,
+                            "comment_id": 26878130,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment26878130_14388707",
+                            "body": "@trusktr: No, it&#39;s not &quot;the source on one machine is the destination on the other&quot;.  From the perspective of a single machine, &quot;the source on incoming packets is the destination on outgoing packets, and all of them pass through the same socket&quot;.  So you can&#39;t generalize to saying &quot;the source address for this socket&quot;.  What you have is a local address, and a peer address, and that perspective only changes when you move to the other end of the connection."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1377000157,
+                            "post_id": 14388707,
+                            "comment_id": 26910661,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment26910661_14388707",
+                            "body": "@Ben You are talking about packets, but I&#39;ve never been talking about packets, I was talking about sockets. The source address of the socket is the source address of outgoing packets and the destination address of incoming packets, but it is always the source address for the socket, because in one case the socket is the sender and in the other case it is the recipient and depending on its role, the terms source and destination have different meanings."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "edited": false,
+                            "score": 13,
+                            "creation_date": 1377008618,
+                            "post_id": 14388707,
+                            "comment_id": 26916100,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment26916100_14388707",
+                            "body": "@Mecki: That makes so much more sense if you say &quot;The local address of the socket is the source address of outgoing packets and the destination address of incoming packets&quot;.  Packets have source and destination addresses.  Hosts, and sockets on hosts, don&#39;t.  For datagram sockets both peers are equal.  For TCP sockets, because of the three-way handshake, there&#39;s an originator (client) and a responder (server), but that still doesn&#39;t mean the connection or connected sockets have a <i>source</i> and <i>destination</i> either, because traffic flows both ways."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2612706,
+                                "reputation": 7791,
+                                "user_id": 2262522,
+                                "user_type": "registered",
+                                "accept_rate": 77,
+                                "display_name": "zer0uno"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1384367915,
+                            "post_id": 14388707,
+                            "comment_id": 29711884,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment29711884_14388707",
+                            "body": "&#39;Note that binding a socket to exactly the same address and port as dying socket in TIME_WAIT state can have unexpected, and usually undesired, side effects in case the other socket is still &quot;at work&quot;&#39; Can somebody make me an example of what could happen? Or where can I find more info?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2612706,
+                                "reputation": 7791,
+                                "user_id": 2262522,
+                                "user_type": "registered",
+                                "accept_rate": 77,
+                                "display_name": "zer0uno"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1384870849,
+                            "post_id": 14388707,
+                            "comment_id": 29903024,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment29903024_14388707",
+                            "body": "@antox E.g. if the socket in TIME_WAIT state receives another packet (which may still happen, it isn&#39;t dead yet), this packet may be consumed by the other socket bound to the same address, which means the TIME_WAIT socket never sees it (even though it was meant for it) and the other socket may incorrectly reacts to this packet (e.g. act according to the TCP header flags, goes into an error state, closes itself, etc.)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1548079,
+                                "reputation": 130488,
+                                "user_id": 1441122,
+                                "user_type": "registered",
+                                "display_name": "Stuart Marks"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1418780740,
+                            "post_id": 14388707,
+                            "comment_id": 43464181,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment43464181_14388707",
+                            "body": "Apparently SO_REUSEPORT now exists in Solaris. It may have been added in Solaris 11."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 135559,
+                                "reputation": 742,
+                                "user_id": 1261305,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "ASBai"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1419317024,
+                            "post_id": 14388707,
+                            "comment_id": 43652242,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment43652242_14388707",
+                            "body": "Windows ignores TIME_WAIT connections by default, so you don&#39;t need to use the SO_REUSEADDR option on a server program before bind to an address and port."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 135559,
+                                "reputation": 742,
+                                "user_id": 1261305,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "ASBai"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1420738199,
+                            "post_id": 14388707,
+                            "comment_id": 44096017,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment44096017_14388707",
+                            "body": "@ASBai Do you have an official source for that (e.g. is it in the docs somewhere) or have you just found out about that fact by using the API?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 135559,
+                                "reputation": 742,
+                                "user_id": 1261305,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "ASBai"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1420828741,
+                            "post_id": 14388707,
+                            "comment_id": 44136533,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment44136533_14388707",
+                            "body": "@Mecki It&#39;s just a simple fact, and you can test it by yourself easily. I have been write many network service for windows, and I even know many windows only programers, who do not even know about this option. If you only live in the msw world, you do not need to know this option almostly. :-)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 31460,
+                                "reputation": 2963,
+                                "user_id": 86375,
+                                "user_type": "registered",
+                                "accept_rate": 25,
+                                "display_name": "Cameron"
+                            },
+                            "reply_to_user": {
+                                "account_id": 135559,
+                                "reputation": 742,
+                                "user_id": 1261305,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "ASBai"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1424312419,
+                            "post_id": 14388707,
+                            "comment_id": 45501621,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment45501621_14388707",
+                            "body": "@ASBai you still need to use SO_REUSEADDR if you hope to bind two processes to the same addr/port on Windows."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 135559,
+                                "reputation": 742,
+                                "user_id": 1261305,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "ASBai"
+                            },
+                            "reply_to_user": {
+                                "account_id": 31460,
+                                "reputation": 2963,
+                                "user_id": 86375,
+                                "user_type": "registered",
+                                "accept_rate": 25,
+                                "display_name": "Cameron"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1424414215,
+                            "post_id": 14388707,
+                            "comment_id": 45547654,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment45547654_14388707",
+                            "body": "@Cameron that&#39;s right, I just said: &quot;Windows ignores <b>TIME_WAIT</b> connections by default...&quot; :-)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 316665,
+                                "reputation": 88125,
+                                "user_id": 632951,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Pacerier"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1442569644,
+                            "post_id": 14388707,
+                            "comment_id": 53144928,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment53144928_14388707",
+                            "body": "@Mecki, Where did you get the term &quot;<i>Linger Time</i>&quot;  from?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 316665,
+                                "reputation": 88125,
+                                "user_id": 632951,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Pacerier"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1442589844,
+                            "post_id": 14388707,
+                            "comment_id": 53157794,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment53157794_14388707",
+                            "body": "@Pacerier The option is named &quot;Linger&quot; and it is a time value, hence the &quot;Linger Time&quot;. Search for &quot;linger time&quot; and you will get plenty of hits all over the Internet (including hits on the IETF mailing list)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 31703,
+                                "reputation": 1447,
+                                "user_id": 87280,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "Good Person"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1451439280,
+                            "post_id": 14388707,
+                            "comment_id": 56784962,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment56784962_14388707",
+                            "body": "minor nit: TIME_WAIT isn&#39;t for the <i>send</i> buffer - its for the <i>recv</i> buffer. Since TCP packets for a maximum of up to 2 minutes acc&#39; to the RFC there may still be packets in flight for the same connections.  If application A opens a socket and starts talking on cxtn C and then application B opens the same socket it may get data destined for A.  The Send buffer is irrelevant here."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 316665,
+                                "reputation": 88125,
+                                "user_id": 632951,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Pacerier"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1453538771,
+                            "post_id": 14388707,
+                            "comment_id": 57653535,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment57653535_14388707",
+                            "body": "@Mecki, Just a couple of clarifications: <b>Q1)</b> On BSD, if socket-A has already bound to <code>192.168.1.0:21</code> using <code>SO_REUSEADDR</code>, can socket-B come along and try to bind to <code>0.0.0.0:21</code> <b>without using</b> <code>SO_REUSEADDR</code>? <b>Q2)</b> On BSD, if socket-A has already bound to <code>192.168.1.0:21</code> using <b>both</b> <code>SO_REUSEPORT</code> and <code>SO_REUSEADDR</code>, can socket-B with <code>SO_REUSEPORT</code> but without <code>SO_REUSEADDR</code> come along and try to bind to <code>0.0.0.0:21</code>?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 316665,
+                                "reputation": 88125,
+                                "user_id": 632951,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Pacerier"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1453538781,
+                            "post_id": 14388707,
+                            "comment_id": 57653538,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment57653538_14388707",
+                            "body": "<b>Q3)</b> Is it that on BSD there&#39;s absolutely no way to get 2 connections of all-5-tuple equal even with <code>SO_REUSEPORT</code>? And this is true of all OS too? <b>Q4)</b> You wrote that if a socket is connected to <code>0.0.0.0</code>, the system will pick &quot;an appropriate source address&quot;. Is it right to say that it&#39;s always either <code>127.0.0.1</code> or <code>::1</code>? <b>Q5)</b> You wrote that to prevent port hijacking, Linux only allows <code>SO_REUSEPORT</code> for processes that share the same effective user ID. What about BSD&#39;s defenses against port hijacking?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4301737,
+                                "reputation": 1925,
+                                "user_id": 3515313,
+                                "user_type": "registered",
+                                "accept_rate": 97,
+                                "display_name": "aDoN"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1456505466,
+                            "post_id": 14388707,
+                            "comment_id": 58995112,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment58995112_14388707",
+                            "body": "What linux application can I use to test the REUSEPORT? Neither netcat not socat allow doing that. Thank you"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4476101,
+                                "reputation": 106,
+                                "user_id": 3641224,
+                                "user_type": "registered",
+                                "display_name": "rht"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1474138435,
+                            "post_id": 14388707,
+                            "comment_id": 66412841,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment66412841_14388707",
+                            "body": "@Mecki For LINUX Two sockets can be bound to the same local/source ip address (wildcard address too) and port if they both have SO_REUSEADDR option set, except when one of them is already listening for connections before binding to the second port. If you bind a socket to a specific ip address and port then listen on that socket and then try to bind another socket to the same specific ip address and port, the second call to bind will fail. BUT you can first bind the two sockets to the same ip address and port and then can listen on any one of them."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4476101,
+                                "reputation": 106,
+                                "user_id": 3641224,
+                                "user_type": "registered",
+                                "display_name": "rht"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1474138931,
+                            "post_id": 14388707,
+                            "comment_id": 66412978,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment66412978_14388707",
+                            "body": "@Mecki And in the contrary to what you said in your answer for LINUX, it is not possible to first bind a listening TCP socket to a specific IP address and port combination and later on bind another one to a wildcard IP address and the same port. I tried that and the second call to bind failed. So you cannot bind a socket to the same address and port as another socket or wildcard address and port, if the other socket is already listening for connections even if both the sockets have SO_REUSEADDR option set. For this, you&#39;ll need SO_REUSEPORT option set for both the sockets."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 43750,
+                                "reputation": 18144,
+                                "user_id": 128028,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Viet"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1492858793,
+                            "post_id": 14388707,
+                            "comment_id": 74167890,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment74167890_14388707",
+                            "body": "Awesome answer. A minor point from my practical experience:  &gt; you could say that <code>SO_REUSEADDR</code> implies <code>SO_REUSEPORT</code> for all multicast addresses and the other way round.  This is not right and you have to set <code>SO_REUSEPORT</code> explicitly. Try on Mac OS :)  <code>#define\tSO_REUSEADDR\t0x0004\t\t&#47;* allow local address reuse *&#47;</code>  <code>#define\tSO_REUSEPORT\t0x0200\t\t&#47;* allow local address &amp; port reuse *&#47;</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4476101,
+                                "reputation": 106,
+                                "user_id": 3641224,
+                                "user_type": "registered",
+                                "display_name": "rht"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1493045575,
+                            "post_id": 14388707,
+                            "comment_id": 74232262,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment74232262_14388707",
+                            "body": "@rht Post owner is always informed of comments, no need for @Mecki. That listening blocks all reuse has always been in my reply (<b>check history</b>, that was my first exception). How could you overlook that? And that <code>ADDRREUSE</code> works like <code>PORTREUSE</code> for some cases was there as well (but I admit, not covering all cases). I made the text now more foolproof but I didn\u2019t really revise any statements, just added more details. I don&#39;t see how your comment ever contradicted anything I&#39;ve wrote, basically you just pointed out how Linux is different and that&#39;s the same I&#39;ve done already."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4476101,
+                                "reputation": 106,
+                                "user_id": 3641224,
+                                "user_type": "registered",
+                                "display_name": "rht"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1493045930,
+                            "post_id": 14388707,
+                            "comment_id": 74232535,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment74232535_14388707",
+                            "body": "@rht E.g. <i>And in the contrary to what you said in your answer for LINUX, it is not possible to first bind a listening TCP socket to a specific IP address and port combination and later on bind another one to a wildcard IP address and the same port.</i> - where in the world did I ever claim so? Please provide the exact quote (all edit history is available). I said this is possible for BSD and it is, I never said this is possible for Linux, did I? I said the opposite, I said once a socket is listening, you cannot bind with just <code>REUSESADDR</code>, contrary to BSD (you can with <code>REUSEPORT</code>!)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 43750,
+                                "reputation": 18144,
+                                "user_id": 128028,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Viet"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1493046949,
+                            "post_id": 14388707,
+                            "comment_id": 74233248,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment74233248_14388707",
+                            "body": "@Viet Like I said in your other answer (I lust don&#39;t want to leave your comment uncommented here), I did test it and it works exactly like I said. Here&#39;s the code (still WIP, I try to make it even more cross platform):  codepad.org/PJbOp5gW and here&#39;s the output for the code multicast loop codepad.org/mTZeJajB Everyone with a Mac is free to verify that result. W/O either option set, it always fails but it always succeeds with one option set and it doesn&#39;t matter which one."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 43750,
+                                "reputation": 18144,
+                                "user_id": 128028,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Viet"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1493071009,
+                            "post_id": 14388707,
+                            "comment_id": 74246968,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment74246968_14388707",
+                            "body": "@Mecki: Here&#39;s the code for my subscriber/listener:  <a href=\"http://codepad.org/GY8HSF7X\" rel=\"nofollow noreferrer\">codepad.org/GY8HSF7X</a>  And the code for my publisher:  <a href=\"http://codepad.org/pkS0M2v5\" rel=\"nofollow noreferrer\">codepad.org/pkS0M2v5</a>  When using <code>SO_REUSEADDR </code>, I get <code>bind: Address already in use</code>. When using <code>SO_REUSEPORT</code>, the problem goes away.  I&#39;m on MacOS Sierra."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 43750,
+                                "reputation": 18144,
+                                "user_id": 128028,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Viet"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1493108221,
+                            "post_id": 14388707,
+                            "comment_id": 74259581,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment74259581_14388707",
+                            "body": "@Viet You are binding the socket to <code>INADDR_ANY</code> and not to a multicast address. Binding two sockets to &quot;any address&quot; is not possible with just <code>SO_REUSEADDR</code>, but that&#39;s also what my answer says. What you do is to bind a socket to any address and then joining the multicast group, which is allowed but it is not the same as binding a socket to a multicast address. When you bind that socket, how would the system know that this is going to be a multicast socket?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 43750,
+                                "reputation": 18144,
+                                "user_id": 128028,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Viet"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1493195881,
+                            "post_id": 14388707,
+                            "comment_id": 74306424,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment74306424_14388707",
+                            "body": "@Viet I didn&#39;t say your code is wrong, I just said your code binds to INADDRY_ANY and thus what I wrote about multicast addresses will not apply as INADDR_ANY <b>is no multicast address</b>, it is a wildcard address and thus the rules for wildcard addresses apply. What I said about multicast addresses was for the case when you bind a port to a multicast address and then both options behave the same. So please stop that stupid arguing here. What I say is correct, Period! Comments are no place for arguments, take your questions to an own question if you have one."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 43750,
+                                "reputation": 18144,
+                                "user_id": 128028,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "Viet"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1493196224,
+                            "post_id": 14388707,
+                            "comment_id": 74306667,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment74306667_14388707",
+                            "body": "@Viet Binding to a multicast address is not the same as joining a multicast group. If you don&#39;t know what the difference is, you miss fundamental knowledge about multicast. When joining a multicast group, none of these flags even ever play any role. These flags only play a role when binding a socket and binding and joining a group are two entirely different things. So I really don&#39;t understand what you are intending with those comments, other than showing the world your lack of understanding multicast."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 193834,
+                                "reputation": 37855,
+                                "user_id": 435800,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "Kiril Kirov"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1496510915,
+                            "post_id": 14388707,
+                            "comment_id": 75696079,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment75696079_14388707",
+                            "body": "Great answer! Really! Bounty awarded (in 24h .. :) ). So, may we say, that <b>setting <code>SO_REUSEADDR</code> on Linux</b> will behave the <b>same</b> way as <b>Windows without this option</b> only in respect to &quot;port reuse&quot; (ignoring the wildcard cases)?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 193834,
+                                "reputation": 37855,
+                                "user_id": 435800,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "Kiril Kirov"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1496758512,
+                            "post_id": 14388707,
+                            "comment_id": 75784538,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment75784538_14388707",
+                            "body": "@KirilKirov See this page: <a href=\"https://msdn.microsoft.com/en-us/library/windows/desktop/ms740621(v=vs.85).aspx\" rel=\"nofollow noreferrer\">msdn.microsoft.com/en-us/library/windows/desktop/&hellip;</a> If you scroll down a bit, there is a table showing you all combinations between two bind calls, either one having either flag set or not and even distinguishing wildcard and specific address. I&#39;ll add that link to my reply. According to table your assumption is wrong: Without any flag Windows allows no reuse whatsoever, Linux will allow certain kind of reuse."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 193834,
+                                "reputation": 37855,
+                                "user_id": 435800,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "Kiril Kirov"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1496759315,
+                            "post_id": 14388707,
+                            "comment_id": 75785193,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment75785193_14388707",
+                            "body": "@KirilKirov Oh, but when I scroll down further, it shows the behavior has changed with Windows 2003, so starting with that version, the behavior is more similar to Linux, actually even more permissive but only as long as it&#39;s the same user performing both bind calls (if it&#39;s not the same user, the behavior is similar to Linux w/o any flags). So all in all this makes Windows among the complicated systems, as the behavior depends on OS version as well as on which user makes which call."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4462362,
+                                "reputation": 702,
+                                "user_id": 3630822,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "hongshuwei"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1524632737,
+                            "post_id": 14388707,
+                            "comment_id": 87044937,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment87044937_14388707",
+                            "body": "when SO_REUSEADDR is on and bind Socket A and Socket B with the following address &quot;ON  0.0.0.0:21 192.168.1.0:21    OK&quot;  like the answer above, when there is a remote client connect to 192.168.1.0:21, which local socket receive? SocketA or Socket B?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4462362,
+                                "reputation": 702,
+                                "user_id": 3630822,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "hongshuwei"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1524665403,
+                            "post_id": 14388707,
+                            "comment_id": 87064932,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment87064932_14388707",
+                            "body": "@hongshuwei Just FYI: If your network is 192.168.1.0/24, then 192.168.1.0 is no valid host address, it is the address of the network itself and must not be used by any host. Otherwise, if two sockets both bind for the same port, one with a wildcard and one with a specific address and someone from outside connects to this port and the specific address, then the socket with the specific address usually wins over the socket with the wildcard address (in networking, the most specific match usually wins), but in the end, it&#39;s not specified and thus can be OS specific."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 31460,
+                                "reputation": 2963,
+                                "user_id": 86375,
+                                "user_type": "registered",
+                                "accept_rate": 25,
+                                "display_name": "Cameron"
+                            },
+                            "reply_to_user": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1554329135,
+                            "post_id": 14388707,
+                            "comment_id": 97715920,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment97715920_14388707",
+                            "body": "@BenVoigt is right on about this answer. There is a lot of good stuff here, but some of it is misleading and poorly stated.  Using any REUSE options starts getting into OS-specific behavior, but generally allowed binding works something like this: TCP-listener sockets must have a unique localaddr/port combo, TCP-connected sockets must have  a unique localaddr/lport/remoteaddr/rport combo, and UDP sockets must have a unique localaddr/port combo. You can of course override those rules as you start using REUSE flags, but don&#39;t expect the same behavior from different operating systems with REUSE!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 71739,
+                                "reputation": 308814,
+                                "user_id": 207421,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "user207421"
+                            },
+                            "reply_to_user": {
+                                "account_id": 31703,
+                                "reputation": 1447,
+                                "user_id": 87280,
+                                "user_type": "registered",
+                                "accept_rate": 70,
+                                "display_name": "Good Person"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1556775380,
+                            "post_id": 14388707,
+                            "comment_id": 98545040,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment98545040_14388707",
+                            "body": "I replaced the part about TIME-WAIT, which, as @GoodPerson states above, was totally incorrect. It doesn&#39;t have anything to do with outbound data, and the citation that was provided doesn&#39;t state otherwise. That citation was actually a section of RFC 793, which is what should have been cited (and understood) in the first place. It doesn&#39;t have anything to do with SO_LINGER or linger timeouts either."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 71739,
+                                "reputation": 308814,
+                                "user_id": 207421,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "user207421"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1556803981,
+                            "post_id": 14388707,
+                            "comment_id": 98559162,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment98559162_14388707",
+                            "body": "@user207421 May explanation for Linger time may not be right, but I can prove that a socket with Linger time set will hang in Time Wait whereas a socket with no Linger time never will. So you could have fixed just that one statement about Linger time but throwing out the whole paragraph destroys an otherwise perfect answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 71739,
+                                "reputation": 308814,
+                                "user_id": 207421,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "user207421"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1556844353,
+                            "post_id": 14388707,
+                            "comment_id": 98575185,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment98575185_14388707",
+                            "body": "You didn&#39;t &#39;restore the answer to its correct state&#39;. You put your errors back. Linger time has nothing to do with TIME-WAIT time, and neither does pending outgoing data. Read the RFC section you cited, which doesn&#39;t mention &#39;linger&#39; at all. Removed my ancient UV and placed DV for this egregious mistake, and for using a citation that doesn&#39;t support your claims. Last time I try to help you too."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 71739,
+                                "reputation": 308814,
+                                "user_id": 207421,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "user207421"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1556877364,
+                            "post_id": 14388707,
+                            "comment_id": 98585611,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment98585611_14388707",
+                            "body": "@user207421 I fixed the wrong sentence about pending outgoing data, instead it now says &quot;data in flight&quot; which is correct, as it applies to any data. And sorry that systems don&#39;t work like the RFC wishes that, but I can verify on my FreeBSD system as well as on my macOS system (macOS is POSIX approved!) that the longer I set the Linger time, the longer the socket stays in time wait and when I set Linger time to zero, it never stays in time wait at all. I&#39;m not going to discuss provable facts with you here."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 71739,
+                                "reputation": 308814,
+                                "user_id": 207421,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "user207421"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1557032893,
+                            "post_id": 14388707,
+                            "comment_id": 98626455,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment98626455_14388707",
+                            "body": "A socket that is in TIME-WAIT state is there because of the state diagram in RFC 794 #3.3.3. This is your own citation and it supports what I wrote, not what you wrote. And it is certainly untrue that a socket without a linger timeout never goes into TIME-WAIT: it would be a violation of that section."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3132,
+                                "reputation": 5788,
+                                "user_id": 4454,
+                                "user_type": "registered",
+                                "accept_rate": 59,
+                                "display_name": "Eyal"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1565718215,
+                            "post_id": 14388707,
+                            "comment_id": 101436993,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment101436993_14388707",
+                            "body": "This answer is pretty old and no longer correct.  According to the text above, this command that should succeed, doesn&#39;t: python -c &#39;import socket; s = socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0); s.bind((&quot;127.0.0.1&quot;, 9999)); s2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0); s2.setsockopt(socket.SOL_SOCKET, 2, 1); s2.bind((&quot;127.0.0.1&quot;, 9999));&#39;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3132,
+                                "reputation": 5788,
+                                "user_id": 4454,
+                                "user_type": "registered",
+                                "accept_rate": 59,
+                                "display_name": "Eyal"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1566215439,
+                            "post_id": 14388707,
+                            "comment_id": 101573988,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment101573988_14388707",
+                            "body": "@Eyal Your code is wrong and contradicts what is written in the answer. You didn&#39;t set <code>SO_REUSERPORT</code> on <code>s1</code> prior to binding it but that is required. Quote: &quot;Basically, SO_REUSEPORT allows you to bind an arbitrary number of sockets to exactly the same source address and port as long as <b>all prior bound sockets also had SO_REUSEPORT set before they were bound.</b>&quot; This is also repeated twice in the Linux sections."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3132,
+                                "reputation": 5788,
+                                "user_id": 4454,
+                                "user_type": "registered",
+                                "accept_rate": 59,
+                                "display_name": "Eyal"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1567257964,
+                            "post_id": 14388707,
+                            "comment_id": 101915852,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment101915852_14388707",
+                            "body": "@Mecki I was not using SO_REUSEPORT, I was using SO_REUSEADDR.  My example had a typo, oops, it should be this: <code>python -c &#39;import socket; s = socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0); s.bind((&quot;127.0.0.1&quot;, 9999)); s2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0); s2.setsockopt(socket.SOL_SOCKET, 2, 1); s2.bind((&quot;0.0.0.0&quot;, 9999));&#39;</code>  According to the text above, this should work.  In practice, it does not work.  Compare with second-to-last row of SO_REUSEADDR table above."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 355162,
+                                "reputation": 2995,
+                                "user_id": 693943,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "Matthew Goulart"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1567306102,
+                            "post_id": 14388707,
+                            "comment_id": 101924472,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment101924472_14388707",
+                            "body": "Amazing answer. I was surprised to read: For UDP sockets, it tries to distribute datagrams evenly. I am wondering if this applies in the case of two sockets bound to the same endpoint, but one is also connected to a remote endpoint. If a datagram is received from <i>that</i> endpoint, will it be &quot;load balanced&quot; or will it take the <i>most specific</i> route and end up at the <i>bound and connected</i> socket? I am asking specifically for linux but am also curious about windows."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 355162,
+                                "reputation": 2995,
+                                "user_id": 693943,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "Matthew Goulart"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1567415434,
+                            "post_id": 14388707,
+                            "comment_id": 101945042,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment101945042_14388707",
+                            "body": "@MatthewGoulart As far as I understood the documentation, it applies only to two (or more) UDP sockets locally bound to the same endpoint but neither one being connected. I think if one is connected to a remote endpoint, then all datagrams originating from that remote endpoint will end up at the connected socket. The unconnected one would only catch datagrams from other remote endpoints. AFAIK this only applies to Linux, I&#39;ve not yet heard that other OSes have implemented a similar concept, yet some datagram distribution concept must exists in every OS for that case and if it is &quot;random&quot;."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1217449,
+                                "reputation": 4189,
+                                "user_id": 1184752,
+                                "user_type": "registered",
+                                "accept_rate": 43,
+                                "display_name": "Juraj Martinka"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1593501397,
+                            "post_id": 14388707,
+                            "comment_id": 110795630,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment110795630_14388707",
+                            "body": "Fantastic answer, thanks for all the details. I&#39;ve had trouble to find the default for the Linger Time - how/where can I find that, specifically on Linux?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1217449,
+                                "reputation": 4189,
+                                "user_id": 1184752,
+                                "user_type": "registered",
+                                "accept_rate": 43,
+                                "display_name": "Juraj Martinka"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1593596273,
+                            "post_id": 14388707,
+                            "comment_id": 110833939,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment110833939_14388707",
+                            "body": "@JurajMartinka The default values for most socket options are not documented, they are hard-coded in the kernel and often they can be overridden for running systems (<code>sysctl</code>,<code>&#47;sys</code>, <code>&#47;proc&#47;sys</code>). Also no rule forbids them to be dynamic and change automatically at system runtime (as some systems do for socket buffers). The default is usually no linger timeout at all but that only means the system itself decides about the linger time. It&#39;s complicated. You probably want to read this detailed description <a href=\"https://notes.shichao.io/unp/ch7/#so_linger-socket-option\" rel=\"nofollow noreferrer\">notes.shichao.io/unp/ch7/#so_linger-socket-option</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1217449,
+                                "reputation": 4189,
+                                "user_id": 1184752,
+                                "user_type": "registered",
+                                "accept_rate": 43,
+                                "display_name": "Juraj Martinka"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1593661327,
+                            "post_id": 14388707,
+                            "comment_id": 110859966,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment110859966_14388707",
+                            "body": "Interesting and thanks for the link. But isn&#39;t the default &quot;linger timeout&quot; 2 * MSL (as stated in &quot;Unix Network Programming&quot; in section &quot;2.7. TIME_WAIT State&quot; on p. 43)? On Linux this seems to be 60 seconds (net.ipv4.tcp_fin_timeout), on Mac OS X 30 seconds (2 * net.inet.tcp.msl, that is set to 15 seconds). Or am I&#39;m mixing up different things?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1217449,
+                                "reputation": 4189,
+                                "user_id": 1184752,
+                                "user_type": "registered",
+                                "accept_rate": 43,
+                                "display_name": "Juraj Martinka"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1593681166,
+                            "post_id": 14388707,
+                            "comment_id": 110867159,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment110867159_14388707",
+                            "body": "@JurajMartinka If Linger is on, the set Linger timeout is the amount of time before a closing socket is closed the hard way if still open. If on and time is zero, sockets are instantly closed the hard way with data in flight getting lost. Yet if Linger is off, the socket is not closed instantly but in the background with no upper time limit. Of course, there must still be a time limit for closing steps performed, like the <code>net.ipv4.tcp_fin_timeout</code>. These time limits are also in effect if you set a Linger timeout, yet with a Linger timeout there is an upper bound for the sum of all operations."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1217449,
+                                "reputation": 4189,
+                                "user_id": 1184752,
+                                "user_type": "registered",
+                                "accept_rate": 43,
+                                "display_name": "Juraj Martinka"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1593691869,
+                            "post_id": 14388707,
+                            "comment_id": 110872442,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment110872442_14388707",
+                            "body": "So If I understand what you&#39;re saying it means that with &quot;linger&quot; on and set to non-zero there&#39;s an upper bound on the whole &quot;close socket&quot; operation (4-way handshake initiated by an active close) while the &quot;tcp_fin_timeout&quot; only limits the time spent in the TIME_WAIT state. It was a bit confusing but after I&#39;ve finally wholly read what you linked (which I realized is actually the Unix Network Programming book) I think I now understand this stuff better."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1217449,
+                                "reputation": 4189,
+                                "user_id": 1184752,
+                                "user_type": "registered",
+                                "accept_rate": 43,
+                                "display_name": "Juraj Martinka"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1593701570,
+                            "post_id": 14388707,
+                            "comment_id": 110877835,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment110877835_14388707",
+                            "body": "@JurajMartinka Correct. The Linger timeout you configure is the upper bound for the entire close operation (from calling <code>close()</code> to the point where the socket is completely gone in your local system). You use it to tell the system &quot;when I call close, I expect that socket to be gone and the port number to be reusable after that many seconds&quot;. If you set no Linger, you just don&#39;t care how long the close operation will take but timeouts for traffic in flight or the close handshake are still in use and these are very system specific and can be overridden by system admins."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 18876645,
+                                "reputation": 2013,
+                                "user_id": 13770014,
+                                "user_type": "registered",
+                                "display_name": "milanHrabos"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1610828337,
+                            "post_id": 14388707,
+                            "comment_id": 116257183,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment116257183_14388707",
+                            "body": "Actually if binding local address and port to the same as another socket (before calling) connect will not cause error <code>address in use</code> but generate error <code>cannot assign requested address</code>, where the kernel is unable to assign local address and port, when it is identical to already one socket. But the meaning is the same as in you post"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 18876645,
+                                "reputation": 2013,
+                                "user_id": 13770014,
+                                "user_type": "registered",
+                                "display_name": "milanHrabos"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1610894128,
+                            "post_id": 14388707,
+                            "comment_id": 116270595,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment116270595_14388707",
+                            "body": "@milanHrabos See <a href=\"https://0cn.de/ih4f\" rel=\"nofollow noreferrer\">0cn.de/ih4f</a> It clearly defines that if the address is already in use, the error will be <code>EADDRINUSE</code>. The error <code>EADDRNOTAVAIL</code> must only be used if that is a UNIX domain socket (<code>AF_UNIX</code>). If your implementation may throw <code>EADDRNOTAVAIL</code> on an IP socket, then it violates its own documentation, that&#39;s a bug which should be reported. It also violates the POSIX standard which allows <code>EADDRNOTAVAIL</code> on all sockets but there it has a completely different meaning, see <a href=\"https://0cn.de/vlbe\" rel=\"nofollow noreferrer\">0cn.de/vlbe</a> (it means the address is generally unavailable and not because it is already in use)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4495188,
+                                "reputation": 319,
+                                "user_id": 3655142,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Jay"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1613255967,
+                            "post_id": 14388707,
+                            "comment_id": 117021128,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment117021128_14388707",
+                            "body": "@Mecki for Windows you write in bold that SO_REUSEADDR allows binding the second socket to the same source and port as the first socket, even if the first did not set SO_REUSEADDR. <a href=\"https://learn.microsoft.com/en-us/windows/win32/winsock/using-so-reuseaddr-and-so-exclusiveaddruse?redirectedfrom=MSDN#enhanced-socket-security\" rel=\"nofollow noreferrer\">MS 2nd table</a> that you linked contradicts that and says specifically it&#39;s no longer the case since Server 2003. I suggest clarifying your bolded statement."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4495188,
+                                "reputation": 319,
+                                "user_id": 3655142,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Jay"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1613259615,
+                            "post_id": 14388707,
+                            "comment_id": 117021816,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment117021816_14388707",
+                            "body": "@Jay Yes, but it was the case prior to Windows 2003 and it is still possible in compatibility modes. So it would be fatal to rely on it; you shall not rely on changed default behavior if you can specify desired behavior. This exactly the kind of mistake that leads to horrible security problems, that&#39;s why I documented this horrible past default behavior in bold. As <code>SO_EXCLUSIVEADDRUSE</code> still works as of today, there is no reason not to use it and if you want to share ports, you better know those tables in detail, that&#39;s why I added the link. I will mention it, though."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11211151,
+                                "reputation": 397,
+                                "user_id": 11531750,
+                                "user_type": "registered",
+                                "display_name": "Alon Gweta"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1649671229,
+                            "post_id": 14388707,
+                            "comment_id": 126926727,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment126926727_14388707",
+                            "body": "@Mecki, So can I bind the exact same address with a wildcard and the same port when the older socket is in TIME_WAIT state and the new socket is set with SO_REUSEADDR in Linux? I tried to define <code>SO_REUSEADDR</code> and linger to 0 but <code>bind()</code> keeps falling with EADDRINUSE. (I also posted <a href=\"https://stackoverflow.com/questions/71825838/bind-fails-after-using-so-reuseaddr-option-for-wildcard-socket-in-state-time-w\" title=\"bind fails after using so reuseaddr option for wildcard socket in state time w\">stackoverflow.com/questions/71825838/&hellip;</a>)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 292459,
+                                "reputation": 696,
+                                "user_id": 595220,
+                                "user_type": "registered",
+                                "display_name": "webknjaz -- \u0421\u043b\u0430\u0432\u0430 \u0423\u043a\u0440\u0430\u0457\u043d\u0456"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1664417683,
+                            "post_id": 14388707,
+                            "comment_id": 130468652,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment130468652_14388707",
+                            "body": "@Mecki your post contains <code>SO_REUESADDR</code> \u2014 with a typo. I couldn&#39;t edit it because SO wants minimum 6 chars to be changed. Maybe you could fix it yourself :)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 292459,
+                                "reputation": 696,
+                                "user_id": 595220,
+                                "user_type": "registered",
+                                "display_name": "webknjaz -- \u0421\u043b\u0430\u0432\u0430 \u0423\u043a\u0440\u0430\u0457\u043d\u0456"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1664455750,
+                            "post_id": 14388707,
+                            "comment_id": 130479176,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment130479176_14388707",
+                            "body": "@webknjaz Thanks for pointing it out. I&#39;ve fixed it."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1686397,
+                                "reputation": 947,
+                                "user_id": 1549596,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Vega4"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1669535967,
+                            "post_id": 14388707,
+                            "comment_id": 131659821,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment131659821_14388707",
+                            "body": "Welcome to the wonderful passion, where people like @Mecki equipped with StackOverflow, make it even better."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 180358,
+                                "reputation": 2495,
+                                "user_id": 413622,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "claymation"
+                            },
+                            "reply_to_user": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1675980550,
+                            "post_id": 14388707,
+                            "comment_id": 133050403,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment133050403_14388707",
+                            "body": "I agree with @BenVoigt that &quot;local&quot; and &quot;remote&quot; are more accurate and less subjective than &quot;source&quot; and &quot;destination&quot; when talking about socket addresses \u2014 see <code>man 7 socket</code>: &quot;getsockname(2) returns the local socket address and getpeername(2) returns the remote socket address.&quot;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 180358,
+                                "reputation": 2495,
+                                "user_id": 413622,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "claymation"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1676021837,
+                            "post_id": 14388707,
+                            "comment_id": 133057349,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment133057349_14388707",
+                            "body": "@claymation A socket connection always has a source, the socket that calls <code>connect()</code>, and a destination, the socket it connects to. These roles are clear and always there. But I can have two sockets inside a single application that talk to each other, now which of those two would then be &quot;local&quot; and which one would be &quot;remote&quot;?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 180358,
+                                "reputation": 2495,
+                                "user_id": 413622,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "claymation"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1676022458,
+                            "post_id": 14388707,
+                            "comment_id": 133057550,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment133057550_14388707",
+                            "body": "@claymation Also you cannot simply make changes like replacing &quot;all source&quot; with &quot;any&quot; as &quot;all source&quot; is a fixed term that is used for ages, is found in all standard reference books about BSD networking/ Any IP address mean any one, &quot;all source&quot; means any of the addresses available as an IP source address, which is not the same thing, as not every address may be available as a source, addresses on an interface can also only be available as a destination. And source/destination are also what the IP standard uses when talking about addresses."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 180358,
+                                "reputation": 2495,
+                                "user_id": 413622,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "claymation"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1676023266,
+                            "post_id": 14388707,
+                            "comment_id": 133057804,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment133057804_14388707",
+                            "body": "@claymation And finally you ignore the server socket case. What if you have the server socket? Then this is still a local socket, but now the remote (client) socket is the one connecting to you. Local and remote would still be used the same way but in fact the roles are now swapped, now your local socket is the connection destination and the remote socket is the source. With source/destination, my answer is still correct for this case, with local/remote it isn&#39;t anymore as what used to be true for &quot;local&quot; is now true for &quot;remote&quot; and the other way round."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1676040675,
+                            "post_id": 14388707,
+                            "comment_id": 133063107,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment133063107_14388707",
+                            "body": "@Mecki: &quot;I can have two sockets inside a single application that talk to each other, now which of those two would then be local and which one would be remote?&quot;  You make an error in thinking &quot;local&quot; and &quot;remote&quot; apply to sockets. They apply to addresses, relative to a particular socket. The address you or the OS binds to the socket is local. The address you pass to <code>connect()</code> or <code>sendto()</code> is remote.  For that socket whose descriptor you passed to <code>connect()</code> or <code>sendto()</code>.  The remote end of the connection might or might not even be using BSD sockets API, there are others such as &quot;lwip raw&quot;."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1676046089,
+                            "post_id": 14388707,
+                            "comment_id": 133064873,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment133064873_14388707",
+                            "body": "@BenVoigt Local and remote addresses only applies to sockets and my answer is not about sockets in particular and you yourself just said &quot;might not even be using BSD sockets &quot;; exactly! My answer is about addresses and ports on TCP/IP protocol level and how socket options matches to them and on this protocol level there is no local/remote, a TCP connection has no local or remote end. It has a source and a destination, hence the ports are also called source and destination ports; same goes for IP packets."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1676047039,
+                            "post_id": 14388707,
+                            "comment_id": 133065198,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment133065198_14388707",
+                            "body": "@Mecki &quot;on this protocol level there is no local/remote&quot; Baloney.  A connection is identified by a tuple of <b>(local IP address, local port, remote IP address, remote port, transport protocol)</b>.  A TCP connection is bidirectional, there are outgoing packets (<code>send()</code>) with source=local, dest=remote and incoming (<code>recv()</code>) with source=remote, dest=local. Unfortunately some RFCs use imprecise wording.  (And no, this isn&#39;t a case where I am trying to use non-standard terminology.  I use &quot;source&quot; and &quot;destination&quot; as they are defined in the Internet Protocol RFC, which is perfectly standard.)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1676048025,
+                            "post_id": 14388707,
+                            "comment_id": 133065556,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment133065556_14388707",
+                            "body": "@BenVoigt Sorry but I will not discuss that with you anymore. Stop the spamming and go write your own better reply if you can and there you can use whatever names you want. I will not change the answer; period. I&#39;m happy with it the way it is and so are  2035 other SO users. Stop wasting everyone&#39;s time."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1676048123,
+                            "post_id": 14388707,
+                            "comment_id": 133065587,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment133065587_14388707",
+                            "body": "@Mecki: <a href=\"https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707?noredirect=1#comment133057349_14388707\">You are the one who revived the old topic with 3 comments in a row</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 36215,
+                                "reputation": 281024,
+                                "user_id": 103167,
+                                "user_type": "registered",
+                                "accept_rate": 53,
+                                "display_name": "Ben Voigt"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1676049049,
+                            "post_id": 14388707,
+                            "comment_id": 133065861,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment133065861_14388707",
+                            "body": "@BenVoigt I replied to claymation who just posted a comment 18 hours ago, I did not revive anything, I posted to a new comment that is not even a day old."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 180358,
+                                "reputation": 2495,
+                                "user_id": 413622,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "claymation"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1676237284,
+                            "post_id": 14388707,
+                            "comment_id": 133092455,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment133092455_14388707",
+                            "body": "@Mecki, your insistence on using the subjective &quot;source&quot; and &quot;destination&quot; is frustrating because it contradicts canonical references. Since you ignored the socket(7) reference, here&#39;s Richard Stevens in TCP/IP Illustrated: Volume 2: &quot;The combination of the local IP address and the local port number is often called a socket, as is the combination of the foreign IP address and the foreign port number.&quot; It also defies common sense. If I create a datagram socket and only ever intend to call recvfrom(2) on it, in what universe should the address and port assigned to it be considered the &quot;source&quot;?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 180358,
+                                "reputation": 2495,
+                                "user_id": 413622,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "claymation"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1676238642,
+                            "post_id": 14388707,
+                            "comment_id": 133092725,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment133092725_14388707",
+                            "body": "And yes, 2036 people have found your answer useful enough to upvote, myself included. But it&#39;s not as clear as it could be. I often find myself wondering what confusing comments like this mean: &quot;source_port: Port where we are receiving traffic.&quot; Why would we be <i>receiving</i> traffic on a <i>source</i> port? It makes no sense. The word &quot;source&quot; is just too subjective. Here, local_port or listen_port would have been a much clearer choice. Who knows, maybe the author used &quot;source&quot; after reading your answer\u2014they also set reuseaddr and reuseport on the socket. I edited your answer to avoid this confusion."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 180358,
+                                "reputation": 2495,
+                                "user_id": 413622,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "claymation"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1676270419,
+                            "post_id": 14388707,
+                            "comment_id": 133096194,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment133096194_14388707",
+                            "body": "If the word &quot;remote&quot; is what&#39;s throwing you, feel free to substitute &quot;peer&quot;, as in <code>getpeername(2)</code>, or &quot;partner&quot;. The salient point is that either or both of the two sockets involved in any socket-based communication may be a source or a destination of packets at any given time, and so to avoid confusion we should pick unambiguous names for <i>this</i> (local) socket  and <i>that</i> (remote, or peer) socket. The fact that the two sockets may be on different hosts or on the same host is abstracted away and should not preclude us from saying that the peer socket is &quot;remote&quot; \u2014 in general, it is."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 169125,
+                                "reputation": 4294,
+                                "user_id": 395034,
+                                "user_type": "registered",
+                                "accept_rate": 52,
+                                "display_name": "vinnitu"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1677261152,
+                            "post_id": 14388707,
+                            "comment_id": 133309358,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment133309358_14388707",
+                            "body": "You are my network God! Can you explain in such way this thread question? <a href=\"https://stackoverflow.com/questions/33121208/loopback-in-multicast\" title=\"loopback in multicast\">stackoverflow.com/questions/33121208/loopback-in-multicast</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 14956555,
+                                "reputation": 472,
+                                "user_id": 10797659,
+                                "user_type": "registered",
+                                "display_name": "Mrityu"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1679730502,
+                            "post_id": 14388707,
+                            "comment_id": 133776309,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment133776309_14388707",
+                            "body": "I understand that two applications/processes can listen on the same combination. But then when a request arrives how does the OS bifurcate between which process should handle the request?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 13375406,
+                                "reputation": 364,
+                                "user_id": 9652400,
+                                "user_type": "registered",
+                                "display_name": "Ambareesh"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1703060252,
+                            "post_id": 14388707,
+                            "comment_id": 136965248,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment136965248_14388707",
+                            "body": "@Mecki Brilliant answer, thank you for all the detail. Do you know/think the ports in the <code>ephemeral</code> range are treated differently when it comes to duration in <code>TIME_WAIT</code> state or how <code>SO_REUSE*</code> flags affect them? I couldn&#39;t find anything online, but I noticed that when I used (unconventionally) an eph port for a listener, and closed it, it took longer to close, than when I used a non-eph port. This allowed a client (from a diff thread) to make a short-lived connection (which terminated and was left in TIME_WAIT), preventing server from binding again. This didn&#39;t happen with non-eph port."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8706,
+                                "reputation": 129863,
+                                "user_id": 15809,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Mecki"
+                            },
+                            "reply_to_user": {
+                                "account_id": 13375406,
+                                "reputation": 364,
+                                "user_id": 9652400,
+                                "user_type": "registered",
+                                "display_name": "Ambareesh"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1703069981,
+                            "post_id": 14388707,
+                            "comment_id": 136966890,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment136966890_14388707",
+                            "body": "@Ambareesh <code>TIME_WAIT</code> is a beast of its own and how it behaves can in fact vary a lot, depending on all kind of factors. You may also want to read my reply about SO_LINGER <a href=\"https://stackoverflow.com/a/71975993/15809\">stackoverflow.com/a/71975993/15809</a> It contains a link to a blog post which is not available anymore (the link goes to archive.org) and is a follow up to another blog post. Unfortunately archive.org never captured the first part. The first part was about blocking sockets (which is the default) and was also way more detailed, providing more background information about the topic."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 13375406,
+                                "reputation": 364,
+                                "user_id": 9652400,
+                                "user_type": "registered",
+                                "display_name": "Ambareesh"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1703078937,
+                            "post_id": 14388707,
+                            "comment_id": 136968255,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment136968255_14388707",
+                            "body": "@Mecki Excellent read, thank you. But I didn&#39;t find anything specific to do with <code>ephemeral</code> port. I am guessing what I observed may be uncaused correlation (i.e nothing to do with the port being eph or not). Will keep digging."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 13375406,
+                                "reputation": 364,
+                                "user_id": 9652400,
+                                "user_type": "registered",
+                                "display_name": "Ambareesh"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1703079770,
+                            "post_id": 14388707,
+                            "comment_id": 136968398,
+                            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#comment136968398_14388707",
+                            "body": "@Mecki Found it in another answer of yours at <a href=\"https://stackoverflow.com/a/71830970/9652400\">stackoverflow.com/a/71830970/9652400</a>.   Relevant parts:  &quot;<code>SO_REUSEADDR</code> does not necessarily allow reuse across different processes for sockets in <code>TIME_WAIT</code>. But process Y may not be able to bind to a socket to the same address and port as socketA, while socketA is still in <code>TIME_WAIT</code> state for security reasons.  It may also depend on the port number your are using. Sometimes this limitation only applies to ports below 1024 (most people testing behavior forget to test for both, ports above and below 1024)&quot;  Thank you :)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 8706,
+                        "reputation": 129863,
+                        "user_id": 15809,
+                        "user_type": "registered",
+                        "accept_rate": 79,
+                        "display_name": "Mecki"
+                    },
+                    "comment_count": 86,
+                    "is_accepted": true,
+                    "score": 2162,
+                    "last_activity_date": 1676206409,
+                    "last_edit_date": 1676206409,
+                    "creation_date": 1358459144,
+                    "answer_id": 14388707,
+                    "question_id": 14388706,
+                    "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/14388707#14388707",
+                    "body": "<p>Welcome to the wonderful world of portability... or rather the lack of it. Before we start analyzing these two options in detail and take a deeper look how different operating systems handle them, it should be noted that the BSD socket implementation is the mother of all socket implementations. Basically all other systems copied the BSD socket implementation at some point in time (or at least its interfaces) and then started evolving it on their own. Of course the BSD socket implementation was evolved as well at the same time and thus systems that copied it later got features that were lacking in systems that copied it earlier. Understanding the BSD socket implementation is the key to understanding all other socket implementations, so you should read about it even if you don't care to ever write code for a BSD system.</p>\n<p>There are a couple of basics you should know before we look at these two options. A TCP/UDP connection is identified by a tuple of five values:</p>\n<p><code>{&lt;protocol&gt;, &lt;src addr&gt;, &lt;src port&gt;, &lt;dest addr&gt;, &lt;dest port&gt;}</code></p>\n<p>Any unique combination of these values identifies a connection. As a result, no two connections can have the same five values, otherwise the system would not be able to distinguish these connections any longer.</p>\n<p>The protocol of a socket is set when a socket is created with the <code>socket()</code> function. The source address and port are set with the <code>bind()</code> function. The destination address and port are set with the <code>connect()</code> function. Since UDP is a connectionless protocol, UDP sockets can be used without connecting them. Yet it is allowed to connect them and in some cases very advantageous for your code and general application design. In connectionless mode, UDP sockets that were not explicitly bound when data is sent over them for the first time are usually automatically bound by the system, as an unbound UDP socket cannot receive any (reply) data. Same is true for an unbound TCP socket, it is automatically bound before it will be connected.</p>\n<p>If you explicitly bind a socket, it is possible to bind it to port <code>0</code>, which means &quot;any port&quot;. Since a socket cannot really be bound to all existing ports, the system will have to choose a specific port itself in that case (usually from a predefined, OS specific range of source ports). A similar wildcard exists for the source address, which can be &quot;any address&quot; (<code>0.0.0.0</code> in case of IPv4 and <code>::</code> in case of IPv6). Unlike in case of ports, a socket can really be bound to &quot;any address&quot; which means &quot;all source IP addresses of all local interfaces&quot;. If the socket is connected later on, the system has to choose a specific source IP address, since a socket cannot be connected and at the same time be bound to any local IP address. Depending on the destination address and the content of the routing table, the system will pick an appropriate source address and replace the &quot;any&quot; binding with a binding to the chosen source IP address.</p>\n<p>By default, no two sockets can be bound to the same combination of source address and source port. As long as the source port is different, the source address is actually irrelevant. Binding <code>socketA</code> to <code>ipA:portA</code> and <code>socketB</code> to <code>ipB:portB</code> is always possible if <code>ipA != ipB</code> holds true, even when <code>portA == portB</code>. E.g. <code>socketA</code> belongs to a FTP server program and is bound to <code>192.168.0.1:21</code> and <code>socketB</code> belongs to another FTP server program and is bound to <code>10.0.0.1:21</code>, both bindings will succeed. Keep in mind, though, that a socket may be locally bound to &quot;any address&quot;. If a socket is bound to <code>0.0.0.0:21</code>, it is bound to all existing local addresses at the same time and in that case no other socket can be bound to port <code>21</code>, regardless which specific IP address it tries to bind to, as <code>0.0.0.0</code> conflicts with all existing local IP addresses.</p>\n<p>Anything said so far is pretty much equal for all major operating system. Things start to get OS specific when address reuse comes into play. We start with BSD, since as I said above, it is the mother of all socket implementations.</p>\n<h1>BSD</h1>\n<h2>SO_REUSEADDR</h2>\n<p>If <code>SO_REUSEADDR</code> is enabled on a socket prior to binding it, the socket can be successfully bound unless there is a conflict with another socket bound to <strong>exactly</strong> the same combination of source address and port. Now you may wonder how is that any different than before? The keyword is &quot;exactly&quot;. <code>SO_REUSEADDR</code> mainly changes the way how wildcard addresses (&quot;any IP address&quot;) are treated when searching for conflicts.</p>\n<p>Without <code>SO_REUSEADDR</code>, binding <code>socketA</code> to <code>0.0.0.0:21</code> and then binding <code>socketB</code> to <code>192.168.0.1:21</code> will fail (with error <code>EADDRINUSE</code>), since 0.0.0.0 means &quot;any local IP address&quot;, thus all local IP addresses are considered in use by this socket and this includes <code>192.168.0.1</code>, too. With <code>SO_REUSEADDR</code> it will succeed, since <code>0.0.0.0</code> and <code>192.168.0.1</code> are <strong>not exactly</strong> the same address, one is a wildcard for all local addresses and the other one is a very specific local address. Note that the statement above is true regardless in which order <code>socketA</code> and <code>socketB</code> are bound; without <code>SO_REUSEADDR</code> it will always fail, with <code>SO_REUSEADDR</code> it will always succeed.</p>\n<p>To give you a better overview, let's make a table here and list all possible combinations:</p>\n<pre>\nSO_REUSEADDR       socketA        socketB       Result\n---------------------------------------------------------------------\n  ON/OFF       192.168.0.1:21   192.168.0.1:21    Error (EADDRINUSE)\n  ON/OFF       192.168.0.1:21      10.0.0.1:21    OK\n  ON/OFF          10.0.0.1:21   192.168.0.1:21    OK\n   OFF             0.0.0.0:21   192.168.1.0:21    Error (EADDRINUSE)\n   OFF         192.168.1.0:21       0.0.0.0:21    Error (EADDRINUSE)\n   ON              0.0.0.0:21   192.168.1.0:21    OK\n   ON          192.168.1.0:21       0.0.0.0:21    OK\n  ON/OFF           0.0.0.0:21       0.0.0.0:21    Error (EADDRINUSE)\n</pre>\n<p>The table above assumes that <code>socketA</code> has already been successfully bound to the address given for <code>socketA</code>, then <code>socketB</code> is created, either gets <code>SO_REUSEADDR</code> set or not, and finally is bound to the address given for <code>socketB</code>. <code>Result</code> is the result of the bind operation for <code>socketB</code>. If the first column says <code>ON/OFF</code>, the value of <code>SO_REUSEADDR</code> is irrelevant to the result.</p>\n<p>Okay, <code>SO_REUSEADDR</code> has an effect on wildcard addresses, good to know. Yet that isn't its only effect it has. There is another well known effect which is also the reason why most people use <code>SO_REUSEADDR</code> in server programs in the first place. For the other important use of this option we have to take a deeper look on how the TCP protocol works.</p>\n<p>If a TCP socket is being closed, normally a 3-way handshake is performed; the sequence is called <a href=\"https://stackoverflow.com/a/71975993/15809\"><code>FIN-ACK</code></a>. The problem here is, that the last ACK of that sequence may have arrived on the other side or it may not have arrived and only if it has, the other side also considers the socket as being fully closed. To prevent re-using an address+port combination, that may still be considered open by some remote peer, the system will not immediately consider a socket as dead after sending the last <code>ACK</code> but instead put the socket into a state commonly referred to as <code>TIME_WAIT</code>. It can be in that state for minutes (system dependent setting). On most systems you can get around that state by enabling lingering and setting a linger time of zero1 but there is no guarantee that this is always possible, that the system will always honor this request, and even if the system honors it, this causes the socket to be closed by a reset (<a href=\"https://accedian.com/wp-content/uploads/2018/09/standard_tcp_rst-1.png\" rel=\"noreferrer\"><code>RST</code></a>), which is not always a great idea. To learn more about linger time, have a look at <a href=\"https://stackoverflow.com/a/71975993/15809\">my answer about this topic</a>.</p>\n<p>The question is, how does the system treat a socket in state <code>TIME_WAIT</code>? If <code>SO_REUSEADDR</code> is not set, a socket in state <code>TIME_WAIT</code> is considered to still be bound to the source address and port and any attempt to bind a new socket to the same address and port will fail until the socket has really been closed. So don't expect that you can rebind the source address of a socket immediately after closing it. In most cases this will fail. However, if <code>SO_REUSEADDR</code> is set for the socket you are trying to bind, another socket bound to the same address and port in state <code>TIME_WAIT</code> is simply ignored, after all its already &quot;half dead&quot;, and your socket can bind to exactly the same address without any problem. In that case it plays no role that the other socket may have exactly the same address and port. Note that binding a socket to exactly the same address and port as a dying socket in <code>TIME_WAIT</code> state can have unexpected, and usually undesired, side effects in case the other socket is still &quot;at work&quot;, but that is beyond the scope of this answer and fortunately those side effects are rather rare in practice.</p>\n<p>There is one final thing you should know about <code>SO_REUSEADDR</code>. Everything written above will work as long as the socket you want to bind to has address reuse enabled. It is not necessary that the other socket, the one which is already bound or is in a <code>TIME_WAIT</code> state, also had this flag set when it was bound. The code that decides if the bind will succeed or fail only inspects the <code>SO_REUSEADDR</code> flag of the socket fed into the <code>bind()</code> call, for all other sockets inspected, this flag is not even looked at.</p>\n<h2>SO_REUSEPORT</h2>\n<p><code>SO_REUSEPORT</code> is what most people would expect <code>SO_REUSEADDR</code> to be. Basically, <code>SO_REUSEPORT</code> allows you to bind an arbitrary number of sockets to <strong>exactly</strong> the same source address and port as long as <strong>all</strong> prior bound sockets also had <code>SO_REUSEPORT</code> set before they were bound. If the first socket that is bound to an address and port does not have <code>SO_REUSEPORT</code> set, no other socket can be bound to exactly the same address and port, regardless if this other socket has <code>SO_REUSEPORT</code> set or not, until the first socket releases its binding again. Unlike in case of <code>SO_REUSEADDR</code> the code handling <code>SO_REUSEPORT</code> will not only verify that the currently bound socket has <code>SO_REUSEPORT</code> set but it will also verify that the socket with a conflicting address and port had <code>SO_REUSEPORT</code> set when it was bound.</p>\n<p><code>SO_REUSEPORT</code> does not imply <code>SO_REUSEADDR</code>. This means if a socket did not have <code>SO_REUSEPORT</code> set when it was bound and another socket has <code>SO_REUSEPORT</code> set when it is bound to exactly the same address and port, the bind fails, which is expected, but it also fails if the other socket is already dying and is in <code>TIME_WAIT</code> state. To be able to bind a socket to the same addresses and port as another socket in <code>TIME_WAIT</code> state requires either <code>SO_REUSEADDR</code> to be set on that socket or <code>SO_REUSEPORT</code> must have been set <strong>on both</strong> sockets prior to binding them. Of course it is allowed to set both, <code>SO_REUSEPORT</code> and <code>SO_REUSEADDR</code>, on a socket.</p>\n<p>There is not much more to say about <code>SO_REUSEPORT</code> other than that it was added later than <code>SO_REUSEADDR</code>, that's why you will not find it in many socket implementations of other systems, which &quot;forked&quot; the BSD code before this option was added, and that there was no way to bind two sockets to exactly the same socket address in BSD prior to this option.</p>\n<h2>Connect() Returning EADDRINUSE?</h2>\n<p>Most people know that <code>bind()</code> may fail with the error <code>EADDRINUSE</code>, however, when you start playing around with address reuse, you may run into the strange situation that <code>connect()</code> fails with that error as well. How can this be? How can a remote address, after all that's what connect adds to a socket, be already in use? Connecting multiple sockets to exactly the same remote address has never been a problem before, so what's going wrong here?</p>\n<p>As I said on the very top of my reply, a connection is defined by a tuple of five values, remember? And I also said, that these five values must be unique otherwise the system cannot distinguish two connections any longer, right? Well, with address reuse, you can bind two sockets of the same protocol to the same source address and port. That means three of those five values are already the same for these two sockets. If you now try to connect both of these sockets also to the same destination address and port, you would create two connected sockets, whose tuples are absolutely identical. This cannot work, at least not for TCP connections (UDP connections are no real connections anyway). If data arrived for either one of the two connections, the system could not tell which connection the data belongs to. At least the destination address or destination port must be different for either connection, so that the system has no problem to identify to which connection incoming data belongs to.</p>\n<p>So if you bind two sockets of the same protocol to the same source address and port and try to connect them both to the same destination address and port, <code>connect()</code> will actually fail with the error <code>EADDRINUSE</code> for the second socket you try to connect, which means that a socket with an identical tuple of five values is already connected.</p>\n<h2>Multicast Addresses</h2>\n<p>Most people ignore the fact that multicast addresses exist, but they do exist. While unicast addresses are used for one-to-one communication, multicast addresses are used for one-to-many communication. Most people got aware of multicast addresses when they learned about IPv6 but multicast addresses also existed in IPv4, even though this feature was never widely used on the public Internet.</p>\n<p>The meaning of <code>SO_REUSEADDR</code> changes for multicast addresses as it allows multiple sockets to be bound to exactly the same combination of source multicast address and port. In other words, for multicast addresses <code>SO_REUSEADDR</code> behaves exactly as <code>SO_REUSEPORT</code> for unicast addresses. Actually, the code treats <code>SO_REUSEADDR</code> and <code>SO_REUSEPORT</code> identically for multicast addresses, that means you could say that <code>SO_REUSEADDR</code> implies <code>SO_REUSEPORT</code> for all multicast addresses and the other way round.</p>\n<h1><br>FreeBSD/OpenBSD/NetBSD</h1>\n<p>All these are rather late forks of the original BSD code, that's why they all three offer the same options as BSD and they also behave the same way as in BSD.</p>\n<h1><br>macOS (MacOS X)</h1>\n<p>At its core, macOS is simply a BSD-style UNIX named &quot;<em>Darwin</em>&quot;, based on a rather late fork of the BSD code (BSD 4.3), which was then later on even re-synchronized with the (at that time current) FreeBSD 5 code base for the Mac OS 10.3 release, so that Apple could gain full POSIX compliance (macOS is POSIX certified). Despite having a microkernel at its core (&quot;<em>Mach</em>&quot;), the rest of the kernel (&quot;<em>XNU</em>&quot;) is basically just a BSD kernel, and that's why macOS offers the same options as BSD and they also behave the same way as in BSD.</p>\n<h2>iOS / watchOS / tvOS</h2>\n<p>iOS is just a macOS fork with a slightly modified and trimmed kernel, somewhat stripped down user space toolset and a slightly different default framework set. watchOS and tvOS are iOS forks, that are stripped down even further (especially watchOS). To my best knowledge they all behave exactly as macOS does.</p>\n<h1><br>Linux</h1>\n<h2>Linux &lt; 3.9</h2>\n<p>Prior to Linux 3.9, only the option <code>SO_REUSEADDR</code> existed. This option behaves generally the same as in BSD with two important exceptions:</p>\n<ol>\n<li><p>As long as a listening (server) TCP socket is bound to a specific port, the <code>SO_REUSEADDR</code> option is entirely ignored for all sockets targeting that port. Binding a second socket to the same port is only possible if it was also possible in BSD without having <code>SO_REUSEADDR</code> set. E.g. you cannot bind to a wildcard address and then to a more specific one or the other way round, both is possible in BSD if you set <code>SO_REUSEADDR</code>. What you can do is you can bind to the same port and two different non-wildcard addresses, as that's always allowed. In this aspect Linux is more restrictive than BSD.</p>\n</li>\n<li><p>The second exception is that for client sockets, this option behaves exactly like <code>SO_REUSEPORT</code> in BSD, as long as both had this flag set before they were bound. The reason for allowing that was simply that it is important to be able to bind multiple sockets to exactly to the same UDP socket address for various protocols and as there used to be no <code>SO_REUSEPORT</code> prior to 3.9, the behavior of <code>SO_REUSEADDR</code> was altered accordingly to fill that gap. In that aspect Linux is less restrictive than BSD.</p>\n</li>\n</ol>\n<h2>Linux &gt;= 3.9</h2>\n<p>Linux 3.9 added the option <code>SO_REUSEPORT</code> to Linux as well. This option behaves exactly like the option in BSD and allows binding to exactly the same address and port number as long as all sockets have this option set prior to binding them.</p>\n<p>Yet, there are still two differences to <code>SO_REUSEPORT</code> on other systems:</p>\n<ol>\n<li><p>To prevent &quot;port hijacking&quot;, there is one special limitation: <strong>All sockets that want to share the same address and port combination must belong to processes that share the same effective user ID!</strong> So one user cannot &quot;steal&quot; ports of another user. This is some special magic to somewhat compensate for the missing <code>SO_EXCLBIND</code>/<code>SO_EXCLUSIVEADDRUSE</code> flags.</p>\n</li>\n<li><p>Additionally the kernel performs some &quot;special magic&quot; for <code>SO_REUSEPORT</code> sockets that isn't found in other operating systems: For UDP sockets, it tries to distribute datagrams evenly, for TCP listening sockets, it tries to distribute incoming connect requests (those accepted by calling <code>accept()</code>)  evenly across all the sockets that share the same address and port combination. Thus an application can easily open the same port in multiple child processes and then use <code>SO_REUSEPORT</code> to get a very inexpensive load balancing.</p>\n</li>\n</ol>\n<h2><br>Android</h2>\n<p>Even though the whole Android system is somewhat different from most Linux distributions, at its core works a slightly modified Linux kernel, thus everything that applies to Linux should apply to Android as well.</p>\n<h1><br>Windows</h1>\n<p>Windows only knows the <code>SO_REUSEADDR</code> option, there is no <code>SO_REUSEPORT</code>. Setting <code>SO_REUSEADDR</code> on a socket in Windows behaves like setting <code>SO_REUSEPORT</code> and <code>SO_REUSEADDR</code> on a socket in BSD, with one exception:</p>\n<p>Prior to Windows 2003, a socket with <code>SO_REUSEADDR</code> could always been bound to exactly the same source address and port as an already bound socket, <strong>even if the other socket did not have this option set when it was bound</strong>. This behavior allowed an application &quot;to steal&quot; the connected port of another application. Needless to say that this has major security implications!</p>\n<p>Microsoft realized that and added another important socket option: <code>SO_EXCLUSIVEADDRUSE</code>. Setting <code>SO_EXCLUSIVEADDRUSE</code> on a socket makes sure that if the binding succeeds, the combination of source address and port is owned exclusively by this socket and no other socket can bind to them, <strong>not even</strong> if it has <code>SO_REUSEADDR</code> set.</p>\n<p>This default behavior was changed first in Windows 2003, Microsoft calls that &quot;Enhanced Socket Security&quot; (funny name for a behavior that is default on all other major operating systems). For more details <a href=\"https://msdn.microsoft.com/en-us/library/windows/desktop/ms740621(v=vs.85).aspx\" rel=\"noreferrer\">just visit this page</a>. There are three tables: The first one shows the classic behavior (still in use when using compatibility modes!), the second one shows the behavior of Windows 2003 and up when the <code>bind()</code> calls are made by the same user, and the third one when the <code>bind()</code> calls are made by different users.</p>\n<h1><br>Solaris</h1>\n<p>Solaris is the successor of SunOS. SunOS was originally based on a fork of BSD, SunOS 5 and later was based on a fork of SVR4, however SVR4 is a merge of BSD, System V, and Xenix, so up to some degree Solaris is also a BSD fork, and a rather early one. As a result Solaris only knows <code>SO_REUSEADDR</code>, there is no <code>SO_REUSEPORT</code>. The <code>SO_REUSEADDR</code> behaves pretty much the same as it does in BSD. As far as I know there is no way to get the same behavior as <code>SO_REUSEPORT</code> in Solaris, that means it is not possible to bind two sockets to exactly the same address and port.</p>\n<p>Similar to Windows, Solaris has an option to give a socket an exclusive binding. This option is named <code>SO_EXCLBIND</code>. If this option is set on a socket prior to binding it, setting <code>SO_REUSEADDR</code> on another socket has no effect if the two sockets are tested for an address conflict. E.g. if <code>socketA</code> is bound to a wildcard address and <code>socketB</code> has <code>SO_REUSEADDR</code> enabled and is bound to a non-wildcard address and the same port as <code>socketA</code>, this bind will normally succeed, unless <code>socketA</code> had <code>SO_EXCLBIND</code> enabled, in which case it will fail regardless the <code>SO_REUSEADDR</code> flag of <code>socketB</code>.</p>\n<h1><br>Other Systems</h1>\n<p>In case your system is not listed above, I wrote a little test program that you can use to find out how your system handles these two options. <strong>Also if you think my results are wrong</strong>, please first run that program before posting any comments and possibly making false claims.</p>\n<p>All that the code requires to build is a bit POSIX API (for the network parts) and a C99 compiler (actually most non-C99 compiler will work as well as long as they offer <code>inttypes.h</code> and <code>stdbool.h</code>; e.g. <code>gcc</code> supported both long before offering full C99 support).</p>\n<p>All that the program needs to run is that at least one interface in your system (other than the local interface) has an IP address assigned and that a default route is set which uses that interface. The program will gather that IP address and use it as the second &quot;specific address&quot;.</p>\n<p>It tests all possible combinations you can think of:</p>\n<ul>\n<li>TCP and UDP protocol</li>\n<li>Normal sockets, listen (server) sockets, multicast sockets</li>\n<li><code>SO_REUSEADDR</code> set on socket1, socket2, or both sockets</li>\n<li><code>SO_REUSEPORT</code> set on socket1, socket2, or both sockets</li>\n<li>All address combinations you can make out of <code>0.0.0.0</code> (wildcard), <code>127.0.0.1</code> (specific address), and the second specific address found at your primary interface (for multicast it's just <code>224.1.2.3</code> in all tests)</li>\n</ul>\n<p>and prints the results in a nice table. It will also work on systems that don't know <code>SO_REUSEPORT</code>, in which case this option is simply not tested.</p>\n<p>What the program cannot easily test is how <code>SO_REUSEADDR</code> acts on sockets in <code>TIME_WAIT</code> state as it's very tricky to force and keep a socket in that state. Fortunately most operating systems seems to simply behave like BSD here and most of the time programmers can simply ignore the existence of that state.</p>\n<p><a href=\"http://rextester.com/BUAFK86204\" rel=\"noreferrer\">Here's the code</a> (I cannot include it here, answers have a size limit and the code would push this reply over the limit).</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4133045,
+                        "reputation": 1826,
+                        "user_id": 3390390,
+                        "user_type": "registered",
+                        "display_name": "Edward Tomasz Napierala"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 29,
+                    "last_activity_date": 1591828445,
+                    "creation_date": 1591828445,
+                    "answer_id": 62314199,
+                    "question_id": 14388706,
+                    "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ/62314199#62314199",
+                    "body": "<p>Mecki's answer is absolutly perfect, but it's worth adding that FreeBSD also supports <code>SO_REUSEPORT_LB</code>, which mimics Linux' <code>SO_REUSEPORT</code> behaviour - it balances the load; see <a href=\"https://www.freebsd.org/cgi/man.cgi?setsockopt\" rel=\"noreferrer\">setsockopt(2)</a></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 8706,
+                "reputation": 129863,
+                "user_id": 15809,
+                "user_type": "registered",
+                "accept_rate": 79,
+                "display_name": "Mecki"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 14388707,
+            "answer_count": 2,
+            "score": 864,
+            "last_activity_date": 1676206409,
+            "creation_date": 1358459144,
+            "last_edit_date": 1675970386,
+            "question_id": 14388706,
+            "link": "https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ",
+            "title": "How do SO_REUSEADDR and SO_REUSEPORT differ?",
+            "body": "<p>The <code>man pages</code> and programmer documentations for the socket options <code>SO_REUSEADDR</code> and <code>SO_REUSEPORT</code> are different for different operating systems and often highly confusing. Some operating systems don't even have the option <code>SO_REUSEPORT</code>. The WWW is full of contradicting information regarding this subject and often you can find information that is only true for one socket implementation of a specific operating system, which may not even be explicitly mentioned in the text.</p>\n<p>So how exactly is <code>SO_REUSEADDR</code> different than <code>SO_REUSEPORT</code>?</p>\n<p>Are systems without <code>SO_REUSEPORT</code> more limited?</p>\n<p>And what exactly is the expected behavior if I use either one on different operating systems?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6631
+}

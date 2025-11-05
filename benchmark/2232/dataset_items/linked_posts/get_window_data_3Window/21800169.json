@@ -1,0 +1,205 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "pandas",
+                "dataframe",
+                "indexing"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 64585,
+                        "reputation": 864610,
+                        "user_id": 190597,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "unutbu"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 790,
+                    "last_activity_date": 1553593692,
+                    "last_edit_date": 1553593692,
+                    "creation_date": 1392481726,
+                    "answer_id": 21800319,
+                    "question_id": 21800169,
+                    "link": "https://stackoverflow.com/questions/21800169/python-pandas-get-index-of-rows-where-column-matches-certain-value/21800319#21800319",
+                    "body": "<p><code>df.iloc[i]</code> returns the <code>ith</code> row of <code>df</code>. <code>i</code> does not refer to the index label, <code>i</code> is a 0-based index.</p>\n\n<p>In contrast, <strong>the attribute <code>index</code> returns actual index labels</strong>, not numeric row-indices:</p>\n\n<pre><code>df.index[df['BoolCol'] == True].tolist()\n</code></pre>\n\n<p>or equivalently,</p>\n\n<pre><code>df.index[df['BoolCol']].tolist()\n</code></pre>\n\n<p>You can see the difference quite clearly by playing with a DataFrame with\na non-default index that does not equal to the row's numerical position:</p>\n\n<pre><code>df = pd.DataFrame({'BoolCol': [True, False, False, True, True]},\n       index=[10,20,30,40,50])\n\nIn [53]: df\nOut[53]: \n   BoolCol\n10    True\n20   False\n30   False\n40    True\n50    True\n\n[5 rows x 1 columns]\n\nIn [54]: df.index[df['BoolCol']].tolist()\nOut[54]: [10, 40, 50]\n</code></pre>\n\n<hr>\n\n<p><strong>If you want to use the index</strong>, </p>\n\n<pre><code>In [56]: idx = df.index[df['BoolCol']]\n\nIn [57]: idx\nOut[57]: Int64Index([10, 40, 50], dtype='int64')\n</code></pre>\n\n<p><strong>then you can select the rows using <code>loc</code> instead of <code>iloc</code></strong>:</p>\n\n<pre><code>In [58]: df.loc[idx]\nOut[58]: \n   BoolCol\n10    True\n40    True\n50    True\n\n[3 rows x 1 columns]\n</code></pre>\n\n<hr>\n\n<p>Note that <strong><code>loc</code> can also accept boolean arrays</strong>:</p>\n\n<pre><code>In [55]: df.loc[df['BoolCol']]\nOut[55]: \n   BoolCol\n10    True\n40    True\n50    True\n\n[3 rows x 1 columns]\n</code></pre>\n\n<hr>\n\n<p><strong>If you have a boolean array, <code>mask</code>, and need ordinal index values, you can compute them using <code>np.flatnonzero</code></strong>:</p>\n\n<pre><code>In [110]: np.flatnonzero(df['BoolCol'])\nOut[112]: array([0, 3, 4])\n</code></pre>\n\n<p>Use <code>df.iloc</code> to select rows by ordinal index:</p>\n\n<pre><code>In [113]: df.iloc[np.flatnonzero(df['BoolCol'])]\nOut[113]: \n   BoolCol\n10    True\n40    True\n50    True\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7089045,
+                        "reputation": 11340,
+                        "user_id": 5424918,
+                        "user_type": "registered",
+                        "display_name": "Surya"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 50,
+                    "last_activity_date": 1483138127,
+                    "last_edit_date": 1483138127,
+                    "creation_date": 1483134829,
+                    "answer_id": 41403130,
+                    "question_id": 21800169,
+                    "link": "https://stackoverflow.com/questions/21800169/python-pandas-get-index-of-rows-where-column-matches-certain-value/41403130#41403130",
+                    "body": "<p>Can be done using numpy where() function:</p>\n\n<pre><code>import pandas as pd\nimport numpy as np\n\nIn [716]: df = pd.DataFrame({\"gene_name\": ['SLC45A1', 'NECAP2', 'CLIC4', 'ADC', 'AGBL4'] , \"BoolCol\": [False, True, False, True, True] },\n       index=list(\"abcde\"))\n\nIn [717]: df\nOut[717]: \n  BoolCol gene_name\na   False   SLC45A1\nb    True    NECAP2\nc   False     CLIC4\nd    True       ADC\ne    True     AGBL4\n\nIn [718]: np.where(df[\"BoolCol\"] == True)\nOut[718]: (array([1, 3, 4]),)\n\nIn [719]: select_indices = list(np.where(df[\"BoolCol\"] == True)[0])\n\nIn [720]: df.iloc[select_indices]\nOut[720]: \n  BoolCol gene_name\nb    True    NECAP2\nd    True       ADC\ne    True     AGBL4\n</code></pre>\n\n<p>Though you don't always need index for a match, but incase if you need:</p>\n\n<pre><code>In [796]: df.iloc[select_indices].index\nOut[796]: Index([u'b', u'd', u'e'], dtype='object')\n\nIn [797]: df.iloc[select_indices].index.tolist()\nOut[797]: ['b', 'd', 'e']\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 10829702,
+                        "reputation": 321263,
+                        "user_id": 7964527,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "BENY"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1662827836,
+                    "last_edit_date": 1662827836,
+                    "creation_date": 1547072694,
+                    "answer_id": 54119293,
+                    "question_id": 21800169,
+                    "link": "https://stackoverflow.com/questions/21800169/python-pandas-get-index-of-rows-where-column-matches-certain-value/54119293#54119293",
+                    "body": "<p>First you may check <code>query</code> when the target column is type <code>bool</code>  (PS: about how to use it please check <a href=\"https://stackoverflow.com/questions/53779986/dynamic-expression-evaluation-in-pandas-using-pd-eval/53779987#53779987\">link</a> )</p>\n<pre><code>df.query('BoolCol')\nOut[123]: \n    BoolCol\n10     True\n40     True\n50     True\n</code></pre>\n<p>After we filter the original df by the Boolean column we can pick the index .</p>\n<pre><code>df=df.query('BoolCol')\ndf.index\nOut[125]: Int64Index([10, 40, 50], dtype='int64')\n</code></pre>\n<hr />\n<p>Also pandas have <code>nonzero</code>, we just select the <em><strong>position</strong></em> of <code>True</code> row and using it slice the <code>DataFrame</code> or <code>index</code></p>\n<pre><code>df.index[df.BoolCol.values.nonzero()[0]]\nOut[128]: Int64Index([10, 40, 50], dtype='int64')\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 15518808,
+                        "reputation": 51,
+                        "user_id": 11195534,
+                        "user_type": "registered",
+                        "display_name": "Ben Druitt"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1561092992,
+                    "creation_date": 1561092992,
+                    "answer_id": 56697075,
+                    "question_id": 21800169,
+                    "link": "https://stackoverflow.com/questions/21800169/python-pandas-get-index-of-rows-where-column-matches-certain-value/56697075#56697075",
+                    "body": "<p>Simple way is to reset the index of the DataFrame prior to filtering:</p>\n\n<pre><code>df_reset = df.reset_index()\ndf_reset[df_reset['BoolCol']].index.tolist()\n</code></pre>\n\n<p>Bit hacky, but it's quick!</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 19844883,
+                                "reputation": 89,
+                                "user_id": 16568273,
+                                "user_type": "registered",
+                                "display_name": "MiKK"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1657123841,
+                            "post_id": 57899374,
+                            "comment_id": 128736934,
+                            "link": "https://stackoverflow.com/questions/21800169/python-pandas-get-index-of-rows-where-column-matches-certain-value/57899374#comment128736934_57899374",
+                            "body": "Without explicitly using numpy by using boolean dataframe: <a href=\"https://thispointer.com/python-find-indexes-of-an-element-in-pandas-dataframe/\" rel=\"nofollow noreferrer\">thispointer.com/&hellip;</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 13767357,
+                        "reputation": 6969,
+                        "user_id": 9935654,
+                        "user_type": "registered",
+                        "display_name": "Carson"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1568259337,
+                    "creation_date": 1568259337,
+                    "answer_id": 57899374,
+                    "question_id": 21800169,
+                    "link": "https://stackoverflow.com/questions/21800169/python-pandas-get-index-of-rows-where-column-matches-certain-value/57899374#57899374",
+                    "body": "<p>I extended this question that is how to gets the <code>row</code>, <code>column</code>and <code>value</code> of all matches value?</p>\n\n<p>here is solution:</p>\n\n<pre><code>import pandas as pd\nimport numpy as np\n\n\ndef search_coordinate(df_data: pd.DataFrame, search_set: set) -&gt; list:\n    nda_values = df_data.values\n    tuple_index = np.where(np.isin(nda_values, [e for e in search_set]))\n    return [(row, col, nda_values[row][col]) for row, col in zip(tuple_index[0], tuple_index[1])]\n\n\nif __name__ == '__main__':\n    test_datas = [['cat', 'dog', ''],\n                  ['goldfish', '', 'kitten'],\n                  ['Puppy', 'hamster', 'mouse']\n                  ]\n    df_data = pd.DataFrame(test_datas)\n    print(df_data)\n    result_list = search_coordinate(df_data, {'dog', 'Puppy'})\n    print(f\"\\n\\n{'row':&lt;4} {'col':&lt;4} {'name':&gt;10}\")\n    [print(f\"{row:&lt;4} {col:&lt;4} {name:&gt;10}\") for row, col, name in result_list]\n</code></pre>\n\n<p>Output:</p>\n\n<pre><code>          0        1       2\n0       cat      dog        \n1  goldfish           kitten\n2     Puppy  hamster   mouse\n\n\nrow  col        name\n0    1           dog\n2    0         Puppy\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4603993,
+                        "reputation": 6298,
+                        "user_id": 3733974,
+                        "user_type": "registered",
+                        "accept_rate": 50,
+                        "display_name": "mbh86"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 48,
+                    "last_activity_date": 1578483032,
+                    "creation_date": 1578483032,
+                    "answer_id": 59644915,
+                    "question_id": 21800169,
+                    "link": "https://stackoverflow.com/questions/21800169/python-pandas-get-index-of-rows-where-column-matches-certain-value/59644915#59644915",
+                    "body": "<p>If you want to use your dataframe object only once, use:</p>\n\n<pre><code>df['BoolCol'].loc[lambda x: x==True].index\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 15621854,
+                        "reputation": 1931,
+                        "user_id": 11671779,
+                        "user_type": "registered",
+                        "display_name": "Muhammad Yasirroni"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1637578516,
+                    "creation_date": 1637578516,
+                    "answer_id": 70064652,
+                    "question_id": 21800169,
+                    "link": "https://stackoverflow.com/questions/21800169/python-pandas-get-index-of-rows-where-column-matches-certain-value/70064652#70064652",
+                    "body": "<p>For known index candidate that we interested, a faster way by not checking the whole column can be done like this:</p>\n<pre class=\"lang-py prettyprint-override\"><code>np.array(index_slice)[np.where(df.loc[index_slice]['column_name'] &gt;= threshold)[0]]\n</code></pre>\n<p>Full comparison:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import pandas as pd\nimport numpy as np\n\nindex_slice = list(range(50,150)) # know index location for our inteterest\ndata = np.zeros(10000)\ndata[(index_slice)] = np.random.random(len(index_slice))\n\ndf = pd.DataFrame(\n    {'column_name': data},\n)\n\nthreshold = 0.5\n\n</code></pre>\n<pre class=\"lang-py prettyprint-override\"><code>%%timeit\nnp.array(index_slice)[np.where(df.loc[index_slice]['column_name'] &gt;= threshold)[0]]\n# 600 \u00b5s \u00b1 1.21 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 1000 loops each)\n\n%%timeit\n[i for i in index_slice if i in df.index[df['column_name'] &gt;= threshold].tolist()]\n# 22.5 ms \u00b1 29.1 \u00b5s per loop (mean \u00b1 std. dev. of 7 runs, 10 loops each)\n</code></pre>\n<p>The way it works is like this:</p>\n<pre class=\"lang-py prettyprint-override\"><code># generate Boolean satisfy condition only in sliced column\ndf.loc[index_slice]['column_name'] &gt;= threshold\n\n# convert Boolean to index, but start from 0 and increment by 1\nnp.where(...)[0]\n\n# list of index to be sliced\nnp.array(index_slice)[...]\n</code></pre>\n<p>Note:\nIt needs to be noted that <code>np.array(index_slice)</code> can't be substituted by <code>df.index</code> due to <code>np.where(...)[0]</code> indexing <code>start from 0 and increment by 1</code>, but you can make something like <code>df.index[index_slice]</code>. And I think this is not worth the hassle if you just do it one time with small number of rows.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 25298386,
+                        "reputation": 17587,
+                        "user_id": 19123103,
+                        "user_type": "registered",
+                        "display_name": "cottontail"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1662827607,
+                    "creation_date": 1662827607,
+                    "answer_id": 73673468,
+                    "question_id": 21800169,
+                    "link": "https://stackoverflow.com/questions/21800169/python-pandas-get-index-of-rows-where-column-matches-certain-value/73673468#73673468",
+                    "body": "<p>Another method is to use <code>pipe()</code> to pipe the indexing of the index of <code>BoolCol</code>. In terms of performance, it's as efficient as the canonical indexing using <code>[]</code>.<sup>1</sup></p>\n<pre class=\"lang-py prettyprint-override\"><code>df['BoolCol'].pipe(lambda x: x.index[x])\n</code></pre>\n<p>This is especially useful if <code>BoolCol</code> is actually the result of multiple comparisons and you want to use method chaining to put all methods in a pipeline.</p>\n<p>For example, if you want to get the row indexes where <code>NumCol</code> value is greater than 0.5, <code>BoolCol</code> value is True and the product of <code>NumCol</code> and <code>BoolCol</code> values is greater than 0, you can do so by evaluating an expression via <code>eval()</code> and call <code>pipe()</code> on the result to perform the indexing of the indexes.<sup>2</sup></p>\n<pre class=\"lang-py prettyprint-override\"><code>df.eval(&quot;NumCol &gt; 0.5 and BoolCol and NumCol * BoolCol &gt;0&quot;).pipe(lambda x: x.index[x])\n</code></pre>\n<br>\n<hr />\n<p><sup>1</sup>: The following benchmark used a dataframe with 20mil rows (on average filtered half of the rows) and retrieved their indexes. The method chaining via <code>pipe()</code> does very well compared to the other efficient options.</p>\n<pre class=\"lang-py prettyprint-override\"><code>n = 20_000_000\ndf = pd.DataFrame({'NumCol': np.random.rand(n).astype('float16'), \n                   'BoolCol': np.random.default_rng().choice([True, False], size=n)})\n\n%timeit df.index[df['BoolCol']]\n# 181 ms \u00b1 2.47 ms per loop (mean \u00b1 std. dev. of 10 runs, 1000 loops each)\n\n%timeit df['BoolCol'].pipe(lambda x: x.index[x])\n# 181 ms \u00b1 1.08 ms per loop (mean \u00b1 std. dev. of 10 runs, 1000 loops each)\n\n%timeit df['BoolCol'].loc[lambda x: x].index\n# 297 ms \u00b1 7.15 ms per loop (mean \u00b1 std. dev. of 10 runs, 1000 loops each)\n</code></pre>\n<p><sup>2</sup>: For a 20 mil row dataframe constructed in the same way as in <sup>1</sup>) for the benchmark, you will find that the method proposed here is the fastest option. It performs better than bitwise-operator chaining because by design, <code>eval()</code> performs multiple operations on a large dataframe faster than vectorized Python operations and it is more memory efficient than <code>query()</code> because unlike <code>query()</code>, <code>eval().pipe(...)</code> doesn't need to create a copy of the sliced dataframe to get its index.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 2453121,
+                "reputation": 6355,
+                "user_id": 2138906,
+                "user_type": "registered",
+                "accept_rate": 91,
+                "display_name": "I want badges"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 21800319,
+            "answer_count": 8,
+            "score": 546,
+            "last_activity_date": 1662827836,
+            "creation_date": 1392481091,
+            "last_edit_date": 1662827725,
+            "question_id": 21800169,
+            "link": "https://stackoverflow.com/questions/21800169/python-pandas-get-index-of-rows-where-column-matches-certain-value",
+            "title": "Python Pandas: Get index of rows where column matches certain value",
+            "body": "<p>Given a DataFrame with a column &quot;BoolCol&quot;, we want to find the indexes of the DataFrame in which the values for &quot;BoolCol&quot; == True</p>\n<p>I currently have the iterating way to do it, which works perfectly:</p>\n<pre class=\"lang-py prettyprint-override\"><code>for i in range(100,3000):\n    if df.iloc[i]['BoolCol']== True:\n         print i,df.iloc[i]['BoolCol']\n</code></pre>\n<p>But this is not the correct pandas way to do it. After some research, I am currently using this code:</p>\n<pre class=\"lang-py prettyprint-override\"><code>df[df['BoolCol'] == True].index.tolist()\n</code></pre>\n<p>This one gives me a list of indexes, but they don't match, when I check them by doing:</p>\n<pre class=\"lang-py prettyprint-override\"><code>df.iloc[i]['BoolCol']\n</code></pre>\n<p>The result is actually False!!</p>\n<p>Which would be the correct pandas way to do this?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5769
+}

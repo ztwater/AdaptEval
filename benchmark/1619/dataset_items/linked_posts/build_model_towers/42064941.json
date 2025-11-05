@@ -1,0 +1,50 @@
+{
+    "items": [
+        {
+            "tags": [
+                "tensorflow"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 9180312,
+                        "reputation": 5778,
+                        "user_id": 6824418,
+                        "user_type": "registered",
+                        "display_name": "Allen Lavoie"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 18,
+                    "last_activity_date": 1486416395,
+                    "creation_date": 1486416395,
+                    "answer_id": 42077538,
+                    "question_id": 42064941,
+                    "link": "https://stackoverflow.com/questions/42064941/tensorflow-float16-support-is-broken/42077538#42077538",
+                    "body": "<p>It looks like you need a slightly larger epsilon to avoid numerical instability with zero moments in AdamOptimizer (default is 1e-8). This works for me with float16:</p>\n\n<pre><code>opt = tf.train.AdamOptimizer(1e-3, epsilon=1e-4)\n</code></pre>\n\n<p>It would be reasonable to request that epsilon be set based on dtype (and presumably such a request, or better yet a pull request, would be met with a more positive response on GitHub). Note that GradientDescentOptimizer has no such issue.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 10188198,
+                "reputation": 83,
+                "user_id": 7522443,
+                "user_type": "registered",
+                "display_name": "Konstantin Shmelkov"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 42077538,
+            "answer_count": 1,
+            "score": 8,
+            "last_activity_date": 1517318091,
+            "creation_date": 1486375244,
+            "question_id": 42064941,
+            "link": "https://stackoverflow.com/questions/42064941/tensorflow-float16-support-is-broken",
+            "title": "TensorFlow float16 support is broken",
+            "body": "<p>Recently I tried to train a CNN in TF using float16. To my surprise it is broken in various ways even though TF claims to support it for a while. For example, float16 optimization causes NaN loss already on the second step regardless of the network.</p>\n\n<pre><code>import tensorflow as tf\nimport numpy as np\n\nslim = tf.contrib.slim\n\ndtype = tf.float16\nshape = (4, 16, 16, 3)\n\ninpt = tf.placeholder(dtype, shape, name='input')\nnet = slim.conv2d(inpt, 16, [3, 3], scope='conv',\n        weights_initializer=tf.zeros_initializer(),\n        # normalizer_fn=slim.batch_norm\n        )\nloss = tf.reduce_mean(net)\nopt = tf.train.AdamOptimizer(1e-3)\ntrain_op = slim.learning.create_train_op(loss, opt)\n\nval = np.zeros(shape)\nwith tf.Session() as sess:\n    sess.run(tf.global_variables_initializer())\n    for i in range(2):\n        print(sess.run(train_op, feed_dict={inpt: val}))\n</code></pre>\n\n<p>To my understanding it is clearly a bug: I apply zero convolutions on zero input, I should get zero gradients that don't change zero loss. It just can't diverge. If dtype is float32 it works. NaN loss occurs both on CPU and GPU versions.</p>\n\n<p>However, I was dismissed in GH issues, a random dude closed this issue saying that it is intended behaviour: <a href=\"https://github.com/tensorflow/tensorflow/issues/7226\" rel=\"noreferrer\">https://github.com/tensorflow/tensorflow/issues/7226</a></p>\n\n<p>If you uncomment the line with BN, it will break already on graph construction time because BN assumes moving averages (and beta, gamma) are always float32 and does not cast them properly. This issue was also closed and apparently ignored: <a href=\"https://github.com/tensorflow/tensorflow/issues/7164\" rel=\"noreferrer\">https://github.com/tensorflow/tensorflow/issues/7164</a></p>\n\n<p>I feel like I am talking to a first line IT support of an ISP.</p>\n\n<p>Can anybody explain how I should train with float16 when such a simple \"network\" fails horribly? And what is the recommended way to report bugs now?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6874
+}

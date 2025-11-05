@@ -1,0 +1,89 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "numpy",
+                "vector",
+                "svd",
+                "eigenvalue"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 9800827,
+                                "reputation": 4858,
+                                "user_id": 7262247,
+                                "user_type": "registered",
+                                "display_name": "smarie"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1590247351,
+                            "post_id": 61974002,
+                            "comment_id": 109611624,
+                            "link": "https://stackoverflow.com/questions/61973915/fastest-way-in-numpy-to-check-if-vectors-are-aligned-or-have-opposite-direction/61974002#comment109611624_61974002",
+                            "body": "Impressive ! compute_signs_dot: 2.513s compute_signs_mul: 0.866s compute_signs_sign: 1.755s compute_signs_einsum: 0.373s compute_signs_matmul: 0.355s"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9800827,
+                                "reputation": 4858,
+                                "user_id": 7262247,
+                                "user_type": "registered",
+                                "display_name": "smarie"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1590248281,
+                            "post_id": 61974002,
+                            "comment_id": 109612010,
+                            "link": "https://stackoverflow.com/questions/61973915/fastest-way-in-numpy-to-check-if-vectors-are-aligned-or-have-opposite-direction/61974002#comment109612010_61974002",
+                            "body": "note: increasing the number of runs, both seem to have equivalent execution times."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3996536,
+                        "reputation": 221021,
+                        "user_id": 3293881,
+                        "user_type": "registered",
+                        "accept_rate": 17,
+                        "display_name": "Divakar"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 3,
+                    "last_activity_date": 1590245987,
+                    "creation_date": 1590245987,
+                    "answer_id": 61974002,
+                    "question_id": 61973915,
+                    "link": "https://stackoverflow.com/questions/61973915/fastest-way-in-numpy-to-check-if-vectors-are-aligned-or-have-opposite-direction/61974002#61974002",
+                    "body": "<p>We can use <a href=\"https://numpy.org/doc/stable/reference/generated/numpy.einsum.html\" rel=\"nofollow noreferrer\"><code>np.einsum</code></a> -</p>\n\n<pre><code>diag_VtU = np.einsum('ji,ij-&gt;j',Vt[:n_components, :], U[:, :n_components])\n</code></pre>\n\n<p>Alternatively, with <code>np.matmul/@-operator</code> to get <code>diag_VtU</code> -</p>\n\n<pre><code>(Vt[:n_components, :][:,None,:] @ (U[:, :n_components].T)[:,:,None])[:,0,0]\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 9800827,
+                "reputation": 4858,
+                "user_id": 7262247,
+                "user_type": "registered",
+                "display_name": "smarie"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 61974002,
+            "answer_count": 1,
+            "score": 2,
+            "last_activity_date": 1590245987,
+            "creation_date": 1590245656,
+            "question_id": 61973915,
+            "link": "https://stackoverflow.com/questions/61973915/fastest-way-in-numpy-to-check-if-vectors-are-aligned-or-have-opposite-direction",
+            "title": "Fastest way in numpy to check if vectors are aligned or have opposite direction (truncated SVD post processing)",
+            "body": "<p>I have a bunch of vectors that are stored in the columns of a matrix U.\nI have also a matrix V containing column vectors. Each vector in V can either be</p>\n\n<ul>\n<li>almost identical to its counterpart in U, with numerical approximations</li>\n<li>or have an opposite sign, with numerical approximations.</li>\n</ul>\n\n<p>The goal is to find an array containing either 1 if the vectors have the same direction, or -1 if they have opposite directions.</p>\n\n<p>Two additional things:</p>\n\n<ul>\n<li>I am only interested in the first signs, not all (100 out of 10000 in the example below).</li>\n<li>V is given in its transposed form (Vt)</li>\n</ul>\n\n<p>I have found three ways so far to solve this problem: </p>\n\n<pre><code>from timeit import timeit\nimport numpy as np\n\n# create fake SVD output\nn_components = 100\nn_samples = 10000\nU = np.random.random((n_samples, n_samples - 1))\ntrue_signs = np.sign(np.random.random(n_samples - 1) - 0.5)\nVt = np.multiply(U, true_signs[None, :]).T\n# simulate some numerical imprecision\nVt += np.random.random((n_samples - 1, n_samples)) * 0.001\n\n# 3 competing methods\ndef compute_signs_dot():\n    VtU = np.dot(Vt[:n_components, :], U[:, :n_components])\n    signs = np.sign(np.diag(VtU))\n    np.testing.assert_equal(signs, true_signs[:n_components])\n\ndef compute_signs_mul():\n    diag_VtU = np.multiply(Vt[:n_components, :].T,\n                          U[:, :n_components]).sum(axis=0)\n    signs = np.sign(diag_VtU)\n    np.testing.assert_equal(signs, true_signs[:n_components])\n\ndef compute_signs_sign():\n    signs = np.multiply(np.sign(Vt[:n_components, :].T),\n                        np.sign(U[:, :n_components])).sum(axis=0)\n    signs = np.sign(signs)\n    np.testing.assert_equal(signs, true_signs[:n_components])\n\n# compare execution times\nprint(\"compute_signs_dot: %.3fs\" % timeit(compute_signs_dot, number=100))\nprint(\"compute_signs_mul: %.3fs\" % timeit(compute_signs_mul, number=100))\nprint(\"compute_signs_sign: %.3fs\" % timeit(compute_signs_sign, number=100))\n</code></pre>\n\n<p>yields</p>\n\n<pre><code>compute_signs_dot: 2.001s\ncompute_signs_mul: 0.786s\ncompute_signs_sign: 1.693s\n</code></pre>\n\n<p>So it seems that the fastest method so far is to compute the scalar product between pairs of vectors at each column index by multiplying term by term and sum (<code>compute_signs_mul</code>).</p>\n\n<p>Any other method would be appreciated, faster or with similar speed.</p>\n\n<p>Note: as some readers will have noted, this is postprocessing on output from a truncated SVD in order to transform the singular values into eigenvalues by finding their signs.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8885
+}

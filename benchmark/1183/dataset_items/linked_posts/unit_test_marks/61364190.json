@@ -1,0 +1,230 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python-3.x",
+                "pytest"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 17237619,
+                        "reputation": 16010,
+                        "user_id": 12480730,
+                        "user_type": "registered",
+                        "display_name": "MrBean Bremen"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1587569508,
+                    "post_id": 61364190,
+                    "comment_id": 108564223,
+                    "link": "https://stackoverflow.com/questions/61364190/python-pytest-how-can-i-get-a-test-markers-inside-its-fixture-methods#comment108564223_61364190",
+                    "body": "Do you want to get the markers inside the fixture? That can be done using the fixture request. What is your use case?"
+                },
+                {
+                    "owner": {
+                        "account_id": 8275280,
+                        "reputation": 419,
+                        "user_id": 6221713,
+                        "user_type": "registered",
+                        "accept_rate": 50,
+                        "display_name": "erez"
+                    },
+                    "reply_to_user": {
+                        "account_id": 17237619,
+                        "reputation": 16010,
+                        "user_id": 12480730,
+                        "user_type": "registered",
+                        "display_name": "MrBean Bremen"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1587609217,
+                    "post_id": 61364190,
+                    "comment_id": 108580682,
+                    "link": "https://stackoverflow.com/questions/61364190/python-pytest-how-can-i-get-a-test-markers-inside-its-fixture-methods#comment108580682_61364190",
+                    "body": "yes, I&#39;m indeed using the request for similar tasks, but I didn&#39;t find there any info about the markers"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3133056,
+                                "reputation": 63405,
+                                "user_id": 2650249,
+                                "user_type": "registered",
+                                "accept_rate": 95,
+                                "display_name": "hoefling"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1587633180,
+                            "post_id": 61379477,
+                            "comment_id": 108589406,
+                            "link": "https://stackoverflow.com/questions/61364190/python-pytest-how-can-i-get-a-test-markers-inside-its-fixture-methods/61379477#comment108589406_61379477",
+                            "body": "There&#39;s also <code>request.node.iter_markers()</code> that will yield only the markers. I&#39;d pay attention to the fixture scope though, <code>request.node</code> is the session in session-scoped, test class in class-scoped, module in module-scoped fixtures etc. The most general solution would probably combine <code>request.node.iter_markers()</code> with <code>request.node.parent.iter_markers()</code> while available."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 17237619,
+                                "reputation": 16010,
+                                "user_id": 12480730,
+                                "user_type": "registered",
+                                "display_name": "MrBean Bremen"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3133056,
+                                "reputation": 63405,
+                                "user_id": 2650249,
+                                "user_type": "registered",
+                                "accept_rate": 95,
+                                "display_name": "hoefling"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1587635396,
+                            "post_id": 61379477,
+                            "comment_id": 108590652,
+                            "link": "https://stackoverflow.com/questions/61364190/python-pytest-how-can-i-get-a-test-markers-inside-its-fixture-methods/61379477#comment108590652_61379477",
+                            "body": "@hoefling - thanks, that sounds more reasonable, but it it doesn&#39;t work for me. There is an <code>iter_markers</code> in the item that is passed in hooks (that is actually used in the other answer), but none in <code>request.node</code>, as far as I can see."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3133056,
+                                "reputation": 63405,
+                                "user_id": 2650249,
+                                "user_type": "registered",
+                                "accept_rate": 95,
+                                "display_name": "hoefling"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1587635568,
+                            "post_id": 61379477,
+                            "comment_id": 108590758,
+                            "link": "https://stackoverflow.com/questions/61364190/python-pytest-how-can-i-get-a-test-markers-inside-its-fixture-methods/61379477#comment108590758_61379477",
+                            "body": "Use <code>request.node.iter_markers()</code>, not <code>request.iter_markers()</code>. In function-scoped fixtures, <code>request.node</code> is the same <code>item</code> that is passed in hooks."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3133056,
+                                "reputation": 63405,
+                                "user_id": 2650249,
+                                "user_type": "registered",
+                                "accept_rate": 95,
+                                "display_name": "hoefling"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1587635999,
+                            "post_id": 61379477,
+                            "comment_id": 108590988,
+                            "link": "https://stackoverflow.com/questions/61364190/python-pytest-how-can-i-get-a-test-markers-inside-its-fixture-methods/61379477#comment108590988_61379477",
+                            "body": "Hmm, are you sure it doesn&#39;t work? If I replace <code>[m for m in request.keywords if ...]</code> with <code>[m.name for m in request.node.iter_markers()]</code> in your fixture example, I get the same output as yours."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 17237619,
+                                "reputation": 16010,
+                                "user_id": 12480730,
+                                "user_type": "registered",
+                                "display_name": "MrBean Bremen"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3133056,
+                                "reputation": 63405,
+                                "user_id": 2650249,
+                                "user_type": "registered",
+                                "accept_rate": 95,
+                                "display_name": "hoefling"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1587636409,
+                            "post_id": 61379477,
+                            "comment_id": 108591246,
+                            "link": "https://stackoverflow.com/questions/61364190/python-pytest-how-can-i-get-a-test-markers-inside-its-fixture-methods/61379477#comment108591246_61379477",
+                            "body": "Ok, my bad - I used a venv with an older pytest version. After upgrading pytest it works. Thanks a lot - I will update the answer!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3133056,
+                                "reputation": 63405,
+                                "user_id": 2650249,
+                                "user_type": "registered",
+                                "accept_rate": 95,
+                                "display_name": "hoefling"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1587641028,
+                            "post_id": 61379477,
+                            "comment_id": 108593792,
+                            "link": "https://stackoverflow.com/questions/61364190/python-pytest-how-can-i-get-a-test-markers-inside-its-fixture-methods/61379477#comment108593792_61379477",
+                            "body": "Yeah, <code>get_markers</code> was reworked into <code>iter_markers</code> somewhere around version 4 :-)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 17237619,
+                        "reputation": 16010,
+                        "user_id": 12480730,
+                        "user_type": "registered",
+                        "display_name": "MrBean Bremen"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1587643699,
+                    "last_edit_date": 1587643699,
+                    "creation_date": 1587616758,
+                    "answer_id": 61379477,
+                    "question_id": 61364190,
+                    "link": "https://stackoverflow.com/questions/61364190/python-pytest-how-can-i-get-a-test-markers-inside-its-fixture-methods/61379477#61379477",
+                    "body": "<p>The markers can be taken from the fixture request <code>node</code> attribute using <code>iter_markers</code>, as can be seen in this (nonsensical) example:</p>\n\n<pre><code>import pytest\n\n\n@pytest.fixture\ndef get_marks(request):\n    marks = [m.name for m in request.node.iter_markers()]\n    if request.node.parent:\n        marks += [m.name for m in request.node.parent.iter_markers()]\n    yield marks\n\n\n@pytest.mark.parametrize('number', [1, 2, 3])\n@pytest.mark.foo\n@pytest.mark.xfail\ndef test_marks(get_marks, number):\n    print(get_marks)\n    assert 'xfail' in get_marks\n    assert number == 42\n</code></pre>\n\n<p>This gives the output:</p>\n\n<pre><code>...\nxfail                                      [100%]['parametrize', 'xfail', 'foo']\n\nget_marks = ['parametrize', 'xfail', 'foo'], number = 3\n\n    @pytest.mark.parametrize('number', [1, 2, 3])\n    @pytest.mark.foo\n    @pytest.mark.xfail\n    def test_marks(get_marks, number):\n        print(get_marks)\n        assert 'xfail' in get_marks\n&gt;       assert number == 42\nE       assert 3 == 42\n</code></pre>\n\n<p><em>Update</em>:\nUse the correct public call to get the markers as proposed by @hoefling.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 10162231,
+                        "reputation": 2491,
+                        "user_id": 7505321,
+                        "user_type": "registered",
+                        "display_name": "Chanda Korat"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1587628940,
+                    "creation_date": 1587628940,
+                    "answer_id": 61382176,
+                    "question_id": 61364190,
+                    "link": "https://stackoverflow.com/questions/61364190/python-pytest-how-can-i-get-a-test-markers-inside-its-fixture-methods/61382176#61382176",
+                    "body": "<p>One method is already described by @MrBean, here's one another approach using <code>pytest_runtest_setup</code> in <code>conftest.py</code>. By combiantion of global variable and <code>pytest_runtest_setup</code> which is pytest's own method, you can get current test marker.</p>\n\n<p>This approach would give you markers of both class level and function level.</p>\n\n<p><strong>conftest.py</strong></p>\n\n<pre><code>import pytest\n\nmarker_name = [] #Global variable so you can use it everywhere\n\ndef pytest_runtest_setup(item):\n    global marker_name\n    marker_name.clear() #If you would not clear this, it would append every test's marker, test by test. \n    for mark in item.iter_markers():\n        marker_name.append(mark.name)\n\n\n@pytest.fixture(scope='function', autouse=True) #Note here, autouse=true.\ndef my_fixture(request):\n    request.instance.test_marker=marker_name #assign it to request's session so you can use it in other fixture and in tests as well\n\n@pytest.fixture\ndef some_other_fixture(request):\n    test_marker=request.instance.test_marker #access marker in fixture\n</code></pre>\n\n<p><strong>test_file.py</strong> (Access that marker variable inside test using request.instance.test_marker.)</p>\n\n<pre><code>import pytest\n\n\n@pytest.mark.class_marker\nclass TestClass:\n    @pytest.mark.my_test\n    @pytest.mark.xfail\n    def test_foo(self,request):\n        print(request.instance.test_marker) #output :  ['xfail', 'my_test', 'class_marker']\n\n    @pytest.mark.my_test_two\n    @pytest.mark.xfail\n    def test_foo_two(self,request):\n        print(request.instance.test_marker) #output :  ['xfail', 'my_test_two', 'class_marker']\n</code></pre>\n\n<p>Hope it would help !! </p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 8275280,
+                "reputation": 419,
+                "user_id": 6221713,
+                "user_type": "registered",
+                "accept_rate": 50,
+                "display_name": "erez"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "answer_count": 2,
+            "score": 3,
+            "last_activity_date": 1587643699,
+            "creation_date": 1587555483,
+            "question_id": 61364190,
+            "link": "https://stackoverflow.com/questions/61364190/python-pytest-how-can-i-get-a-test-markers-inside-its-fixture-methods",
+            "title": "python pytest - How can I get a test markers inside its fixture methods?",
+            "body": "<p>I have test in pytest and added some markers such as: '<code>@pytest.mark.xfail</code>', the test have several fixture methods.\nHow can I get all the markers of certain test using a fixture method?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7807
+}

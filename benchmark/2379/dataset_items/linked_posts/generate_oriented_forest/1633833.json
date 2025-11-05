@@ -1,0 +1,339 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "algorithm",
+                "taocp"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 64391,
+                        "reputation": 2717,
+                        "user_id": 190127,
+                        "user_type": "registered",
+                        "accept_rate": 18,
+                        "display_name": "Oduvan"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1256680265,
+                    "post_id": 1633833,
+                    "comment_id": 1502775,
+                    "link": "https://stackoverflow.com/questions/1633833/oriented-forest-taocp-algorithm-in-python#comment1502775_1633833",
+                    "body": "first of all - try to rename all variables with names &quot;j&quot;,&quot;d&quot;,&quot;k&quot; ... to more readable name. It helps to resolve you problem."
+                },
+                {
+                    "owner": {
+                        "account_id": 58364,
+                        "reputation": 299717,
+                        "user_id": 174728,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "John La Rooy"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1256684442,
+                    "post_id": 1633833,
+                    "comment_id": 1503084,
+                    "link": "https://stackoverflow.com/questions/1633833/oriented-forest-taocp-algorithm-in-python#comment1503084_1633833",
+                    "body": "@Oduvan, I believe those are the variable names used in the text"
+                },
+                {
+                    "owner": {
+                        "account_id": 176892,
+                        "reputation": 6217,
+                        "user_id": 407879,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "PrettyPrincessKitty FS"
+                    },
+                    "reply_to_user": {
+                        "account_id": 58364,
+                        "reputation": 299717,
+                        "user_id": 174728,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "John La Rooy"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1300469669,
+                    "post_id": 1633833,
+                    "comment_id": 6049602,
+                    "link": "https://stackoverflow.com/questions/1633833/oriented-forest-taocp-algorithm-in-python#comment6049602_1633833",
+                    "body": "@gnibbler, if you can&#39;t read the code then you&#39;re going to struggle understanding it or even bug fixing it. ;P"
+                },
+                {
+                    "owner": {
+                        "account_id": 58364,
+                        "reputation": 299717,
+                        "user_id": 174728,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "John La Rooy"
+                    },
+                    "reply_to_user": {
+                        "account_id": 176892,
+                        "reputation": 6217,
+                        "user_id": 407879,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "PrettyPrincessKitty FS"
+                    },
+                    "edited": false,
+                    "score": 2,
+                    "creation_date": 1300485649,
+                    "post_id": 1633833,
+                    "comment_id": 6053092,
+                    "link": "https://stackoverflow.com/questions/1633833/oriented-forest-taocp-algorithm-in-python#comment6053092_1633833",
+                    "body": "@The Communist Duck, Meaningful names are important, but when implementing an algorithm from a paper it&#39;s often a good idea to use the same variable names as used in the algorithm, so your quarrel is with Knuth for not using more meaningful names"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 47439,
+                                "reputation": 1472,
+                                "user_id": 140483,
+                                "user_type": "registered",
+                                "display_name": "BMeph"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1300574473,
+                            "post_id": 1634240,
+                            "comment_id": 6062534,
+                            "link": "https://stackoverflow.com/questions/1633833/oriented-forest-taocp-algorithm-in-python/1634240#comment6062534_1634240",
+                            "body": "As I mentioned, it&#39;s because this algorithm produces <i>parent</i> codes, not <i>level</i> codes. For a level code-generating program, foobar above has a faithful translation of the B&amp;H one."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 58364,
+                        "reputation": 299717,
+                        "user_id": 174728,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "John La Rooy"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1256727135,
+                    "last_edit_date": 1256727135,
+                    "creation_date": 1256685522,
+                    "answer_id": 1634240,
+                    "question_id": 1633833,
+                    "link": "https://stackoverflow.com/questions/1633833/oriented-forest-taocp-algorithm-in-python/1634240#1634240",
+                    "body": "<p>I refactored your code a little, mostly to eliminate the duplication in step 5.<br>\nHowever the output is still the same as you are getting</p>\n\n<pre><code>def generate_oriented_forest(n):\n    \"\"\"Algorithm O from Knuth TAoCP, Fascicle 4, p. 25. \"\"\"\n    p = range(-1,n)\n    while True:\n        yield p[1:]\n        if p[n] &gt; 0:\n            p[n] = p[p[n]]\n            continue\n        for k in range(n-1,0,-1):\n            if p[k] != 0: break\n        else:\n            break\n        j = p[k]\n        d = k-j\n        while True:\n            if p[k-d] == p[j]:\n                p[k] = p[j]\n            else:\n                p[k] = p[k-d] + d\n            if k==n:\n                break\n            k+=1\n\nif __name__ == \"__main__\":\n    for el in generate_oriented_forest(4):\n        print el\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 27940,
+                                "reputation": 507,
+                                "user_id": 74184,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "foobar"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1256711995,
+                            "post_id": 1634938,
+                            "comment_id": 1504623,
+                            "link": "https://stackoverflow.com/questions/1633833/oriented-forest-taocp-algorithm-in-python/1634938#comment1504623_1634938",
+                            "body": "Ok. Thanks for your help. I will test it with other n&#39;s as soon as possible."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 27940,
+                                "reputation": 507,
+                                "user_id": 74184,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "foobar"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1256712039,
+                            "post_id": 1634938,
+                            "comment_id": 1504624,
+                            "link": "https://stackoverflow.com/questions/1633833/oriented-forest-taocp-algorithm-in-python/1634938#comment1504624_1634938",
+                            "body": "Although it seems to be a bit strange to find an error in Knuth&#39;s Book."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 58364,
+                                "reputation": 299717,
+                                "user_id": 174728,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "John La Rooy"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1256726554,
+                            "post_id": 1634938,
+                            "comment_id": 1505531,
+                            "link": "https://stackoverflow.com/questions/1633833/oriented-forest-taocp-algorithm-in-python/1634938#comment1505531_1634938",
+                            "body": "Another possibility is <code>p[k]=-p[k-d]+d</code>, but such a printing error would be very unlikely"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 27940,
+                                "reputation": 507,
+                                "user_id": 74184,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "foobar"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1256727347,
+                            "post_id": 1634938,
+                            "comment_id": 1505591,
+                            "link": "https://stackoverflow.com/questions/1633833/oriented-forest-taocp-algorithm-in-python/1634938#comment1505591_1634938",
+                            "body": "I think both answers are wrong. In Knuth&#39;s book on page 21, there is a table with the number of oriented trees for different n&#39;s. With the equivalence that every n-node oriented forest is a (n+1)-oriented tree. We should get the following number of results: n = 4 (-&gt; A_(n+1)) should give 9 sequences n = 5 should give 20 sequences n = 6 shoudl give 48 sequences"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 64585,
+                        "reputation": 864610,
+                        "user_id": 190597,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "unutbu"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1256697685,
+                    "creation_date": 1256697685,
+                    "answer_id": 1634938,
+                    "question_id": 1633833,
+                    "link": "https://stackoverflow.com/questions/1633833/oriented-forest-taocp-algorithm-in-python/1634938#1634938",
+                    "body": "<p>I do not understand the algorithm and have no idea if my suggested change to the algorithm (below) is correct or not. All I know is that it produces the expected output that you quote for n=4:</p>\n\n<pre><code>def generate_oriented_forest(n):\n    \"\"\"Algorithm O from Knuth TAoCP, Fascicle 4, p. 25. \"\"\"\n    p = range(-1,n)\n    while True:\n        yield p[1:]\n        if p[n] &gt; 0:\n            p[n] = p[p[n]]\n            continue\n        for k in range(n-1,0,-1):\n            if p[k] != 0: break\n        else:\n            break\n        j = p[k]\n        d = k-j\n        while True:\n            if p[k-d] == p[j]:\n                p[k] = p[j]\n            else:\n                p[k] = p[k-d]\n            if k==n:\n                break\n            k+=1\n</code></pre>\n\n<p>I used gnibbler's code as a starting point. I used <a href=\"http://www.dalkescientific.com/writings/diary/archive/2005/04/20/tracing_python_code.html\" rel=\"nofollow noreferrer\">traceit()</a> and print statements to follow the code as it transitioned from [0, 1, 1, 0] --> [0, 1, 0, 3].</p>\n\n<p>What I find is that this is state of the variables:</p>\n\n<pre><code>[0, 1, 1, 0]  # the last yield\nk: 4\nd: 2\nj: 1\np: [-1, 0, 1, 0, 0]\n[0, 1, 0, 3]  # the problem yield\n</code></pre>\n\n<p>and this is the only time that this code is executed:</p>\n\n<pre><code>__main__:19:             if p[k-d] == p[j]:\n__main__:22:                 p[k] = p[k-d] + d\n</code></pre>\n\n<p>Since p[k-d]=p[2]=1, and you want p[k] to equal 1, I \"guess\" the correct formula should be\np[k]=p[k-d]. </p>\n\n<p>I also changed</p>\n\n<pre><code>for k in range(n-1,-1,-1):\n</code></pre>\n\n<p>to</p>\n\n<pre><code>for k in range(n-1,0,-1):\n</code></pre>\n\n<p>to stop the code from yielding an extra [0, 0, 0, 0] at the end.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 27940,
+                        "reputation": 507,
+                        "user_id": 74184,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "foobar"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1256851787,
+                    "creation_date": 1256851787,
+                    "answer_id": 1646677,
+                    "question_id": 1633833,
+                    "link": "https://stackoverflow.com/questions/1633833/oriented-forest-taocp-algorithm-in-python/1646677#1646677",
+                    "body": "<p>I digged up the original articel: SIAM Journal of Computing, T. Beyer and S.M. Hedetniemi, 'Constant Time generation of rooted trees\". The paper explains the algorithm really well. Here's my implementation:</p>\n\n<pre><code>def generate_oriented_forest_2(n): \n    \"\"\"SIAM J. COMPUT. Vol. 9, No. 4, November 1980\n    T. Beyer and S.M. Hedetniemi: constant time generation of rooted trees.\"\"\" \n\n    L = range(-1, n) \n    while True: \n        yield L[1:] \n        if L[n] &gt; 0: L[n] = L[L[n]] \n        else:\n            for p in range(n-1, 0, -1): \n                if L[p] != 0: break\n            else: break\n            for q in range(p-1, 0, -1):\n                if L[q] == L[p] - 1: break \n            i = p\n            while i &lt;= n:\n                L[i] = L[i-(p-q)]\n                i += 1 \n</code></pre>\n\n<p>It gives me the expected result. But I'm still wondering why Knuth's algorithm doesn't work. Would be cool to find out.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 27940,
+                                "reputation": 507,
+                                "user_id": 74184,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "foobar"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1257977504,
+                            "post_id": 1714382,
+                            "comment_id": 1596410,
+                            "link": "https://stackoverflow.com/questions/1633833/oriented-forest-taocp-algorithm-in-python/1714382#comment1596410_1714382",
+                            "body": "just send him an email. hope I&#39;m really the first one. Would be &#252;bergeekig to have a certificate from him..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4474,
+                                "reputation": 4080,
+                                "user_id": 6741,
+                                "user_type": "registered",
+                                "display_name": "Michael Dorfman"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1258027268,
+                            "post_id": 1714382,
+                            "comment_id": 1599988,
+                            "link": "https://stackoverflow.com/questions/1633833/oriented-forest-taocp-algorithm-in-python/1714382#comment1599988_1714382",
+                            "body": "@sdcwc: There&#39;s no need for a :( -- if you read the text, you&#39;ll see that nothing has changed in Knuth&#39;s policy, except that the check he sends out are no longer cashable by banks-- they are drawn on his (fictional) &quot;Bank of San Seriffe&quot;.  As he points out, it was extremely rare that anybody was cashing them anyway, so the vast majority of folks are completely unaffected.  I&#39;ve got one of his &quot;San Seriffe&quot; checks, and I can tell you, I never would have cashed it anyway."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4474,
+                        "reputation": 4080,
+                        "user_id": 6741,
+                        "user_type": "registered",
+                        "display_name": "Michael Dorfman"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1257936040,
+                    "creation_date": 1257936040,
+                    "answer_id": 1714382,
+                    "question_id": 1633833,
+                    "link": "https://stackoverflow.com/questions/1633833/oriented-forest-taocp-algorithm-in-python/1714382#1714382",
+                    "body": "<p><strong>Congratulations!</strong></p>\n\n<p>It sure looks like you just found an error in TAOCP. As you no doubt know, there's a reward of one hexadecimal dollar (drawn on the Bank of San Seriffe) for the first finder of such errors.  I've got one, and I can tell you, it's a hell of thing to put on your wall.  </p>\n\n<p>It certainly appears to me that the \"<em>+d</em>\" in step <strong>O5</strong> is in error; at least, I can't find a way to reconcile it with the description of the \"cloning\" step in the text description before the algorithm. I've checked the most recent Errata for V4f4, and this one is not in there, so it looks like you are the first to notice this.</p>\n\n<p>To verify, I recommend that you calculate the values for <em>n=5</em> both with and without the \"<em>+d</em>\", and see which match the expected results.  If it goes the way I suspect, write it up and send it to Knuth by email (the address for TAOCP bugs is on his web site) along with your postal address, and you should receive a reply (by paper mail) within 6 months.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 47439,
+                        "reputation": 1472,
+                        "user_id": 140483,
+                        "user_type": "registered",
+                        "display_name": "BMeph"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1300902221,
+                    "last_edit_date": 1300902221,
+                    "creation_date": 1300394338,
+                    "answer_id": 5344978,
+                    "question_id": 1633833,
+                    "link": "https://stackoverflow.com/questions/1633833/oriented-forest-taocp-algorithm-in-python/5344978#5344978",
+                    "body": "<p>The answer is: everyone is right!</p>\n\n<p>Knuth's algorithm calculates the parent codes, not the level codes. It seems \"THE Donald\" was still thinking in terms of parent codes, even while remarking that the B &amp; H algorithm uses level codes instead.</p>\n\n<p>However, if you look at the text of Algorithm O, you should notice that Knuth mentions that \"each canonical forest is represented directly by its sequence of parent pointers p <em>1</em>...p <em>n</em> in preorder of the nodes.\"</p>\n\n<p>So, this algorithm is supposed to use parent codes, not level codes.\nThat Knuth, he's a crafty one...\n So, I blatantly copied unutbu's code, to come up with a level code-generating version that looks more like what you wrote:</p>\n\n<pre><code>def generate_oriented_forest(n):\n     \"\"\"Algorithm O from Knuth TAoCP, Fascicle 4, p. 25. \"\"\"\n     p = range(-1,n)\n     while True:\n         yield p[1:]\n         if p[n] &gt; 0:\n             p[n] = p[p[n]]\n             continue\n         for k in range(n-1,0,-1):\n             if p[k] != 0: break\n         else:\n             break\n         j = p[k]\n         for q in range(1,k):\n             if p[k-q] == p[j]: break\n         while True:\n             p[k] = p[k-q]\n             if k==n:\n                 break\n             k+=1\n\n if __name__ == \"__main__\":\n     for el in generate_oriented_forest(4):\n         print el \n</code></pre>\n\n<p>Hopefully, that answered your question. :)</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 27940,
+                "reputation": 507,
+                "user_id": 74184,
+                "user_type": "registered",
+                "accept_rate": 75,
+                "display_name": "foobar"
+            },
+            "comment_count": 4,
+            "is_answered": true,
+            "answer_count": 5,
+            "score": 2,
+            "last_activity_date": 1300902221,
+            "creation_date": 1256679634,
+            "last_edit_date": 1256693177,
+            "question_id": 1633833,
+            "link": "https://stackoverflow.com/questions/1633833/oriented-forest-taocp-algorithm-in-python",
+            "title": "Oriented forest TAoCP - Algorithm in python",
+            "body": "<p>I try to implement <a href=\"http://books.google.com.au/books?id=56LNfE2QGtYC&amp;lpg=PA23&amp;ots=vMcdKi_eYa&amp;dq=taocp%20oriented%20forests&amp;pg=PA24#v=onepage&amp;q=&amp;f=false\" rel=\"nofollow noreferrer\">Algorithm O (Oriented forests)</a> from Donald E. Knuth: 'The Art of Computer Programming - Volume 4, Fascile 4, Generating All Trees' on page 24.</p>\n\n<p>My Python solution is:</p>\n\n<pre><code>def generate_oriented_forest(n):\n    \"\"\"Algorithm O from Knuth TAoCP, Fascicle 4, p. 25. \"\"\"\n    p = range(-1, n)\n    while True:\n       yield p[1:]\n       if p[n] &gt; 0: p[n] = p[p[n]]\n       else:\n           k_largest =  0\n           for k in range(1,n): \n               if p[k] != 0: k_largest = k\n           k = k_largest\n           if k == 0: return\n           j =  p[k]\n           d = k-j\n           if p[k-d] == p[j]: p[k] = p[j]\n           else: p[k] = p[k-d] + d\n           while k != n:\n               #print k, p\n               k = k+1\n               if p[k-d] == p[j]: p[k] = p[j]\n               else: p[k] = p[k-d] + d\n\nif __name__ == \"__main__\":\n    for el in generate_oriented_forest(4):\n        print el\n\n    # According to page 23 and also Table 1 p.4 I would expect the sequence:\n    # 0123, 0122, 0121, 0120, 0111, 0110, 0101, 0100, 0000\n</code></pre>\n\n<p>My Implementation gives me:</p>\n\n<p>[0, 1, 2, 3],\n[0, 1, 2, 2],\n[0, 1, 2, 1],\n[0, 1, 2, 0],\n[0, 1, 1, 1],\n[0, 1, 1, 0],</p>\n\n<p><strong>[0, 1, 0, 3]</strong>,</p>\n\n<p>[0, 1, 0, 0],\n[0, 0, 0, 0].</p>\n\n<p>I'm already looking too long for a bug. Hope someone can point me in the right direction of fix my code. Is my understanding of the algorithm correct? Any improvements on my python style are also appreciated. Thanks for your help.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5402
+}

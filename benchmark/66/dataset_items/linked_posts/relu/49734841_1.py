@@ -1,0 +1,8 @@
+print("baseline:")
+%timeit -n10 baseline()
+print("multiplication method:")
+%timeit -n10 relu_mul()
+print("max method:")
+%timeit -n10 relu_max()
+print("max inplace method:")
+%timeit -n10 relu_max_inplace()

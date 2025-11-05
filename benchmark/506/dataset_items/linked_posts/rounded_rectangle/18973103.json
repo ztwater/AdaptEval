@@ -1,0 +1,148 @@
+{
+    "items": [
+        {
+            "tags": [
+                "c++",
+                "opencv",
+                "rounded-corners",
+                "rectangles"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2183640,
+                                "reputation": 6007,
+                                "user_id": 1932557,
+                                "user_type": "registered",
+                                "accept_rate": 45,
+                                "display_name": "Bahramdun Adil"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1523497654,
+                            "post_id": 18975399,
+                            "comment_id": 86588805,
+                            "link": "https://stackoverflow.com/questions/18973103/how-to-draw-a-rounded-rectangle-rectangle-with-rounded-corners-with-opencv/18975399#comment86588805_18975399",
+                            "body": "It will be good that the <code>cornerRadius</code> be calculated automatically, because when you draw a small size Rectangle, then it will look like a circle, so the <code>cornerRadius</code> can be calculated like this <code>cornerRadius = (rect.width+rect.height)*0.1</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2271733,
+                        "reputation": 2082,
+                        "user_id": 1998944,
+                        "user_type": "registered",
+                        "accept_rate": 40,
+                        "display_name": "Kenyakorn Ketsombut"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 16,
+                    "last_activity_date": 1669691716,
+                    "last_edit_date": 1669691716,
+                    "creation_date": 1380007534,
+                    "answer_id": 18975399,
+                    "question_id": 18973103,
+                    "link": "https://stackoverflow.com/questions/18973103/how-to-draw-a-rounded-rectangle-rectangle-with-rounded-corners-with-opencv/18975399#18975399",
+                    "body": "<p>I realized, this is much easier that I thought. Here is my function. I hope it is helpful for someone.</p>\n<pre><code>/**\n * Draws a rectangle with rounded corners, the parameters are the same as in the OpenCV function @see rectangle();\n * @param cornerRadius A positive int value defining the radius of the round corners.\n * @author K\n */\nvoid rounded_rectangle( Mat&amp; src, Point topLeft, Point bottomRight, const Scalar lineColor, const int thickness, const int lineType , const int cornerRadius)\n{\n    /* corners:\n     * p1 - p2\n     * |     |\n     * p4 - p3\n     */\n    Point p1 = topLeft;\n    Point p2 = Point (bottomRight.x, topLeft.y);\n    Point p3 = bottomRight;\n    Point p4 = Point (topLeft.x, bottomRight.y);\n    \n    // draw straight lines\n    line(src, Point (p1.x + cornerRadius, p1.y), Point (p2.x - cornerRadius, p2.y), lineColor, thickness, lineType);\n    line(src, Point (p2.x, p2.y + cornerRadius), Point (p3.x, p3.y - cornerRadius), lineColor, thickness, lineType);\n    line(src, Point (p4.x + cornerRadius, p4.y), Point (p3.x-cornerRadius, p3.y), lineColor, thickness, lineType);\n    line(src, Point (p1.x, p1.y + cornerRadius), Point (p4.x, p4.y - cornerRadius), lineColor, thickness, lineType);\n    \n    // draw arcs\n    ellipse( src, p1 + Point(cornerRadius, cornerRadius), Size( cornerRadius, cornerRadius ), 180.0, 0, 90, lineColor, thickness, lineType );\n    ellipse( src, p2 + Point(-cornerRadius, cornerRadius), Size( cornerRadius, cornerRadius ), 270.0, 0, 90, lineColor, thickness, lineType );\n    ellipse( src, p3 + Point(-cornerRadius, -cornerRadius), Size( cornerRadius, cornerRadius ), 0.0, 0, 90, lineColor, thickness, lineType );\n    ellipse( src, p4 + Point(cornerRadius, -cornerRadius), Size( cornerRadius, cornerRadius ), 90.0, 0, 90, lineColor, thickness, lineType );\n}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 171991,
+                        "reputation": 1960,
+                        "user_id": 399741,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "Cartesian Theater"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1491064663,
+                    "creation_date": 1491064663,
+                    "answer_id": 43159386,
+                    "question_id": 18973103,
+                    "link": "https://stackoverflow.com/questions/18973103/how-to-draw-a-rounded-rectangle-rectangle-with-rounded-corners-with-opencv/43159386#43159386",
+                    "body": "<p>Here's a Python implementation(in case anyone was looking for one): it draws a rounded corner (of random radius and line thickness --- change that if you want) border around an image:</p>\n\n<pre><code>def addRoundedRectangleBorder(img):\n    height, width, channels = img.shape\n\n    border_radius = int(width * random.randint(1, 10)/100.0)\n    line_thickness = int(max(width, height) * random.randint(1, 3)/100.0)\n    edge_shift = int(line_thickness/2.0)\n\n    red = random.randint(230,255)\n    green = random.randint(230,255)\n    blue = random.randint(230,255)\n    color = (blue, green, red)\n\n    #draw lines\n    #top\n    cv2.line(img, (border_radius, edge_shift), \n    (width - border_radius, edge_shift), (blue, green, red), line_thickness)\n    #bottom\n    cv2.line(img, (border_radius, height-line_thickness), \n    (width - border_radius, height-line_thickness), (blue, green, red), line_thickness)\n    #left\n    cv2.line(img, (edge_shift, border_radius), \n    (edge_shift, height  - border_radius), (blue, green, red), line_thickness)\n    #right\n    cv2.line(img, (width - line_thickness, border_radius), \n    (width - line_thickness, height  - border_radius), (blue, green, red), line_thickness)\n\n    #corners\n    cv2.ellipse(img, (border_radius+ edge_shift, border_radius+edge_shift), \n    (border_radius, border_radius), 180, 0, 90, color, line_thickness)\n    cv2.ellipse(img, (width-(border_radius+line_thickness), border_radius), \n    (border_radius, border_radius), 270, 0, 90, color, line_thickness)\n    cv2.ellipse(img, (width-(border_radius+line_thickness), height-(border_radius + line_thickness)), \n    (border_radius, border_radius), 10, 0, 90, color, line_thickness)\n    cv2.ellipse(img, (border_radius+edge_shift, height-(border_radius + line_thickness)), \n    (border_radius, border_radius), 90, 0, 90, color, line_thickness)\n\n    return img\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 12452554,
+                                "reputation": 139,
+                                "user_id": 9066781,
+                                "user_type": "registered",
+                                "display_name": "M.Winkens"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1676331092,
+                            "post_id": 60210706,
+                            "comment_id": 133112375,
+                            "link": "https://stackoverflow.com/questions/18973103/how-to-draw-a-rounded-rectangle-rectangle-with-rounded-corners-with-opencv/60210706#comment133112375_60210706",
+                            "body": "I wonder how it went unnoticed for over 3 years, but your x/y coordinates are unclear. You need to give this function <code>top_left=(x1, y1), bottom_right=(y2, x2)</code>. Since you used <code>top_left=(0&#47;0)</code> this went unnoticed! At least in the full rectangle"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3362444,
+                        "reputation": 336,
+                        "user_id": 3861865,
+                        "user_type": "registered",
+                        "display_name": "oliver"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 11,
+                    "last_activity_date": 1581628503,
+                    "last_edit_date": 1581628503,
+                    "creation_date": 1581605910,
+                    "answer_id": 60210706,
+                    "question_id": 18973103,
+                    "link": "https://stackoverflow.com/questions/18973103/how-to-draw-a-rounded-rectangle-rectangle-with-rounded-corners-with-opencv/60210706#60210706",
+                    "body": "<p>Here is the python version with filled/not filled feature and corner_radius automatically calculated based on the image's height.</p>\n\n<pre><code>import cv2\nimport numpy as np\n\ndef rounded_rectangle(src, top_left, bottom_right, radius=1, color=255, thickness=1, line_type=cv2.LINE_AA):\n\n    #  corners:\n    #  p1 - p2\n    #  |     |\n    #  p4 - p3\n\n    p1 = top_left\n    p2 = (bottom_right[1], top_left[1])\n    p3 = (bottom_right[1], bottom_right[0])\n    p4 = (top_left[0], bottom_right[0])\n\n    height = abs(bottom_right[0] - top_left[1])\n\n    if radius &gt; 1:\n        radius = 1\n\n    corner_radius = int(radius * (height/2))\n\n    if thickness &lt; 0:\n\n        #big rect\n        top_left_main_rect = (int(p1[0] + corner_radius), int(p1[1]))\n        bottom_right_main_rect = (int(p3[0] - corner_radius), int(p3[1]))\n\n        top_left_rect_left = (p1[0], p1[1] + corner_radius)\n        bottom_right_rect_left = (p4[0] + corner_radius, p4[1] - corner_radius)\n\n        top_left_rect_right = (p2[0] - corner_radius, p2[1] + corner_radius)\n        bottom_right_rect_right = (p3[0], p3[1] - corner_radius)\n\n        all_rects = [\n        [top_left_main_rect, bottom_right_main_rect], \n        [top_left_rect_left, bottom_right_rect_left], \n        [top_left_rect_right, bottom_right_rect_right]]\n\n        [cv2.rectangle(src, rect[0], rect[1], color, thickness) for rect in all_rects]\n\n    # draw straight lines\n    cv2.line(src, (p1[0] + corner_radius, p1[1]), (p2[0] - corner_radius, p2[1]), color, abs(thickness), line_type)\n    cv2.line(src, (p2[0], p2[1] + corner_radius), (p3[0], p3[1] - corner_radius), color, abs(thickness), line_type)\n    cv2.line(src, (p3[0] - corner_radius, p4[1]), (p4[0] + corner_radius, p3[1]), color, abs(thickness), line_type)\n    cv2.line(src, (p4[0], p4[1] - corner_radius), (p1[0], p1[1] + corner_radius), color, abs(thickness), line_type)\n\n    # draw arcs\n    cv2.ellipse(src, (p1[0] + corner_radius, p1[1] + corner_radius), (corner_radius, corner_radius), 180.0, 0, 90, color ,thickness, line_type)\n    cv2.ellipse(src, (p2[0] - corner_radius, p2[1] + corner_radius), (corner_radius, corner_radius), 270.0, 0, 90, color , thickness, line_type)\n    cv2.ellipse(src, (p3[0] - corner_radius, p3[1] - corner_radius), (corner_radius, corner_radius), 0.0, 0, 90,   color , thickness, line_type)\n    cv2.ellipse(src, (p4[0] + corner_radius, p4[1] - corner_radius), (corner_radius, corner_radius), 90.0, 0, 90,  color , thickness, line_type)\n\n    return src\n</code></pre>\n\n<p>Usage:</p>\n\n<pre><code>top_left = (0, 0)\nbottom_right = (500, 800)\ncolor = (255, 255, 255)\nimage_size = (500, 800, 3)\nimg = np.zeros(image_size)\nimg = rounded_rectangle(img, top_left, bottom_right, color=color, radius=0.5, thickness=-1)\n\ncv2.imshow('rounded_rect', img)\ncv2.waitKey(0)\n</code></pre>\n\n<p><a href=\"https://i.stack.imgur.com/nB73V.jpg\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/nB73V.jpg\" alt=\"Rounded rectangle Filled\"></a></p>\n\n<p><a href=\"https://i.stack.imgur.com/P0Y4l.jpg\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/P0Y4l.jpg\" alt=\"Rounded rectangle Not Filled\"></a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 9350859,
+                        "reputation": 11,
+                        "user_id": 6940595,
+                        "user_type": "registered",
+                        "display_name": "agalloch21"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1676487483,
+                    "creation_date": 1676487483,
+                    "answer_id": 75464325,
+                    "question_id": 18973103,
+                    "link": "https://stackoverflow.com/questions/18973103/how-to-draw-a-rounded-rectangle-rectangle-with-rounded-corners-with-opencv/75464325#75464325",
+                    "body": "<p>based on the code from @author K. make the function have ability to draw filled rounded rectangle if pass -1 as thickness</p>\n<p>python version</p>\n<pre><code>def DrawRoundedRectangle(img, topLeft, bottomRight, radius=1, color=255, thickness=1, line_type=cv.LINE_AA):\n\nmin_half = int(min((bottomRight[0] - topLeft[0]), (bottomRight[1] - topLeft[1])) * 0.5)\nradius = min(radius, min_half)\n\n# /* corners:\n#  * p1 - p2\n#  * |     |\n#  * p4 - p3\n#  */\np1 = topLeft\np2 = (bottomRight[0], topLeft[1])\np3 = bottomRight\np4 = (topLeft[0], bottomRight[1])\n\nif(thickness &lt; 0):\n    # // draw rectangle\n    cv.rectangle(img, (p1[0] + radius, p1[1]),  (p3[0] - radius, p3[1]), color, thickness, line_type)\n    cv.rectangle(img, (p1[0], p1[1] + radius),  (p3[0], p3[1] - radius), color, thickness, line_type)\nelse:\n    # // draw straight lines\n    cv.line(img, (p1[0] + radius, p1[1]),  (p2[0] - radius, p2[1]), color, thickness, line_type);\n    cv.line(img, (p2[0], p2[1] + radius),  (p3[0], p3[1] - radius), color, thickness, line_type);\n    cv.line(img, (p4[0] + radius, p4[1]),  (p3[0]-radius, p3[1]), color, thickness, line_type);\n    cv.line(img, (p1[0], p1[1] + radius),  (p4[0], p4[1] - radius), color, thickness, line_type);\n\n# // draw arcs\nif(radius &gt; 0):\n    cv.ellipse( img, (p1[0] + radius, p1[1] + radius), ( radius, radius ), 180.0, 0, 90, color, thickness, line_type );\n    cv.ellipse( img, (p2[0] - radius, p2[1] + radius), ( radius, radius ), 270.0, 0, 90, color, thickness, line_type );\n    cv.ellipse( img, (p3[0] - radius, p3[1] - radius), ( radius, radius ), 0.0, 0, 90, color, thickness, line_type );\n    cv.ellipse( img, (p4[0] + radius, p4[1] - radius), ( radius, radius ), 90.0, 0, 90, color, thickness, line_type );\n</code></pre>\n<p>javascript version</p>\n<pre><code>function DrawRoundedRectangle(img, topLeft, bottomRight, radius=1, color=255, thickness=1, line_type=cv.LINE_AA){\n\nlet min_half = Math.floor(Math.min((bottomRight.x - topLeft.x), (bottomRight.y - topLeft.y)) * 0.5)\nradius = Math.min(radius, min_half)\n\n/* corners:\n#  * p1 - p2\n#  * |     |\n#  * p4 - p3\n#  */\nlet p1 = topLeft\nlet p2 = new cv.Point(bottomRight.x, topLeft.y)\nlet p3 = bottomRight\nlet p4 = new cv.Point(topLeft.x, bottomRight.y)\n\nif(thickness &lt; 0){\n    // draw rectangle\n    cv.rectangle(img, new cv.Point(p1.x + radius, p1.y),  new cv.Point(p3.x - radius, p3.y), color, thickness, line_type)\n    cv.rectangle(img, new cv.Point(p1.x, p1.y + radius),  new cv.Point(p3.x, p3.y - radius), color, thickness, line_type)\n}\nelse{\n    // draw straight lines\n    cv.line(img, new cv.Point(p1.x + radius, p1.y),  new cv.Point(p2.x - radius, p2.y), color, thickness, line_type);\n    cv.line(img, new cv.Point(p2.x, p2.y + radius),  new cv.Point(p3.x, p3.y - radius), color, thickness, line_type);\n    cv.line(img, new cv.Point(p4.x + radius, p4.y),  new cv.Point(p3.x-radius, p3.y), color, thickness, line_type);\n    cv.line(img, new cv.Point(p1.x, p1.y + radius),  new cv.Point(p4.x, p4.y - radius), color, thickness, line_type);\n}\n// draw arcs\nif(radius &gt; 0){\n    cv.ellipse( img, new cv.Point(p1.x + radius, p1.y + radius), new cv.Size( radius, radius ), 180.0, 0, 90, color, thickness, line_type );\n    cv.ellipse( img, new cv.Point(p2.x - radius, p2.y + radius), new cv.Size( radius, radius ), 270.0, 0, 90, color, thickness, line_type );\n    cv.ellipse( img, new cv.Point(p3.x - radius, p3.y - radius), new cv.Size( radius, radius ), 0.0, 0, 90, color, thickness, line_type );\n    cv.ellipse( img, new cv.Point(p4.x + radius, p4.y - radius), new cv.Size( radius, radius ), 90.0, 0, 90, color, thickness, line_type );\n}\n}\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 2271733,
+                "reputation": 2082,
+                "user_id": 1998944,
+                "user_type": "registered",
+                "accept_rate": 40,
+                "display_name": "Kenyakorn Ketsombut"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "answer_count": 4,
+            "score": 14,
+            "last_activity_date": 1676487483,
+            "creation_date": 1379997916,
+            "question_id": 18973103,
+            "link": "https://stackoverflow.com/questions/18973103/how-to-draw-a-rounded-rectangle-rectangle-with-rounded-corners-with-opencv",
+            "title": "How to draw a rounded rectangle (rectangle with rounded corners) with OpenCV?",
+            "body": "<p>How can I draw a rectangle with rounded corners in OpenCV? I know that the functions ellipse() and line() can be simply put together to draw it. I just wonder if someone has done it before and has put it in a proper function so I can use it? Ideally the corner radius is to calibrate  in a parameter. </p>\n\n<p>I searched a lot for that, but it seems no one had that problem before. If no one has such I function I will probably post my own solution here in a few days.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9137
+}

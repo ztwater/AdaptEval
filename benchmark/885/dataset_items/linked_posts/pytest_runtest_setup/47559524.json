@@ -1,0 +1,183 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "unit-testing",
+                "pytest"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 6587111,
+                        "reputation": 1461,
+                        "user_id": 5089570,
+                        "user_type": "registered",
+                        "display_name": "veri_pudicha_coder"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1511988324,
+                    "last_edit_date": 1511988324,
+                    "creation_date": 1511987090,
+                    "answer_id": 47561194,
+                    "question_id": 47559524,
+                    "link": "https://stackoverflow.com/questions/47559524/pytest-how-to-skip-tests-unless-you-declare-an-option-flag/47561194#47561194",
+                    "body": "<p>There are two ways to do that:</p>\n\n<p>First method is to tag the functions with <code>@pytest.mark</code> decorator and run / skip the tagged functions alone using <code>-m</code> option.</p>\n\n<pre><code>@pytest.mark.anytag\ndef test_calc_add():\n    assert True\n\n@pytest.mark.anytag\ndef test_calc_multiply():\n    assert True\n\ndef test_calc_divide():\n    assert True\n</code></pre>\n\n<p>Running the script as <code>py.test -m anytag test_script.py</code> will run only the first two functions.</p>\n\n<p>Alternatively run as <code>py.test -m \"not anytag\" test_script.py</code> will run only the third function and skip the first two functions.</p>\n\n<p>Here 'anytag' is the name of the tag. It can be anything.!</p>\n\n<p>Second way is to run the functions with a common substring in their name using <code>-k</code> option.</p>\n\n<pre><code>def test_calc_add():\n    assert True\n\ndef test_calc_multiply():\n    assert True\n\ndef test_divide():\n    assert True\n</code></pre>\n\n<p>Running the script as <code>py.test -k calc test_script.py</code> will run the functions and skip the last one.</p>\n\n<p>Note that 'calc' is the common substring present in both the function name and any other function having 'calc' in its name like 'calculate' will also be run.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7495658,
+                                "reputation": 677,
+                                "user_id": 5696021,
+                                "user_type": "registered",
+                                "accept_rate": 40,
+                                "display_name": "3voC"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1533603375,
+                            "post_id": 47567535,
+                            "comment_id": 90395912,
+                            "link": "https://stackoverflow.com/questions/47559524/pytest-how-to-skip-tests-unless-you-declare-an-option-flag/47567535#comment90395912_47567535",
+                            "body": "Can confirm that works. <code>pytest_runtest_setup</code> should also be in conftest.py."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 392804,
+                                "reputation": 4119,
+                                "user_id": 754300,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Kevin"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1563780118,
+                            "post_id": 47567535,
+                            "comment_id": 100797206,
+                            "link": "https://stackoverflow.com/questions/47559524/pytest-how-to-skip-tests-unless-you-declare-an-option-flag/47567535#comment100797206_47567535",
+                            "body": "Just fyi, the marker doesn&#39;t need to be the same as the command line argument."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15872,
+                                "reputation": 10483,
+                                "user_id": 33982,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "kshahar"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1582814201,
+                            "post_id": 47567535,
+                            "comment_id": 106913201,
+                            "link": "https://stackoverflow.com/questions/47559524/pytest-how-to-skip-tests-unless-you-declare-an-option-flag/47567535#comment106913201_47567535",
+                            "body": "You may also want to add the marker to pytest.ini, otherwise you will get a PytestUnknownMarkWarning warning. Add something like <code>markers = no_cmd</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1631724,
+                        "reputation": 515,
+                        "user_id": 1506110,
+                        "user_type": "registered",
+                        "display_name": "looki"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 30,
+                    "last_activity_date": 1693567323,
+                    "last_edit_date": 1693567323,
+                    "creation_date": 1512024843,
+                    "answer_id": 47567535,
+                    "question_id": 47559524,
+                    "link": "https://stackoverflow.com/questions/47559524/pytest-how-to-skip-tests-unless-you-declare-an-option-flag/47567535#47567535",
+                    "body": "<p>We are using markers with addoption in conftest.py</p>\n<p><strong>testcase:</strong></p>\n<pre><code>@pytest.mark.no_cmd\ndef test_skip_if_no_command_line():\n    assert True\n</code></pre>\n<p><strong>conftest.py:</strong></p>\n<pre class=\"lang-py prettyprint-override\"><code>def pytest_addoption(parser):\n    parser.addoption(&quot;--no_cmd&quot;, action=&quot;store_true&quot;,\n                     help=&quot;run the tests only in case of that command line (marked with marker @no_cmd)&quot;)\n\ndef pytest_runtest_setup(item):\n    if 'no_cmd' in item.keywords and not item.config.getoption(&quot;--no_cmd&quot;):\n        pytest.skip(&quot;need --no_cmd option to run this test&quot;)\n</code></pre>\n<p><strong>pytest call:</strong></p>\n<pre class=\"lang-bash prettyprint-override\"><code>py.test test_the_marker  # test will be skipped\n    \npy.test test_the_marker --no_cmd  # test will run\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 10811776,
+                        "reputation": 2779,
+                        "user_id": 7952162,
+                        "user_type": "registered",
+                        "display_name": "Manu CJ"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 35,
+                    "last_activity_date": 1693623660,
+                    "last_edit_date": 1693623660,
+                    "creation_date": 1586799658,
+                    "answer_id": 61193490,
+                    "question_id": 47559524,
+                    "link": "https://stackoverflow.com/questions/47559524/pytest-how-to-skip-tests-unless-you-declare-an-option-flag/61193490#61193490",
+                    "body": "<p>The <a href=\"https://docs.pytest.org/en/latest/example/simple.html#control-skipping-of-tests-according-to-command-line-option\" rel=\"nofollow noreferrer\">pytest documentation</a> offers a nice example on how to skip tests marked &quot;slow&quot; by default and only run them with a <code>--runslow</code> option:</p>\n<pre><code># conftest.py\n\nimport pytest\n\n\ndef pytest_addoption(parser):\n    parser.addoption(\n        &quot;--runslow&quot;, action=&quot;store_true&quot;, default=False, help=&quot;run slow tests&quot;\n    )\n\n\ndef pytest_configure(config):\n    config.addinivalue_line(&quot;markers&quot;, &quot;slow: mark test as slow to run&quot;)\n\n\ndef pytest_collection_modifyitems(config, items):\n    if config.getoption(&quot;--runslow&quot;):\n        # --runslow given in cli: do not skip slow tests\n        return\n    skip_slow = pytest.mark.skip(reason=&quot;need --runslow option to run&quot;)\n    for item in items:\n        if &quot;slow&quot; in item.keywords:\n            item.add_marker(skip_slow)\n</code></pre>\n<p>We can now mark our tests in the following way:</p>\n<pre><code># test_module.py\nfrom time import sleep\n\nimport pytest\n\n\ndef test_func_fast():\n    sleep(0.1)\n\n\n@pytest.mark.slow\ndef test_func_slow():\n    sleep(10)\n</code></pre>\n<p>The test <code>test_func_fast</code> is always executed (calling e.g. <code>pytest</code>). The &quot;slow&quot; function <code>test_func_slow</code>, however, will only be executed when calling <code>pytest --runslow</code>.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1779931,
+                        "reputation": 10699,
+                        "user_id": 1622937,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "j-i-l"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1627819515,
+                    "last_edit_date": 1627819515,
+                    "creation_date": 1614534263,
+                    "answer_id": 66412097,
+                    "question_id": 47559524,
+                    "link": "https://stackoverflow.com/questions/47559524/pytest-how-to-skip-tests-unless-you-declare-an-option-flag/66412097#66412097",
+                    "body": "<p><em>Following the approach <a href=\"https://docs.pytest.org/en/latest/example/simple.html#control-skipping-of-tests-according-to-command-line-option\" rel=\"nofollow noreferrer\">suggested in the pytest docs</a>, thus <a href=\"https://stackoverflow.com/a/61193490/1622937\">the answer of @Manu_CJ</a>, is certainly the way to go here.</em></p>\n<p><em>I'd simply like to show how this can be adapted to easily define multiple options:</em></p>\n<p>The <a href=\"https://docs.pytest.org/en/latest/example/simple.html#control-skipping-of-tests-according-to-command-line-option\" rel=\"nofollow noreferrer\">canonical example given by the pytest docs</a> highlights well <strong>how to add a single marker</strong> through command line options. However, <strong>adapting it to add multiple markers might not be straight forward</strong>, as the three hooks <code>pytest_addoption</code>, <code>pytest_configure</code> and <code>pytest_collection_modifyitems</code> all need to be evoked to allow adding a single marker through command line option.</p>\n<p><strong>This is one way you can adapt the canonical example, if you have several markers</strong>, like <code>'flag1'</code>, <code>'flag2'</code>, etc., that you want to be able to add via command line option:</p>\n<pre class=\"lang-py prettyprint-override\"><code># content of conftest.py\n \nimport pytest\n\n# Create a dict of markers.\n# The key is used as option, so --{key} will run all tests marked with key.\n# The value must be a dict that specifies:\n# 1. 'help': the command line help text\n# 2. 'marker-descr': a description of the marker\n# 3. 'skip-reason': displayed reason whenever a test with this marker is skipped.\noptional_markers = {\n    &quot;flag1&quot;: {&quot;help&quot;: &quot;&lt;Command line help text for flag1...&gt;&quot;,\n             &quot;marker-descr&quot;: &quot;&lt;Description of the marker...&gt;&quot;,\n             &quot;skip-reason&quot;: &quot;Test only runs with the --{} option.&quot;},\n    &quot;flag2&quot;: {&quot;help&quot;: &quot;&lt;Command line help text for flag2...&gt;&quot;,\n             &quot;marker-descr&quot;: &quot;&lt;Description of the marker...&gt;&quot;,\n             &quot;skip-reason&quot;: &quot;Test only runs with the --{} option.&quot;},\n    # add further markers here\n}\n\n\ndef pytest_addoption(parser):\n    for marker, info in optional_markers.items():\n        parser.addoption(&quot;--{}&quot;.format(marker), action=&quot;store_true&quot;,\n                         default=False, help=info['help'])\n\n\ndef pytest_configure(config):\n    for marker, info in optional_markers.items():\n        config.addinivalue_line(&quot;markers&quot;,\n                                &quot;{}: {}&quot;.format(marker, info['marker-descr']))\n\n\ndef pytest_collection_modifyitems(config, items):\n    for marker, info in optional_markers.items():\n        if not config.getoption(&quot;--{}&quot;.format(marker)):\n            skip_test = pytest.mark.skip(\n                reason=info['skip-reason'].format(marker)\n            )\n            for item in items:\n                if marker in item.keywords:\n                    item.add_marker(skip_test)\n\n</code></pre>\n<p>Now you can use the markers defined in <code>optional_markers</code> in your test modules:</p>\n<pre class=\"lang-py prettyprint-override\"><code># content of test_module.py\n\nimport pytest\n\n\n@pytest.mark.flag1\ndef test_some_func():\n    pass\n\n\n@pytest.mark.flag2\ndef test_other_func():\n    pass\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 277856,
+                        "reputation": 3327,
+                        "user_id": 572097,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "aqua"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1669954839,
+                    "creation_date": 1669954839,
+                    "answer_id": 74650872,
+                    "question_id": 47559524,
+                    "link": "https://stackoverflow.com/questions/47559524/pytest-how-to-skip-tests-unless-you-declare-an-option-flag/74650872#74650872",
+                    "body": "<p>If the use-case prohibits modifying either <code>conftest.py</code> and/or <code>pytest.ini</code>, here's how to use environment variables to directly take advantage of the <code>skipif</code> marker.</p>\n<p><strong>test_reports.py contents:</strong></p>\n<pre class=\"lang-py prettyprint-override\"><code>import os\nimport pytest\n\n@pytest.mark.skipif(\n    not os.environ.get(&quot;MY_SPECIAL_FLAG&quot;),\n    reason=&quot;MY_SPECIAL_FLAG not set in environment&quot;\n)\ndef test_skip_if_no_cli_tag():\n    assert True\n\ndef test_always_run():\n    assert True\n</code></pre>\n<p><strong>In Windows:</strong></p>\n<pre><code>&gt; pytest -v test_reports.py --no-header\n================== test session starts ===================\ncollected 2 items\n\ntest_reports.py::test_skip_if_no_cli_tag SKIPPED    [ 50%]\ntest_reports.py::test_always_run PASSED             [100%]\n\n============== 1 passed, 1 skipped in 0.01s ==============\n\n&gt; cmd /c &quot;set MY_SPECIAL_FLAG=1&amp;pytest -v test_reports.py --no-header&quot;\n================== test session starts ===================\ncollected 2 items\n\ntest_reports.py::test_skip_if_no_cli_tag PASSED     [ 50%]\ntest_reports.py::test_always_run PASSED             [100%]\n\n=================== 2 passed in 0.01s ====================\n</code></pre>\n<p><strong>In Linux or other *NIX-like systems:</strong></p>\n<pre class=\"lang-bash prettyprint-override\"><code>$ pytest -v test_reports.py --no-header\n================= test session starts =================\ncollected 2 items\n\ntest_reports.py::test_skip_if_no_cli_tag SKIPPED [ 50%]\ntest_reports.py::test_always_run PASSED         [100%]\n\n============ 1 passed, 1 skipped in 0.00s =============\n\n$ MY_SPECIAL_FLAG=1 pytest -v test_reports.py --no-header\n================= test session starts =================\ncollected 2 items\n\ntest_reports.py::test_skip_if_no_cli_tag PASSED [ 50%]\ntest_reports.py::test_always_run PASSED         [100%]\n\n================== 2 passed in 0.00s ==================\n</code></pre>\n<p><code>MY_SPECIAL_FLAG</code> can be whatever you wish based on your specific use-case and of course <code>--no-header</code> is just being used for this example.</p>\n<p>Enjoy.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 12084272,
+                "reputation": 1193,
+                "user_id": 8834415,
+                "user_type": "registered",
+                "accept_rate": 55,
+                "display_name": "Louis"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "answer_count": 5,
+            "score": 34,
+            "last_activity_date": 1693623660,
+            "creation_date": 1511980526,
+            "question_id": 47559524,
+            "link": "https://stackoverflow.com/questions/47559524/pytest-how-to-skip-tests-unless-you-declare-an-option-flag",
+            "title": "Pytest - how to skip tests unless you declare an option/flag?",
+            "body": "<p>I have some unit tests, but I'm looking for a way to tag some specific unit tests to have them skipped unless you declare an option when you call the tests.</p>\n\n<p>Example:\nIf I call <code>pytest test_reports.py</code>, I'd want a couple specific unit tests to not be run.</p>\n\n<p>But if I call <code>pytest -&lt;something&gt; test_reports</code>, then I want all my tests to be run.</p>\n\n<p>I looked into the <code>@pytest.mark.skipif(condition)</code> tag but couldn't quite figure it out, so not sure if I'm on the right track or not. Any guidance here would be great!</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8307
+}

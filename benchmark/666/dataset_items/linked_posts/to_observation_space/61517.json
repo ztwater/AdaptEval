@@ -1,0 +1,1017 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "dictionary",
+                "attributes",
+                "object",
+                "metaprogramming"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1604,
+                                "reputation": 13126,
+                                "user_id": 2148,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Julio C&#233;sar"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1221417153,
+                            "post_id": 61522,
+                            "comment_id": 4520,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/61522#comment4520_61522",
+                            "body": "This code includes methods. Is there a way to exclude methods? I only need the object&#39;s fields. Thanks"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 67867,
+                                "reputation": 7612,
+                                "user_id": 198348,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "Ehtesh Choudhury"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1387832020,
+                            "post_id": 61522,
+                            "comment_id": 31096484,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/61522#comment31096484_61522",
+                            "body": "<code>ismethod</code> doesn&#39;t catch functions. Example: <code>inspect.ismethod(str.upper)</code>. <code>inspect.isfunction</code> isn&#39;t much more helpful, though. Not sure how to approach this right away."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1874064,
+                                "reputation": 17503,
+                                "user_id": 1695680,
+                                "user_type": "registered",
+                                "accept_rate": 44,
+                                "display_name": "ThorSummoner"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1471067640,
+                            "post_id": 61522,
+                            "comment_id": 65215787,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/61522#comment65215787_61522",
+                            "body": "I made some tweaks to crudely recurs and ignore all errors to a depth here, thanks! <a href=\"https://gist.github.com/thorsummoner/bf0142fd24974a0ced778768a33a3069\" rel=\"nofollow noreferrer\">gist.github.com/thorsummoner/bf0142fd24974a0ced778768a33a306&zwnj;&#8203;9</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2184,
+                        "reputation": 75037,
+                        "user_id": 3002,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "dF."
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 73,
+                    "last_activity_date": 1379655016,
+                    "last_edit_date": 1379655016,
+                    "creation_date": 1221415675,
+                    "answer_id": 61522,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/61522#61522",
+                    "body": "<p>The <code>dir</code> builtin will give you all the object's attributes, including special methods like <code>__str__</code>, <code>__dict__</code> and a whole bunch of others which you probably don't want. But you can do something like:</p>\n\n<pre><code>&gt;&gt;&gt; class Foo(object):\n...     bar = 'hello'\n...     baz = 'world'\n...\n&gt;&gt;&gt; f = Foo()\n&gt;&gt;&gt; [name for name in dir(f) if not name.startswith('__')]\n[ 'bar', 'baz' ]\n&gt;&gt;&gt; dict((name, getattr(f, name)) for name in dir(f) if not name.startswith('__')) \n{ 'bar': 'hello', 'baz': 'world' }\n</code></pre>\n\n<p>So can extend this to only return data attributes and not methods, by defining your <code>props</code> function like this:</p>\n\n<pre><code>import inspect\n\ndef props(obj):\n    pr = {}\n    for name in dir(obj):\n        value = getattr(obj, name)\n        if not name.startswith('__') and not inspect.ismethod(value):\n            pr[name] = value\n    return pr\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2184,
+                                "reputation": 75037,
+                                "user_id": 3002,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "dF."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1221418512,
+                            "post_id": 61551,
+                            "comment_id": 4531,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/61551#comment4531_61551",
+                            "body": "That works also, but be aware that it will only give you the attributes set on the instance, not on the class (like class Foo in your example)..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3353,
+                                "reputation": 38951,
+                                "user_id": 4834,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "quamrana"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1221423886,
+                            "post_id": 61551,
+                            "comment_id": 4592,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/61551#comment4592_61551",
+                            "body": "So, jcarrascal, you are better off wrapping the above code in a function like props(), then you can call either props(f) or props(Foo). Notice that you are almost always better off writing a function, rather than writing &#39;inline&#39; code."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2345687,
+                                "reputation": 2238,
+                                "user_id": 2157289,
+                                "user_type": "registered",
+                                "display_name": "Morten"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1573120998,
+                            "post_id": 61551,
+                            "comment_id": 103781296,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/61551#comment103781296_61551",
+                            "body": "Nice, btw note this is for python2.7, for python3 relpace iteritems() with simply items()."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11058403,
+                                "reputation": 1325,
+                                "user_id": 8120580,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Alex"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1576018678,
+                            "post_id": 61551,
+                            "comment_id": 104760055,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/61551#comment104760055_61551",
+                            "body": "And what about <code>staticmethod</code>? It&#39;s not <code>callable</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1604,
+                        "reputation": 13126,
+                        "user_id": 2148,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Julio C&#233;sar"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 31,
+                    "last_activity_date": 1221418252,
+                    "creation_date": 1221418252,
+                    "answer_id": 61551,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/61551#61551",
+                    "body": "<p>I've settled with a combination of both answers:</p>\n\n<pre><code>dict((key, value) for key, value in f.__dict__.iteritems() \n    if not callable(value) and not key.startswith('__'))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 357187,
+                                "reputation": 22845,
+                                "user_id": 697190,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "zakdances"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1362130595,
+                            "post_id": 62680,
+                            "comment_id": 21338231,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/62680#comment21338231_62680",
+                            "body": "What happens if one of A&#39;s attribute&#39;s has a custom getter? (a function with a @property decorator)? Does it still show up in ____dict____? What will its value be?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1520477,
+                                "reputation": 38583,
+                                "user_id": 1420279,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Antimony"
+                            },
+                            "edited": false,
+                            "score": 15,
+                            "creation_date": 1369631634,
+                            "post_id": 62680,
+                            "comment_id": 24156198,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/62680#comment24156198_62680",
+                            "body": "<code>__dict__</code> won&#39;t work if the object is using slots (or defined in a C module)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1482287,
+                                "reputation": 2068,
+                                "user_id": 1391376,
+                                "user_type": "registered",
+                                "accept_rate": 69,
+                                "display_name": "chiffa"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1380108703,
+                            "post_id": 62680,
+                            "comment_id": 28074745,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/62680#comment28074745_62680",
+                            "body": "Is there an equivalent of this method for the class objects? I.E. Instead of using f=Foo() and then doing f.__dict__, do directly Foo.__dict__?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 177955,
+                                "reputation": 4747,
+                                "user_id": 409638,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "robert"
+                            },
+                            "edited": false,
+                            "score": 75,
+                            "creation_date": 1423754362,
+                            "post_id": 62680,
+                            "comment_id": 45284558,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/62680#comment45284558_62680",
+                            "body": "Sorry, I&#39;m coming to this late, but shouldn&#39;t <code>vars(a)</code> do this? For me it&#39;s preferable to invoking the <code>__dict__</code> directly."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7690869,
+                                "reputation": 21169,
+                                "user_id": 5827215,
+                                "user_type": "registered",
+                                "display_name": "Tadhg McDonald-Jensen"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1455302778,
+                            "post_id": 62680,
+                            "comment_id": 58445907,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/62680#comment58445907_62680",
+                            "body": "for second example it would be better to do <code>__getattr__ = dict.__getitem__</code> to exactly replicate the behaviour, then you would also want <code>__setattr__ = dict.__setitem__</code> and <code>__delattr__ = dict.__delitem__</code> for complete-ness."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3220770,
+                                "reputation": 3342,
+                                "user_id": 2718295,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "cowbert"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1509579590,
+                            "post_id": 62680,
+                            "comment_id": 81078875,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/62680#comment81078875_62680",
+                            "body": "The best practice in Python 2.7 is to use <code>vars(Object)</code> if <code>Object</code> inherits from <code>object</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1128545,
+                                "reputation": 4467,
+                                "user_id": 1115187,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "maxkoryukov"
+                            },
+                            "reply_to_user": {
+                                "account_id": 177955,
+                                "reputation": 4747,
+                                "user_id": 409638,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "robert"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1510316507,
+                            "post_id": 62680,
+                            "comment_id": 81395054,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/62680#comment81395054_62680",
+                            "body": "@robert since it is the end of 2017 (9 years after the question was asked, and this answer was accepted), so I have moved your notice about <code>vars</code> to the answer&#39;s body."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4112705,
+                                "reputation": 8440,
+                                "user_id": 3482533,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "Naramsim"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1527688924,
+                            "post_id": 62680,
+                            "comment_id": 88222930,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/62680#comment88222930_62680",
+                            "body": "Any way to preserve the order of the keys?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 196458,
+                                "reputation": 453,
+                                "user_id": 439905,
+                                "user_type": "registered",
+                                "display_name": "Jacob Lee"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1544028825,
+                            "post_id": 62680,
+                            "comment_id": 94133945,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/62680#comment94133945_62680",
+                            "body": "It may be worth including a warning that vars(obj) and obj.__dict__ will not provide custom class attributes (e.g. class Foo(): fooname=&#39;fooname&#39;). Some might not expect that, since obj.class_attribute and obj.object_attribute look like similar."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1211489,
+                                "reputation": 20913,
+                                "user_id": 1179925,
+                                "user_type": "registered",
+                                "accept_rate": 47,
+                                "display_name": "mrgloom"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1568891893,
+                            "post_id": 62680,
+                            "comment_id": 102423762,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/62680#comment102423762_62680",
+                            "body": "What is the difference between <code>vars</code> and <code>__dict__</code>?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 14419513,
+                                "reputation": 3838,
+                                "user_id": 10415970,
+                                "user_type": "registered",
+                                "display_name": "Zack Plauch&#233;"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1621799337,
+                            "post_id": 62680,
+                            "comment_id": 119598720,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/62680#comment119598720_62680",
+                            "body": "<code>vars</code> <b>does <i>not</i> return class attributes</b>, only instance attributes (set by <code>__init__</code>)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2607137,
+                                "reputation": 2016,
+                                "user_id": 2258077,
+                                "user_type": "registered",
+                                "display_name": "Sunding Wei"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1679205646,
+                            "post_id": 62680,
+                            "comment_id": 133677713,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/62680#comment133677713_62680",
+                            "body": "best answer, inherit the dict, implement the getter/setter is simplest."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4539,
+                        "reputation": 8800,
+                        "user_id": 6868,
+                        "user_type": "registered",
+                        "display_name": "user6868"
+                    },
+                    "comment_count": 12,
+                    "is_accepted": true,
+                    "score": 618,
+                    "last_activity_date": 1510223324,
+                    "last_edit_date": 1510223324,
+                    "creation_date": 1221484136,
+                    "answer_id": 62680,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/62680#62680",
+                    "body": "<p>Note that best practice in Python 2.7 is to use <em><a href=\"https://www.python.org/doc/newstyle/\" rel=\"noreferrer\">new-style</a></em> classes (not needed with Python 3), i.e.</p>\n\n<pre><code>class Foo(object):\n   ...\n</code></pre>\n\n<p>Also, there's a difference between an 'object' and a 'class'. To build a dictionary from an arbitrary <em>object</em>, it's sufficient to use <code>__dict__</code>. Usually, you'll declare your methods at class level and your attributes at instance level, so <code>__dict__</code> should be fine. For example:</p>\n\n<pre class=\"lang-python prettyprint-override\"><code>&gt;&gt;&gt; class A(object):\n...   def __init__(self):\n...     self.b = 1\n...     self.c = 2\n...   def do_nothing(self):\n...     pass\n...\n&gt;&gt;&gt; a = A()\n&gt;&gt;&gt; a.__dict__\n{'c': 2, 'b': 1}\n</code></pre>\n\n<p>A better approach (suggested by <a href=\"https://stackoverflow.com/users/409638/robert\">robert</a> in comments) is the builtin <a href=\"https://docs.python.org/3/library/functions.html#vars\" rel=\"noreferrer\"><code>vars</code></a> function:</p>\n\n<pre class=\"lang-python prettyprint-override\"><code>&gt;&gt;&gt; vars(a)\n{'c': 2, 'b': 1}\n</code></pre>\n\n<p>Alternatively, depending on what you want to do, it might be nice to inherit from <code>dict</code>. Then your class is <em>already</em> a dictionary, and if you want you can override <code>getattr</code> and/or <code>setattr</code> to call through and set the dict. For example:</p>\n\n<pre><code>class Foo(dict):\n    def __init__(self):\n        pass\n    def __getattr__(self, attr):\n        return self[attr]\n\n    # etc...\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 11808626,
+                                "reputation": 771,
+                                "user_id": 8640538,
+                                "user_type": "registered",
+                                "display_name": "should_be_working"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1558431640,
+                            "post_id": 63635,
+                            "comment_id": 99089732,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/63635#comment99089732_63635",
+                            "body": "In this case what&#39;s the solution ? Since <code>vars()</code> doesn&#39;t work"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 45260,
+                                "reputation": 66874,
+                                "user_id": 133374,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Albert"
+                            },
+                            "reply_to_user": {
+                                "account_id": 11808626,
+                                "reputation": 771,
+                                "user_id": 8640538,
+                                "user_type": "registered",
+                                "display_name": "should_be_working"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1558512030,
+                            "post_id": 63635,
+                            "comment_id": 99121390,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/63635#comment99121390_63635",
+                            "body": "@should_be_working <code>dir</code> is the solution in this case. See the other answer about that."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 563696,
+                        "reputation": 9955,
+                        "user_id": 7706,
+                        "user_type": "unregistered",
+                        "display_name": "indentation"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 15,
+                    "last_activity_date": 1368296917,
+                    "last_edit_date": 1368296917,
+                    "creation_date": 1221490561,
+                    "answer_id": 63635,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/63635#63635",
+                    "body": "<blockquote>\n  <p>To build a dictionary from an arbitrary <i>object</i>, it's sufficient to use <code>__dict__</code>.</p>\n</blockquote>\n\n<p>This misses attributes that the object inherits from its class. For example,</p>\n\n<pre><code>class c(object):\n    x = 3\na = c()\n</code></pre>\n\n<p>hasattr(a, 'x') is true, but 'x' does not appear in a.__dict__</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1098700,
+                        "reputation": 1218,
+                        "user_id": 1091693,
+                        "user_type": "registered",
+                        "display_name": "Score_Under"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 9,
+                    "last_activity_date": 1372941605,
+                    "creation_date": 1372941605,
+                    "answer_id": 17470565,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/17470565#17470565",
+                    "body": "<p>Late answer but provided for completeness and the benefit of googlers:</p>\n\n<pre><code>def props(x):\n    return dict((key, getattr(x, key)) for key in dir(x) if key not in dir(x.__class__))\n</code></pre>\n\n<p>This will not show methods defined in the class, but it will still show fields including those assigned to lambdas or those which start with a double underscore.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1128545,
+                                "reputation": 4467,
+                                "user_id": 1115187,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "maxkoryukov"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1510223008,
+                            "post_id": 23937693,
+                            "comment_id": 81347146,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/23937693#comment81347146_23937693",
+                            "body": "After this answer still not clear how to get a dictionary from an object. Not properties, but entire dictionary;)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2303653,
+                        "reputation": 35336,
+                        "user_id": 2023392,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "radtek"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1510242668,
+                    "last_edit_date": 1510242668,
+                    "creation_date": 1401379343,
+                    "answer_id": 23937693,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/23937693#23937693",
+                    "body": "<p>I think the easiest way is to create a <strong>getitem</strong> attribute for the class. If you need to write to the object, you can create a custom <strong>setattr</strong> . Here is an example for <strong>getitem</strong>:</p>\n\n<pre><code>class A(object):\n    def __init__(self):\n        self.b = 1\n        self.c = 2\n    def __getitem__(self, item):\n        return self.__dict__[item]\n\n# Usage: \na = A()\na.__getitem__('b')  # Outputs 1\na.__dict__  # Outputs {'c': 2, 'b': 1}\nvars(a)  # Outputs {'c': 2, 'b': 1}\n</code></pre>\n\n<p><strong>dict</strong> generates the objects attributes into a dictionary and the dictionary object can be used to get the item you need.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 11058403,
+                                "reputation": 1325,
+                                "user_id": 8120580,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Alex"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1576018413,
+                            "post_id": 29333136,
+                            "comment_id": 104759983,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/29333136#comment104759983_29333136",
+                            "body": "This will grab also all the methods, but we need only class+instance fields. Maybe <code>dict((x, y) for x, y in KpiRow.__dict__.items() if x[:2] != &#39;__&#39; and not callable(y))</code> will solve it? But there still could be <code>static</code> methods :("
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 96913,
+                        "reputation": 3479,
+                        "user_id": 263175,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "Seaux"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 24,
+                    "last_activity_date": 1427654892,
+                    "last_edit_date": 1427654892,
+                    "creation_date": 1427653962,
+                    "answer_id": 29333136,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/29333136#29333136",
+                    "body": "<p>I thought I'd take some time to show you how you can translate an object to dict via <code>dict(obj)</code>.</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>class A(object):\n    d = '4'\n    e = '5'\n    f = '6'\n\n    def __init__(self):\n        self.a = '1'\n        self.b = '2'\n        self.c = '3'\n\n    def __iter__(self):\n        # first start by grabbing the Class items\n        iters = dict((x,y) for x,y in A.__dict__.items() if x[:2] != '__')\n\n        # then update the class items with the instance items\n        iters.update(self.__dict__)\n\n        # now 'yield' through the items\n        for x,y in iters.items():\n            yield x,y\n\na = A()\nprint(dict(a)) \n# prints \"{'a': '1', 'c': '3', 'b': '2', 'e': '5', 'd': '4', 'f': '6'}\"\n</code></pre>\n\n<p>The key section of this code is the <code>__iter__</code> function. </p>\n\n<p>As the comments explain, the first thing we do is grab the Class items and prevent anything that starts with '__'.</p>\n\n<p>Once you've created that <code>dict</code>, then you can use the <code>update</code> dict function and pass in the instance <code>__dict__</code>.</p>\n\n<p>These will give you a complete class+instance dictionary of members. Now all that's left is to iterate over them and yield the returns.</p>\n\n<p>Also, if you plan on using this a lot, you can create an <code>@iterable</code> class decorator.</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>def iterable(cls):\n    def iterfn(self):\n        iters = dict((x,y) for x,y in cls.__dict__.items() if x[:2] != '__')\n        iters.update(self.__dict__)\n\n        for x,y in iters.items():\n            yield x,y\n\n    cls.__iter__ = iterfn\n    return cls\n\n@iterable\nclass B(object):\n    d = 'd'\n    e = 'e'\n    f = 'f'\n\n    def __init__(self):\n        self.a = 'a'\n        self.b = 'b'\n        self.c = 'c'\n\nb = B()\nprint(dict(b))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 360033,
+                                "reputation": 1806,
+                                "user_id": 701803,
+                                "user_type": "registered",
+                                "display_name": "tvt173"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1492625941,
+                            "post_id": 31770231,
+                            "comment_id": 74060975,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/31770231#comment74060975_31770231",
+                            "body": "Agreed. Note that you can also convert the other way (dict-&gt;class) by typing <code>MyClass(**my_dict)</code>, assuming you have defined a constructor with parameters that mirror the class attributes. No need to access private attributes or override dict."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1864937,
+                                "reputation": 1031,
+                                "user_id": 1688738,
+                                "user_type": "registered",
+                                "display_name": "Hugh W"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1546621441,
+                            "post_id": 31770231,
+                            "comment_id": 94921848,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/31770231#comment94921848_31770231",
+                            "body": "Can you explain why it&#39;s more Pythonic?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 41935,
+                                "reputation": 17005,
+                                "user_id": 122033,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "Berislav Lopac"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1546718269,
+                            "post_id": 31770231,
+                            "comment_id": 94945409,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/31770231#comment94945409_31770231",
+                            "body": "First, Python generally shuns callings dunder items directly, and there is almost always a method or function (or operator) to access it indirectly. In general, dunder attributes and methods are an implementation detail, and using the &quot;wrapper&quot; function allows you to separate the two. Second, this way you can override the <code>vars</code> function and introduce additional functionality without changing the object itself."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4422027,
+                                "reputation": 8419,
+                                "user_id": 3601660,
+                                "user_type": "registered",
+                                "accept_rate": 61,
+                                "display_name": "c z"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1568191368,
+                            "post_id": 31770231,
+                            "comment_id": 102192969,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/31770231#comment102192969_31770231",
+                            "body": "It still fails if your class uses <code>__slots__</code> though."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 41935,
+                                "reputation": 17005,
+                                "user_id": 122033,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "Berislav Lopac"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1568296125,
+                            "post_id": 31770231,
+                            "comment_id": 102236197,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/31770231#comment102236197_31770231",
+                            "body": "That is correct, and I always felt that it would be a good direction to extend <code>vars</code> to, i.e. to return an equivalent of <code>__dict__</code> for &quot;slotted&quot; classes. For now, it can be emulated by adding a <code>__dict__</code> property which returns <code>{x: getattr(self, x) for x in self.__slots__}</code> (not sure whether that affects the performance or behaviour in any way though)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8120429,
+                                "reputation": 2931,
+                                "user_id": 6117426,
+                                "user_type": "registered",
+                                "display_name": "Anakhand"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4422027,
+                                "reputation": 8419,
+                                "user_id": 3601660,
+                                "user_type": "registered",
+                                "accept_rate": 61,
+                                "display_name": "c z"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1609094102,
+                            "post_id": 31770231,
+                            "comment_id": 115746715,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/31770231#comment115746715_31770231",
+                            "body": "Agree with @cz ; and +1 to Berislav for extending <code>vars</code> to work with <code>__slots__</code> (and even objects that don&#39;t have neither <code>__dict__</code> nor <code>__slots__</code>). For now, I have written a wrapper function to deal with this <a href=\"https://stackoverflow.com/a/65469063/6117426\">in an answer below</a>; I&#39;d say it&#39;s better to add this functionality externally rather than require your object to define a <code>__dict__</code> property (which might not be possible)."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 41935,
+                        "reputation": 17005,
+                        "user_id": 122033,
+                        "user_type": "registered",
+                        "accept_rate": 87,
+                        "display_name": "Berislav Lopac"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": false,
+                    "score": 251,
+                    "last_activity_date": 1438505849,
+                    "creation_date": 1438505849,
+                    "answer_id": 31770231,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/31770231#31770231",
+                    "body": "<p>Instead of <code>x.__dict__</code>, it's actually more pythonic to use <code>vars(x)</code>.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 41935,
+                                "reputation": 17005,
+                                "user_id": 122033,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "Berislav Lopac"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1546718632,
+                            "post_id": 34662287,
+                            "comment_id": 94945511,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/34662287#comment94945511_34662287",
+                            "body": "<code>__dict__</code> is an attribute, not a method, so this example changes the interface (i.e. you need to call it as a callable), so it&#39;s not overriding it."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 137847,
+                        "reputation": 3856,
+                        "user_id": 342348,
+                        "user_type": "registered",
+                        "accept_rate": 61,
+                        "display_name": "coanor"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1452190485,
+                    "creation_date": 1452190485,
+                    "answer_id": 34662287,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/34662287#34662287",
+                    "body": "<p>If you want to list part of your attributes, override <code>__dict__</code>:</p>\n\n<pre><code>def __dict__(self):\n    d = {\n    'attr_1' : self.attr_1,\n    ...\n    }\n    return d\n\n# Call __dict__\nd = instance.__dict__()\n</code></pre>\n\n<p>This helps a lot if your <code>instance</code> get some large block data and you want to push <code>d</code> to Redis like message queue. </p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3718545,
+                        "reputation": 143,
+                        "user_id": 3094089,
+                        "user_type": "registered",
+                        "display_name": "spattanaik75"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1530640753,
+                    "last_edit_date": 1530640753,
+                    "creation_date": 1518133139,
+                    "answer_id": 48696573,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/48696573#48696573",
+                    "body": "<h2>PYTHON 3:</h2>\n\n<pre><code>class DateTimeDecoder(json.JSONDecoder):\n\n   def __init__(self, *args, **kargs):\n        JSONDecoder.__init__(self, object_hook=self.dict_to_object,\n                         *args, **kargs)\n\n   def dict_to_object(self, d):\n       if '__type__' not in d:\n          return d\n\n       type = d.pop('__type__')\n       try:\n          dateobj = datetime(**d)\n          return dateobj\n       except:\n          d['__type__'] = type\n          return d\n\ndef json_default_format(value):\n    try:\n        if isinstance(value, datetime):\n            return {\n                '__type__': 'datetime',\n                'year': value.year,\n                'month': value.month,\n                'day': value.day,\n                'hour': value.hour,\n                'minute': value.minute,\n                'second': value.second,\n                'microsecond': value.microsecond,\n            }\n        if isinstance(value, decimal.Decimal):\n            return float(value)\n        if isinstance(value, Enum):\n            return value.name\n        else:\n            return vars(value)\n    except Exception as e:\n        raise ValueError\n</code></pre>\n\n<p>Now you can use above code inside your own class :</p>\n\n<pre><code>class Foo():\n  def toJSON(self):\n        return json.loads(\n            json.dumps(self, sort_keys=True, indent=4, separators=(',', ': '), default=json_default_format), cls=DateTimeDecoder)\n\n\nFoo().toJSON() \n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2492018,
+                        "reputation": 2136,
+                        "user_id": 2169290,
+                        "user_type": "registered",
+                        "display_name": "R H"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 22,
+                    "last_activity_date": 1545085367,
+                    "creation_date": 1545085367,
+                    "answer_id": 53823839,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/53823839#53823839",
+                    "body": "<p>A downside of using <code>__dict__</code> is that it is shallow; it won't convert any subclasses to dictionaries.</p>\n\n<p>If you're using Python3.5 or higher, you can use <a href=\"https://jsons.readthedocs.io/en/latest/\" rel=\"noreferrer\"><code>jsons</code></a>:</p>\n\n<pre><code>&gt;&gt;&gt; import jsons\n&gt;&gt;&gt; jsons.dump(f)\n{'bar': 'hello', 'baz': 'world'}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 105720,
+                        "reputation": 7690,
+                        "user_id": 281965,
+                        "user_type": "registered",
+                        "accept_rate": 64,
+                        "display_name": "Ricky Levi"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1588275088,
+                    "creation_date": 1588275088,
+                    "answer_id": 61531302,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/61531302#61531302",
+                    "body": "<p><code>vars()</code> is great, but doesn't work for nested objects of objects</p>\n\n<p>Convert nested object of objects to dict:</p>\n\n<pre><code>def to_dict(self):\n    return json.loads(json.dumps(self, default=lambda o: o.__dict__))\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 8120429,
+                        "reputation": 2931,
+                        "user_id": 6117426,
+                        "user_type": "registered",
+                        "display_name": "Anakhand"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1609332858,
+                    "last_edit_date": 1609332858,
+                    "creation_date": 1609093425,
+                    "answer_id": 65469063,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/65469063#65469063",
+                    "body": "<p>As mentioned in <a href=\"https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/65469063#comment102192969_31770231\">one of the comments above</a>, <code>vars</code> currently isn't universal in that it doesn't work for objects with <a href=\"https://docs.python.org/3/reference/datamodel.html#slots\" rel=\"nofollow noreferrer\"><code>__slots__</code></a> instead of a normal <code>__dict__</code>. Moreover, some objecs (e.g., builtins like <code>str</code> or <code>int</code>) have <em>neither</em> a <code>__dict__</code> <em>nor</em> <code>__slots__</code>.</p>\n<p>For now, a more versatile solution could be this:</p>\n<pre class=\"lang-py prettyprint-override\"><code>def instance_attributes(obj: Any) -&gt; Dict[str, Any]:\n    &quot;&quot;&quot;Get a name-to-value dictionary of instance attributes of an arbitrary object.&quot;&quot;&quot;\n    try:\n        return vars(obj)\n    except TypeError:\n        pass\n\n    # object doesn't have __dict__, try with __slots__\n    try:\n        slots = obj.__slots__\n    except AttributeError:\n        # doesn't have __dict__ nor __slots__, probably a builtin like str or int\n        return {}\n    # collect all slots attributes (some might not be present)\n    attrs = {}\n    for name in slots:\n        try:\n            attrs[name] = getattr(obj, name)\n        except AttributeError:\n            continue\n    return attrs\n</code></pre>\n<p>Example:</p>\n<pre class=\"lang-py prettyprint-override\"><code>class Foo:\n    class_var = &quot;spam&quot;\n\n\nclass Bar:\n    class_var = &quot;eggs&quot;\n    \n    __slots__ = [&quot;a&quot;, &quot;b&quot;]\n</code></pre>\n<pre><code>&gt;&gt;&gt; foo = Foo()\n&gt;&gt;&gt; foo.a = 1\n&gt;&gt;&gt; foo.b = 2\n&gt;&gt;&gt; instance_attributes(foo)\n{'a': 1, 'b': 2}\n\n&gt;&gt;&gt; bar = Bar()\n&gt;&gt;&gt; bar.a = 3\n&gt;&gt;&gt; instance_attributes(bar)\n{'a': 3}\n\n&gt;&gt;&gt; instance_attributes(&quot;baz&quot;) \n{}\n\n</code></pre>\n<hr />\n<p>Rant:</p>\n<p>It's a pity that this isn't built into <code>vars</code> already. Many builtins in Python promise to be &quot;the&quot; solution to a problem but then there's always several special cases that aren't handled... And one just ends up having to write the code manually in any case.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1346433,
+                        "reputation": 691,
+                        "user_id": 1287091,
+                        "user_type": "registered",
+                        "display_name": "Reed Sandberg"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1616285389,
+                    "creation_date": 1616285389,
+                    "answer_id": 66727687,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/66727687#66727687",
+                    "body": "<p>In 2021, and for nested objects/dicts/json use pydantic BaseModel - will convert nested dicts and nested json objects to python objects and JSON and vice versa:</p>\n<p><a href=\"https://pydantic-docs.helpmanual.io/usage/models/\" rel=\"noreferrer\">https://pydantic-docs.helpmanual.io/usage/models/</a></p>\n<pre><code>&gt;&gt;&gt; class Foo(BaseModel):\n...     count: int\n...     size: float = None\n... \n&gt;&gt;&gt; \n&gt;&gt;&gt; class Bar(BaseModel):\n...     apple = 'x'\n...     banana = 'y'\n... \n&gt;&gt;&gt; \n&gt;&gt;&gt; class Spam(BaseModel):\n...     foo: Foo\n...     bars: List[Bar]\n... \n&gt;&gt;&gt; \n&gt;&gt;&gt; m = Spam(foo={'count': 4}, bars=[{'apple': 'x1'}, {'apple': 'x2'}])\n</code></pre>\n<p><strong>Object to dict</strong></p>\n<pre><code>&gt;&gt;&gt; print(m.dict())\n{'foo': {'count': 4, 'size': None}, 'bars': [{'apple': 'x1', 'banana': 'y'}, {'apple': 'x2', 'banana': 'y'}]}\n</code></pre>\n<p><strong>Object to JSON</strong></p>\n<pre><code>&gt;&gt;&gt; print(m.json())\n{&quot;foo&quot;: {&quot;count&quot;: 4, &quot;size&quot;: null}, &quot;bars&quot;: [{&quot;apple&quot;: &quot;x1&quot;, &quot;banana&quot;: &quot;y&quot;}, {&quot;apple&quot;: &quot;x2&quot;, &quot;banana&quot;: &quot;y&quot;}]}\n</code></pre>\n<p><strong>Dict to object</strong></p>\n<pre><code>&gt;&gt;&gt; spam = Spam.parse_obj({'foo': {'count': 4, 'size': None}, 'bars': [{'apple': 'x1', 'banana': 'y'}, {'apple': 'x2', 'banana': 'y2'}]})\n&gt;&gt;&gt; spam\nSpam(foo=Foo(count=4, size=None), bars=[Bar(apple='x1', banana='y'), Bar(apple='x2', banana='y2')])\n</code></pre>\n<p><strong>JSON to object</strong></p>\n<pre><code>&gt;&gt;&gt; spam = Spam.parse_raw('{&quot;foo&quot;: {&quot;count&quot;: 4, &quot;size&quot;: null}, &quot;bars&quot;: [{&quot;apple&quot;: &quot;x1&quot;, &quot;banana&quot;: &quot;y&quot;}, {&quot;apple&quot;: &quot;x2&quot;, &quot;banana&quot;: &quot;y&quot;}]}')\n&gt;&gt;&gt; spam\nSpam(foo=Foo(count=4, size=None), bars=[Bar(apple='x1', banana='y'), Bar(apple='x2', banana='y')])\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2231374,
+                        "reputation": 435,
+                        "user_id": 1968839,
+                        "user_type": "registered",
+                        "display_name": "thetaprime"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1630317449,
+                    "creation_date": 1630317449,
+                    "answer_id": 68982164,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/68982164#68982164",
+                    "body": "<p>Try:</p>\n<pre class=\"lang-py prettyprint-override\"><code>from pprint import pformat\na_dict = eval(pformat(an_obj))\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1667519,
+                        "reputation": 3839,
+                        "user_id": 1534638,
+                        "user_type": "registered",
+                        "accept_rate": 90,
+                        "display_name": "hizbul25"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 10,
+                    "last_activity_date": 1631020300,
+                    "creation_date": 1631020300,
+                    "answer_id": 69088860,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/69088860#69088860",
+                    "body": "<p><strong>Python3.x</strong></p>\n<pre><code>return dict((key, value) for key, value in f.__dict__.items() if not callable(value) and not key.startswith('__'))\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5871839,
+                        "reputation": 1350,
+                        "user_id": 5692181,
+                        "user_type": "registered",
+                        "display_name": "Surya Teja"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1660741477,
+                    "creation_date": 1660741477,
+                    "answer_id": 73388990,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/73388990#73388990",
+                    "body": "<p>Dataclass(from Python 3.7) is another option which can be used for converting class properties to dict. <a href=\"https://docs.python.org/3/library/dataclasses.html#dataclasses.asdict\" rel=\"noreferrer\">asdict</a> can be used along with dataclass objects\nfor the conversion.</p>\n<p>Example:</p>\n<pre><code>@dataclass\nclass Point:\n   x: int\n   y: int\n\np = Point(10, 20)\nasdict(p) # it returns {'x': 10, 'y': 20}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7534991,
+                        "reputation": 11430,
+                        "user_id": 8605685,
+                        "user_type": "registered",
+                        "display_name": "Salvatore"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1676051883,
+                    "last_edit_date": 1676051883,
+                    "creation_date": 1675883624,
+                    "answer_id": 75390673,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/75390673#75390673",
+                    "body": "<h1>Python 3.7+ in 2023</h1>\n<p>You can add the <a href=\"https://docs.python.org/3/library/dataclasses.html\" rel=\"nofollow noreferrer\"><code>dataclass</code></a> decorator to your class and define a custom JSON serializer, then <a href=\"https://docs.python.org/3/library/json.html#json.dumps\" rel=\"nofollow noreferrer\"><code>json.dumps</code></a> will work (and you can extend it to work with non-serializable attributes by providing a custom encoder to <code>cls</code>).</p>\n<pre><code>f=Foo()\njson.dumps(f, cls=CustomJSONEncoder)\n\n{&quot;bar&quot;: &quot;hello&quot;, &quot;baz&quot;: &quot;world&quot;, &quot;modified&quot;: &quot;2023-02-08T11:49:15.675837&quot;}\n</code></pre>\n<p>A custom JSON serializer can be easily modified to make it compatible with any type that isn't natively JSON serializable.</p>\n<pre><code>from datetime import datetime\nimport dataclasses\nimport json\n\n\n@dataclasses.dataclass # &lt;&lt;-- add this decorator \nclass Foo():\n    &quot;&quot;&quot;An example dataclass.&quot;&quot;&quot;\n\n    bar: str = &quot;hello&quot;\n    baz: str = &quot;world&quot;\n    modified: datetime = Column(DateTime(timezone=True), default=datetime.utcnow)\n\n\nclass CustomJSONEncoder(json.JSONEncoder): # &lt;&lt;-- Add this custom encoder \n    &quot;&quot;&quot;Custom JSON encoder for the DB class.&quot;&quot;&quot;\n\n    def default(self, o):\n        if dataclasses.is_dataclass(o): # this serializes anything dataclass can handle  \n            return dataclasses.asdict(o)\n        if isinstance(o, datetime): # this adds support for datetime\n            return o.isoformat()\n        return super().default(o)\n</code></pre>\n<p>To further extend it for any non-serializable type, add another <code>if</code> statement to the custom encoder class that returns something serializable (e.g. <code>str</code>).</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7960219,
+                                "reputation": 721,
+                                "user_id": 6008271,
+                                "user_type": "registered",
+                                "display_name": "OscarVanL"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1680275016,
+                            "post_id": 75782671,
+                            "comment_id": 133875820,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/75782671#comment133875820_75782671",
+                            "body": "Be aware that <code>__dict__</code> does not give you a dict, but a mappingproxy, which does not support item assignment."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6304107,
+                                "reputation": 7870,
+                                "user_id": 9039646,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "DINA TAKLIT"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7960219,
+                                "reputation": 721,
+                                "user_id": 6008271,
+                                "user_type": "registered",
+                                "display_name": "OscarVanL"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1680276292,
+                            "post_id": 75782671,
+                            "comment_id": 133876148,
+                            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/75782671#comment133876148_75782671",
+                            "body": "thank you for the information, for me I use this way to access item values of my model class only to assign I can directly assign to the item"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6304107,
+                        "reputation": 7870,
+                        "user_id": 9039646,
+                        "user_type": "registered",
+                        "accept_rate": 91,
+                        "display_name": "DINA TAKLIT"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1679236020,
+                    "creation_date": 1679236020,
+                    "answer_id": 75782671,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/75782671#75782671",
+                    "body": "<p>I think the best way is to use attribute <code>__dict__</code> example:</p>\n<pre class=\"lang-py prettyprint-override\"><code>class Foo:\n    def __init__(self):\n        # keys are initialized with\n        # their respective values\n        self.bar = 'hello'\n        self.baz = 'world'\n  \nf = Foo()\nprint (f.__dict__) # {'bar': 'hello', 'baz': 'world'}\n\n</code></pre>\n<hr />\n<p>sqlAlchemy example:</p>\n<pre class=\"lang-py prettyprint-override\"><code>async def getAssessments(client_id: UUID, db: Session = Depends(get_async_session)):\n    evaluation_id_data = await getEvaluationId(client_id, db)\n    evaluation_id = evaluation_id_data['data']\n    evaluation_dimensions_data = await getEvluationDimensions(evaluation_id, db)\n    evaluation_dimensions = evaluation_dimensions_data['data']\n\n    assessment = []\n    for dimension in evaluation_dimensions:\n        print(f&quot;\\n\\n dimension {dimension} \\n\\n&quot;)\n        print(f&quot;\\n\\n dimension dict {dimension.__dict__} \\n\\n&quot;)\n\n</code></pre>\n<p>Where dimension is <code>DimensionsEvaluation</code> model object</p>\n<pre class=\"lang-py prettyprint-override\"><code>class DimensionsEvaluation(Base):\n    __tablename__ = &quot;dimensions_evaluation&quot;\n    id = Column(Integer, primary_key=True)\n    dimension_id = Column(Integer, ForeignKey('dimension.id'))\n    evaluation_id = Column(Integer, ForeignKey('evaluation.id'))\n    questions = Column(String, nullable=False)\n    selected = Column(Boolean, default=False)\n\n</code></pre>\n<p>the result is like so</p>\n<pre class=\"lang-bash prettyprint-override\"><code> dimension &lt;app.models.evaluation.DimensionsEvaluation object at 0x10d8def50&gt; \n\n</code></pre>\n<pre class=\"lang-bash prettyprint-override\"><code> dimension dict {'_sa_instance_state': &lt;sqlalchemy.orm.state.InstanceState object at 0x10d8def90&gt;, 'selected': True, 'dimension_id': 2, 'evaluation_id': 6, 'id': 16, 'questions': '[152,153]'} \n</code></pre>\n<p>Check this link for simple example: <a href=\"https://www.geeksforgeeks.org/get-a-dictionary-from-an-objects-fields/\" rel=\"nofollow noreferrer\">https://www.geeksforgeeks.org/get-a-dictionary-from-an-objects-fields/</a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 519209,
+                        "reputation": 1092,
+                        "user_id": 3534491,
+                        "user_type": "registered",
+                        "display_name": "Marduk"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1680868101,
+                    "last_edit_date": 1680868101,
+                    "creation_date": 1680777854,
+                    "answer_id": 75948607,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/75948607#75948607",
+                    "body": "<p>Here is a solution that does not require any libraries and supports nested objects:</p>\n<pre class=\"lang-py prettyprint-override\"><code>def is_json(obj: object):\n\u00a0 \u00a0 return obj is None or type(obj) in {bool, int, str, list, dict}\n\ndef attrs(obj: object):\n\u00a0 \u00a0 return {\n\u00a0 \u00a0 \u00a0 \u00a0 name: getattr(obj, name)\n\u00a0 \u00a0 \u00a0 \u00a0 for name in dir(obj)\n\u00a0 \u00a0 }\n\ndef props(obj: object, max_depth: int=1, depth: int=0):\n\u00a0 \u00a0 if depth &gt; max_depth:\n\u00a0 \u00a0 \u00a0 \u00a0 return {}\n\n\u00a0 \u00a0 return {\n\u00a0 \u00a0 \u00a0 \u00a0 name: attr if is_json(attr) else props(attr, max_depth, depth+1)\n\u00a0 \u00a0 \u00a0 \u00a0 for name, attr in attrs(obj).items()\n\u00a0 \u00a0 \u00a0 \u00a0 if not name.startswith('__') and not callable(attr)\n\u00a0 \u00a0 }\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3057146,
+                        "reputation": 315,
+                        "user_id": 2590528,
+                        "user_type": "registered",
+                        "display_name": "Pixel"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1702046226,
+                    "last_edit_date": 1702046226,
+                    "creation_date": 1702045449,
+                    "answer_id": 77627227,
+                    "question_id": 61517,
+                    "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/77627227#77627227",
+                    "body": "<p>Convert composite object to dictionary recursively without recursion:</p>\n<pre class=\"lang-py prettyprint-override\"><code>def new_construct(obj: Any) -&gt; Any:\n    if obj is None:\n        return None\n    return [] if isinstance(obj, list) else {}\n \n \ndef isliteral(obj: Any):\n    return isinstance(obj, (int, float, str, bool))\n \n \ndef object_to_dict(obj):\n    result = new_construct(obj)\n    queue = deque([(id(obj), obj, result)])\n    processed = set()\n \n    while queue:\n        obj_id, obj, constructed_obj = queue.pop()\n        if obj_id in processed:\n            continue\n        processed.add(obj_id)\n \n        if hasattr(obj, &quot;__dict__&quot;):\n            obj = vars(obj)\n \n        if isinstance(obj, list):\n            for val in obj:\n                if isliteral(val):\n                    constructed_obj.append(val)\n                else:\n                    new_obj = new_construct(val)\n                    queue.append((id(val), val, new_obj))\n                    constructed_obj.append(new_obj)\n        elif isinstance(obj, dict):\n            for key, val in obj.items():\n                if isliteral(val):\n                    constructed_obj[key] = val\n                else:\n                    new_obj = new_construct(val)\n                    constructed_obj[key] = new_obj\n                    queue.append((id(val), val, new_obj))\n \n    return result\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 1604,
+                "reputation": 13126,
+                "user_id": 2148,
+                "user_type": "registered",
+                "accept_rate": 100,
+                "display_name": "Julio C&#233;sar"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 62680,
+            "answer_count": 21,
+            "score": 512,
+            "last_activity_date": 1702046226,
+            "creation_date": 1221415243,
+            "last_edit_date": 1477871654,
+            "question_id": 61517,
+            "link": "https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields",
+            "title": "Python dictionary from an object&#39;s fields",
+            "body": "<p>Do you know if there is a built-in function to build a dictionary from an arbitrary object? I'd like to do something like this:</p>\n\n<pre><code>&gt;&gt;&gt; class Foo:\n...     bar = 'hello'\n...     baz = 'world'\n...\n&gt;&gt;&gt; f = Foo()\n&gt;&gt;&gt; props(f)\n{ 'bar' : 'hello', 'baz' : 'world' }\n</code></pre>\n\n<p><strong>NOTE:</strong> It should not include methods. Only fields.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8831
+}

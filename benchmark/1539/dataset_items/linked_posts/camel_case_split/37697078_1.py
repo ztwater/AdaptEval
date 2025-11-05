@@ -1,0 +1,5 @@
+'CamelCaseTest123' -> ['Camel', 'Case', 'Test123']
+'CamelCaseXYZ' -> ['Camel', 'Case', 'XYZ']
+'XYZCamelCase' -> ['XYZ', 'Camel', 'Case']
+'XYZ' -> ['XYZ']
+'IPAddress' -> ['IP', 'Address']

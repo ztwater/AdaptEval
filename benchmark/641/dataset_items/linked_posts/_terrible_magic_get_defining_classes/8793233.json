@@ -1,0 +1,337 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "inspect"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 27199,
+                        "reputation": 152220,
+                        "user_id": 71522,
+                        "user_type": "registered",
+                        "accept_rate": 62,
+                        "display_name": "David Wolever"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1326140632,
+                    "post_id": 8793233,
+                    "comment_id": 10970431,
+                    "link": "https://stackoverflow.com/questions/8793233/python-can-a-decorator-determine-if-a-function-is-being-defined-inside-a-class#comment10970431_8793233",
+                    "body": "For the curious, here is the result: <a href=\"http://paste.pocoo.org/show/532430/\" rel=\"nofollow noreferrer\">paste.pocoo.org/show/532430</a>"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 27199,
+                                "reputation": 152220,
+                                "user_id": 71522,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "David Wolever"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1326134272,
+                            "post_id": 8793356,
+                            "comment_id": 10968471,
+                            "link": "https://stackoverflow.com/questions/8793233/python-can-a-decorator-determine-if-a-function-is-being-defined-inside-a-class/8793356#comment10968471_8793356",
+                            "body": "I expect that <code>inspect</code> will be involved, but not the way you&#39;ve described. See my first note (that at the time decorators are applied the function is just an instance of <code>function</code>, not <code>unboundmethod</code> or <code>boundmethod</code>)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11325,
+                                "reputation": 18120,
+                                "user_id": 21776,
+                                "user_type": "registered",
+                                "display_name": "Jeremy Brown"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1326134283,
+                            "post_id": 8793356,
+                            "comment_id": 10968475,
+                            "link": "https://stackoverflow.com/questions/8793233/python-can-a-decorator-determine-if-a-function-is-being-defined-inside-a-class/8793356#comment10968475_8793356",
+                            "body": "He didn&#39;t state it explicitly, but his point was this does not work at class definition time."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 27199,
+                                "reputation": 152220,
+                                "user_id": 71522,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "David Wolever"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1326134460,
+                            "post_id": 8793356,
+                            "comment_id": 10968510,
+                            "link": "https://stackoverflow.com/questions/8793233/python-can-a-decorator-determine-if-a-function-is-being-defined-inside-a-class/8793356#comment10968510_8793356",
+                            "body": "Yes, you&#39;re right \u2014 I&#39;ve updated my question to be more explicit. I appreciate the thorough answer, it just doesn&#39;t address my question."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 42781,
+                        "reputation": 26158,
+                        "user_id": 124745,
+                        "user_type": "registered",
+                        "accept_rate": 83,
+                        "display_name": "dcrosta"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": -3,
+                    "last_activity_date": 1326134126,
+                    "creation_date": 1326134126,
+                    "answer_id": 8793356,
+                    "question_id": 8793233,
+                    "link": "https://stackoverflow.com/questions/8793233/python-can-a-decorator-determine-if-a-function-is-being-defined-inside-a-class/8793356#8793356",
+                    "body": "<p>I think the functions in the <code>inspect</code> module will do what you want, particularly <a href=\"http://docs.python.org/library/inspect.html#inspect.isfunction\" rel=\"nofollow\">isfunction</a> and <a href=\"http://docs.python.org/library/inspect.html#inspect.ismethod\" rel=\"nofollow\">ismethod</a>:</p>\n\n<pre><code>&gt;&gt;&gt; import inspect\n&gt;&gt;&gt; def foo(): pass\n... \n&gt;&gt;&gt; inspect.isfunction(foo)\nTrue\n&gt;&gt;&gt; inspect.ismethod(foo)\nFalse\n&gt;&gt;&gt; class C(object):\n...     def foo(self):\n...             pass\n... \n&gt;&gt;&gt; inspect.isfunction(C.foo)\nFalse\n&gt;&gt;&gt; inspect.ismethod(C.foo)\nTrue\n&gt;&gt;&gt; inspect.isfunction(C().foo)\nFalse\n&gt;&gt;&gt; inspect.ismethod(C().foo)\nTrue\n</code></pre>\n\n<p>You can then follow the <a href=\"http://docs.python.org/library/inspect.html#types-and-members\" rel=\"nofollow\">Types and Members table</a> to access the function inside the bound or unbound method:</p>\n\n<pre><code>&gt;&gt;&gt; C.foo.im_func\n&lt;function foo at 0x1062dfaa0&gt;\n&gt;&gt;&gt; inspect.isfunction(C.foo.im_func)\nTrue\n&gt;&gt;&gt; inspect.ismethod(C.foo.im_func)\nFalse\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3343278,
+                                "reputation": 10053,
+                                "user_id": 2809027,
+                                "user_type": "registered",
+                                "display_name": "Cecil Curry"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1616212313,
+                            "post_id": 8793675,
+                            "comment_id": 117938561,
+                            "link": "https://stackoverflow.com/questions/8793233/python-can-a-decorator-determine-if-a-function-is-being-defined-inside-a-class/8793675#comment117938561_8793675",
+                            "body": "<b>This is guaranteed to fail with both false positives and negatives.</b> <code>self</code> is just an ad-hoc community standard. Nothing enforces <code>self</code>, so nothing should expect there to exist a one-to-one relation between unbound methods and callables whose first arguments are coincidentally named <code>self</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1047643,
+                        "reputation": 9482,
+                        "user_id": 1052325,
+                        "user_type": "registered",
+                        "display_name": "reclosedev"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1326135608,
+                    "creation_date": 1326135608,
+                    "answer_id": 8793675,
+                    "question_id": 8793233,
+                    "link": "https://stackoverflow.com/questions/8793233/python-can-a-decorator-determine-if-a-function-is-being-defined-inside-a-class/8793675#8793675",
+                    "body": "<p>Some hacky solution that I've got:</p>\n\n<pre><code>import inspect\n\ndef my_decorator(f):\n    args = inspect.getargspec(f).args\n    defined_in_class = bool(args and args[0] == 'self')\n    print \"%r: %s\" %(f, defined_in_class)\n</code></pre>\n\n<p>But it relays on the presence of <code>self</code> argument in function.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 31162,
+                        "reputation": 86535,
+                        "user_id": 85360,
+                        "user_type": "registered",
+                        "accept_rate": 45,
+                        "display_name": "Brandon Rhodes"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 15,
+                    "last_activity_date": 1408116192,
+                    "last_edit_date": 1408116192,
+                    "creation_date": 1326135674,
+                    "answer_id": 8793684,
+                    "question_id": 8793233,
+                    "link": "https://stackoverflow.com/questions/8793233/python-can-a-decorator-determine-if-a-function-is-being-defined-inside-a-class/8793684#8793684",
+                    "body": "<p>Take a look at the output of <code>inspect.stack()</code> when you wrap a method. When your decorator's execution is underway, the current stack frame is the function call to your decorator; the next stack frame down is the <code>@</code> wrapping action that is being applied to the new method; and the third frame will be the class definition itself, which merits a separate stack frame because the class definition is its own namespace (that is wrapped up to create a class when it is done executing).</p>\n\n<p>I suggest, therefore:</p>\n\n<pre><code>defined_in_class = (len(frames) &gt; 2 and\n                    frames[2][4][0].strip().startswith('class '))\n</code></pre>\n\n<p>If all of those crazy indexes look unmaintainable, then you can be more explicit by taking the frame apart piece by piece, like this:</p>\n\n<pre><code>import inspect\nframes = inspect.stack()\ndefined_in_class = False\nif len(frames) &gt; 2:\n    maybe_class_frame = frames[2]\n    statement_list = maybe_class_frame[4]\n    first_statment = statement_list[0]\n    if first_statment.strip().startswith('class '):\n        defined_in_class = True\n</code></pre>\n\n<p>Note that I do <em>not</em> see any way to ask Python about the class name or inheritance hierarchy at the moment your wrapper runs; that point is \"too early\" in the processing steps, since the class creation is not yet finished. Either parse the line that begins with <code>class</code> yourself and then look in that frame's globals to find the superclass, or else poke around the <code>frames[1]</code> code object to see what you can learn \u2014 it appears that the class name winds up being <code>frames[1][0].f_code.co_name</code> in the above code, but I cannot find any way to learn what superclasses will be attached when the class creation finishes up.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 27199,
+                                "reputation": 152220,
+                                "user_id": 71522,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "David Wolever"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1326137536,
+                            "post_id": 8793724,
+                            "comment_id": 10969431,
+                            "link": "https://stackoverflow.com/questions/8793233/python-can-a-decorator-determine-if-a-function-is-being-defined-inside-a-class/8793724#comment10969431_8793724",
+                            "body": "Hrm\u2026 But this wouldn&#39;t work for classes nested within something, would it? (ex, <code>def mk_class(): class MyClass: \u2026 ; return MyClass</code>)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1143565,
+                                "reputation": 516556,
+                                "user_id": 1126841,
+                                "user_type": "registered",
+                                "display_name": "chepner"
+                            },
+                            "reply_to_user": {
+                                "account_id": 27199,
+                                "reputation": 152220,
+                                "user_id": 71522,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "David Wolever"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1326146653,
+                            "post_id": 8793724,
+                            "comment_id": 10972376,
+                            "link": "https://stackoverflow.com/questions/8793233/python-can-a-decorator-determine-if-a-function-is-being-defined-inside-a-class/8793724#comment10972376_8793724",
+                            "body": "What the function does or returns doesn&#39;t affect the value of <code>inspect.currentframe().f_back</code>; the only thing that matters is where <code>my_decorator</code> is called, and that&#39;s always going to be the same level at which the thing it wraps around is defined."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1143565,
+                                "reputation": 516556,
+                                "user_id": 1126841,
+                                "user_type": "registered",
+                                "display_name": "chepner"
+                            },
+                            "reply_to_user": {
+                                "account_id": 27199,
+                                "reputation": 152220,
+                                "user_id": 71522,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "David Wolever"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1326148671,
+                            "post_id": 8793724,
+                            "comment_id": 10972953,
+                            "link": "https://stackoverflow.com/questions/8793233/python-can-a-decorator-determine-if-a-function-is-being-defined-inside-a-class/8793724#comment10972953_8793724",
+                            "body": "I might have misunderstood your comment; any decorated functions inside other functions won&#39;t run the decorator until the enclosing function is called, but the scope of the wrapped function will be computed correctly. You can use this inside the decorator to see a list of the enclosing scopes at the point when the decorator is run: <code>[x[0].f_code.co_name for x in inspect.stack()[1:]]</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3343278,
+                                "reputation": 10053,
+                                "user_id": 2809027,
+                                "user_type": "registered",
+                                "display_name": "Cecil Curry"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1616212630,
+                            "post_id": 8793724,
+                            "comment_id": 117938585,
+                            "link": "https://stackoverflow.com/questions/8793233/python-can-a-decorator-determine-if-a-function-is-being-defined-inside-a-class/8793724#comment117938585_8793724",
+                            "body": "<b>This is guaranteed to fail with false positives,</b> notably for nested closures (i.e., functions declared within other functions declared within other functions). Nested closures are decoratable, but the <code>f_code.co_name</code> attribute of their parent closures is guaranteed to be a valid Python identifier and thus <i>not</i> <code>&lt;module&gt;</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1143565,
+                        "reputation": 516556,
+                        "user_id": 1126841,
+                        "user_type": "registered",
+                        "display_name": "chepner"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1326135882,
+                    "creation_date": 1326135882,
+                    "answer_id": 8793724,
+                    "question_id": 8793233,
+                    "link": "https://stackoverflow.com/questions/8793233/python-can-a-decorator-determine-if-a-function-is-being-defined-inside-a-class/8793724#8793724",
+                    "body": "<p>You could check if the decorator itself is being called at the module level or nested within something else.</p>\n\n<pre><code>defined_in_class = inspect.currentframe().f_back.f_code.co_name != \"&lt;module&gt;\"\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3343278,
+                                "reputation": 10053,
+                                "user_id": 2809027,
+                                "user_type": "registered",
+                                "display_name": "Cecil Curry"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1616213665,
+                            "post_id": 18472324,
+                            "comment_id": 117938732,
+                            "link": "https://stackoverflow.com/questions/8793233/python-can-a-decorator-determine-if-a-function-is-being-defined-inside-a-class/18472324#comment117938732_18472324",
+                            "body": "This may very well succeed on frozen apps (e.g., PyInstaller, py2exe), but <b>this certainly fails on unfrozen apps that nest classes</b> \u2013 a more common use case. <code>&#39;__module__&#39;</code> will <i>not</i> be in the <code>frame[0].f_code.co_names</code> tuple for nested classes, especially nested classes themselves localized to nested closures. Decorator authors just can&#39;t get a break here."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 53575,
+                        "reputation": 3280,
+                        "user_id": 160205,
+                        "user_type": "registered",
+                        "accept_rate": 82,
+                        "display_name": "Walt W"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1377625936,
+                    "creation_date": 1377625936,
+                    "answer_id": 18472324,
+                    "question_id": 8793233,
+                    "link": "https://stackoverflow.com/questions/8793233/python-can-a-decorator-determine-if-a-function-is-being-defined-inside-a-class/18472324#18472324",
+                    "body": "<p>A little late to the party here, but this has proven to be a reliable means of determining if a decorator is being used on a function defined in a class:</p>\n\n<pre><code>frames = inspect.stack()\n\nclassName = None\nfor frame in frames[1:]:\n    if frame[3] == \"&lt;module&gt;\":\n        # At module level, go no further\n        break\n    elif '__module__' in frame[0].f_code.co_names:\n        className = frame[0].f_code.co_name\n        break\n</code></pre>\n\n<p>The advantage of this method over the accepted answer is that it works with e.g. py2exe.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 9431546,
+                        "reputation": 1698,
+                        "user_id": 7014926,
+                        "user_type": "registered",
+                        "display_name": "nnolte"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1562146387,
+                    "creation_date": 1562146387,
+                    "answer_id": 56867084,
+                    "question_id": 8793233,
+                    "link": "https://stackoverflow.com/questions/8793233/python-can-a-decorator-determine-if-a-function-is-being-defined-inside-a-class/56867084#56867084",
+                    "body": "<p>you can use the package <code>wrapt</code> to check for<br>\n - instance/class methods<br>\n - classes<br>\n - freestanding functions/static methods:  </p>\n\n<p>See the project page of <code>wrapt</code>: <a href=\"https://pypi.org/project/wrapt/\" rel=\"nofollow noreferrer\">https://pypi.org/project/wrapt/</a></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 27199,
+                "reputation": 152220,
+                "user_id": 71522,
+                "user_type": "registered",
+                "accept_rate": 62,
+                "display_name": "David Wolever"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 8793684,
+            "answer_count": 6,
+            "score": 15,
+            "last_activity_date": 1562146387,
+            "creation_date": 1326133452,
+            "last_edit_date": 1326140586,
+            "question_id": 8793233,
+            "link": "https://stackoverflow.com/questions/8793233/python-can-a-decorator-determine-if-a-function-is-being-defined-inside-a-class",
+            "title": "Python: can a decorator determine if a function is being defined inside a class?",
+            "body": "<p>I'm writing a decorator, and for various annoying reasons[0] it would be expedient to check if the function it is wrapping is being defined stand-alone or as part of a class (and further which classes that new class is subclassing).</p>\n\n<p>For example:</p>\n\n<pre><code>def my_decorator(f):\n    defined_in_class = ??\n    print \"%r: %s\" %(f, defined_in_class)\n\n@my_decorator\ndef foo(): pass\n\nclass Bar(object):\n    @my_decorator\n    def bar(self): pass\n</code></pre>\n\n<p>Should print:</p>\n\n<pre><code>&lt;function foo \u2026&gt;: False\n&lt;function bar \u2026&gt;: True\n</code></pre>\n\n<p>Also, please note:</p>\n\n<ul>\n<li>At the point decorators are applied the function will still be a function, not an unbound method, so testing for instance/unbound method  (using <code>typeof</code> or <code>inspect</code>) will not work.</li>\n<li>Please only offer suggestions that solve <em>this</em> problem \u2014 I'm aware that there are many similar ways to accomplish this end (ex, using a class decorator), but I would like them to happen at <em>decoration</em> time, not later.</li>\n</ul>\n\n<p>[0]: specifically, I'm writing a decorator that will make it easy to do parameterized testing with <code>nose</code>. However, <code>nose</code> will <em>not</em> run test generators on subclasses of <code>unittest.TestCase</code>, so I would like my decorator to be able to determine if it's being used inside a subclass of <code>TestCase</code> and fail with an appropriate error. The obvious solution - using <code>isinstance(self, TestCase)</code> before calling the wrapped function doesn't work, because the wrapped function <em>needs</em> to be a generator, which doesn't get executed <em>at all</em>.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8881
+}

@@ -1,0 +1,131 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 3725792,
+                        "reputation": 1417,
+                        "user_id": 3099733,
+                        "user_type": "registered",
+                        "display_name": "link89"
+                    },
+                    "reply_to_user": {
+                        "account_id": 5088285,
+                        "reputation": 5749,
+                        "user_id": 4082104,
+                        "user_type": "registered",
+                        "display_name": "Multihunter"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1690171197,
+                    "post_id": 76751171,
+                    "comment_id": 135310853,
+                    "link": "https://stackoverflow.com/questions/76751171/how-to-flat-a-list-of-lists-and-ensure-the-output-result-distributed-evenly-in-p#comment135310853_76751171",
+                    "body": "@Multihunter No, there is an additional requirement in my question."
+                },
+                {
+                    "owner": {
+                        "account_id": 5088285,
+                        "reputation": 5749,
+                        "user_id": 4082104,
+                        "user_type": "registered",
+                        "display_name": "Multihunter"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1690262712,
+                    "post_id": 76751171,
+                    "comment_id": 135324794,
+                    "link": "https://stackoverflow.com/questions/76751171/how-to-flat-a-list-of-lists-and-ensure-the-output-result-distributed-evenly-in-p#comment135324794_76751171",
+                    "body": "I see. You want to interleave. Your question only states flattening. My apologies. Do you contest the other duplicate as well?"
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 15205995,
+                        "reputation": 2349,
+                        "user_id": 18694400,
+                        "user_type": "registered",
+                        "display_name": "MoRe"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1690170632,
+                    "last_edit_date": 1690170632,
+                    "creation_date": 1690169385,
+                    "answer_id": 76751223,
+                    "question_id": 76751171,
+                    "link": "https://stackoverflow.com/questions/76751171/how-to-flat-a-list-of-lists-and-ensure-the-output-result-distributed-evenly-in-p/76751223#76751223",
+                    "body": "<pre><code>data = [[1, 2, 3],\n[4, 5],\n[6, 8, 9, 10],\n[11]]\nfrom itertools import zip_longest\n[i for lst in zip_longest(*data) for i in lst if i is not None]\n</code></pre>\n<p>or a more complex way:</p>\n<pre><code>from itertools import zip_longest\nfrom functools import reduce\nlist(filter(lambda x: x is not None, reduce(lambda x, y: x + y, zip_longest(*data))))\n</code></pre>\n<p>or</p>\n<pre><code>reduce(lambda x, y: x + tuple(i for i in y if i is not None), zip_longest(*data))\n</code></pre>\n<p>if it is ok, I can explain it</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 19522095,
+                        "reputation": 1956,
+                        "user_id": 17030540,
+                        "user_type": "registered",
+                        "display_name": "nigh_anxiety"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 2,
+                    "last_activity_date": 1690169816,
+                    "creation_date": 1690169816,
+                    "answer_id": 76751244,
+                    "question_id": 76751171,
+                    "link": "https://stackoverflow.com/questions/76751171/how-to-flat-a-list-of-lists-and-ensure-the-output-result-distributed-evenly-in-p/76751244#76751244",
+                    "body": "<p>You can use the <code>zip_longest</code> function from the <code>itertools</code> module to combine these lists, and just throw away the <code>None</code> fillvalues</p>\n<pre><code>from itertools import zip_longest\n\nlist_of_lists = [\n    [1, 2, 3],\n    [4, 5],\n    [6, 8, 9, 10],\n    [11]\n    ]\n\nflat_list = []\nfor tup in zip_longest(*list_of_lists, fillvalue=None):\n    for e in tup:\n        if e is not None:\n            flat_list.append(e)\n\nprint(flat_list)\n</code></pre>\n<p>Or as a list comprehension:</p>\n<pre><code>flat_list = [e for tup in zip_longest(*list_of_lists) for e in tup if e is not None]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 29076139,
+                        "reputation": 19,
+                        "user_id": 22273248,
+                        "user_type": "unregistered",
+                        "display_name": "richard"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1690170844,
+                    "creation_date": 1690170844,
+                    "answer_id": 76751313,
+                    "question_id": 76751171,
+                    "link": "https://stackoverflow.com/questions/76751171/how-to-flat-a-list-of-lists-and-ensure-the-output-result-distributed-evenly-in-p/76751313#76751313",
+                    "body": "<pre class=\"lang-py prettyprint-override\"><code>tree = [[1, 2, 3],\n        [4, 5],\n        [6, 8, 9, 10],\n        [11]]\n\nstump = [\n    sublist[i]\n    for i in range(max(map(len, tree)))\n    for sublist in tree if len(sublist) &gt; i\n    ]\n\nprint(stump) #[1, 4, 6, 11, 2, 5, 8, 3, 9, 10]\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 3725792,
+                "reputation": 1417,
+                "user_id": 3099733,
+                "user_type": "registered",
+                "display_name": "link89"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "closed_date": 1690177939,
+            "accepted_answer_id": 76751244,
+            "answer_count": 3,
+            "score": 0,
+            "last_activity_date": 1690204389,
+            "creation_date": 1690168042,
+            "last_edit_date": 1690204389,
+            "question_id": 76751171,
+            "link": "https://stackoverflow.com/questions/76751171/how-to-flat-a-list-of-lists-and-ensure-the-output-result-distributed-evenly-in-p",
+            "closed_reason": "Duplicate",
+            "title": "How to flat a list of lists and ensure the output result distributed evenly in python?",
+            "body": "<p>Given there is a list if lists like the below.</p>\n<pre><code>[\n  [1, 2, 3],\n  [4, 5],\n  [6, 8, 9, 10],\n  [11]\n]\n</code></pre>\n<p>I hope that I can flatten the list and the output should be <code>[1, 4, 6, 11, 2, 5, 8, 3, 9, 10]</code>. How to implement this in Python?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9424
+}

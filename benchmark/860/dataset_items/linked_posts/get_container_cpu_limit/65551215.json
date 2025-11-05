@@ -1,0 +1,123 @@
+{
+    "items": [
+        {
+            "tags": [
+                "java",
+                "docker"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 13863020,
+                        "reputation": 146053,
+                        "user_id": 10008173,
+                        "user_type": "registered",
+                        "display_name": "David Maze"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1609689429,
+                    "post_id": 65551215,
+                    "comment_id": 115895330,
+                    "link": "https://stackoverflow.com/questions/65551215/get-docker-cpu-memory-limit-inside-container#comment115895330_65551215",
+                    "body": "Modern JVMs already know how to set the heap size based on the cgroup memory limits, so this should reduce to the more portable problem of figuring out the current Java heap utilization."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 15067872,
+                                "reputation": 1344,
+                                "user_id": 10874380,
+                                "user_type": "registered",
+                                "display_name": "Pegasis"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1609789948,
+                            "post_id": 65554131,
+                            "comment_id": 115927491,
+                            "link": "https://stackoverflow.com/questions/65551215/get-docker-cpu-memory-limit-inside-container/65554131#comment115927491_65554131",
+                            "body": "I believe memory.usage_in_bytes includes memory used by disk cache? Is there a way to get memory without disk cache? (What about total_rss in memory.stat?)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 35261,
+                                "reputation": 166312,
+                                "user_id": 99834,
+                                "user_type": "registered",
+                                "accept_rate": 46,
+                                "display_name": "sorin"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1695143489,
+                            "post_id": 65554131,
+                            "comment_id": 135983545,
+                            "link": "https://stackoverflow.com/questions/65551215/get-docker-cpu-memory-limit-inside-container/65554131#comment135983545_65554131",
+                            "body": "2023: Not sure if with current versions of podman and docker, the correct place to look into seems to be <code>&#47;sys&#47;fs&#47;cgroup&#47;cpu.max</code> as the other ones are not visible."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 293130,
+                        "reputation": 249480,
+                        "user_id": 596285,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "BMitch"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 10,
+                    "last_activity_date": 1609702704,
+                    "creation_date": 1609702704,
+                    "answer_id": 65554131,
+                    "question_id": 65551215,
+                    "link": "https://stackoverflow.com/questions/65551215/get-docker-cpu-memory-limit-inside-container/65554131#65554131",
+                    "body": "<p>This is all controlled by cgroups. So you can check the cgroup limits and utilization:</p>\n<pre><code>$ docker run -it --rm --cpus 1.5 --memory 1g busybox /bin/sh\n/ # cat /sys/fs/cgroup/memory/memory.usage_in_bytes\n3043328\n/ # cat /sys/fs/cgroup/memory/memory.limit_in_bytes\n1073741824\n/ # cat /sys/fs/cgroup/cpu/cpu.cfs_quota_us\n150000\n/ # cat /sys/fs/cgroup/cpu/cpu.cfs_period_us\n100000\n/ # cat /sys/fs/cgroup/cpu/cpuacct.usage\n97206588\n</code></pre>\n<p>The memory usage and limit are fairly straight forward to monitor. This is more accurate than monitoring the Java heap usage since heap is only one portion of memory used by Java.</p>\n<p>The CPU quota over the period gives you the number of fractional CPU's allocated, 150000/100000 = 1.5. You could monitor the cpuacct.usage over time to calculate when it exceeds the limit and is throttling your process.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 8855308,
+                        "reputation": 128,
+                        "user_id": 6613259,
+                        "user_type": "registered",
+                        "display_name": "sebi88"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1664881083,
+                    "creation_date": 1664881083,
+                    "answer_id": 73946866,
+                    "question_id": 65551215,
+                    "link": "https://stackoverflow.com/questions/65551215/get-docker-cpu-memory-limit-inside-container/73946866#73946866",
+                    "body": "<p>For cgroup2:</p>\n<pre><code>/ # cat /sys/fs/cgroup/memory.current\n503808\n\n/ # cat /sys/fs/cgroup/memory.max\n1073741824\n\n/ # cat /sys/fs/cgroup/cpu.stat\nusage_usec 58384\nuser_usec 23602\nsystem_usec 34782\nnr_periods 37\nnr_throttled 0\nthrottled_usec 0\n\n/ # cat /sys/fs/cgroup/cpu.max\n150000 100000\n</code></pre>\n<p>see: <a href=\"https://facebookmicrosites.github.io/cgroup2/docs/cpu-controller.html\" rel=\"nofollow noreferrer\">https://facebookmicrosites.github.io/cgroup2/docs/cpu-controller.html</a></p>\n<p>see2: <a href=\"https://facebookmicrosites.github.io/cgroup2/docs/memory-controller.html\" rel=\"nofollow noreferrer\">https://facebookmicrosites.github.io/cgroup2/docs/memory-controller.html</a></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 15067872,
+                "reputation": 1344,
+                "user_id": 10874380,
+                "user_type": "registered",
+                "display_name": "Pegasis"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "answer_count": 2,
+            "score": 3,
+            "last_activity_date": 1664881083,
+            "creation_date": 1609685858,
+            "last_edit_date": 1609693395,
+            "question_id": 65551215,
+            "link": "https://stackoverflow.com/questions/65551215/get-docker-cpu-memory-limit-inside-container",
+            "title": "Get docker cpu/memory limit inside container",
+            "body": "<p>I'm implementing a feature in my dockerized server where it will ignore some of the requests when cpu and memory utilization is too high.</p>\n<p>I already found out how to get memory and cpu time used by the process inside container <a href=\"https://stackoverflow.com/questions/51248144/getting-cpu-and-memory-usage-of-a-docker-container-from-within-the-dockerized-ap\">here</a>, but I also need a way to get cpu limit and memory limit (set by <a href=\"https://docs.docker.com/config/containers/resource_constraints/#cpu\" rel=\"nofollow noreferrer\">Runtime Options</a>) to calculate the percentage.</p>\n<p>Also, I can read the load for the host system from <code>/proc/loadavg</code>, is there a &quot;per-container load&quot; somewhere I can read?</p>\n<p>I'm using Java/Kotlin on openjdk 14.</p>\n<p><strong>Update</strong>: I found out I can get memory limit from <code>/sys/fs/cgroup/memory/memory.limit_in_bytes</code></p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8359
+}

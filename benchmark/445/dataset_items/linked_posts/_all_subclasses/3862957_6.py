@@ -1,0 +1,1 @@
+cls = locals()[name]

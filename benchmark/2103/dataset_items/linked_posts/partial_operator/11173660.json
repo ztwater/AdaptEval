@@ -1,0 +1,702 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "arguments",
+                "partial-application"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 1514897,
+                        "reputation": 8025,
+                        "user_id": 1416144,
+                        "user_type": "registered",
+                        "accept_rate": 52,
+                        "display_name": "S\u0142awomir Lenart"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1518431117,
+                    "post_id": 11173660,
+                    "comment_id": 84488223,
+                    "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword#comment84488223_11173660",
+                    "body": "another usage of partial starting from 2-nd argument is partial for method(s) omitting self argument"
+                },
+                {
+                    "owner": {
+                        "account_id": 2208996,
+                        "reputation": 2646,
+                        "user_id": 1951448,
+                        "user_type": "registered",
+                        "accept_rate": 50,
+                        "display_name": "nadapez"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1617498660,
+                    "post_id": 11173660,
+                    "comment_id": 118321122,
+                    "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword#comment118321122_11173660",
+                    "body": "for methods you can use: <code>def meth(cls, self,...)</code> and then <code>partial(meth, cls)</code>"
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 941644,
+                        "reputation": 5679,
+                        "user_id": 969617,
+                        "user_type": "registered",
+                        "accept_rate": 98,
+                        "display_name": "beoliver"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1340494102,
+                    "last_edit_date": 1340494102,
+                    "creation_date": 1340492368,
+                    "answer_id": 11173665,
+                    "question_id": 11173660,
+                    "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/11173665#11173665",
+                    "body": "<p>One way of doing it would be:</p>\n\n<pre><code>def testfunc1(xs):\n    from functools import partial\n    def mypow(x,y): return x ** y\n    return list(map(partial(mypow,y=2),xs))\n</code></pre>\n\n<p>but this involves re-defining the pow function.</p>\n\n<p>if the use of partial was not 'needed' then a simple lambda would do the trick</p>\n\n<pre><code>def testfunc2(xs):\n    return list(map(lambda x: pow(x,2), xs))\n</code></pre>\n\n<p>And a specific way to map the pow of 2 would be</p>\n\n<pre><code>def testfunc5(xs):\n    from operator import mul\n    return list(map(mul,xs,xs))\n</code></pre>\n\n<p>but none of these fully address the problem directly of partial applicaton in relation to keyword arguments</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 941644,
+                                "reputation": 5679,
+                                "user_id": 969617,
+                                "user_type": "registered",
+                                "accept_rate": 98,
+                                "display_name": "beoliver"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1340494863,
+                            "post_id": 11173727,
+                            "comment_id": 14659170,
+                            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/11173727#comment14659170_11173727",
+                            "body": "Major +1. I was tempted to select this answer, but I suppose I was thinking more about the inbuilt <code>functools.partial</code>. But this is definitely being saved. I like :)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 18250,
+                        "reputation": 39568,
+                        "user_id": 41655,
+                        "user_type": "registered",
+                        "accept_rate": 76,
+                        "display_name": "millimoose"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1340493046,
+                    "creation_date": 1340493046,
+                    "answer_id": 11173727,
+                    "question_id": 11173660,
+                    "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/11173727#11173727",
+                    "body": "<p>You could create a helper function for this:</p>\n\n<pre><code>from functools import wraps\ndef foo(a, b, c, d, e):\n    print('foo(a={}, b={}, c={}, d={}, e={})'.format(a, b, c, d, e))\n\ndef partial_at(func, index, value):\n    @wraps(func)\n    def result(*rest, **kwargs):\n        args = []\n        args.extend(rest[:index])\n        args.append(value)\n        args.extend(rest[index:])\n        return func(*args, **kwargs)\n    return result\n\nif __name__ == '__main__':\n    bar = partial_at(foo, 2, 'C')\n    bar('A', 'B', 'D', 'E') \n    # Prints: foo(a=A, b=B, c=C, d=D, e=E)\n</code></pre>\n\n<p>Disclaimer: I haven't tested this with keyword arguments so it might blow up because of them somehow. Also I'm not sure if this is what <code>@wraps</code> should be used for but it seemed right -ish.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 392458,
+                        "reputation": 23126,
+                        "user_id": 753731,
+                        "user_type": "registered",
+                        "accept_rate": 71,
+                        "display_name": "iruvar"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1340493415,
+                    "creation_date": 1340493415,
+                    "answer_id": 11173768,
+                    "question_id": 11173660,
+                    "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/11173768#11173768",
+                    "body": "<p>you could use a closure</p>\n\n<pre><code>xs = [1,2,3,4,5,6,7,8]\n\ndef closure(method, param):\n  def t(x):\n    return method(x, param)\n  return t\n\nf = closure(pow, 2)\nf(10)\nf = closure(pow, 3)\nf(10)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 941644,
+                                "reputation": 5679,
+                                "user_id": 969617,
+                                "user_type": "registered",
+                                "accept_rate": 98,
+                                "display_name": "beoliver"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1340495893,
+                            "post_id": 11173826,
+                            "comment_id": 14659330,
+                            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/11173826#comment14659330_11173826",
+                            "body": "if in python 4.X pow() is &quot;fixed&quot;, we will all know where they got their idea from :)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 36018,
+                                "reputation": 96689,
+                                "user_id": 102441,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "Eric"
+                            },
+                            "reply_to_user": {
+                                "account_id": 941644,
+                                "reputation": 5679,
+                                "user_id": 969617,
+                                "user_type": "registered",
+                                "accept_rate": 98,
+                                "display_name": "beoliver"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1501071881,
+                            "post_id": 11173826,
+                            "comment_id": 77615308,
+                            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/11173826#comment77615308_11173826",
+                            "body": "@beoliver: Actually, as of <a href=\"https://www.python.org/dev/peps/pep-0457/\" rel=\"nofollow noreferrer\">PEP-457</a>, positional-only arguments are formalized into what seems to be a feature, so I would never expect a fix to <code>pow</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1082519,
+                                "reputation": 33453,
+                                "user_id": 1079110,
+                                "user_type": "registered",
+                                "accept_rate": 96,
+                                "display_name": "danijar"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1519758064,
+                            "post_id": 11173826,
+                            "comment_id": 85036982,
+                            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/11173826#comment85036982_11173826",
+                            "body": "When using lambda here, you don&#39;t need the <code>functools.partial()</code> anymore."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1053202,
+                                "reputation": 61306,
+                                "user_id": 1056563,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "WestCoastProjects"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1571776132,
+                            "post_id": 11173826,
+                            "comment_id": 103351161,
+                            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/11173826#comment103351161_11173826",
+                            "body": "What is this doing?  The arguments have not been changed at all: i would have anticipated a reversal of the order of x,y -&gt; y,x"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1053202,
+                                "reputation": 61306,
+                                "user_id": 1056563,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "WestCoastProjects"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1571839980,
+                            "post_id": 11173826,
+                            "comment_id": 103374567,
+                            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/11173826#comment103374567_11173826",
+                            "body": "Following up on my comment: should not one or other of <code>lambda x,y</code> and  <code>_pow(x,y)</code> have the <code>x,y</code> reversed??"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 36018,
+                                "reputation": 96689,
+                                "user_id": 102441,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "Eric"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1053202,
+                                "reputation": 61306,
+                                "user_id": 1056563,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "WestCoastProjects"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1571848696,
+                            "post_id": 11173826,
+                            "comment_id": 103379192,
+                            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/11173826#comment103379192_11173826",
+                            "body": "@javadba: No, the context of that line is to <i>&#39;&quot;fix&quot; <code>pow</code> to have keyword args&quot;</i>. Once you&#39;ve done that, the question is no longer relevant, as <code>pow</code> is no longer <i>&quot;a function that takes no keyword arguments&quot;</i>. The OPs code that fails above works if preceded with this &quot;fix&quot;."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2245093,
+                                "reputation": 678,
+                                "user_id": 2180100,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "Sidharth Ghoshal"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1667762664,
+                            "post_id": 11173826,
+                            "comment_id": 131239237,
+                            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/11173826#comment131239237_11173826",
+                            "body": "honestly partial could&#39;ve been perfect if they just let you submit a tuple of tuples of the form (arg_index, value). Why didn&#39;t they just include that to kill the problem once and for all"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 36018,
+                        "reputation": 96689,
+                        "user_id": 102441,
+                        "user_type": "registered",
+                        "accept_rate": 76,
+                        "display_name": "Eric"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": true,
+                    "score": 71,
+                    "last_activity_date": 1340495185,
+                    "last_edit_date": 1592644375,
+                    "creation_date": 1340494169,
+                    "answer_id": 11173826,
+                    "question_id": 11173660,
+                    "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/11173826#11173826",
+                    "body": "<h1>No</h1>\n<p>According to <a href=\"http://docs.python.org/library/functools.html#functools.partial.args\" rel=\"noreferrer\">the documentation</a>, <a href=\"http://docs.python.org/library/functools.html#functools.partial\" rel=\"noreferrer\"><code>partial</code></a> <em>cannot</em> do this (emphasis my own):</p>\n<blockquote>\n<p><strong>partial.args</strong></p>\n<blockquote>\n<p>The <em>leftmost</em> positional arguments that will be prepended to the positional arguments</p>\n</blockquote>\n</blockquote>\n<hr />\n<p>You could always just &quot;fix&quot; <code>pow</code> to have keyword args:</p>\n<pre><code>_pow = pow\npow = lambda x, y: _pow(x, y)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 941644,
+                                "reputation": 5679,
+                                "user_id": 969617,
+                                "user_type": "registered",
+                                "accept_rate": 98,
+                                "display_name": "beoliver"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1340495624,
+                            "post_id": 11173903,
+                            "comment_id": 14659287,
+                            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/11173903#comment14659287_11173903",
+                            "body": "nice, for some reason I never use repeat.  and as I&#39;m on 3.X, it&#39;s just <code>list(map(pow, [1, 2, 3], itertools.repeat(2)))</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 97405,
+                                "reputation": 7013,
+                                "user_id": 264215,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "mutantacule"
+                            },
+                            "reply_to_user": {
+                                "account_id": 941644,
+                                "reputation": 5679,
+                                "user_id": 969617,
+                                "user_type": "registered",
+                                "accept_rate": 98,
+                                "display_name": "beoliver"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1340497599,
+                            "post_id": 11173903,
+                            "comment_id": 14659533,
+                            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/11173903#comment14659533_11173903",
+                            "body": "nice, I didn&#39;t know they changed <code>map</code> in Python3"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 18250,
+                                "reputation": 39568,
+                                "user_id": 41655,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "millimoose"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1340665045,
+                            "post_id": 11173903,
+                            "comment_id": 14699998,
+                            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/11173903#comment14699998_11173903",
+                            "body": "The funny one is pretty clever in a somewhat horrifying way :P (Also, you&#39;re not really supposed to pass Ellipsis around to begin with, so that&#39;s not much of a disadvantage. Unless you count &quot;using Ellipsis for something it&#39;s not meant to be used&quot; a disadvantage.)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 97405,
+                                "reputation": 7013,
+                                "user_id": 264215,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "mutantacule"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1400875929,
+                            "post_id": 11173903,
+                            "comment_id": 36679831,
+                            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/11173903#comment36679831_11173903",
+                            "body": "after learning some functional programming, for me it looks like a bizarre way of function currying in python"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 410963,
+                                "reputation": 1394,
+                                "user_id": 783116,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "josiah"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1538064283,
+                            "post_id": 11173903,
+                            "comment_id": 92021902,
+                            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/11173903#comment92021902_11173903",
+                            "body": "@kosii That&#39;s exactly what it is.  It&#39;s impressive that Python is flexible enough to facilitate many of these functional patterns."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 97405,
+                        "reputation": 7013,
+                        "user_id": 264215,
+                        "user_type": "registered",
+                        "accept_rate": 71,
+                        "display_name": "mutantacule"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": false,
+                    "score": 20,
+                    "last_activity_date": 1340497393,
+                    "last_edit_date": 1340497393,
+                    "creation_date": 1340494983,
+                    "answer_id": 11173903,
+                    "question_id": 11173660,
+                    "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/11173903#11173903",
+                    "body": "<p>I think I'd just use this simple one-liner:</p>\n\n<pre><code>import itertools\nprint list(itertools.imap(pow, [1, 2, 3], itertools.repeat(2)))\n</code></pre>\n\n<p><strong>Update:</strong></p>\n\n<p>I also came up with a funnier than useful solution. It's a beautiful syntactic sugar, profiting from the fact that the <code>...</code> literal means <code>Ellipsis</code> in Python3. It's a modified version of <code>partial</code>, allowing to omit some positional arguments between the leftmost and rightmost ones. The only drawback is that you can't pass anymore Ellipsis as argument.</p>\n\n<pre><code>import itertools\ndef partial(func, *args, **keywords):\n    def newfunc(*fargs, **fkeywords):\n        newkeywords = keywords.copy()\n        newkeywords.update(fkeywords)\n        return func(*(newfunc.leftmost_args + fargs + newfunc.rightmost_args), **newkeywords)\n    newfunc.func = func\n    args = iter(args)\n    newfunc.leftmost_args = tuple(itertools.takewhile(lambda v: v != Ellipsis, args))\n    newfunc.rightmost_args = tuple(args)\n    newfunc.keywords = keywords\n    return newfunc\n\n&gt;&gt;&gt; print partial(pow, ..., 2, 3)(5) # (5^2)%3\n1\n&gt;&gt;&gt; print partial(pow, 2, ..., 3)(5) # (2^5)%3\n2\n&gt;&gt;&gt; print partial(pow, 2, 3, ...)(5) # (2^3)%5\n3\n&gt;&gt;&gt; print partial(pow, 2, 3)(5) # (2^3)%5\n3\n</code></pre>\n\n<p>So the the solution for the original question would be with this version of partial <code>list(map(partial(pow, ..., 2),xs))</code></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5213580,
+                                "reputation": 328,
+                                "user_id": 4284097,
+                                "user_type": "registered",
+                                "display_name": "Eric Smith"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1565305683,
+                            "post_id": 37468215,
+                            "comment_id": 101322513,
+                            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/37468215#comment101322513_37468215",
+                            "body": "I just found that method useful when defining a property (using property() function directly, rather than as a decorator), where I needed to default the second argument to a __setitem__() call."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 61226,
+                                "reputation": 258,
+                                "user_id": 3191103,
+                                "user_type": "registered",
+                                "display_name": "jobermark"
+                            },
+                            "edited": false,
+                            "score": 9,
+                            "creation_date": 1608158457,
+                            "post_id": 37468215,
+                            "comment_id": 115500987,
+                            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/37468215#comment115500987_37468215",
+                            "body": "At that point, why partial it?  Why not f = lambda p, x=2: pow(x, p).  Or even f = lambda p: pow(2, p)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2093512,
+                        "reputation": 891,
+                        "user_id": 1862785,
+                        "user_type": "registered",
+                        "accept_rate": 68,
+                        "display_name": "nrob"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 23,
+                    "last_activity_date": 1464286335,
+                    "creation_date": 1464286335,
+                    "answer_id": 37468215,
+                    "question_id": 11173660,
+                    "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/37468215#37468215",
+                    "body": "<p>Why not just create a quick lambda function which reorders the args and partial that</p>\n\n<pre><code>partial(lambda p, x: pow(x, p), 2)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7040846,
+                        "reputation": 149720,
+                        "user_id": 5393381,
+                        "user_type": "registered",
+                        "accept_rate": 84,
+                        "display_name": "MSeifert"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1498298431,
+                    "creation_date": 1498298431,
+                    "answer_id": 44735191,
+                    "question_id": 11173660,
+                    "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/44735191#44735191",
+                    "body": "<p>As already said that's a limitation of <a href=\"https://docs.python.org/3/library/functools.html#functools.partial\" rel=\"nofollow noreferrer\"><code>functools.partial</code></a> if the function you want to <code>partial</code> doesn't accept keyword arguments.</p>\n\n<p>If you don't mind using an external library <sup>1</sup> you could use <a href=\"https://iteration-utilities.readthedocs.io/en/latest/generated/partial.html\" rel=\"nofollow noreferrer\"><code>iteration_utilities.partial</code></a> which has a partial that supports placeholders:</p>\n\n<pre><code>&gt;&gt;&gt; from iteration_utilities import partial\n&gt;&gt;&gt; square = partial(pow, partial._, 2)  # the partial._ attribute represents a placeholder\n&gt;&gt;&gt; list(map(square, xs))\n[1, 4, 9, 16, 25, 36, 49, 64]\n</code></pre>\n\n<hr>\n\n<p><sup>1</sup> Disclaimer: I'm the author of the <a href=\"https://github.com/MSeifert04/iteration_utilities\" rel=\"nofollow noreferrer\"><code>iteration_utilities</code></a> library (installation instructions can be found <a href=\"http://iteration-utilities.readthedocs.io/en/latest/installation.html\" rel=\"nofollow noreferrer\">in the documentation</a> in case you're interested).</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7040846,
+                                "reputation": 149720,
+                                "user_id": 5393381,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "MSeifert"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1519759899,
+                            "post_id": 49016059,
+                            "comment_id": 85037979,
+                            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/49016059#comment85037979_49016059",
+                            "body": "What do you mean with some libraries? I think no library is able to serialize them."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1082519,
+                                "reputation": 33453,
+                                "user_id": 1079110,
+                                "user_type": "registered",
+                                "accept_rate": 96,
+                                "display_name": "danijar"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7040846,
+                                "reputation": 149720,
+                                "user_id": 5393381,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "MSeifert"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1519760063,
+                            "post_id": 49016059,
+                            "comment_id": 85038087,
+                            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/49016059#comment85038087_49016059",
+                            "body": "I&#39;m often using ruamel.yaml and it serializes lambdas fine."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7040846,
+                                "reputation": 149720,
+                                "user_id": 5393381,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "MSeifert"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1519760119,
+                            "post_id": 49016059,
+                            "comment_id": 85038116,
+                            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/49016059#comment85038116_49016059",
+                            "body": "Okay, I was thinking about the built-in modules. Thanks for the clarification :)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1082519,
+                        "reputation": 33453,
+                        "user_id": 1079110,
+                        "user_type": "registered",
+                        "accept_rate": 96,
+                        "display_name": "danijar"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1519757876,
+                    "creation_date": 1519757876,
+                    "answer_id": 49016059,
+                    "question_id": 11173660,
+                    "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/49016059#49016059",
+                    "body": "<p>You can do this with <code>lambda</code>, which is more flexible than <code>functools.partial()</code>:</p>\n\n<pre><code>pow_two = lambda base: pow(base, 2)\nprint(pow_two(3))  # 9\n</code></pre>\n\n<p>More generally:</p>\n\n<pre><code>def bind_skip_first(func, *args, **kwargs):\n  return lambda first: func(first, *args, **kwargs)\n\npow_two = bind_skip_first(pow, 2)\nprint(pow_two(3))  # 9\n</code></pre>\n\n<p>One down-side of lambda is that some libraries are not able to serialize it.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4661280,
+                                "reputation": 5118,
+                                "user_id": 3775493,
+                                "user_type": "registered",
+                                "display_name": "Nuno Andr&#233;"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1536713686,
+                            "post_id": 51829385,
+                            "comment_id": 91520198,
+                            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/51829385#comment91520198_51829385",
+                            "body": "Not &quot;exactly&quot;. The second argument need not necessarily be the last one."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2935084,
+                        "reputation": 4378,
+                        "user_id": 2514228,
+                        "user_type": "registered",
+                        "accept_rate": 67,
+                        "display_name": "Micah Smith"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1534188779,
+                    "creation_date": 1534188779,
+                    "answer_id": 51829385,
+                    "question_id": 11173660,
+                    "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/51829385#51829385",
+                    "body": "<p>The very versatile <a href=\"http://funcy.readthedocs.io/en/stable/index.html\" rel=\"nofollow noreferrer\">funcy</a> includes an <code>rpartial</code> function that exactly addresses this problem.</p>\n\n<pre><code>xs = [1,2,3,4,5,6,7,8]\nfrom funcy import rpartial\nlist(map(rpartial(pow, 2), xs))\n# [1, 4, 9, 16, 25, 36, 49, 64]\n</code></pre>\n\n<p>It's just a lambda under the hood:</p>\n\n<pre><code>def rpartial(func, *args):\n    \"\"\"Partially applies last arguments.\"\"\"\n    return lambda *a: func(*(a + args))\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5439742,
+                        "reputation": 161,
+                        "user_id": 4550126,
+                        "user_type": "registered",
+                        "display_name": "Corvince"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1536930196,
+                    "creation_date": 1536930196,
+                    "answer_id": 52332612,
+                    "question_id": 11173660,
+                    "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/52332612#52332612",
+                    "body": "<p>If you can't use lambda functions, you can also write a simple wrapper function that reorders the arguments. </p>\n\n<pre><code>def _pow(y, x):\n    return pow(x, y)\n</code></pre>\n\n<p>and then call</p>\n\n<pre><code>list(map(partial(_pow,2),xs))\n\n&gt;&gt;&gt; [1, 4, 9, 16, 25, 36, 49, 64]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1289148,
+                                "reputation": 455,
+                                "user_id": 1241593,
+                                "user_type": "registered",
+                                "display_name": "amohr"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1652929983,
+                            "post_id": 65482187,
+                            "comment_id": 127728244,
+                            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/65482187#comment127728244_65482187",
+                            "body": "beautiful :). Just did something similar on our side with dict:  <code>def _remove_table_id(ds: List[Dict[str, Any]]) -&gt; List[Dict[str, Any]]:     return list(map(dict.pop, ds, repeat(&#39;table_id&#39;)))</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7894033,
+                        "reputation": 1231,
+                        "user_id": 5963316,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Mike"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1609179467,
+                    "creation_date": 1609179467,
+                    "answer_id": 65482187,
+                    "question_id": 11173660,
+                    "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/65482187#65482187",
+                    "body": "<p>Even though this question was already answered, you can get the results you're looking for with a recipe taken from <a href=\"https://docs.python.org/3/library/itertools.html#itertools.repeat\" rel=\"nofollow noreferrer\"><code>itertools.repeat</code></a>:</p>\n<pre class=\"lang-py prettyprint-override\"><code>from itertools import repeat\n\n\nxs = list(range(1, 9))  # [1, 2, 3, 4, 5, 6, 7, 8]\nxs_pow_2 = list(map(pow, xs, repeat(2)))  # [1, 4, 9, 16, 25, 36, 49, 64]\n</code></pre>\n<p>Hopefully this helps someone.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 20467723,
+                        "reputation": 11,
+                        "user_id": 15018856,
+                        "user_type": "registered",
+                        "display_name": "Rapheal Kalandadze"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1630008152,
+                    "creation_date": 1630008152,
+                    "answer_id": 68944682,
+                    "question_id": 11173660,
+                    "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/68944682#68944682",
+                    "body": "<h1><strong>Yes</strong> <br></h1>\n<p><strong>if you created your partial class</strong></p>\n<pre><code>class MyPartial:\n    def __init__(self, func, *args):\n        self._func = func\n        self._args = args\n        \n    def __call__(self, *args):\n        return self._func(*args, *self._args) # swap ordering\n    \nxs = [1,2,3,4,5,6,7,8]\nlist(map(MyPartial(pow,2),xs))\n\n&gt;&gt;&gt; [1, 4, 9, 16, 25, 36, 49, 64]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6230616,
+                        "reputation": 31,
+                        "user_id": 4847526,
+                        "user_type": "registered",
+                        "display_name": "yossi"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1670840016,
+                    "last_edit_date": 1670840016,
+                    "creation_date": 1664466135,
+                    "answer_id": 73898274,
+                    "question_id": 11173660,
+                    "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword/73898274#73898274",
+                    "body": "<p>Yes, you can do it, provided the function takes keyword arguments. You just need to know the name.</p>\n<p>In the case of <code>pow()</code> (provided you are using Python 3.8 or newer) you need <code>exp</code> instead of y.</p>\n<p>Try to do:</p>\n<pre><code>xs = [1,2,3,4,5,6,7,8]\nprint(list(map(partial(pow,exp=2),xs)))\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 941644,
+                "reputation": 5679,
+                "user_id": 969617,
+                "user_type": "registered",
+                "accept_rate": 98,
+                "display_name": "beoliver"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "accepted_answer_id": 11173826,
+            "answer_count": 13,
+            "score": 71,
+            "last_activity_date": 1670840016,
+            "creation_date": 1340492306,
+            "last_edit_date": 1340492627,
+            "question_id": 11173660,
+            "link": "https://stackoverflow.com/questions/11173660/can-one-partially-apply-the-second-argument-of-a-function-that-takes-no-keyword",
+            "title": "Can one partially apply the second argument of a function that takes no keyword arguments?",
+            "body": "<p>Take for example the python built in <code>pow()</code> function.</p>\n\n<pre><code>xs = [1,2,3,4,5,6,7,8]\n\nfrom functools import partial\n\nlist(map(partial(pow,2),xs))\n\n&gt;&gt;&gt; [2, 4, 8, 16, 32, 128, 256]\n</code></pre>\n\n<p>but how would I raise the xs to the power of 2?</p>\n\n<p>to get <code>[1, 4, 9, 16, 25, 49, 64]</code></p>\n\n<pre><code>list(map(partial(pow,y=2),xs))\n\nTypeError: pow() takes no keyword arguments\n</code></pre>\n\n<p>I know list comprehensions would be easier.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6019
+}

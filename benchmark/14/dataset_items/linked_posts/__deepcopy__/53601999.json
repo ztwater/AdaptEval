@@ -1,0 +1,88 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "python-2.x"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 15700323,
+                                "reputation": 1011,
+                                "user_id": 11328614,
+                                "user_type": "registered",
+                                "display_name": "W&#246;r Du Schnaffzig"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1604582261,
+                            "post_id": 53660367,
+                            "comment_id": 114394029,
+                            "link": "https://stackoverflow.com/questions/53601999/getting-typeerror-cant-pickle-thread-lock-objects-when-an-object-is-deepcopi/53660367#comment114394029_53660367",
+                            "body": "I got the same problem using threading.Lock. This helped."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 16347588,
+                                "reputation": 355,
+                                "user_id": 11806938,
+                                "user_type": "registered",
+                                "display_name": "m_ocean"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1648749586,
+                            "post_id": 53660367,
+                            "comment_id": 126710173,
+                            "link": "https://stackoverflow.com/questions/53601999/getting-typeerror-cant-pickle-thread-lock-objects-when-an-object-is-deepcopi/53660367#comment126710173_53660367",
+                            "body": "Never pass mutable objects as default arguments, though"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2005646,
+                        "reputation": 848,
+                        "user_id": 1795641,
+                        "user_type": "registered",
+                        "accept_rate": 71,
+                        "display_name": "smm"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 12,
+                    "last_activity_date": 1544133787,
+                    "creation_date": 1544133787,
+                    "answer_id": 53660367,
+                    "question_id": 53601999,
+                    "link": "https://stackoverflow.com/questions/53601999/getting-typeerror-cant-pickle-thread-lock-objects-when-an-object-is-deepcopi/53660367#53660367",
+                    "body": "<p>Finally, I've find a solution. Here, in the Base class it needs to override deepcopy method and avoid deepcopying the logger, log_config object. The class will look like below.</p>\n\n<pre><code>class Base(object):\n    def __init__(self):\n        self.deep_cp_attr = None\n        self.logger = logging.getLogger(\"logs\")\n        self.log_config = LoggerConfig(self.logger)\n\n    def __deepcopy__(self, memodict={}):\n        cpyobj = type(self)() # shallow copy of whole object \n        cpyobj.deep_cp_attr = copy.deepcopy(self.other_attr, memodict) # deepcopy required attr\n\n        return cpyobj\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 2005646,
+                "reputation": 848,
+                "user_id": 1795641,
+                "user_type": "registered",
+                "accept_rate": 71,
+                "display_name": "smm"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 53660367,
+            "answer_count": 1,
+            "score": 11,
+            "last_activity_date": 1544133787,
+            "creation_date": 1543871752,
+            "last_edit_date": 1543876063,
+            "question_id": 53601999,
+            "link": "https://stackoverflow.com/questions/53601999/getting-typeerror-cant-pickle-thread-lock-objects-when-an-object-is-deepcopi",
+            "title": "Getting &quot;TypeError: can&#39;t pickle thread.lock objects&quot; when an object is deepcopied with log configs",
+            "body": "<p>I am getting <code>TypeError: can't pickle thread.lock objects</code> when an object is deep copied. Following is my class structure. </p>\n\n<pre><code>import logging\nimport copy\n\nDEFAULT_LOG_PATH = r\"C:\\temp\\loging.log\"\nclass LoggerConfig(object):\n    def __init__(self, log_obj):\n        self._logger = log_obj\n        self.default_level = logging.DEBUG\n        self.set_default_config()\n\n    def set_default_config(self):\n        formatter = self._get_default_formatter()\n        self.fh = self._create_file_handler(DEFAULT_LOG_PATH,\n                                   self.default_level, formatter)\n        self.ch = self._create_stream_handler(self.default_level, formatter)\n        self._logger.addHandler(self.fh)\n        self._logger.addHandler(self.ch)\n\n    def _get_default_formatter(self):\n        msg_format = '%(asctime)s.%(msecs).03d: %(levelname)s:%(message)s'\n        date_format = '%d-%b-%y %H:%M:%S'\n        formatter = logging.Formatter(msg_format, datefmt=date_format)\n        return formatter\n\n    def _create_stream_handler(self, log_level, formatter):\n        ch = logging.StreamHandler()\n        ch.setLevel(log_level)\n        ch.setFormatter(formatter)\n        return ch\n\n    def _create_file_handler(self, filename, log_level, formatter):\n        fh = logging.FileHandler(filename)\n        fh.setLevel(log_level)\n        fh.setFormatter(formatter)\n\n        return fh\n\nclass DataSpec(object):\n    def __init__(self, default=None):\n        self.default = copy.deepcopy(default)\n\nclass Base(object):\n    def __init__(self):\n        self.logger = logging.getLogger(\"logs\")\n        self.log_config = LoggerConfig(self.logger)\n\nclass Simple(Base):\n    def Run(self):\n        print(\"In Simple Class\")\n\nclass Complex(Base):\n    def __init__(self):\n        s = DataSpec(Simple())\n\n    def Run(self):\n        print(\"In complex\")\n\nc = Complex()\nc.Run()\n</code></pre>\n\n<p>When the deepcopy occurs in DataSpec.<strong>init</strong>(), the following exception occurs.</p>\n\n<pre><code>Traceback (most recent call last):\nFile \"C:/temp/temp.py\", line 72, in &lt;module&gt;\n    c = Complex()\n  File \"C:/temp/temp.py\", line 67, in __init__\n    s = DataSpec(Simple())\n  File \"C:/temp/temp.py\", line 52, in __init__\n    self.default = copy.deepcopy(default)\n  File \"C:\\Python27\\lib\\copy.py\", line 190, in deepcopy\n    y = _reconstruct(x, rv, 1, memo)\n  File \"C:\\Python27\\lib\\copy.py\", line 334, in _reconstruct\n    state = deepcopy(state, memo)\n  File \"C:\\Python27\\lib\\copy.py\", line 163, in deepcopy\n    y = copier(x, memo)\n  File \"C:\\Python27\\lib\\copy.py\", line 257, in _deepcopy_dict\n    y[deepcopy(key, memo)] = deepcopy(value, memo)\n  File \"C:\\Python27\\lib\\copy.py\", line 190, in deepcopy\n    y = _reconstruct(x, rv, 1, memo)\n  File \"C:\\Python27\\lib\\copy.py\", line 334, in _reconstruct\n    state = deepcopy(state, memo)\n  File \"C:\\Python27\\lib\\copy.py\", line 163, in deepcopy\n    y = copier(x, memo)\n  File \"C:\\Python27\\lib\\copy.py\", line 257, in _deepcopy_dict\n    y[deepcopy(key, memo)] = deepcopy(value, memo)\n  File \"C:\\Python27\\lib\\copy.py\", line 163, in deepcopy\n    y = copier(x, memo)\n  File \"C:\\Python27\\lib\\copy.py\", line 230, in _deepcopy_list\n    y.append(deepcopy(a, memo))\n  File \"C:\\Python27\\lib\\copy.py\", line 190, in deepcopy\n    y = _reconstruct(x, rv, 1, memo)\n  File \"C:\\Python27\\lib\\copy.py\", line 334, in _reconstruct\n    state = deepcopy(state, memo)\n  File \"C:\\Python27\\lib\\copy.py\", line 163, in deepcopy\n    y = copier(x, memo)\n  File \"C:\\Python27\\lib\\copy.py\", line 257, in _deepcopy_dict\n    y[deepcopy(key, memo)] = deepcopy(value, memo)\n  File \"C:\\Python27\\lib\\copy.py\", line 190, in deepcopy\n    y = _reconstruct(x, rv, 1, memo)\n  File \"C:\\Python27\\lib\\copy.py\", line 334, in _reconstruct\n    state = deepcopy(state, memo)\n  File \"C:\\Python27\\lib\\copy.py\", line 163, in deepcopy\n    y = copier(x, memo)\n  File \"C:\\Python27\\lib\\copy.py\", line 257, in _deepcopy_dict\n    y[deepcopy(key, memo)] = deepcopy(value, memo)\n  File \"C:\\Python27\\lib\\copy.py\", line 182, in deepcopy\n    rv = reductor(2)\nTypeError: can't pickle thread.lock objects\n</code></pre>\n\n<p>Here, I saw that when I comment both <code>self._logger.addHandler()</code> in LogConfig class, it doesn't throw this error. Can any one help me to find out workaround? I need to add those handlers to save the logs.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9977
+}

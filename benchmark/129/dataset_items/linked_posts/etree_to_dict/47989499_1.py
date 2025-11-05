@@ -1,0 +1,11 @@
+OrderedDict([('root',
+              OrderedDict([('e',
+                            [None,
+                             'text',
+                             OrderedDict([('@name', 'value')]),
+                             OrderedDict([('@name', 'value'),
+                                          ('#text', 'text')]),
+                             OrderedDict([('a', 'text'), ('b', 'text')]),
+                             OrderedDict([('a', ['text', 'text'])]),
+                             OrderedDict([('a', 'text'),
+                                          ('#text', 'text')])])]))])

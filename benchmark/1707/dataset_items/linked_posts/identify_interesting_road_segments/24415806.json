@@ -1,0 +1,148 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "distance",
+                "geos",
+                "shapely"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3595039,
+                                "reputation": 995,
+                                "user_id": 3012255,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Asif Rehan"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1403838164,
+                            "post_id": 24440122,
+                            "comment_id": 37822618,
+                            "link": "https://stackoverflow.com/questions/24415806/coordinates-of-the-closest-points-of-two-geometries-in-shapely/24440122#comment37822618_24440122",
+                            "body": "quick note for anyone who might be following the post:  <code>line.project(p)</code> measures the projection point along the line from the starting node-coordinate given in the argument of LineString() method.  But <code>np = line.interpolate(line.project(p))</code> gives the POINT (5 7) as in global coordinates, not from the start of the line. Here the line started from (0,0). So it might be confusing."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2245446,
+                                "reputation": 738,
+                                "user_id": 3973597,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "user14241"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1594925217,
+                            "post_id": 24440122,
+                            "comment_id": 111305554,
+                            "link": "https://stackoverflow.com/questions/24415806/coordinates-of-the-closest-points-of-two-geometries-in-shapely/24440122#comment111305554_24440122",
+                            "body": "Be careful declaring a variable &#39;np&#39; as this maybe conflict with a numpy import."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4118120,
+                                "reputation": 376,
+                                "user_id": 3379196,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "SchemeSonic"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1628782736,
+                            "post_id": 24440122,
+                            "comment_id": 121519293,
+                            "link": "https://stackoverflow.com/questions/24415806/coordinates-of-the-closest-points-of-two-geometries-in-shapely/24440122#comment121519293_24440122",
+                            "body": "He is asking for <b>the coordinate of the point on the line</b> if he refers to a vertex on the line, Shapely documents says that: <b>Note that the nearest points may not be existing vertices in the geometries</b>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 128865,
+                        "reputation": 42475,
+                        "user_id": 327026,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "Mike T"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": true,
+                    "score": 65,
+                    "last_activity_date": 1628800570,
+                    "last_edit_date": 1628800570,
+                    "creation_date": 1403816303,
+                    "answer_id": 24440122,
+                    "question_id": 24415806,
+                    "link": "https://stackoverflow.com/questions/24415806/coordinates-of-the-closest-points-of-two-geometries-in-shapely/24440122#24440122",
+                    "body": "<p>The GIS term you are describing is <a href=\"https://en.wikipedia.org/wiki/Linear_referencing\" rel=\"noreferrer\">linear referencing</a>, and <a href=\"https://shapely.readthedocs.io/en/latest/manual.html#linear-referencing-methods\" rel=\"noreferrer\">Shapely has these methods</a>.</p>\n<pre><code># Length along line that is closest to the point\nprint(line.project(p))\n\n# Now combine with interpolated point on line\np2 = line.interpolate(line.project(p))\nprint(p2)  # POINT (5 7)\n</code></pre>\n<hr />\n<p>An alternative method is to use <a href=\"https://shapely.readthedocs.io/en/latest/manual.html#nearest-points\" rel=\"noreferrer\"><code>nearest_points</code></a>:</p>\n<pre><code>from shapely.ops import nearest_points\np2 = nearest_points(line, p)[0]\nprint(p2)  # POINT (5 7)\n</code></pre>\n<p>which provides the same answer as the linear referencing technique does, but can determine the nearest pair of points from more complicated geometry inputs, like two polygons.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1399381,
+                                "reputation": 16800,
+                                "user_id": 1328439,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "Dima Chubarov"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1578577967,
+                            "post_id": 49504305,
+                            "comment_id": 105489778,
+                            "link": "https://stackoverflow.com/questions/24415806/coordinates-of-the-closest-points-of-two-geometries-in-shapely/49504305#comment105489778_49504305",
+                            "body": "This is a perfect solution. How about using the &quot;<i>precise</i>&quot; <b>lerp</b> to compute <code>x</code> and <code>y</code> as in <code>x = (1 - lerp) * self.a.x + lerp * self.b.x</code>? See for instance <a href=\"https://stackoverflow.com/a/23716956/1328439\">stackoverflow.com/a/23716956/1328439</a> for more details and a comparison."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2507405,
+                        "reputation": 10316,
+                        "user_id": 2476920,
+                        "user_type": "registered",
+                        "accept_rate": 90,
+                        "display_name": "Guillaume Chevalier"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1522124443,
+                    "creation_date": 1522124443,
+                    "answer_id": 49504305,
+                    "question_id": 24415806,
+                    "link": "https://stackoverflow.com/questions/24415806/coordinates-of-the-closest-points-of-two-geometries-in-shapely/49504305#49504305",
+                    "body": "<p>In case you have a single segment (e.g.: a line, as referring to the title) rather than a list of segments, here is what I did, and with a passing test case. Please consider that some users on this page are looking just for that from looking at the title, coming from a Google search. </p>\n\n<h2>Python code:</h2>\n\n<pre><code>def sq_shortest_dist_to_point(self, other_point):\n    dx = self.b.x - self.a.x\n    dy = self.b.y - self.a.y\n    dr2 = float(dx ** 2 + dy ** 2)\n\n    lerp = ((other_point.x - self.a.x) * dx + (other_point.y - self.a.y) * dy) / dr2\n    if lerp &lt; 0:\n        lerp = 0\n    elif lerp &gt; 1:\n        lerp = 1\n\n    x = lerp * dx + self.a.x\n    y = lerp * dy + self.a.y\n\n    _dx = x - other_point.x\n    _dy = y - other_point.y\n    square_dist = _dx ** 2 + _dy ** 2\n    return square_dist\n\ndef shortest_dist_to_point(self, other_point):\n    return math.sqrt(self.sq_shortest_dist_to_point(other_point))\n</code></pre>\n\n<h2>A test case:</h2>\n\n<pre><code>def test_distance_to_other_point(self):\n    # Parametrize test with multiple cases:\n    segments_and_point_and_answer = [\n        [Segment(Point(1.0, 1.0), Point(1.0, 3.0)), Point(2.0, 4.0), math.sqrt(2.0)],\n        [Segment(Point(1.0, 1.0), Point(1.0, 3.0)), Point(2.0, 3.0), 1.0],\n        [Segment(Point(0.0, 0.0), Point(0.0, 3.0)), Point(1.0, 1.0), 1.0],\n        [Segment(Point(1.0, 1.0), Point(3.0, 3.0)), Point(2.0, 2.0), 0.0],\n        [Segment(Point(-1.0, -1.0), Point(3.0, 3.0)), Point(2.0, 2.0), 0.0],\n        [Segment(Point(1.0, 1.0), Point(1.0, 3.0)), Point(2.0, 3.0), 1.0],\n        [Segment(Point(1.0, 1.0), Point(1.0, 3.0)), Point(2.0, 4.0), math.sqrt(2.0)],\n        [Segment(Point(1.0, 1.0), Point(-3.0, -3.0)), Point(-3.0, -4.0), 1],\n        [Segment(Point(1.0, 1.0), Point(-3.0, -3.0)), Point(-4.0, -3.0), 1],\n        [Segment(Point(1.0, 1.0), Point(-3.0, -3.0)), Point(1, 2), 1],\n        [Segment(Point(1.0, 1.0), Point(-3.0, -3.0)), Point(2, 1), 1],\n        [Segment(Point(1.0, 1.0), Point(-3.0, -3.0)), Point(-3, -1), math.sqrt(2.0)],\n        [Segment(Point(1.0, 1.0), Point(-3.0, -3.0)), Point(-1, -3), math.sqrt(2.0)],\n        [Segment(Point(-1.0, -1.0), Point(3.0, 3.0)), Point(3, 1), math.sqrt(2.0)],\n        [Segment(Point(-1.0, -1.0), Point(3.0, 3.0)), Point(1, 3), math.sqrt(2.0)],\n        [Segment(Point(1.0, 1.0), Point(3.0, 3.0)), Point(3, 1), math.sqrt(2.0)],\n        [Segment(Point(1.0, 1.0), Point(3.0, 3.0)), Point(1, 3), math.sqrt(2.0)]\n    ]\n\n    for i, (segment, point, answer) in enumerate(segments_and_point_and_answer):\n        result = segment.shortest_dist_to_point(point)\n        self.assertAlmostEqual(result, answer, delta=0.001, msg=str((i, segment, point, answer)))\n</code></pre>\n\n<p>Note: I assume this function is inside a <code>Segment</code> class.\nIn case your line is infinite, don't limit the <code>lerp</code> from 0 to 1 only, but still at least provide two distinct <code>a</code> and <code>b</code> points. </p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 3595039,
+                "reputation": 995,
+                "user_id": 3012255,
+                "user_type": "registered",
+                "accept_rate": 78,
+                "display_name": "Asif Rehan"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 24440122,
+            "answer_count": 2,
+            "score": 49,
+            "last_activity_date": 1628800570,
+            "creation_date": 1403720454,
+            "last_edit_date": 1559552679,
+            "question_id": 24415806,
+            "link": "https://stackoverflow.com/questions/24415806/coordinates-of-the-closest-points-of-two-geometries-in-shapely",
+            "title": "Coordinates of the closest points of two geometries in Shapely",
+            "body": "<p>There is a polyline with a list of coordinates of the vertices = [(x1,y1), (x2,y2), (x3,y3),...]  and a point(x,y). In Shapely, <code>geometry1.distance(geometry2)</code> returns the shortest distance between the two geometries. </p>\n\n<pre><code>&gt;&gt;&gt; from shapely.geometry import LineString, Point\n&gt;&gt;&gt; line = LineString([(0, 0), (5, 7), (12, 6)])  # geometry2\n&gt;&gt;&gt; list(line.coords)\n[(0.0, 0.0), (5.0, 7.0), (12.0, 6.0)]\n&gt;&gt;&gt; p = Point(4,8)  # geometry1\n&gt;&gt;&gt; list(p.coords)\n[(4.0, 8.0)]\n&gt;&gt;&gt; p.distance(line)\n1.4142135623730951\n</code></pre>\n\n<p>But I also need to find the coordinate of the point on the line that is closest to the point(x,y). In the example above, this is the coordinate of the point on the <code>LineString</code> object that is 1.4142135623730951 unit distant from <code>Point(4,8)</code>. The method <code>distance()</code> should have the coordinates when calculating the distance. Is there any way to get it returned from this method?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6731
+}

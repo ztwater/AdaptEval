@@ -1,0 +1,5 @@
+plt.pcolormesh(times, frequencies, np.log(spectrogram))
+#plt.imshow(spectrogram)
+plt.ylabel('Frequency [Hz]')
+plt.xlabel('Time [sec]')
+plt.show()

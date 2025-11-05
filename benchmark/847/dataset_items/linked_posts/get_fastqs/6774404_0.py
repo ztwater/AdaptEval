@@ -1,0 +1,1 @@
+sorted(glob.glob('*.png'))

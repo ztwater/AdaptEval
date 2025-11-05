@@ -1,0 +1,1476 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "algorithm",
+                "math",
+                "geometry",
+                "uniform"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 365893,
+                        "reputation": 90060,
+                        "user_id": 711085,
+                        "user_type": "registered",
+                        "display_name": "ninjagecko"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1331128689,
+                    "post_id": 9600801,
+                    "comment_id": 12180999,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere#comment12180999_9600801",
+                    "body": "What do you mean &quot;with a bit of randomization&quot;? Do you mean perturbations in some sense?"
+                },
+                {
+                    "owner": {
+                        "account_id": 85546,
+                        "reputation": 84844,
+                        "user_id": 238419,
+                        "user_type": "registered",
+                        "accept_rate": 89,
+                        "display_name": "BlueRaja - Danny Pflughoeft"
+                    },
+                    "edited": false,
+                    "score": 45,
+                    "creation_date": 1331140357,
+                    "post_id": 9600801,
+                    "comment_id": 12186258,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere#comment12186258_9600801",
+                    "body": "OP is confused.  <b>What he&#39;s looking for is to put n-points on a sphere, so that the minimum distance between any two points is as large as possible.</b>  This will give the points the appearance of being &quot;evenly distributed&quot; over the entire sphere.  This is completely unrelated to creating a uniform random distribution on a sphere, which is what many of those links are about, and what many of the answers below are talking about."
+                },
+                {
+                    "owner": {
+                        "account_id": 160373,
+                        "reputation": 28942,
+                        "user_id": 380384,
+                        "user_type": "registered",
+                        "accept_rate": 92,
+                        "display_name": "John Alexiou"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1416341042,
+                    "post_id": 9600801,
+                    "comment_id": 42535617,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere#comment42535617_9600801",
+                    "body": "20 isn&#39;t a lot of points to place on a sphere if you don&#39;t want them to look just random."
+                },
+                {
+                    "owner": {
+                        "account_id": 205831,
+                        "reputation": 45909,
+                        "user_id": 454780,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "trusktr"
+                    },
+                    "edited": false,
+                    "score": 2,
+                    "creation_date": 1520398749,
+                    "post_id": 9600801,
+                    "comment_id": 85294021,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere#comment85294021_9600801",
+                    "body": "Here&#39;s a way to do it (it has code examples): <a href=\"https://pdfs.semanticscholar.org/97a6/7e367e39762baf631f519c00fbfd1d5c009a.pdf\" rel=\"nofollow noreferrer\">pdfs.semanticscholar.org/97a6/&hellip;</a> (looks like it uses repulsion force calculations)"
+                },
+                {
+                    "owner": {
+                        "account_id": 1827,
+                        "reputation": 100060,
+                        "user_id": 2509,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "dmckee --- ex-moderator kitten"
+                    },
+                    "edited": false,
+                    "score": 3,
+                    "creation_date": 1547512041,
+                    "post_id": 9600801,
+                    "comment_id": 95210130,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere#comment95210130_9600801",
+                    "body": "Of course for values on N in {4, 6, 8, 12, 20} there exist exact solutions in which the distance from each point to (each of) it&#39;s nearest neighbors is a constant for all points and all nearest neighbors."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 60903,
+                                "reputation": 46515,
+                                "user_id": 181772,
+                                "user_type": "registered",
+                                "accept_rate": 96,
+                                "display_name": "andrew cooke"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1331121970,
+                            "post_id": 9601168,
+                            "comment_id": 12178490,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9601168#comment12178490_9601168",
+                            "body": "that would look a lot better if you worked in sin(lat) rather than lat.  as it is, you will get a lot of bunching near the poles."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 19055,
+                        "reputation": 77908,
+                        "user_id": 44309,
+                        "user_type": "registered",
+                        "display_name": "High Performance Mark"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1331124276,
+                    "last_edit_date": 1331124276,
+                    "creation_date": 1331121795,
+                    "answer_id": 9601168,
+                    "question_id": 9600801,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9601168#9601168",
+                    "body": "<p>Take the two largest factors of your <code>N</code>, if <code>N==20</code> then the two largest factors are <code>{5,4}</code>, or, more generally <code>{a,b}</code>.  Calculate </p>\n\n<pre><code>dlat  = 180/(a+1)\ndlong = 360/(b+1})\n</code></pre>\n\n<p>Put your first point at <code>{90-dlat/2,(dlong/2)-180}</code>, your second at <code>{90-dlat/2,(3*dlong/2)-180}</code>, your 3rd at <code>{90-dlat/2,(5*dlong/2)-180}</code>, until you've tripped round the world once, by which time you've got to about <code>{75,150}</code> when you go next to <code>{90-3*dlat/2,(dlong/2)-180}</code>.</p>\n\n<p>Obviously I'm working this in degrees on the surface of the spherical earth, with the usual conventions for translating +/- to N/S or E/W.  And obviously this gives you a completely non-random distribution, but it is uniform and the points are not bunched together.</p>\n\n<p>To add some degree of randomness, you could generate 2 normally-distributed (with mean 0 and std dev of {dlat/3, dlong/3} as appropriate) and add them to your uniformly distributed points.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 316105,
+                                "reputation": 16821,
+                                "user_id": 632088,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "Rusty Rob"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1331122990,
+                            "post_id": 9601334,
+                            "comment_id": 12178841,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9601334#comment12178841_9601334",
+                            "body": "nice, it&#39;s good to see a mathematical solution. I was thinking of using a helix and arc length separation. I&#39;m still not certain on how to get the optimal solution which is an interesting problem."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 60903,
+                                "reputation": 46515,
+                                "user_id": 181772,
+                                "user_type": "registered",
+                                "accept_rate": 96,
+                                "display_name": "andrew cooke"
+                            },
+                            "reply_to_user": {
+                                "account_id": 316105,
+                                "reputation": 16821,
+                                "user_id": 632088,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "Rusty Rob"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1331124708,
+                            "post_id": 9601334,
+                            "comment_id": 12179437,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9601334#comment12179437_9601334",
+                            "body": "did you see that i edited my answer to include an explanation of node[k] at the top?  i think that may be all you need..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 112973,
+                                "reputation": 6660,
+                                "user_id": 1488774,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "Befall"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1331154386,
+                            "post_id": 9601334,
+                            "comment_id": 12191158,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9601334#comment12191158_9601334",
+                            "body": "Wonderful, thanks for the explanation. I&#39;ll try it out later, as I haven&#39;t time currently, but thank you so much for helping me out. I&#39;ll let you know how it ends up working for my purposes. ^^"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 112973,
+                                "reputation": 6660,
+                                "user_id": 1488774,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "Befall"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1331169776,
+                            "post_id": 9601334,
+                            "comment_id": 12195308,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9601334#comment12195308_9601334",
+                            "body": "Using the Spiral method fits my needs perfectly, thanks so much for the help and clarification. :)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 16770336,
+                                "reputation": 151,
+                                "user_id": 12122911,
+                                "user_type": "registered",
+                                "display_name": "Ismael Harun"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1595270929,
+                            "post_id": 9601334,
+                            "comment_id": 111411180,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9601334#comment111411180_9601334",
+                            "body": "Your latitude conversion to degrees seem incorrect.  Shouldn&#39;t you divide by pi also?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 16770336,
+                                "reputation": 151,
+                                "user_id": 12122911,
+                                "user_type": "registered",
+                                "display_name": "Ismael Harun"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1595273209,
+                            "post_id": 9601334,
+                            "comment_id": 111412173,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9601334#comment111412173_9601334",
+                            "body": "Also your latitude calculation ranges from 0 to 2 exclusively, that can&#39;t be right.  Perhaps you meant to subtract 1 from that."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 60903,
+                        "reputation": 46515,
+                        "user_id": 181772,
+                        "user_type": "registered",
+                        "accept_rate": 96,
+                        "display_name": "andrew cooke"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": true,
+                    "score": 17,
+                    "last_activity_date": 1518467304,
+                    "last_edit_date": 1518467304,
+                    "creation_date": 1331122501,
+                    "answer_id": 9601334,
+                    "question_id": 9600801,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9601334#9601334",
+                    "body": "<p>In <a href=\"https://web.archive.org/web/20120107030109/http://cgafaq.info/wiki/Evenly_distributed_points_on_sphere#Spirals\" rel=\"noreferrer\">this example code</a> <code>node[k]</code> is just the kth node. You are generating an array N points and <code>node[k]</code> is the kth (from 0 to N-1). If that is all that is confusing you, hopefully you can use that now.</p>\n\n<p>(in other words, <code>k</code> is an array of size N that is defined before the code fragment starts, and which contains a list of the points).</p>\n\n<p><em>Alternatively</em>, building on the other answer here (and using Python):</p>\n\n<pre><code>&gt; cat ll.py\nfrom math import asin\nnx = 4; ny = 5\nfor x in range(nx):\n    lon = 360 * ((x+0.5) / nx)\n    for y in range(ny):                                                         \n        midpt = (y+0.5) / ny                                                    \n        lat = 180 * asin(2*((y+0.5)/ny-0.5))                                    \n        print lon,lat                                                           \n&gt; python2.7 ll.py                                                      \n45.0 -166.91313924                                                              \n45.0 -74.0730322921                                                             \n45.0 0.0                                                                        \n45.0 74.0730322921                                                              \n45.0 166.91313924                                                               \n135.0 -166.91313924                                                             \n135.0 -74.0730322921                                                            \n135.0 0.0                                                                       \n135.0 74.0730322921                                                             \n135.0 166.91313924                                                              \n225.0 -166.91313924                                                             \n225.0 -74.0730322921                                                            \n225.0 0.0                                                                       \n225.0 74.0730322921                                                             \n225.0 166.91313924\n315.0 -166.91313924\n315.0 -74.0730322921\n315.0 0.0\n315.0 74.0730322921\n315.0 166.91313924\n</code></pre>\n\n<p>If you plot that, you'll see that the vertical spacing is larger near the poles so that each point is situated in about the same total <em>area</em> of space (near the poles there's less space \"horizontally\", so it gives more \"vertically\").</p>\n\n<p>This isn't the same as all points having about the same distance to their neighbours (which is what I think your links are talking about), but it may be sufficient for what you want and improves on simply making a uniform lat/lon grid.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 316105,
+                                "reputation": 16821,
+                                "user_id": 632088,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "Rusty Rob"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1331123196,
+                            "post_id": 9601408,
+                            "comment_id": 12178908,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9601408#comment12178908_9601408",
+                            "body": "to improve my answer you should change closest_index = i to closest_index = randchoice(i,j)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 316105,
+                        "reputation": 16821,
+                        "user_id": 632088,
+                        "user_type": "registered",
+                        "accept_rate": 87,
+                        "display_name": "Rusty Rob"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1331122811,
+                    "creation_date": 1331122811,
+                    "answer_id": 9601408,
+                    "question_id": 9600801,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9601408#9601408",
+                    "body": "<p>with small numbers of points you could run a simulation:</p>\n\n<pre><code>from random import random,randint\nr = 10\nn = 20\nbest_closest_d = 0\nbest_points = []\npoints = [(r,0,0) for i in range(n)]\nfor simulation in range(10000):\n    x = random()*r\n    y = random()*r\n    z = r-(x**2+y**2)**0.5\n    if randint(0,1):\n        x = -x\n    if randint(0,1):\n        y = -y\n    if randint(0,1):\n        z = -z\n    closest_dist = (2*r)**2\n    closest_index = None\n    for i in range(n):\n        for j in range(n):\n            if i==j:\n                continue\n            p1,p2 = points[i],points[j]\n            x1,y1,z1 = p1\n            x2,y2,z2 = p2\n            d = (x1-x2)**2+(y1-y2)**2+(z1-z2)**2\n            if d &lt; closest_dist:\n                closest_dist = d\n                closest_index = i\n    if simulation % 100 == 0:\n        print simulation,closest_dist\n    if closest_dist &gt; best_closest_d:\n        best_closest_d = closest_dist\n        best_points = points[:]\n    points[closest_index]=(x,y,z)\n\n\nprint best_points\n&gt;&gt;&gt; best_points\n[(9.921692138442777, -9.930808529773849, 4.037839326088124),\n (5.141893371460546, 1.7274947332807744, -4.575674650522637),\n (-4.917695758662436, -1.090127967097737, -4.9629263893193745),\n (3.6164803265540666, 7.004158551438312, -2.1172868271109184),\n (-9.550655088997003, -9.580386054762917, 3.5277052594769422),\n (-0.062238110294250415, 6.803105171979587, 3.1966101417463655),\n (-9.600996012203195, 9.488067284474834, -3.498242301168819),\n (-8.601522086624803, 4.519484132245867, -0.2834204048792728),\n (-1.1198210500791472, -2.2916581379035694, 7.44937337008726),\n (7.981831370440529, 8.539378431788634, 1.6889099589074377),\n (0.513546008372332, -2.974333486904779, -6.981657873262494),\n (-4.13615438946178, -6.707488383678717, 2.1197605651446807),\n (2.2859494919024326, -8.14336582650039, 1.5418694699275672),\n (-7.241410895247996, 9.907335206038226, 2.271647103735541),\n (-9.433349952523232, -7.999106443463781, -2.3682575660694347),\n (3.704772125650199, 1.0526567864085812, 6.148581714099761),\n (-3.5710511242327048, 5.512552040316693, -3.4318468250897647),\n (-7.483466337225052, -1.506434920354559, 2.36641535124918),\n (7.73363824231576, -8.460241422163824, -1.4623228616326003),\n (10, 0, 0)]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 60903,
+                                "reputation": 46515,
+                                "user_id": 181772,
+                                "user_type": "registered",
+                                "accept_rate": 96,
+                                "display_name": "andrew cooke"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1331133769,
+                            "post_id": 9602404,
+                            "comment_id": 12183241,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9602404#comment12183241_9602404",
+                            "body": "isn&#39;t this equivalent to the option he discarded as being &quot;100% randomized&quot;?  my understanding is that he wants them to be more evenly spaced than a uniform random distribution."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 365893,
+                                "reputation": 90060,
+                                "user_id": 711085,
+                                "user_type": "registered",
+                                "display_name": "ninjagecko"
+                            },
+                            "reply_to_user": {
+                                "account_id": 85546,
+                                "reputation": 84844,
+                                "user_id": 238419,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "BlueRaja - Danny Pflughoeft"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1331161555,
+                            "post_id": 9602404,
+                            "comment_id": 12193462,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9602404#comment12193462_9602404",
+                            "body": "@BlueRaja-DannyPflughoeft: Hmm, fair enough. I guess I didn&#39;t read the question as carefully as I should have. I leave this here anyway in case others find it useful. Thanks for pointing this out."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 365893,
+                        "reputation": 90060,
+                        "user_id": 711085,
+                        "user_type": "registered",
+                        "display_name": "ninjagecko"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1331165030,
+                    "last_edit_date": 1331165030,
+                    "creation_date": 1331126954,
+                    "answer_id": 9602404,
+                    "question_id": 9600801,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9602404#9602404",
+                    "body": "<p><strong>edit:</strong> This does not answer the question the OP meant to ask, leaving it here in case people find it useful somehow.</p>\n\n<p>We use the multiplication rule of probability, combined with infinitessimals. This results in 2 lines of code to achieve your desired result:</p>\n\n<pre><code>longitude: \u03c6 = uniform([0,2pi))\nazimuth:   \u03b8 = -arcsin(1 - 2*uniform([0,1]))\n</code></pre>\n\n<p>(defined in the following coordinate system:)</p>\n\n<p><img src=\"https://i.stack.imgur.com/EHHKM.png\" alt=\"enter image description here\"></p>\n\n<p>Your language typically has a uniform random number primitive. For example in python you can use <code>random.random()</code> to return a number in the range <code>[0,1)</code>. You can multiply this number by k to get a random number in the range <code>[0,k)</code>. Thus in python, <code>uniform([0,2pi))</code> would mean <code>random.random()*2*math.pi</code>.</p>\n\n<hr>\n\n<p><strong>Proof</strong></p>\n\n<p>Now we can't assign \u03b8 uniformly, otherwise we'd get clumping at the poles. We wish to assign probabilities proportional to the surface area of the spherical wedge (the \u03b8 in this diagram is actually \u03c6):</p>\n\n<p><img src=\"https://i.stack.imgur.com/4OHbn.gif\" alt=\"enter image description here\"></p>\n\n<p>An angular displacement d\u03c6 at the equator will result in a displacement of d\u03c6*r. What will that displacement be at an arbitrary azimuth \u03b8? Well, the radius from the z-axis is <code>r*sin(\u03b8)</code>, so the arclength of that \"latitude\" intersecting the wedge is <code>d\u03c6 * r*sin(\u03b8)</code>. Thus we calculate the <a href=\"http://en.wikipedia.org/wiki/Cumulative_distribution_function\" rel=\"nofollow noreferrer\">cumulative distribution</a> of the area to sample from it, by integrating the area of the slice from the south pole to the north pole.</p>\n\n<p><img src=\"https://i.stack.imgur.com/AZGuq.gif\" alt=\"enter image description here\"> (where stuff=<code>d\u03c6*r</code>)</p>\n\n<p>We will now attempt to get the inverse of the CDF to sample from it: <a href=\"http://en.wikipedia.org/wiki/Inverse_transform_sampling\" rel=\"nofollow noreferrer\">http://en.wikipedia.org/wiki/Inverse_transform_sampling</a></p>\n\n<p>First we normalize by dividing our almost-CDF by its maximum value. This has the side-effect of cancelling out the d\u03c6 and r.</p>\n\n<pre><code>azimuthalCDF: cumProb = (sin(\u03b8)+1)/2 from -pi/2 to pi/2\n\ninverseCDF: \u03b8 = -sin^(-1)(1 - 2*cumProb)\n</code></pre>\n\n<p>Thus:</p>\n\n<pre><code>let x by a random float in range [0,1]\n\u03b8 = -arcsin(1-2*x)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 112973,
+                                "reputation": 6660,
+                                "user_id": 1488774,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "Befall"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1331154527,
+                            "post_id": 9606368,
+                            "comment_id": 12191199,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9606368#comment12191199_9606368",
+                            "body": "I will be looking into the spiral tactic that andrew cooke posted below, however, could you please clarify the difference between what I want and what &quot;uniform random distribution&quot; is? Is that just 100% randomized placement of points on a sphere so that they are uniformly placed? Thanks for the help. :)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 85546,
+                                "reputation": 84844,
+                                "user_id": 238419,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "BlueRaja - Danny Pflughoeft"
+                            },
+                            "reply_to_user": {
+                                "account_id": 112973,
+                                "reputation": 6660,
+                                "user_id": 1488774,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "Befall"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1331157457,
+                            "post_id": 9606368,
+                            "comment_id": 12192235,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9606368#comment12192235_9606368",
+                            "body": "@Befall: &quot;uniform random distribution&quot; refers to the <i>probability-distribution</i> being uniform - it means, when choosing a random point on the sphere, every point has an equal likelihood of being chosen.  It has nothing to do with the final <i>spatial</i>-distribution of the points, and thus has nothing to do with your question."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 112973,
+                                "reputation": 6660,
+                                "user_id": 1488774,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "Befall"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1331157594,
+                            "post_id": 9606368,
+                            "comment_id": 12192296,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9606368#comment12192296_9606368",
+                            "body": "Ahhh, okay, thanks very much. Searching for my question lead to a ton of answers for both, and I couldn&#39;t really grasp which was pointless to me."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 960513,
+                                "reputation": 7774,
+                                "user_id": 984975,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "AturSams"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1478682922,
+                            "post_id": 9606368,
+                            "comment_id": 68249689,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9606368#comment68249689_9606368",
+                            "body": "To be clear, every point has zero probability of being chosen. The ratio of the probabilities that the point will belong to any two areas on the surface of the sphere, is equal to the ratio of the surfaces."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 960513,
+                                "reputation": 7774,
+                                "user_id": 984975,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "AturSams"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1478683051,
+                            "post_id": 9606368,
+                            "comment_id": 68249757,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9606368#comment68249757_9606368",
+                            "body": "The difference is of some importance because on a computer, when using floats of doubles, there is a finite number of points on the sphere, depending on your tolerance, and they don&#39;t (I think) have an equal chance of being picked."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3052692,
+                                "reputation": 2509,
+                                "user_id": 2700173,
+                                "user_type": "registered",
+                                "accept_rate": 59,
+                                "display_name": "gota"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1520002954,
+                            "post_id": 9606368,
+                            "comment_id": 85148887,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9606368#comment85148887_9606368",
+                            "body": "3. doesn&#39;t work for dimensions &gt; 3... 2. works for all dimensions but the rejection rate becomes impossible for dimensions &gt; 20... Does anyone know of an implementation of 1. in e.g. python?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3972915,
+                                "reputation": 926,
+                                "user_id": 3753684,
+                                "user_type": "registered",
+                                "display_name": "Felix D."
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1527629815,
+                            "post_id": 9606368,
+                            "comment_id": 88195948,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9606368#comment88195948_9606368",
+                            "body": "The last link is now dead"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 85546,
+                        "reputation": 84844,
+                        "user_id": 238419,
+                        "user_type": "registered",
+                        "accept_rate": 89,
+                        "display_name": "BlueRaja - Danny Pflughoeft"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": false,
+                    "score": 92,
+                    "last_activity_date": 1540186454,
+                    "last_edit_date": 1540186454,
+                    "creation_date": 1331141578,
+                    "answer_id": 9606368,
+                    "question_id": 9600801,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/9606368#9606368",
+                    "body": "<p>This is known as packing points on a sphere, and there is no (known) general, perfect solution.  However, there are plenty of imperfect solutions.  The three most popular seem to be:</p>\n\n<ol>\n<li><strong>Create a simulation</strong>.  Treat each point as an electron constrained to a sphere, then run a simulation for a certain number of steps.  The electrons' repulsion will naturally tend the system to a more stable state, where the points are about as far away from each other as they can get.</li>\n<li><strong>Hypercube rejection</strong>.  This fancy-sounding method is actually really simple:  you uniformly choose points <em>(much more than <code>n</code> of them)</em> inside of the cube surrounding the sphere, then reject the points outside of the sphere.  Treat the remaining points as vectors, and normalize them.  These are your \"samples\" - choose <code>n</code> of them using some method (randomly, greedy, etc).</li>\n<li><strong>Spiral approximations</strong>.  You trace a spiral around a sphere, and evenly-distribute the points around the spiral.  Because of the mathematics involved, these are more complicated to understand than the simulation, but much faster (and probably involving less code).  The most popular seems to be by <a href=\"http://www.math.vanderbilt.edu/saffeb/texts/161.pdf\" rel=\"noreferrer\">Saff, et al</a>.</li>\n</ol>\n\n<p>A <em>lot</em> more information about this problem can be found <a href=\"http://web.archive.org/web/20120421191837/http://www.cgafaq.info/wiki/Evenly_distributed_points_on_sphere\" rel=\"noreferrer\">here</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 362056,
+                                "reputation": 7156,
+                                "user_id": 705048,
+                                "user_type": "registered",
+                                "accept_rate": 65,
+                                "display_name": "hcarver"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1348642439,
+                            "post_id": 12588704,
+                            "comment_id": 16976483,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/12588704#comment16976483_12588704",
+                            "body": "It&#39;d be helpful if you wrote some text explaining what this is meant to do, so the OP doesn&#39;t have to take it on faith that it will just work."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1877199,
+                        "reputation": 1,
+                        "user_id": 1698171,
+                        "user_type": "unregistered",
+                        "display_name": "ksmith"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1348642600,
+                    "last_edit_date": 1348642600,
+                    "creation_date": 1348596597,
+                    "answer_id": 12588704,
+                    "question_id": 9600801,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/12588704#12588704",
+                    "body": "<pre><code># create uniform spiral grid\nnumOfPoints = varargin[0]\nvxyz = zeros((numOfPoints,3),dtype=float)\nsq0 = 0.00033333333**2\nsq2 = 0.9999998**2\nsumsq = 2*sq0 + sq2\nvxyz[numOfPoints -1] = array([(sqrt(sq0/sumsq)), \n                              (sqrt(sq0/sumsq)), \n                              (-sqrt(sq2/sumsq))])\nvxyz[0] = -vxyz[numOfPoints -1] \nphi2 = sqrt(5)*0.5 + 2.5\nrootCnt = sqrt(numOfPoints)\nprevLongitude = 0\nfor index in arange(1, (numOfPoints -1), 1, dtype=float):\n  zInc = (2*index)/(numOfPoints) -1\n  radius = sqrt(1-zInc**2)\n\n  longitude = phi2/(rootCnt*radius)\n  longitude = longitude + prevLongitude\n  while (longitude &gt; 2*pi): \n    longitude = longitude - 2*pi\n\n  prevLongitude = longitude\n  if (longitude &gt; pi):\n    longitude = longitude - 2*pi\n\n  latitude = arccos(zInc) - pi/2\n  vxyz[index] = array([ (cos(latitude) * cos(longitude)) ,\n                        (cos(latitude) * sin(longitude)), \n                        sin(latitude)])\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1094303,
+                        "reputation": 335,
+                        "user_id": 1088245,
+                        "user_type": "registered",
+                        "accept_rate": 33,
+                        "display_name": "Arthur Flower"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1357260506,
+                    "creation_date": 1357260506,
+                    "answer_id": 14149595,
+                    "question_id": 9600801,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/14149595#14149595",
+                    "body": "<p>This works and it's deadly simple. As many points as you want:</p>\n\n<pre><code>    private function moveTweets():void {\n\n\n        var newScale:Number=Scale(meshes.length,50,500,6,2);\n        trace(\"new scale:\"+newScale);\n\n\n        var l:Number=this.meshes.length;\n        var tweetMeshInstance:TweetMesh;\n        var destx:Number;\n        var desty:Number;\n        var destz:Number;\n        for (var i:Number=0;i&lt;this.meshes.length;i++){\n\n            tweetMeshInstance=meshes[i];\n\n            var phi:Number = Math.acos( -1 + ( 2 * i ) / l );\n            var theta:Number = Math.sqrt( l * Math.PI ) * phi;\n\n            tweetMeshInstance.origX = (sphereRadius+5) * Math.cos( theta ) * Math.sin( phi );\n            tweetMeshInstance.origY= (sphereRadius+5) * Math.sin( theta ) * Math.sin( phi );\n            tweetMeshInstance.origZ = (sphereRadius+5) * Math.cos( phi );\n\n            destx=sphereRadius * Math.cos( theta ) * Math.sin( phi );\n            desty=sphereRadius * Math.sin( theta ) * Math.sin( phi );\n            destz=sphereRadius * Math.cos( phi );\n\n            tweetMeshInstance.lookAt(new Vector3D());\n\n\n            TweenMax.to(tweetMeshInstance, 1, {scaleX:newScale,scaleY:newScale,x:destx,y:desty,z:destz,onUpdate:onLookAtTween, onUpdateParams:[tweetMeshInstance]});\n\n        }\n\n    }\n    private function onLookAtTween(theMesh:TweetMesh):void {\n        theMesh.lookAt(new Vector3D());\n    }\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 52081,
+                        "reputation": 898,
+                        "user_id": 155631,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "Matt S."
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 9,
+                    "last_activity_date": 1375520185,
+                    "last_edit_date": 1495540478,
+                    "creation_date": 1366524462,
+                    "answer_id": 16128461,
+                    "question_id": 9600801,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/16128461#16128461",
+                    "body": "<p>This answer is based on the same 'theory'  that is outlined well by <a href=\"https://stackoverflow.com/a/9606368/155631\">this answer</a></p>\n\n<p>I'm adding this answer as: <br>\n-- None of the other options fit the 'uniformity' need 'spot-on' (or not obviously-clearly so).  (Noting to get the planet like distribution looking behavior particurally wanted in the original ask, you just reject from the finite list of the k uniformly created points at random (random wrt the index count  in the k items back).) <br>\n--The closest other impl forced you to decide the 'N' by 'angular axis', vs. just 'one value of N' across both angular axis values ( which at low counts of N is very tricky  to know what may, or may not matter  (e.g. you want '5' points -- have fun ) )  <br>\n--Furthermore, it's very hard to 'grok' how to differentiate between the other options without any imagery, so here's what this option looks like (below), and the ready-to-run implementation that goes with it. <br></p>\n\n<p><strong>with N at 20:</strong> <br></p>\n\n<p><img src=\"https://i.stack.imgur.com/3mBdL.jpg\" alt=\"enter image description here\">\n<br>\n<strong>and then N at 80:</strong>\n<img src=\"https://i.stack.imgur.com/XSJqn.jpg\" alt=\"enter image description here\"></p>\n\n<p><br></p>\n\n<p>here's the ready-to-run python3 code, where the emulation is that same source: \" <a href=\"http://web.archive.org/web/20120421191837/http://www.cgafaq.info/wiki/Evenly_distributed_points_on_sphere\" rel=\"noreferrer\">http://web.archive.org/web/20120421191837/http://www.cgafaq.info/wiki/Evenly_distributed_points_on_sphere</a> \" found by others.  ( The plotting I've included, that fires when run as 'main,' is taken from: <a href=\"http://www.scipy.org/Cookbook/Matplotlib/mplot3D\" rel=\"noreferrer\">http://www.scipy.org/Cookbook/Matplotlib/mplot3D</a> )</p>\n\n<pre><code>from math import cos, sin, pi, sqrt\n\ndef GetPointsEquiAngularlyDistancedOnSphere(numberOfPoints=45):\n    \"\"\" each point you get will be of form 'x, y, z'; in cartesian coordinates\n        eg. the 'l2 distance' from the origion [0., 0., 0.] for each point will be 1.0 \n        ------------\n        converted from:  http://web.archive.org/web/20120421191837/http://www.cgafaq.info/wiki/Evenly_distributed_points_on_sphere ) \n    \"\"\"\n    dlong = pi*(3.0-sqrt(5.0))  # ~2.39996323 \n    dz   =  2.0/numberOfPoints\n    long =  0.0\n    z    =  1.0 - dz/2.0\n    ptsOnSphere =[]\n    for k in range( 0, numberOfPoints): \n        r    = sqrt(1.0-z*z)\n        ptNew = (cos(long)*r, sin(long)*r, z)\n        ptsOnSphere.append( ptNew )\n        z    = z - dz\n        long = long + dlong\n    return ptsOnSphere\n\nif __name__ == '__main__':                \n    ptsOnSphere = GetPointsEquiAngularlyDistancedOnSphere( 80)    \n\n    #toggle True/False to print them\n    if( True ):    \n        for pt in ptsOnSphere:  print( pt)\n\n    #toggle True/False to plot them\n    if(True):\n        from numpy import *\n        import pylab as p\n        import mpl_toolkits.mplot3d.axes3d as p3\n\n        fig=p.figure()\n        ax = p3.Axes3D(fig)\n\n        x_s=[];y_s=[]; z_s=[]\n\n        for pt in ptsOnSphere:\n            x_s.append( pt[0]); y_s.append( pt[1]); z_s.append( pt[2])\n\n        ax.scatter3D( array( x_s), array( y_s), array( z_s) )                \n        ax.set_xlabel('X'); ax.set_ylabel('Y'); ax.set_zlabel('Z')\n        p.show()\n        #end\n</code></pre>\n\n<p>tested at low counts (N in 2, 5, 7, 13, etc) and seems to work 'nice'</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2326492,
+                        "reputation": 2306,
+                        "user_id": 2040877,
+                        "user_type": "registered",
+                        "accept_rate": 64,
+                        "display_name": "bandybabboon"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1678730733,
+                    "last_edit_date": 1678730733,
+                    "creation_date": 1388466285,
+                    "answer_id": 20852006,
+                    "question_id": 9600801,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/20852006#20852006",
+                    "body": "<p>Try:</p>\n<pre><code>function sphere ( N:float,k:int):Vector3 {\n    var inc =  Mathf.PI  * (3 - Mathf.Sqrt(5));\n    var off = 2 / N;\n    var y = k * off - 1 + (off / 2);\n    var r = Mathf.Sqrt(1 - y*y);\n    var phi = k * inc;\n    return Vector3((Mathf.Cos(phi)*r), y, Mathf.Sin(phi)*r); \n};\n</code></pre>\n<p>The above function should run in loop with N loop total and k loop current iteration.</p>\n<p>It is based on a sunflower seeds pattern, except the sunflower seeds are curved around into a half dome, and again into a sphere.</p>\n<p>Here is a picture, except I put the camera halfway inside the sphere.</p>\n<p><a href=\"https://i.stack.imgur.com/ycGPJ.jpg\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/ycGPJ.jpg\" alt=\"enter image description here\" /></a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3392345,
+                                "reputation": 11044,
+                                "user_id": 2846923,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "The Guy with The Hat"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1453357730,
+                            "post_id": 21949236,
+                            "comment_id": 57568216,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/21949236#comment57568216_21949236",
+                            "body": "A good idea, but it only works for 4, 6, 8, 12, 20, 24, or 30 points."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1436622,
+                                "reputation": 1249,
+                                "user_id": 1357841,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "chessofnerd"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1461045774,
+                            "post_id": 21949236,
+                            "comment_id": 61006632,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/21949236#comment61006632_21949236",
+                            "body": "If you want to cheat, you can use the center of faces and verticies. They will <i>not</i> be equi-spaced but a decent approximation. This is nice because it it deterministic."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2932990,
+                        "reputation": 19,
+                        "user_id": 2892553,
+                        "user_type": "registered",
+                        "display_name": "user19371"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1393039601,
+                    "creation_date": 1393039601,
+                    "answer_id": 21949236,
+                    "question_id": 9600801,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/21949236#21949236",
+                    "body": "<p>OR... to place 20 points, compute the centers of the icosahedronal faces. For 12 points, find the vertices of the icosahedron. For 30 points, the mid point of the edges of the icosahedron. you can do the same thing with the tetrahedron, cube, dodecahedron and octahedrons: one set of points is on the vertices, another on the center of the face and another on the center of the edges. They cannot be mixed, however.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1124495,
+                                "reputation": 2684,
+                                "user_id": 1112097,
+                                "user_type": "registered",
+                                "accept_rate": 77,
+                                "display_name": "Andrew Staroscik"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1416226409,
+                            "post_id": 26127012,
+                            "comment_id": 42480330,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment42480330_26127012",
+                            "body": "a variable n is called when defining phi: phi = ((i + rnd) % n) * increment. Does n = samples?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1532546,
+                                "reputation": 5585,
+                                "user_id": 1429402,
+                                "user_type": "registered",
+                                "accept_rate": 65,
+                                "display_name": "Fnord"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1124495,
+                                "reputation": 2684,
+                                "user_id": 1112097,
+                                "user_type": "registered",
+                                "accept_rate": 77,
+                                "display_name": "Andrew Staroscik"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1416340252,
+                            "post_id": 26127012,
+                            "comment_id": 42535203,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment42535203_26127012",
+                            "body": "@AndrewStaroscik yes! When i first wrote the code i used &quot;n&quot; as a variable and changed the name later but didn&#39;t do due diligence. Thanks for catching that!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2774232,
+                                "reputation": 266,
+                                "user_id": 2388129,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "naphier"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1460360045,
+                            "post_id": 26127012,
+                            "comment_id": 60686356,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment60686356_26127012",
+                            "body": "This is great, but how would you use this and input the desired distance between the points? For example, say I want to use this to pack sphere with radius of 2 around a sphere. What variable would I change to get a separation of 2 between the points? Thanks!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 960513,
+                                "reputation": 7774,
+                                "user_id": 984975,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "AturSams"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2774232,
+                                "reputation": 266,
+                                "user_id": 2388129,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "naphier"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1478100190,
+                            "post_id": 26127012,
+                            "comment_id": 68019136,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment68019136_26127012",
+                            "body": "@naphier You can do a binary search if I understand your question."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 43896,
+                                "reputation": 104077,
+                                "user_id": 128511,
+                                "user_type": "registered",
+                                "accept_rate": 52,
+                                "display_name": "gman"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1485785028,
+                            "post_id": 26127012,
+                            "comment_id": 71055925,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment71055925_26127012",
+                            "body": "this rocks! Thanks!!! <a href=\"https://www.vertexshaderart.com/art/79HqSrQH4meL63aAo/revision/9c9YN5LwBQKLDa4Aa\" rel=\"nofollow noreferrer\">Here&#39;s something random I made using it, warning contains sound and uses WebGL</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8462635,
+                                "reputation": 1421,
+                                "user_id": 6347799,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Xarbrough"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1488885297,
+                            "post_id": 26127012,
+                            "comment_id": 72419960,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment72419960_26127012",
+                            "body": "Great! How do I scale the entire sphere when inputting a radius other than 1?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1532546,
+                                "reputation": 5585,
+                                "user_id": 1429402,
+                                "user_type": "registered",
+                                "accept_rate": 65,
+                                "display_name": "Fnord"
+                            },
+                            "reply_to_user": {
+                                "account_id": 8462635,
+                                "reputation": 1421,
+                                "user_id": 6347799,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Xarbrough"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1488906021,
+                            "post_id": 26127012,
+                            "comment_id": 72433972,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment72433972_26127012",
+                            "body": "@Xarbrough the code gives you points around a unit sphere, so just multiply each point by whatever scalar you want for radius."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4076203,
+                                "reputation": 1032,
+                                "user_id": 3347826,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "doublefelix"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1490048453,
+                            "post_id": 26127012,
+                            "comment_id": 72929179,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment72929179_26127012",
+                            "body": "If you are wondering whether to use randomize=True, I did some tests and found that while the minimum nearest neighbor distance (NND) was about the same whether randomize was on or not, the stdev of NNDs divided by their mean was significantly lower (better) when randomize = False. In addition, the &quot;evenness&quot; of the distribution gets better with a larger sample size when randomize = False."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3381683,
+                                "reputation": 10868,
+                                "user_id": 2838606,
+                                "user_type": "registered",
+                                "accept_rate": 66,
+                                "display_name": "Amir"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1518227673,
+                            "post_id": 26127012,
+                            "comment_id": 84432217,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment84432217_26127012",
+                            "body": "@Fnord I wonder, how can one also make <code>y</code> totally random? Currently <code>y</code> is indifferent to the random seed"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2628316,
+                                "reputation": 1259,
+                                "user_id": 2274894,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "judepereira"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1518497102,
+                            "post_id": 26127012,
+                            "comment_id": 84519855,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment84519855_26127012",
+                            "body": "If you&#39;re using this in context with a real world, where your camera is placed at 0,0,0, multiply the resulting output (x, y, z) with the radius of your sphere."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5626336,
+                                "reputation": 2727,
+                                "user_id": 4454657,
+                                "user_type": "registered",
+                                "accept_rate": 61,
+                                "display_name": "Tintinabulator Zea"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1547715414,
+                            "post_id": 26127012,
+                            "comment_id": 95289208,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment95289208_26127012",
+                            "body": "how can you perform this on an uneven cylinder type shape? if you have the vertices of the geometry"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3352158,
+                                "reputation": 675,
+                                "user_id": 3678911,
+                                "user_type": "registered",
+                                "accept_rate": 27,
+                                "display_name": "pikachuchameleon"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1552251450,
+                            "post_id": 26127012,
+                            "comment_id": 96929234,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment96929234_26127012",
+                            "body": "@Fnord: Can we do this for higher dimensions?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1897845,
+                                "reputation": 4248,
+                                "user_id": 1714385,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "Ferdinando Randisi"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1573925486,
+                            "post_id": 26127012,
+                            "comment_id": 104051806,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment104051806_26127012",
+                            "body": "Really cool!!! What tool did you use to generate that render?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 241711,
+                                "reputation": 13699,
+                                "user_id": 2712652,
+                                "user_type": "registered",
+                                "display_name": "Demitri"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1586755849,
+                            "post_id": 26127012,
+                            "comment_id": 108234993,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment108234993_26127012",
+                            "body": "The function above internally calculates phi, then converts to and returns Cartesian coordinates. What is the definition of theta if I wanted to return spherical coordinates without going back and forth?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 81980,
+                                "reputation": 4983,
+                                "user_id": 230851,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "orion elenzil"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1620408682,
+                            "post_id": 26127012,
+                            "comment_id": 119201374,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment119201374_26127012",
+                            "body": "rad. implemented as a <a href=\"https://www.shadertoy.com/view/ssjXWm\" rel=\"nofollow noreferrer\">raymarched demo on shadertoy</a>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 10453971,
+                                "reputation": 211,
+                                "user_id": 7706652,
+                                "user_type": "registered",
+                                "display_name": "imkzh"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1655808820,
+                            "post_id": 26127012,
+                            "comment_id": 128414077,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment128414077_26127012",
+                            "body": "Can I have a list of triangle faces accompany with these vertices as well?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1002891,
+                                "reputation": 7684,
+                                "user_id": 1017348,
+                                "user_type": "registered",
+                                "accept_rate": 77,
+                                "display_name": "Joachim W"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1657443062,
+                            "post_id": 26127012,
+                            "comment_id": 128807398,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment128807398_26127012",
+                            "body": "It would be appropriate to cite a source for this wonderful solution. As far as I can see, it is due to &#193;lvaro Gonz&#225;lez, Math Geosci (2010) 42: 49\u201364"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2341178,
+                                "reputation": 4485,
+                                "user_id": 2052436,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "user2052436"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1680135292,
+                            "post_id": 26127012,
+                            "comment_id": 133848270,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment133848270_26127012",
+                            "body": "Is the golden angle <code>phi = math.pi * (3. - math.sqrt(5.))</code> correct?  From cited publication it follows that is should be <code>phi = math.pi * (math.sqrt(5.) - 1.)</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1532546,
+                                "reputation": 5585,
+                                "user_id": 1429402,
+                                "user_type": "registered",
+                                "accept_rate": 65,
+                                "display_name": "Fnord"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1680149542,
+                            "post_id": 26127012,
+                            "comment_id": 133849825,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment133849825_26127012",
+                            "body": "i changed the code to reflect the cited publication. fwiw <code>phi = math.pi * (3. - math.sqrt(5.))</code>  gives you a mirror image."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2341178,
+                                "reputation": 4485,
+                                "user_id": 2052436,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "user2052436"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1680181842,
+                            "post_id": 26127012,
+                            "comment_id": 133857003,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment133857003_26127012",
+                            "body": "Oh right, it was different by <code>2*pi - phi</code>..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8111973,
+                                "reputation": 423,
+                                "user_id": 6111772,
+                                "user_type": "registered",
+                                "display_name": "peets"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1708410189,
+                            "post_id": 26127012,
+                            "comment_id": 137553485,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#comment137553485_26127012",
+                            "body": "The Fibonacci distribution generates some kind of &#39;texture&#39; typically e.g. along latitudes which may cause problems for some later calculations."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1532546,
+                        "reputation": 5585,
+                        "user_id": 1429402,
+                        "user_type": "registered",
+                        "accept_rate": 65,
+                        "display_name": "Fnord"
+                    },
+                    "comment_count": 21,
+                    "is_accepted": false,
+                    "score": 228,
+                    "last_activity_date": 1680149368,
+                    "last_edit_date": 1680149368,
+                    "creation_date": 1412099484,
+                    "answer_id": 26127012,
+                    "question_id": 9600801,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/26127012#26127012",
+                    "body": "<p><a href=\"https://arxiv.org/pdf/0912.4540.pdf\" rel=\"noreferrer\">The Fibonacci sphere algorithm</a> is great for this. It is fast and gives results that at a glance will easily fool the human eye. <a href=\"http://www.openprocessing.org/sketch/41142\" rel=\"noreferrer\">You can see an example done with processing</a> which will show the result over time as points are added. <a href=\"https://www.vertexshaderart.com/art/79HqSrQH4meL63aAo/revision/9c9YN5LwBQKLDa4Aa\" rel=\"noreferrer\">Here's another great interactive example</a> made by @gman. And here's a simple implementation in python.</p>\n<pre><code>import math\n\n\ndef fibonacci_sphere(samples=1000):\n\n    points = []\n    phi = math.pi * (math.sqrt(5.) - 1.)  # golden angle in radians\n\n    for i in range(samples):\n        y = 1 - (i / float(samples - 1)) * 2  # y goes from 1 to -1\n        radius = math.sqrt(1 - y * y)  # radius at y\n\n        theta = phi * i  # golden angle increment\n\n        x = math.cos(theta) * radius\n        z = math.sin(theta) * radius\n\n        points.append((x, y, z))\n\n    return points\n</code></pre>\n<p>1000 samples gives you this:</p>\n<p><img src=\"https://i.stack.imgur.com/NsCif.png\" alt=\"enter image description here\" /></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1827,
+                                "reputation": 100060,
+                                "user_id": 2509,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "dmckee --- ex-moderator kitten"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1555003542,
+                            "post_id": 29663633,
+                            "comment_id": 97967274,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/29663633#comment97967274_29663633",
+                            "body": "Upvoted for the minimum maximum distance expressions. Useful for putting limits on the number of points you want to use. A reference to an authoritative source for that would be nice, though."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6025982,
+                        "reputation": 4072,
+                        "user_id": 4731679,
+                        "user_type": "registered",
+                        "display_name": "Edward Doolittle"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 13,
+                    "last_activity_date": 1429147610,
+                    "last_edit_date": 1429147610,
+                    "creation_date": 1429146540,
+                    "answer_id": 29663633,
+                    "question_id": 9600801,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/29663633#29663633",
+                    "body": "<p>What you are looking for is called a <em>spherical covering</em>. The spherical covering problem is very hard and solutions are unknown except for small numbers of points. One thing that is known for sure is that given n points on a sphere, there always exist two points of distance <code>d = (4-csc^2(\\pi n/6(n-2)))^(1/2)</code> or closer.</p>\n\n<p>If you want a probabilistic method for generating points uniformly distributed on a sphere, it's easy: generate points in space uniformly by Gaussian distribution (it's built into Java, not hard to find the code for other languages). So in 3-dimensional space, you need something like </p>\n\n<pre><code>Random r = new Random();\ndouble[] p = { r.nextGaussian(), r.nextGaussian(), r.nextGaussian() };\n</code></pre>\n\n<p>Then project the point onto the sphere by normalizing its distance from the origin </p>\n\n<pre><code>double norm = Math.sqrt( (p[0])^2 + (p[1])^2 + (p[2])^2 ); \ndouble[] sphereRandomPoint = { p[0]/norm, p[1]/norm, p[2]/norm };\n</code></pre>\n\n<p>The Gaussian distribution in n dimensions is spherically symmetric so the projection onto the sphere is uniform.</p>\n\n<p>Of course, there's no guarantee that the distance between any two points in a collection of uniformly generated points will be bounded below, so you can use rejection to enforce any such conditions that you might have: probably it's best to generate the whole collection and then reject the whole collection if necessary. (Or use \"early rejection\" to reject the whole collection you've generated so far; just don't keep some points and drop others.) You can use the formula for <code>d</code> given above, minus some slack, to determine the min distance between points below which you will reject a set of points. You'll have to calculate n choose 2 distances, and the probability of rejection will depend on the slack; it's hard to say how, so run a simulation to get a feel for the relevant statistics.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2320007,
+                                "reputation": 4693,
+                                "user_id": 2036035,
+                                "user_type": "registered",
+                                "accept_rate": 59,
+                                "display_name": "Krupip"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1512056795,
+                            "post_id": 44164075,
+                            "comment_id": 82111563,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/44164075#comment82111563_44164075",
+                            "body": "I&#39;m not sure why this is so far down, this is by far the best fast method to do this."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 838779,
+                                "reputation": 9717,
+                                "user_id": 1113881,
+                                "user_type": "registered",
+                                "display_name": "CR Drost"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2320007,
+                                "reputation": 4693,
+                                "user_id": 2036035,
+                                "user_type": "registered",
+                                "accept_rate": 59,
+                                "display_name": "Krupip"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1512927238,
+                            "post_id": 44164075,
+                            "comment_id": 82443062,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/44164075#comment82443062_44164075",
+                            "body": "@snb thank you for the kind words! it is so far down in part because it is much, much younger than all the rest of the answers here. I am surprised that it is even doing as well as it has been."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3972915,
+                                "reputation": 926,
+                                "user_id": 3753684,
+                                "user_type": "registered",
+                                "display_name": "Felix D."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1527633806,
+                            "post_id": 44164075,
+                            "comment_id": 88197152,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/44164075#comment88197152_44164075",
+                            "body": "One question that remains for me is: How many points n do i need to distribute for a given maximum distance between any two points?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 838779,
+                                "reputation": 9717,
+                                "user_id": 1113881,
+                                "user_type": "registered",
+                                "display_name": "CR Drost"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3972915,
+                                "reputation": 926,
+                                "user_id": 3753684,
+                                "user_type": "registered",
+                                "display_name": "Felix D."
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1527856796,
+                            "post_id": 44164075,
+                            "comment_id": 88297448,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/44164075#comment88297448_44164075",
+                            "body": "@FelixD. That sounds like a question that could get very complicated very fast especially if you start using, say, great-circle distances rather than Euclidean  distances. But maybe I can answer a simple question, if one converts the points on the sphere to their Voronoi diagram, one can describe each Voronoi cell as having approximately area 4\u03c0/N and one can convert this to a characteristic distance by pretending it&#39;s a circle rather than a rhombus, \u03c0r&#178; =  4\u03c0/N. Then r=2/\u221a(N)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3972915,
+                                "reputation": 926,
+                                "user_id": 3753684,
+                                "user_type": "registered",
+                                "display_name": "Felix D."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1527887355,
+                            "post_id": 44164075,
+                            "comment_id": 88312882,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/44164075#comment88312882_44164075",
+                            "body": "Okay thanks, that sounds like a good estimate for sufficiently large N!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5606,
+                                "reputation": 448,
+                                "user_id": 9127,
+                                "user_type": "registered",
+                                "display_name": "Lanny"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1540436945,
+                            "post_id": 44164075,
+                            "comment_id": 92867805,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/44164075#comment92867805_44164075",
+                            "body": "Another good writeup on evenly distributing points on a sphere is available at <a href=\"http://extremelearning.com.au/evenly-distributing-points-on-a-sphere/\" rel=\"nofollow noreferrer\">extremelearning.com.au/evenly-distributing-points-on-a-spher&zwnj;&#8203;e</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1827,
+                                "reputation": 100060,
+                                "user_id": 2509,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "dmckee --- ex-moderator kitten"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1548442412,
+                            "post_id": 44164075,
+                            "comment_id": 95556794,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/44164075#comment95556794_44164075",
+                            "body": "Using the sampling theorem with actually uniform instead of randomly-uniform input is one of those  things that makes me say <i>&quot;Well, why the #$%&amp; didn&#39;t I think of that?&quot;</i>. Nice."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 838779,
+                                "reputation": 9717,
+                                "user_id": 1113881,
+                                "user_type": "registered",
+                                "display_name": "CR Drost"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1827,
+                                "reputation": 100060,
+                                "user_id": 2509,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "dmckee --- ex-moderator kitten"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1548544902,
+                            "post_id": 44164075,
+                            "comment_id": 95580235,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/44164075#comment95580235_44164075",
+                            "body": "@dmckee thanks for saying so! Especially coming from someone I respect as much as you, that&#39;s a high compliment!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 342606,
+                                "reputation": 18710,
+                                "user_id": 673852,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Ruslan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1595713024,
+                            "post_id": 44164075,
+                            "comment_id": 111571298,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/44164075#comment111571298_44164075",
+                            "body": "In <i>Spacing the points radially</i> section you say &quot;sphere&quot; twice. Did you instead mean &quot;disk&quot; there?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 660089,
+                                "reputation": 7781,
+                                "user_id": 472610,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "Jonathan H"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1599067272,
+                            "post_id": 44164075,
+                            "comment_id": 112661416,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/44164075#comment112661416_44164075",
+                            "body": "Looks like the <a href=\"http://extremelearning.com.au/how-to-evenly-distribute-points-on-a-sphere-more-effectively-than-the-canonical-fibonacci-lattice/#more-3069\" rel=\"nofollow noreferrer\">reference</a> you cite divides by the golden ratio to obtain <code>theta</code>, but you seem to multiply instead. Is that a mistake?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 838779,
+                                "reputation": 9717,
+                                "user_id": 1113881,
+                                "user_type": "registered",
+                                "display_name": "CR Drost"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1599118066,
+                            "post_id": 44164075,
+                            "comment_id": 112675493,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/44164075#comment112675493_44164075",
+                            "body": "Great question! I believe my answer is closer to the \u201creason it works\u201d while Martin\u2019s squeaks out an extra bit of precision. So the golden ratio by definition satisfies \u03c6&#178; = \u03c6 + 1, which rearranges to \u03c6 \u2013 1 = 1/\u03c6, multiplying by 2 \u03c0, that leading digit 1 just gets nuked by the trig functions. So in floating point, just subtracting the one would fill that 53rd bit with a 0 where a 1 would be more correct."
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user18893035"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1683638109,
+                            "post_id": 44164075,
+                            "comment_id": 134394727,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/44164075#comment134394727_44164075",
+                            "body": "How can this be adapted to yield the <code>theta</code>, <code>phi</code> pairs as initially defined? <code>theta</code> [0, 2pi)  and <code>phi</code>from [0, pi]?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 838779,
+                                "reputation": 9717,
+                                "user_id": 1113881,
+                                "user_type": "registered",
+                                "display_name": "CR Drost"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1683907553,
+                            "post_id": 44164075,
+                            "comment_id": 134443629,
+                            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/44164075#comment134443629_44164075",
+                            "body": "Phi seems to already be in range, leaving just theta which needs a modulus, <code>theta2 = theta % (2* pi)</code> should do it."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 838779,
+                        "reputation": 9717,
+                        "user_id": 1113881,
+                        "user_type": "registered",
+                        "display_name": "CR Drost"
+                    },
+                    "comment_count": 13,
+                    "is_accepted": false,
+                    "score": 194,
+                    "last_activity_date": 1595882572,
+                    "last_edit_date": 1595882572,
+                    "creation_date": 1495643778,
+                    "answer_id": 44164075,
+                    "question_id": 9600801,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/44164075#44164075",
+                    "body": "<h1>The golden spiral method</h1>\n<p>You said you couldn\u2019t get the golden spiral method to work and that\u2019s a shame because it\u2019s really, really good. I would like to give you a complete understanding of it so that maybe you can understand how to keep this away from being \u201cbunched up.\u201d</p>\n<p>So here\u2019s a fast, non-random way to create a lattice that is approximately correct; as discussed above, no lattice will be perfect, but this may be good enough. It is compared to other methods e.g. at <a href=\"https://bendwavy.org/pack/pack.htm\" rel=\"noreferrer\">BendWavy.org</a> but it just has a nice and pretty look as well as a guarantee about even spacing in the limit.</p>\n<h2>Primer: sunflower spirals on the unit disk</h2>\n<p>To understand this algorithm, I first invite you to look at the 2D sunflower spiral algorithm. This is based on the fact that the most irrational number is the golden ratio <code>(1 + sqrt(5))/2</code> and if one emits points by the approach \u201cstand at the center, turn a golden ratio of whole turns, then emit another point in that direction,\u201d one naturally constructs a spiral which, as you get to higher and higher numbers of points, nevertheless refuses to have well-defined \u2018bars\u2019 that the points line up on.<sup>(Note 1.)</sup></p>\n<p>The algorithm for even spacing on a disk is,</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>from numpy import pi, cos, sin, sqrt, arange\nimport matplotlib.pyplot as pp\n\nnum_pts = 100\nindices = arange(0, num_pts, dtype=float) + 0.5\n\nr = sqrt(indices/num_pts)\ntheta = pi * (1 + 5**0.5) * indices\n\npp.scatter(r*cos(theta), r*sin(theta))\npp.show()\n</code></pre>\n<p>and it produces results that look like (n=100 and n=1000):</p>\n<p><a href=\"https://i.stack.imgur.com/U7Ut2.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/U7Ut2.png\" alt=\"enter image description here\" /></a></p>\n<h2>Spacing the points radially</h2>\n<p>The key strange thing is the formula <code>r = sqrt(indices / num_pts)</code>; how did I come to that one? <sup>(Note 2.)</sup></p>\n<p>Well, I am using the square root here because I want these to have even-area spacing around the disk. That is the same as saying that in the limit of large <em>N</em> I want a little region <em>R</em> \u2208 (<em>r</em>, <em>r</em> + d<em>r</em>), <em>\u0398</em> \u2208 (<em>\u03b8</em>, <em>\u03b8</em> + d<em>\u03b8</em>) to contain a number of points proportional to its area, which is <em>r</em> d<em>r</em> d<em>\u03b8</em>. Now if we pretend that we are talking about a random variable here, this has a straightforward interpretation as saying that the joint probability density for (<em>R</em>, <em>\u0398</em>) is just <em>c r</em> for some constant <em>c</em>. Normalization on the unit disk would then force <em>c</em> = 1/\u03c0.</p>\n<p>Now let me introduce a trick. It comes from probability theory where it\u2019s known as <a href=\"https://en.wikipedia.org/wiki/Inverse_transform_sampling\" rel=\"noreferrer\">sampling the inverse CDF</a>: suppose you wanted to <em>generate</em> a random variable with a probability density <em>f</em>(<em>z</em>) and you have a random variable <em>U</em> ~ Uniform(0, 1), just like comes out of <code>random()</code> in most programming languages. How do you do this?</p>\n<ol>\n<li>First, turn your density into a <a href=\"https://en.wikipedia.org/wiki/Cumulative_distribution_function\" rel=\"noreferrer\">cumulative distribution function</a> or CDF, which we will call <em>F</em>(<em>z</em>). A CDF, remember, increases monotonically from 0 to 1 with derivative <em>f</em>(<em>z</em>).</li>\n<li>Then calculate the CDF\u2019s inverse function <em>F</em><sup>-1</sup>(<em>z</em>).</li>\n<li>You will find that <em>Z</em> = <em>F</em><sup>-1</sup>(<em>U</em>) is distributed according to the target density. <sup>(Note 3).</sup></li>\n</ol>\n<p>Now the golden-ratio spiral trick spaces the points out in a nicely even pattern for <em>\u03b8</em> so let\u2019s integrate that out; for the unit disk we are left with <em>F</em>(<em>r</em>) = <em>r</em><sup>2</sup>. So the inverse function is <em>F</em><sup>-1</sup>(<em>u</em>) = <em>u</em><sup>1/2</sup>, and therefore we would generate random points on the disk in polar coordinates with <code>r = sqrt(random()); theta = 2 * pi * random()</code>.</p>\n<p>Now instead of <em>randomly</em> sampling this inverse function we\u2019re <em>uniformly</em> sampling it, and the nice thing about uniform sampling is that our results about how points are spread out in the limit of large <em>N</em> will behave as if we had randomly sampled it. This combination is the trick. Instead of <code>random()</code> we use <code>(arange(0, num_pts, dtype=float) + 0.5)/num_pts</code>, so that, say, if we want to sample 10 points they are <code>r = 0.05, 0.15, 0.25, ... 0.95</code>. We uniformly sample <em>r</em> to get equal-area spacing, and we use the sunflower increment to avoid awful \u201cbars\u201d of points in the output.</p>\n<h2>Now doing the sunflower on a sphere</h2>\n<p>The changes that we need to make to dot the sphere with points merely involve switching out the polar coordinates for spherical coordinates. The radial coordinate of course doesn't enter into this because we're on a unit sphere. To keep things a little more consistent here, even though I was trained as a physicist I'll use mathematicians' coordinates where 0 \u2264 <em>\u03c6</em> \u2264 \u03c0 is latitude coming down from the pole and 0 \u2264 <em>\u03b8</em> \u2264 2\u03c0 is longitude. So the difference from above is that we are basically replacing the variable <em>r</em> with <em>\u03c6</em>.</p>\n<p>Our area element, which was <em>r</em> d<em>r</em> d<em>\u03b8</em>, now becomes the not-much-more-complicated sin(<em>\u03c6</em>) d<em>\u03c6</em> d<em>\u03b8</em>. So our joint density for uniform spacing is sin(<em>\u03c6</em>)/4\u03c0. Integrating out <em>\u03b8</em>, we find <em>f</em>(<em>\u03c6</em>) = sin(<em>\u03c6</em>)/2, thus <em>F</em>(<em>\u03c6</em>) = (1 \u2212 cos(<em>\u03c6</em>))/2. Inverting this we can see that a uniform random variable would look like acos(1 - 2 <em>u</em>), but we sample uniformly instead of randomly, so we instead use <em>\u03c6</em><sub><em>k</em></sub> = acos(1 \u2212 2 (<em>k</em> + 0.5)/<em>N</em>). And the rest of the algorithm is just projecting this onto the x, y, and z coordinates:</p>\n<pre class=\"lang-py prettyprint-override\"><code>from numpy import pi, cos, sin, arccos, arange\nimport mpl_toolkits.mplot3d\nimport matplotlib.pyplot as pp\n\nnum_pts = 1000\nindices = arange(0, num_pts, dtype=float) + 0.5\n\nphi = arccos(1 - 2*indices/num_pts)\ntheta = pi * (1 + 5**0.5) * indices\n\nx, y, z = cos(theta) * sin(phi), sin(theta) * sin(phi), cos(phi);\n\npp.figure().add_subplot(111, projection='3d').scatter(x, y, z);\npp.show()\n</code></pre>\n<p>Again for n=100 and n=1000 the results look like:\n<a href=\"https://i.stack.imgur.com/13o9v.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/13o9v.png\" alt=\"enter image description here\" /></a>\n<a href=\"https://i.stack.imgur.com/jml6W.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/jml6W.png\" alt=\"enter image description here\" /></a></p>\n<h1>Further research</h1>\n<p>I wanted to give a shout out to Martin Roberts\u2019s blog. Note that above I created an offset of my indices by adding 0.5 to each index. This was just visually appealing to me, but <a href=\"http://extremelearning.com.au/how-to-evenly-distribute-points-on-a-sphere-more-effectively-than-the-canonical-fibonacci-lattice/#more-3069\" rel=\"noreferrer\">it turns out that the choice of offset matters a lot</a> and is not constant over the interval and can mean getting as much as 8% better accuracy in packing if chosen correctly. There should also be a way to get <a href=\"http://extremelearning.com.au/unreasonable-effectiveness-of-quasirandom-sequences/\" rel=\"noreferrer\">his R<sub>2</sub> sequence</a> to cover a sphere and it would be interesting to see if this also produced a nice even covering, perhaps as-is but perhaps needing to be, say, taken from only a half of the unit square cut diagonally or so and stretched around to get a circle.</p>\n<h1>Notes</h1>\n<ol>\n<li><p>Those \u201cbars\u201d are formed by rational approximations to a number, and the best rational approximations to a number come from its continued fraction expression, <code>z + 1/(n_1 + 1/(n_2 + 1/(n_3 + ...)))</code> where <code>z</code> is an integer and <code>n_1, n_2, n_3, ...</code> is either a finite or infinite sequence of positive integers:</p>\n<pre class=\"lang-py prettyprint-override\"><code>def continued_fraction(r):\n    while r != 0:\n        n = floor(r)\n        yield n\n        r = 1/(r - n)\n</code></pre>\n<p>Since the fraction part <code>1/(...)</code> is always between zero and one, a large integer in the continued fraction allows for a particularly good rational approximation: \u201cone divided by something between 100 and 101\u201d is better than \u201cone divided by something between 1 and 2.\u201d The most irrational number is therefore the one which is <code>1 + 1/(1 + 1/(1 + ...))</code> and has no particularly good rational approximations; one can solve <em>\u03c6</em> = 1 + 1/<em>\u03c6</em> by multiplying through by <em>\u03c6</em> to get the formula for the golden ratio.</p>\n</li>\n<li><p>For folks who are not so familiar with NumPy -- all of the functions are \u201cvectorized,\u201d so that <code>sqrt(array)</code> is the same as what other languages might write <code>map(sqrt, array)</code>. So this is a component-by-component <code>sqrt</code> application. The same also holds for division by a scalar or addition with scalars -- those apply to all components in parallel.</p>\n</li>\n<li><p>The proof is simple once you know that this is the result. If you ask what's the probability that <em>z</em> &lt; <em>Z</em> &lt; <em>z</em> + d<em>z</em>, this is the same as asking what's the probability that <em>z</em> &lt; <em>F</em><sup>-1</sup>(<em>U</em>) &lt; <em>z</em> + d<em>z</em>, apply <em>F</em> to all three expressions noting that it is a monotonically increasing function, hence <em>F</em>(<em>z</em>) &lt; <em>U</em> &lt; <em>F</em>(<em>z</em> + d<em>z</em>), expand the right hand side out to find <em>F</em>(<em>z</em>) + <em>f</em>(<em>z</em>) d<em>z</em>, and since <em>U</em> is uniform this probability is just <em>f</em>(<em>z</em>) d<em>z</em> as promised.</p>\n</li>\n</ol>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 47235,
+                        "reputation": 23785,
+                        "user_id": 139802,
+                        "user_type": "registered",
+                        "accept_rate": 52,
+                        "display_name": "Andrew Wagner"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1497654767,
+                    "creation_date": 1497654767,
+                    "answer_id": 44599165,
+                    "question_id": 9600801,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/44599165#44599165",
+                    "body": "<p>Healpix solves a closely related problem (pixelating the sphere with equal area pixels):</p>\n\n<p><a href=\"http://healpix.sourceforge.net/\" rel=\"noreferrer\">http://healpix.sourceforge.net/</a></p>\n\n<p>It's probably overkill, but maybe after looking at it you'll realize some of it's other nice properties are interesting to you. It's way more than just a function that outputs a point cloud.</p>\n\n<p>I landed here trying to find it again; the name \"healpix\" doesn't exactly evoke spheres... </p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 16770336,
+                        "reputation": 151,
+                        "user_id": 12122911,
+                        "user_type": "registered",
+                        "display_name": "Ismael Harun"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1595273794,
+                    "creation_date": 1595273794,
+                    "answer_id": 63002668,
+                    "question_id": 9600801,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/63002668#63002668",
+                    "body": "<p>@robert king It's a really nice solution but has some sloppy bugs in it.    I know it helped me a lot though, so never mind the sloppiness.  :)\nHere is a cleaned up version....</p>\n<pre><code>from math import pi, asin, sin, degrees\nhalfpi, twopi = .5 * pi, 2 * pi\nsphere_area = lambda R=1.0: 4 * pi * R ** 2\n\nlat_dist = lambda lat, R=1.0: R*(1-sin(lat))\n\n#A = 2*pi*R^2(1-sin(lat))\ndef sphere_latarea(lat, R=1.0):\n    if -halfpi &gt; lat or lat &gt; halfpi:\n        raise ValueError(&quot;lat must be between -halfpi and halfpi&quot;)\n    return 2 * pi * R ** 2 * (1-sin(lat))\n\nsphere_lonarea = lambda lon, R=1.0: \\\n        4 * pi * R ** 2 * lon / twopi\n\n#A = 2*pi*R^2 |sin(lat1)-sin(lat2)| |lon1-lon2|/360\n#    = (pi/180)R^2 |sin(lat1)-sin(lat2)| |lon1-lon2|\nsphere_rectarea = lambda lat0, lat1, lon0, lon1, R=1.0: \\\n        (sphere_latarea(lat0, R)-sphere_latarea(lat1, R)) * (lon1-lon0) / twopi\n\n\ndef test_sphere(n_lats=10, n_lons=19, radius=540.0):\n    total_area = 0.0\n    for i_lons in range(n_lons):\n        lon0 = twopi * float(i_lons) / n_lons\n        lon1 = twopi * float(i_lons+1) / n_lons\n        for i_lats in range(n_lats):\n            lat0 = asin(2 * float(i_lats) / n_lats - 1)\n            lat1 = asin(2 * float(i_lats+1)/n_lats - 1)\n            area = sphere_rectarea(lat0, lat1, lon0, lon1, radius)\n            print(&quot;{:} {:}: {:9.4f} to  {:9.4f}, {:9.4f} to  {:9.4f} =&gt; area {:10.4f}&quot;\n                    .format(i_lats, i_lons\n                    , degrees(lat0), degrees(lat1)\n                    , degrees(lon0), degrees(lon1)\n                    , area))\n            total_area += area\n    print(&quot;total_area = {:10.4f} (difference of {:10.4f})&quot;\n            .format(total_area, abs(total_area) - sphere_area(radius)))\n\ntest_sphere()\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2912209,
+                        "reputation": 4096,
+                        "user_id": 2496170,
+                        "user_type": "registered",
+                        "accept_rate": 67,
+                        "display_name": "Vlad"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1613641900,
+                    "creation_date": 1613641900,
+                    "answer_id": 66257432,
+                    "question_id": 9600801,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/66257432#66257432",
+                    "body": "<p>Based on fnord's answer, here is a Unity3D version with added ranges :</p>\n<p>Code :</p>\n<pre class=\"lang-cs prettyprint-override\"><code>// golden angle in radians\nstatic float Phi = Mathf.PI * ( 3f - Mathf.Sqrt( 5f ) );\nstatic float Pi2 = Mathf.PI * 2;\n\npublic static Vector3 Point( float radius , int index , int total , float min = 0f, float max = 1f , float angleStartDeg = 0f, float angleRangeDeg = 360 )\n{\n    // y goes from min (-) to max (+)\n    var y = ( ( index / ( total - 1f ) ) * ( max - min ) + min ) * 2f - 1f;\n\n    // golden angle increment\n    var theta = Phi * index ; \n        \n    if( angleStartDeg != 0 || angleRangeDeg != 360 )\n    {\n        theta = ( theta % ( Pi2 ) ) ;\n        theta = theta &lt; 0 ? theta + Pi2 : theta ;\n            \n        var a1 = angleStartDeg * Mathf.Deg2Rad;\n        var a2 = angleRangeDeg * Mathf.Deg2Rad;\n            \n        theta = theta * a2 / Pi2 + a1;\n    }\n\n    // https://stackoverflow.com/a/26127012/2496170\n    \n    // radius at y\n    var rY = Mathf.Sqrt( 1 - y * y ); \n    \n    var x = Mathf.Cos( theta ) * rY;\n    var z = Mathf.Sin( theta ) * rY;\n\n    return  new Vector3( x, y, z ) * radius;\n}\n</code></pre>\n<p>Gist : <a href=\"https://gist.github.com/nukadelic/7449f0872f708065bc1afeb19df666f7/edit\" rel=\"nofollow noreferrer\">https://gist.github.com/nukadelic/7449f0872f708065bc1afeb19df666f7/edit</a></p>\n<p>Preview:</p>\n<p><a href=\"https://i.imgur.com/HtMeCtq.mp4\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/msYTD.png\" alt=\"MP4\" /></a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 10286733,
+                        "reputation": 3945,
+                        "user_id": 7589775,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "LeoDog896"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1696040594,
+                    "last_edit_date": 1696040594,
+                    "creation_date": 1685147969,
+                    "answer_id": 76344906,
+                    "question_id": 9600801,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/76344906#76344906",
+                    "body": "<p>Jonathan Kogan proposed a new method (2016, <a href=\"https://scholar.rose-hulman.edu/cgi/viewcontent.cgi?article=1387&amp;context=rhumj\" rel=\"nofollow noreferrer\">pdf</a>) for creating a solution that solves this problem semi-accurately, while simultaneously not compromising on speed:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import math\ndef spherical_coordinate(x, y):\n    return [\n        math.cos(x) * math.cos(y),\n        math.sin(x) * math.cos(y),\n        math.sin(y)\n    ]\n\ndef NX(n, x):\n    pts = []\n    start = (-1. + 1. / (n - 1.))\n    increment = (2. - 2. / (n - 1.)) / (n - 1.)\n    for j in xrange(0, n):\n        s = start + j * increment\n        pts.append(\n            spherical_cordinate(\n                s * x, math.pi / 2. *\n                math.copysign(1, s) *\n                (1. - math.sqrt(1. - abs(s)))\n            )\n        )\n    return pts\n\ndef generate_points(n):\n    return NX(n, 0.1 + 1.2 * n)\n</code></pre>\n<p><strong>This method is more accurate than the Fibonacci sphere algorithm, and works in O(n)</strong></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1148345,
+                        "reputation": 175,
+                        "user_id": 1130612,
+                        "user_type": "registered",
+                        "display_name": "chhu79"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1687951251,
+                    "creation_date": 1687951251,
+                    "answer_id": 76572678,
+                    "question_id": 9600801,
+                    "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/76572678#76572678",
+                    "body": "<p>Fast &amp; good distribution method is the equidistant Archimedean spiral: <a href=\"https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/2007GC001581\" rel=\"nofollow noreferrer\">https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/2007GC001581</a>. Key ingredient is the second incomplete elliptic integral (<a href=\"https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.ellipeinc.html#scipy.special.ellipeinc\" rel=\"nofollow noreferrer\">https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.ellipeinc.html#scipy.special.ellipeinc</a>) Repulsion simulation gives better results but has high complexity O(N^2).</p>\n<p><a href=\"https://i.stack.imgur.com/j05f8.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/j05f8.png\" alt=\"Equidistant Archimedean Spiral\" /></a></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 112973,
+                "reputation": 6660,
+                "user_id": 1488774,
+                "user_type": "registered",
+                "accept_rate": 89,
+                "display_name": "Befall"
+            },
+            "comment_count": 5,
+            "is_answered": true,
+            "accepted_answer_id": 9601334,
+            "answer_count": 18,
+            "score": 200,
+            "last_activity_date": 1696040594,
+            "creation_date": 1331120346,
+            "last_edit_date": 1518113483,
+            "question_id": 9600801,
+            "link": "https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere",
+            "title": "Evenly distributing n points on a sphere",
+            "body": "<p>I need an algorithm that can give me positions around a sphere for N points (less than 20, probably) that vaguely spreads them out. There's no need for \"perfection\", but I just need it so none of them are bunched together.</p>\n\n<ul>\n<li><a href=\"https://stackoverflow.com/questions/5408276/python-uniform-spherical-distribution\">This question</a> provided good code, but I couldn't find a way to make this uniform, as this seemed 100% randomized.</li>\n<li><a href=\"http://www.xsi-blog.com/archives/115\" rel=\"noreferrer\">This blog post</a> recommended had two ways allowing input of number of points on the sphere, but the <a href=\"http://sitemason.vanderbilt.edu/page/hmbADS\" rel=\"noreferrer\">Saff and Kuijlaars</a> algorithm is exactly in psuedocode I could transcribe, and the <a href=\"http://cgafaq.info/wiki/Evenly_distributed_points_on_sphere#Spirals\" rel=\"noreferrer\">code example</a> I found contained \"node[k]\", which I couldn't see explained and ruined that possibility. The second blog example was the Golden Section Spiral, which gave me strange, bunched up results, with no clear way to define a constant radius.</li>\n<li><a href=\"http://mathworld.wolfram.com/SpherePointPicking.html\" rel=\"noreferrer\">This algorithm</a> from <a href=\"https://stackoverflow.com/questions/1841014/uniform-random-monte-carlo-distribution-on-unit-sphere\">this question</a> seems like it could possibly work, but I can't piece together what's on that page into psuedocode or anything.</li>\n</ul>\n\n<p>A few other question threads I came across spoke of randomized uniform distribution, which adds a level of complexity I'm not concerned about. I apologize that this is such a silly question, but I wanted to show that I've truly looked hard and still come up short.</p>\n\n<p>So, what I'm looking for is simple pseudocode to evenly distribute N points around a unit sphere, that either returns in spherical or Cartesian coordinates. Even better if it can even distribute with a bit of randomization (think planets around a star, decently spread out, but with room for leeway).</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8077
+}

@@ -1,0 +1,175 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "arrays",
+                "string",
+                "numpy",
+                "char"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 1163045,
+                        "reputation": 24600,
+                        "user_id": 1142167,
+                        "user_type": "registered",
+                        "accept_rate": 93,
+                        "display_name": "Joel Cornett"
+                    },
+                    "edited": false,
+                    "score": 3,
+                    "creation_date": 1339434452,
+                    "post_id": 10984471,
+                    "comment_id": 14348194,
+                    "link": "https://stackoverflow.com/questions/10984471/numpy-array-of-chars-to-string#comment14348194_10984471",
+                    "body": "Why are you copying <code>data</code> in your for loop?"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 310511,
+                                "reputation": 45548,
+                                "user_id": 623518,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Chris"
+                            },
+                            "reply_to_user": {
+                                "account_id": 366823,
+                                "reputation": 77974,
+                                "user_id": 712603,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "David Robinson"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1339437222,
+                            "post_id": 10984549,
+                            "comment_id": 14349092,
+                            "link": "https://stackoverflow.com/questions/10984471/numpy-array-of-chars-to-string/10984549#comment14349092_10984549",
+                            "body": "@DavidRobinson Hadn&#39;t thought of that - very nice."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 366823,
+                                "reputation": 77974,
+                                "user_id": 712603,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "David Robinson"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1339465355,
+                            "post_id": 10984549,
+                            "comment_id": 14356646,
+                            "link": "https://stackoverflow.com/questions/10984471/numpy-array-of-chars-to-string/10984549#comment14356646_10984549",
+                            "body": "@AdrianR- don&#39;t forget to accept his answer (by clicking on the green checkmark) if it answered your question."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 310511,
+                        "reputation": 45548,
+                        "user_id": 623518,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Chris"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1339434611,
+                    "creation_date": 1339434611,
+                    "answer_id": 10984549,
+                    "question_id": 10984471,
+                    "link": "https://stackoverflow.com/questions/10984471/numpy-array-of-chars-to-string/10984549#10984549",
+                    "body": "<p>Try a list comprehension:</p>\n\n<pre><code>&gt;&gt; s = [''.join(row) for row in data]\n&gt;&gt; s\n['ab', 'cd']\n</code></pre>\n\n<p>which is just your <code>for</code> loop rewritten.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 427774,
+                                "reputation": 9415,
+                                "user_id": 809705,
+                                "user_type": "registered",
+                                "accept_rate": 43,
+                                "display_name": "shoyer"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1419042155,
+                            "post_id": 10984878,
+                            "comment_id": 43578071,
+                            "link": "https://stackoverflow.com/questions/10984471/numpy-array-of-chars-to-string/10984878#comment43578071_10984878",
+                            "body": "An important caveat is that the array must be <i>contiguous</i> in memory -- otherwise the view fails. You can ensure this by using <code>data = np.ascontiguousarray(data)</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 119329,
+                        "reputation": 5847,
+                        "user_id": 310953,
+                        "user_type": "registered",
+                        "accept_rate": 83,
+                        "display_name": "Phil Cooper"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 14,
+                    "last_activity_date": 1339439253,
+                    "last_edit_date": 1339439253,
+                    "creation_date": 1339436244,
+                    "answer_id": 10984878,
+                    "question_id": 10984471,
+                    "link": "https://stackoverflow.com/questions/10984471/numpy-array-of-chars-to-string/10984878#10984878",
+                    "body": "<p>The list comprehension is the most \"pythonic\" way.</p>\n\n<p>The most \"numpythonic\" way would be:</p>\n\n<pre><code>&gt;&gt;&gt; data = np.array([['a','b'],['c','d']])\n# a 2D view\n&gt;&gt;&gt; data.view('S2')\narray([['ab'],\n       ['cd']], \n      dtype='|S2')\n# or maybe a 1D view ...fastest solution:\n&gt;&gt;&gt; data.view('S2').ravel()\narray(['ab', 'cd'], \n      dtype='|S2')\n</code></pre>\n\n<p>No looping, no list comprehension, not even a copy.  The buffer just sits there unchanged with a different \"view\" so this is the fastest solution available.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 261322,
+                        "reputation": 16029,
+                        "user_id": 545424,
+                        "user_type": "registered",
+                        "accept_rate": 72,
+                        "display_name": "user545424"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1339441209,
+                    "creation_date": 1339441209,
+                    "answer_id": 10985964,
+                    "question_id": 10984471,
+                    "link": "https://stackoverflow.com/questions/10984471/numpy-array-of-chars-to-string/10985964#10985964",
+                    "body": "<pre><code>[row.tostring() for row in data]\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 1559157,
+                "reputation": 101,
+                "user_id": 1449473,
+                "user_type": "registered",
+                "display_name": "AdrianR"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "answer_count": 3,
+            "score": 10,
+            "last_activity_date": 1339441209,
+            "creation_date": 1339434120,
+            "question_id": 10984471,
+            "link": "https://stackoverflow.com/questions/10984471/numpy-array-of-chars-to-string",
+            "title": "numpy array of chars to string",
+            "body": "<p>I have a 2D numpy char array (from a NetCDF4 file) which actually represents a list of strings.  I want to convert it into a list of strings.</p>\n\n<p>I know I can use join() to concatenate the chars into a string, but I can only find a way to do this one string at a time:</p>\n\n<pre><code>data = np.array([['a','b'],['c','d']])\nfor row in data[:]:\n    print ''.join(row)\n</code></pre>\n\n<p>But it's very slow.  How can I return an array of strings in a single command?  Thanks</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5424
+}

@@ -1,0 +1,569 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "string",
+                "prefix"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 1475,
+                        "reputation": 538964,
+                        "user_id": 1968,
+                        "user_type": "registered",
+                        "accept_rate": 83,
+                        "display_name": "Konrad Rudolph"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1310847532,
+                    "post_id": 6718196,
+                    "comment_id": 7958492,
+                    "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings#comment7958492_6718196",
+                    "body": "So you are in effect asking for the <b><a href=\"http://en.wikipedia.org/wiki/Longest_common_subsequence\" rel=\"nofollow noreferrer\">longest common subsequence</a></b>?"
+                },
+                {
+                    "owner": {
+                        "account_id": 441885,
+                        "reputation": 60711,
+                        "user_id": 832230,
+                        "user_type": "registered",
+                        "display_name": "Asclepius"
+                    },
+                    "reply_to_user": {
+                        "account_id": 1475,
+                        "reputation": 538964,
+                        "user_id": 1968,
+                        "user_type": "registered",
+                        "accept_rate": 83,
+                        "display_name": "Konrad Rudolph"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1686150590,
+                    "post_id": 6718196,
+                    "comment_id": 134760424,
+                    "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings#comment134760424_6718196",
+                    "body": "@KonradRudolph It&#39;s asking for the longest common prefix, not for a subsequence."
+                },
+                {
+                    "owner": {
+                        "account_id": 170189,
+                        "reputation": 13875,
+                        "user_id": 396732,
+                        "user_type": "registered",
+                        "accept_rate": 73,
+                        "display_name": "Kawu"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1686663675,
+                    "post_id": 6718196,
+                    "comment_id": 134827868,
+                    "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings#comment134827868_6718196",
+                    "body": "He! I&#39;m not an it \u261d\ufe0f\ud83d\ude44"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1786019,
+                                "reputation": 3165,
+                                "user_id": 1627479,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Joren"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1706410360,
+                            "post_id": 6718270,
+                            "comment_id": 137322227,
+                            "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/6718270#comment137322227_6718270",
+                            "body": "This fails for e.g. <code>a = [&quot;abc&quot;, &quot;axc&quot;]</code>, which gives <code>&#39;ac&#39;</code>, instead of just  <code>&#39;a&#39;</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 93465,
+                        "reputation": 35455,
+                        "user_id": 255688,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "phimuemue"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1310829328,
+                    "creation_date": 1310829328,
+                    "answer_id": 6718270,
+                    "question_id": 6718196,
+                    "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/6718270#6718270",
+                    "body": "<p>The following is an working, but probably quite inefficient solution.</p>\n\n<pre><code>a = [\"my_prefix_what_ever\", \"my_prefix_what_so_ever\", \"my_prefix_doesnt_matter\"]\nb = zip(*a)\nc = [x[0] for x in b if x==(x[0],)*len(x)]\nresult = \"\".join(c)\n</code></pre>\n\n<p>For small sets of strings, the above is no problem at all. But for larger sets, I personally would code another, manual solution that checks each character one after another and stops when there are differences. </p>\n\n<p>Algorithmically, this yields the same procedure, however, one might be able to avoid constructing the list <code>c</code>.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 351620,
+                        "reputation": 20526,
+                        "user_id": 688213,
+                        "user_type": "registered",
+                        "display_name": "MRAB"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1310830539,
+                    "creation_date": 1310830539,
+                    "answer_id": 6718380,
+                    "question_id": 6718196,
+                    "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/6718380#6718380",
+                    "body": "<p>Here's my solution:</p>\n\n<pre><code>a = [\"my_prefix_what_ever\", \"my_prefix_what_so_ever\", \"my_prefix_doesnt_matter\"]\n\nprefix_len = len(a[0])\nfor x in a[1 : ]:\n    prefix_len = min(prefix_len, len(x))\n    while not x.startswith(a[0][ : prefix_len]):\n        prefix_len -= 1\n\nprefix = a[0][ : prefix_len]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 284586,
+                                "reputation": 4845,
+                                "user_id": 582782,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "sramij"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1509083036,
+                            "post_id": 6718435,
+                            "comment_id": 80883816,
+                            "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/6718435#comment80883816_6718435",
+                            "body": "I think this can only handle two strings in m, isn&#39;t it? The comment though says &quot;all list elements, kinda indicating any number of elements&quot;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6374411,
+                                "reputation": 113,
+                                "user_id": 4945871,
+                                "user_type": "registered",
+                                "display_name": "Petr"
+                            },
+                            "reply_to_user": {
+                                "account_id": 284586,
+                                "reputation": 4845,
+                                "user_id": 582782,
+                                "user_type": "registered",
+                                "accept_rate": 62,
+                                "display_name": "sramij"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1512551544,
+                            "post_id": 6718435,
+                            "comment_id": 82299815,
+                            "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/6718435#comment82299815_6718435",
+                            "body": "@sramij Not exactly! min() and max() on string is lexicographical minimum and mnaximum like in dictionary. So when minimum and maximum have same first letter, then all other words between their have to have same letter too, and so on."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 288659,
+                                "reputation": 12742,
+                                "user_id": 589206,
+                                "user_type": "registered",
+                                "accept_rate": 69,
+                                "display_name": "hochl"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1533913297,
+                            "post_id": 6718435,
+                            "comment_id": 90535805,
+                            "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/6718435#comment90535805_6718435",
+                            "body": "Do the arguments need to be valid path names? What happens if they are not? The documentation says nothing, so I&#39;m not so sure this can be used for arbitrary strings."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1517357,
+                                "reputation": 3935,
+                                "user_id": 1456887,
+                                "user_type": "registered",
+                                "display_name": "Jesse Chisholm"
+                            },
+                            "reply_to_user": {
+                                "account_id": 288659,
+                                "reputation": 12742,
+                                "user_id": 589206,
+                                "user_type": "registered",
+                                "accept_rate": 69,
+                                "display_name": "hochl"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1549399663,
+                            "post_id": 6718435,
+                            "comment_id": 95886664,
+                            "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/6718435#comment95886664_6718435",
+                            "body": "@hochl No. This code is just looking at string, not at paths.  If they happen to be all paths watch out for this prefix <code>commonprefix({&quot;&#47;aaA&#47;b&quot;, &quot;&#47;aaB&#47;b&quot;}) == &quot;&#47;aa&quot;</code> which is probably not a path you want to use."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5449384,
+                                "reputation": 2617,
+                                "user_id": 4334743,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "AneesAhmed777"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1587537293,
+                            "post_id": 6718435,
+                            "comment_id": 108546196,
+                            "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/6718435#comment108546196_6718435",
+                            "body": "@hochi If you do need valid paths, check out the sister function <a href=\"https://docs.python.org/3/library/os.path.html#os.path.commonpath\" rel=\"nofollow noreferrer\"><code>os.path.commonpath</code></a>. From the documentation: &quot;Unlike commonprefix(), this returns a valid path.&quot;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 288171,
+                                "reputation": 6955,
+                                "user_id": 588437,
+                                "user_type": "registered",
+                                "display_name": "ijoseph"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1592864834,
+                            "post_id": 6718435,
+                            "comment_id": 110572893,
+                            "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/6718435#comment110572893_6718435",
+                            "body": "Tell that to the LC interviewers (&quot;never rewrite what&#39;s provided to you&quot;). As a serious and perhaps constructive comment, consider not actually providing the source code for that function as on first glance I missed the statement that it&#39;s already part of <code>os.path.commonprefix</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 8083,
+                        "reputation": 370773,
+                        "user_id": 14343,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "Ned Batchelder"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": true,
+                    "score": 176,
+                    "last_activity_date": 1434710318,
+                    "last_edit_date": 1434710318,
+                    "creation_date": 1310831123,
+                    "answer_id": 6718435,
+                    "question_id": 6718196,
+                    "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/6718435#6718435",
+                    "body": "<p>Never rewrite what is provided to you: <a href=\"https://docs.python.org/3/library/os.path.html#os.path.commonprefix\"><code>os.path.commonprefix</code></a> does exactly this:</p>\n\n<blockquote>\n  <p>Return the longest path prefix (taken\n  character-by-character) that is a prefix of all paths in list. If list\n  is empty, return the empty string (<code>''</code>). Note that this may return\n  invalid paths because it works a character at a time.</p>\n</blockquote>\n\n<p>For comparison to the other answers, here's the code:</p>\n\n<pre><code># Return the longest prefix of all list elements.\ndef commonprefix(m):\n    \"Given a list of pathnames, returns the longest common leading component\"\n    if not m: return ''\n    s1 = min(m)\n    s2 = max(m)\n    for i, c in enumerate(s1):\n        if c != s2[i]:\n            return s1[:i]\n    return s1\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 6649964,
+                                "reputation": 3238,
+                                "user_id": 5132509,
+                                "user_type": "registered",
+                                "accept_rate": 48,
+                                "display_name": "Regis May"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1589451630,
+                            "post_id": 6719272,
+                            "comment_id": 109302152,
+                            "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/6719272#comment109302152_6719272",
+                            "body": "For Python3 please replace <code>itertools.izip(*strings)</code> with <code>zip(*strings)</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 281021,
+                        "reputation": 148953,
+                        "user_id": 577088,
+                        "user_type": "registered",
+                        "display_name": "senderle"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 22,
+                    "last_activity_date": 1310839964,
+                    "last_edit_date": 1495540045,
+                    "creation_date": 1310839964,
+                    "answer_id": 6719272,
+                    "question_id": 6718196,
+                    "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/6719272#6719272",
+                    "body": "<p><a href=\"https://stackoverflow.com/questions/6718196/python-determine-prefix-from-a-set-of-similar-strings/6718435#6718435\">Ned Batchelder</a> is probably right. But for the fun of it, here's a more efficient version of <a href=\"https://stackoverflow.com/questions/6718196/python-determine-prefix-from-a-set-of-similar-strings/6718270#6718270\">phimuemue</a>'s answer using <code>itertools</code>. </p>\n\n<pre><code>import itertools\n\nstrings = ['my_prefix_what_ever', \n           'my_prefix_what_so_ever', \n           'my_prefix_doesnt_matter']\n\ndef all_same(x):\n    return all(x[0] == y for y in x)\n\nchar_tuples = itertools.izip(*strings)\nprefix_tuples = itertools.takewhile(all_same, char_tuples)\n''.join(x[0] for x in prefix_tuples)\n</code></pre>\n\n<p>As an affront to readability, here's a one-line version :)</p>\n\n<pre><code>&gt;&gt;&gt; from itertools import takewhile, izip\n&gt;&gt;&gt; ''.join(c[0] for c in takewhile(lambda x: all(x[0] == y for y in x), izip(*strings)))\n'my_prefix_'\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 330192,
+                        "reputation": 1852,
+                        "user_id": 654162,
+                        "user_type": "registered",
+                        "accept_rate": 60,
+                        "display_name": "ThePhysicist"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1383148652,
+                    "creation_date": 1383148652,
+                    "answer_id": 19687795,
+                    "question_id": 6718196,
+                    "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/19687795#19687795",
+                    "body": "<p>Just out of curiosity I figured out yet another way to do this:</p>\n\n<pre><code>def common_prefix(strings):\n\n    if len(strings) == 1:#rule out trivial case\n        return strings[0]\n\n    prefix = strings[0]\n\n    for string in strings[1:]:\n        while string[:len(prefix)] != prefix and prefix:\n            prefix = prefix[:len(prefix)-1]\n        if not prefix:\n            break\n\n    return prefix\n\nstrings = [\"my_prefix_what_ever\",\"my_prefix_what_so_ever\",\"my_prefix_doesnt_matter\"]\n\nprint common_prefix(strings)\n#Prints \"my_prefix_\"\n</code></pre>\n\n<p>As Ned pointed out it's probably better to use <code>os.path.commonprefix</code>, which is a pretty elegant function.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3276820,
+                        "reputation": 11,
+                        "user_id": 2758579,
+                        "user_type": "registered",
+                        "display_name": "skeptichacker"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1421220209,
+                    "last_edit_date": 1421220209,
+                    "creation_date": 1421219419,
+                    "answer_id": 27937540,
+                    "question_id": 6718196,
+                    "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/27937540#27937540",
+                    "body": "<p>Here is another way of doing this using OrderedDict with minimal code.</p>\n\n<pre><code>import collections\nimport itertools\n\ndef commonprefix(instrings):\n    \"\"\" Common prefix of a list of input strings using OrderedDict \"\"\"\n\n    d = collections.OrderedDict()\n\n    for instring in instrings:\n        for idx,char in enumerate(instring):\n            # Make sure index is added into key\n            d[(char, idx)] = d.get((char,idx), 0) + 1\n\n    # Return prefix of keys while value == length(instrings)\n    return ''.join([k[0] for k in itertools.takewhile(lambda x: d[x] == len(instrings), d)])\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7150287,
+                        "reputation": 29,
+                        "user_id": 5464616,
+                        "user_type": "registered",
+                        "display_name": "Mano Bastardo"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1446493051,
+                    "last_edit_date": 1446493051,
+                    "creation_date": 1446477303,
+                    "answer_id": 33480868,
+                    "question_id": 6718196,
+                    "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/33480868#33480868",
+                    "body": "<p>The second line of this employs the reduce function on each character in the input strings.  It returns a list of N+1 elements where N is length of the shortest input string.</p>\n\n<p>Each element in <strong>lot</strong> is either (a) the input character, if <em>all</em> input strings match at that position, or (b) None.  <strong>lot.index(None)</strong> is the position of the first <strong>None</strong> in lot: the length of the common prefix.  <strong>out</strong> is that common prefix.</p>\n\n<pre><code>val = [\"axc\", \"abc\", \"abc\"]\nlot = [reduce(lambda a, b: a if a == b else None, x) for x in zip(*val)] + [None]\nout = val[0][:lot.index(None)]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1983292,
+                                "reputation": 3476,
+                                "user_id": 1779316,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "thang"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1516745491,
+                            "post_id": 40790447,
+                            "comment_id": 83813085,
+                            "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/40790447#comment83813085_40790447",
+                            "body": "how is this clean?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9715473,
+                                "reputation": 75,
+                                "user_id": 7206041,
+                                "user_type": "registered",
+                                "display_name": "Patmanizer"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1518033942,
+                            "post_id": 40790447,
+                            "comment_id": 84342905,
+                            "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/40790447#comment84342905_40790447",
+                            "body": "how is it not clean? Other solutions have codes in blocks. Logic is simple enough to do it in a single assignment."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 9715473,
+                        "reputation": 75,
+                        "user_id": 7206041,
+                        "user_type": "registered",
+                        "display_name": "Patmanizer"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1505223371,
+                    "last_edit_date": 1505223371,
+                    "creation_date": 1480002684,
+                    "answer_id": 40790447,
+                    "question_id": 6718196,
+                    "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/40790447#40790447",
+                    "body": "<p>Here's a simple clean solution. The idea is to use zip() function to line up all the characters by putting them in a list of 1st characters, list of 2nd characters,...list of nth characters. Then iterate each list to check if they contain only 1 value.</p>\n\n<pre><code>a = [\"my_prefix_what_ever\", \"my_prefix_what_so_ever\", \"my_prefix_doesnt_matter\"]\n\nlist = [all(x[i] == x[i+1] for i in range(len(x)-1)) for x in zip(*a)]\n\nprint a[0][:list.index(0) if list.count(0) &gt; 0 else len(list)]\n</code></pre>\n\n<p>output: my_prefix_</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 535594,
+                        "reputation": 9271,
+                        "user_id": 904887,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "Rich Tier"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1686150683,
+                    "last_edit_date": 1686150683,
+                    "creation_date": 1587539809,
+                    "answer_id": 61359326,
+                    "question_id": 6718196,
+                    "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/61359326#61359326",
+                    "body": "<p>I had a slight variation of the problem which I think will be useful to document:</p>\n<p>I have a list like:</p>\n<ul>\n<li>my_prefix_what_ever</li>\n<li>my_prefix_what_so_ever</li>\n<li>my_prefix_doesnt_matter</li>\n<li>some_noise</li>\n<li>some_other_noise</li>\n</ul>\n<p>So I would expect <code>my_prefix</code> to be returned. That can be done with:</p>\n<pre><code>from collections import Counter\n\ndef get_longest_common_prefix(values, min_length):\n    substrings = [value[0: i-1] for value in values for i in range(min_length, len(value))]\n    counter = Counter(substrings)\n    # remove count of 1\n    counter -= Counter(set(substrings))\n    return max(counter, key=len)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3367911,
+                        "reputation": 1547,
+                        "user_id": 2827971,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "angus l"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1620226803,
+                    "creation_date": 1620226803,
+                    "answer_id": 67403843,
+                    "question_id": 6718196,
+                    "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/67403843#67403843",
+                    "body": "<p>In one line without using itertools, for no particular reason, although it does iterate through each character:</p>\n<pre><code>''.join([z[0] for z in zip(*(list(s) for s in strings)) if all(x==z[0] for x in z)])\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 16575447,
+                        "reputation": 62,
+                        "user_id": 11977391,
+                        "user_type": "registered",
+                        "display_name": "jugesh"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1644467797,
+                    "creation_date": 1644467797,
+                    "answer_id": 71059879,
+                    "question_id": 6718196,
+                    "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/71059879#71059879",
+                    "body": "<p>Find the common prefix in all words from the given input string, if there is no common prefix print -1</p>\n<pre><code>stringList = ['my_prefix_what_ever', 'my_prefix_what_so_ever', 'my_prefix_doesnt_matter']\nlen2 = len( stringList )\nif len2 != 0:\n    # let shortest word is prefix\n    prefix = min( stringList )\n    for i in range( len2 ):\n        word = stringList[ i ]\n        len1 = len( prefix )\n        # slicing each word as lenght of prefix\n        word = word[ 0:len1 ]\n        for j in range( len1 ):\n            # comparing each letter of word and prefix\n            if word[ j ] != prefix[ j ]:\n                # if letter does not match slice the prefix\n                prefix = prefix[ :j ]\n                break # after getting comman prefix move to next word\n    if len( prefix ) != 0:\n        print(&quot;common prefix: &quot;,prefix)\n    else:\n        print(&quot;-1&quot;)\nelse:\n     print(&quot;string List is empty&quot;) \n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6523059,
+                        "reputation": 401,
+                        "user_id": 5046650,
+                        "user_type": "registered",
+                        "display_name": "Rumpelstiltskin Koriat"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1683702072,
+                    "last_edit_date": 1683702072,
+                    "creation_date": 1683701074,
+                    "answer_id": 76215569,
+                    "question_id": 6718196,
+                    "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/76215569#76215569",
+                    "body": "<p>numpy matrix approach:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import numpy as np\n\n\ndef common_prefix(strings: list[str]) -&gt; str:\n    # common prefix cannot be larger than the smallest str\n    min_length = min(len(string) for string in strings)\n    strings = [string[:min_length] for string in strings]\n\n    array = np.array([list(x) for x in strings])  # covert to numpy matrix for column-wise operations\n    for i in range(min_length):\n        # for every column check if all char values are the same (same as first)\n        if not all(array[:, i] == array[0][i]):\n            # if not return the substring before the first char difference\n            return strings[0][:i]\n\n    # the common prefix is the full (shortest) str\n    return strings[0]\n\n\nassert common_prefix([&quot;str1&quot;, &quot;str2&quot;, &quot;str3&quot;]) == &quot;str&quot;\nassert common_prefix([&quot;s&quot;, &quot;st&quot;, &quot;str&quot;]) == &quot;s&quot;\nassert common_prefix([&quot;1str&quot;, &quot;str&quot;, &quot;str&quot;]) == &quot;&quot;\n\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 170189,
+                                "reputation": 13875,
+                                "user_id": 396732,
+                                "user_type": "registered",
+                                "accept_rate": 73,
+                                "display_name": "Kawu"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1699630857,
+                            "post_id": 77430376,
+                            "comment_id": 136560192,
+                            "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/77430376#comment136560192_77430376",
+                            "body": "What does this add to the accepted answer?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 24153494,
+                        "reputation": 101,
+                        "user_id": 18118017,
+                        "user_type": "registered",
+                        "display_name": "Ravi kumar"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1699266517,
+                    "creation_date": 1699266517,
+                    "answer_id": 77430376,
+                    "question_id": 6718196,
+                    "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/77430376#77430376",
+                    "body": "<pre><code>import os\nos.path.commonprefix(list_name) ## this will do the work\n</code></pre>\n<p><a href=\"https://docs.python.org/3/library/os.path.html\" rel=\"nofollow noreferrer\">OS module link</a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 8945046,
+                        "reputation": 792,
+                        "user_id": 6672815,
+                        "user_type": "registered",
+                        "display_name": "virgesmith"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1713523769,
+                    "creation_date": 1713523769,
+                    "answer_id": 78353131,
+                    "question_id": 6718196,
+                    "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings/78353131#78353131",
+                    "body": "<p>Posting yet another solution as its more concise than most of the solutions here</p>\n<pre><code>def common_prefix(strings: list[str]) -&gt; str:\n    shortest = min(strings, key=len)\n    for i, c in enumerate(shortest):\n        if any(x[i] != c for x in strings):\n            return shortest[:i]\n    return shortest\n\nassert common_prefix([&quot;Abc01&quot;, &quot;Abc02&quot;, &quot;Abc03&quot;]) == &quot;Abc0&quot;\nassert common_prefix([&quot;Abc01&quot;, &quot;Abc01&quot;]) == &quot;Abc01&quot;\nassert common_prefix([&quot;&quot;, &quot;Abc01&quot;]) == &quot;&quot;\nassert common_prefix([&quot;Xyz01&quot;, &quot;Abc01&quot;]) == &quot;&quot;\n</code></pre>\n<p>It will throw on an empty list but trivial to add a check for this if needed</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 170189,
+                "reputation": 13875,
+                "user_id": 396732,
+                "user_type": "registered",
+                "accept_rate": 73,
+                "display_name": "Kawu"
+            },
+            "comment_count": 3,
+            "is_answered": true,
+            "accepted_answer_id": 6718435,
+            "answer_count": 14,
+            "score": 97,
+            "last_activity_date": 1713523769,
+            "creation_date": 1310828611,
+            "last_edit_date": 1677985965,
+            "question_id": 6718196,
+            "link": "https://stackoverflow.com/questions/6718196/determine-the-common-prefix-of-multiple-strings",
+            "title": "Determine the common prefix of multiple strings",
+            "body": "<p>I have a set of strings, e.g.</p>\n\n<pre><code>my_prefix_what_ever\nmy_prefix_what_so_ever\nmy_prefix_doesnt_matter\n</code></pre>\n\n<p>I simply want to find the longest common portion of these strings, here the prefix. In the above the result should be</p>\n\n<pre><code>my_prefix_\n</code></pre>\n\n<p>The strings</p>\n\n<pre><code>my_prefix_what_ever\nmy_prefix_what_so_ever\nmy_doesnt_matter\n</code></pre>\n\n<p>should result in the prefix</p>\n\n<pre><code>my_\n</code></pre>\n\n<p>Is there a relatively painless way in Python to determine the prefix (without having to iterate over each character manually)?</p>\n\n<p>PS: I'm using Python 2.6.3.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6025
+}

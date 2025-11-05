@@ -1,0 +1,358 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "opencv",
+                "wolfram-mathematica",
+                "computer-vision"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 248820,
+                        "reputation": 17041,
+                        "user_id": 524436,
+                        "user_type": "registered",
+                        "display_name": "etarion"
+                    },
+                    "edited": false,
+                    "score": 2,
+                    "creation_date": 1335623756,
+                    "post_id": 10364201,
+                    "comment_id": 13355914,
+                    "link": "https://stackoverflow.com/questions/10364201/image-transformation-in-opencv#comment13355914_10364201",
+                    "body": "As he suggested in his answer, just use standard transforms (the one you tried to use in your first question) for each individual cell ..."
+                },
+                {
+                    "owner": {
+                        "account_id": 345336,
+                        "reputation": 52405,
+                        "user_id": 1134940,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "Abid Rahman K"
+                    },
+                    "reply_to_user": {
+                        "account_id": 248820,
+                        "reputation": 17041,
+                        "user_id": 524436,
+                        "user_type": "registered",
+                        "display_name": "etarion"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1335624730,
+                    "post_id": 10364201,
+                    "comment_id": 13356135,
+                    "link": "https://stackoverflow.com/questions/10364201/image-transformation-in-opencv#comment13356135_10364201",
+                    "body": "I used warp perspective which used 4 corners to transform. Are you saying to use the same taking 4 points of each cell? isn&#39;t it a time consuming process?"
+                },
+                {
+                    "owner": {
+                        "account_id": 248820,
+                        "reputation": 17041,
+                        "user_id": 524436,
+                        "user_type": "registered",
+                        "display_name": "etarion"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1335628869,
+                    "post_id": 10364201,
+                    "comment_id": 13357015,
+                    "link": "https://stackoverflow.com/questions/10364201/image-transformation-in-opencv#comment13357015_10364201",
+                    "body": "Are you talking embedded programming? I guess not, since you&#39;re using python ... on a desktop machine, no, it should not be noticeable, since it&#39;s only 81 cells ..."
+                },
+                {
+                    "owner": {
+                        "account_id": 27036,
+                        "reputation": 15737,
+                        "user_id": 70915,
+                        "user_type": "registered",
+                        "accept_rate": 90,
+                        "display_name": "Niki"
+                    },
+                    "edited": false,
+                    "score": 2,
+                    "creation_date": 1335733756,
+                    "post_id": 10364201,
+                    "comment_id": 13375185,
+                    "link": "https://stackoverflow.com/questions/10364201/image-transformation-in-opencv#comment13375185_10364201",
+                    "body": "@AbidRahmanK: I haven&#39;t tested that, but I&#39;d expect that the running time of the perspective warp transformation is proportional to the number of output pixels. So if it was fast enough to transform the whole grid, it should be fast enough transform 81 grid cells that are only 1/81 of the grid size."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 345336,
+                                "reputation": 52405,
+                                "user_id": 1134940,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Abid Rahman K"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1335724770,
+                            "post_id": 10374811,
+                            "comment_id": 13373297,
+                            "link": "https://stackoverflow.com/questions/10364201/image-transformation-in-opencv/10374811#comment13373297_10374811",
+                            "body": "Fine, that was marvelous. This is what i was looking for. I knew i could use <code>cv2.remap</code>, but not how to use. But is it necessary to use scipy? can&#39;t it be done with numpy and cv2 only? Also can be the same method used for whole image in a single step(ie without splitting into sub-blocks)?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1406946,
+                                "reputation": 14320,
+                                "user_id": 1334399,
+                                "user_type": "registered",
+                                "display_name": "fireant"
+                            },
+                            "reply_to_user": {
+                                "account_id": 345336,
+                                "reputation": 52405,
+                                "user_id": 1134940,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Abid Rahman K"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1335737068,
+                            "post_id": 10374811,
+                            "comment_id": 13375845,
+                            "link": "https://stackoverflow.com/questions/10364201/image-transformation-in-opencv/10374811#comment13375845_10374811",
+                            "body": "It was done for a part of the image to make it easier for myself typing the coordinates of the red points. In &quot;source&quot; you have the coordinates of the red points you have already detected and in &quot;destination&quot; their coordinates in the regular grid. If you&#39;d shared your code I could show how to do it in the code, no need to split the image into subregions. Reg. no use of Scipy, see the update in the answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 345336,
+                                "reputation": 52405,
+                                "user_id": 1134940,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Abid Rahman K"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1335767929,
+                            "post_id": 10374811,
+                            "comment_id": 13380781,
+                            "link": "https://stackoverflow.com/questions/10364201/image-transformation-in-opencv/10374811#comment13380781_10374811",
+                            "body": "<code>I&#39;d like to hear how your final code solves Sudokus</code>. which one do you want? how to solve the sudoku grid? or the opencv version on how to do ocr etc.? (solving sudoku grid is taken from a blog , ocr part etc written by myself)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1406946,
+                                "reputation": 14320,
+                                "user_id": 1334399,
+                                "user_type": "registered",
+                                "display_name": "fireant"
+                            },
+                            "reply_to_user": {
+                                "account_id": 345336,
+                                "reputation": 52405,
+                                "user_id": 1134940,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Abid Rahman K"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1335884382,
+                            "post_id": 10374811,
+                            "comment_id": 13412832,
+                            "link": "https://stackoverflow.com/questions/10364201/image-transformation-in-opencv/10374811#comment13412832_10374811",
+                            "body": "I meant an update from you when the sudoku solver is ready would be nice. If that answered your question, you could reward me by selecting as the answer :-)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 345336,
+                                "reputation": 52405,
+                                "user_id": 1134940,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Abid Rahman K"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1358173235,
+                            "post_id": 10374811,
+                            "comment_id": 19897506,
+                            "link": "https://stackoverflow.com/questions/10364201/image-transformation-in-opencv/10374811#comment19897506_10374811",
+                            "body": "Hi, what is the use of creating grid_x, grid_y in this code? what does they mean?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1406946,
+                                "reputation": 14320,
+                                "user_id": 1334399,
+                                "user_type": "registered",
+                                "display_name": "fireant"
+                            },
+                            "reply_to_user": {
+                                "account_id": 345336,
+                                "reputation": 52405,
+                                "user_id": 1134940,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Abid Rahman K"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1358255320,
+                            "post_id": 10374811,
+                            "comment_id": 19929183,
+                            "link": "https://stackoverflow.com/questions/10364201/image-transformation-in-opencv/10374811#comment19929183_10374811",
+                            "body": "<a href=\"http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.griddata.html\" rel=\"nofollow noreferrer\">docs.scipy.org/doc/scipy/reference/generated/&hellip;</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 345336,
+                                "reputation": 52405,
+                                "user_id": 1134940,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Abid Rahman K"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1358255796,
+                            "post_id": 10374811,
+                            "comment_id": 19929442,
+                            "link": "https://stackoverflow.com/questions/10364201/image-transformation-in-opencv/10374811#comment19929442_10374811",
+                            "body": "how did you selected the values for grid_x and grid_y ? Is it resulting image size?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1406946,
+                                "reputation": 14320,
+                                "user_id": 1334399,
+                                "user_type": "registered",
+                                "display_name": "fireant"
+                            },
+                            "reply_to_user": {
+                                "account_id": 345336,
+                                "reputation": 52405,
+                                "user_id": 1134940,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Abid Rahman K"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1358256261,
+                            "post_id": 10374811,
+                            "comment_id": 19929697,
+                            "link": "https://stackoverflow.com/questions/10364201/image-transformation-in-opencv/10374811#comment19929697_10374811",
+                            "body": "yes, read carefully the example in the link above, you get a very good idea how that function works."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3615208,
+                                "reputation": 3614,
+                                "user_id": 3015268,
+                                "user_type": "registered",
+                                "accept_rate": 59,
+                                "display_name": "Lightsout"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1473462531,
+                            "post_id": 10374811,
+                            "comment_id": 66166617,
+                            "link": "https://stackoverflow.com/questions/10364201/image-transformation-in-opencv/10374811#comment66166617_10374811",
+                            "body": "Just wondering how did you get the hard coded values in destination and source?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 231223,
+                                "reputation": 3283,
+                                "user_id": 495319,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Wodin"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3615208,
+                                "reputation": 3614,
+                                "user_id": 3015268,
+                                "user_type": "registered",
+                                "accept_rate": 59,
+                                "display_name": "Lightsout"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1476629232,
+                            "post_id": 10374811,
+                            "comment_id": 67416486,
+                            "link": "https://stackoverflow.com/questions/10364201/image-transformation-in-opencv/10374811#comment67416486_10374811",
+                            "body": "@bakalolo dest is a regular grid, so you can calculate the values. In src you need to detect where the lines cross. For one way to do this, see <a href=\"http://stackoverflow.com/a/10226971/1134940\">@nikie&#39;s answer</a> from the referenced question."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1406946,
+                        "reputation": 14320,
+                        "user_id": 1334399,
+                        "user_type": "registered",
+                        "display_name": "fireant"
+                    },
+                    "comment_count": 10,
+                    "is_accepted": true,
+                    "score": 40,
+                    "last_activity_date": 1335767680,
+                    "last_edit_date": 1335767680,
+                    "creation_date": 1335724479,
+                    "answer_id": 10374811,
+                    "question_id": 10364201,
+                    "link": "https://stackoverflow.com/questions/10364201/image-transformation-in-opencv/10374811#10374811",
+                    "body": "<p>Apart from etarion's suggestion, you could also use the <a href=\"http://opencv.itseez.com/modules/imgproc/doc/geometric_transformations.html?highlight=cv2.remap#cv2.remap\" rel=\"noreferrer\">remap</a> function. I wrote a quick script to show how you can do this. As you see coding this is really easy in Python. This is the test image:</p>\n\n<p><img src=\"https://i.stack.imgur.com/PJing.png\" alt=\"distorted image\"></p>\n\n<p>and this is the result after warping:</p>\n\n<p><img src=\"https://i.stack.imgur.com/i7fyM.png\" alt=\"warped image\"></p>\n\n<p>And here is the code:</p>\n\n<pre><code>import cv2\nfrom scipy.interpolate import griddata\nimport numpy as np\n\ngrid_x, grid_y = np.mgrid[0:149:150j, 0:149:150j]\ndestination = np.array([[0,0], [0,49], [0,99], [0,149],\n                  [49,0],[49,49],[49,99],[49,149],\n                  [99,0],[99,49],[99,99],[99,149],\n                  [149,0],[149,49],[149,99],[149,149]])\nsource = np.array([[22,22], [24,68], [26,116], [25,162],\n                  [64,19],[65,64],[65,114],[64,159],\n                  [107,16],[108,62],[108,111],[107,157],\n                  [151,11],[151,58],[151,107],[151,156]])\ngrid_z = griddata(destination, source, (grid_x, grid_y), method='cubic')\nmap_x = np.append([], [ar[:,1] for ar in grid_z]).reshape(150,150)\nmap_y = np.append([], [ar[:,0] for ar in grid_z]).reshape(150,150)\nmap_x_32 = map_x.astype('float32')\nmap_y_32 = map_y.astype('float32')\n\norig = cv2.imread(\"tmp.png\")\nwarped = cv2.remap(orig, map_x_32, map_y_32, cv2.INTER_CUBIC)\ncv2.imwrite(\"warped.png\", warped)\n</code></pre>\n\n<p>I suppose you can google and find what griddata does. In short, it does interpolation and here we use it to convert sparse mappings to dense mappings as cv2.remap requires dense mappings. We just need to convert to the values to float32 as OpenCV complains about the float64 type. Please let me know how it goes.</p>\n\n<p><strong>Update</strong>: If you don't want to rely on Scipy, one way is to implement the 2d interpolation function in your code, for example, see the source code of griddata in Scipy or a simpler one like this <a href=\"http://inasafe.readthedocs.org/en/latest/_modules/engine/interpolation2d.html\" rel=\"noreferrer\">http://inasafe.readthedocs.org/en/latest/_modules/engine/interpolation2d.html</a> which depends only on numpy. Though, I'd suggest to use Scipy or another library for this, though I see why requiring only CV2 and numpy may be better for a case like this. I'd like to hear how your final code solves Sudokus.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 170035,
+                        "reputation": 6524,
+                        "user_id": 396483,
+                        "user_type": "registered",
+                        "accept_rate": 68,
+                        "display_name": "john k"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1506915414,
+                    "creation_date": 1506915414,
+                    "answer_id": 46519160,
+                    "question_id": 10364201,
+                    "link": "https://stackoverflow.com/questions/10364201/image-transformation-in-opencv/46519160#46519160",
+                    "body": "<p>if you have source points and end points (you only need 4), you can plug them into cv2.getPerspectiveTransform, and use that result in cv2.warpPerspective.  Gives you a nice flat result.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 345336,
+                "reputation": 52405,
+                "user_id": 1134940,
+                "user_type": "registered",
+                "accept_rate": 78,
+                "display_name": "Abid Rahman K"
+            },
+            "comment_count": 4,
+            "is_answered": true,
+            "accepted_answer_id": 10374811,
+            "answer_count": 2,
+            "score": 24,
+            "last_activity_date": 1714811023,
+            "creation_date": 1335621684,
+            "last_edit_date": 1495540430,
+            "question_id": 10364201,
+            "link": "https://stackoverflow.com/questions/10364201/image-transformation-in-opencv",
+            "title": "Image transformation in OpenCV",
+            "body": "<p>This question is related to this question: <a href=\"https://stackoverflow.com/questions/10196198/how-to-remove-convexity-defects-in-sudoku-square\"><code>How to remove convexity defects in sudoku square</code></a></p>\n\n<p>I was trying  to implement <a href=\"https://stackoverflow.com/a/10226971/1134940\"><code>nikie's answer</code></a> in <code>Mathematica to OpenCV-Python</code>. But i am stuck at the final step of procedure. </p>\n\n<p>ie I got the all intersection points in square like below:</p>\n\n<p><img src=\"https://i.stack.imgur.com/fTZBd.png\" alt=\"enter image description here\"></p>\n\n<p>Now, i want to transform this into a perfect square of size (450,450) as given below:</p>\n\n<p><img src=\"https://i.stack.imgur.com/Pjc5D.png\" alt=\"enter image description here\"></p>\n\n<p>(Never mind the brightness difference of two images).</p>\n\n<p><strong>Question:</strong>\nHow can i do this in OpenCV-Python? I am using <code>cv2</code> version.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7658
+}

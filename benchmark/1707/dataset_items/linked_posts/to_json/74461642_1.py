@@ -1,0 +1,10 @@
+obj = Person("John", 27)
+obj.gender = "Male"
+print("greeting:", hasattr(obj, 'greeting'))
+print("name:", hasattr(obj, 'name'))
+print("age:", hasattr(obj, 'age'))
+print("gender:", hasattr(obj, 'gender'))
+print("test:", hasattr(obj, 'test'))
+print("__init__:", hasattr(obj, '__init__'))
+print("__str__:", hasattr(obj, '__str__'))
+print("__module__:", hasattr(obj, '__module__'))

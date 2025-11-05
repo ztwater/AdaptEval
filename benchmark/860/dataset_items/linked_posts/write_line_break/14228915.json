@@ -1,0 +1,214 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "yaml",
+                "pyyaml"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 376984,
+                                "reputation": 56392,
+                                "user_id": 728795,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Andrei"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1404744528,
+                            "post_id": 16561170,
+                            "comment_id": 38140452,
+                            "link": "https://stackoverflow.com/questions/14228915/formatting-pyyaml-dump-output/16561170#comment38140452_16561170",
+                            "body": "Thanks! Had to use something similar for lists formatting. PyYAML does not put indent before <code>-</code>, while YAML consuming library which we use expected some indentation there. So we had to do <code>replace(&#39;-   &#39;, &#39;  - &#39;)</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1373414,
+                                "reputation": 73747,
+                                "user_id": 1307905,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Anthon"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1502807128,
+                            "post_id": 16561170,
+                            "comment_id": 78347827,
+                            "link": "https://stackoverflow.com/questions/14228915/formatting-pyyaml-dump-output/16561170#comment78347827_16561170",
+                            "body": "That node are passive is true but irrelevant, as nodes don&#39;t emit any other information either (i.e. <code>ScalarNode</code>s don&#39;t emit their own value). The <code>Emitter</code> does get a node&#39;s value (when appropriate) and emits it, and if you attach extra information on nodes, and enhance the relevant Emitter methods to handle this extra information (like I do in <code>ruamel.yaml</code>), then there is absolutely no need to do that kind of, coarse, string based post-processing."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1373414,
+                                "reputation": 73747,
+                                "user_id": 1307905,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Anthon"
+                            },
+                            "reply_to_user": {
+                                "account_id": 376984,
+                                "reputation": 56392,
+                                "user_id": 728795,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Andrei"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1502807247,
+                            "post_id": 16561170,
+                            "comment_id": 78347897,
+                            "link": "https://stackoverflow.com/questions/14228915/formatting-pyyaml-dump-output/16561170#comment78347897_16561170",
+                            "body": "@Andrei With <a href=\"https://pypi.python.org/pypi/ruamel.yaml\" rel=\"nofollow noreferrer\"><code>ruamel.yaml</code></a> you can set <code>yaml.indent(sequence=3, offset=1)</code> and get  that output without post-processing."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 76022,
+                        "reputation": 722,
+                        "user_id": 217895,
+                        "user_type": "registered",
+                        "display_name": "Yuri Baburov"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": true,
+                    "score": 22,
+                    "last_activity_date": 1368609414,
+                    "creation_date": 1368609414,
+                    "answer_id": 16561170,
+                    "question_id": 14228915,
+                    "link": "https://stackoverflow.com/questions/14228915/formatting-pyyaml-dump-output/16561170#16561170",
+                    "body": "<p>There's no easy way to do this with the library (Node objects in yaml dumper syntax tree are passive and can't emit this info), so I ended up with</p>\n\n<pre><code>stream = yaml.dump(list_of_dicts, default_flow_style = False)\nfile.write(stream.replace('\\n- ', '\\n\\n- '))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4675872,
+                                "reputation": 824,
+                                "user_id": 3786245,
+                                "user_type": "registered",
+                                "display_name": "Chih-Hsuan Yen"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1567006585,
+                            "post_id": 44284819,
+                            "comment_id": 101835965,
+                            "link": "https://stackoverflow.com/questions/14228915/formatting-pyyaml-dump-output/44284819#comment101835965_44284819",
+                            "body": "Inspired by this, I created another version <a href=\"https://github.com/yaml/pyyaml/issues/127#issuecomment-525800484\" rel=\"nofollow noreferrer\">github.com/yaml/pyyaml/issues/127#issuecomment-525800484</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 73059,
+                        "reputation": 27668,
+                        "user_id": 210613,
+                        "user_type": "registered",
+                        "accept_rate": 77,
+                        "display_name": "synthesizerpatel"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1496233684,
+                    "creation_date": 1496233684,
+                    "answer_id": 44284819,
+                    "question_id": 14228915,
+                    "link": "https://stackoverflow.com/questions/14228915/formatting-pyyaml-dump-output/44284819#44284819",
+                    "body": "<p>While its a little klunky, I had the same goal as OP. \nI solved it by subclassing yaml.Dumper</p>\n\n<pre><code>from yaml import Dumper\n\nclass MyDumper(Dumper):\n\n  def write_indent(self):\n    indent = self.indent or 0\n    if not self.indention or self.column &gt; indent \\\n        or (self.column == indent and not self.whitespace):\n      self.write_line_break()\n\n\n    ##########$#######################################\n    # On the first level of indentation, add an extra\n    # newline\n\n    if indent == 2:\n      self.write_line_break()\n\n    ##################################################\n\n    if self.column &lt; indent:\n      self.whitespace = True\n      data = u' '*(indent-self.column)\n      self.column = indent\n      if self.encoding:\n        data = data.encode(self.encoding)\n      self.stream.write(data)\n</code></pre>\n\n<p><strong>You call it like this:</strong></p>\n\n<pre><code>print dump(python_dict, default_flow_style=False, width=79, Dumper=MyDumper)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7148456,
+                                "reputation": 1013,
+                                "user_id": 5463380,
+                                "user_type": "registered",
+                                "accept_rate": 46,
+                                "display_name": "Iron Attorney"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1560004899,
+                            "post_id": 45694748,
+                            "comment_id": 99602161,
+                            "link": "https://stackoverflow.com/questions/14228915/formatting-pyyaml-dump-output/45694748#comment99602161_45694748",
+                            "body": "Good answer, and cheers for forking your own improved yaml parser, I&#39;ll have a go with that now as I&#39;m looking into dump formatting issues myself now. It occurs to me though, pyyaml has continued to be updated since this post. Have they improved on formatting since? Or have any of your contributions been merged into pyyaml?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1373414,
+                                "reputation": 73747,
+                                "user_id": 1307905,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Anthon"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7148456,
+                                "reputation": 1013,
+                                "user_id": 5463380,
+                                "user_type": "registered",
+                                "accept_rate": 46,
+                                "display_name": "Iron Attorney"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1560006503,
+                            "post_id": 45694748,
+                            "comment_id": 99602482,
+                            "link": "https://stackoverflow.com/questions/14228915/formatting-pyyaml-dump-output/45694748#comment99602482_45694748",
+                            "body": "No on both questions. The only real chance that I know of is that PyYAML&#39;s <code>load()</code> is no longer as dangerous if there is no 100% control over the input. It is still YAML 1.1, multiple long-standing bugs are still not fixed. Changes seem to be mostly for compatibility with newer versions of Python. I think my (and all other PRs) were dropped with the move from bitbucket to github (an effort that would have been better spent on bugfixing PyYAML IMHO). ruamel.yaml now has  options to control an extra newline after the item indicator (<code>-</code>): <code>.compact_seq_seq</code> resp. <code>.compact_seq_map</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1373414,
+                        "reputation": 73747,
+                        "user_id": 1307905,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "Anthon"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1502806601,
+                    "creation_date": 1502806601,
+                    "answer_id": 45694748,
+                    "question_id": 14228915,
+                    "link": "https://stackoverflow.com/questions/14228915/formatting-pyyaml-dump-output/45694748#45694748",
+                    "body": "<p>PyYAML documentation only talks about <code>dump()</code> arguments briefly, because there is not much to say. This kind of control is not provided by PyYAML.</p>\n\n<p>To allow preservation of such empty (and comment) lines in YAML that is loaded, I started the development of the <a href=\"https://pypi.python.org/pypi/ruamel.yaml\" rel=\"noreferrer\"><code>ruamel.yaml</code></a> library, a superset of the stalled PyYAML, with YAML 1.2 compatibility, many features added and bugs fixed. With <code>ruamel.yaml</code> you can do:</p>\n\n<pre><code>import sys\nimport ruamel.yaml\n\nyaml_str = \"\"\"\\\n- key_1: value_a\n  key_2: value_b\n\n- key_1: value_c\n  key_2: value_d\n\n- key_1: value_x  # a few before this were ellipsed\n  key_2: value_y\n\"\"\"\n\nyaml = ruamel.yaml.YAML()\ndata = yaml.load(yaml_str)\nyaml.dump(data, sys.stdout)\n</code></pre>\n\n<p>and get the output exactly the same as the input string (including the comment).</p>\n\n<p>You can also build the output that you want from scratch:</p>\n\n<pre><code>import sys\nimport ruamel.yaml\n\nyaml = ruamel.yaml.YAML()\nlist_of_dicts = yaml.seq([ { 'key_1': 'value_a', 'key_2': 'value_b'},\n                           { 'key_1': 'value_c', 'key_2': 'value_d'},\n                           { 'key_1': 'value_x', 'key_2': 'value_y'}  ])\n\nfor idx in range(1, len(list_of_dicts)):\n    list_of_dicts.yaml_set_comment_before_after_key(idx, before='\\n')\n\nruamel.yaml.comments.dump_comments(list_of_dicts)\nyaml.dump(list_of_dicts, sys.stdout)\n</code></pre>\n\n<p>The conversion using <code>yaml.seq()</code> is necessary to create an object that  allows attachment of the empty-lines through special attributes.</p>\n\n<p>The library also allows preservation/easy-setting of quotes and literal style on strings, format of int (hex, octal, binary) and floats. As well as separate indent specification for mappings and sequences (although not for individual mappings or sequences).</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 2220622,
+                "reputation": 387,
+                "user_id": 1960062,
+                "user_type": "registered",
+                "display_name": "nope"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 16561170,
+            "answer_count": 3,
+            "score": 25,
+            "last_activity_date": 1502806601,
+            "creation_date": 1357710051,
+            "last_edit_date": 1502805635,
+            "question_id": 14228915,
+            "link": "https://stackoverflow.com/questions/14228915/formatting-pyyaml-dump-output",
+            "title": "Formatting PyYAML dump() output",
+            "body": "<p>I have a list of dictionaries, which I want to serialize:</p>\n\n<pre><code>list_of_dicts = [ { 'key_1': 'value_a', 'key_2': 'value_b'},\n                  { 'key_1': 'value_c', 'key_2': 'value_d'},\n                  ...\n                  { 'key_1': 'value_x', 'key_2': 'value_y'}  ]\n\nyaml.dump(list_of_dicts, file, default_flow_style = False)\n</code></pre>\n\n<p>produces the following:</p>\n\n<pre><code>- key_1: value_a\n  key_2: value_b\n- key_1: value_c\n  key_2: value_d\n(...)\n- key_1: value_x\n  key_2: value_y\n</code></pre>\n\n<p>But i'd like to get this:</p>\n\n<pre><code>- key_1: value_a\n  key_2: value_b\n                     &lt;-|\n- key_1: value_c       | \n  key_2: value_d       |  empty lines between blocks\n(...)                  |\n                     &lt;-|\n- key_1: value_x\n  key_2: value_y\n</code></pre>\n\n<p>PyYAML <a href=\"http://pyyaml.org/wiki/PyYAMLDocumentation\" rel=\"noreferrer\">documentation</a> talks about <code>dump()</code> arguments very briefly and doesn't seem to have anything on this particular subject.</p>\n\n<p>Editing the file manually to add newlines improves readability quite a lot, and the structure still loads just fine afterwards, but I have no idea how to make dump method generate it.</p>\n\n<p>And in general, is there a way to have more control over output formatting besides simple indentation?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8362
+}

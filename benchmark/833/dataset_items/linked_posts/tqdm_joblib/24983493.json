@@ -1,0 +1,715 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "multithreading",
+                "parallel-processing",
+                "multiprocessing",
+                "joblib"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 89800,
+                                "reputation": 63305,
+                                "user_id": 247542,
+                                "user_type": "registered",
+                                "accept_rate": 59,
+                                "display_name": "Cerin"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1406646575,
+                            "post_id": 24984155,
+                            "comment_id": 38905724,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/24984155#comment38905724_24984155",
+                            "body": "Great research, thanks. I didn&#39;t notice the callback attribute."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 351545,
+                                "reputation": 4410,
+                                "user_id": 688080,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "Ziyuan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1423748966,
+                            "post_id": 24984155,
+                            "comment_id": 45280763,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/24984155#comment45280763_24984155",
+                            "body": "I found the documentation of joblib is very limited. I have to dig into the source code for this CallBack class. My question: can I customize the arguments when <code>__call__</code> is called? (sub-classing the whole Parallel class may be one way but it&#39;s heavy for me)."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2368363,
+                        "reputation": 93334,
+                        "user_id": 2073595,
+                        "user_type": "registered",
+                        "display_name": "dano"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 22,
+                    "last_activity_date": 1406564232,
+                    "last_edit_date": 1406564232,
+                    "creation_date": 1406485454,
+                    "answer_id": 24984155,
+                    "question_id": 24983493,
+                    "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/24984155#24984155",
+                    "body": "<p>The documentation you linked to states that <code>Parallel</code> has an optional progress meter. It's implemented by using the <code>callback</code> keyword argument provided by <code>multiprocessing.Pool.apply_async</code>:</p>\n\n<pre><code># This is inside a dispatch function\nself._lock.acquire()\njob = self._pool.apply_async(SafeFunction(func), args,\n            kwargs, callback=CallBack(self.n_dispatched, self))\nself._jobs.append(job)\nself.n_dispatched += 1\n</code></pre>\n\n<p>...</p>\n\n<pre><code>class CallBack(object):\n    \"\"\" Callback used by parallel: it is used for progress reporting, and\n        to add data to be processed\n    \"\"\"\n    def __init__(self, index, parallel):\n        self.parallel = parallel\n        self.index = index\n\n    def __call__(self, out):\n        self.parallel.print_progress(self.index)\n        if self.parallel._original_iterable:\n            self.parallel.dispatch_next()\n</code></pre>\n\n<p>And here's <code>print_progress</code>:</p>\n\n<pre><code>def print_progress(self, index):\n    elapsed_time = time.time() - self._start_time\n\n    # This is heuristic code to print only 'verbose' times a messages\n    # The challenge is that we may not know the queue length\n    if self._original_iterable:\n        if _verbosity_filter(index, self.verbose):\n            return\n        self._print('Done %3i jobs       | elapsed: %s',\n                    (index + 1,\n                     short_format_time(elapsed_time),\n                    ))\n    else:\n        # We are finished dispatching\n        queue_length = self.n_dispatched\n        # We always display the first loop\n        if not index == 0:\n            # Display depending on the number of remaining items\n            # A message as soon as we finish dispatching, cursor is 0\n            cursor = (queue_length - index + 1\n                      - self._pre_dispatch_amount)\n            frequency = (queue_length // self.verbose) + 1\n            is_last_item = (index + 1 == queue_length)\n            if (is_last_item or cursor % frequency):\n                return\n        remaining_time = (elapsed_time / (index + 1) *\n                    (self.n_dispatched - index - 1.))\n        self._print('Done %3i out of %3i | elapsed: %s remaining: %s',\n                    (index + 1,\n                     queue_length,\n                     short_format_time(elapsed_time),\n                     short_format_time(remaining_time),\n                    ))\n</code></pre>\n\n<p>The way they implement this is kind of weird, to be honest - it seems to assume that tasks will always be completed in the order that they're started. The <code>index</code> variable that goes to <code>print_progress</code> is just the <code>self.n_dispatched</code> variable at the time the job was actually started. So the first job launched will always finish with an <code>index</code> of 0, even if say, the third job finished first. It also means they don't actually keep track of the number of <em>completed</em> jobs. So there's no instance variable for you to monitor.</p>\n\n<p>I think your best best is to make your own CallBack class, and monkey patch Parallel:</p>\n\n<pre><code>from math import sqrt\nfrom collections import defaultdict\nfrom joblib import Parallel, delayed\n\nclass CallBack(object):\n    completed = defaultdict(int)\n\n    def __init__(self, index, parallel):\n        self.index = index\n        self.parallel = parallel\n\n    def __call__(self, index):\n        CallBack.completed[self.parallel] += 1\n        print(\"done with {}\".format(CallBack.completed[self.parallel]))\n        if self.parallel._original_iterable:\n            self.parallel.dispatch_next()\n\nimport joblib.parallel\njoblib.parallel.CallBack = CallBack\n\nif __name__ == \"__main__\":\n    print(Parallel(n_jobs=2)(delayed(sqrt)(i**2) for i in range(10)))\n</code></pre>\n\n<p>Output:</p>\n\n<pre><code>done with 1\ndone with 2\ndone with 3\ndone with 4\ndone with 5\ndone with 6\ndone with 7\ndone with 8\ndone with 9\ndone with 10\n[0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0]\n</code></pre>\n\n<p>That way, your callback gets called whenever a job completes, rather than the default one.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 82720,
+                        "reputation": 8207,
+                        "user_id": 232371,
+                        "user_type": "registered",
+                        "accept_rate": 82,
+                        "display_name": "Ben Usman"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1478237742,
+                    "last_edit_date": 1495541846,
+                    "creation_date": 1478237742,
+                    "answer_id": 40415927,
+                    "question_id": 24983493,
+                    "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/40415927#40415927",
+                    "body": "<p>Here's another answer to your question with the following syntax:</p>\n\n<pre><code>aprun = ParallelExecutor(n_jobs=5)\n\na1 = aprun(total=25)(delayed(func)(i ** 2 + j) for i in range(5) for j in range(5))\na2 = aprun(total=16)(delayed(func)(i ** 2 + j) for i in range(4) for j in range(4))\na2 = aprun(bar='txt')(delayed(func)(i ** 2 + j) for i in range(4) for j in range(4))\na2 = aprun(bar=None)(delayed(func)(i ** 2 + j) for i in range(4) for j in range(4))\n</code></pre>\n\n<p><a href=\"https://stackoverflow.com/a/40415477/232371\">https://stackoverflow.com/a/40415477/232371</a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3315775,
+                        "reputation": 706,
+                        "user_id": 2788187,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "Connor Clark"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 11,
+                    "last_activity_date": 1485203309,
+                    "creation_date": 1485203309,
+                    "answer_id": 41815007,
+                    "question_id": 24983493,
+                    "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/41815007#41815007",
+                    "body": "<p>Expanding on dano's answer for the newest version of the joblib library. There were a couple of changes to the internal implementation.</p>\n\n<pre><code>from joblib import Parallel, delayed\nfrom collections import defaultdict\n\n# patch joblib progress callback\nclass BatchCompletionCallBack(object):\n  completed = defaultdict(int)\n\n  def __init__(self, time, index, parallel):\n    self.index = index\n    self.parallel = parallel\n\n  def __call__(self, index):\n    BatchCompletionCallBack.completed[self.parallel] += 1\n    print(\"done with {}\".format(BatchCompletionCallBack.completed[self.parallel]))\n    if self.parallel._original_iterator is not None:\n      self.parallel.dispatch_next()\n\nimport joblib.parallel\njoblib.parallel.BatchCompletionCallBack = BatchCompletionCallBack\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4195506,
+                                "reputation": 647,
+                                "user_id": 3437018,
+                                "user_type": "registered",
+                                "display_name": "lawrencegripper"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1562854668,
+                            "post_id": 49858242,
+                            "comment_id": 100517156,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/49858242#comment100517156_49858242",
+                            "body": "Works great. If you want to print a time estimate too you can adapt <code>__call__</code> with the following:   ``` time_remaining = (this_batch_duration / self.batch_size) * (total_n_jobs - self.parallel.n_completed_tasks)         print(             &quot;\\rProgress: [{0:50s}] {1:.1f}% est {2:1f}mins left&quot;.format(&#39;#&#39; * int(progress * 50), progress*100, time_remaining/60)             , end=&quot;&quot;, flush=True) ```"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 9107891,
+                        "reputation": 81,
+                        "user_id": 6777626,
+                        "user_type": "registered",
+                        "display_name": "Nikolay"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1630163475,
+                    "last_edit_date": 1630163475,
+                    "creation_date": 1523884405,
+                    "answer_id": 49858242,
+                    "question_id": 24983493,
+                    "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/49858242#49858242",
+                    "body": "<p><strong>Text progress bar</strong></p>\n<p>One more variant for those, who want text progress bar without additional modules like tqdm. Actual for joblib=0.11, python 3.5.2 on linux at 16.04.2018 and shows progress upon subtask completion.</p>\n<p>Redefine native class:</p>\n<pre><code>class BatchCompletionCallBack(object):\n    # Added code - start\n    global total_n_jobs\n    # Added code - end\n    def __init__(self, dispatch_timestamp, batch_size, parallel):\n        self.dispatch_timestamp = dispatch_timestamp\n        self.batch_size = batch_size\n        self.parallel = parallel\n\n    def __call__(self, out):\n        self.parallel.n_completed_tasks += self.batch_size\n        this_batch_duration = time.time() - self.dispatch_timestamp\n\n        self.parallel._backend.batch_completed(self.batch_size,\n                                           this_batch_duration)\n        self.parallel.print_progress()\n        # Added code - start\n        progress = self.parallel.n_completed_tasks / total_n_jobs\n        print(\n            &quot;\\rProgress: [{0:50s}] {1:.1f}%&quot;.format('#' * int(progress * 50), progress*100)\n            , end=&quot;&quot;, flush=True)\n        if self.parallel.n_completed_tasks == total_n_jobs:\n            print('\\n')\n        # Added code - end\n        if self.parallel._original_iterator is not None:\n            self.parallel.dispatch_next()\n\nimport joblib.parallel\nimport time\njoblib.parallel.BatchCompletionCallBack = BatchCompletionCallBack\n</code></pre>\n<p>Define global constant before usage with total number of jobs:</p>\n<pre><code>total_n_jobs = 10\n</code></pre>\n<p>This will result in something like this:</p>\n<pre><code>Progress: [########################################          ] 80.0%\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 296230,
+                                "reputation": 196,
+                                "user_id": 601073,
+                                "user_type": "registered",
+                                "accept_rate": 25,
+                                "display_name": "Noah"
+                            },
+                            "edited": false,
+                            "score": 61,
+                            "creation_date": 1548981445,
+                            "post_id": 49950707,
+                            "comment_id": 95750316,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/49950707#comment95750316_49950707",
+                            "body": "I don&#39;t think this is actually monitoring the completion of running jobs, just the queuing of jobs. If you were to insert a <code>time.sleep(1)</code> at the start of <code>myfun</code> you would find the tqdm progress finishes almost instantly, but <code>results</code> takes a few more seconds to populate."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6572093,
+                                "reputation": 2459,
+                                "user_id": 5079666,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Jon"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1548991762,
+                            "post_id": 49950707,
+                            "comment_id": 95752679,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/49950707#comment95752679_49950707",
+                            "body": "Yes, that\u2019s partly correct. It is tracking the job starts vs the completions, but the other issue is that there is also a delay caused by overhead after all jobs are completed. Once all tasks are completed results need to be collected and this can take quite a while."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8863600,
+                                "reputation": 1592,
+                                "user_id": 6619344,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "devforfu"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1558527173,
+                            "post_id": 49950707,
+                            "comment_id": 99129666,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/49950707#comment99129666_49950707",
+                            "body": "I believe this answer doesn&#39;t really answer the question. As it was mentioned, one will track <i>queuing</i> and not the <i>execution</i> itself with this approach. The approach with callback shown below seems to be more precise in relation to the question."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6572093,
+                                "reputation": 2459,
+                                "user_id": 5079666,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Jon"
+                            },
+                            "reply_to_user": {
+                                "account_id": 8863600,
+                                "reputation": 1592,
+                                "user_id": 6619344,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "devforfu"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1558576839,
+                            "post_id": 49950707,
+                            "comment_id": 99150161,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/49950707#comment99150161_49950707",
+                            "body": "@devforfu yes, that was addressed in the former comment."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 462034,
+                                "reputation": 5337,
+                                "user_id": 864112,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Henry Henrinson"
+                            },
+                            "edited": false,
+                            "score": 13,
+                            "creation_date": 1594471108,
+                            "post_id": 49950707,
+                            "comment_id": 111140924,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/49950707#comment111140924_49950707",
+                            "body": "This answer is incorrect, as it does not answer the question. This answer should be unaccepted."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6892872,
+                                "reputation": 944,
+                                "user_id": 5299750,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "Christian Steinmeyer"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1597910816,
+                            "post_id": 49950707,
+                            "comment_id": 112287961,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/49950707#comment112287961_49950707",
+                            "body": "The <a href=\"https://stackoverflow.com/a/58936697/5299750\">provided answer by frenzykryger below</a> contains a great solution to the problem of this answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2187569,
+                                "reputation": 1877,
+                                "user_id": 1935611,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "anilbey"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1616677737,
+                            "post_id": 49950707,
+                            "comment_id": 118081652,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/49950707#comment118081652_49950707",
+                            "body": "It&#39;s wrong. It only counts the job start times which happens immediately."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 256068,
+                                "reputation": 4489,
+                                "user_id": 536538,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "Marc Maxmeister"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1645821038,
+                            "post_id": 49950707,
+                            "comment_id": 125980559,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/49950707#comment125980559_49950707",
+                            "body": "This worked for me with a reasonably complex logistic regression function called on thousands of probes in parallel:  <code>stats = parallel(func(data, phenotype) for data in tqdm(meth_data, total=len(all_probes), desc=&#39;Probes&#39;) )</code>  [meth_data is a dataframe and I&#39;m passing each column through the function]"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 19656919,
+                                "reputation": 982,
+                                "user_id": 14389345,
+                                "user_type": "registered",
+                                "display_name": "Shriraj Hegde"
+                            },
+                            "reply_to_user": {
+                                "account_id": 89800,
+                                "reputation": 63305,
+                                "user_id": 247542,
+                                "user_type": "registered",
+                                "accept_rate": 59,
+                                "display_name": "Cerin"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1666624451,
+                            "post_id": 49950707,
+                            "comment_id": 130975700,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/49950707#comment130975700_49950707",
+                            "body": "Oct 2022 and this wrong answer is still the accepted answer. This will just show the progress of start of jobs. @Cerin please change the accepted answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 26742667,
+                                "reputation": 423,
+                                "user_id": 20343209,
+                                "user_type": "registered",
+                                "display_name": "someone"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1689948148,
+                            "post_id": 49950707,
+                            "comment_id": 135289276,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/49950707#comment135289276_49950707",
+                            "body": "While this answer is indeed technically wrong, as several comments have pointed out, it&#39;s still useful: it&#39;s the simplest solution, way easier to do that the other answers, and when I&#39;m using it with a large number of short jobs, completion is not very long after the queueing, so in some cases it can be good enough."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6572093,
+                        "reputation": 2459,
+                        "user_id": 5079666,
+                        "user_type": "registered",
+                        "accept_rate": 67,
+                        "display_name": "Jon"
+                    },
+                    "comment_count": 10,
+                    "is_accepted": true,
+                    "score": 27,
+                    "last_activity_date": 1524265165,
+                    "creation_date": 1524265165,
+                    "answer_id": 49950707,
+                    "question_id": 24983493,
+                    "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/49950707#49950707",
+                    "body": "<p>Why can't you simply use <code>tqdm</code>? The following worked for me</p>\n\n<pre><code>from joblib import Parallel, delayed\nfrom datetime import datetime\nfrom tqdm import tqdm\n\ndef myfun(x):\n    return x**2\n\nresults = Parallel(n_jobs=8)(delayed(myfun)(i) for i in tqdm(range(1000))\n100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 1000/1000 [00:00&lt;00:00, 10563.37it/s]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2187569,
+                                "reputation": 1877,
+                                "user_id": 1935611,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "anilbey"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1616678673,
+                            "post_id": 56393240,
+                            "comment_id": 118082157,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/56393240#comment118082157_56393240",
+                            "body": "Wrong, this only counts the job start times which will be immediate no matter what function you are wrapping."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11125610,
+                                "reputation": 542,
+                                "user_id": 8825823,
+                                "user_type": "registered",
+                                "display_name": "\u0414\u043c\u0438\u0442\u0440\u043e \u041e\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440\u043e\u0432\u0438\u0447"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2187569,
+                                "reputation": 1877,
+                                "user_id": 1935611,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "anilbey"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1617806287,
+                            "post_id": 56393240,
+                            "comment_id": 118410528,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/56393240#comment118410528_56393240",
+                            "body": "How can it be wrong if it&#39;s from the official documentation? <a href=\"https://joblib.readthedocs.io/en/latest/\" rel=\"nofollow noreferrer\">joblib.readthedocs.io/en/latest</a> Ctrl+F for &quot;Parallel(n_jobs=1)&quot; And my answer was about running tqdm in Jupyter notebook. It is almost the same as the accepted one. The only difference is that it is intended for use in Jupyter notebook."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11125610,
+                                "reputation": 542,
+                                "user_id": 8825823,
+                                "user_type": "registered",
+                                "display_name": "\u0414\u043c\u0438\u0442\u0440\u043e \u041e\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440\u043e\u0432\u0438\u0447"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2187569,
+                                "reputation": 1877,
+                                "user_id": 1935611,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "anilbey"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1617807494,
+                            "post_id": 56393240,
+                            "comment_id": 118411157,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/56393240#comment118411157_56393240",
+                            "body": "I think I got it. Looks like you&#39;re right."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11125610,
+                                "reputation": 542,
+                                "user_id": 8825823,
+                                "user_type": "registered",
+                                "display_name": "\u0414\u043c\u0438\u0442\u0440\u043e \u041e\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440\u043e\u0432\u0438\u0447"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2187569,
+                                "reputation": 1877,
+                                "user_id": 1935611,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "anilbey"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1617808487,
+                            "post_id": 56393240,
+                            "comment_id": 118411646,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/56393240#comment118411646_56393240",
+                            "body": "However, it is not instant in Jupyter notebook. For example, 14% 14/100 [00:05&lt;00:31, 2.77it/s] It takes time to complete with random time sleeps."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 11125610,
+                        "reputation": 542,
+                        "user_id": 8825823,
+                        "user_type": "registered",
+                        "display_name": "\u0414\u043c\u0438\u0442\u0440\u043e \u041e\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440\u043e\u0432\u0438\u0447"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1617809484,
+                    "last_edit_date": 1617809484,
+                    "creation_date": 1559298086,
+                    "answer_id": 56393240,
+                    "question_id": 24983493,
+                    "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/56393240#56393240",
+                    "body": "<p>In Jupyter tqdm starts a new line in the output each time it outputs.\nSo for Jupyter Notebook it will be:</p>\n<p>For use in Jupyter notebook.\nNo sleeps:</p>\n<pre><code>from joblib import Parallel, delayed\nfrom datetime import datetime\nfrom tqdm import notebook\n\ndef myfun(x):\n    return x**2\n\nresults = Parallel(n_jobs=8)(delayed(myfun)(i) for i in notebook.tqdm(range(1000)))  \n</code></pre>\n<p>100% 1000/1000 [00:06&lt;00:00, 143.70it/s]</p>\n<p>With time.sleep:</p>\n<pre><code>from joblib import Parallel, delayed\nfrom datetime import datetime\nfrom tqdm import notebook\nfrom random import randint\nimport time\n\ndef myfun(x):\n    time.sleep(randint(1, 5))\n    return x**2\n\nresults = Parallel(n_jobs=7)(delayed(myfun)(i) for i in notebook.tqdm(range(100)))\n</code></pre>\n<p>What I'm currently using instead of joblib.Parallel:</p>\n<pre><code>import concurrent.futures\nfrom tqdm import notebook\nfrom random import randint\nimport time\n\niterable = [i for i in range(50)]\n\ndef myfun(x):\n    time.sleep(randint(1, 5))\n    return x**2\n\ndef run(func, iterable, max_workers=8):\n    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:\n        results = list(notebook.tqdm(executor.map(func, iterable), total=len(iterable)))\n    return results\n\nrun(myfun, iterable)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 367679,
+                                "reputation": 1198,
+                                "user_id": 714004,
+                                "user_type": "registered",
+                                "display_name": "dennisobrien"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1585852827,
+                            "post_id": 58936697,
+                            "comment_id": 107917517,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/58936697#comment107917517_58936697",
+                            "body": "Excellent solution.  Tested with joblib 0.14.1 and tqdm 4.41.0 -- works great.  This would be a great addition to tqdm!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7042582,
+                                "reputation": 479,
+                                "user_id": 5394584,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "Andrew"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1592238918,
+                            "post_id": 58936697,
+                            "comment_id": 110347784,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/58936697#comment110347784_58936697",
+                            "body": "I can&#39;t edit it, but minor typo in solution where joblib.parallel.BatchCompletionCallback is actually BatchCompletionCallBack (note the camelcase on CallBack)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6651156,
+                                "reputation": 2572,
+                                "user_id": 5133167,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Labo"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1653284269,
+                            "post_id": 58936697,
+                            "comment_id": 127804357,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/58936697#comment127804357_58936697",
+                            "body": "I just posted this code to PyPI: <a href=\"https://github.com/louisabraham/tqdm_joblib\" rel=\"nofollow noreferrer\">github.com/louisabraham/tqdm_joblib</a>  Now you can just <code>pip install tqdm_joblib</code> and <code>from tqdm_joblib import tqdm_joblib</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1332162,
+                                "reputation": 672,
+                                "user_id": 1275815,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Ansh David"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1666015373,
+                            "post_id": 58936697,
+                            "comment_id": 130828635,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/58936697#comment130828635_58936697",
+                            "body": "i think this is no longer working"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 14850639,
+                                "reputation": 136,
+                                "user_id": 10724707,
+                                "user_type": "registered",
+                                "display_name": "Jeyes Unterwegs"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1706219033,
+                            "post_id": 58936697,
+                            "comment_id": 137303141,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/58936697#comment137303141_58936697",
+                            "body": "Fantastic, this works out of the box, thank you, featuredpeow and AlanSTACK! I have also successfully tested using a Parallel context within this context, so <code>with tqdm_joblib() as progress_bar: with Parallel as parallel: &lt;code&gt;</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3232356,
+                        "reputation": 2141,
+                        "user_id": 2727308,
+                        "user_type": "registered",
+                        "display_name": "featuredpeow"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": false,
+                    "score": 91,
+                    "last_activity_date": 1667754527,
+                    "last_edit_date": 1667754527,
+                    "creation_date": 1574175030,
+                    "answer_id": 58936697,
+                    "question_id": 24983493,
+                    "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/58936697#58936697",
+                    "body": "<p>Yet another step ahead from dano's and Connor's answers is to wrap the whole thing as a context manager:</p>\n<pre><code>import contextlib\nimport joblib\nfrom tqdm import tqdm\n\n@contextlib.contextmanager\ndef tqdm_joblib(tqdm_object):\n    &quot;&quot;&quot;Context manager to patch joblib to report into tqdm progress bar given as argument&quot;&quot;&quot;\n    class TqdmBatchCompletionCallback(joblib.parallel.BatchCompletionCallBack):\n        def __call__(self, *args, **kwargs):\n            tqdm_object.update(n=self.batch_size)\n            return super().__call__(*args, **kwargs)\n\n    old_batch_callback = joblib.parallel.BatchCompletionCallBack\n    joblib.parallel.BatchCompletionCallBack = TqdmBatchCompletionCallback\n    try:\n        yield tqdm_object\n    finally:\n        joblib.parallel.BatchCompletionCallBack = old_batch_callback\n        tqdm_object.close()\n</code></pre>\n<p>Then you can use it like this and don't leave monkey patched code once you're done:</p>\n<pre><code>from math import sqrt\nfrom joblib import Parallel, delayed\n\nwith tqdm_joblib(tqdm(desc=&quot;My calculation&quot;, total=10)) as progress_bar:\n    Parallel(n_jobs=16)(delayed(sqrt)(i**2) for i in range(10))\n</code></pre>\n<p>which is awesome I think and it looks similar to tqdm pandas integration.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 14081188,
+                        "reputation": 578,
+                        "user_id": 10172196,
+                        "user_type": "registered",
+                        "display_name": "Magdrop"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 10,
+                    "last_activity_date": 1588977146,
+                    "creation_date": 1588977146,
+                    "answer_id": 61689175,
+                    "question_id": 24983493,
+                    "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/61689175#61689175",
+                    "body": "<p><strong>TLDR solution</strong>:</p>\n\n<p>Works with joblib 0.14.0 and tqdm 4.46.0 using python 3.5.  Credits to frenzykryger for contextlib suggestions, dano and Connor for monkey patching idea.</p>\n\n<pre><code>import contextlib\nimport joblib\nfrom tqdm import tqdm\nfrom joblib import Parallel, delayed\n\n@contextlib.contextmanager\ndef tqdm_joblib(tqdm_object):\n    \"\"\"Context manager to patch joblib to report into tqdm progress bar given as argument\"\"\"\n\n    def tqdm_print_progress(self):\n        if self.n_completed_tasks &gt; tqdm_object.n:\n            n_completed = self.n_completed_tasks - tqdm_object.n\n            tqdm_object.update(n=n_completed)\n\n    original_print_progress = joblib.parallel.Parallel.print_progress\n    joblib.parallel.Parallel.print_progress = tqdm_print_progress\n\n    try:\n        yield tqdm_object\n    finally:\n        joblib.parallel.Parallel.print_progress = original_print_progress\n        tqdm_object.close()\n</code></pre>\n\n<p>You can use this the same way as described by frenzykryger</p>\n\n<pre><code>import time\ndef some_method(wait_time):\n    time.sleep(wait_time)\n\nwith tqdm_joblib(tqdm(desc=\"My method\", total=10)) as progress_bar:\n    Parallel(n_jobs=2)(delayed(some_method)(0.2) for i in range(10))\n</code></pre>\n\n<p><strong>Longer explanation:</strong></p>\n\n<p>The solution by Jon is simple to implement, but it only measures the dispatched task.  If the task takes a long time, the bar will be stuck at 100% while waiting for the last dispatched task to finish execution.</p>\n\n<p>The context manager approach by frenzykryger, improved from dano and Connor, is better, but the <code>BatchCompletionCallBack</code> can also be called with <code>ImmediateResult</code> before the task completes (See <a href=\"https://stackoverflow.com/questions/38483874/intermediate-results-from-joblib\">Intermediate results from joblib</a>).  This is going to get us a count that is over 100%.</p>\n\n<p>Instead of monkey patching the <code>BatchCompletionCallBack</code>, we can just patch the <code>print_progress</code> function in <code>Parallel</code>.  The <code>BatchCompletionCallBack</code> already calls this <code>print_progress</code> anyway. If the verbose is set (i.e. <code>Parallel(n_jobs=2, verbose=100)</code>), the <code>print_progress</code> will be printing out completed tasks, though not as nice as tqdm.  Looking at the code, the <code>print_progress</code> is a class method, so it already has <code>self.n_completed_tasks</code> that logs the number we want.  All we have to do is just to compare this with the current state of joblib's progress and update only if there is a difference.</p>\n\n<p>This was tested in joblib 0.14.0 and tqdm 4.46.0 using python 3.5.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4530765,
+                        "reputation": 141,
+                        "user_id": 4292705,
+                        "user_type": "registered",
+                        "display_name": "Carlos H. Mendoza-Cardenas"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1669908154,
+                    "creation_date": 1669908154,
+                    "answer_id": 74644263,
+                    "question_id": 24983493,
+                    "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/74644263#74644263",
+                    "body": "<p>Setting <code>verbose=13</code> was enough for me: <a href=\"https://joblib.readthedocs.io/en/latest/generated/joblib.Parallel.html\" rel=\"nofollow noreferrer\">https://joblib.readthedocs.io/en/latest/generated/joblib.Parallel.html</a></p>\n<p>I get a line on stderr that says something like:</p>\n<pre><code>[Parallel(n_jobs=16)]: Done 134 tasks      | elapsed:  7.7min\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1519336,
+                                "reputation": 1788,
+                                "user_id": 2057969,
+                                "user_type": "registered",
+                                "display_name": "Lover of Structure"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1679507309,
+                            "post_id": 75762460,
+                            "comment_id": 133736037,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/75762460#comment133736037_75762460",
+                            "body": "Would you mind adding a bit of explanation to your code?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 28036485,
+                        "reputation": 1,
+                        "user_id": 21414792,
+                        "user_type": "registered",
+                        "display_name": "RAFisherman"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1679008666,
+                    "creation_date": 1679008666,
+                    "answer_id": 75762460,
+                    "question_id": 24983493,
+                    "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/75762460#75762460",
+                    "body": "<pre><code>import joblib\nclass ProgressParallel(joblib.Parallel):\n    def __init__(self, n_total_tasks=None, **kwargs):\n        super().__init__(**kwargs)\n        self.n_total_tasks = n_total_tasks\n\n    def __call__(self, *args, **kwargs):\n        with tqdm() as self._pbar:\n            return joblib.Parallel.__call__(self, *args, **kwargs)\n\n    def print_progress(self):\n        if self.n_total_tasks:\n            self._pbar.total = self.n_total_tasks\n        else:\n            self._pbar.total = self.n_dispatched_tasks\n        self._pbar.n = self.n_completed_tasks\n        self._pbar.refresh()\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 249657,
+                                "reputation": 31716,
+                                "user_id": 525872,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "Jo Liss"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1698170445,
+                            "post_id": 76726101,
+                            "comment_id": 136370388,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/76726101#comment136370388_76726101",
+                            "body": "Excellent solution! I think now that joblib v1.3.0 is out, this should probably be the accepted answer. It works great and is much simpler than the other solutions."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2712633,
+                                "reputation": 2860,
+                                "user_id": 2340703,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Gregor Sturm"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1705004853,
+                            "post_id": 76726101,
+                            "comment_id": 137160145,
+                            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/76726101#comment137160145_76726101",
+                            "body": "This is neat, but it should be noted that <code>return_as=&quot;generator&quot;</code> only works with a few selected backends (including <code>loky</code> and <code>threading</code>)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 44361,
+                        "reputation": 17917,
+                        "user_id": 130164,
+                        "user_type": "registered",
+                        "accept_rate": 85,
+                        "display_name": "Maxim Zaslavsky"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 9,
+                    "last_activity_date": 1689815984,
+                    "creation_date": 1689815984,
+                    "answer_id": 76726101,
+                    "question_id": 24983493,
+                    "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution/76726101#76726101",
+                    "body": "<p>As of joblib v1.3.0, released in June 2023, there's an easier way to wrap <code>joblib.Parallel</code> with the tqdm progress bar (inspired by <a href=\"https://github.com/joblib/joblib/issues/972#issuecomment-1623366702\" rel=\"noreferrer\">this comment</a>).</p>\n<p>This progress bar will track job completion, not job enqueueing. Previously this required a special context manager. Here's an example:</p>\n<pre class=\"lang-py prettyprint-override\"><code>from joblib import Parallel, delayed\nfrom tqdm import tqdm\n\nimport time\nimport random\n\n# Our example worker will sleep for a certain number of seconds.\n\ninputs = list(range(10))\nrandom.shuffle(inputs)\n\ndef worker(n_seconds):\n    time.sleep(n_seconds)\n    return n_seconds\n\n# Run the worker jobs in parallel, with a tqdm progress bar.\n# We configure Parallel to return a generator.\n# Then we wrap the generator in tqdm.\n# Finally, we execute everything by converting the tqdm generator to a list.\n\noutputs = list(\n    tqdm(\n        # Note the new return_as argument here, which requires joblib &gt;= 1.3:\n        Parallel(return_as=&quot;generator&quot;, n_jobs=3)(\n            delayed(worker)(n_seconds) for n_seconds in inputs\n        ),\n        total=len(inputs),\n    )\n)\nprint(outputs)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 89800,
+                "reputation": 63305,
+                "user_id": 247542,
+                "user_type": "registered",
+                "accept_rate": 59,
+                "display_name": "Cerin"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 49950707,
+            "answer_count": 11,
+            "score": 65,
+            "last_activity_date": 1689815984,
+            "creation_date": 1406481609,
+            "last_edit_date": 1406485646,
+            "question_id": 24983493,
+            "link": "https://stackoverflow.com/questions/24983493/tracking-progress-of-joblib-parallel-execution",
+            "title": "Tracking progress of joblib.Parallel execution",
+            "body": "<p>Is there a simple way to track the overall progress of a <a href=\"https://pythonhosted.org/joblib/generated/joblib.Parallel.html\">joblib.Parallel</a> execution?</p>\n\n<p>I have a long-running execution composed of thousands of jobs, which I want to track and record in a database. However, to do that, whenever Parallel finishes a task, I need it to execute a callback, reporting how many remaining jobs are left.</p>\n\n<p>I've accomplished a similar task before with Python's stdlib multiprocessing.Pool, by launching a thread that records the number of pending jobs in Pool's job list.</p>\n\n<p>Looking at the code, Parallel inherits Pool, so I thought I could pull off the same trick, but it doesn't seem to use these that list, and I haven't been able to figure out how else to \"read\" it's internal status any other way.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8432
+}

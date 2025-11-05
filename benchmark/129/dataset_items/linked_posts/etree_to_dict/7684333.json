@@ -1,0 +1,643 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "xml",
+                "dictionary",
+                "elementtree"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 302636,
+                                "reputation": 10300,
+                                "user_id": 611116,
+                                "user_type": "registered",
+                                "accept_rate": 98,
+                                "display_name": "Mokus"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1317975861,
+                            "post_id": 7684581,
+                            "comment_id": 9341691,
+                            "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/7684581#comment9341691_7684581",
+                            "body": "I had got an error in the iterchildren so I changed to getchildren, With this example I&#39;m getting the  attributes but the node values is empty, example:{&#39;Tag&#39;: &#39;Lidars&#39;, &#39;lidars_list&#39;: [{&#39;positive_towards_LOS&#39;: &#39;false&#39;, &#39;scanner_3D&#39;: &#39;true&#39;, &#39;lidar&#39;: [{&#39;name&#39;: []}, the name is LNAC but I&#39;m getting an empty dictionary"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 751011,
+                                "reputation": 512,
+                                "user_id": 748493,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "Confounded"
+                            },
+                            "reply_to_user": {
+                                "account_id": 302636,
+                                "reputation": 10300,
+                                "user_id": 611116,
+                                "user_type": "registered",
+                                "accept_rate": 98,
+                                "display_name": "Mokus"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1585060534,
+                            "post_id": 7684581,
+                            "comment_id": 107629503,
+                            "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/7684581#comment107629503_7684581",
+                            "body": "@OHL&#193;L&#193;  Hi, did you mange to modify the code to convert XML to Dictionary? Thanks"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 751011,
+                                "reputation": 512,
+                                "user_id": 748493,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "Confounded"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1597220240,
+                            "post_id": 7684581,
+                            "comment_id": 112058909,
+                            "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/7684581#comment112058909_7684581",
+                            "body": "This returns a <code>map</code> (whatever this is) as the value of the first key of the dictionary, not a nested dictionary."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 55665,
+                        "reputation": 359902,
+                        "user_id": 166749,
+                        "user_type": "registered",
+                        "accept_rate": 94,
+                        "display_name": "Fred Foo"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": true,
+                    "score": 32,
+                    "last_activity_date": 1364485299,
+                    "last_edit_date": 1364485299,
+                    "creation_date": 1317974872,
+                    "answer_id": 7684581,
+                    "question_id": 7684333,
+                    "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/7684581#7684581",
+                    "body": "<pre><code>def etree_to_dict(t):\n    d = {t.tag : map(etree_to_dict, t.iterchildren())}\n    d.update(('@' + k, v) for k, v in t.attrib.iteritems())\n    d['text'] = t.text\n    return d\n</code></pre>\n\n<p>Call as</p>\n\n<pre><code>tree = etree.parse(\"some_file.xml\")\netree_to_dict(tree.getroot())\n</code></pre>\n\n<p>This works as long as you don't actually have an attribute <code>text</code>; if you do, then change the third line in the function body to use a different key. Also, you can't handle mixed content with this.</p>\n\n<p>(Tested on LXML.)</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4815,
+                                "reputation": 379779,
+                                "user_id": 7432,
+                                "user_type": "registered",
+                                "accept_rate": 94,
+                                "display_name": "Bryan Oakley"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1336502008,
+                            "post_id": 10076823,
+                            "comment_id": 13580236,
+                            "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/10076823#comment13580236_10076823",
+                            "body": "This code throws anerror if a node has no text (such as the first <code>&lt;e&gt;</code> node -- you get <code>AttributeError: &#39;NoneType&#39; object has no attribute &#39;strip&#39;</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1214616,
+                                "reputation": 3094,
+                                "user_id": 1182469,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "xander27"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1378644177,
+                            "post_id": 10076823,
+                            "comment_id": 27521142,
+                            "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/10076823#comment27521142_10076823",
+                            "body": "Is there any example of reverse (dict -&gt; xml) convertion?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1522906,
+                                "reputation": 44396,
+                                "user_id": 1422096,
+                                "user_type": "registered",
+                                "accept_rate": 63,
+                                "display_name": "Basj"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1392587586,
+                            "post_id": 10076823,
+                            "comment_id": 33017792,
+                            "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/10076823#comment33017792_10076823",
+                            "body": "This is one of the best xml -&gt; dict I have ever tried (and there are a lot of : <code>xmltodict</code>, several recipes on several websites etc.)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1097085,
+                                "reputation": 6935,
+                                "user_id": 1090455,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "K3---rnc"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1214616,
+                                "reputation": 3094,
+                                "user_id": 1182469,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "xander27"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1392775122,
+                            "post_id": 10076823,
+                            "comment_id": 33110892,
+                            "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/10076823#comment33110892_10076823",
+                            "body": "@xander27 I added what I believe is the inverse of above function. Sorry, a bit late. :P"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 106330,
+                                "reputation": 94386,
+                                "user_id": 283296,
+                                "user_type": "registered",
+                                "accept_rate": 77,
+                                "display_name": "Amelio Vazquez-Reina"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1522906,
+                                "reputation": 44396,
+                                "user_id": 1422096,
+                                "user_type": "registered",
+                                "accept_rate": 63,
+                                "display_name": "Basj"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1393371683,
+                            "post_id": 10076823,
+                            "comment_id": 33395163,
+                            "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/10076823#comment33395163_10076823",
+                            "body": "As @Basj said - This is the best XML-&gt; dict implementation I have ever tried. And I have tried many."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 303256,
+                                "reputation": 3902,
+                                "user_id": 612091,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "spiderplant0"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1438262656,
+                            "post_id": 10076823,
+                            "comment_id": 51386116,
+                            "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/10076823#comment51386116_10076823",
+                            "body": "V. good. But got confused for a bit until I realised that for <code>dict_to_etree</code> to truly be an inverse it should return an etree not a string. I.e. last line <code>return node</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1097085,
+                                "reputation": 6935,
+                                "user_id": 1090455,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "K3---rnc"
+                            },
+                            "reply_to_user": {
+                                "account_id": 303256,
+                                "reputation": 3902,
+                                "user_id": 612091,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "spiderplant0"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1438344746,
+                            "post_id": 10076823,
+                            "comment_id": 51425154,
+                            "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/10076823#comment51425154_10076823",
+                            "body": "@spiderplant0 Thanks, fixed. SE lets anyone edit answers, though. :)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 357618,
+                                "reputation": 397,
+                                "user_id": 697895,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "jgrump2012"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1470183588,
+                            "post_id": 10076823,
+                            "comment_id": 64840939,
+                            "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/10076823#comment64840939_10076823",
+                            "body": "In my experience, this solution did not account for xmlns at the root of the document.  Easy solution is to just strip it out.  I found <a href=\"http://stackoverflow.com/questions/13412496\">this question</a> to be a helpful addition"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1680736,
+                                "reputation": 5388,
+                                "user_id": 1545014,
+                                "user_type": "registered",
+                                "accept_rate": 21,
+                                "display_name": "jcoppens"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1507398017,
+                            "post_id": 10076823,
+                            "comment_id": 80197007,
+                            "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/10076823#comment80197007_10076823",
+                            "body": "Note: In python3, dict.<code>iteritems()</code> doesn&#39;t exist anymore. Change 3 instances of that method to just <code>items()</code> and all is well again."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2342508,
+                                "reputation": 320,
+                                "user_id": 3174889,
+                                "user_type": "registered",
+                                "display_name": "apresence"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1692189135,
+                            "post_id": 10076823,
+                            "comment_id": 135589550,
+                            "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/10076823#comment135589550_10076823",
+                            "body": "I know this is many years later, but this code fails when t.text is set but not t.attrib. To fix, replace these lines:  <code>def etree_to_dict(t):</code> <code>d = {t.tag: {}} # type Dict[Any, Any]</code> <code>...</code> <code>return d</code>  With these:  <code>def etree_to_dict(t):</code> <code># type: (ET.Element) -&gt; Dict</code> <code>d = {t.tag: {}} # type Dict[Any, Any]</code> <code>...</code> <code>return {t.tag: None} if len(d[t.tag]) == 0 else d</code>  <b>NOTE:</b> Type hints resolve errors reported by Pylance but are optional."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1097085,
+                        "reputation": 6935,
+                        "user_id": 1090455,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "K3---rnc"
+                    },
+                    "comment_count": 10,
+                    "is_accepted": false,
+                    "score": 61,
+                    "last_activity_date": 1628777375,
+                    "last_edit_date": 1628777375,
+                    "creation_date": 1333991015,
+                    "answer_id": 10076823,
+                    "question_id": 7684333,
+                    "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/10076823#10076823",
+                    "body": "<p>The following XML-to-Python-dict snippet parses entities as well as attributes following <a href=\"http://www.xml.com/pub/a/2006/05/31/converting-between-xml-and-json.html\" rel=\"noreferrer\">this XML-to-JSON &quot;specification&quot;</a>:</p>\n<pre><code>from collections import defaultdict\n\ndef etree_to_dict(t):\n    d = {t.tag: {} if t.attrib else None}\n    children = list(t)\n    if children:\n        dd = defaultdict(list)\n        for dc in map(etree_to_dict, children):\n            for k, v in dc.items():\n                dd[k].append(v)\n        d = {t.tag: {k: v[0] if len(v) == 1 else v\n                     for k, v in dd.items()}}\n    if t.attrib:\n        d[t.tag].update(('@' + k, v)\n                        for k, v in t.attrib.items())\n    if t.text:\n        text = t.text.strip()\n        if children or t.attrib:\n            if text:\n                d[t.tag]['#text'] = text\n        else:\n            d[t.tag] = text\n    return d\n</code></pre>\n<p>It is used:</p>\n<pre><code>from xml.etree import cElementTree as ET\ne = ET.XML('''\n&lt;root&gt;\n  &lt;e /&gt;\n  &lt;e&gt;text&lt;/e&gt;\n  &lt;e name=&quot;value&quot; /&gt;\n  &lt;e name=&quot;value&quot;&gt;text&lt;/e&gt;\n  &lt;e&gt; &lt;a&gt;text&lt;/a&gt; &lt;b&gt;text&lt;/b&gt; &lt;/e&gt;\n  &lt;e&gt; &lt;a&gt;text&lt;/a&gt; &lt;a&gt;text&lt;/a&gt; &lt;/e&gt;\n  &lt;e&gt; text &lt;a&gt;text&lt;/a&gt; &lt;/e&gt;\n&lt;/root&gt;\n''')\n\nfrom pprint import pprint\n\nd = etree_to_dict(e)\n\npprint(d)\n</code></pre>\n<p>The output of this example (as per above-linked &quot;specification&quot;) should be:</p>\n<pre><code>{'root': {'e': [None,\n                'text',\n                {'@name': 'value'},\n                {'#text': 'text', '@name': 'value'},\n                {'a': 'text', 'b': 'text'},\n                {'a': ['text', 'text']},\n                {'#text': 'text', 'a': 'text'}]}}\n</code></pre>\n<p>Not necessarily pretty, but it is unambiguous, and simpler XML inputs result in simpler JSON. :)</p>\n<hr />\n<h2>Update</h2>\n<p>If you want to do the <strong>reverse</strong>, emit an <strong>XML string from a JSON/dict</strong>, you can use:</p>\n<pre><code>try:\n  basestring\nexcept NameError:  # python3\n  basestring = str\n\ndef dict_to_etree(d):\n    def _to_etree(d, root):\n        if not d:\n            pass\n        elif isinstance(d, str):\n            root.text = d\n        elif isinstance(d, dict):\n            for k,v in d.items():\n                assert isinstance(k, str)\n                if k.startswith('#'):\n                    assert k == '#text' and isinstance(v, str)\n                    root.text = v\n                elif k.startswith('@'):\n                    assert isinstance(v, str)\n                    root.set(k[1:], v)\n                elif isinstance(v, list):\n                    for e in v:\n                        _to_etree(e, ET.SubElement(root, k))\n                else:\n                    _to_etree(v, ET.SubElement(root, k))\n        else:\n            assert d == 'invalid type', (type(d), d)\n    assert isinstance(d, dict) and len(d) == 1\n    tag, body = next(iter(d.items()))\n    node = ET.Element(tag)\n    _to_etree(body, node)\n    return node\n\nprint(ET.tostring(dict_to_etree(d)))\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 454080,
+                        "reputation": 1089,
+                        "user_id": 851428,
+                        "user_type": "registered",
+                        "display_name": "luismartingil"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1398622768,
+                    "last_edit_date": 1398622768,
+                    "creation_date": 1345017447,
+                    "answer_id": 11965820,
+                    "question_id": 7684333,
+                    "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/11965820#11965820",
+                    "body": "<pre><code>from lxml import etree, objectify\ndef formatXML(parent):\n    \"\"\"\n    Recursive operation which returns a tree formated\n    as dicts and lists.\n    Decision to add a list is to find the 'List' word\n    in the actual parent tag.   \n    \"\"\"\n    ret = {}\n    if parent.items(): ret.update(dict(parent.items()))\n    if parent.text: ret['__content__'] = parent.text\n    if ('List' in parent.tag):\n        ret['__list__'] = []\n        for element in parent:\n            ret['__list__'].append(formatXML(element))\n    else:\n        for element in parent:\n            ret[element.tag] = formatXML(element)\n    return ret\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 227774,
+                        "reputation": 2037,
+                        "user_id": 489638,
+                        "user_type": "registered",
+                        "display_name": "s29"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1382589426,
+                    "creation_date": 1382589426,
+                    "answer_id": 19557036,
+                    "question_id": 7684333,
+                    "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/19557036#19557036",
+                    "body": "<p>Based on @larsmans, if you don't need attributes, this will give you a tighter dictionary --</p>\n\n<pre><code>def etree_to_dict(t):\n    return {t.tag : map(etree_to_dict, t.iterchildren()) or t.text}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1166281,
+                        "reputation": 1827,
+                        "user_id": 2827397,
+                        "user_type": "registered",
+                        "accept_rate": 92,
+                        "display_name": "DaveL17"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1453906711,
+                    "creation_date": 1453906711,
+                    "answer_id": 35040712,
+                    "question_id": 7684333,
+                    "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/35040712#35040712",
+                    "body": "<p>Building on @larsmans, if the resulting keys contain xml namespace info, you can remove that before writing to the dict.  Set a variable <code>xmlns</code> equal to the namespace and strip its value out.</p>\n\n<pre><code>xmlns = '{http://foo.namespaceinfo.com}'\n\ndef etree_to_dict(t):\n    if xmlns in t.tag:\n        t.tag = t.tag.lstrip(xmlns)\n    if d = {t.tag : map(etree_to_dict, t.iterchildren())}\n    d.update(('@' + k, v) for k, v in t.attrib.iteritems())\n    d['text'] = t.text\n    return d\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4721085,
+                                "reputation": 1104,
+                                "user_id": 3818895,
+                                "user_type": "registered",
+                                "accept_rate": 45,
+                                "display_name": "Murali"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1490700981,
+                            "post_id": 41726636,
+                            "comment_id": 73220258,
+                            "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/41726636#comment73220258_41726636",
+                            "body": "If there is some child tag how can we do this?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4721085,
+                                "reputation": 1104,
+                                "user_id": 3818895,
+                                "user_type": "registered",
+                                "accept_rate": 45,
+                                "display_name": "Murali"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1490701316,
+                            "post_id": 41726636,
+                            "comment_id": 73220481,
+                            "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/41726636#comment73220481_41726636",
+                            "body": "Consider like this:  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; &lt;Data&gt;   &lt;Person&gt;     &lt;First&gt;John&lt;/First&gt;     &lt;Last&gt;Smith&lt;/Last&gt; \t&lt;extra&gt; \t\t&lt;details1&gt; \t\t\t&lt;married&gt;yes&lt;/married&gt; \t\t\t&lt;status&gt;rich&lt;/status&gt; \t\t&lt;/details1&gt; \t&lt;/extra&gt;   &lt;/Person&gt;   &lt;Person&gt;     &lt;First&gt;Jane&lt;/First&gt;     &lt;Last&gt;Doe&lt;/Last&gt; \t\t&lt;extra&gt; \t\t&lt;details1&gt; \t\t\t&lt;married&gt;yes&lt;/married&gt; \t\t\t&lt;status&gt;rich&lt;/status&gt; \t\t&lt;/details1&gt; \t\t&lt;details2&gt; \t\t\t&lt;property&gt;yes&lt;/property&gt; \t\t&lt;/details2&gt; \t&lt;/extra&gt;   &lt;/Person&gt; &lt;/Data&gt;"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6680443,
+                        "reputation": 1163,
+                        "user_id": 5153834,
+                        "user_type": "registered",
+                        "display_name": "bloodrootfc"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1484765081,
+                    "last_edit_date": 1484765081,
+                    "creation_date": 1484763371,
+                    "answer_id": 41726636,
+                    "question_id": 7684333,
+                    "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/41726636#41726636",
+                    "body": "<p>Here is a simple data structure in xml (save as file.xml):</p>\n\n<pre><code>&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n&lt;Data&gt;\n  &lt;Person&gt;\n    &lt;First&gt;John&lt;/First&gt;\n    &lt;Last&gt;Smith&lt;/Last&gt;\n  &lt;/Person&gt;\n  &lt;Person&gt;\n    &lt;First&gt;Jane&lt;/First&gt;\n    &lt;Last&gt;Doe&lt;/Last&gt;\n  &lt;/Person&gt;\n&lt;/Data&gt;\n</code></pre>\n\n<p>Here is the code to create a list of dictionary objects from it.</p>\n\n<pre><code>from lxml import etree\ntree = etree.parse('file.xml')\nroot = tree.getroot()\ndatadict = []\nfor item in root:\n    d = {}\n    for elem in item:\n        d[elem.tag]=elem.text\n    datadict.append(d)\n</code></pre>\n\n<p>datadict now contains:</p>\n\n<pre><code>[{'First': 'John', 'Last': 'Smith'},{'First': 'Jane', 'Last': 'Doe'}]\n</code></pre>\n\n<p>and can be accessed like so:</p>\n\n<pre><code>datadict[0]['First']\n'John'\ndatadict[1]['Last']\n'Doe'\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7308167,
+                        "reputation": 7078,
+                        "user_id": 5568405,
+                        "user_type": "registered",
+                        "accept_rate": 57,
+                        "display_name": "Dean Christian Armada"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1494414448,
+                    "creation_date": 1494414448,
+                    "answer_id": 43890705,
+                    "question_id": 7684333,
+                    "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/43890705#43890705",
+                    "body": "<p>You can use this snippet that directly converts it from xml to dictionary</p>\n\n<pre><code>import xml.etree.ElementTree as ET\n\nxml = ('&lt;xml&gt;' +\n       '&lt;first_name&gt;Dean Christian&lt;/first_name&gt;' +\n       '&lt;middle_name&gt;Christian&lt;/middle_name&gt;' +\n       '&lt;last_name&gt;Armada&lt;/last_name&gt;' +\n       '&lt;/xml&gt;')\nroot = ET.fromstring(xml)\n\nx = {x.tag: root.find(x.tag).text  for x in root._children}\n# returns {'first_name': 'Dean Christian', 'last_name': 'Armada', 'middle_name': 'Christian'}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2835953,
+                        "reputation": 860,
+                        "user_id": 2436578,
+                        "user_type": "registered",
+                        "display_name": "albarji"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1514366648,
+                    "creation_date": 1514366648,
+                    "answer_id": 47989499,
+                    "question_id": 7684333,
+                    "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/47989499#47989499",
+                    "body": "<p>For transforming XML from/to python dictionaries, <a href=\"https://github.com/martinblech/xmltodict\" rel=\"noreferrer\">xmltodict</a> has worked great for me:</p>\n\n<pre><code>import xmltodict\n\nxml = '''\n&lt;root&gt;\n  &lt;e /&gt;\n  &lt;e&gt;text&lt;/e&gt;\n  &lt;e name=\"value\" /&gt;\n  &lt;e name=\"value\"&gt;text&lt;/e&gt;\n  &lt;e&gt; &lt;a&gt;text&lt;/a&gt; &lt;b&gt;text&lt;/b&gt; &lt;/e&gt;\n  &lt;e&gt; &lt;a&gt;text&lt;/a&gt; &lt;a&gt;text&lt;/a&gt; &lt;/e&gt;\n  &lt;e&gt; text &lt;a&gt;text&lt;/a&gt; &lt;/e&gt;\n&lt;/root&gt;\n'''\n\nxdict = xmltodict.parse(xml)\n</code></pre>\n\n<p>xdict will now look like</p>\n\n<pre><code>OrderedDict([('root',\n              OrderedDict([('e',\n                            [None,\n                             'text',\n                             OrderedDict([('@name', 'value')]),\n                             OrderedDict([('@name', 'value'),\n                                          ('#text', 'text')]),\n                             OrderedDict([('a', 'text'), ('b', 'text')]),\n                             OrderedDict([('a', ['text', 'text'])]),\n                             OrderedDict([('a', 'text'),\n                                          ('#text', 'text')])])]))])\n</code></pre>\n\n<p>If your XML data is not in raw string/bytes form but in some ElementTree object, you just need to print it out as a string and use xmldict.parse again. For instance, if you are using lxml to process the XML documents, then</p>\n\n<pre><code>from lxml import etree\ne = etree.XML(xml)\nxmltodict.parse(etree.tostring(e))\n</code></pre>\n\n<p>will produce the same dictionary as above.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 751011,
+                                "reputation": 512,
+                                "user_id": 748493,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "Confounded"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1597220677,
+                            "post_id": 63368922,
+                            "comment_id": 112059103,
+                            "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/63368922#comment112059103_63368922",
+                            "body": "For me this returns a <code>tuple</code>, not a <code>dictionary</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3790561,
+                                "reputation": 797,
+                                "user_id": 3147247,
+                                "user_type": "registered",
+                                "display_name": "kafran"
+                            },
+                            "reply_to_user": {
+                                "account_id": 751011,
+                                "reputation": 512,
+                                "user_id": 748493,
+                                "user_type": "registered",
+                                "accept_rate": 56,
+                                "display_name": "Confounded"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1597251306,
+                            "post_id": 63368922,
+                            "comment_id": 112074384,
+                            "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/63368922#comment112074384_63368922",
+                            "body": "For sure this can be improved."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3790561,
+                        "reputation": 797,
+                        "user_id": 3147247,
+                        "user_type": "registered",
+                        "display_name": "kafran"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1597251284,
+                    "last_edit_date": 1597251284,
+                    "creation_date": 1597199617,
+                    "answer_id": 63368922,
+                    "question_id": 7684333,
+                    "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/63368922#63368922",
+                    "body": "<p>The lxml documentation brings an example of <a href=\"https://lxml.de/FAQ.html#how-can-i-map-an-xml-tree-into-a-dict-of-dicts\" rel=\"nofollow noreferrer\">how to map an XML tree into a dict of dicts</a>:</p>\n<pre class=\"lang-py prettyprint-override\"><code>def recursive_dict(element):\n    return element.tag, dict(map(recursive_dict, element)) or element.text\n</code></pre>\n<blockquote>\n<p>Note that this beautiful quick-and-dirty converter expects children to have unique tag names and will silently overwrite any data that was contained in preceding siblings with the same name. For any real-world application of xml-to-dict conversion, you would better write your own, longer version of this.</p>\n</blockquote>\n<p>You could create a custom dictionary to deal with preceding siblings with the same name being overwritten:</p>\n<pre class=\"lang-py prettyprint-override\"><code>from collections import UserDict, namedtuple\nfrom lxml.etree import QName\n\nclass XmlDict(UserDict):\n    &quot;&quot;&quot;Custom dict to avoid preceding siblings with the same name being overwritten.&quot;&quot;&quot;\n\n    __ROOTELM = namedtuple('RootElm', ['tag', 'node'])\n\n    def __setitem__(self, key, value):\n        if key in self:\n            if type(self.data[key]) is list:\n                self.data[key].append(value)\n            else:\n                self.data[key] = [self.data[key], value]\n        else:\n            self.data[key] = value\n\n    @staticmethod\n    def xml2dict(element):\n        &quot;&quot;&quot;Converts an ElementTree Element to a dictionary.&quot;&quot;&quot;\n        elm = XmlDict.__ROOTELM(\n            tag=QName(element).localname,\n            node=XmlDict(map(XmlDict.xml2dict, element)) or element.text,\n    )\n    return elm\n</code></pre>\n<h3>Usage</h3>\n<pre class=\"lang-py prettyprint-override\"><code>from lxml import etree\nfrom pprint import pprint\n\nxml_f = b&quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;\n            &lt;Data&gt;\n              &lt;Person&gt;\n                &lt;First&gt;John&lt;/First&gt;\n                &lt;Last&gt;Smith&lt;/Last&gt;\n              &lt;/Person&gt;\n              &lt;Person&gt;\n                &lt;First&gt;Jane&lt;/First&gt;\n                &lt;Last&gt;Doe&lt;/Last&gt;\n              &lt;/Person&gt;\n            &lt;/Data&gt;&quot;&quot;&quot;\n\nelm = etree.fromstring(xml_f)\nd = XmlDict.xml2dict(elm)\n</code></pre>\n<h3>Output</h3>\n<pre class=\"lang-py prettyprint-override\"><code>In [3]: pprint(d)\nRootElm(tag='Data', node={'Person': [{'First': 'John', 'Last': 'Smith'}, {'First': 'Jane', 'Last': 'Doe'}]})\n\nIn [4]: pprint(d.node)\n{'Person': [{'First': 'John', 'Last': 'Smith'},\n            {'First': 'Jane', 'Last': 'Doe'}]}\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1940371,
+                        "reputation": 656,
+                        "user_id": 2002061,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "Paamand"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1624361768,
+                    "creation_date": 1624361768,
+                    "answer_id": 68082847,
+                    "question_id": 7684333,
+                    "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/68082847#68082847",
+                    "body": "<p>Several answers already, but here's one compact solution that maps attributes, text value and children using dict-comprehension:</p>\n<pre><code>def etree_to_dict(t):\n    if type(t) is ET.ElementTree: return etree_to_dict(t.getroot())\n    return {\n        **t.attrib,\n        'text': t.text,\n        **{e.tag: etree_to_dict(e) for e in t}\n    }\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 11094697,
+                                "reputation": 1363,
+                                "user_id": 9921853,
+                                "user_type": "registered",
+                                "display_name": "Sergey Nudnov"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1636576896,
+                            "post_id": 69115904,
+                            "comment_id": 123597502,
+                            "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/69115904#comment123597502_69115904",
+                            "body": "A bit overcomplicated, but good. Didn&#39;t check for ElementTree, but for lxml an element object could be sequenced and has length already. For example, instead of <code>children = list(root) if len(children) &gt; 1 and len({child.tag for child in children}) == 1</code>, you could use <code>if len(root) &gt; 1 and len({child.tag for child in root}) == 1</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 449088,
+                                "reputation": 591,
+                                "user_id": 843678,
+                                "user_type": "registered",
+                                "accept_rate": 25,
+                                "display_name": "James H"
+                            },
+                            "reply_to_user": {
+                                "account_id": 11094697,
+                                "reputation": 1363,
+                                "user_id": 9921853,
+                                "user_type": "registered",
+                                "display_name": "Sergey Nudnov"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1637129079,
+                            "post_id": 69115904,
+                            "comment_id": 123740193,
+                            "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/69115904#comment123740193_69115904",
+                            "body": "thanks @SergeyNudnov! updated my code"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 449088,
+                        "reputation": 591,
+                        "user_id": 843678,
+                        "user_type": "registered",
+                        "accept_rate": 25,
+                        "display_name": "James H"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1637128868,
+                    "last_edit_date": 1637128868,
+                    "creation_date": 1631180798,
+                    "answer_id": 69115904,
+                    "question_id": 7684333,
+                    "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/69115904#69115904",
+                    "body": "<p>enhanced the accepted answer with python3 and use json list when all children have the same tag. Also provided an option whether to wrap the dict with root tag or not.</p>\n<pre><code>from collections import OrderedDict\nfrom typing import Union\nfrom xml.etree.ElementTree import ElementTree, Element\n\ndef etree_to_dict(root: Union[ElementTree, Element], include_root_tag=False):\n    root = root.getroot() if isinstance(root, ElementTree) else root\n    result = OrderedDict()\n    if len(root) &gt; 1 and len({child.tag for child in root}) == 1:\n        result[next(iter(root)).tag] = [etree_to_dict(child) for child in root]\n    else:\n        for child in root:\n            result[child.tag] = etree_to_dict(child) if len(list(child)) &gt; 0 else (child.text or &quot;&quot;)\n    result.update(('@' + k, v) for k, v in root.attrib.items())\n    return {root.tag: result} if include_root_tag else result\n\nd = etree_to_dict(etree.ElementTree.parse('data.xml'), True)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1565848,
+                        "reputation": 2303,
+                        "user_id": 1454678,
+                        "user_type": "registered",
+                        "accept_rate": 91,
+                        "display_name": "MEE"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1662732453,
+                    "creation_date": 1662732453,
+                    "answer_id": 73663407,
+                    "question_id": 7684333,
+                    "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree/73663407#73663407",
+                    "body": "<p>If you have a schema, the <code>xmlschema</code> package already implements multiple XML-to-dict converters that honor the schema and attribute types. Quoting the following from the <a href=\"https://xmlschema.readthedocs.io/en/latest/converters.html\" rel=\"nofollow noreferrer\">docs</a></p>\n<blockquote>\n<p>Available converters</p>\n<p>The library includes some converters. The default converter\nxmlschema.XMLSchemaConverter is the base class of other converter\ntypes. Each derived converter type implements a well know convention,\nrelated to the conversion from XML to JSON data format:</p>\n<ul>\n<li>xmlschema.ParkerConverter: Parker convention</li>\n<li>xmlschema.BadgerFishConverter: BadgerFish convention</li>\n<li>xmlschema.AbderaConverter: Apache Abdera project convention</li>\n<li>xmlschema.JsonMLConverter: JsonML (JSON Mark-up Language) convention</li>\n</ul>\n</blockquote>\n<p>Documentation of these different conventions is available here: <a href=\"http://wiki.open311.org/JSON_and_XML_Conversion/\" rel=\"nofollow noreferrer\">http://wiki.open311.org/JSON_and_XML_Conversion/</a></p>\n<p>Usage of the converters is straightforward, e.g.:</p>\n<pre class=\"lang-py prettyprint-override\"><code>from xmlschema import ParkerConverter, XMLSchema, to_dict\n\nxml = '...'\nschema = XMLSchema('...')\nto_dict(xml, schema=schema, converter=ParkerConverter)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 302636,
+                "reputation": 10300,
+                "user_id": 611116,
+                "user_type": "registered",
+                "accept_rate": 98,
+                "display_name": "Mokus"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 7684581,
+            "answer_count": 12,
+            "score": 42,
+            "last_activity_date": 1662732453,
+            "creation_date": 1317973103,
+            "last_edit_date": 1330080604,
+            "question_id": 7684333,
+            "link": "https://stackoverflow.com/questions/7684333/converting-xml-to-dictionary-using-elementtree",
+            "title": "Converting xml to dictionary using ElementTree",
+            "body": "<p>I'm looking for an XML to dictionary parser using ElementTree, I already found some but they are excluding the attributes, and in my case I have a lot of attributes.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9787
+}

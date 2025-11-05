@@ -1,0 +1,166 @@
+{
+    "items": [
+        {
+            "tags": [
+                "django",
+                "validation",
+                "django-rest-framework"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 400003,
+                        "reputation": 4249,
+                        "user_id": 765720,
+                        "user_type": "registered",
+                        "display_name": "kdazzle"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1422822826,
+                    "post_id": 28155758,
+                    "comment_id": 44891143,
+                    "link": "https://stackoverflow.com/questions/28155758/validation-codes-and-messages-in-django-rest-framework#comment44891143_28155758",
+                    "body": "Could you override the <code>Serializer.is_valid</code> method, catch a ValidationError, and change the way it is added to the errors dictionary? That is assuming that DRF or Django adds the <code>code</code> values that you&#39;re looking for."
+                },
+                {
+                    "owner": {
+                        "account_id": 37371,
+                        "reputation": 18575,
+                        "user_id": 106797,
+                        "user_type": "registered",
+                        "accept_rate": 75,
+                        "display_name": "Catskul"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1443545825,
+                    "post_id": 28155758,
+                    "comment_id": 53533128,
+                    "link": "https://stackoverflow.com/questions/28155758/validation-codes-and-messages-in-django-rest-framework#comment53533128_28155758",
+                    "body": "Let me guess: You&#39;re using newforms (<a href=\"https://github.com/insin/newforms\" rel=\"nofollow noreferrer\">github.com/insin/newforms</a>)"
+                },
+                {
+                    "owner": {
+                        "account_id": 117837,
+                        "reputation": 5262,
+                        "user_id": 1377500,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Jocelyn delalande"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1445958047,
+                    "post_id": 28155758,
+                    "comment_id": 54537190,
+                    "link": "https://stackoverflow.com/questions/28155758/validation-codes-and-messages-in-django-rest-framework#comment54537190_28155758",
+                    "body": "Actually, there are discussions for embeding such a support in DRF, see <a href=\"https://github.com/tomchristie/django-rest-framework/pull/3169\" rel=\"nofollow noreferrer\">github.com/tomchristie/django-rest-framework/pull/3169</a>"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5685634,
+                                "reputation": 473,
+                                "user_id": 4495298,
+                                "user_type": "registered",
+                                "display_name": "Justin Harris"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1434578082,
+                            "post_id": 29869594,
+                            "comment_id": 49844994,
+                            "link": "https://stackoverflow.com/questions/28155758/validation-codes-and-messages-in-django-rest-framework/29869594#comment49844994_29869594",
+                            "body": "I guess I was looking for something a little more general purpose.  This would need customization per field and per validation error, right?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 37594,
+                                "reputation": 9747,
+                                "user_id": 107510,
+                                "user_type": "registered",
+                                "accept_rate": 85,
+                                "display_name": "WhyNotHugo"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5685634,
+                                "reputation": 473,
+                                "user_id": 4495298,
+                                "user_type": "registered",
+                                "display_name": "Justin Harris"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1434625005,
+                            "post_id": 29869594,
+                            "comment_id": 49863997,
+                            "link": "https://stackoverflow.com/questions/28155758/validation-codes-and-messages-in-django-rest-framework/29869594#comment49863997_29869594",
+                            "body": "Yup. And it&#39;s ugly. Issue <a href=\"https://github.com/tomchristie/django-rest-framework/issues/2878\" rel=\"nofollow noreferrer\">#2878</a> will get rid of all the uglyness, when fixed."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 37594,
+                        "reputation": 9747,
+                        "user_id": 107510,
+                        "user_type": "registered",
+                        "accept_rate": 85,
+                        "display_name": "WhyNotHugo"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1429989506,
+                    "creation_date": 1429989506,
+                    "answer_id": 29869594,
+                    "question_id": 28155758,
+                    "link": "https://stackoverflow.com/questions/28155758/validation-codes-and-messages-in-django-rest-framework/29869594#29869594",
+                    "body": "<p>Add something like this to your serializer:</p>\n\n<pre><code>def is_valid(self, raise_exception=False):\n    try:\n        return super(ClientSerializer, self).is_valid(raise_exception)\n    except exceptions.ValidationError as e:\n        if 'email' in e.detail:\n            for i in range(len(e.detail['email'])):\n                if e.detail['email'][i] == UniqueValidator.message:\n                    e.detail['email'][i] = {'code': 'not-unique'}\n        raise e\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5685634,
+                        "reputation": 473,
+                        "user_id": 4495298,
+                        "user_type": "registered",
+                        "display_name": "Justin Harris"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 11,
+                    "last_activity_date": 1526079839,
+                    "creation_date": 1526079839,
+                    "answer_id": 50301325,
+                    "question_id": 28155758,
+                    "link": "https://stackoverflow.com/questions/28155758/validation-codes-and-messages-in-django-rest-framework/50301325#50301325",
+                    "body": "<p>This question was posted quite a while ago, so I will add the updated answer here.  Newer versions of DRF now support this, but it still takes a bit of custom code.  Creating a new exception handler with do the trick:</p>\n\n<pre><code>from rest_framework.views import exception_handler\nfrom rest_framework.exceptions import APIException\n\n\ndef full_details_exception_handler(exc, context):\n    \"\"\"\n    This overrides the default exception handler to\n    include the human-readable message AND the error code\n    so that clients can respond programmatically.\n    \"\"\"\n    if isinstance(exc, APIException):\n        exc.detail = exc.get_full_details()\n\n    return exception_handler(exc, context)\n</code></pre>\n\n<p>Then configure DRF to use that custom handler in your settings:</p>\n\n<pre><code>REST_FRAMEWORK['EXCEPTION_HANDLER'] = 'my_module.full_details_exception_handler'\n</code></pre>\n\n<p>It would be nice if this configuration were available in DRF itself to just add it as a configuration option, but this is a pretty lightweight solution to include the error codes.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 5685634,
+                "reputation": 473,
+                "user_id": 4495298,
+                "user_type": "registered",
+                "display_name": "Justin Harris"
+            },
+            "comment_count": 3,
+            "is_answered": true,
+            "accepted_answer_id": 50301325,
+            "answer_count": 2,
+            "score": 8,
+            "last_activity_date": 1526079839,
+            "creation_date": 1422294553,
+            "last_edit_date": 1429989687,
+            "question_id": 28155758,
+            "link": "https://stackoverflow.com/questions/28155758/validation-codes-and-messages-in-django-rest-framework",
+            "title": "Validation codes and messages in Django Rest Framework",
+            "body": "<p>Using out of the box fields in a serializer, validation error messages look something like this:</p>\n\n<pre><code>{\n    \"product\": [\n        \"This field must be unique.\"\n    ],\n    \"price\": [\n        \"This field is required.\"\n    ]\n}\n</code></pre>\n\n<p>However, for the API I am writing, I would like to provide a unique error code for each failed validation, so that clients can programmatically respond to validation errors, or can provide their own custom messages in a UI.  Ideally the error json would look something like this:</p>\n\n<pre><code>{\n    \"product\": [\n        {\n          \"code\": \"unique\",\n          \"message\": \"This field must be unique.\"\n        }\n    ],\n    \"price\": [\n        { \n          \"code\": \"required\",\n          \"message\": \"This field is required.\"\n        }\n    ]\n}\n</code></pre>\n\n<p>The current approach using ValidationErrors makes this rather difficult.  Looking through the code, it seems as though this type of error reporting is not supported currently.  However, I'm looking for an approach to override the error handling to fit this model.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9473
+}

@@ -1,0 +1,300 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "matlab",
+                "numpy",
+                "matplotlib"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 40654,
+                                "reputation": 3862,
+                                "user_id": 117814,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "Gyom"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1246410374,
+                            "post_id": 1066780,
+                            "comment_id": 879141,
+                            "link": "https://stackoverflow.com/questions/1066758/find-length-of-sequences-of-identical-values-in-a-numpy-array-run-length-encodi/1066780#comment879141_1066780",
+                            "body": "sure, this is more consise, but just as inefficient ; what I want to do is move the loop down to the C layer, by means of using some clever combination of numpy calls..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 34048,
+                                "reputation": 869830,
+                                "user_id": 95810,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Alex Martelli"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1246412653,
+                            "post_id": 1066780,
+                            "comment_id": 879221,
+                            "link": "https://stackoverflow.com/questions/1066758/find-length-of-sequences-of-identical-values-in-a-numpy-array-run-length-encodi/1066780#comment879221_1066780",
+                            "body": "check my edited answer, I now offer one such &quot;clever combinations&quot; (always trying hard not to be TOO clever though;-) -- but, do measure the speed of that one AND the itertools.groupby-based solution, and let us know which one is faster (and by how much) in examples realistic-for-you!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 26377,
+                        "reputation": 356129,
+                        "user_id": 68587,
+                        "user_type": "registered",
+                        "accept_rate": 95,
+                        "display_name": "John Kugelman"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1246409940,
+                    "last_edit_date": 1246409940,
+                    "creation_date": 1246408262,
+                    "answer_id": 1066780,
+                    "question_id": 1066758,
+                    "link": "https://stackoverflow.com/questions/1066758/find-length-of-sequences-of-identical-values-in-a-numpy-array-run-length-encodi/1066780#1066780",
+                    "body": "<pre><code>durations = []\ncounter   = 0\n\nfor bool in b:\n    if bool:\n        counter += 1\n    elif counter &gt; 0:\n        durations.append(counter)\n        counter = 0\n\nif counter &gt; 0:\n    durations.append(counter)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 40654,
+                                "reputation": 3862,
+                                "user_id": 117814,
+                                "user_type": "registered",
+                                "accept_rate": 91,
+                                "display_name": "Gyom"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1246416004,
+                            "post_id": 1066838,
+                            "comment_id": 879310,
+                            "link": "https://stackoverflow.com/questions/1066758/find-length-of-sequences-of-identical-values-in-a-numpy-array-run-length-encodi/1066838#comment879310_1066838",
+                            "body": "Thanks a lot !  The diff/where solution is exactly what I had in mind (not to mention it is about 10 times faster than the other solutions).  Call that &quot;not too clever&quot; if you like, but I wish I was clever enough to come up with it :-)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 34048,
+                                "reputation": 869830,
+                                "user_id": 95810,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Alex Martelli"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1246416630,
+                            "post_id": 1066838,
+                            "comment_id": 879323,
+                            "link": "https://stackoverflow.com/questions/1066758/find-length-of-sequences-of-identical-values-in-a-numpy-array-run-length-encodi/1066838#comment879323_1066838",
+                            "body": "@gnovice, I don&#39;t do matlab (funny enough my daughter, now a PhD candidate in advanced radio engineering, does;-), but now looking at your answer I do see the analogies -- get the end-of-runs minus the start-of-runs, get those by locating &lt;0 and &gt;0 spot in the differences, and pad the bits with zeros to make sure all runs-of-ones do end. Guess there aren&#39;t that many ways to skin this &quot;run lengths&quot; problem!-)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 34048,
+                                "reputation": 869830,
+                                "user_id": 95810,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Alex Martelli"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1246416849,
+                            "post_id": 1066838,
+                            "comment_id": 879327,
+                            "link": "https://stackoverflow.com/questions/1066758/find-length-of-sequences-of-identical-values-in-a-numpy-array-run-length-encodi/1066838#comment879327_1066838",
+                            "body": "@Gyom, you&#39;re welcome -- as @gnovice hints, the matlab solution is also similar, or so I guess it would be if one knew matlab -- so it must be that neither is very clever;-)... it&#39;s more a question of having had to do run-length coding stuff before (most of the time in my edit was about translating from Numeric, which is what I still tend instinctively to turn to, to much-better numpy -- but where I actually first learned such things was with APL, 30 years ago, when I was still a hardware designer...!-)."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 34048,
+                        "reputation": 869830,
+                        "user_id": 95810,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "Alex Martelli"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": true,
+                    "score": 60,
+                    "last_activity_date": 1246412529,
+                    "last_edit_date": 1246412529,
+                    "creation_date": 1246410274,
+                    "answer_id": 1066838,
+                    "question_id": 1066758,
+                    "link": "https://stackoverflow.com/questions/1066758/find-length-of-sequences-of-identical-values-in-a-numpy-array-run-length-encodi/1066838#1066838",
+                    "body": "<p>While not <code>numpy</code> primitives, <code>itertools</code> functions are often very fast, so do give this one a try (and measure times for various solutions including this one, of course):</p>\n\n<pre><code>def runs_of_ones(bits):\n  for bit, group in itertools.groupby(bits):\n    if bit: yield sum(group)\n</code></pre>\n\n<p>If you do need the values in a list, just can use list(runs_of_ones(bits)), of course; but maybe a list comprehension might be marginally faster still:</p>\n\n<pre><code>def runs_of_ones_list(bits):\n  return [sum(g) for b, g in itertools.groupby(bits) if b]\n</code></pre>\n\n<p>Moving to \"numpy-native\" possibilities, what about:</p>\n\n<pre><code>def runs_of_ones_array(bits):\n  # make sure all runs of ones are well-bounded\n  bounded = numpy.hstack(([0], bits, [0]))\n  # get 1 at run starts and -1 at run ends\n  difs = numpy.diff(bounded)\n  run_starts, = numpy.where(difs &gt; 0)\n  run_ends, = numpy.where(difs &lt; 0)\n  return run_ends - run_starts\n</code></pre>\n\n<p>Again: be sure to benchmark solutions against each others in realistic-for-you examples!</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 20933,
+                                "reputation": 3533,
+                                "user_id": 50462,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "dwf"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1248449366,
+                            "post_id": 1066864,
+                            "comment_id": 999281,
+                            "link": "https://stackoverflow.com/questions/1066758/find-length-of-sequences-of-identical-values-in-a-numpy-array-run-length-encodi/1066864#comment999281_1066864",
+                            "body": "diff() exists in numpy too, so this is more or less what you want though replace find(foo) with where(foo)[0]."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 21633,
+                        "reputation": 125554,
+                        "user_id": 52738,
+                        "user_type": "registered",
+                        "accept_rate": 50,
+                        "display_name": "gnovice"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1246410916,
+                    "creation_date": 1246410916,
+                    "answer_id": 1066864,
+                    "question_id": 1066758,
+                    "link": "https://stackoverflow.com/questions/1066758/find-length-of-sequences-of-identical-values-in-a-numpy-array-run-length-encodi/1066864#1066864",
+                    "body": "<p>Just in case anyone is curious (and since you mentioned MATLAB in passing), here's one way to solve it in MATLAB:</p>\n\n<pre><code>threshold = 7;\nd = 10*rand(1,100000);  % Sample data\nb = diff([false (d &lt; threshold) false]);\ndurations = find(b == -1)-find(b == 1);\n</code></pre>\n\n<p>I'm not too familiar with Python, but maybe this could help give you some ideas. =)</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6106,
+                        "reputation": 13601,
+                        "user_id": 10138,
+                        "user_type": "registered",
+                        "display_name": "piro"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 13,
+                    "last_activity_date": 1453308247,
+                    "last_edit_date": 1453308247,
+                    "creation_date": 1246444355,
+                    "answer_id": 1068397,
+                    "question_id": 1066758,
+                    "link": "https://stackoverflow.com/questions/1066758/find-length-of-sequences-of-identical-values-in-a-numpy-array-run-length-encodi/1068397#1068397",
+                    "body": "<p>Here is a solution using only arrays: it takes an array containing a sequence of bools and counts the length of the transitions.</p>\n\n<pre><code>&gt;&gt;&gt; from numpy import array, arange\n&gt;&gt;&gt; b = array([0,0,0,1,1,1,0,0,0,1,1,1,1,0,0], dtype=bool)\n&gt;&gt;&gt; sw = (b[:-1] ^ b[1:]); print sw\n[False False  True False False  True False False  True False False False\n  True False]\n&gt;&gt;&gt; isw = arange(len(sw))[sw]; print isw\n[ 2  5  8 12]\n&gt;&gt;&gt; lens = isw[1::2] - isw[::2]; print lens\n[3 4]\n</code></pre>\n\n<p><code>sw</code> contains a true where there is a switch, <code>isw</code> converts them in indexes. The items of isw are then subtracted pairwise in <code>lens</code>.</p>\n\n<p>Notice that if the sequence started with an 1 it would count the length of the 0s sequences: this can be fixed in the indexing to compute lens. Also, I have not tested corner cases such sequences of length 1.</p>\n\n<hr>\n\n<p>Full function that returns start positions and lengths of all <code>True</code>-subarrays. </p>\n\n<pre><code>import numpy as np\n\ndef count_adjacent_true(arr):\n    assert len(arr.shape) == 1\n    assert arr.dtype == np.bool\n    if arr.size == 0:\n        return np.empty(0, dtype=int), np.empty(0, dtype=int)\n    sw = np.insert(arr[1:] ^ arr[:-1], [0, arr.shape[0]-1], values=True)\n    swi = np.arange(sw.shape[0])[sw]\n    offset = 0 if arr[0] else 1\n    lengths = swi[offset+1::2] - swi[offset:-1:2]\n    return swi[offset:-1:2], lengths\n</code></pre>\n\n<p>Tested for different bool 1D-arrays (empty array; single/multiple elements; even/odd lengths; started with <code>True</code>/<code>False</code>; with only <code>True</code>/<code>False</code> elements).</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 42175,
+                                "reputation": 24414,
+                                "user_id": 122792,
+                                "user_type": "registered",
+                                "accept_rate": 87,
+                                "display_name": "Thomas Browne"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1670283782,
+                            "post_id": 32681075,
+                            "comment_id": 131836416,
+                            "link": "https://stackoverflow.com/questions/1066758/find-length-of-sequences-of-identical-values-in-a-numpy-array-run-length-encodi/32681075#comment131836416_32681075",
+                            "body": "Warning - this function breaks on runs of <code>np.nan</code>. Working a fix."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 42175,
+                        "reputation": 24414,
+                        "user_id": 122792,
+                        "user_type": "registered",
+                        "accept_rate": 87,
+                        "display_name": "Thomas Browne"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 78,
+                    "last_activity_date": 1609872499,
+                    "last_edit_date": 1609872499,
+                    "creation_date": 1442763043,
+                    "answer_id": 32681075,
+                    "question_id": 1066758,
+                    "link": "https://stackoverflow.com/questions/1066758/find-length-of-sequences-of-identical-values-in-a-numpy-array-run-length-encodi/32681075#32681075",
+                    "body": "<p>Fully numpy vectorized and generic RLE for any array (works with strings, booleans etc too).</p>\n<p>Outputs tuple of run lengths, start positions, and values.</p>\n<pre><code>import numpy as np\n\ndef rle(inarray):\n        &quot;&quot;&quot; run length encoding. Partial credit to R rle function. \n            Multi datatype arrays catered for including non Numpy\n            returns: tuple (runlengths, startpositions, values) &quot;&quot;&quot;\n        ia = np.asarray(inarray)                # force numpy\n        n = len(ia)\n        if n == 0: \n            return (None, None, None)\n        else:\n            y = ia[1:] != ia[:-1]               # pairwise unequal (string safe)\n            i = np.append(np.where(y), n - 1)   # must include last element posi\n            z = np.diff(np.append(-1, i))       # run lengths\n            p = np.cumsum(np.append(0, z))[:-1] # positions\n            return(z, p, ia[i])\n</code></pre>\n<p>Pretty fast (i7):</p>\n<pre><code>xx = np.random.randint(0, 5, 1000000)\n%timeit yy = rle(xx)\n100 loops, best of 3: 18.6 ms per loop\n</code></pre>\n<p>Multiple data types:</p>\n<pre><code>rle([True, True, True, False, True, False, False])\nOut[8]: \n(array([3, 1, 1, 2]),\n array([0, 3, 4, 5]),\n array([ True, False,  True, False], dtype=bool))\n\nrle(np.array([5, 4, 4, 4, 4, 0, 0]))\nOut[9]: (array([1, 4, 2]), array([0, 1, 5]), array([5, 4, 0]))\n\nrle([&quot;hello&quot;, &quot;hello&quot;, &quot;my&quot;, &quot;friend&quot;, &quot;okay&quot;, &quot;okay&quot;, &quot;bye&quot;])\nOut[10]: \n(array([2, 1, 1, 2, 1]),\n array([0, 2, 3, 4, 6]),\n array(['hello', 'my', 'friend', 'okay', 'bye'], \n       dtype='|S6'))\n</code></pre>\n<p>Same results as Alex Martelli above:</p>\n<pre><code>xx = np.random.randint(0, 2, 20)\n\nxx\nOut[60]: array([1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1])\n\nam = runs_of_ones_array(xx)\n\ntb = rle(xx)\n\nam\nOut[63]: array([4, 5, 2, 5])\n\ntb[0][tb[2] == 1]\nOut[64]: array([4, 5, 2, 5])\n\n%timeit runs_of_ones_array(xx)\n10000 loops, best of 3: 28.5 \u00b5s per loop\n\n%timeit rle(xx)\n10000 loops, best of 3: 38.2 \u00b5s per loop\n</code></pre>\n<p>Slightly slower than Alex (but still very fast), and much more flexible.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6776801,
+                        "reputation": 26348,
+                        "user_id": 5218354,
+                        "user_type": "registered",
+                        "accept_rate": 57,
+                        "display_name": "norok2"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1635038771,
+                    "creation_date": 1635038771,
+                    "answer_id": 69693227,
+                    "question_id": 1066758,
+                    "link": "https://stackoverflow.com/questions/1066758/find-length-of-sequences-of-identical-values-in-a-numpy-array-run-length-encodi/69693227#69693227",
+                    "body": "<p>Perhaps late to the party, but a Numba-based approach is going to be fastest by far and large.</p>\n<pre class=\"lang-py prettyprint-override\"><code>import numpy as np\nimport numba as nb\n\n\n@nb.njit\ndef count_steps_nb(arr):\n    result = 1\n    last_x = arr[0]\n    for x in arr[1:]:\n        if last_x != x:\n            result += 1\n            last_x = x\n    return result\n\n\n@nb.njit\ndef rle_nb(arr):\n    n = count_steps_nb(arr)\n    values = np.empty(n, dtype=arr.dtype)\n    lengths = np.empty(n, dtype=np.int_)\n    last_x = arr[0]\n    length = 1\n    i = 0\n    for x in arr[1:]:\n        if last_x != x:\n            values[i] = last_x\n            lengths[i] = length\n            i += 1\n            length = 1\n            last_x = x\n        else:\n            length += 1\n    values[i] = last_x\n    lengths[i] = length\n    return values, lengths\n</code></pre>\n<p>Numpy-based approaches (inspired by <a href=\"https://stackoverflow.com/a/32681075/5218354\">@ThomasBrowne answer</a> but faster because the use of the expensive <code>numpy.concatenate()</code> is reduced to a minimum) are the runner-up (here two similar approaches are presented, one using not-equality to find the positions of the steps, and the other one using differences):</p>\n<pre class=\"lang-py prettyprint-override\"><code>import numpy as np\n\n\ndef rle_np_neq(arr):\n    n = len(arr)\n    if n == 0:\n        values = np.empty(0, dtype=arr.dtype)\n        lengths = np.empty(0, dtype=np.int_)\n    else:\n        positions = np.concatenate(\n            [[-1], np.nonzero(arr[1:] != arr[:-1])[0], [n - 1]])\n        lengths = positions[1:] - positions[:-1]\n        values = arr[positions[1:]]\n    return values, lengths\n</code></pre>\n<pre class=\"lang-py prettyprint-override\"><code>import numpy as np\n\n\ndef rle_np_diff(arr):\n    n = len(arr)\n    if n == 0:\n        values = np.empty(0, dtype=arr.dtype)\n        lengths = np.empty(0, dtype=np.int_)\n    else:\n        positions = np.concatenate(\n            [[-1], np.nonzero(arr[1:] - arr[:-1])[0], [n - 1]])\n        lengths = positions[1:] - positions[:-1]\n        values = arr[positions[1:]]\n        return values, lengths\n</code></pre>\n<p>These both outperform the na\u00efve and simple single loop approach:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import numpy as np\n\n\ndef rle_loop(arr):\n    values = []\n    lengths = []\n    last_x = arr[0]\n    length = 1\n    for x in arr[1:]:\n        if last_x != x:\n            values.append(last_x)\n            lengths.append(length)\n            length = 1\n            last_x = x\n        else:\n            length += 1\n    values.append(last_x)\n    lengths.append(length)\n    return np.array(values), np.array(lengths)\n</code></pre>\n<p>On the contrary, using <code>itertools.groupby()</code> is not going to be any faster than the simple loop (unless on very special cases like in <a href=\"https://stackoverflow.com/a/1066838/5218354\">@AlexMartelli answer</a> or someone will implement <code>__len__</code> on the group object) because in general there is no simple way of extracting the group size information other than looping through the group itself, which is not exactly fast:</p>\n<pre class=\"lang-py prettyprint-override\"><code>import itertools\nimport numpy as np\n\n\ndef rle_groupby(arr):\n    values = []\n    lengths = []\n    for x, group in itertools.groupby(arr):\n        values.append(x)\n        lengths.append(sum(1 for _ in group))\n    return np.array(values), np.array(lengths)\n</code></pre>\n<p>The results of some benchmarks on random integer arrays of varying size are reported:</p>\n<p><a href=\"https://i.stack.imgur.com/KyaUV.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/KyaUV.png\" alt=\"bm_full\" /></a>\n<a href=\"https://i.stack.imgur.com/xle8O.png\" rel=\"noreferrer\"><img src=\"https://i.stack.imgur.com/xle8O.png\" alt=\"bm_zoom\" /></a></p>\n<p>(Full analysis <a href=\"https://colab.research.google.com/drive/1sxVACpy9RrEE5PKiviPgegdkwOTvP1eS?usp=sharing\" rel=\"noreferrer\">here</a>).</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 25400606,
+                        "reputation": 11,
+                        "user_id": 19210183,
+                        "user_type": "registered",
+                        "display_name": "Jack"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1653614996,
+                    "last_edit_date": 1653614996,
+                    "creation_date": 1653603945,
+                    "answer_id": 72398606,
+                    "question_id": 1066758,
+                    "link": "https://stackoverflow.com/questions/1066758/find-length-of-sequences-of-identical-values-in-a-numpy-array-run-length-encodi/72398606#72398606",
+                    "body": "<pre><code>import numpy as np\na = np.array([3, 3, 3, 1, 3, 3, 3, 3, 1, 1, 3, 3, 3, 3, 3])\nis_not_in_run = (a != 3)\nis_not_in_run = np.concatenate(([True], is_not_in_run, [True]))\ngap_indices = np.where(is_not_in_run)[0]\nrun_lengths = np.diff(gap_indices) - 1\nrun_lengths = np.delete(run_lengths, np.where(run_lengths == 0)[0])\nprint(run_lengths)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 40654,
+                "reputation": 3862,
+                "user_id": 117814,
+                "user_type": "registered",
+                "accept_rate": 91,
+                "display_name": "Gyom"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 1066838,
+            "answer_count": 7,
+            "score": 63,
+            "last_activity_date": 1653614996,
+            "creation_date": 1246407558,
+            "last_edit_date": 1510660920,
+            "question_id": 1066758,
+            "link": "https://stackoverflow.com/questions/1066758/find-length-of-sequences-of-identical-values-in-a-numpy-array-run-length-encodi",
+            "title": "find length of sequences of identical values in a numpy array (run length encoding)",
+            "body": "<p>In a pylab program (which could probably be a matlab program as well) I have a numpy array of numbers representing distances: <code>d[t]</code> is the <em>distance</em> at time <code>t</code> (and the timespan of my data is <code>len(d)</code> time units).</p>\n\n<p>The events I'm interested in are when the distance is below a certain threshold, and I want to compute the duration of these events. It's easy to get an array of booleans with <code>b = d&lt;threshold</code>, and the problem comes down to computing the sequence of the lengths of the True-only words in <code>b</code>. But I do not know how to do that efficiently (i.e. using numpy primitives), and I resorted to walk the array and to do manual change detection (i.e. initialize counter when value goes from False to True, increase counter as long as value is True, and output the counter to the sequence when value goes back to False). But this is tremendously slow.</p>\n\n<p><b>How to efficienly detect that sort of sequences in numpy arrays ?</b></p>\n\n<p>Below is some python code that illustrates my problem : the fourth dot takes a very long time to appear (if not, increase the size of the array)</p>\n\n<pre><code>from pylab import *\n\nthreshold = 7\n\nprint '.'\nd = 10*rand(10000000)\n\nprint '.'\n\nb = d&lt;threshold\n\nprint '.'\n\ndurations=[]\nfor i in xrange(len(b)):\n    if b[i] and (i==0 or not b[i-1]):\n        counter=1\n    if  i&gt;0 and b[i-1] and b[i]:\n        counter+=1\n    if (b[i-1] and not b[i]) or i==len(b)-1:\n        durations.append(counter)\n\nprint '.'\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9829
+}

@@ -1,0 +1,116 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "pandas",
+                "properties",
+                "setter"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 3977767,
+                        "reputation": 22674,
+                        "user_id": 3280538,
+                        "user_type": "registered",
+                        "accept_rate": 74,
+                        "display_name": "flakes"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1674450899,
+                    "post_id": 75205824,
+                    "comment_id": 132709125,
+                    "link": "https://stackoverflow.com/questions/75205824/pandas-dataframe-as-a-property-of-a-class-setter-not-called-when-columns-change#comment132709125_75205824",
+                    "body": "<code>.data</code> calls the getter property and returns the <code>_data</code> attribute. <code>[&#39;three&#39;]</code> is then called on the returned attribute <code>_data </code>. At that point <code>DemoClass</code> isn&#39;t in the picture at all."
+                },
+                {
+                    "owner": {
+                        "account_id": 26277015,
+                        "reputation": 1,
+                        "user_id": 19946010,
+                        "user_type": "registered",
+                        "display_name": "bwheelz36"
+                    },
+                    "reply_to_user": {
+                        "account_id": 3977767,
+                        "reputation": 22674,
+                        "user_id": 3280538,
+                        "user_type": "registered",
+                        "accept_rate": 74,
+                        "display_name": "flakes"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1674458485,
+                    "post_id": 75205824,
+                    "comment_id": 132710125,
+                    "link": "https://stackoverflow.com/questions/75205824/pandas-dataframe-as-a-property-of-a-class-setter-not-called-when-columns-change#comment132710125_75205824",
+                    "body": "Right... so do you think it&#39;s possible to do this in some other way, or would I need to create a new DataFrame class?"
+                },
+                {
+                    "owner": {
+                        "account_id": 3977767,
+                        "reputation": 22674,
+                        "user_id": 3280538,
+                        "user_type": "registered",
+                        "accept_rate": 74,
+                        "display_name": "flakes"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1674489103,
+                    "post_id": 75205824,
+                    "comment_id": 132719470,
+                    "link": "https://stackoverflow.com/questions/75205824/pandas-dataframe-as-a-property-of-a-class-setter-not-called-when-columns-change#comment132719470_75205824",
+                    "body": "Yeah you would need to write a wrapper for each of the returned values. That will not be easy however. I think you need to step back and think about why you actually need this. It would most likely be easier to maintain if you made a helper function to do these types of assertions at specific points, rather than trying to force in behavior into a library for syntactic sugar. This will keep your code more resistant to change in the long run. Think about the requirements of your application and less on how to save lines."
+                },
+                {
+                    "owner": {
+                        "account_id": 26277015,
+                        "reputation": 1,
+                        "user_id": 19946010,
+                        "user_type": "registered",
+                        "display_name": "bwheelz36"
+                    },
+                    "reply_to_user": {
+                        "account_id": 3977767,
+                        "reputation": 22674,
+                        "user_id": 3280538,
+                        "user_type": "registered",
+                        "accept_rate": 74,
+                        "display_name": "flakes"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1674526878,
+                    "post_id": 75205824,
+                    "comment_id": 132728387,
+                    "link": "https://stackoverflow.com/questions/75205824/pandas-dataframe-as-a-property-of-a-class-setter-not-called-when-columns-change#comment132728387_75205824",
+                    "body": "thanks. maybe you are right, I could probably check the data when operations need to be performed rather than whenever it is changed."
+                }
+            ],
+            "owner": {
+                "account_id": 26277015,
+                "reputation": 1,
+                "user_id": 19946010,
+                "user_type": "registered",
+                "display_name": "bwheelz36"
+            },
+            "comment_count": 4,
+            "is_answered": false,
+            "answer_count": 0,
+            "score": 0,
+            "last_activity_date": 1674450466,
+            "creation_date": 1674450466,
+            "question_id": 75205824,
+            "link": "https://stackoverflow.com/questions/75205824/pandas-dataframe-as-a-property-of-a-class-setter-not-called-when-columns-change",
+            "title": "Pandas dataframe as a property of a class: setter not called when columns changed",
+            "body": "<p>I want to have a pandas DataFrame as a property of my class. I want users to be able to interact with the DataFrame  in a normal way, but when it changes I want to run a few checks and balances over the resultant data to make sure it remains valid. I thought I would be able to achieve this using the <code>@property</code> decorator, however this doesn't appear to work when a column of the dataframe (as opposed to the entire dataframe) is changed. An example demonstrating what I mean is below.</p>\n<p>My question: is there an alternative way to implement what I want? The only thing I can think of is creating a new class inheriting from DataFrame.... which I'd rather not do, and also the desire to monitor a dataframe whenever it gets updated seems like a broader issue than just my own case?</p>\n<pre class=\"lang-py prettyprint-override\"><code>import pandas as pd\n\nclass DemoClass:\n\n    def __init__(self, data_frame):\n        self.data = data_frame\n        self._check_data_frame_is_valid()\n\n    @property\n    def data(self):\n        return self._data\n\n    @data.setter\n    def data(self, new_data):\n        self._data = new_data\n        self._check_data_frame_is_valid()\n\n\n    def _check_data_frame_is_valid(self):\n\n        # example check:\n        allowed_columns = ['one', 'two']\n        for column in self.data:\n            assert column in allowed_columns\n            assert self.data[column].sum() &lt; 10\n        print('data passed checks')\n\nif __name__ == '__main__':\n    example_data = pd.DataFrame({'one': [1,2,3], 'two': [1,2,3]})\n    class_instance = DemoClass(example_data)\n    DemoClass.data = example_data  # this works; @data.setter is triggered\n    DemoClass.data['three'] = [4,5,6]  #this does not work, and the data is not checked\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7572
+}

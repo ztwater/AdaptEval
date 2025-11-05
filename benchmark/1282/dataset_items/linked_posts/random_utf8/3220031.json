@@ -1,0 +1,345 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "mysql",
+                "django",
+                "unicode"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 89879,
+                                "reputation": 143727,
+                                "user_id": 247696,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Flimm"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1495819257,
+                            "post_id": 3220210,
+                            "comment_id": 75426537,
+                            "link": "https://stackoverflow.com/questions/3220031/how-to-filter-or-replace-unicode-characters-that-would-take-more-than-3-bytes/3220210#comment75426537_3220210",
+                            "body": "Note that the strings <code>&quot;[^\\u0000-\\uFFFF]&quot;</code> etc are not raw strings, that is, the string literals are not prefixed with <code>r</code>!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7089065,
+                                "reputation": 1422,
+                                "user_id": 5424931,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Rolando Urquiza"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1499888027,
+                            "post_id": 3220210,
+                            "comment_id": 77105557,
+                            "link": "https://stackoverflow.com/questions/3220031/how-to-filter-or-replace-unicode-characters-that-would-take-more-than-3-bytes/3220210#comment77105557_3220210",
+                            "body": "I had to change the the first range end in <code>u&#39;[^\\u0000-\\uD7FF\\uE000-\\uFFFF]&#39;</code> from <code>&#39;\\uD7FF&#39;</code> to <code>&#39;\\u07FF&#39;</code> because there where still some chars not beign cleaned."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 116839,
+                        "reputation": 53589,
+                        "user_id": 306253,
+                        "user_type": "registered",
+                        "accept_rate": 93,
+                        "display_name": "drawnonward"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 40,
+                    "last_activity_date": 1394888154,
+                    "last_edit_date": 1394888154,
+                    "creation_date": 1278783468,
+                    "answer_id": 3220210,
+                    "question_id": 3220031,
+                    "link": "https://stackoverflow.com/questions/3220031/how-to-filter-or-replace-unicode-characters-that-would-take-more-than-3-bytes/3220210#3220210",
+                    "body": "<p>Unicode characters in the ranges \\u0000-\\uD7FF and \\uE000-\\uFFFF will have 3 byte (or less) encodings in UTF8.  The \\uD800-\\uDFFF range is for multibyte UTF16.  I do not know python, but you should be able to set up a regular expression to match outside those ranges.</p>\n\n<pre><code>pattern = re.compile(\"[\\uD800-\\uDFFF].\", re.UNICODE)\npattern = re.compile(\"[^\\u0000-\\uFFFF]\", re.UNICODE)\n</code></pre>\n\n<p>Edit adding Python from Denilson S\u00e1's script in the question body:</p>\n\n<pre><code>re_pattern = re.compile(u'[^\\u0000-\\uD7FF\\uE000-\\uFFFF]', re.UNICODE)\nfiltered_string = re_pattern.sub(u'\\uFFFD', unicode_string)    \n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4551,
+                                "reputation": 94733,
+                                "user_id": 6899,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "tzot"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1278837901,
+                            "post_id": 3220327,
+                            "comment_id": 3324673,
+                            "link": "https://stackoverflow.com/questions/3220031/how-to-filter-or-replace-unicode-characters-that-would-take-more-than-3-bytes/3220327#comment3324673_3220327",
+                            "body": "Perhaps <code>struct.unpack(&#39;&lt;%dH&#39; % (len(e)&#47;&#47;2), e)</code>?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 30816,
+                                "reputation": 82403,
+                                "user_id": 84270,
+                                "user_type": "registered",
+                                "display_name": "John Machin"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1278850466,
+                            "post_id": 3220327,
+                            "comment_id": 3325337,
+                            "link": "https://stackoverflow.com/questions/3220031/how-to-filter-or-replace-unicode-characters-that-would-take-more-than-3-bytes/3220327#comment3325337_3220327",
+                            "body": "(1) The MySQL docs that I referred to declare the charset as part of the column definition: <code>t character(128) character set utf8</code> ...  are you sure that what you have is equivalent? (2) Try your UTF-16 stunt with Python 3.1 :-)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 10930,
+                                "reputation": 788903,
+                                "user_id": 20862,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "Ignacio Vazquez-Abrams"
+                            },
+                            "reply_to_user": {
+                                "account_id": 30816,
+                                "reputation": 82403,
+                                "user_id": 84270,
+                                "user_type": "registered",
+                                "display_name": "John Machin"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1278851251,
+                            "post_id": 3220327,
+                            "comment_id": 3325372,
+                            "link": "https://stackoverflow.com/questions/3220031/how-to-filter-or-replace-unicode-characters-that-would-take-more-than-3-bytes/3220327#comment3325372_3220327",
+                            "body": "@John: (1) Retested with <code>character set utf8</code> on 2.6. Results were the same. (2) That&#39;s just a limitation of the stock UTF-8 codec. It can be worked around with a custom codec. Or with MySQL doing the right thing in the first place."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 10930,
+                        "reputation": 788903,
+                        "user_id": 20862,
+                        "user_type": "registered",
+                        "accept_rate": 50,
+                        "display_name": "Ignacio Vazquez-Abrams"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1278842841,
+                    "last_edit_date": 1278842841,
+                    "creation_date": 1278785350,
+                    "answer_id": 3220327,
+                    "question_id": 3220031,
+                    "link": "https://stackoverflow.com/questions/3220031/how-to-filter-or-replace-unicode-characters-that-would-take-more-than-3-bytes/3220327#3220327",
+                    "body": "<p>Encode as UTF-16, then reencode as UTF-8.</p>\n\n<pre><code>&gt;&gt;&gt; t = u'\ud835\udc1f\ud835\udc28\ud835\udc28'\n&gt;&gt;&gt; e = t.encode('utf-16le')\n&gt;&gt;&gt; ''.join(unichr(x).encode('utf-8') for x in struct.unpack('&lt;' + 'H' * (len(e) // 2), e))\n'\\xed\\xa0\\xb5\\xed\\xb0\\x9f\\xed\\xa0\\xb5\\xed\\xb0\\xa8\\xed\\xa0\\xb5\\xed\\xb0\\xa8'\n</code></pre>\n\n<p>Note that you can't encode after joining, since the surrogate pairs may be decoded before reencoding.</p>\n\n<p><strong>EDIT:</strong></p>\n\n<p>MySQL (at least 5.1.47) has no problem dealing with surrogate pairs:</p>\n\n<pre><code>mysql&gt; create table utf8test (t character(128)) collate utf8_general_ci;\nQuery OK, 0 rows affected (0.12 sec)\n\n  ...\n\n&gt;&gt;&gt; cxn = MySQLdb.connect(..., charset='utf8')\n&gt;&gt;&gt; csr = cxn.cursor()\n&gt;&gt;&gt; t = u'\ud835\udc1f\ud835\udc28\ud835\udc28'\n&gt;&gt;&gt; e = t.encode('utf-16le')\n&gt;&gt;&gt; v = ''.join(unichr(x).encode('utf-8') for x in struct.unpack('&lt;' + 'H' * (len(e) // 2), e))\n&gt;&gt;&gt; v\n'\\xed\\xa0\\xb5\\xed\\xb0\\x9f\\xed\\xa0\\xb5\\xed\\xb0\\xa8\\xed\\xa0\\xb5\\xed\\xb0\\xa8'\n&gt;&gt;&gt; csr.execute('insert into utf8test (t) values (%s)', (v,))\n1L\n&gt;&gt;&gt; csr.execute('select * from utf8test')\n1L\n&gt;&gt;&gt; r = csr.fetchone()\n&gt;&gt;&gt; r\n(u'\\ud835\\udc1f\\ud835\\udc28\\ud835\\udc28',)\n&gt;&gt;&gt; print r[0]\n\ud835\udc1f\ud835\udc28\ud835\udc28\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 30816,
+                                "reputation": 82403,
+                                "user_id": 84270,
+                                "user_type": "registered",
+                                "display_name": "John Machin"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1278836901,
+                            "post_id": 3222368,
+                            "comment_id": 3324623,
+                            "link": "https://stackoverflow.com/questions/3220031/how-to-filter-or-replace-unicode-characters-that-would-take-more-than-3-bytes/3222368#comment3324623_3222368",
+                            "body": "Perhaps it should exclude surrogates. Also: <code>uc &lt;= u&#39;\\uffff&#39;</code> might be better than <code>ord(uc) &lt; 65536</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4551,
+                        "reputation": 94733,
+                        "user_id": 6899,
+                        "user_type": "registered",
+                        "accept_rate": 84,
+                        "display_name": "tzot"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1278837808,
+                    "last_edit_date": 1278837808,
+                    "creation_date": 1278836583,
+                    "answer_id": 3222368,
+                    "question_id": 3220031,
+                    "link": "https://stackoverflow.com/questions/3220031/how-to-filter-or-replace-unicode-characters-that-would-take-more-than-3-bytes/3222368#3222368",
+                    "body": "<p>I'm guessing it's not the fastest, but quite straightforward (\u201cpythonic\u201d :) :</p>\n\n<pre><code>def max3bytes(unicode_string):\n    return u''.join(uc if uc &lt;= u'\\uffff' else u'\\ufffd' for uc in unicode_string)\n</code></pre>\n\n<p>NB: this code does <em>not</em> take into account the fact that Unicode has surrogate characters in the ranges U+D800-U+DFFF.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4551,
+                        "reputation": 94733,
+                        "user_id": 6899,
+                        "user_type": "registered",
+                        "accept_rate": 84,
+                        "display_name": "tzot"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1278837351,
+                    "creation_date": 1278837351,
+                    "answer_id": 3222399,
+                    "question_id": 3220031,
+                    "link": "https://stackoverflow.com/questions/3220031/how-to-filter-or-replace-unicode-characters-that-would-take-more-than-3-bytes/3222399#3222399",
+                    "body": "<p>And just for the fun of it, an <code>itertools</code> monstrosity :)</p>\n\n<pre><code>import itertools as it, operator as op\n\ndef max3bytes(unicode_string):\n\n    # sequence of pairs of (char_in_string, u'\\N{REPLACEMENT CHARACTER}')\n    pairs= it.izip(unicode_string, it.repeat(u'\\ufffd'))\n\n    # is the argument less than or equal to 65535?\n    selector= ft.partial(op.le, 65535)\n\n    # using the character ordinals, return 0 or 1 based on `selector`\n    indexer= it.imap(selector, it.imap(ord, unicode_string))\n\n    # now pick the correct item for all pairs\n    return u''.join(it.imap(tuple.__getitem__, pairs, indexer))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 59777,
+                                "reputation": 48994,
+                                "user_id": 178761,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Philipp"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1278843753,
+                            "post_id": 3222573,
+                            "comment_id": 3324938,
+                            "link": "https://stackoverflow.com/questions/3220031/how-to-filter-or-replace-unicode-characters-that-would-take-more-than-3-bytes/3222573#comment3324938_3222573",
+                            "body": "\u201cHowever this proscription is as far as I know largely unknown or ignored.\u201d\u2014Hopefully not! At least Python 3 refuses to encode surrogate code points (try <code>chr(55349).encode(&quot;utf-8&quot;)</code>)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 30816,
+                                "reputation": 82403,
+                                "user_id": 84270,
+                                "user_type": "registered",
+                                "display_name": "John Machin"
+                            },
+                            "reply_to_user": {
+                                "account_id": 59777,
+                                "reputation": 48994,
+                                "user_id": 178761,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Philipp"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1278849115,
+                            "post_id": 3222573,
+                            "comment_id": 3325247,
+                            "link": "https://stackoverflow.com/questions/3220031/how-to-filter-or-replace-unicode-characters-that-would-take-more-than-3-bytes/3222573#comment3325247_3222573",
+                            "body": "@Philipp: Python 3 does seem to do the &quot;right thing&quot; -- however your example is a LONE surrogate which is a different problem; Python 2 passes that test but not this one: <code>&quot;\\xed\\xa0\\x80\\xed\\xb0\\x80&quot;.decode(&#39;utf8&#39;)</code> produces <code>u&#39;\\U00010000&#39;</code> instead of an exception."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 42834,
+                                "reputation": 48512,
+                                "user_id": 124946,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Denilson S&#225; Maia"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1279317946,
+                            "post_id": 3222573,
+                            "comment_id": 3381646,
+                            "link": "https://stackoverflow.com/questions/3220031/how-to-filter-or-replace-unicode-characters-that-would-take-more-than-3-bytes/3222573#comment3381646_3222573",
+                            "body": "Hmmm... You forgot to add the <code>u</code> prefix to all strings! It should have been <code>u&#39;\\ufffd&#39;</code>. ;)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 30816,
+                        "reputation": 82403,
+                        "user_id": 84270,
+                        "user_type": "registered",
+                        "display_name": "John Machin"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1295955952,
+                    "last_edit_date": 1295955952,
+                    "creation_date": 1278841174,
+                    "answer_id": 3222573,
+                    "question_id": 3220031,
+                    "link": "https://stackoverflow.com/questions/3220031/how-to-filter-or-replace-unicode-characters-that-would-take-more-than-3-bytes/3222573#3222573",
+                    "body": "<p>According to <a href=\"http://dev.mysql.com/doc/refman/5.1/en/charset-unicode.html\" rel=\"nofollow noreferrer\">the MySQL 5.1 documentation</a>: \"The ucs2 and utf8  character sets do not support supplementary characters that lie outside the BMP.\" This indicates that there might be a problem with surrogate pairs.</p>\n\n<p>Note that the <a href=\"http://www.unicode.org/versions/Unicode5.2.0/ch03.pdf\" rel=\"nofollow noreferrer\">Unicode standard 5.2 chapter 3</a> actually forbids encoding a surrogate pair as two 3-byte UTF-8 sequences instead of one 4-byte UTF-8 sequence  ... see for example page 93 \"\"\"Because surrogate code points are not Unicode scalar values, any UTF-8 byte sequence that would otherwise map to code points D800..DFFF is ill-formed.\"\"\" However this proscription is as far as I know largely unknown or ignored.</p>\n\n<p>It may well be a good idea to check what MySQL does with surrogate pairs. If they are not to be retained, this code will provide a simple-enough check:</p>\n\n<pre><code>all(uc &lt; u'\\ud800' or u'\\ue000' &lt;= uc &lt;= u'\\uffff' for uc in unicode_string)\n</code></pre>\n\n<p>and this code will replace any \"nasties\" with <code>u\\ufffd</code>:</p>\n\n<pre><code>u''.join(\n    uc if uc &lt; u'\\ud800' or u'\\ue000' &lt;= uc &lt;= u'\\uffff' else u'\\ufffd'\n    for uc in unicode_string\n    )\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1165496,
+                        "reputation": 61,
+                        "user_id": 1143971,
+                        "user_type": "registered",
+                        "display_name": "kasioumis"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1349606340,
+                    "creation_date": 1349606340,
+                    "answer_id": 12768060,
+                    "question_id": 3220031,
+                    "link": "https://stackoverflow.com/questions/3220031/how-to-filter-or-replace-unicode-characters-that-would-take-more-than-3-bytes/12768060#12768060",
+                    "body": "<p>You may skip the decoding and encoding steps and directly detect the value of the first byte  (8-bit string) of each character. According to UTF-8:</p>\n\n<pre><code>#1-byte characters have the following format: 0xxxxxxx\n#2-byte characters have the following format: 110xxxxx 10xxxxxx\n#3-byte characters have the following format: 1110xxxx 10xxxxxx 10xxxxxx\n#4-byte characters have the following format: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx\n</code></pre>\n\n<p>According to that, you only need to check the value of only the first byte of each character to filter out 4-byte characters:</p>\n\n<pre><code>def filter_4byte_chars(s):\n    i = 0\n    j = len(s)\n    # you need to convert\n    # the immutable string\n    # to a mutable list first\n    s = list(s)\n    while i &lt; j:\n        # get the value of this byte\n        k = ord(s[i])\n        # this is a 1-byte character, skip to the next byte\n        if k &lt;= 127:\n            i += 1\n        # this is a 2-byte character, skip ahead by 2 bytes\n        elif k &lt; 224:\n            i += 2\n        # this is a 3-byte character, skip ahead by 3 bytes\n        elif k &lt; 240:\n            i += 3\n        # this is a 4-byte character, remove it and update\n        # the length of the string we need to check\n        else:\n            s[i:i+4] = []\n            j -= 4\n    return ''.join(s)\n</code></pre>\n\n<p>Skipping the decoding and encoding parts will save you some time and for smaller strings that mostly have 1-byte characters this could even be faster than the regular expression filtering.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 110558,
+                        "reputation": 10303,
+                        "user_id": 292502,
+                        "user_type": "registered",
+                        "accept_rate": 83,
+                        "display_name": "Csaba Toth"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1634584342,
+                    "creation_date": 1634584342,
+                    "answer_id": 69621353,
+                    "question_id": 3220031,
+                    "link": "https://stackoverflow.com/questions/3220031/how-to-filter-or-replace-unicode-characters-that-would-take-more-than-3-bytes/69621353#69621353",
+                    "body": "<p>This does more than filtering out just 3+ byte UTF-8 unicode characters. It removes unicode but tries to do that in a gentle way and replace it with relevant ASCII characters if possible. It can be a blessing in the future if you don't have for example a dozen of various unicode apostrophes and unicode quotation marks in your text (usually coming from Apple handhelds) but only the regular ASCII apostrophes and quotations.</p>\n<pre><code>unicodedata.normalize(&quot;NFKD&quot;, sentence).encode(&quot;ascii&quot;, &quot;ignore&quot;)\n</code></pre>\n<p>This is robust, I use it with some more guards:</p>\n<pre><code>import unicodedata\n\ndef neutralize_unicode(value):\n    &quot;&quot;&quot;\n    Taking care of special characters as gently as possible\n\n    Args:\n        value (string): input string, can contain unicode characters\n\n    Returns:\n        :obj:`string` where the unicode characters are replaced with standard\n        ASCII counterparts (for example en-dash and em-dash with regular dash,\n        apostrophe and quotation variations with the standard ones) or taken\n        out if there's no substitute.\n    &quot;&quot;&quot;\n    if not value or not isinstance(value, basestring):\n        return value\n\n    if isinstance(value, str):\n        return value\n\n    return unicodedata.normalize(&quot;NFKD&quot;, value).encode(&quot;ascii&quot;, &quot;ignore&quot;)\n</code></pre>\n<p>This is Python 2 BTW.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 42834,
+                "reputation": 48512,
+                "user_id": 124946,
+                "user_type": "registered",
+                "accept_rate": 80,
+                "display_name": "Denilson S&#225; Maia"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 3220210,
+            "answer_count": 7,
+            "score": 44,
+            "last_activity_date": 1634584342,
+            "creation_date": 1278780578,
+            "last_edit_date": 1592644375,
+            "question_id": 3220031,
+            "link": "https://stackoverflow.com/questions/3220031/how-to-filter-or-replace-unicode-characters-that-would-take-more-than-3-bytes",
+            "title": "How to filter (or replace) unicode characters that would take more than 3 bytes in UTF-8?",
+            "body": "<p>I'm using Python and Django, but I'm having a problem caused by a limitation of MySQL. According to the <a href=\"http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-utf8.html\" rel=\"noreferrer\">MySQL 5.1 documentation</a>, their <code>utf8</code> implementation does not support 4-byte characters. <a href=\"http://dev.mysql.com/doc/refman/5.5/en/charset-unicode-utf8mb4.html\" rel=\"noreferrer\">MySQL 5.5</a> will support 4-byte characters using <code>utf8mb4</code>; and, someday in future, <code>utf8</code> might support it as well.</p>\n<p>But my server is not ready to upgrade to MySQL 5.5, and thus I'm limited to UTF-8 characters that take 3 bytes or less.</p>\n<p>My question is: <strong>How to filter (or replace) unicode characters that would take more than 3 bytes?</strong></p>\n<p>I want to replace all 4-byte characters with the official <code>\\ufffd</code> (<em>U+FFFD REPLACEMENT CHARACTER</em>), or with <code>?</code>.</p>\n<p>In other words, I want a behavior quite similar to Python's own <a href=\"http://docs.python.org/library/stdtypes.html#str.encode\" rel=\"noreferrer\"><code>str.encode()</code></a> method (when passing <code>'replace'</code> parameter). <em>Edit: I want a behavior similar to <code>encode()</code>, but I don't want to actually encode the string. I want to still have an unicode string after filtering.</em></p>\n<p>I DON'T want to escape the character before storing at the MySQL, because that would mean I would need to unescape all strings I get from the database, which is very annoying and unfeasible.</p>\n<p>See also:</p>\n<ul>\n<li><a href=\"http://code.djangoproject.com/ticket/13919\" rel=\"noreferrer\">&quot;Incorrect string value&quot; warning when saving some unicode characters to MySQL</a> (at Django ticket system)</li>\n<li><a href=\"https://stackoverflow.com/questions/3060358/not-a-valid-unicode-character-but-in-the-unicode-character-set\">\u2018\ud840\udc89\u2019 Not a valid unicode character, but in the unicode character set?</a> (at Stack Overflow)</li>\n</ul>\n<h3>[EDIT] Added tests about the proposed solutions</h3>\n<p>So I got good answers so far. Thanks, people! Now, in order to choose one of them, I did a quick testing to find the simplest and fastest one.</p>\n<pre><code>#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n# vi:ts=4 sw=4 et\n\nimport cProfile\nimport random\nimport re\n\n# How many times to repeat each filtering\nrepeat_count = 256\n\n# Percentage of &quot;normal&quot; chars, when compared to &quot;large&quot; unicode chars\nnormal_chars = 90\n\n# Total number of characters in this string\nstring_size = 8 * 1024\n\n# Generating a random testing string\ntest_string = u''.join(\n        unichr(random.randrange(32,\n            0x10ffff if random.randrange(100) &gt; normal_chars else 0x0fff\n        )) for i in xrange(string_size) )\n\n# RegEx to find invalid characters\nre_pattern = re.compile(u'[^\\u0000-\\uD7FF\\uE000-\\uFFFF]', re.UNICODE)\n\ndef filter_using_re(unicode_string):\n    return re_pattern.sub(u'\\uFFFD', unicode_string)\n\ndef filter_using_python(unicode_string):\n    return u''.join(\n        uc if uc &lt; u'\\ud800' or u'\\ue000' &lt;= uc &lt;= u'\\uffff' else u'\\ufffd'\n        for uc in unicode_string\n    )\n\ndef repeat_test(func, unicode_string):\n    for i in xrange(repeat_count):\n        tmp = func(unicode_string)\n\nprint '='*10 + ' filter_using_re() ' + '='*10\ncProfile.run('repeat_test(filter_using_re, test_string)')\nprint '='*10 + ' filter_using_python() ' + '='*10\ncProfile.run('repeat_test(filter_using_python, test_string)')\n\n#print test_string.encode('utf8')\n#print filter_using_re(test_string).encode('utf8')\n#print filter_using_python(test_string).encode('utf8')\n</code></pre>\n<p>The results:</p>\n<ul>\n<li><code>filter_using_re()</code> did 515 function calls in <strong>0.139 CPU seconds</strong> (0.138 CPU seconds at the <code>sub()</code> built-in)</li>\n<li><code>filter_using_python()</code> did 2097923 function calls in <strong>3.413 CPU seconds</strong> (1.511 CPU seconds at the <code>join()</code> call and 1.900 CPU seconds evaluating the generator expression)</li>\n<li>I did no test using <code>itertools</code> because... well... that solution, although interesting, was quite big and complex.</li>\n</ul>\n<h3>Conclusion</h3>\n<p>The RegEx solution was, by far, the fastest one.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7631
+}

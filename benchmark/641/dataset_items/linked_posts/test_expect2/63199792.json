@@ -1,0 +1,123 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "scipy",
+                "statistics"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 466379,
+                        "reputation": 17276,
+                        "user_id": 871096,
+                        "user_type": "registered",
+                        "accept_rate": 52,
+                        "display_name": "Robert Dodier"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1596256862,
+                    "post_id": 63199792,
+                    "comment_id": 111760758,
+                    "link": "https://stackoverflow.com/questions/63199792/why-do-scipy-stats-rv-discrete-mean-and-expect-show-unexpected-difference#comment111760758_63199792",
+                    "body": "For the record, I did it by hand and I get the expected value of y being 1400.79, as reported by dy.mean."
+                },
+                {
+                    "owner": {
+                        "account_id": 13585482,
+                        "reputation": 77040,
+                        "user_id": 12046409,
+                        "user_type": "registered",
+                        "display_name": "JohanC"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1596278146,
+                    "post_id": 63199792,
+                    "comment_id": 111764913,
+                    "link": "https://stackoverflow.com/questions/63199792/why-do-scipy-stats-rv-discrete-mean-and-expect-show-unexpected-difference#comment111764913_63199792",
+                    "body": "<code>dy.expect(chunksize=5000)</code> and <code>dy.expect(lb=1000.0, conditional=True, chunksize=5000)</code> seem to return the desired values.  Chunksize seems to indicate the range of input values to consider.  I have no idea what exactly is happening, nor what is supposed to be the logical way to call this function. It may be related to the fact that the function also needs to do something when the possible values are infinite (as the example of zipf)."
+                },
+                {
+                    "owner": {
+                        "account_id": 48388,
+                        "reputation": 25608,
+                        "user_id": 143765,
+                        "user_type": "registered",
+                        "accept_rate": 96,
+                        "display_name": "ev-br"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1596470259,
+                    "post_id": 63199792,
+                    "comment_id": 111814508,
+                    "link": "https://stackoverflow.com/questions/63199792/why-do-scipy-stats-rv-discrete-mean-and-expect-show-unexpected-difference#comment111814508_63199792",
+                    "body": "<code>chunksize</code> is a smoking gun: it controls the iteration over the support of <i>contiguous integers</i>. So it&#39;s a scipy bug."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 208933,
+                                "reputation": 401,
+                                "user_id": 459714,
+                                "user_type": "registered",
+                                "display_name": "Seth"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1596651784,
+                            "post_id": 63232792,
+                            "comment_id": 111882973,
+                            "link": "https://stackoverflow.com/questions/63199792/why-do-scipy-stats-rv-discrete-mean-and-expect-show-unexpected-difference/63232792#comment111882973_63232792",
+                            "body": "Pull is now merged"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 48388,
+                        "reputation": 25608,
+                        "user_id": 143765,
+                        "user_type": "registered",
+                        "accept_rate": 96,
+                        "display_name": "ev-br"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": true,
+                    "score": 1,
+                    "last_activity_date": 1596470100,
+                    "creation_date": 1596470100,
+                    "answer_id": 63232792,
+                    "question_id": 63199792,
+                    "link": "https://stackoverflow.com/questions/63199792/why-do-scipy-stats-rv-discrete-mean-and-expect-show-unexpected-difference/63232792#63232792",
+                    "body": "<p>This is a scipy bug. (The <code>chunksize</code> dependence is a smoking gun, there is no reason to do chunked iteration for this short sequences).\nThe bug affects scipy versions 1.5.2 and below.</p>\n<p>A suggested fix is at <a href=\"https://github.com/scipy/scipy/pull/12659\" rel=\"nofollow noreferrer\">https://github.com/scipy/scipy/pull/12659</a></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 4526459,
+                "reputation": 23,
+                "user_id": 3678115,
+                "user_type": "registered",
+                "display_name": "gnarls"
+            },
+            "comment_count": 3,
+            "is_answered": true,
+            "accepted_answer_id": 63232792,
+            "answer_count": 1,
+            "score": 2,
+            "last_activity_date": 1596470100,
+            "creation_date": 1596234025,
+            "question_id": 63199792,
+            "link": "https://stackoverflow.com/questions/63199792/why-do-scipy-stats-rv-discrete-mean-and-expect-show-unexpected-difference",
+            "title": "Why do scipy.stats.rv_discrete mean and expect show unexpected difference?",
+            "body": "<p>I have a scipy stats rv_discrete distribution where the expect method with the defaults fails to match the mean.</p>\n<p>When I try with a toy example, it works as expected:</p>\n<pre><code>from scipy.stats import rv_discrete\nx = (1.0, 3.0, 4.0, 6.0)\npx = (0.1, 0.6, 0.2, 0.1)\ndx = rv_discrete(values=(x, px))\n\nprint(dx.mean(), dx.expect(), dx.expect(lb=5.0, conditional=True))\n</code></pre>\n<p>Gives:</p>\n<blockquote>\n<p>3.3000000000000003 3.3000000000000003 5.999999999999996</p>\n</blockquote>\n<pre><code>y = [200.0, 300.0, 400.0, 500.0, 600.0, 700.0, 800.0, 900.0, 1000.0, 1100.0, 1200.0, 1300.0, 1400.0, 1500.0, 1600.0, 1700.0, 1800.0, 1900.0, 2000.0, 2100.0, 2200.0, 2300.0, 2400.0, 2500.0, 2600.0, 2700.0, 2800.0, 2900.0, 3000.0, 3100.0, 3200.0, 3300.0, 3400.0, 3500.0, 3600.0, 3700.0, 3800.0, 3900.0, 4000.0, 4100.0, 4200.0, 4300.0, 4400.0, 4500.0, 4600.0, 4700.0, 4800.0]\npy = [0.0004, 0.0, 0.0033, 0.006500000000000001, 0.0, 0.0, 0.004399999999999999, 0.6862, 0.0, 0.0, 0.0, 0.00019999999999997797, 0.0006000000000000449, 0.024499999999999966, 0.006400000000000072, 0.0043999999999999595, 0.019499999999999962, 0.03770000000000007, 0.01759999999999995, 0.015199999999999991, 0.018100000000000005, 0.04500000000000004, 0.0025999999999999357, 0.0, 0.0041000000000001036, 0.005999999999999894, 0.0042000000000000925, 0.0050000000000000044, 0.0041999999999999815, 0.0004999999999999449, 0.009199999999999986, 0.008200000000000096, 0.0, 0.0, 0.0046999999999999265, 0.0019000000000000128, 0.0006000000000000449, 0.02510000000000001, 0.0, 0.007199999999999984, 0.0, 0.012699999999999934, 0.0, 0.0, 0.008199999999999985, 0.005600000000000049, 0.0]\n\ndy = rv_discrete(values=(y, py))\n\nprint(dy.mean(), dy.expect(), dy.expect(lb=1000.0, conditional=True))\n</code></pre>\n<p>Gives:</p>\n<blockquote>\n<p>1400.79 617.58 0.0</p>\n</blockquote>\n<p>Any ideas why dy.expect() doesn't match dy.mean()?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8873
+}

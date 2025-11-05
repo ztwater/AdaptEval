@@ -1,0 +1,93 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "md5"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 3057193,
+                        "reputation": 2052,
+                        "user_id": 2590568,
+                        "user_type": "registered",
+                        "display_name": "Colin Pitrat"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1458375322,
+                    "last_edit_date": 1458375322,
+                    "creation_date": 1458374700,
+                    "answer_id": 36099388,
+                    "question_id": 36099331,
+                    "link": "https://stackoverflow.com/questions/36099331/how-to-grab-all-files-in-a-folder-and-get-their-md5-hash-in-python/36099388#36099388",
+                    "body": "<p>I think in the end, you're opening only one empty file. The reason for that is that you take the list returned by <code>glob</code> and remove the list markers in its string representation (and only at both ends of the string as you use <code>strip</code>. This gives you something like:</p>\n\n<pre><code>file1.exe' 'file2.exe' 'file3.exe\n</code></pre>\n\n<p>You then give this string to open that will try to open a file called like that. In fact, I'm even surprised it works (unless you have only one file) ! You should get a <code>FileNotFoundError</code>.</p>\n\n<p>What you want to do is iterate on all the files returned by <code>glob.glob</code>:</p>\n\n<pre><code>import glob\nimport hashlib\nfile = glob.glob(\"/root/PycharmProjects/untitled1/*.exe\")\n\nfor f in file:\n    with open(f, 'rb') as getmd5:\n        data = getmd5.read()\n        gethash = hashlib.md5(data).hexdigest()\n        print(\"f: \" + gethash)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5888432,
+                                "reputation": 101,
+                                "user_id": 4635728,
+                                "user_type": "registered",
+                                "accept_rate": 25,
+                                "display_name": "Xozu"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1458375285,
+                            "post_id": 36099389,
+                            "comment_id": 59842336,
+                            "link": "https://stackoverflow.com/questions/36099331/how-to-grab-all-files-in-a-folder-and-get-their-md5-hash-in-python/36099389#comment59842336_36099389",
+                            "body": "Thank you so much for your help !"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 556766,
+                        "reputation": 132341,
+                        "user_id": 918959,
+                        "user_type": "registered",
+                        "accept_rate": 89,
+                        "display_name": "Antti Haapala -- \u0421\u043b\u0430\u0432\u0430 \u0423\u043a\u0440\u0430\u0457\u043d\u0456"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": true,
+                    "score": 12,
+                    "last_activity_date": 1535184821,
+                    "last_edit_date": 1535184821,
+                    "creation_date": 1458374708,
+                    "answer_id": 36099389,
+                    "question_id": 36099331,
+                    "link": "https://stackoverflow.com/questions/36099331/how-to-grab-all-files-in-a-folder-and-get-their-md5-hash-in-python/36099389#36099389",
+                    "body": "<p><code>glob.glob</code> returns a list of files. Just iterate over the list using <code>for</code>:</p>\n\n<pre><code>import glob\nimport hashlib\n\nfilenames = glob.glob(\"/root/PycharmProjects/untitled1/*.exe\")\n\nfor filename in filenames:\n    with open(filename, 'rb') as inputfile:\n        data = inputfile.read()\n        print(filename, hashlib.md5(data).hexdigest())\n</code></pre>\n\n<p>Notice that this can potentially exhaust your memory if you happen to have a large file in that directory, so it is <a href=\"https://stackoverflow.com/a/3431838/918959\">better to read the file in smaller chunks</a> (adapted here for 1 MiB blocks):</p>\n\n<pre><code>def md5(fname):\n    hash_md5 = hashlib.md5()\n    with open(fname, \"rb\") as f:\n        for chunk in iter(lambda: f.read(2 ** 20), b\"\"):\n            hash_md5.update(chunk)\n    return hash_md5.hexdigest()\n\nfor filename in filenames:\n    print(filename, md5(filename))\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 5888432,
+                "reputation": 101,
+                "user_id": 4635728,
+                "user_type": "registered",
+                "accept_rate": 25,
+                "display_name": "Xozu"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 36099389,
+            "answer_count": 2,
+            "score": 5,
+            "last_activity_date": 1535184821,
+            "creation_date": 1458374161,
+            "last_edit_date": 1458375968,
+            "question_id": 36099331,
+            "link": "https://stackoverflow.com/questions/36099331/how-to-grab-all-files-in-a-folder-and-get-their-md5-hash-in-python",
+            "title": "How to grab all files in a folder and get their MD5 hash in python?",
+            "body": "<p>I'm trying to write some code to get the md5 of every exe file in a folder.</p>\n\n<p>My problem is that I don't understand how to do it. It works only if the folder contains only one file. This is my code:</p>\n\n<pre><code>import glob\nimport hashlib\nfile = glob.glob(\"/root/PycharmProjects/untitled1/*.exe\")\n\nnewf = str (file)\nnewf2 =  newf.strip( '[]' )\nnewf3 = newf2.strip(\"''\")\n\nwith open(newf3,'rb') as getmd5:\n    data = getmd5.read()\n    gethash= hashlib.md5(data).hexdigest()\n    print gethash\n</code></pre>\n\n<p>And I get the result: </p>\n\n<pre><code>a7f4518aae539254061e45424981e97c\n</code></pre>\n\n<p>I want to know how I can do it to more than one file in the folder.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5966
+}

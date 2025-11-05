@@ -1,0 +1,190 @@
+{
+    "items": [
+        {
+            "tags": [
+                "tensorflow"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5713803,
+                                "reputation": 758,
+                                "user_id": 4514817,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Anthony D&#39;Amato"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1508828809,
+                            "post_id": 46903886,
+                            "comment_id": 80755039,
+                            "link": "https://stackoverflow.com/questions/46903885/map-rgb-semantic-maps-to-one-hot-encodings-and-vice-versa-in-tensorflow/46903886#comment80755039_46903886",
+                            "body": "You can speed up your code at &#39;color_image&#39; I think with tf.gather function (<a href=\"https://www.tensorflow.org/api_docs/python/tf/gather\" rel=\"nofollow noreferrer\">tensorflow.org/api_docs/python/tf/gather</a>) : tf.gather(palette, class_indexes) and then reshape as you did."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7507932,
+                                "reputation": 5806,
+                                "user_id": 5703903,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "jkschin"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5713803,
+                                "reputation": 758,
+                                "user_id": 4514817,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Anthony D&#39;Amato"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1508829916,
+                            "post_id": 46903886,
+                            "comment_id": 80755689,
+                            "link": "https://stackoverflow.com/questions/46903885/map-rgb-semantic-maps-to-one-hot-encodings-and-vice-versa-in-tensorflow/46903886#comment80755689_46903886",
+                            "body": "I&#39;ve made the changes and tested it. It is indeed faster. Thanks for the suggestion!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5713803,
+                                "reputation": 758,
+                                "user_id": 4514817,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Anthony D&#39;Amato"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1508830563,
+                            "post_id": 46903886,
+                            "comment_id": 80756100,
+                            "link": "https://stackoverflow.com/questions/46903885/map-rgb-semantic-maps-to-one-hot-encodings-and-vice-versa-in-tensorflow/46903886#comment80756100_46903886",
+                            "body": "Can you share the image you are using like this I can test other things? :)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7507932,
+                                "reputation": 5806,
+                                "user_id": 5703903,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "jkschin"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5713803,
+                                "reputation": 758,
+                                "user_id": 4514817,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Anthony D&#39;Amato"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1508832026,
+                            "post_id": 46903886,
+                            "comment_id": 80756971,
+                            "link": "https://stackoverflow.com/questions/46903885/map-rgb-semantic-maps-to-one-hot-encodings-and-vice-versa-in-tensorflow/46903886#comment80756971_46903886",
+                            "body": "I can&#39;t share it according to the license. You have to download it from Cityscapes."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5713803,
+                                "reputation": 758,
+                                "user_id": 4514817,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Anthony D&#39;Amato"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1508893933,
+                            "post_id": 46903886,
+                            "comment_id": 80791947,
+                            "link": "https://stackoverflow.com/questions/46903885/map-rgb-semantic-maps-to-one-hot-encodings-and-vice-versa-in-tensorflow/46903886#comment80791947_46903886",
+                            "body": "So what you really want to do is, from this image [H, W, 3] create a one hot matrix [H, W, 21], right ?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5713803,
+                                "reputation": 758,
+                                "user_id": 4514817,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Anthony D&#39;Amato"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1508894336,
+                            "post_id": 46903886,
+                            "comment_id": 80792035,
+                            "link": "https://stackoverflow.com/questions/46903885/map-rgb-semantic-maps-to-one-hot-encodings-and-vice-versa-in-tensorflow/46903886#comment80792035_46903886",
+                            "body": "If it is the case you can try this with your dimensions: equality = tf.equal(tf.reshape(img,[W, H, 1, 3] ), tf.reshape(palette, [21,3])) equality = tf.cast(tf.reduce_all(equality, axis=-1), tf.int32) The first line is gonna check the equality with each color, then if there is a [True, True, True] on a color, the second is gonna put a 1 for this color (0 for the others, since they are False)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5713803,
+                                "reputation": 758,
+                                "user_id": 4514817,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Anthony D&#39;Amato"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1509338492,
+                            "post_id": 46903886,
+                            "comment_id": 80963038,
+                            "link": "https://stackoverflow.com/questions/46903885/map-rgb-semantic-maps-to-one-hot-encodings-and-vice-versa-in-tensorflow/46903886#comment80963038_46903886",
+                            "body": "did you try this solution ?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7507932,
+                        "reputation": 5806,
+                        "user_id": 5703903,
+                        "user_type": "registered",
+                        "accept_rate": 89,
+                        "display_name": "jkschin"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": true,
+                    "score": 4,
+                    "last_activity_date": 1508829888,
+                    "last_edit_date": 1508829888,
+                    "creation_date": 1508827670,
+                    "answer_id": 46903886,
+                    "question_id": 46903885,
+                    "link": "https://stackoverflow.com/questions/46903885/map-rgb-semantic-maps-to-one-hot-encodings-and-vice-versa-in-tensorflow/46903886#46903886",
+                    "body": "<p>My solution is below. Looking forward to suggestions on how to make this more efficient or perhaps an answer that's more efficient.</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>import tensorflow as tf\nimport numpy as np\nimport scipy.misc\n\nimg = scipy.misc.imread('aachen_000000_000019_gtFine_color.png', mode = 'RGB')\npalette = np.array(\n[[128,  64, 128],\n [244,  35, 232],\n [ 70,  70,  70],\n [102, 102, 156],\n [190, 153, 153],\n [153, 153, 153],\n [250, 170,  30],\n [220, 220,   0],\n [107, 142,  35],\n [152, 251, 152],\n [ 70, 130, 180],\n [220,  20,  60],\n [255,   0,   0],\n [  0,   0, 142],\n [  0,   0,  70],\n [  0,  60, 100],\n [  0,  80, 100],\n [  0,   0, 230],\n [119,  11,  32],\n [  0,   0,   0],\n [255, 255, 255]], np.uint8)\n\nsemantic_map = []\nfor colour in palette:\n  class_map = tf.reduce_all(tf.equal(img, colour), axis=-1)\n  semantic_map.append(class_map)\nsemantic_map = tf.stack(semantic_map, axis=-1)\n# NOTE cast to tf.float32 because most neural networks operate in float32.\nsemantic_map = tf.cast(semantic_map, tf.float32)\nmagic_number = tf.reduce_sum(semantic_map)\nprint semantic_map.shape\n\npalette = tf.constant(palette, dtype=tf.uint8)\nclass_indexes = tf.argmax(semantic_map, axis=-1)\n# NOTE this operation flattens class_indexes\nclass_indexes = tf.reshape(class_indexes, [-1])\ncolor_image = tf.gather(palette, class_indexes)\ncolor_image = tf.reshape(color_image, [1024, 2048, 3])\n\nsess = tf.Session()\n# NOTE magic_number checks that there are only 1024*2048 1s in the entire\n# 1024*2048*21 tensor.\nmagic_number_val = sess.run(magic_number)\nassert magic_number_val == 1024*2048\ncolor_image_val = sess.run(color_image)\nscipy.misc.imsave('test.png', color_image_val)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 7507932,
+                "reputation": 5806,
+                "user_id": 5703903,
+                "user_type": "registered",
+                "accept_rate": 89,
+                "display_name": "jkschin"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 46903886,
+            "answer_count": 1,
+            "score": 1,
+            "last_activity_date": 1508829888,
+            "creation_date": 1508827670,
+            "question_id": 46903885,
+            "link": "https://stackoverflow.com/questions/46903885/map-rgb-semantic-maps-to-one-hot-encodings-and-vice-versa-in-tensorflow",
+            "title": "Map RGB Semantic Maps to One Hot Encodings and vice versa in TensorFlow",
+            "body": "<p>The image below is a sample semantic map from the <a href=\"https://www.cityscapes-dataset.com/\" rel=\"nofollow noreferrer\">Cityscapes Dataset</a>. It's provided in the form of an RGB image where each specific colour represents a class.</p>\n\n<p>In some deep learning tasks, we would like to map this into a one hot encoding. For example, if it has 20 classes, then this image would be mapped from <code>H x W x 3</code> to <code>H x W x 20</code>.</p>\n\n<p>How do we do this in TensorFlow?</p>\n\n<p><a href=\"https://i.stack.imgur.com/R9Cu7.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/R9Cu7.png\" alt=\"aachen_000000_000019_gtFine_color.png\"></a></p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6892
+}

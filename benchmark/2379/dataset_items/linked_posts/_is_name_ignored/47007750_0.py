@@ -1,0 +1,3 @@
+def fn(alist=None):
+    alist = alist or []
+    ....

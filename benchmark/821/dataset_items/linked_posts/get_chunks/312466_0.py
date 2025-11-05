@@ -1,0 +1,2 @@
+def SplitList(mylist, chunk_size):
+    return [mylist[offs:offs+chunk_size] for offs in range(0, len(mylist), chunk_size)]

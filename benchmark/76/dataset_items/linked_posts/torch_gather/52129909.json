@@ -1,0 +1,129 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "tensorflow",
+                "pytorch"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 1205262,
+                        "reputation": 6260,
+                        "user_id": 1175065,
+                        "user_type": "registered",
+                        "accept_rate": 77,
+                        "display_name": "ravi"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1536243795,
+                    "post_id": 52129909,
+                    "comment_id": 91361653,
+                    "link": "https://stackoverflow.com/questions/52129909/tensorflow-equivalent-of-torch-gather#comment91361653_52129909",
+                    "body": "any suggestions, please?"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1205262,
+                                "reputation": 6260,
+                                "user_id": 1175065,
+                                "user_type": "registered",
+                                "accept_rate": 77,
+                                "display_name": "ravi"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1538642666,
+                            "post_id": 52642327,
+                            "comment_id": 92217280,
+                            "link": "https://stackoverflow.com/questions/52129909/tensorflow-equivalent-of-torch-gather/52642327#comment92217280_52642327",
+                            "body": "Can you please try to incorporate for the example given above?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7349574,
+                        "reputation": 111,
+                        "user_id": 5596238,
+                        "user_type": "registered",
+                        "display_name": "LiShaoyuan"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1538815257,
+                    "last_edit_date": 1538815257,
+                    "creation_date": 1538641904,
+                    "answer_id": 52642327,
+                    "question_id": 52129909,
+                    "link": "https://stackoverflow.com/questions/52129909/tensorflow-equivalent-of-torch-gather/52642327#52642327",
+                    "body": "<p>For 2D case,there is a method to do it:</p>\n\n<pre><code># a.shape (16L, 10L)\n# idx.shape (16L,1)\nidx = tf.stack([tf.range(tf.shape(idx)[0]),idx[:,0]],axis=-1)\nb = tf.gather_nd(a,idx)\n</code></pre>\n\n<p>However,For ND case,this method maybe very complex</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 9344676,
+                        "reputation": 837,
+                        "user_id": 6936275,
+                        "user_type": "registered",
+                        "accept_rate": 89,
+                        "display_name": "Lukeyb"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1602720222,
+                    "last_edit_date": 1602720222,
+                    "creation_date": 1602293011,
+                    "answer_id": 64289084,
+                    "question_id": 52129909,
+                    "link": "https://stackoverflow.com/questions/52129909/tensorflow-equivalent-of-torch-gather/64289084#64289084",
+                    "body": "<p>This &quot;should&quot; be a general solution using tf.gather_nd (I've only tested for rank 2 and 3 tensors along the last axis):</p>\n<pre><code>def torch_gather(x, indices, gather_axis):\n    # if pytorch gather indices are\n    # [[[0, 10, 20], [0, 10, 20], [0, 10, 20]],\n    #  [[0, 10, 20], [0, 10, 20], [0, 10, 20]]]\n    # tf nd_gather needs to be\n    # [[0,0,0], [0,0,10], [0,0,20], [0,1,0], [0,1,10], [0,1,20], [0,2,0], [0,2,10], [0,2,20],\n    #  [1,0,0], [1,0,10], [1,0,20], [1,1,0], [1,1,10], [1,1,20], [1,2,0], [1,2,10], [1,2,20]]\n\n    # create a tensor containing indices of each element\n    all_indices = tf.where(tf.fill(indices.shape, True))\n    gather_locations = tf.reshape(indices, [indices.shape.num_elements()])\n\n    # splice in our pytorch style index at the correct axis\n    gather_indices = []\n    for axis in range(len(indices.shape)):\n        if axis == gather_axis:\n            gather_indices.append(gather_locations)\n        else:\n            gather_indices.append(all_indices[:, axis])\n\n    gather_indices = tf.stack(gather_indices, axis=-1)\n    gathered = tf.gather_nd(x, gather_indices)\n    reshaped = tf.reshape(gathered, indices.shape)\n    return reshaped\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 20272487,
+                        "reputation": 1,
+                        "user_id": 14868349,
+                        "user_type": "registered",
+                        "display_name": "Jung - Ratthachat"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1608590321,
+                    "creation_date": 1608590321,
+                    "answer_id": 65400913,
+                    "question_id": 52129909,
+                    "link": "https://stackoverflow.com/questions/52129909/tensorflow-equivalent-of-torch-gather/65400913#65400913",
+                    "body": "<p>For the last-axis gathering, we can use the 2D-reshape trick for general ND cases, and then employ @LiShaoyuan 2D code above</p>\n<pre><code>        # last-axis gathering only - use 2D-reshape-trick for Torch's style nD gathering\n        def torch_gather(param, id_tensor):\n\n            # 2d-gather torch equivalent from @LiShaoyuan above \n            def gather2d(target, id_tensor):\n                idx = tf.stack([tf.range(tf.shape(id_tensor)[0]),id_tensor[:,0]],axis=-1)\n                result = tf.gather_nd(target,idx)\n                return tf.expand_dims(result,axis=-1)\n\n            target = tf.reshape(param, (-1, param.shape[-1])) # reshape 2D\n            target_shape = id_tensor.shape\n\n            id_tensor = tf.reshape(id_tensor, (-1, 1)) # also 2D-index\n            result = gather2d(target, id_tensor)\n            return tf.reshape(result, target_shape)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 1205262,
+                "reputation": 6260,
+                "user_id": 1175065,
+                "user_type": "registered",
+                "accept_rate": 77,
+                "display_name": "ravi"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "answer_count": 3,
+            "score": 1,
+            "last_activity_date": 1608590321,
+            "creation_date": 1535818060,
+            "question_id": 52129909,
+            "link": "https://stackoverflow.com/questions/52129909/tensorflow-equivalent-of-torch-gather",
+            "title": "tensorflow equivalent of torch.gather",
+            "body": "<p>I have a tensor of shape <code>(16, 4096, 3)</code>. I have another tensor of indices of shape <code>(16, 32768, 3)</code>. I am trying to collect the values along <code>dim=1</code>. This was initially done in pytorch using <a href=\"https://pytorch.org/docs/stable/torch.html#torch.gather\" rel=\"nofollow noreferrer\">gather function</a> as shown below-</p>\n\n<pre><code># a.shape (16L, 4096L, 3L)\n# idx.shape (16L, 32768L, 3L)\nb = a.gather(1, idx)\n# b.shape (16L, 32768L, 3L)\n</code></pre>\n\n<p>Please note that the size of output <code>b</code> is the same as that of <code>idx</code>. However, when I apply <code>gather</code> function of tensorflow, I get a completely different output. The output dimension was found mismatching as shown below-</p>\n\n<pre><code>b = tf.gather(a, idx, axis=1)\n# b.shape (16, 16, 32768, 3, 3)\n</code></pre>\n\n<p>I also tried using <code>tf.gather_nd</code> but got in vain. See below-</p>\n\n<pre><code>b = tf.gather_nd(a, idx)\n# b.shape (16, 32768)\n</code></pre>\n\n<p>Why am I getting different shapes of tensors? <em>I want to get the tensor of the same shape as calculated by pytorch.</em> </p>\n\n<p><strong>In other words, I want to know the tensorflow equivalent of torch.gather.</strong></p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9857
+}

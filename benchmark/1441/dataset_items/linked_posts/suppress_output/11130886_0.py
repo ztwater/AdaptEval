@@ -1,0 +1,1 @@
+$> ./runscript.py > output.txt

@@ -1,0 +1,102 @@
+[
+    {
+        "id": 0,
+        "type": "Logic.Handle_Ex",
+        "description": "Implement exception handling to catch and log any `ClientError` that occurs during the S3 operations.",
+        "associated_tests": [
+            "test_download_s3_folder_exception"
+        ],
+        "dependencies": {
+            "in_class": {
+                "fields": [
+                    "S3Client.logger"
+                ],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": [
+                "botocore.exceptions.ClientError"
+            ]
+        }
+    },
+    {
+        "id": 1,
+        "type": "Refactoring.Ins_Return_None",
+        "description": "Add a statement to return 'None' to indicate the end of the function execution when no exceptions occur.",
+        "associated_tests": [
+            "test_download_s3_folder_return_none"
+        ],
+        "dependencies": {
+            "in_class": {
+                "fields": [],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        }
+    },
+    {
+        "id": 2,
+        "type": "Logic.Replace_Var",
+        "description": "Remove the unused `bucket` variable and replace its usage with the class's instance attribute.",
+        "associated_tests": [
+            "test_string_updates"
+        ],
+        "dependencies": {
+            "in_class": {
+                "fields": [
+                    "S3Client.bucket"
+                ],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        }
+    },
+    {
+        "id": 3,
+        "type": "Method_Signature.Upd_Type",
+        "description": "Update the method signature to include `self` as the first parameter, indicating it is a class method of S3Client.",
+        "associated_tests": [
+            "test_download_s3_folder_success"
+        ],
+        "dependencies": {
+            "in_class": {
+                "fields": [
+                    "S3Client"
+                ],
+                "methods": []
+            },
+            "in_file": {
+                "variables": [],
+                "functions": []
+            },
+            "in_repo": {
+                "variables": [],
+                "functions": []
+            },
+            "external": []
+        }
+    }
+]

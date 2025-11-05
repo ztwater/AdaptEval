@@ -1,0 +1,390 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "image",
+                "noise",
+                "poisson"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5566702,
+                                "reputation": 325,
+                                "user_id": 4413709,
+                                "user_type": "registered",
+                                "display_name": "6infinity8"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1622635532,
+                            "post_id": 19295942,
+                            "comment_id": 119847517,
+                            "link": "https://stackoverflow.com/questions/19289470/adding-poisson-noise-to-an-image/19295942#comment119847517_19295942",
+                            "body": "It&#39;s confusing because the answer has been corrected but is still downvoted... Stackoverflow definitely needs a rewamp."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3352915,
+                                "reputation": 7275,
+                                "user_id": 2816571,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "Paul"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5566702,
+                                "reputation": 325,
+                                "user_id": 4413709,
+                                "user_type": "registered",
+                                "display_name": "6infinity8"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1622650793,
+                            "post_id": 19295942,
+                            "comment_id": 119855108,
+                            "link": "https://stackoverflow.com/questions/19289470/adding-poisson-noise-to-an-image/19295942#comment119855108_19295942",
+                            "body": "I did try to address the original concern for the downvote @6infinity8 as it was something I wanted to keep up to date and address any concerns. My use of the poisson function was initially off but has been fixed.  Glad you noticed."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5566702,
+                                "reputation": 325,
+                                "user_id": 4413709,
+                                "user_type": "registered",
+                                "display_name": "6infinity8"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1622651752,
+                            "post_id": 19295942,
+                            "comment_id": 119855523,
+                            "link": "https://stackoverflow.com/questions/19289470/adding-poisson-noise-to-an-image/19295942#comment119855523_19295942",
+                            "body": "Of course, thanks for correcting it! I&#39;m only upset at stackoverflow, their system just makes it more confusing to people trying to understand."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3352915,
+                        "reputation": 7275,
+                        "user_id": 2816571,
+                        "user_type": "registered",
+                        "accept_rate": 89,
+                        "display_name": "Paul"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": true,
+                    "score": -8,
+                    "last_activity_date": 1528728268,
+                    "last_edit_date": 1528728268,
+                    "creation_date": 1381408631,
+                    "answer_id": 19295942,
+                    "question_id": 19289470,
+                    "link": "https://stackoverflow.com/questions/19289470/adding-poisson-noise-to-an-image/19295942#19295942",
+                    "body": "<p>If numpy/scipy are available to you, then the following should help.  I recommend that you cast the arrays to float for intermediate computations then cast back to uint8 for output/display purposes.  As poisson noise is all >=0, you will need to decide how you want to handle overflow of your arrays as you cast back to uint8.  You could scale or truncate depending on what your goals were.</p>\n\n<pre><code>filename = 'myimage.png'\nimagea = (scipy.misc.imread(filename)).astype(float)\n\npoissonNoise = numpy.random.poisson(imagea).astype(float)\n\nnoisyImage = imagea + poissonNoise\n\n#here care must be taken to re cast the result to uint8 if needed or scale to 0-1 etc...\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4255333,
+                                "reputation": 2495,
+                                "user_id": 3481173,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Yonatan Simson"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1454857683,
+                            "post_id": 32318155,
+                            "comment_id": 58222684,
+                            "link": "https://stackoverflow.com/questions/19289470/adding-poisson-noise-to-an-image/32318155#comment58222684_32318155",
+                            "body": "You r answer makes sense. Though how do you handle the saturation this causes?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 514954,
+                                "reputation": 481,
+                                "user_id": 998341,
+                                "user_type": "registered",
+                                "display_name": "Helder"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4255333,
+                                "reputation": 2495,
+                                "user_id": 3481173,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Yonatan Simson"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1454922792,
+                            "post_id": 32318155,
+                            "comment_id": 58243238,
+                            "link": "https://stackoverflow.com/questions/19289470/adding-poisson-noise-to-an-image/32318155#comment58243238_32318155",
+                            "body": "Well, in this case you have to handle the saturation by yourself, setting to 0 the negative values and setting to the highest value of the number of bits of your image, those values that became highest than that."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4255333,
+                                "reputation": 2495,
+                                "user_id": 3481173,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Yonatan Simson"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1454940158,
+                            "post_id": 32318155,
+                            "comment_id": 58254402,
+                            "link": "https://stackoverflow.com/questions/19289470/adding-poisson-noise-to-an-image/32318155#comment58254402_32318155",
+                            "body": "Thanks. I handled it by saturating the top 5% pixels"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 166893,
+                                "reputation": 8615,
+                                "user_id": 391339,
+                                "user_type": "registered",
+                                "accept_rate": 63,
+                                "display_name": "user391339"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1459304642,
+                            "post_id": 32318155,
+                            "comment_id": 60221485,
+                            "link": "https://stackoverflow.com/questions/19289470/adding-poisson-noise-to-an-image/32318155#comment60221485_32318155",
+                            "body": "Can&#39;t there be intrinsic and extrinsic sources of poisson distributed noise?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3390302,
+                                "reputation": 1037,
+                                "user_id": 2845263,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "stochastic_zeitgeist"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1490763260,
+                            "post_id": 32318155,
+                            "comment_id": 73251669,
+                            "link": "https://stackoverflow.com/questions/19289470/adding-poisson-noise-to-an-image/32318155#comment73251669_32318155",
+                            "body": "I don&#39;t think Poisson Noise is additive like Gaussian noise. Please refer @yuxiang.li &#39;s answer for reference."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 514954,
+                                "reputation": 481,
+                                "user_id": 998341,
+                                "user_type": "registered",
+                                "display_name": "Helder"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3390302,
+                                "reputation": 1037,
+                                "user_id": 2845263,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "stochastic_zeitgeist"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1519301880,
+                            "post_id": 32318155,
+                            "comment_id": 84860534,
+                            "link": "https://stackoverflow.com/questions/19289470/adding-poisson-noise-to-an-image/32318155#comment84860534_32318155",
+                            "body": "@stochastic_zeitgeist you didnt get the idea. Poisson noise is not additive, yes we both know. But you need to generate a random mask (created by a Poisson process) where the parameter of poisson distribution is the pixel value. Later you need to add that mask, with the variation above the mean (pixel value) to the real image..."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 934016,
+                                "reputation": 1051,
+                                "user_id": 963298,
+                                "user_type": "registered",
+                                "accept_rate": 76,
+                                "display_name": "stephen"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1546542126,
+                            "post_id": 32318155,
+                            "comment_id": 94892908,
+                            "link": "https://stackoverflow.com/questions/19289470/adding-poisson-noise-to-an-image/32318155#comment94892908_32318155",
+                            "body": "For all you python noobs (such as myself), you can use noisyImage = numpy.clip(tempImage, 0.0, 255.0) to clamp"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 514954,
+                        "reputation": 481,
+                        "user_id": 998341,
+                        "user_type": "registered",
+                        "display_name": "Helder"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": false,
+                    "score": 17,
+                    "last_activity_date": 1712627238,
+                    "last_edit_date": 1712627238,
+                    "creation_date": 1441047683,
+                    "answer_id": 32318155,
+                    "question_id": 19289470,
+                    "link": "https://stackoverflow.com/questions/19289470/adding-poisson-noise-to-an-image/32318155#32318155",
+                    "body": "<p>Actually <a href=\"https://stackoverflow.com/a/19295942\">the answer of Paul</a> doesn't make sense.</p>\n<p>Poisson noise is signal dependent! And using those commands, provided by him, the noise later added to the image is not signal dependent.</p>\n<p>To make it signal dependent you should pass the image to the NumPy's poisson function:</p>\n<pre><code>filename = 'myimage.png'\nimg = (scipy.misc.imread(filename)).astype(float)\n\nnoise_mask = numpy.random.poisson(img)\n\nnoisy_img = img + noise_mask\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2284078,
+                                "reputation": 616,
+                                "user_id": 2008532,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "misssprite"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1494310731,
+                            "post_id": 36331042,
+                            "comment_id": 74760173,
+                            "link": "https://stackoverflow.com/questions/19289470/adding-poisson-noise-to-an-image/36331042#comment74760173_36331042",
+                            "body": "Poisson distribution generates integers. If the image is a np.float array with a range [0,1], the correct code should be <code>noisy = np.random.poisson(image * 255.0 * PEAK) &#47; PEAK &#47; 255</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1130694,
+                                "reputation": 1941,
+                                "user_id": 1116842,
+                                "user_type": "registered",
+                                "display_name": "moi"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1580895600,
+                            "post_id": 36331042,
+                            "comment_id": 106244858,
+                            "link": "https://stackoverflow.com/questions/19289470/adding-poisson-noise-to-an-image/36331042#comment106244858_36331042",
+                            "body": "What is <code>create_noisemap</code> in this case?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5866004,
+                                "reputation": 16939,
+                                "user_id": 4619958,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "ch271828n"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1584058929,
+                            "post_id": 36331042,
+                            "comment_id": 107327930,
+                            "link": "https://stackoverflow.com/questions/19289470/adding-poisson-noise-to-an-image/36331042#comment107327930_36331042",
+                            "body": "what is <code>create_noisemap</code>...?"
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user14046024"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1651650147,
+                            "post_id": 36331042,
+                            "comment_id": 127410809,
+                            "link": "https://stackoverflow.com/questions/19289470/adding-poisson-noise-to-an-image/36331042#comment127410809_36331042",
+                            "body": "This works for me:  noisemap = np.ones((image_size_x, image_size_y)) * mean"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6887078,
+                        "reputation": 181,
+                        "user_id": 5330643,
+                        "user_type": "registered",
+                        "display_name": "yuxiang.li"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 18,
+                    "last_activity_date": 1712627193,
+                    "last_edit_date": 1712627193,
+                    "creation_date": 1459420820,
+                    "answer_id": 36331042,
+                    "question_id": 19289470,
+                    "link": "https://stackoverflow.com/questions/19289470/adding-poisson-noise-to-an-image/36331042#36331042",
+                    "body": "<p><a href=\"https://stackoverflow.com/a/32318155\">The answer of Helder</a> is correct. I just want to add the fact that Poisson noise is not additive and you can not add it as Gaussian noise.</p>\n<p>Depend on what you want to achieve, here is some suggestions:</p>\n<ul>\n<li><p>Simulate a low-light noisy image (if PEAK = 1, it will be really noisy)</p>\n<pre><code>import numpy as np\nimage = read_image(&quot;YOUR_IMAGE&quot;)  # need a rescale to be more realistic\nnoisy = np.random.poisson(image / 255.0 * PEAK) / PEAK * 255  # noisy image\n</code></pre>\n</li>\n<li><p>Add a noise layer on top of the clean image</p>\n<pre><code>import numpy as np\nimage = read_image(&quot;YOUR_IMAGE&quot;) \nnoisemap = create_noisemap() \nnoisy = image + np.random.poisson(noisemap)  \n</code></pre>\n</li>\n</ul>\n<p>Then you can crop the result to 0 - 255 if you like (I use PIL so I use 255 instead of 1).</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1130694,
+                        "reputation": 1941,
+                        "user_id": 1116842,
+                        "user_type": "registered",
+                        "display_name": "moi"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1580896288,
+                    "creation_date": 1580896288,
+                    "answer_id": 60073071,
+                    "question_id": 19289470,
+                    "link": "https://stackoverflow.com/questions/19289470/adding-poisson-noise-to-an-image/60073071#60073071",
+                    "body": "<p>You could use <a href=\"https://scikit-image.org/docs/dev/api/skimage.util.html#skimage.util.random_noise\" rel=\"noreferrer\"><code>skimage.util.random_noise</code></a>:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>from skimage.util import random_noise\n\nnoisy = random_noise(img, mode=\"poisson\")\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 11865252,
+                        "reputation": 1103,
+                        "user_id": 8682939,
+                        "user_type": "registered",
+                        "display_name": "rvimieiro"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1589504549,
+                    "last_edit_date": 1592644375,
+                    "creation_date": 1589487349,
+                    "answer_id": 61806650,
+                    "question_id": 19289470,
+                    "link": "https://stackoverflow.com/questions/19289470/adding-poisson-noise-to-an-image/61806650#61806650",
+                    "body": "<p>From the item <em>1.4.4 - &quot;Gaussian Approximation of the Poisson Distribution&quot;</em> of <a href=\"https://doi.org/10.1007/978-3-319-96029-6_1\" rel=\"nofollow noreferrer\">Chapter 1</a> of this <a href=\"https://link.springer.com/book/10.1007/978-3-319-96029-6\" rel=\"nofollow noreferrer\">book</a>:</p>\n<blockquote>\n<p>For large mean values, the Poisson distribution is well <strong>approximated</strong> by a Gaussian distribution with mean and variance equal to the mean of the Poisson random variable:</p>\n<p>P(\u03bc) \u2248 N (\u03bc,\u03bc)</p>\n</blockquote>\n<p>Then, we can generate Poisson noise from a normal distribution N (0,1), scale its standard deviation by the square root of \u03bc and add it to the image which is the \u03bc value:</p>\n<pre><code># Image size\nM, N = 1000, 1000\n\n# Generate synthetic image\nimage = np.tile(np.arange(0,N,dtype='float64'),(M,1)) * 20\n\n# -- sqrt(mu) * normal(0,1) --\npoisson_noise = np.sqrt(image) * np.random.normal(0, 1, image.shape)\n\n# Add the noise to the mu values\nnoisy_image = image + poisson_noise\n\nplt.figure(figsize=(10,10))\nplt.subplot(2,2,1)\nplt.title('Image')\nplt.imshow(image,'gray')\nplt.subplot(2,2,2)\nplt.title('Noisy image noise')\nplt.imshow(noisy_image,'gray')  \nplt.subplot(2,2,3)\nplt.title('Image profile')\nplt.plot(image[0,:])\nplt.subplot(2,2,4)\nplt.title('Noisy image profile')\nplt.plot(noisy_image[0,:])\n\nprint(&quot;Synthetic image mean: {}&quot;.format(image[:,1].mean()))\nprint(&quot;Synthetic image variance: {}&quot;.format(image[:,1].var()))    \nprint(&quot;Noisy image mean: {}&quot;.format(noisy_image[:,1].mean()))\nprint(&quot;Noisy image variance: {}&quot;.format(noisy_image[:,1].var()))\n</code></pre>\n<p>As Poisson noise is signal-dependent, as we increase the underlying signal the noise variance also increases, as we can see in this row profiles:</p>\n<p><img src=\"https://i.stack.imgur.com/CSwD3.png\" alt=\"image\" /></p>\n<p><strong>Output for statistics in a single column:</strong></p>\n<blockquote>\n<p>Synthetic image mean: 20.0</p>\n<p>Synthetic image variance: 0.0</p>\n<p>Noisy image mean: 19.931120555821597</p>\n<p>Noisy image variance: 19.39456713877459</p>\n</blockquote>\n<p>Further references: [<a href=\"https://www.johndcook.com/blog/normal_approx_to_poisson/\" rel=\"nofollow noreferrer\">1</a>][<a href=\"https://math.stackexchange.com/questions/38526/gaussian-approximation-of-poisson-distribution\">2</a>]</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 2939748,
+                "reputation": 5347,
+                "user_id": 2517915,
+                "user_type": "registered",
+                "accept_rate": 64,
+                "display_name": "vdogsandman"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 19295942,
+            "answer_count": 5,
+            "score": 8,
+            "last_activity_date": 1712627238,
+            "creation_date": 1381389664,
+            "last_edit_date": 1495750229,
+            "question_id": 19289470,
+            "link": "https://stackoverflow.com/questions/19289470/adding-poisson-noise-to-an-image",
+            "title": "Adding poisson noise to an image",
+            "body": "<p>I have some images that I need to add incremental amounts of Poisson noise to in order to more thoroughly analyze them. I know you can do this in MATLAB, but how do you go about doing it in Python? Searches have yielded nothing so far.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6896
+}

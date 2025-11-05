@@ -1,0 +1,411 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "python-sphinx",
+                "autodoc"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 3173783,
+                        "reputation": 52585,
+                        "user_id": 2682142,
+                        "user_type": "registered",
+                        "display_name": "L&#225;szl&#243; Papp"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1410197535,
+                    "post_id": 5599254,
+                    "comment_id": 40226243,
+                    "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method#comment40226243_5599254",
+                    "body": "No, that is not what the documentation writes as of today, at least: <code>&quot;both&quot;     Both the class\u2019 and the __init__ method\u2019s docstring are concatenated and inserted.</code> -&gt; Therefore, it ought not to be only the <code>__init__(self)</code>, but also the class docstring if you have that. Can you provide a test case because if it is so, it feels like a bug, right?"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 211351,
+                                "reputation": 3298,
+                                "user_id": 463462,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "Roger Binns"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1310185298,
+                            "post_id": 5599712,
+                            "comment_id": 7834134,
+                            "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method/5599712#comment7834134_5599712",
+                            "body": "That doesn&#39;t help with automodule since it has to be added to every class."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1296201,
+                                "reputation": 28223,
+                                "user_id": 1247192,
+                                "user_type": "registered",
+                                "display_name": "jcarballo"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1377625482,
+                            "post_id": 5599712,
+                            "comment_id": 27150578,
+                            "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method/5599712#comment27150578_5599712",
+                            "body": "The first alternative worked. In my case it was better than the second and third alternatives, as it doesn&#39;t need to be editing .rst files."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 457851,
+                                "reputation": 10093,
+                                "user_id": 857390,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Florian Brucker"
+                            },
+                            "edited": false,
+                            "score": 10,
+                            "creation_date": 1407410881,
+                            "post_id": 5599712,
+                            "comment_id": 39208717,
+                            "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method/5599712#comment39208717_5599712",
+                            "body": "In Sphinx 1.2.1, <code>special-members</code> works fine using <code>automodule</code>. Use <code>:special-members: __init__</code> to document only <code>__init__</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2263702,
+                                "reputation": 21713,
+                                "user_id": 2132157,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "G M"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1670749531,
+                            "post_id": 5599712,
+                            "comment_id": 131941592,
+                            "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method/5599712#comment131941592_5599712",
+                            "body": "None of these alternatives worked for me in Sphinx 5.3.0"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 176760,
+                        "reputation": 50082,
+                        "user_id": 407651,
+                        "user_type": "registered",
+                        "display_name": "mzjn"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": true,
+                    "score": 129,
+                    "last_activity_date": 1585938304,
+                    "last_edit_date": 1585938304,
+                    "creation_date": 1302289707,
+                    "answer_id": 5599712,
+                    "question_id": 5599254,
+                    "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method/5599712#5599712",
+                    "body": "<p>Here are three alternatives:</p>\n\n<ol>\n<li><p>To ensure that <code>__init__()</code> is always documented, you can use <a href=\"http://sphinx.pocoo.org/ext/autodoc.html#skipping-members\" rel=\"noreferrer\"><code>autodoc-skip-member</code></a> in conf.py. Like this:</p>\n\n<pre><code>def skip(app, what, name, obj, would_skip, options):\n    if name == \"__init__\":\n        return False\n    return would_skip\n\ndef setup(app):\n    app.connect(\"autodoc-skip-member\", skip)\n</code></pre>\n\n<p>This explicitly defines <code>__init__</code> not to be skipped (which it is by default). This configuration is specified once, and it does not require any additional markup for every class in the .rst source.</p></li>\n<li><p>The <a href=\"https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html\" rel=\"noreferrer\"><code>special-members</code></a> option was <a href=\"http://sphinx.pocoo.org/changes.html#release-1-1-oct-9-2011\" rel=\"noreferrer\">added in Sphinx 1.1</a>. It makes \"special\" members (those with names like <code>__special__</code>) be documented by autodoc.</p>\n\n<p>Since Sphinx 1.2, this option takes arguments which makes it more useful than it was previously.</p></li>\n<li><p>Use <code>automethod</code>: </p>\n\n<pre><code>.. autoclass:: MyClass     \n   :members: \n\n   .. automethod:: __init__\n</code></pre>\n\n<p>This has to be added for every class (cannot be used with <code>automodule</code>, as pointed out in a comment to the first revision of this answer).</p></li>\n</ol>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3173783,
+                                "reputation": 52585,
+                                "user_id": 2682142,
+                                "user_type": "registered",
+                                "display_name": "L&#225;szl&#243; Papp"
+                            },
+                            "reply_to_user": {
+                                "account_id": 118337,
+                                "reputation": 172440,
+                                "user_id": 309308,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "Michael Mrozek"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1410197692,
+                            "post_id": 9772922,
+                            "comment_id": 40226345,
+                            "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method/9772922#comment40226345_9772922",
+                            "body": "@MichaelMrozek: I am wondering about that, too... Did you understand the high upvote rate of this answer? At first, it looks like an answer that should be purged."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2538334,
+                                "reputation": 1591,
+                                "user_id": 2204806,
+                                "user_type": "registered",
+                                "accept_rate": 61,
+                                "display_name": "Stretch"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1427980882,
+                            "post_id": 9772922,
+                            "comment_id": 47000660,
+                            "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method/9772922#comment47000660_9772922",
+                            "body": "I tried setting the <code>autoclass_content = &#39;both&#39;</code> option, which did document the <b>init</b> method, but it made the autosummary appear twice."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 326731,
+                                "reputation": 2152,
+                                "user_id": 648661,
+                                "user_type": "registered",
+                                "display_name": "Terseus"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1616512501,
+                            "post_id": 9772922,
+                            "comment_id": 118022129,
+                            "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method/9772922#comment118022129_9772922",
+                            "body": "This is the best way to do it, it works perfectly with autosummary and the result it&#39;s much better than <code>special-methods</code>, the former add the constructor doc right at the start of the class and the latter adds a separate <code>__init__</code> method to the doc."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 17166,
+                        "reputation": 39329,
+                        "user_id": 38140,
+                        "user_type": "registered",
+                        "accept_rate": 84,
+                        "display_name": "gotgenes"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 95,
+                    "last_activity_date": 1493304714,
+                    "last_edit_date": 1493304714,
+                    "creation_date": 1332170706,
+                    "answer_id": 9772922,
+                    "question_id": 5599254,
+                    "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method/9772922#9772922",
+                    "body": "<p>You were close. You can use the <a href=\"http://www.sphinx-doc.org/en/stable/ext/autodoc.html#confval-autoclass_content\" rel=\"noreferrer\"><code>autoclass_content</code></a> option in your <code>conf.py</code> file:</p>\n\n<pre><code>autoclass_content = 'both'\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2785811,
+                                "reputation": 4366,
+                                "user_id": 2397253,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "oarfish"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1534427191,
+                            "post_id": 35493334,
+                            "comment_id": 90708506,
+                            "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method/35493334#comment90708506_35493334",
+                            "body": "How do I use this? It seems the method must be named <code>setup(app)</code> in order to be executed by Sphinx."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7042582,
+                                "reputation": 479,
+                                "user_id": 5394584,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "Andrew"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1561141158,
+                            "post_id": 35493334,
+                            "comment_id": 99980519,
+                            "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method/35493334#comment99980519_35493334",
+                            "body": "I don&#39;t understand it all, but see xolox&#39;s <a href=\"https://github.com/xolox/python-humanfriendly/blob/master/humanfriendly/sphinx.py\" rel=\"nofollow noreferrer\">implementation</a> if you want to dissect yourself. I believe he built a sphinx extension that connects a callback to the autodoc-skip-member event.  When sphinx tries to figure out if something should be included/skipped that event fires, and his code runs.  If his code detects a <b>special</b> member that was defined explicitly by the user (inherited like often happens) then it tells Sphinx to include it.  That way you can doc special members you write yourself"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 763527,
+                                "reputation": 5006,
+                                "user_id": 788200,
+                                "user_type": "registered",
+                                "display_name": "xolox"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1561198437,
+                            "post_id": 35493334,
+                            "comment_id": 99991393,
+                            "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method/35493334#comment99991393_35493334",
+                            "body": "Thanks for the clarifications Andrew and yes you are correct oarfish, a setup function is needed. I&#39;ve added it to the example to avoid further confusion."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 763527,
+                                "reputation": 5006,
+                                "user_id": 788200,
+                                "user_type": "registered",
+                                "display_name": "xolox"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7928081,
+                                "reputation": 6992,
+                                "user_id": 5986907,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "joel"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1581511913,
+                            "post_id": 35493334,
+                            "comment_id": 106458030,
+                            "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method/35493334#comment106458030_35493334",
+                            "body": "@JoelB: The example code in my post is written to assume that your <code>__init__</code> method has a nonempty docstring. Does it?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 763527,
+                        "reputation": 5006,
+                        "user_id": 788200,
+                        "user_type": "registered",
+                        "display_name": "xolox"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1581514215,
+                    "last_edit_date": 1581514215,
+                    "creation_date": 1455832960,
+                    "answer_id": 35493334,
+                    "question_id": 5599254,
+                    "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method/35493334#35493334",
+                    "body": "<p>Over the past years I've written several variants of <code>autodoc-skip-member</code> callbacks for various unrelated Python projects because I wanted methods like <code>__init__()</code>, <code>__enter__()</code> and <code>__exit__()</code> to show up in my API documentation (after all, these \"special methods\" are part of the API and what better place to document them than inside the special method's docstring).</p>\n\n<p>Recently I took the best implementation and made it part of one of my Python projects (<a href=\"https://humanfriendly.readthedocs.io/en/latest/api.html#humanfriendly.sphinx.enable_special_methods\" rel=\"nofollow noreferrer\">here's the documentation</a>). <a href=\"https://github.com/xolox/python-humanfriendly/blob/master/humanfriendly/sphinx.py\" rel=\"nofollow noreferrer\">The implementation</a> basically comes down to this:</p>\n\n\n\n<pre><code>import types\n\ndef setup(app):\n    \"\"\"Enable Sphinx customizations.\"\"\"\n    enable_special_methods(app)\n\n\ndef enable_special_methods(app):\n    \"\"\"\n    Enable documenting \"special methods\" using the autodoc_ extension.\n\n    :param app: The Sphinx application object.\n\n    This function connects the :func:`special_methods_callback()` function to\n    ``autodoc-skip-member`` events.\n\n    .. _autodoc: http://www.sphinx-doc.org/en/stable/ext/autodoc.html\n    \"\"\"\n    app.connect('autodoc-skip-member', special_methods_callback)\n\n\ndef special_methods_callback(app, what, name, obj, skip, options):\n    \"\"\"\n    Enable documenting \"special methods\" using the autodoc_ extension.\n\n    Refer to :func:`enable_special_methods()` to enable the use of this\n    function (you probably don't want to call\n    :func:`special_methods_callback()` directly).\n\n    This function implements a callback for ``autodoc-skip-member`` events to\n    include documented \"special methods\" (method names with two leading and two\n    trailing underscores) in your documentation. The result is similar to the\n    use of the ``special-members`` flag with one big difference: Special\n    methods are included but other types of members are ignored. This means\n    that attributes like ``__weakref__`` will always be ignored (this was my\n    main annoyance with the ``special-members`` flag).\n\n    The parameters expected by this function are those defined for Sphinx event\n    callback functions (i.e. I'm not going to document them here :-).\n    \"\"\"\n    if getattr(obj, '__doc__', None) and isinstance(obj, (types.FunctionType, types.MethodType)):\n        return False\n    else:\n        return skip\n</code></pre>\n\n<p>Yes, there's more documentation than logic :-). The advantage of defining an <code>autodoc-skip-member</code> callback like this over the use of the <code>special-members</code> option (for me) is that the <code>special-members</code> option also enables documentation of properties like <code>__weakref__</code> (available on all new-style classes, AFAIK) which I consider noise and not useful at all. The callback approach avoids this (because it only works on functions/methods and ignores other attributes). </p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 14429807,
+                        "reputation": 1048,
+                        "user_id": 10423481,
+                        "user_type": "registered",
+                        "display_name": "dheinz"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 15,
+                    "last_activity_date": 1648650239,
+                    "last_edit_date": 1648650239,
+                    "creation_date": 1589207077,
+                    "answer_id": 61732050,
+                    "question_id": 5599254,
+                    "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method/61732050#61732050",
+                    "body": "<p>Even though this is an older post, for those who are looking it up as of now, there is also another solution introduced in version 1.8. According to the <a href=\"https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html#confval-autodoc_default_options\" rel=\"noreferrer\">documentation</a>, You can add the  <code>special-members</code> key in the <code>autodoc_default_options</code> to your <code>conf.py</code>.</p>\n<p>Example:</p>\n<pre><code>autodoc_default_options = {\n    'members': True,\n    'member-order': 'bysource',\n    'special-members': '__init__',\n    'undoc-members': True,\n    'exclude-members': '__weakref__'\n}\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2263702,
+                                "reputation": 21713,
+                                "user_id": 2132157,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "G M"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1670750303,
+                            "post_id": 63209832,
+                            "comment_id": 131941705,
+                            "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method/63209832#comment131941705_63209832",
+                            "body": "did not work for me"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 24080,
+                        "reputation": 3420,
+                        "user_id": 60982,
+                        "user_type": "registered",
+                        "accept_rate": 71,
+                        "display_name": "letmaik"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1596314169,
+                    "creation_date": 1596314169,
+                    "answer_id": 63209832,
+                    "question_id": 5599254,
+                    "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method/63209832#63209832",
+                    "body": "<p>This is a variant which only includes <code>__init__</code> if it has arguments:</p>\n<pre><code>import inspect\n\ndef skip_init_without_args(app, what, name, obj, would_skip, options):\n    if name == '__init__':\n        func = getattr(obj, '__init__')\n        spec = inspect.getfullargspec(func)\n        return not spec.args and not spec.varargs and not spec.varkw and not spec.kwonlyargs\n    return would_skip\n\ndef setup(app):\n    app.connect(&quot;autodoc-skip-member&quot;, skip_init_without_args)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 13451509,
+                                "reputation": 86,
+                                "user_id": 9706202,
+                                "user_type": "registered",
+                                "display_name": "Harshil Mehta"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1685542960,
+                            "post_id": 68818512,
+                            "comment_id": 134675224,
+                            "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method/68818512#comment134675224_68818512",
+                            "body": "the correct syntax to do this would be to remove the quotes around so it&#39;s like: <code>:class-doc-from: class</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 165296,
+                        "reputation": 2405,
+                        "user_id": 7599215,
+                        "user_type": "registered",
+                        "accept_rate": 60,
+                        "display_name": "banderlog013"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1685549947,
+                    "last_edit_date": 1685549947,
+                    "creation_date": 1629207932,
+                    "answer_id": 68818512,
+                    "question_id": 5599254,
+                    "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method/68818512#68818512",
+                    "body": "<p>As long as this commit approved: <a href=\"https://github.com/sphinx-doc/sphinx/pull/9154\" rel=\"nofollow noreferrer\">https://github.com/sphinx-doc/sphinx/pull/9154</a>, in the next sphinx version (&gt;4.1.2) will be possible to:</p>\n<pre><code>..autoclass:: MyClass1\n    :members:\n    :class-doc-from: class\n\n\n..autoclass:: MyClass2\n    :members:\n    :class-doc-from: init\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 38455,
+                "reputation": 29500,
+                "user_id": 110358,
+                "user_type": "registered",
+                "accept_rate": 90,
+                "display_name": "Jacob Marble"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 5599712,
+            "answer_count": 6,
+            "score": 128,
+            "last_activity_date": 1685549947,
+            "creation_date": 1302287019,
+            "last_edit_date": 1311006439,
+            "question_id": 5599254,
+            "link": "https://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method",
+            "title": "How to use Sphinx&#39;s autodoc to document a class&#39;s __init__(self) method?",
+            "body": "<p>Sphinx doesn't generate docs for __init__(self) by default. I have tried the following:</p>\n\n<pre><code>.. automodule:: mymodule\n    :members:\n</code></pre>\n\n<p>and</p>\n\n<pre><code>..autoclass:: MyClass\n    :members:\n</code></pre>\n\n<p>In conf.py, setting the following only appends the __init__(self) docstring to the class docstring (<a href=\"http://sphinx.pocoo.org/ext/autodoc.html\" rel=\"noreferrer\">the Sphinx autodoc documentation</a> seems to agree that this is the expected behavior, but mentions nothing regarding the problem I'm trying to solve):</p>\n\n<pre><code>autoclass_content = 'both'\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6314
+}

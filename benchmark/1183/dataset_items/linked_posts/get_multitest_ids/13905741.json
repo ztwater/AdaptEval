@@ -1,0 +1,787 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "python-3.x",
+                "scope",
+                "list-comprehension",
+                "python-internals"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 1190144,
+                        "reputation": 1394,
+                        "user_id": 1163142,
+                        "user_type": "registered",
+                        "display_name": "gps"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1355730294,
+                    "post_id": 13905741,
+                    "comment_id": 19170840,
+                    "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition#comment19170840_13905741",
+                    "body": "Interesting... One obvious workaround is to assign y after you exit the class definition.  Foo.y = [Foo.x for i in range(1)]"
+                },
+                {
+                    "owner": {
+                        "account_id": 1190144,
+                        "reputation": 1394,
+                        "user_id": 1163142,
+                        "user_type": "registered",
+                        "display_name": "gps"
+                    },
+                    "edited": false,
+                    "score": 3,
+                    "creation_date": 1355731343,
+                    "post_id": 13905741,
+                    "comment_id": 19171101,
+                    "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition#comment19171101_13905741",
+                    "body": "+martijn-pieters link to a duplicate is right, there&#39;s a comment from +matt-b in there with the explanation: Python 2.7 list comprehensions do not have their own namespace (unlike set or dict comprehensions or generator expressions... replace your [] with {} to see that in action). They <i>all</i> have their own namespace in 3."
+                },
+                {
+                    "owner": {
+                        "account_id": 35417,
+                        "reputation": 1089182,
+                        "user_id": 100297,
+                        "user_type": "moderator",
+                        "display_name": "Martijn Pieters"
+                    },
+                    "reply_to_user": {
+                        "account_id": 1190144,
+                        "reputation": 1394,
+                        "user_id": 1163142,
+                        "user_type": "registered",
+                        "display_name": "gps"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1355746473,
+                    "post_id": 13905741,
+                    "comment_id": 19177082,
+                    "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition#comment19177082_13905741",
+                    "body": "@gps: Or use a nested scope, by inserting a (temporary) function in the class definition suite."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 274825,
+                                "reputation": 155649,
+                                "user_id": 567292,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "ecatmur"
+                            },
+                            "edited": false,
+                            "score": 34,
+                            "creation_date": 1355752119,
+                            "post_id": 13913933,
+                            "comment_id": 19179733,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/13913933#comment19179733_13913933",
+                            "body": "You can also use a lambda to fix the binding: <code>y = (lambda x=x: [x for i in range(1)])()</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089182,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "reply_to_user": {
+                                "account_id": 274825,
+                                "reputation": 155649,
+                                "user_id": 567292,
+                                "user_type": "registered",
+                                "accept_rate": 84,
+                                "display_name": "ecatmur"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1355752992,
+                            "post_id": 13913933,
+                            "comment_id": 19180105,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/13913933#comment19180105_13913933",
+                            "body": "@ecatmur: Exactly, <code>lambda</code> are just anonymous functions, after all."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1218896,
+                                "reputation": 159,
+                                "user_id": 1489758,
+                                "user_type": "registered",
+                                "display_name": "Neal Young"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1407004230,
+                            "post_id": 13913933,
+                            "comment_id": 39055015,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/13913933#comment39055015_13913933",
+                            "body": "For the record, the work-around that uses a default argument (to a lambda or a function) to pass in the class variable has a gotcha.  Namely, it passes the <i>current value</i> of the variable.  So, if the variable changes later, and then the lambda or function is called, the lambda or function will be using the old value.  This behavior differs from the behavior of a closure (which would capture a reference to the variable, rather than its value), so may be unexpected."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1866281,
+                                "reputation": 6957,
+                                "user_id": 1689770,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Jonathan"
+                            },
+                            "edited": false,
+                            "score": 20,
+                            "creation_date": 1422138484,
+                            "post_id": 13913933,
+                            "comment_id": 44634587,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/13913933#comment44634587_13913933",
+                            "body": "If it requires a page of technical information to explain why something doesn&#39;t work intuitively, I call that a bug."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3344799,
+                                "reputation": 37964,
+                                "user_id": 2810305,
+                                "user_type": "registered",
+                                "accept_rate": 69,
+                                "display_name": "Lutz Prechelt"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1866281,
+                                "reputation": 6957,
+                                "user_id": 1689770,
+                                "user_type": "registered",
+                                "accept_rate": 67,
+                                "display_name": "Jonathan"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1479891918,
+                            "post_id": 13913933,
+                            "comment_id": 68744831,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/13913933#comment68744831_13913933",
+                            "body": "@JonathanLeaders: Don&#39;t call it a <i>bug</i>, call it a <i>tradeoff</i>. If you want A and B, but can get only one of them, then no matter how you decide, in some situations you will dislike the result. That&#39;s life."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3362186,
+                                "reputation": 23453,
+                                "user_id": 2823755,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "wwii"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1577239790,
+                            "post_id": 13913933,
+                            "comment_id": 105127641,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/13913933#comment105127641_13913933",
+                            "body": "I assume all this is also True for staticmethods in the class?  \u2026 <a href=\"https://stackoverflow.com/questions/59474374/how-to-reference-static-method-from-class-variable\" title=\"how to reference static method from class variable\">stackoverflow.com/questions/59474374/&hellip;</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089182,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "reply_to_user": {
+                                "account_id": 3362186,
+                                "reputation": 23453,
+                                "user_id": 2823755,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "wwii"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1577314389,
+                            "post_id": 13913933,
+                            "comment_id": 105141163,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/13913933#comment105141163_13913933",
+                            "body": "@wwii yes. Note that a <code>staticmethod</code> object is stored as just another name in the class scope. It doesn\u2019t matter what type of object it is."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 127944,
+                                "reputation": 12963,
+                                "user_id": 325452,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "ingyhere"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1691286084,
+                            "post_id": 13913933,
+                            "comment_id": 135470974,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/13913933#comment135470974_13913933",
+                            "body": "Gawd, what a waste of time. <b>Solutions:</b> (1) Declare it as a global -- it works. (2) Use a <code>for</code> loop instead. (3) [may work YMMV] Create an artificial list/tuple object and read it in from inside the comprehension. (4) Use a lambda but that turns code into define then call, may as well use a loop or function. Item (3) won&#39;t work in scenarios like <code>re.sub(precompiled_re, ..., ...)</code> within a comprehension as the scope isn&#39;t picked up transitively. You cannot even use <code>ClassName.variable</code> to get it."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 35417,
+                        "reputation": 1089182,
+                        "user_id": 100297,
+                        "user_type": "moderator",
+                        "display_name": "Martijn Pieters"
+                    },
+                    "comment_count": 8,
+                    "is_accepted": true,
+                    "score": 358,
+                    "last_activity_date": 1708291412,
+                    "last_edit_date": 1708291412,
+                    "creation_date": 1355746316,
+                    "answer_id": 13913933,
+                    "question_id": 13905741,
+                    "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/13913933#13913933",
+                    "body": "<p><em>Class scope and list, set or dictionary comprehensions, as well as generator expressions, do not mix.</em></p>\n<h2>The why; or, the official word on this</h2>\n<p>You cannot access the class scope from functions, list comprehensions or generator expressions enclosed in that scope; they act as if that scope does not exist. In Python 2, list comprehensions were implemented using a shortcut so actually <em>could</em> access the class scope, but in Python 3 they got their own scope (as they should have had all along) and thus your example breaks. Other comprehension types have their own scope regardless of Python version, so a similar example with a set or dict comprehension would break in Python 2.</p>\n<pre><code># Same error, in Python 2 or 3\ny = {x: x for i in range(1)}\n</code></pre>\n<h3>More details</h3>\n<p>In Python 3, list comprehensions were given a proper scope (local namespace) of their own, to prevent their local variables bleeding over into the surrounding scope (see <a href=\"https://stackoverflow.com/q/4198906\">List comprehension rebinds names even after scope of comprehension. Is this right?</a>). That's great when using such a list comprehension in a module or in a function, but in classes, scoping is a little, uhm, <em>strange</em>.</p>\n<p>This is documented in <a href=\"http://www.python.org/dev/peps/pep-0227/\" rel=\"nofollow noreferrer\">pep 227</a>:</p>\n<blockquote>\n<p>Names in class scope are not accessible.  Names are resolved in\nthe innermost enclosing function scope.  If a class definition\noccurs in a chain of nested scopes, the resolution process skips\nclass definitions.</p>\n</blockquote>\n<p>and in the <a href=\"http://docs.python.org/3/reference/compound_stmts.html#class-definitions\" rel=\"nofollow noreferrer\"><code>class</code> compound statement documentation</a>:</p>\n<blockquote>\n<p>The class\u2019s suite is then executed in a new execution frame (see section <a href=\"http://docs.python.org/3/reference/executionmodel.html#naming\" rel=\"nofollow noreferrer\"><em>Naming and binding</em></a>), using a newly created local namespace and the original global namespace. (Usually, the suite contains only function definitions.) When the class\u2019s suite finishes execution, <strong>its execution frame is discarded but its local namespace is saved</strong>. <a href=\"http://docs.python.org/3/reference/compound_stmts.html#id8\" rel=\"nofollow noreferrer\">[4]</a> A class object is then created using the inheritance list for the base classes and the saved local namespace for the attribute dictionary.</p>\n</blockquote>\n<p>Emphasis mine; the execution frame is the temporary scope.</p>\n<p>Because the scope is repurposed as the attributes on a class object, allowing it to be used as a nonlocal scope as well leads to undefined behaviour; what would happen if a class method referred to <code>x</code> as a nested scope variable, then manipulates <code>Foo.x</code> as well, for example? More importantly, what would that mean for subclasses of <code>Foo</code>? Python <em>has</em> to treat a class scope differently as it is very different from a function scope.</p>\n<p>Last, but definitely not least, the linked <a href=\"http://docs.python.org/3/reference/executionmodel.html#naming\" rel=\"nofollow noreferrer\">Naming and binding</a> section in the Execution model documentation mentions class scopes explicitly:</p>\n<blockquote>\n<p>The scope of names defined in a class block is limited to the class block; it does not extend to the code blocks of methods \u2013 this includes comprehensions and generator expressions since they are implemented using a function scope. This means that the following will fail:</p>\n<pre><code>class A:\n     a = 42\n     b = list(a + i for i in range(10))\n</code></pre>\n</blockquote>\n<h2>The (small) exception; or, why one part <em>may</em> still work</h2>\n<p>There's one part of a comprehension or generator expression that executes in the surrounding scope, regardless of Python version. That would be the expression for the outermost iterable. In your example, it's the <code>range(1)</code>:</p>\n<pre><code>y = [x for i in range(1)]\n#               ^^^^^^^^\n</code></pre>\n<p>Thus, using <code>x</code> in that expression would not throw an error:</p>\n<pre><code># Runs fine\ny = [i for i in range(x)]\n</code></pre>\n<p>This only applies to the outermost iterable; if a comprehension has multiple <code>for</code> clauses, the iterables for inner <code>for</code> clauses are evaluated in the comprehension's scope:</p>\n<pre><code># NameError\ny = [i for i in range(1) for j in range(x)]\n#      ^^^^^^^^^^^^^^^^^ -----------------\n#      outer loop        inner, nested loop\n</code></pre>\n<p>This design decision was made in order to throw an error at genexp creation time instead of iteration time when creating the outermost iterable of a generator expression throws an error, or when the outermost iterable turns out not to be iterable. Comprehensions share this behavior for consistency.</p>\n<h2>Looking under the hood; or, way more detail than you ever wanted</h2>\n<p>You can see this all in action using the <a href=\"http://docs.python.org/3/library/dis.html\" rel=\"nofollow noreferrer\"><code>dis</code> module</a>. I'm using Python 3.3 in the following examples, because it adds <a href=\"http://docs.python.org/3/whatsnew/3.3.html#pep-3155-qualified-name-for-classes-and-functions\" rel=\"nofollow noreferrer\">qualified names</a> that neatly identify the code objects we want to inspect. The bytecode produced is otherwise functionally identical to Python 3.2.</p>\n<p>To <em>create</em> a class, Python essentially takes the whole suite that makes up the class body (so everything indented one level deeper than the <code>class &lt;name&gt;:</code> line), and executes that as if it were a function:</p>\n<pre><code>&gt;&gt;&gt; import dis\n&gt;&gt;&gt; def foo():\n...     class Foo:\n...         x = 5\n...         y = [x for i in range(1)]\n...     return Foo\n... \n&gt;&gt;&gt; dis.dis(foo)\n  2           0 LOAD_BUILD_CLASS     \n              1 LOAD_CONST               1 (&lt;code object Foo at 0x10a436030, file &quot;&lt;stdin&gt;&quot;, line 2&gt;) \n              4 LOAD_CONST               2 ('Foo') \n              7 MAKE_FUNCTION            0 \n             10 LOAD_CONST               2 ('Foo') \n             13 CALL_FUNCTION            2 (2 positional, 0 keyword pair) \n             16 STORE_FAST               0 (Foo) \n\n  5          19 LOAD_FAST                0 (Foo) \n             22 RETURN_VALUE         \n</code></pre>\n<p>The first <code>LOAD_CONST</code> there loads a code object for the <code>Foo</code> class body, then makes that into a function, and calls it. The <em>result</em> of that call is then used to create the namespace of the class, its <code>__dict__</code>. So far so good.</p>\n<p>The thing to note here is that the bytecode contains a nested code object; in Python, class definitions, functions, comprehensions and generators all are represented as code objects that contain not only bytecode, but also structures that represent local variables, constants, variables taken from globals, and variables taken from the nested scope. The compiled bytecode refers to those structures and the python interpreter knows how to access those given the bytecodes presented.</p>\n<p>The important thing to remember here is that Python creates these structures at compile time; the <code>class</code> suite is a code object (<code>&lt;code object Foo at 0x10a436030, file &quot;&lt;stdin&gt;&quot;, line 2&gt;</code>) that is already compiled.</p>\n<p>Let's inspect that code object that creates the class body itself; code objects have a <code>co_consts</code> structure:</p>\n<pre><code>&gt;&gt;&gt; foo.__code__.co_consts\n(None, &lt;code object Foo at 0x10a436030, file &quot;&lt;stdin&gt;&quot;, line 2&gt;, 'Foo')\n&gt;&gt;&gt; dis.dis(foo.__code__.co_consts[1])\n  2           0 LOAD_FAST                0 (__locals__) \n              3 STORE_LOCALS         \n              4 LOAD_NAME                0 (__name__) \n              7 STORE_NAME               1 (__module__) \n             10 LOAD_CONST               0 ('foo.&lt;locals&gt;.Foo') \n             13 STORE_NAME               2 (__qualname__) \n\n  3          16 LOAD_CONST               1 (5) \n             19 STORE_NAME               3 (x) \n\n  4          22 LOAD_CONST               2 (&lt;code object &lt;listcomp&gt; at 0x10a385420, file &quot;&lt;stdin&gt;&quot;, line 4&gt;) \n             25 LOAD_CONST               3 ('foo.&lt;locals&gt;.Foo.&lt;listcomp&gt;') \n             28 MAKE_FUNCTION            0 \n             31 LOAD_NAME                4 (range) \n             34 LOAD_CONST               4 (1) \n             37 CALL_FUNCTION            1 (1 positional, 0 keyword pair) \n             40 GET_ITER             \n             41 CALL_FUNCTION            1 (1 positional, 0 keyword pair) \n             44 STORE_NAME               5 (y) \n             47 LOAD_CONST               5 (None) \n             50 RETURN_VALUE         \n</code></pre>\n<p>The above bytecode creates the class body. The function is executed and the resulting <code>locals()</code> namespace, containing <code>x</code> and <code>y</code> is used to create the class (except that it doesn't work because <code>x</code> isn't defined as a global). Note that after storing <code>5</code> in <code>x</code>, it loads another code object; that's the list comprehension; it is wrapped in a function object just like the class body was; the created function takes a positional argument, the <code>range(1)</code> iterable to use for its looping code, cast to an iterator. As shown in the bytecode, <code>range(1)</code> is evaluated in the class scope.</p>\n<p>From this you can see that the only difference between a code object for a function or a generator, and a code object for a comprehension is that the latter is executed <em>immediately</em> when the parent code object is executed; the bytecode simply creates a function on the fly and executes it in a few small steps.</p>\n<p>Python 2.x uses inline bytecode there instead, here is output from Python 2.7:</p>\n<pre><code>  2           0 LOAD_NAME                0 (__name__)\n              3 STORE_NAME               1 (__module__)\n\n  3           6 LOAD_CONST               0 (5)\n              9 STORE_NAME               2 (x)\n\n  4          12 BUILD_LIST               0\n             15 LOAD_NAME                3 (range)\n             18 LOAD_CONST               1 (1)\n             21 CALL_FUNCTION            1\n             24 GET_ITER            \n        &gt;&gt;   25 FOR_ITER                12 (to 40)\n             28 STORE_NAME               4 (i)\n             31 LOAD_NAME                2 (x)\n             34 LIST_APPEND              2\n             37 JUMP_ABSOLUTE           25\n        &gt;&gt;   40 STORE_NAME               5 (y)\n             43 LOAD_LOCALS         \n             44 RETURN_VALUE        \n</code></pre>\n<p>No code object is loaded, instead a <code>FOR_ITER</code> loop is run inline. So in Python 3.x, the list generator was given a proper code object of its own, which means it has its own scope.</p>\n<p>However, the comprehension was compiled together with the rest of the python source code when the module or script was first loaded by the interpreter, and the compiler does <em>not</em> consider a class suite a valid scope. Any referenced variables in a list comprehension must look in the scope <em>surrounding</em> the class definition, recursively. If the variable wasn't found by the compiler, it marks it as a global. Disassembly of the list comprehension code object shows that <code>x</code> is indeed loaded as a global:</p>\n<pre><code>&gt;&gt;&gt; foo.__code__.co_consts[1].co_consts\n('foo.&lt;locals&gt;.Foo', 5, &lt;code object &lt;listcomp&gt; at 0x10a385420, file &quot;&lt;stdin&gt;&quot;, line 4&gt;, 'foo.&lt;locals&gt;.Foo.&lt;listcomp&gt;', 1, None)\n&gt;&gt;&gt; dis.dis(foo.__code__.co_consts[1].co_consts[2])\n  4           0 BUILD_LIST               0 \n              3 LOAD_FAST                0 (.0) \n        &gt;&gt;    6 FOR_ITER                12 (to 21) \n              9 STORE_FAST               1 (i) \n             12 LOAD_GLOBAL              0 (x) \n             15 LIST_APPEND              2 \n             18 JUMP_ABSOLUTE            6 \n        &gt;&gt;   21 RETURN_VALUE         \n</code></pre>\n<p>This chunk of bytecode loads the first argument passed in (the <code>range(1)</code> iterator), and just like the Python 2.x version uses <code>FOR_ITER</code> to loop over it and create its output.</p>\n<p>Had we defined <code>x</code> in the <code>foo</code> function instead, <code>x</code> would be a cell variable (cells refer to nested scopes):</p>\n<pre><code>&gt;&gt;&gt; def foo():\n...     x = 2\n...     class Foo:\n...         x = 5\n...         y = [x for i in range(1)]\n...     return Foo\n... \n&gt;&gt;&gt; dis.dis(foo.__code__.co_consts[2].co_consts[2])\n  5           0 BUILD_LIST               0 \n              3 LOAD_FAST                0 (.0) \n        &gt;&gt;    6 FOR_ITER                12 (to 21) \n              9 STORE_FAST               1 (i) \n             12 LOAD_DEREF               0 (x) \n             15 LIST_APPEND              2 \n             18 JUMP_ABSOLUTE            6 \n        &gt;&gt;   21 RETURN_VALUE         \n</code></pre>\n<p>The <code>LOAD_DEREF</code> will indirectly load <code>x</code> from the code object cell objects:</p>\n<pre><code>&gt;&gt;&gt; foo.__code__.co_cellvars               # foo function `x`\n('x',)\n&gt;&gt;&gt; foo.__code__.co_consts[2].co_cellvars  # Foo class, no cell variables\n()\n&gt;&gt;&gt; foo.__code__.co_consts[2].co_consts[2].co_freevars  # Refers to `x` in foo\n('x',)\n&gt;&gt;&gt; foo().y\n[2]\n</code></pre>\n<p>The actual referencing looks the value up from the current frame data structures, which were initialized from a function object's <code>.__closure__</code> attribute. Since the function created for the comprehension code object is discarded again, we do not get to inspect that function's closure. To see a closure in action, we'd have to inspect a nested function instead:</p>\n<pre><code>&gt;&gt;&gt; def spam(x):\n...     def eggs():\n...         return x\n...     return eggs\n... \n&gt;&gt;&gt; spam(1).__code__.co_freevars\n('x',)\n&gt;&gt;&gt; spam(1)()\n1\n&gt;&gt;&gt; spam(1).__closure__\n&gt;&gt;&gt; spam(1).__closure__[0].cell_contents\n1\n&gt;&gt;&gt; spam(5).__closure__[0].cell_contents\n5\n</code></pre>\n<p>So, to summarize:</p>\n<ul>\n<li>List comprehensions get their own code objects in Python 3 (up to Python 3.11), and there is no difference between code objects for functions, generators or comprehensions; comprehension code objects are wrapped in a temporary function object and called immediately.</li>\n<li>Code objects are created at compile time, and any non-local variables are marked as either global or as free variables, based on the nested scopes of the code. The class body is <em>not</em> considered a scope for looking up those variables.</li>\n<li>When executing the code, Python has only to look into the globals, or the closure of the currently executing object. Since the compiler didn't include the class body as a scope, the temporary function namespace is not considered.</li>\n</ul>\n<h2>A workaround; or, what to do about it</h2>\n<p>If you were to create an explicit scope for the <code>x</code> variable, like in a function, you <em>can</em> use class-scope variables for a list comprehension:</p>\n<pre><code>&gt;&gt;&gt; class Foo:\n...     x = 5\n...     def y(x):\n...         return [x for i in range(1)]\n...     y = y(x)\n... \n&gt;&gt;&gt; Foo.y\n[5]\n</code></pre>\n<p>The 'temporary' <code>y</code> function can be called directly; we replace it when we do with its return value. Its scope <em>is</em> considered when resolving <code>x</code>:</p>\n<pre><code>&gt;&gt;&gt; foo.__code__.co_consts[1].co_consts[2]\n&lt;code object y at 0x10a5df5d0, file &quot;&lt;stdin&gt;&quot;, line 4&gt;\n&gt;&gt;&gt; foo.__code__.co_consts[1].co_consts[2].co_cellvars\n('x',)\n</code></pre>\n<p>Of course, people reading your code will scratch their heads over this a little; you may want to put a big fat comment in there explaining why you are doing this.</p>\n<p>The best work-around is to just use <code>__init__</code> to create an instance variable instead:</p>\n<pre><code>def __init__(self):\n    self.y = [self.x for i in range(1)]\n</code></pre>\n<p>and avoid all the head-scratching, and questions to explain yourself. For your own concrete example, I would not even store the <code>namedtuple</code> on the class; either use the output directly (don't store the generated class at all), or use a global:</p>\n<pre><code>from collections import namedtuple\nState = namedtuple('State', ['name', 'capital'])\n\nclass StateDatabase:\n    db = [State(*args) for args in [\n       ('Alabama', 'Montgomery'),\n       ('Alaska', 'Juneau'),\n       # ...\n    ]]\n</code></pre>\n<h2>PEP 709, part of Python 3.12, changes some of this all again</h2>\n<p>In Python 3.12, comprehensions have been made a lot more efficient by removing the nested function and inlining the loop, while still maintaining a separate scope. The details of how this was done are outlined in <a href=\"https://peps.python.org/pep-0709/\" rel=\"nofollow noreferrer\">PEP 709 - Inlined comprehensions</a>, but the long and short of it is that instead of creating a new function object and then calling it, with <code>LOAD_CONST</code>, <code>MAKE_FUNCTION</code> and <code>CALL</code> bytecodes, any clashing names used in the loop are first moved to the stack before executing the comprehension bytecode inline.</p>\n<p>It is important to note that <strong>this change only affects performance</strong> and interaction with the class scope has not changed. You still can't access names created in a class scope, for the reasons outlined above.</p>\n<p>Using Python 3.12.0b4 the bytecode for the <code>Foo</code> class now looks like this:</p>\n<pre><code># creating `def foo()` and its bytecode elided\n\nDisassembly of &lt;code object Foo at 0x104e97000, file &quot;&lt;stdin&gt;&quot;, line 2&gt;:\n  2           0 RESUME                   0\n              2 LOAD_NAME                0 (__name__)\n              4 STORE_NAME               1 (__module__)\n              6 LOAD_CONST               0 ('foo.&lt;locals&gt;.Foo')\n              8 STORE_NAME               2 (__qualname__)\n\n  3          10 LOAD_CONST               1 (5)\n             12 STORE_NAME               3 (x)\n\n  4          14 PUSH_NULL\n             16 LOAD_NAME                4 (range)\n             18 LOAD_CONST               2 (1)\n             20 CALL                     1\n             28 GET_ITER\n             30 LOAD_FAST_AND_CLEAR      0 (.0)\n             32 LOAD_FAST_AND_CLEAR      1 (i)\n             34 LOAD_FAST_AND_CLEAR      2 (x)\n             36 SWAP                     4\n             38 BUILD_LIST               0\n             40 SWAP                     2\n        &gt;&gt;   42 FOR_ITER                 8 (to 62)\n             46 STORE_FAST               1 (i)\n             48 LOAD_GLOBAL              6 (x)\n             58 LIST_APPEND              2\n             60 JUMP_BACKWARD           10 (to 42)\n        &gt;&gt;   62 END_FOR\n             64 SWAP                     4\n             66 STORE_FAST               2 (x)\n             68 STORE_FAST               1 (i)\n             70 STORE_FAST               0 (.0)\n             72 STORE_NAME               5 (y)\n             74 RETURN_CONST             3 (None)\n</code></pre>\n<p>Here, the most important bytecode is the one at offset 34:</p>\n<pre><code>             34 LOAD_FAST_AND_CLEAR      2 (x)\n</code></pre>\n<p>This takes the value for the variable <code>x</code> in the local scope and pushes it on the stack, and then <em>clears</em> the name. If there is no variable <code>x</code> in the current scope, this stores a C <code>NULL</code> value on the stack. The name is now gone from the local scope now until the bytecode at offset 66 is reached:</p>\n<pre><code>             66 STORE_FAST               2 (x)\n</code></pre>\n<p>This restores <code>x</code> to what it was before the list comprehension; if a <code>NULL</code> was stored on the stack to indicate that there was no variable named <code>x</code>, then there still won't be a variable <code>x</code> after this bytecode has been executed.</p>\n<p>The rest of the bytecode between the <code>LOAD_FAST_AND_CLEAR</code> and <code>STORE_FAST</code> calls is more or less the same it was before, with <code>SWAP</code> bytecodes used to access the iterator for the <code>range(1)</code> object instead of <code>LOAD_FAST (.0)</code> in the function bytecode in earlier Python 3.x versions.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089182,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1437052840,
+                            "post_id": 28130950,
+                            "comment_id": 50877752,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/28130950#comment50877752_28130950",
+                            "body": "The problem is present in Python 2 as well, when using generator expressions, as well as with set and dictionary comprehensions. It is not a bug, it is a consequence of how class namespaces work. It&#39;ll not change."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089182,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1492169517,
+                            "post_id": 28130950,
+                            "comment_id": 73880075,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/28130950#comment73880075_28130950",
+                            "body": "And I note that your workaround does exactly what my answer already states: create a new scope (a lambda is no different here from using <code>def</code> to create a function)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 37811,
+                                "reputation": 105529,
+                                "user_id": 108205,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "jsbueno"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1509931005,
+                            "post_id": 28130950,
+                            "comment_id": 81206813,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/28130950#comment81206813_28130950",
+                            "body": "yep. While it is nice to have an answer with the work-around at a glance, this one incorrecly states the behavior as a bug, when it is a side-effect of the way the language works (and therefore, won&#39;t be changed)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 74199,
+                                "reputation": 10455,
+                                "user_id": 213307,
+                                "user_type": "registered",
+                                "display_name": "Rian Rizvi"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1532740041,
+                            "post_id": 28130950,
+                            "comment_id": 90100940,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/28130950#comment90100940_28130950",
+                            "body": "This is a different problem, that actually isn&#39;t a problem in Python 3. It only occurs in IPython when you call it in embed mode using say <code>python -c &quot;import IPython;IPython.embed()&quot;</code>. Run IPython directly using say <code>ipython</code> and the problem will disappear."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1866281,
+                        "reputation": 6957,
+                        "user_id": 1689770,
+                        "user_type": "registered",
+                        "accept_rate": 67,
+                        "display_name": "Jonathan"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 27,
+                    "last_activity_date": 1708288556,
+                    "last_edit_date": 1708288556,
+                    "creation_date": 1422138315,
+                    "answer_id": 28130950,
+                    "question_id": 13905741,
+                    "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/28130950#28130950",
+                    "body": "<p>In my opinion it is a flaw in Python 3. I hope they change it.</p>\n<p>New Way:</p>\n<pre><code>class Foo:\n    x = 5\n    y = (lambda x=x: [x for i in range(1)])()\n</code></pre>\n<p>Because the syntax is so ugly I just initialize all my class variables in the constructor typically</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089182,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1616502242,
+                            "post_id": 51691065,
+                            "comment_id": 118016815,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/51691065#comment118016815_51691065",
+                            "body": "You may have to re-read my answer, all points you raise I did cover. :-) The implementation for list comprehensions changed between Python 2 and 3, look for <i>In Python 2, list comprehensions were implemented using a shortcut, but in Python 3 they got their own function scope (as they should have had all along) and thus your example breaks</i>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089182,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1616502379,
+                            "post_id": 51691065,
+                            "comment_id": 118016882,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/51691065#comment118016882_51691065",
+                            "body": "My answer also covers your work-around: by creating a <code>lambda</code> or <code>def</code> you create a <i>new</i> scope, as covered in the &#39;workaround&#39; section: <i>If you were to create an explicit scope for the x variable, like in a function, you can use class-scope variables for a list comprehension</i>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089182,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1616502604,
+                            "post_id": 51691065,
+                            "comment_id": 118016981,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/51691065#comment118016981_51691065",
+                            "body": "The Z5 example follows from the &#39;exception&#39; section: <i>There&#39;s one part of a comprehension or generator expression that executes in the surrounding scope, regardless of Python version. That would be the expression for the outermost iterable</i>. Here that&#39;s <code>range(len(XS))</code>; the <i>result</i> of that expression is passed into the generator expression scope as the iterable. This is also why you can&#39;t refer to <code>XS</code> anywhere else in the generator expression; it is not that the <i>name</i> is passed in, only the <i>object</i> that a name references is passed in, it is a local variable inside the comprehension scope."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 22584,
+                                "reputation": 42221,
+                                "user_id": 55857,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "FMc"
+                            },
+                            "reply_to_user": {
+                                "account_id": 35417,
+                                "reputation": 1089182,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1616508496,
+                            "post_id": 51691065,
+                            "comment_id": 118019940,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/51691065#comment118019940_51691065",
+                            "body": "@MartijnPieters I&#39;m pretty sure the situation looked different on Aug 5 2018."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089182,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1616511757,
+                            "post_id": 51691065,
+                            "comment_id": 118021723,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/51691065#comment118021723_51691065",
+                            "body": "The only substantial change after August 2018 was an explicit section on the iterator expression being executed in the surrounding scope, but I also covered that in the <i>under the hood</i> section."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089182,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1616512445,
+                            "post_id": 51691065,
+                            "comment_id": 118022096,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/51691065#comment118022096_51691065",
+                            "body": "I&#39;m pointing out that your answer isn&#39;t covering new ground, that the parts you thought were different or new were not."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 22584,
+                                "reputation": 42221,
+                                "user_id": 55857,
+                                "user_type": "registered",
+                                "accept_rate": 86,
+                                "display_name": "FMc"
+                            },
+                            "reply_to_user": {
+                                "account_id": 35417,
+                                "reputation": 1089182,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1616514970,
+                            "post_id": 51691065,
+                            "comment_id": 118023500,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/51691065#comment118023500_51691065",
+                            "body": "@MartijnPieters Having looked at the edit history, and jogged my memory, the material you added after Aug 2018 is part of what I puzzled over while I experimented with this topic back then. That puzzle led me to write this code and post the answer. So the situation did look different in Aug 2018."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 22584,
+                        "reputation": 42221,
+                        "user_id": 55857,
+                        "user_type": "registered",
+                        "accept_rate": 86,
+                        "display_name": "FMc"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": false,
+                    "score": 8,
+                    "last_activity_date": 1533437609,
+                    "creation_date": 1533437609,
+                    "answer_id": 51691065,
+                    "question_id": 13905741,
+                    "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/51691065#51691065",
+                    "body": "<p>The accepted answer provides excellent information, but there appear to be a few other wrinkles here -- differences between list comprehension and generator expressions. A demo that I played around with:</p>\n\n<pre><code>class Foo:\n\n    # A class-level variable.\n    X = 10\n\n    # I can use that variable to define another class-level variable.\n    Y = sum((X, X))\n\n    # Works in Python 2, but not 3.\n    # In Python 3, list comprehensions were given their own scope.\n    try:\n        Z1 = sum([X for _ in range(3)])\n    except NameError:\n        Z1 = None\n\n    # Fails in both.\n    # Apparently, generator expressions (that's what the entire argument\n    # to sum() is) did have their own scope even in Python 2.\n    try:\n        Z2 = sum(X for _ in range(3))\n    except NameError:\n        Z2 = None\n\n    # Workaround: put the computation in lambda or def.\n    compute_z3 = lambda val: sum(val for _ in range(3))\n\n    # Then use that function.\n    Z3 = compute_z3(X)\n\n    # Also worth noting: here I can refer to XS in the for-part of the\n    # generator expression (Z4 works), but I cannot refer to XS in the\n    # inner-part of the generator expression (Z5 fails).\n    XS = [15, 15, 15, 15]\n    Z4 = sum(val for val in XS)\n    try:\n        Z5 = sum(XS[i] for i in range(len(XS)))\n    except NameError:\n        Z5 = None\n\nprint(Foo.Z1, Foo.Z2, Foo.Z3, Foo.Z4, Foo.Z5)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089182,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1616512471,
+                            "post_id": 53977397,
+                            "comment_id": 118022112,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/53977397#comment118022112_53977397",
+                            "body": "This is not a bug. This is <b>by design</b>, that&#39;s how class scopes work, and why the name resolution reference documentation explicitly points out that it will fail."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 14001050,
+                        "reputation": 101,
+                        "user_id": 10359355,
+                        "user_type": "registered",
+                        "display_name": "bzip2"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -2,
+                    "last_activity_date": 1546171212,
+                    "creation_date": 1546171212,
+                    "answer_id": 53977397,
+                    "question_id": 13905741,
+                    "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/53977397#53977397",
+                    "body": "<p>This is a bug in Python. Comprehensions are advertised as being equivalent to for loops, but this is not true in classes. At least up to Python 3.6.6, in a comprehension used in a class, only one variable from outside the comprehension is accessible inside the comprehension, and it must be used as the outermost iterator. In a function, this scope limitation does not apply.</p>\n\n<p>To illustrate why this is a bug, let's return to the original example. This fails:</p>\n\n<pre><code>class Foo:\n    x = 5\n    y = [x for i in range(1)]\n</code></pre>\n\n<p>But this works:</p>\n\n<pre><code>def Foo():\n    x = 5\n    y = [x for i in range(1)]\n</code></pre>\n\n<p>The limitation is stated at the end of <a href=\"https://docs.python.org/3/reference/executionmodel.html#resolution-of-names\" rel=\"nofollow noreferrer\">this section</a> in the reference guide.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4650123,
+                        "reputation": 35309,
+                        "user_id": 3767239,
+                        "user_type": "registered",
+                        "accept_rate": 64,
+                        "display_name": "a_guest"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1552647819,
+                    "creation_date": 1552647819,
+                    "answer_id": 55181176,
+                    "question_id": 13905741,
+                    "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/55181176#55181176",
+                    "body": "<p>Since the outermost iterator is evaluated in the surrounding scope we can use <a href=\"https://docs.python.org/3/library/functions.html#zip\" rel=\"nofollow noreferrer\"><code>zip</code></a> together with <a href=\"https://docs.python.org/3/library/itertools.html#itertools.repeat\" rel=\"nofollow noreferrer\"><code>itertools.repeat</code></a> to carry the dependencies over to the comprehension's scope:</p>\n\n<pre><code>import itertools as it\n\nclass Foo:\n    x = 5\n    y = [j for i, j in zip(range(3), it.repeat(x))]\n</code></pre>\n\n<p>One can also use nested <code>for</code> loops in the comprehension and include the dependencies in the outermost iterable:</p>\n\n<pre><code>class Foo:\n    x = 5\n    y = [j for j in (x,) for i in range(3)]\n</code></pre>\n\n<p>For the specific example of the OP:</p>\n\n<pre><code>from collections import namedtuple\nimport itertools as it\n\nclass StateDatabase:\n    State = namedtuple('State', ['name', 'capital'])\n    db = [State(*args) for State, args in zip(it.repeat(State), [\n        ['Alabama', 'Montgomery'],\n        ['Alaska', 'Juneau'],\n        # ...\n    ])]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4719941,
+                                "reputation": 30749,
+                                "user_id": 4518341,
+                                "user_type": "registered",
+                                "display_name": "wjandrea"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1708289753,
+                            "post_id": 69546737,
+                            "comment_id": 137540082,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/69546737#comment137540082_69546737",
+                            "body": "It&#39;s not clear what you mean by &quot;consider the same code in the class&quot;. What would that look like? How would it be &quot;accessing the data in the class instances&quot; if it&#39;s not using <code>self</code>?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 23015780,
+                        "reputation": 1,
+                        "user_id": 17137576,
+                        "user_type": "registered",
+                        "display_name": "Elvis Fox"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -3,
+                    "last_activity_date": 1634071060,
+                    "creation_date": 1634071060,
+                    "answer_id": 69546737,
+                    "question_id": 13905741,
+                    "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/69546737#69546737",
+                    "body": "<p>I spent quite some time to understand why this is a feature, not a bug.</p>\n<p>Consider the simple code:</p>\n<pre><code>a = 5\ndef myfunc():\n    print(a)\n</code></pre>\n<p>Since there is no &quot;a&quot; defined in myfunc(), the scope would expand and the code will execute.</p>\n<p>Now consider the same code in the class. It <strong>cannot</strong> work because this would completely mess around accessing the data in the class instances. You would never know, are you accessing a variable in the base class or the instance.</p>\n<p>The list comprehension is just a sub-case of the same effect.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1053202,
+                                "reputation": 61306,
+                                "user_id": 1056563,
+                                "user_type": "registered",
+                                "accept_rate": 90,
+                                "display_name": "WestCoastProjects"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1690224538,
+                            "post_id": 74062754,
+                            "comment_id": 135320652,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/74062754#comment135320652_74062754",
+                            "body": "Yes this works. It&#39;s also clumsy.. but there isnt anything not so : It&#39;s as good [/bad] as the other altenatives."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4719941,
+                                "reputation": 30749,
+                                "user_id": 4518341,
+                                "user_type": "registered",
+                                "display_name": "wjandrea"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1708288864,
+                            "post_id": 74062754,
+                            "comment_id": 137539998,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/74062754#comment137539998_74062754",
+                            "body": "This has the unfortunate side-effect of adding another class variable <code>i</code>, so I wouldn&#39;t use this personally. You could put <code>del i</code> after the loop though."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 20700839,
+                        "reputation": 573,
+                        "user_id": 15199988,
+                        "user_type": "registered",
+                        "display_name": "\u0418\u0432\u0430\u043d \u0411\u0430\u043b\u0432\u0430\u043d"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1708288798,
+                    "last_edit_date": 1708288798,
+                    "creation_date": 1665703002,
+                    "answer_id": 74062754,
+                    "question_id": 13905741,
+                    "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/74062754#74062754",
+                    "body": "<p>One can use a <code>for</code> loop:</p>\n<pre><code>class Foo:\n    x = 5\n    y = []\n    for i in range(1):\n        y.append(x)\n</code></pre>\n<p>Please correct me i'm not wrong...</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4719941,
+                                "reputation": 30749,
+                                "user_id": 4518341,
+                                "user_type": "registered",
+                                "display_name": "wjandrea"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1708289501,
+                            "post_id": 75996091,
+                            "comment_id": 137540058,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/75996091#comment137540058_75996091",
+                            "body": "OP also sets <code>Foo.x</code>, so you could do <code>x = 5; __x = x</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4719941,
+                                "reputation": 30749,
+                                "user_id": 4518341,
+                                "user_type": "registered",
+                                "display_name": "wjandrea"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1708289643,
+                            "post_id": 75996091,
+                            "comment_id": 137540072,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/75996091#comment137540072_75996091",
+                            "body": "A slightly more sensible approach, I think, is to move the variable entirely into the global namespace, like <code>_Foo_x = 5; class Foo: x = _Foo_x; y = [_Foo_x for i in range(1)]</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1169907,
+                        "reputation": 1971,
+                        "user_id": 1147321,
+                        "user_type": "registered",
+                        "accept_rate": 67,
+                        "display_name": "Ephreal"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1708289088,
+                    "last_edit_date": 1708289088,
+                    "creation_date": 1681306409,
+                    "answer_id": 75996091,
+                    "question_id": 13905741,
+                    "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/75996091#75996091",
+                    "body": "<p>Just a fun example.</p>\n<p>If you want to keep it as a list comprehension, this also works with nested list comprehensions.\nBring the value out in the global namespace but keep its class name.</p>\n<pre><code>class Foo:\n  global __x\n  __x = 5\n  y = [_Foo__x for i in range(1)]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 127944,
+                                "reputation": 12963,
+                                "user_id": 325452,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "ingyhere"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1691284938,
+                            "post_id": 76622313,
+                            "comment_id": 135470932,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/76622313#comment135470932_76622313",
+                            "body": "So ugly it renders comprehensions unappealing, and in embedded function scopes it still doesn&#39;t work."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 17476274,
+                                "reputation": 27050,
+                                "user_id": 12671057,
+                                "user_type": "registered",
+                                "display_name": "Kelly Bundy"
+                            },
+                            "reply_to_user": {
+                                "account_id": 127944,
+                                "reputation": 12963,
+                                "user_id": 325452,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "ingyhere"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1691287177,
+                            "post_id": 76622313,
+                            "comment_id": 135471023,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/76622313#comment135471023_76622313",
+                            "body": "@ingyhere What embedded function scope? Please show an example."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 127944,
+                                "reputation": 12963,
+                                "user_id": 325452,
+                                "user_type": "registered",
+                                "accept_rate": 71,
+                                "display_name": "ingyhere"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1691290459,
+                            "post_id": 76622313,
+                            "comment_id": 135471167,
+                            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/76622313#comment135471167_76622313",
+                            "body": "Please read the top comment. You are not going to solve this issue -- it&#39;s a language shortcoming. Look at the hand waving here ... Creating a collection to pass in a simple scalar. Try a few more complex data types or using pre-compiled regex patterns in an <code>re.sub()</code> operation with complex <code>dict()</code> values. Notwithstanding that the point of comprehensions are elegance, compactness and convenience, adding superfluous data collections and extra clauses don&#39;t do this language construct justice. Thanks, but I am done with the rabbit hole."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 17476274,
+                        "reputation": 27050,
+                        "user_id": 12671057,
+                        "user_type": "registered",
+                        "display_name": "Kelly Bundy"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1688578189,
+                    "last_edit_date": 1688578189,
+                    "creation_date": 1688574545,
+                    "answer_id": 76622313,
+                    "question_id": 13905741,
+                    "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition/76622313#76622313",
+                    "body": "<p>Simply adding <code>for x in [x]</code> as the first <code>for</code> clause to make <code>x</code> available in the comprehension's scope:</p>\n<pre><code>class Foo:\n    x = 5\n    y = [x for x in [x] for i in range(1)]\n</code></pre>\n<p>And with <code>for State in [State]</code> in your other case:</p>\n<pre><code>from collections import namedtuple\nclass StateDatabase:\n    State = namedtuple('State', ['name', 'capital'])\n    db = [State(*args) for State in [State] for args in [\n        ['Alabama', 'Montgomery'],\n        ['Alaska', 'Juneau'],\n        # ...\n    ]]\n</code></pre>\n<p>Or with more than one variable:</p>\n<pre><code>class Line:\n    a = 19\n    b = 4\n    y = [a*x + b\n         for a, b in [(a, b)]\n         for x in range(10)]\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 115576,
+                "reputation": 51654,
+                "user_id": 303425,
+                "user_type": "registered",
+                "accept_rate": 50,
+                "display_name": "Mark Lodato"
+            },
+            "comment_count": 3,
+            "is_answered": true,
+            "accepted_answer_id": 13913933,
+            "answer_count": 9,
+            "score": 249,
+            "last_activity_date": 1708291412,
+            "creation_date": 1355694142,
+            "last_edit_date": 1694502047,
+            "question_id": 13905741,
+            "link": "https://stackoverflow.com/questions/13905741/accessing-class-variables-from-a-list-comprehension-in-the-class-definition",
+            "title": "Accessing class variables from a list comprehension in the class definition",
+            "body": "<p>How do you access other class variables from a list comprehension within the class definition?  The following works in Python 2 but fails in Python 3:</p>\n<pre class=\"lang-py prettyprint-override\"><code>class Foo:\n    x = 5\n    y = [x for i in range(1)]\n</code></pre>\n<p>Python 3.11 gives the error:</p>\n<pre class=\"lang-none prettyprint-override\"><code>NameError: name 'x' is not defined\n</code></pre>\n<p>Trying <code>Foo.x</code> doesn't work either.  Any ideas on how to do this in Python 3?</p>\n<p>A slightly more complicated motivating example:</p>\n<pre class=\"lang-py prettyprint-override\"><code>from collections import namedtuple\n\nclass StateDatabase:\n    State = namedtuple('State', ['name', 'capital'])\n    db = [State(*args) for args in [\n        ['Alabama', 'Montgomery'],\n        ['Alaska', 'Juneau'],\n        # ...\n    ]]\n</code></pre>\n<p>In this example, <code>apply()</code> would have been a decent workaround, but it is sadly removed from Python 3.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7804
+}

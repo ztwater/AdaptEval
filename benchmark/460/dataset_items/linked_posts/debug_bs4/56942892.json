@@ -1,0 +1,134 @@
+{
+    "items": [
+        {
+            "tags": [
+                "xml",
+                "beautifulsoup",
+                "character-encoding"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 2817220,
+                        "reputation": 2125,
+                        "user_id": 2421916,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Martin J.H."
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1562650585,
+                    "post_id": 56942892,
+                    "comment_id": 100431241,
+                    "link": "https://stackoverflow.com/questions/56942892/cannot-parse-iso-8859-15-encoded-xml-with-bs4#comment100431241_56942892",
+                    "body": "Possible duplicate of <a href=\"https://stackoverflow.com/questions/48203697/beautifulsoup-does-not-parse-xml-with-other-encoding-than-utf-8\">BeautifulSoup does not parse xml with other encoding than utf-8</a>"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2817220,
+                                "reputation": 2125,
+                                "user_id": 2421916,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Martin J.H."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1562650872,
+                            "post_id": 56945916,
+                            "comment_id": 100431326,
+                            "link": "https://stackoverflow.com/questions/56942892/cannot-parse-iso-8859-15-encoded-xml-with-bs4/56945916#comment100431326_56945916",
+                            "body": "I want to parse it as xml, though (I have namespaces in my real file). I think it might work when specifying <code>open(filename, &#39;rb&#39;)</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 13900216,
+                                "reputation": 191069,
+                                "user_id": 10035985,
+                                "user_type": "registered",
+                                "display_name": "Andrej Kesely"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2817220,
+                                "reputation": 2125,
+                                "user_id": 2421916,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Martin J.H."
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1562650978,
+                            "post_id": 56945916,
+                            "comment_id": 100431356,
+                            "link": "https://stackoverflow.com/questions/56942892/cannot-parse-iso-8859-15-encoded-xml-with-bs4/56945916#comment100431356_56945916",
+                            "body": "@MartinJ.H. Namespace shouldn&#39;t be a problem, but you can try run <code>diagnose()</code> through some snippets of your code and see how different parsers will parse it."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 13900216,
+                        "reputation": 191069,
+                        "user_id": 10035985,
+                        "user_type": "registered",
+                        "display_name": "Andrej Kesely"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1562650460,
+                    "creation_date": 1562650460,
+                    "answer_id": 56945916,
+                    "question_id": 56942892,
+                    "link": "https://stackoverflow.com/questions/56942892/cannot-parse-iso-8859-15-encoded-xml-with-bs4/56945916#56945916",
+                    "body": "<p>In this case I would recommend to run BeautifulSoup's <code>diagnose()</code> function:</p>\n\n<pre><code>from bs4 import BeautifulSoup\n\nfrom bs4.diagnose import diagnose\n\nwith open('iso-8859-15_example.xml', encoding=\"iso-8859-15\") as f:\n    diagnose(f.read())\n</code></pre>\n\n<p>On my machine this prints:</p>\n\n<pre><code>Diagnostic running on Beautiful Soup 4.7.1\nPython version 3.6.8 (default, Jan 14 2019, 11:02:34) \n[GCC 8.0.1 20180414 (experimental) [trunk revision 259383]]\nFound lxml version 4.3.3.0\nFound html5lib version 1.0.1\n\nTrying to parse your markup with html.parser\nHere's what html.parser did with the markup:\n&lt;?xml version=\"1.0\" encoding=\"ISO-8859-15\"?&gt;\n&lt;sometag&gt;\n&lt;/sometag&gt;\n--------------------------------------------------------------------------------\nTrying to parse your markup with html5lib\nHere's what html5lib did with the markup:\n&lt;!--?xml version=\"1.0\" encoding=\"ISO-8859-15\"?--&gt;\n&lt;html&gt;\n &lt;head&gt;\n &lt;/head&gt;\n &lt;body&gt;\n  &lt;sometag&gt;\n  &lt;/sometag&gt;\n &lt;/body&gt;\n&lt;/html&gt;\n--------------------------------------------------------------------------------\nTrying to parse your markup with lxml\nHere's what lxml did with the markup:\n&lt;?xml version=\"1.0\" encoding=\"ISO-8859-15\"?&gt;\n&lt;html&gt;\n &lt;body&gt;\n  &lt;sometag&gt;\n  &lt;/sometag&gt;\n &lt;/body&gt;\n&lt;/html&gt;\n--------------------------------------------------------------------------------\nTrying to parse your markup with lxml-xml\nHere's what lxml-xml did with the markup:\n&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;\n\n--------------------------------------------------------------------------------\n</code></pre>\n\n<p>In this case, I would choose the <code>html.parser</code>, as It will do the right thing.</p>\n\n<p>So when you do:</p>\n\n<pre><code>soup = BeautifulSoup(f.read(), 'html.parser')\nprint(soup)\n</code></pre>\n\n<p>It prints:</p>\n\n<pre><code>&lt;?xml version=\"1.0\" encoding=\"ISO-8859-15\"?&gt;\n&lt;sometag&gt;\n&lt;/sometag&gt;\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2817220,
+                        "reputation": 2125,
+                        "user_id": 2421916,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Martin J.H."
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 2,
+                    "last_activity_date": 1562656481,
+                    "creation_date": 1562656481,
+                    "answer_id": 56947172,
+                    "question_id": 56942892,
+                    "link": "https://stackoverflow.com/questions/56942892/cannot-parse-iso-8859-15-encoded-xml-with-bs4/56947172#56947172",
+                    "body": "<p>Combining Andrej's answer and the answers given in <a href=\"https://stackoverflow.com/questions/48203697/beautifulsoup-does-not-parse-xml-with-other-encoding-than-utf-8\">the duplicate question</a>, I can see that specifying raw mode in the <code>open</code> call solves my problem:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>from bs4 import BeautifulSoup\nfrom bs4.diagnose import diagnose\nwith open('iso-8859-15_example.xml', 'rb') as f:\n    diagnose(f)\n</code></pre>\n\n<p>This leads to the output</p>\n\n<pre><code>Diagnostic running on Beautiful Soup 4.7.1\nPython version 3.6.7 (v3.6.7:6ec5cf24b7, Oct 20 2018, 13:35:33) [MSC v.1900 64 bit (AMD64)]\nI noticed that html5lib is not installed. Installing it may help.\nFound lxml version 4.3.4.0\nTrying to parse your markup with html.parser\nHere's what html.parser did with the markup:\n&lt;?xml version=\"1.0\" encoding=\"ISO-8859-15\"?&gt;\n&lt;sometag&gt;\n&lt;/sometag&gt;\n--------------------------------------------------------------------------------\nTrying to parse your markup with lxml\nHere's what lxml did with the markup:\n&lt;?xml version=\"1.0\" encoding=\"ISO-8859-15\"?&gt;\n&lt;html&gt;\n &lt;body&gt;\n  &lt;sometag&gt;\n  &lt;/sometag&gt;\n &lt;/body&gt;\n&lt;/html&gt;\n--------------------------------------------------------------------------------\nTrying to parse your markup with lxml-xml\nHere's what lxml-xml did with the markup:\n&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;\n&lt;someTag&gt;\n&lt;/someTag&gt;\n--------------------------------------------------------------------------------\n</code></pre>\n\n<p>and shows that lxml in xml mode works well.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 2817220,
+                "reputation": 2125,
+                "user_id": 2421916,
+                "user_type": "registered",
+                "accept_rate": 100,
+                "display_name": "Martin J.H."
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 56947172,
+            "answer_count": 2,
+            "score": 0,
+            "last_activity_date": 1562656481,
+            "creation_date": 1562622060,
+            "question_id": 56942892,
+            "link": "https://stackoverflow.com/questions/56942892/cannot-parse-iso-8859-15-encoded-xml-with-bs4",
+            "title": "Cannot parse ISO-8859-15 encoded XML with bs4",
+            "body": "<p>I have the following XML document, saved with Notepad++ in ISO-8859-15 encoding:</p>\n\n<pre class=\"lang-xml prettyprint-override\"><code>&lt;?xml version=\"1.0\" encoding=\"ISO-8859-15\"?&gt;\n&lt;someTag&gt;\n&lt;/someTag&gt;\n</code></pre>\n\n<p>I try to parse this file using bs4, but somehow (even when specifying the encoding everywhere I can think of), I get an empty result:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>filepath = 'iso-8859-15_example.xml'\nwith open(filepath, encoding=\"iso-8859-15\") as f:\n    soup = BeautifulSoup(f, 'xml', from_encoding=\"iso-8859-15\")\nprint(soup)\n# --&gt; \"&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;\", otherwise empty\n</code></pre>\n\n<p>Removing the encoding hints in the Python code does not help. But strangely, what works is deleting the first line of the XML file, which is the <code>&lt;?xml ... ?&gt;</code> statement (called \"prolog, I think).</p>\n\n<p>What am I doing wrong here? I thought the prolog would help bs4 to \"do the right thing\" and choose the correct encoding. Is there an alternative to deleting the prolog/messing with the XML-file encoding?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9220
+}

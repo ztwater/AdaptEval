@@ -1,0 +1,916 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "matlab",
+                "random",
+                "geometry",
+                "uniform-distribution"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 1919325,
+                        "reputation": 4589,
+                        "user_id": 1731200,
+                        "user_type": "registered",
+                        "accept_rate": 83,
+                        "display_name": "Matthias"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1448971378,
+                    "post_id": 5408276,
+                    "comment_id": 55794891,
+                    "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume#comment55794891_5408276",
+                    "body": "depending on your purposes, it can also be usefull to look at quasi-random numbers instead of (software) random numbers"
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1827,
+                                "reputation": 100060,
+                                "user_id": 2509,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "dmckee --- ex-moderator kitten"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1300897785,
+                            "post_id": 5408344,
+                            "comment_id": 6118899,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408344#comment6118899_5408344",
+                            "body": "Good call. Discarding is fairly efficient for spheres, and is recommended in many texts as being faster than the transform needed to sample exactly."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 130228,
+                                "reputation": 7084,
+                                "user_id": 329344,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim McJilton"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1300897868,
+                            "post_id": 5408344,
+                            "comment_id": 6118921,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408344#comment6118921_5408344",
+                            "body": "I thought of that idea, but that would lose ~50% of the total points created. So to create 16,000 particles it would create ~32,000. Since Area of cube is r^3 and sphere is 4/3*pi*(r/2)^3 = so the ratio = ~4/8 = .5"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 334826,
+                                "reputation": 225933,
+                                "user_id": 661519,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "juanchopanza"
+                            },
+                            "reply_to_user": {
+                                "account_id": 130228,
+                                "reputation": 7084,
+                                "user_id": 329344,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim McJilton"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1300898406,
+                            "post_id": 5408344,
+                            "comment_id": 6119090,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408344#comment6119090_5408344",
+                            "body": "This wouldn&#39;t result a normal distribution, which is what @Tim was asking for. Normal distribution isn&#39;t the same as uniform distribution."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 130228,
+                                "reputation": 7084,
+                                "user_id": 329344,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim McJilton"
+                            },
+                            "reply_to_user": {
+                                "account_id": 334826,
+                                "reputation": 225933,
+                                "user_id": 661519,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "juanchopanza"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1300898541,
+                            "post_id": 5408344,
+                            "comment_id": 6119138,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408344#comment6119138_5408344",
+                            "body": "Oh @Juanchopanza I messed up. I meant uniform. I am going to go fix that now."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 334826,
+                                "reputation": 225933,
+                                "user_id": 661519,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "juanchopanza"
+                            },
+                            "reply_to_user": {
+                                "account_id": 130228,
+                                "reputation": 7084,
+                                "user_id": 329344,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim McJilton"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1300898647,
+                            "post_id": 5408344,
+                            "comment_id": 6119178,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408344#comment6119178_5408344",
+                            "body": "@Tim McJilton: I just figured out what you meant. The cube solution is good! If you are concerned about efficiency, you can try profiling cube-discard vs. transform."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 130228,
+                                "reputation": 7084,
+                                "user_id": 329344,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim McJilton"
+                            },
+                            "reply_to_user": {
+                                "account_id": 334826,
+                                "reputation": 225933,
+                                "user_id": 661519,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "juanchopanza"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1300899188,
+                            "post_id": 5408344,
+                            "comment_id": 6119342,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408344#comment6119342_5408344",
+                            "body": "@Juanchopanza that would require knowing the true transform one ;)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 327694,
+                                "reputation": 6832,
+                                "user_id": 650222,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "coldfix"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1433406190,
+                            "post_id": 5408344,
+                            "comment_id": 49341730,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408344#comment49341730_5408344",
+                            "body": "Note that this is not efficient for high dimensions since the volume of the unit ball goes to zero (=probability for sampling a point within the ball)."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 51354,
+                        "reputation": 44146,
+                        "user_id": 153430,
+                        "user_type": "registered",
+                        "display_name": "Jim Lewis"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": false,
+                    "score": 15,
+                    "last_activity_date": 1300897006,
+                    "creation_date": 1300897006,
+                    "answer_id": 5408344,
+                    "question_id": 5408276,
+                    "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408344#5408344",
+                    "body": "<p>Generate a set of points uniformly distributed within a cube, then discard the ones whose distance from the center exceeds the radius of the desired sphere.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 130228,
+                                "reputation": 7084,
+                                "user_id": 329344,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim McJilton"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1300898058,
+                            "post_id": 5408400,
+                            "comment_id": 6118988,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408400#comment6118988_5408400",
+                            "body": "This is the same thing that Jim Lewis suggested right?  Create a uniform cube and toss out anything not in the sphere?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 282321,
+                                "reputation": 7520,
+                                "user_id": 579145,
+                                "user_type": "registered",
+                                "display_name": "eat"
+                            },
+                            "reply_to_user": {
+                                "account_id": 130228,
+                                "reputation": 7084,
+                                "user_id": 329344,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim McJilton"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1300898372,
+                            "post_id": 5408400,
+                            "comment_id": 6119073,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408400#comment6119073_5408400",
+                            "body": "@Tim McJilton: Yes, I was typing it while Jim&#39;s answer come in and since it&#39;s code I&#39;ll decided to publish it anyway. Anyway nothing suggested in your question that generating more points actually needed would be someway problematic. Care to elaborate more? Thanks"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 130228,
+                                "reputation": 7084,
+                                "user_id": 329344,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim McJilton"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1300898844,
+                            "post_id": 5408400,
+                            "comment_id": 6119247,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408400#comment6119247_5408400",
+                            "body": "I am running a simulation of 16,000 + stars with both velocity and and position locations which I want to be uniform.  I was hoping to have a way where I can set the amount of points to keep since I need exactly 16,000 or whatnot.  Your way would work and I guess I could keep adding points 1 by 1 till we have 16,000 enclosed."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 282321,
+                                "reputation": 7520,
+                                "user_id": 579145,
+                                "user_type": "registered",
+                                "display_name": "eat"
+                            },
+                            "reply_to_user": {
+                                "account_id": 130228,
+                                "reputation": 7084,
+                                "user_id": 329344,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim McJilton"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1300899721,
+                            "post_id": 5408400,
+                            "comment_id": 6119498,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408400#comment6119498_5408400",
+                            "body": "@Tim McJilton: FWIW, in my (very) modest machine generating 1e5 3d uniform random points and discarding outsiders (yielding to some 5.3e4 points), takes some 35 ms. If this kind of performance is not applicable to you, please give us more details. Thanks"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 130228,
+                                "reputation": 7084,
+                                "user_id": 329344,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim McJilton"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1300899976,
+                            "post_id": 5408400,
+                            "comment_id": 6119570,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408400#comment6119570_5408400",
+                            "body": "Maybe I was just nitpicking.  I didn&#39;t get a chance to of trying both out."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 282321,
+                                "reputation": 7520,
+                                "user_id": 579145,
+                                "user_type": "registered",
+                                "display_name": "eat"
+                            },
+                            "reply_to_user": {
+                                "account_id": 130228,
+                                "reputation": 7084,
+                                "user_id": 329344,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim McJilton"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1300901231,
+                            "post_id": 5408400,
+                            "comment_id": 6119941,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408400#comment6119941_5408400",
+                            "body": "@Tim McJilton: now seeing <code>dmckee</code>&#39;s answer I think it&#39;s the <code>correct</code> answer for this situation (exact number of points in sphere). However in general it does not scale quite so easily to higher dimensions (, if that ever matters). Thanks"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 282321,
+                        "reputation": 7520,
+                        "user_id": 579145,
+                        "user_type": "registered",
+                        "display_name": "eat"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1300899047,
+                    "last_edit_date": 1300899047,
+                    "creation_date": 1300897223,
+                    "answer_id": 5408400,
+                    "question_id": 5408276,
+                    "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408400#5408400",
+                    "body": "<p>Would this be uniform enough for your purposes?</p>\n\n<pre><code>In []: p= 2* rand(3, 1e4)- 1\nIn []: p= p[:, sum(p* p, 0)** .5&lt;= 1]\nIn []: p.shape\nOut[]: (3, 5216)\n</code></pre>\n\n<p>A slice of it</p>\n\n<pre><code>In []: plot(p[0], p[2], '.')\n</code></pre>\n\n<p>looks like:\n<img src=\"https://i.stack.imgur.com/ORrh7.png\" alt=\"enter image description here\"></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 130228,
+                                "reputation": 7084,
+                                "user_id": 329344,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim McJilton"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1300898765,
+                            "post_id": 5408628,
+                            "comment_id": 6119221,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408628#comment6119221_5408628",
+                            "body": "That is what my code is doing. The problem happens when you convert it to polar co-ordinates it has an even amount of particles at radius R, as there at radius r &lt; R which causes the center to be more dense than the edges"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1827,
+                                "reputation": 100060,
+                                "user_id": 2509,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "dmckee --- ex-moderator kitten"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1300898887,
+                            "post_id": 5408628,
+                            "comment_id": 6119261,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408628#comment6119261_5408628",
+                            "body": "To make this work, you <i>must</i> draw the radial position non-uniformaly. Because the volume element is <code>r^2 dr d\\phi d(cos\\theta)</code>. And this involves extracting a cube root and one inverse cosine, so it tend to be slower than the discarding procedure."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 130228,
+                                "reputation": 7084,
+                                "user_id": 329344,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim McJilton"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1300899148,
+                            "post_id": 5408628,
+                            "comment_id": 6119331,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408628#comment6119331_5408628",
+                            "body": "Interesting. Alright I guess I will suck it up and do the montecarlo style one. I still am curious though of an example of doing it the other way. I see the code other people used I just don&#39;t understand it -_-."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 106330,
+                                "reputation": 94386,
+                                "user_id": 283296,
+                                "user_type": "registered",
+                                "accept_rate": 77,
+                                "display_name": "Amelio Vazquez-Reina"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1300899168,
+                            "post_id": 5408628,
+                            "comment_id": 6119339,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408628#comment6119339_5408628",
+                            "body": "Got it. Then discarding points is probably easier. If you still want to do it without discarding points, you need to generate the <b>radial coordinate</b> following a <a href=\"http://en.wikipedia.org/wiki/Power_law\" rel=\"nofollow noreferrer\">power law distribution</a>. Unfortunately, sampling from non-trivial distributions is not easy, but if you are still interested, see the <a href=\"http://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm\" rel=\"nofollow noreferrer\">Metropolis-Hastings</a> algorithm for a general method (any other <a href=\"http://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo\" rel=\"nofollow noreferrer\">MCMC</a> method would also work)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1827,
+                                "reputation": 100060,
+                                "user_id": 2509,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "dmckee --- ex-moderator kitten"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1300899410,
+                            "post_id": 5408628,
+                            "comment_id": 6119397,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408628#comment6119397_5408628",
+                            "body": "Do not, I repeat <b>not</b> use Metropolis for this! Sampling power law distributions <i>is</i> easy, just not trivial."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 106330,
+                                "reputation": 94386,
+                                "user_id": 283296,
+                                "user_type": "registered",
+                                "accept_rate": 77,
+                                "display_name": "Amelio Vazquez-Reina"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1827,
+                                "reputation": 100060,
+                                "user_id": 2509,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "dmckee --- ex-moderator kitten"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1300899646,
+                            "post_id": 5408628,
+                            "comment_id": 6119470,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408628#comment6119470_5408628",
+                            "body": "Thanks @dmckee. I am interested in this myself. Do you know of any sources where I can learn more about sampling from such distributions?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1827,
+                                "reputation": 100060,
+                                "user_id": 2509,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "dmckee --- ex-moderator kitten"
+                            },
+                            "reply_to_user": {
+                                "account_id": 106330,
+                                "reputation": 94386,
+                                "user_id": 283296,
+                                "user_type": "registered",
+                                "accept_rate": 77,
+                                "display_name": "Amelio Vazquez-Reina"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1300899810,
+                            "post_id": 5408628,
+                            "comment_id": 6119525,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408628#comment6119525_5408628",
+                            "body": "@AmV: It is sometimes called the Fundamental Law of Sampling. I discuss it in other contexts in the two links in my answer here. You normalize your PDF, integrate then invert it, and use the resulting function to transform values drawn uniformly over [0,1). In this case it comes down to taking a cube root."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 106330,
+                        "reputation": 94386,
+                        "user_id": 283296,
+                        "user_type": "registered",
+                        "accept_rate": 77,
+                        "display_name": "Amelio Vazquez-Reina"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1300900023,
+                    "last_edit_date": 1300900023,
+                    "creation_date": 1300898233,
+                    "answer_id": 5408628,
+                    "question_id": 5408276,
+                    "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408628#5408628",
+                    "body": "<p>You can just generate random points in <a href=\"http://en.wikipedia.org/wiki/Spherical_coordinate_system\" rel=\"nofollow\">spherical coordinates</a> (assuming that you are working in 3D): S(r, \u03b8, \u03c6 ), where r \u2208 [0, R), \u03b8 \u2208 [0, \u03c0 ], \u03c6 \u2208 [0, 2\u03c0 ), where R is the radius of your sphere. This would also allow you directly control how many points are generated (i.e. you don't need to discard any points). </p>\n\n<p>To compensate for the loss of density with the radius, you would generate the radial coordinate following a power law distribution (see <strong>dmckee's answer</strong> for an explanation on how to do this).</p>\n\n<p>If your code needs (x,y,z) (i.e. cartesian) coordinates, you would then just convert the randomly generated points in spherical to cartesian coordinates as explained <a href=\"http://en.wikipedia.org/wiki/Spherical_coordinate_system#Coordinate_system_conversions\" rel=\"nofollow\">here</a>.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 130228,
+                                "reputation": 7084,
+                                "user_id": 329344,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim McJilton"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1300899827,
+                            "post_id": 5408843,
+                            "comment_id": 6119529,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408843#comment6119529_5408843",
+                            "body": "I feel like an idiot now. All I had to do was take the cube root of the radius?  Perfect thanks for your patience and continuous part in the discussion :)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1827,
+                                "reputation": 100060,
+                                "user_id": 2509,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "dmckee --- ex-moderator kitten"
+                            },
+                            "reply_to_user": {
+                                "account_id": 130228,
+                                "reputation": 7084,
+                                "user_id": 329344,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim McJilton"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1300899997,
+                            "post_id": 5408843,
+                            "comment_id": 6119582,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408843#comment6119582_5408843",
+                            "body": "@Tim: As I said in the comments to Jim&#39;s answer, most books prefer the discard method for spheres. Even with hardware support cube roots take a few cycles, and the trig needed to get back to Cartesian coordinates cost some time too. Also note that I&#39;ve hidden a second application of this method by drawing <code>costheta</code> uniformly."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 130228,
+                                "reputation": 7084,
+                                "user_id": 329344,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim McJilton"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1300901192,
+                            "post_id": 5408843,
+                            "comment_id": 6119931,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408843#comment6119931_5408843",
+                            "body": "Ah okay I get it.  The cost of running the cubed root for all of them is more than the cost of everything thrown out. I think I will do it both ways and allow me to decide on use of the function. Anyways thank you again for your help!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8104679,
+                                "reputation": 1706,
+                                "user_id": 6106641,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Archmede"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1504570407,
+                            "post_id": 5408843,
+                            "comment_id": 79050635,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408843#comment79050635_5408843",
+                            "body": "what is <code>R</code>, <code>u</code>, and <code>costheta</code>. I&#39;m assuming <code>R</code> is the magnitude but why is <code>u</code> randomly generated?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1827,
+                                "reputation": 100060,
+                                "user_id": 2509,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "dmckee --- ex-moderator kitten"
+                            },
+                            "reply_to_user": {
+                                "account_id": 8104679,
+                                "reputation": 1706,
+                                "user_id": 6106641,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Archmede"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1504573902,
+                            "post_id": 5408843,
+                            "comment_id": 79051267,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408843#comment79051267_5408843",
+                            "body": "@Archmede The variable <code>u</code> is merely a dummy to make the steps clear. The reason for taking the cube root of a uniform sample is buried in the fundamental theorem of sampling which I explain in the linked questions. You&#39;re right about <code>R</code> (for radius because I&#39;m a physicists) and <code>costheta</code> is the cosine of theta (thrown this way because of the sampling theorem again)."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1827,
+                        "reputation": 100060,
+                        "user_id": 2509,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "dmckee --- ex-moderator kitten"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": true,
+                    "score": 49,
+                    "last_activity_date": 1300900153,
+                    "last_edit_date": 1495541883,
+                    "creation_date": 1300899302,
+                    "answer_id": 5408843,
+                    "question_id": 5408276,
+                    "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/5408843#5408843",
+                    "body": "<p>While I prefer the discarding method for spheres, for completeness <a href=\"https://stackoverflow.com/questions/918736/random-number-generator-that-produces-a-power-law-distribution/918782#918782\">I offer the exact solution</a>.</p>\n\n<p>In spherical coordinates, taking advantage of the <a href=\"https://stackoverflow.com/questions/2106503/pseudorandom-number-generator-exponential-distribution/2106568#2106568\">sampling rule</a>:</p>\n\n<pre><code>phi = random(0,2pi)\ncostheta = random(-1,1)\nu = random(0,1)\n\ntheta = arccos( costheta )\nr = R * cuberoot( u )\n</code></pre>\n\n<p>now you have a <code>(r, theta, phi)</code> group which can be transformed to <code>(x, y, z)</code> in the usual way</p>\n\n<pre><code>x = r * sin( theta) * cos( phi )\ny = r * sin( theta) * sin( phi )\nz = r * cos( theta )\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4683351,
+                                "reputation": 1613,
+                                "user_id": 3791466,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "Hennadii Madan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1511522637,
+                            "post_id": 23785326,
+                            "comment_id": 81898806,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/23785326#comment81898806_23785326",
+                            "body": "If you have a spare minute, could you look at this question please?     <a href=\"https://stackoverflow.com/q/47472123/3791466\">stackoverflow.com/q/47472123/3791466</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6097354,
+                                "reputation": 123,
+                                "user_id": 6147001,
+                                "user_type": "registered",
+                                "display_name": "Joan Sol&#224;"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1607377367,
+                            "post_id": 23785326,
+                            "comment_id": 115249074,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/23785326#comment115249074_23785326",
+                            "body": "This will return points on the surface of the sphere, not inside the volume."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 233423,
+                                "reputation": 8208,
+                                "user_id": 498892,
+                                "user_type": "registered",
+                                "accept_rate": 57,
+                                "display_name": "Alleo"
+                            },
+                            "reply_to_user": {
+                                "account_id": 6097354,
+                                "reputation": 123,
+                                "user_id": 6147001,
+                                "user_type": "registered",
+                                "display_name": "Joan Sol&#224;"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1607421080,
+                            "post_id": 23785326,
+                            "comment_id": 115260539,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/23785326#comment115260539_23785326",
+                            "body": "@JoanSol&#224; yes, it is written in bold"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6097354,
+                                "reputation": 123,
+                                "user_id": 6147001,
+                                "user_type": "registered",
+                                "display_name": "Joan Sol&#224;"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1607514477,
+                            "post_id": 23785326,
+                            "comment_id": 115294846,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/23785326#comment115294846_23785326",
+                            "body": "@Alleo true, I missed it! But it looks like a side note. It&#39;d be good to have the code already for the ball volume, not for the surface and then the final note."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 233423,
+                        "reputation": 8208,
+                        "user_id": 498892,
+                        "user_type": "registered",
+                        "accept_rate": 57,
+                        "display_name": "Alleo"
+                    },
+                    "comment_count": 4,
+                    "is_accepted": false,
+                    "score": 19,
+                    "last_activity_date": 1400762812,
+                    "last_edit_date": 1400762812,
+                    "creation_date": 1400680462,
+                    "answer_id": 23785326,
+                    "question_id": 5408276,
+                    "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/23785326#23785326",
+                    "body": "<p>There is a brilliant way to generate uniformly points on sphere in n-dimensional space, and you have pointed this in your question (I mean MATLAB code). </p>\n\n<p>Why does it work? The answer is: let us look at the probability density of n-dimensional normal distribution. It is equal (up to constant)</p>\n\n<p>exp(-x_1*x_1/2) *exp(-x_2*x_2/2)... = exp(-r*r/2),\nso it doesn't depend on the direction, only on the distance! This means, after you normalize vector, the resulting distribution's density will be constant across the sphere.</p>\n\n<p>This method should be definitely preferred due to it's simplicity, generality and efficiency (and beauty).\nThe code, which generates 1000 events <strong>on</strong> the sphere in three dimensions:</p>\n\n<pre><code>size = 1000\nn = 3 # or any positive integer\nx = numpy.random.normal(size=(size, n)) \nx /= numpy.linalg.norm(x, axis=1)[:, numpy.newaxis]\n</code></pre>\n\n<p>BTW, the good link to look at: <a href=\"http://www-alg.ist.hokudai.ac.jp/~jan/randsphere.pdf\">http://www-alg.ist.hokudai.ac.jp/~jan/randsphere.pdf</a></p>\n\n<p>As for having uniform distribution <strong>within</strong> a sphere, instead of normalizing a vector, you should multiply vercor by some f(r): f(r)*r is distributed with density proportional to r^n on [0,1], which was done in the code you posted</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5246991,
+                                "reputation": 1720,
+                                "user_id": 4192366,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "ZisIsNotZis"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1546846624,
+                            "post_id": 23844892,
+                            "comment_id": 94973202,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/23844892#comment94973202_23844892",
+                            "body": "The <code>uniform</code> should be <code>normal</code>. <code>uniform</code> means uniform distribution while <code>normal</code> means gaussian distribution"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 4517198,
+                        "reputation": 41,
+                        "user_id": 3671664,
+                        "user_type": "unregistered",
+                        "display_name": "ppv"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1400933591,
+                    "creation_date": 1400933591,
+                    "answer_id": 23844892,
+                    "question_id": 5408276,
+                    "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/23844892#23844892",
+                    "body": "<p>Normed gaussian 3d vector is uniformly distributed on sphere, see <a href=\"http://mathworld.wolfram.com/SpherePointPicking.html\" rel=\"nofollow\">http://mathworld.wolfram.com/SpherePointPicking.html</a></p>\n\n<p>For example:</p>\n\n<pre><code>N = 1000\nv = numpy.random.uniform(size=(3,N)) \nvn = v / numpy.sqrt(numpy.sum(v**2, 0))\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 130228,
+                                "reputation": 7084,
+                                "user_id": 329344,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim McJilton"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1498771431,
+                            "post_id": 44782884,
+                            "comment_id": 76650914,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/44782884#comment76650914_44782884",
+                            "body": "Sadly it is not <i>my</i> matlab code. I think I got it from <a href=\"https://www.mathworks.com/matlabcentral/fileexchange/9443-random-points-in-an-n-dimensional-hypersphere?focused=5063757&amp;tab=function\" rel=\"nofollow noreferrer\">mathworks.com/matlabcentral/fileexchange/&hellip;</a> (Written 2005)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4683351,
+                                "reputation": 1613,
+                                "user_id": 3791466,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "Hennadii Madan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1511522618,
+                            "post_id": 44782884,
+                            "comment_id": 81898794,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/44782884#comment81898794_44782884",
+                            "body": "@Daniel If you have a spare minute, could you look at this question please?     <a href=\"https://stackoverflow.com/q/47472123/3791466\">stackoverflow.com/q/47472123/3791466</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3998239,
+                        "reputation": 351,
+                        "user_id": 3295073,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Daniel"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1511515596,
+                    "last_edit_date": 1511515596,
+                    "creation_date": 1498573665,
+                    "answer_id": 44782884,
+                    "question_id": 5408276,
+                    "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/44782884#44782884",
+                    "body": "<p>I agree with Alleo. I translated your Matlab code to Python and it can generate thousands of points very fast (a fraction of second in my computer for 2D and 3D). I've even ran it for up to 5D hyperspheres.\nI found your code so useful that I'm applying it in a study. Tim McJilton, <strong>who should I add as reference?</strong></p>\n\n<pre><code>import numpy as np\nfrom scipy.special import gammainc\nfrom matplotlib import pyplot as plt\ndef sample(center,radius,n_per_sphere):\n    r = radius\n    ndim = center.size\n    x = np.random.normal(size=(n_per_sphere, ndim))\n    ssq = np.sum(x**2,axis=1)\n    fr = r*gammainc(ndim/2,ssq/2)**(1/ndim)/np.sqrt(ssq)\n    frtiled = np.tile(fr.reshape(n_per_sphere,1),(1,ndim))\n    p = center + np.multiply(x,frtiled)\n    return p\n\nfig1 = plt.figure(1)\nax1 = fig1.gca()\ncenter = np.array([0,0])\nradius = 1\np = sample(center,radius,10000)\nax1.scatter(p[:,0],p[:,1],s=0.5)\nax1.add_artist(plt.Circle(center,radius,fill=False,color='0.5'))\nax1.set_xlim(-1.5,1.5)\nax1.set_ylim(-1.5,1.5)\nax1.set_aspect('equal')\n</code></pre>\n\n<p><a href=\"https://i.stack.imgur.com/Mw2HP.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/Mw2HP.png\" alt=\"uniform sample\"></a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 130228,
+                                "reputation": 7084,
+                                "user_id": 329344,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Tim McJilton"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1519239083,
+                            "post_id": 46807848,
+                            "comment_id": 84833011,
+                            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/46807848#comment84833011_46807848",
+                            "body": "You are answering this years later. There are two correct answers already mentioned here. Your example is for a uniform circle, not a uniform sphere. You have no Z Coordinate... ?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7660295,
+                        "reputation": 64,
+                        "user_id": 5805801,
+                        "user_type": "registered",
+                        "accept_rate": 60,
+                        "display_name": "Olives99"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1508321862,
+                    "creation_date": 1508321862,
+                    "answer_id": 46807848,
+                    "question_id": 5408276,
+                    "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/46807848#46807848",
+                    "body": "<p><div class=\"snippet\" data-lang=\"js\" data-hide=\"false\" data-console=\"true\" data-babel=\"false\">\r\n<div class=\"snippet-code\">\r\n<pre class=\"snippet-code-html lang-html prettyprint-override\"><code>import numpy as np\r\nimport matplotlib.pyplot as plt\r\n\r\n\r\n\r\n\r\n\r\nr= 30.*np.sqrt(np.random.rand(1000))\r\n#r= 30.*np.random.rand(1000)\r\nphi = 2. * np.pi * np.random.rand(1000)\r\n\r\n\r\n\r\nx = r * np.cos(phi)\r\ny = r * np.sin(phi)\r\n\r\n\r\nplt.figure()\r\nplt.plot(x,y,'.')\r\nplt.show()</code></pre>\r\n</div>\r\n</div>\r\n</p>\n\n<p>this is what you want </p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 186427,
+                        "reputation": 4521,
+                        "user_id": 423805,
+                        "user_type": "registered",
+                        "accept_rate": 92,
+                        "display_name": "BBSysDyn"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1572872343,
+                    "creation_date": 1572872343,
+                    "answer_id": 58693950,
+                    "question_id": 5408276,
+                    "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/58693950#58693950",
+                    "body": "<pre><code>import random\nR = 2\n\ndef sample_circle(center):\n    a = random.random() * 2 * np.pi\n    r = R * np.sqrt(random.random())\n    x = center[0]+ (r * np.cos(a))\n    y = center[1] + (r * np.sin(a))\n    return x,y\n\nps = np.array([sample_circle((0,0)) for i in range(100)])\n\nplt.plot(ps[:,0],ps[:,1],'.')\nplt.xlim(-3,3)\nplt.ylim(-3,3)\nplt.show()\n</code></pre>\n\n<p><a href=\"https://i.stack.imgur.com/wxEOH.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/wxEOH.png\" alt=\"enter image description here\"></a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 20144730,
+                        "reputation": 106,
+                        "user_id": 14773537,
+                        "user_type": "registered",
+                        "display_name": "E. Turok"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1647640451,
+                    "last_edit_date": 1647640451,
+                    "creation_date": 1647354972,
+                    "answer_id": 71484058,
+                    "question_id": 5408276,
+                    "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume/71484058#71484058",
+                    "body": "<h2>Function to Sample Uniformly from a Hypersphere</h2>\n<p>The function below uniformly samples points from a hypersphere:</p>\n<pre><code>import numpy as np\ndef sample(center, radius, n_samples, seed=None):\n\n    # initial values\n    d = center.shape[0]\n\n    # sample n_samples points in d dimensions from a standard normal distribution\n    rng = np.random.default_rng(seed)\n    samples = rng.normal(size=(n_samples, d))\n\n    # make the samples lie on the surface of the unit hypersphere\n    normalize_radii = np.linalg.norm(samples, axis=1)[:, np.newaxis]\n    samples /= normalize_radii\n\n    # make the samples lie inside the hypersphere with the correct density\n    uniform_points = rng.uniform(size=n_samples)[:, np.newaxis]\n    new_radii = np.power(uniform_points, 1/d)\n    samples *= new_radii\n\n    # scale the points to have the correct radius and center\n    samples = samples * radius + center\n    return samples\n</code></pre>\n<p>This code works as follows.</p>\n<p>First, it first generates <code>n</code> datapoints in <code>d</code> dimensions from a standard normal distribution. We specifically sample from a normal distribution because normal distributions are isotropic, meaning it is uniform in all orientations. This works great for creating a hypersphere where must be uniform/the same in all orientations.</p>\n<p>Second, it computes the radius of each datapoint with <code>np.linalg.norm()</code>. (Note: <code>np.linalg.norm()</code> calls the Euclidean norm which equals the radius because r^2 = x^2 + y^2 in 2D and more generally r^2 = \\sum_{i=1}^d x_i^2 which is the equation for Euclidean distance.) It divides each point by its radius to normalize the radius to length 1. This is equivalent to making all the datapoints lie on the surface of the unit hypersphere with radius <code>r=1</code>.</p>\n<p>Third, it creates a new radius for each of the <code>n_samples</code> datapoints by generating <code>n_samples</code> points from a uniform distribution and then taking the <code>d</code>th root of each of these points. Why do we do this? Consider the 2D case where we want to sample points uniformly on a circle. If we divide this circle into concentric rings, then the ring right by the circle's center will have few points on it while the ring by the circumference will have many more points on it. More generally, the larger the radius, the more points we will need to generate. More precisely, achieving uniform sampling across radii of varying lengths requires a probability distribution proportional to the D-th power of the radius r. We can express this as <code>F(r) \\alpha r^d</code> where <code>F(r)</code> is the number of points radius <code>r</code> away from the origin that give us a uniform distribution. We begin with a uniform distribution of points in <code>uniform_points</code> and can rearrange the equation above as  <code>F(r)^{1\\d} \\alpha r</code>, meaning we must take the <code>d</code>th root of the uniformly distributed radii.</p>\n<p>Fourth, this code scales all the points on the surface of the unit hypersphere by this new radius, distributing these points uniformly across the volume of the hypersphere. It then shifts these points over to have the desired <code>center</code>.</p>\n<h2>Function Performance</h2>\n<p>My code is much faster than @Daniel's code which relies upon <code>scipy</code>'s <code>gammainc</code> function which is quite expensive to evaluate. I benchmark the performance here:</p>\n<pre><code>def time_it():\n\n    # initial values\n    d = 20\n    center, radius = np.full(d, 2), 3\n    n_samples_list = np.logspace(3, 6, num=10).astype(int)\n    runtime_my_code, runtime_daniel_code = [], []\n\n    for n_samples in n_samples_list:\n\n        # time my code\n        start = time.perf_counter()\n        sample_hypersphere_uniformly(center, radius, n_samples)\n        end = time.perf_counter()\n        duration = end - start\n        runtime_my_code.append(duration)\n\n        # time Daniel's code\n        start = time.perf_counter()\n        daniels_code(center, radius, n_samples)\n        end = time.perf_counter()\n        duration = end - start\n        runtime_daniel_code.append(duration)\n\n    # plot the results\n    fig, ax = plt.subplots()\n    ax.scatter(n_samples_list, runtime_my_code)\n    ax.scatter(n_samples_list, runtime_daniel_code)\n    ax.plot(n_samples_list, runtime_my_code, label='my code')\n    ax.plot(n_samples_list, runtime_daniel_code, label='daniel\\'s code')\n    ax.set(xlabel='n_samples',\n        ylabel='runtime (s)', title='runtime VS n_samples')\n    plt.legend()\n    fig.savefig('runtime_vs_n_samples.png')\n</code></pre>\n<p><a href=\"https://i.stack.imgur.com/YS5nP.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/YS5nP.png\" alt=\"runtime_vs_n_samples\" /></a>\nThis diagram makes it clear that my code is much more efficient than Daniel's.</p>\n<h2>Other resources</h2>\n<p>Check out this helpful guide to sampling from a hypersphere <a href=\"https://baezortega.github.io/2018/10/14/hypersphere-sampling/\" rel=\"nofollow noreferrer\">here</a>. It clearly explains why this math works.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 130228,
+                "reputation": 7084,
+                "user_id": 329344,
+                "user_type": "registered",
+                "accept_rate": 100,
+                "display_name": "Tim McJilton"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 5408843,
+            "answer_count": 10,
+            "score": 41,
+            "last_activity_date": 1647640451,
+            "creation_date": 1300896711,
+            "last_edit_date": 1545554292,
+            "question_id": 5408276,
+            "link": "https://stackoverflow.com/questions/5408276/sampling-uniformly-distributed-random-points-inside-a-spherical-volume",
+            "title": "Sampling uniformly distributed random points inside a spherical volume",
+            "body": "<p>I am looking to be able to generate a random uniform sample of particle locations that fall within a spherical volume.</p>\n\n<p>The image below (courtesy of <a href=\"http://nojhan.free.fr/metah/\" rel=\"noreferrer\">http://nojhan.free.fr/metah/</a>) shows what I am looking for. This is a slice through the sphere, showing a uniform distribution of points:</p>\n\n<p><img src=\"https://i.stack.imgur.com/udd8T.png\" alt=\"Uniformly distributed circle\"></p>\n\n<p>This is what I am currently getting:</p>\n\n<p><img src=\"https://i.stack.imgur.com/eu7Jc.png\" alt=\"Uniformly Distributed but Cluster Of Points\"></p>\n\n<p>You can see that there is a cluster of points at the center due to the conversion between spherical and Cartesian coordinates. </p>\n\n<p>The code I am using is:</p>\n\n<pre><code>def new_positions_spherical_coordinates(self):\n   radius = numpy.random.uniform(0.0,1.0, (self.number_of_particles,1)) \n   theta = numpy.random.uniform(0.,1.,(self.number_of_particles,1))*pi\n   phi = numpy.arccos(1-2*numpy.random.uniform(0.0,1.,(self.number_of_particles,1)))\n   x = radius * numpy.sin( theta ) * numpy.cos( phi )\n   y = radius * numpy.sin( theta ) * numpy.sin( phi )\n   z = radius * numpy.cos( theta )\n   return (x,y,z)\n</code></pre>\n\n<p>Below is some MATLAB code that supposedly creates a uniform spherical sample, which is similar to the equation given by <a href=\"http://nojhan.free.fr/metah\" rel=\"noreferrer\">http://nojhan.free.fr/metah</a>. I just can't seem to decipher it or understand what they did.  </p>\n\n<pre><code>function X = randsphere(m,n,r)\n\n% This function returns an m by n array, X, in which \n% each of the m rows has the n Cartesian coordinates \n% of a random point uniformly-distributed over the \n% interior of an n-dimensional hypersphere with \n% radius r and center at the origin.  The function \n% 'randn' is initially used to generate m sets of n \n% random variables with independent multivariate \n% normal distribution, with mean 0 and variance 1.\n% Then the incomplete gamma function, 'gammainc', \n% is used to map these points radially to fit in the \n% hypersphere of finite radius r with a uniform % spatial distribution.\n% Roger Stafford - 12/23/05\n\nX = randn(m,n);\ns2 = sum(X.^2,2);\nX = X.*repmat(r*(gammainc(s2/2,n/2).^(1/n))./sqrt(s2),1,n);\n</code></pre>\n\n<p>I would greatly appreciate any suggestions on generating a truly uniform sample from a spherical volume in Python.</p>\n\n<p>There seem to be plenty of examples showing how to sample from a uniform spherical shell, but that seems to be easier an easier problem. The issue has to do with the scaling - there should be fewer particles at a radius of 0.1 than at a radius of 1.0 to generate a uniform sample from the volume of the sphere.</p>\n\n<p><strong><em>Edit:</em></strong> Fixed and removed the fact I asked for normally and I meant uniform.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8878
+}

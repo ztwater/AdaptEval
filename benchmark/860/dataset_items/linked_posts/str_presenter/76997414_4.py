@@ -1,0 +1,16 @@
+title: organelles absent in animal cells and present in a plant cell
+question: |
+  Observe the following table and identify if the cell is of a plant or an animal
+  | Organelle | Present/Absent | 
+  |---------- | -------------- | 
+  | Nucleus | Present |
+  | Vacuole | Present |
+  | Cellwall | Absent |
+  | Cell membrane | Present |
+  | Mitochondria | Present |
+  | Chlorophyll | Absent |
+answer_type: MCQ_single
+choices:
+- Plant
+- Animal
+points: 1

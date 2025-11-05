@@ -1,0 +1,156 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "tensorflow",
+                "keras",
+                "pytorch"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 9960732,
+                        "reputation": 11368,
+                        "user_id": 7370153,
+                        "user_type": "registered",
+                        "display_name": "Lescurel"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1625583679,
+                    "post_id": 68272502,
+                    "comment_id": 120662403,
+                    "link": "https://stackoverflow.com/questions/68272502/tf-depth-to-space-not-same-as-torchs-pixelshuffle-when-output-channels-1#comment120662403_68272502",
+                    "body": "Shouldn&#39;t your first transpose be <code>np.transpose(input, (0, 2, 3, 1))</code>?"
+                },
+                {
+                    "owner": {
+                        "account_id": 184523,
+                        "reputation": 159,
+                        "user_id": 420620,
+                        "user_type": "registered",
+                        "accept_rate": 83,
+                        "display_name": "ggobieski"
+                    },
+                    "reply_to_user": {
+                        "account_id": 9960732,
+                        "reputation": 11368,
+                        "user_id": 7370153,
+                        "user_type": "registered",
+                        "display_name": "Lescurel"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1625585376,
+                    "post_id": 68272502,
+                    "comment_id": 120663241,
+                    "link": "https://stackoverflow.com/questions/68272502/tf-depth-to-space-not-same-as-torchs-pixelshuffle-when-output-channels-1#comment120663241_68272502",
+                    "body": "Sorry yes... I mistyped.  Updated now."
+                },
+                {
+                    "owner": {
+                        "account_id": 9960732,
+                        "reputation": 11368,
+                        "user_id": 7370153,
+                        "user_type": "registered",
+                        "display_name": "Lescurel"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1625585449,
+                    "post_id": 68272502,
+                    "comment_id": 120663282,
+                    "link": "https://stackoverflow.com/questions/68272502/tf-depth-to-space-not-same-as-torchs-pixelshuffle-when-output-channels-1#comment120663282_68272502",
+                    "body": "I can&#39;t reproduce your problem with the typo fixed though."
+                },
+                {
+                    "owner": {
+                        "account_id": 184523,
+                        "reputation": 159,
+                        "user_id": 420620,
+                        "user_type": "registered",
+                        "accept_rate": 83,
+                        "display_name": "ggobieski"
+                    },
+                    "reply_to_user": {
+                        "account_id": 9960732,
+                        "reputation": 11368,
+                        "user_id": 7370153,
+                        "user_type": "registered",
+                        "display_name": "Lescurel"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1625586079,
+                    "post_id": 68272502,
+                    "comment_id": 120663568,
+                    "link": "https://stackoverflow.com/questions/68272502/tf-depth-to-space-not-same-as-torchs-pixelshuffle-when-output-channels-1#comment120663568_68272502",
+                    "body": "I&#39;ve added a testbench that produces the issue I&#39;m seeing."
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 184523,
+                        "reputation": 159,
+                        "user_id": 420620,
+                        "user_type": "registered",
+                        "accept_rate": 83,
+                        "display_name": "ggobieski"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 1,
+                    "last_activity_date": 1625854234,
+                    "creation_date": 1625854234,
+                    "answer_id": 68321142,
+                    "question_id": 68272502,
+                    "link": "https://stackoverflow.com/questions/68272502/tf-depth-to-space-not-same-as-torchs-pixelshuffle-when-output-channels-1/68321142#68321142",
+                    "body": "<p>They are indeed different. If you want them to match you need to shuffle the channels of one of the inputs. Or if the pixelshuffle/depth_to_space layer follows a convolution layer you can shuffle the channels of the weights of the convolution. Specifically, if <code>oc</code> is the number of output channels and <code>s</code> is the <code>block_size</code> then you need to permute the channels of the convolution's weights in TF using <code>[i + oc * j for i in range(oc) for j in range(s ** 2)]</code> (yields something like [0, 2, 4, 1, 3, 5]).</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 6346013,
+                        "reputation": 568,
+                        "user_id": 4926545,
+                        "user_type": "registered",
+                        "display_name": "lnstadrum"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1699012771,
+                    "creation_date": 1699012771,
+                    "answer_id": 77416502,
+                    "question_id": 68272502,
+                    "link": "https://stackoverflow.com/questions/68272502/tf-depth-to-space-not-same-as-torchs-pixelshuffle-when-output-channels-1/77416502#77416502",
+                    "body": "<p><code>PixelShuffle</code>/<code>PixelUnshuffle</code> is not numerically equivalent to <code>depth_to_space</code>/<code>space_to_depth</code>, unless the upsampled image has a single channel indeed. Otherwise, one would need to rearrange the output channels to get the matching outputs, as stated in the accepted answer.</p>\n<p>This is not a bug, but simply a difference between conventions. This is arguably related to the fact that PyTorch is traditionally channels-first (i.e., <code>NCHW</code> is the most common tensor layout), while TensorFlow is channels-last (<code>NHWC</code>).</p>\n<p>I have faced the need of having <code>depth_to_space</code>/<code>space_to_depth</code> in Torch, so I ended up by publishing the implementation as a PyPi package:</p>\n<p><a href=\"https://github.com/lnstadrum/s2d2s\" rel=\"nofollow noreferrer\">https://github.com/lnstadrum/s2d2s</a></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 184523,
+                "reputation": 159,
+                "user_id": 420620,
+                "user_type": "registered",
+                "accept_rate": 83,
+                "display_name": "ggobieski"
+            },
+            "comment_count": 4,
+            "is_answered": true,
+            "accepted_answer_id": 68321142,
+            "answer_count": 2,
+            "score": 0,
+            "last_activity_date": 1699012771,
+            "creation_date": 1625581991,
+            "last_edit_date": 1625586059,
+            "question_id": 68272502,
+            "link": "https://stackoverflow.com/questions/68272502/tf-depth-to-space-not-same-as-torchs-pixelshuffle-when-output-channels-1",
+            "title": "TF depth_to_space not same as Torch&#39;s PixelShuffle when output channels &gt; 1?",
+            "body": "<p>I noticed something interesting when trying to port a torch-trained model to tensorflow (TF). When the output channels of a PixelShuffle operation are <strong>greater than one</strong>, the corresponding depth_to_space function in TF is not equivalent (Note: I convert the input to TF to NHWC and the output back to NCHW). I was wondering whether this expected behavior OR there is a misunderstanding?</p>\n<p>Specifically,</p>\n<pre><code># Torch\ntorch_out = nn.PixelShuffle(2)(input)\n</code></pre>\n<p>and</p>\n<pre><code># TF/Keras\ninput = np.transpose(input, (0, 2, 3, 1)) // Convert to NHWC\nkeras_input = keras.layers.Input(shape=input.shape[1:])\nkeras_d2s = keras.layers.Lambda(lambda x: tf.nn.depth_to_space(x, 2))(input)\n...\nkeras_out = np.transpose(keras_d2s, (0, 3, 1, 2)) // Convert back to NCHW\n</code></pre>\n<p>and</p>\n<pre><code>keras_out != torch_out\n</code></pre>\n<p>Here is a testbench:</p>\n<pre><code>import numpy as np\n\nimport torch\nimport tensorflow as tf\n\nfrom torch import nn\nfrom tensorflow import keras\n\nclass Shuffle(nn.Module):\n    def __init__(self, s, k, ic):\n        super(Shuffle, self).__init__()\n        self.shuffle = nn.PixelShuffle(s)\n\n    def forward(self, inputs):\n        return self.shuffle(inputs)\n\ndef main():\n    sz = 4\n\n    h = 3\n    w = 3\n    k = 3\n    ic = 8\n    s = 2\n\n    input = np.arange(0, ic * h * w, dtype=np.float32).reshape(ic, h, w)\n    input = input[np.newaxis]\n    torch_input = torch.from_numpy(input)\n\n    shuffle_model = Shuffle(s, k, ic)\n    shuffle_out = shuffle_model(torch_input).detach().numpy()\n    print('Shuffle out:', shuffle_out.shape)\n    print(shuffle_out)\n\n    input = np.transpose(input, (0, 2, 3, 1))\n\n    keras_input = keras.layers.Input(shape=input.shape[1:])\n    keras_d2s = keras.layers.Lambda(lambda x: tf.nn.depth_to_space(x, s))(keras_input)\n    keras_model = keras.Model(keras_input, keras_d2s)\n    keras_out = keras_model.predict(input)\n    \n    keras_out = np.transpose(keras_out, (0, 3, 1, 2))\n    \n    print('Keras out:', keras_out.shape)\n    print(keras_out)\n    equal = np.allclose(shuffle_out, keras_out)\n    print('Equal?', equal)\n\nif __name__ == '__main__':\n    main()\n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7064
+}

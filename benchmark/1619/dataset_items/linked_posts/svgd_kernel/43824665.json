@@ -1,0 +1,221 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "numpy",
+                "tensorflow",
+                "median"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 10821779,
+                                "reputation": 255,
+                                "user_id": 7959013,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Yingchao Xiong"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1494171297,
+                            "post_id": 43825694,
+                            "comment_id": 74703325,
+                            "link": "https://stackoverflow.com/questions/43824665/tensorflow-median-value/43825694#comment74703325_43825694",
+                            "body": "Thanks for your help. The X I defined is a [None, 5] matrix since the size of the input data is unknown. How could I figure out this problem?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5336902,
+                                "reputation": 3561,
+                                "user_id": 4255553,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "BlueSun"
+                            },
+                            "reply_to_user": {
+                                "account_id": 10821779,
+                                "reputation": 255,
+                                "user_id": 7959013,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Yingchao Xiong"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1494172043,
+                            "post_id": 43825694,
+                            "comment_id": 74703584,
+                            "link": "https://stackoverflow.com/questions/43824665/tensorflow-median-value/43825694#comment74703584_43825694",
+                            "body": "@YingchaoXiong do you want to calculate the median of the total matrix or along one of the dimensions?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 10821779,
+                                "reputation": 255,
+                                "user_id": 7959013,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Yingchao Xiong"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1494177488,
+                            "post_id": 43825694,
+                            "comment_id": 74705485,
+                            "link": "https://stackoverflow.com/questions/43824665/tensorflow-median-value/43825694#comment74705485_43825694",
+                            "body": "Along of the dimensions. I had figured out this problem. The new problem is the size of matrix or how to define the value of m in your function. The size of placeholder is [None, 5]. In training part, I set the batch size as 10 ([10,5]), while the size will be [1,5] when I do prediction. How could I change the value of m based on the size of feed? Thank you so much!!!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5336902,
+                                "reputation": 3561,
+                                "user_id": 4255553,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "BlueSun"
+                            },
+                            "reply_to_user": {
+                                "account_id": 10821779,
+                                "reputation": 255,
+                                "user_id": 7959013,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Yingchao Xiong"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1494288463,
+                            "post_id": 43825694,
+                            "comment_id": 74753712,
+                            "link": "https://stackoverflow.com/questions/43824665/tensorflow-median-value/43825694#comment74753712_43825694",
+                            "body": "@YingchaoXiong you can try using the dynamic shape: <code>tf.shape(v)</code> I am not sure if that will work in combination with top_k. Another way would be to make two networks that use the same weights (use a variable scope and set reuse=True for the 2nd network). Make the first network with a [10, 5] placeholder and the 2nd with a [1, 5] placeholder."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 8384840,
+                                "reputation": 172,
+                                "user_id": 7440933,
+                                "user_type": "registered",
+                                "display_name": "dexteritas"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1537527788,
+                            "post_id": 43825694,
+                            "comment_id": 91827283,
+                            "link": "https://stackoverflow.com/questions/43824665/tensorflow-median-value/43825694#comment91827283_43825694",
+                            "body": "For <code>v = [1, 2, 3]</code> this gives <code>3</code>. Therefore you should add 1 to <code>m</code>: <code>m = v.get_shape()[0]&#47;&#47;2 + 1</code>. But for a set with even number of values it is still wrong. For <code>v = [1, 2, 3, 4]</code>, the median should be usually the mean of the two middle elements: <code>2.5</code>. This is done correct in the second part of Lucas <a href=\"https://stackoverflow.com/a/47657076/7440933\">answer</a>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5336902,
+                                "reputation": 3561,
+                                "user_id": 4255553,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "BlueSun"
+                            },
+                            "reply_to_user": {
+                                "account_id": 8384840,
+                                "reputation": 172,
+                                "user_id": 7440933,
+                                "user_type": "registered",
+                                "display_name": "dexteritas"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1539365297,
+                            "post_id": 43825694,
+                            "comment_id": 92490145,
+                            "link": "https://stackoverflow.com/questions/43824665/tensorflow-median-value/43825694#comment92490145_43825694",
+                            "body": "@dexteritas thanks for pointing it out, I fixed the code. I only applied median to very large lists, so I never cared about the mean of the two middle elements rule."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 5336902,
+                        "reputation": 3561,
+                        "user_id": 4255553,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "BlueSun"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": true,
+                    "score": 8,
+                    "last_activity_date": 1553777737,
+                    "last_edit_date": 1553777737,
+                    "creation_date": 1494107262,
+                    "answer_id": 43825694,
+                    "question_id": 43824665,
+                    "link": "https://stackoverflow.com/questions/43824665/tensorflow-median-value/43825694#43825694",
+                    "body": "<p><strong>edit:</strong> This answer is outdated, use Lucas Venezian Povoa's solution instead. It is simpler and faster.</p>\n\n<p>You can calculate the median inside tensorflow using:</p>\n\n<pre><code>def get_median(v):\n    v = tf.reshape(v, [-1])\n    mid = v.get_shape()[0]//2 + 1\n    return tf.nn.top_k(v, mid).values[-1]\n</code></pre>\n\n<p>If X is already a vector you can skip the reshaping.</p>\n\n<p>If you care about the median value being the mean of the two middle elements for vectors of even size, you should use this instead:</p>\n\n<pre><code>def get_real_median(v):\n    v = tf.reshape(v, [-1])\n    l = v.get_shape()[0]\n    mid = l//2 + 1\n    val = tf.nn.top_k(v, mid).values\n    if l % 2 == 1:\n        return val[-1]\n    else:\n        return 0.5 * (val[-1] + val[-2])\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3654044,
+                        "reputation": 559,
+                        "user_id": 3045518,
+                        "user_type": "registered",
+                        "display_name": "Lucas Venezian Povoa"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 21,
+                    "last_activity_date": 1577284565,
+                    "last_edit_date": 1577284565,
+                    "creation_date": 1512487316,
+                    "answer_id": 47657076,
+                    "question_id": 43824665,
+                    "link": "https://stackoverflow.com/questions/43824665/tensorflow-median-value/47657076#47657076",
+                    "body": "<p>For calculating median of an array with <code>tensorflow</code> you can use the <a href=\"https://www.tensorflow.org/probability/api_docs/python/tfp/stats/percentile\" rel=\"noreferrer\"><strong><code>percentile</code></strong></a> function, since the 50th percentile is the median.</p>\n\n<pre><code>import tensorflow as tf\nimport tensorflow_probability as tfp\nimport numpy as np \n\nnp.random.seed(0)   \nx = np.random.normal(3.0, .1, 100)\n\nmedian = tfp.stats.percentile(x, 50.0, interpolation='midpoint')\n\ntf.Session().run(median)\n</code></pre>\n\n<p>The code above is equivalent to <a href=\"https://docs.scipy.org/doc/numpy/reference/generated/numpy.percentile.html\" rel=\"noreferrer\"><strong><code>np.percentile</code></strong></a><code>(x, 50, interpolation='midpoint')</code>.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2509888,
+                        "reputation": 353,
+                        "user_id": 2182622,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "noname"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1529526205,
+                    "creation_date": 1529526205,
+                    "answer_id": 50956478,
+                    "question_id": 43824665,
+                    "link": "https://stackoverflow.com/questions/43824665/tensorflow-median-value/50956478#50956478",
+                    "body": "<p>We can modify BlueSun's solution to be much faster on GPUs:</p>\n\n<pre><code>def get_median(v):\n    v = tf.reshape(v, [-1])\n    m = v.get_shape()[0]//2\n    return tf.reduce_min(tf.nn.top_k(v, m, sorted=False).values)\n</code></pre>\n\n<p>This is as fast as (in my experience) using <code>tf.contrib.distributions.percentile(v, 50.0)</code>, and returns one of the actual elements.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 10821779,
+                "reputation": 255,
+                "user_id": 7959013,
+                "user_type": "registered",
+                "accept_rate": 83,
+                "display_name": "Yingchao Xiong"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 43825694,
+            "answer_count": 3,
+            "score": 15,
+            "last_activity_date": 1577284565,
+            "creation_date": 1494099592,
+            "last_edit_date": 1494106600,
+            "question_id": 43824665,
+            "link": "https://stackoverflow.com/questions/43824665/tensorflow-median-value",
+            "title": "Tensorflow median value",
+            "body": "<p>How can I calculate the median value of a list in tensorflow?\nLike </p>\n\n<pre><code>node = tf.median(X)\n</code></pre>\n\n<p>X is the placeholder<br>\nIn numpy, I can directly use np.median to get the median value. How can I use the numpy operation in tensorflow?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6897
+}

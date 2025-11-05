@@ -1,0 +1,5 @@
+g = paged_iter(list(range(50)), 11))
+i0 = next(g)
+i1 = next(g)
+list(i1)
+list(i0)

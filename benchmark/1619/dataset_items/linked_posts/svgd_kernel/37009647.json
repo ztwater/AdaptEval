@@ -1,0 +1,317 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "tensorflow"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 353803,
+                        "reputation": 8437,
+                        "user_id": 691733,
+                        "user_type": "registered",
+                        "accept_rate": 47,
+                        "display_name": "keveman"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1462316326,
+                    "post_id": 37009647,
+                    "comment_id": 61583517,
+                    "link": "https://stackoverflow.com/questions/37009647/compute-pairwise-distance-in-a-batch-without-replicating-tensor-in-tensorflow#comment61583517_37009647",
+                    "body": "It&#39;s not clear that your code is doing &#39;pairwise distance of a batch of feature`. Can you specify the function you want to do more formally? Also, have you considered <a href=\"https://www.tensorflow.org/versions/r0.8/api_docs/python/math_ops.html#squared_difference\" rel=\"nofollow noreferrer\">tf.squared_difference</a>"
+                },
+                {
+                    "owner": {
+                        "account_id": 1311467,
+                        "reputation": 2431,
+                        "user_id": 1259390,
+                        "user_type": "registered",
+                        "accept_rate": 44,
+                        "display_name": "jrabary"
+                    },
+                    "reply_to_user": {
+                        "account_id": 353803,
+                        "reputation": 8437,
+                        "user_id": 691733,
+                        "user_type": "registered",
+                        "accept_rate": 47,
+                        "display_name": "keveman"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1462324841,
+                    "post_id": 37009647,
+                    "comment_id": 61585675,
+                    "link": "https://stackoverflow.com/questions/37009647/compute-pairwise-distance-in-a-batch-without-replicating-tensor-in-tensorflow#comment61585675_37009647",
+                    "body": "I update the question to explain this. If you put a batch of features as input of this function it should compute distance between its rows."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1311467,
+                                "reputation": 2431,
+                                "user_id": 1259390,
+                                "user_type": "registered",
+                                "accept_rate": 44,
+                                "display_name": "jrabary"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1462439317,
+                            "post_id": 37040451,
+                            "comment_id": 61641197,
+                            "link": "https://stackoverflow.com/questions/37009647/compute-pairwise-distance-in-a-batch-without-replicating-tensor-in-tensorflow/37040451#comment61641197_37040451",
+                            "body": "Thank you. I better understand why broadcasting is interesting."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 927525,
+                                "reputation": 3493,
+                                "user_id": 957997,
+                                "user_type": "registered",
+                                "accept_rate": 95,
+                                "display_name": "Yamaneko"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1476446537,
+                            "post_id": 37040451,
+                            "comment_id": 67360962,
+                            "link": "https://stackoverflow.com/questions/37009647/compute-pairwise-distance-in-a-batch-without-replicating-tensor-in-tensorflow/37040451#comment67360962_37040451",
+                            "body": "Do you know if this approach is better than using <code>tf.expand_dims</code> to exploit broadcasting and then use <code>tf.squared_difference</code>?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 183635,
+                                "reputation": 57455,
+                                "user_id": 419116,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Yaroslav Bulatov"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1476472853,
+                            "post_id": 37040451,
+                            "comment_id": 67377245,
+                            "link": "https://stackoverflow.com/questions/37009647/compute-pairwise-distance-in-a-batch-without-replicating-tensor-in-tensorflow/37040451#comment67377245_37040451",
+                            "body": "Not sure. There&#39;s a <code>transpose</code> in my solution which is costly. If you post a full solution as another answer I could compare performance on large matrix"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 229913,
+                                "reputation": 1372,
+                                "user_id": 783153,
+                                "user_type": "registered",
+                                "display_name": "David J. Harris"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1493747057,
+                            "post_id": 37040451,
+                            "comment_id": 74531029,
+                            "link": "https://stackoverflow.com/questions/37009647/compute-pairwise-distance-in-a-batch-without-replicating-tensor-in-tensorflow/37040451#comment74531029_37040451",
+                            "body": "I don&#39;t know how much of a performance improvement this provides, but <code>tf.matmul</code> has arguments for transposing arrays on the fly (<code>transpose_a</code> and <code>transpose_b</code>)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2544670,
+                                "reputation": 191,
+                                "user_id": 2209716,
+                                "user_type": "registered",
+                                "display_name": "RGMyr"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1574356318,
+                            "post_id": 37040451,
+                            "comment_id": 104213508,
+                            "link": "https://stackoverflow.com/questions/37009647/compute-pairwise-distance-in-a-batch-without-replicating-tensor-in-tensorflow/37040451#comment104213508_37040451",
+                            "body": "^ I recently tested this (on GPU, with TF 2.0). <code>tf.matmul(a, b, transpose_b=True)</code> was consistently ~40% faster than <code>tf.matmul(a, tf.transpose(b))</code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2473494,
+                                "reputation": 1207,
+                                "user_id": 2154701,
+                                "user_type": "registered",
+                                "display_name": "fizzybear"
+                            },
+                            "reply_to_user": {
+                                "account_id": 927525,
+                                "reputation": 3493,
+                                "user_id": 957997,
+                                "user_type": "registered",
+                                "accept_rate": 95,
+                                "display_name": "Yamaneko"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1578513543,
+                            "post_id": 37040451,
+                            "comment_id": 105467283,
+                            "link": "https://stackoverflow.com/questions/37009647/compute-pairwise-distance-in-a-batch-without-replicating-tensor-in-tensorflow/37040451#comment105467283_37040451",
+                            "body": "Is there a simple way to extend this to work for pairwise distances between two sets of points? D_ij = |X[i] - Y[j]|. @Yamaneko&#39;s answer can be easily adapted but I don&#39;t know how this one can."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 104251,
+                                "reputation": 53116,
+                                "user_id": 278836,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "Andrew White"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1620129143,
+                            "post_id": 37040451,
+                            "comment_id": 119103981,
+                            "link": "https://stackoverflow.com/questions/37009647/compute-pairwise-distance-in-a-batch-without-replicating-tensor-in-tensorflow/37040451#comment119103981_37040451",
+                            "body": "I think it should be noted that this produces the square of the distance and not the distance itself. A simple sqrt at the end gets you the actual distance. I only mention that because of the title of the original Q."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 183635,
+                        "reputation": 57455,
+                        "user_id": 419116,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "Yaroslav Bulatov"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": true,
+                    "score": 74,
+                    "last_activity_date": 1464119159,
+                    "last_edit_date": 1464119159,
+                    "creation_date": 1462408809,
+                    "answer_id": 37040451,
+                    "question_id": 37009647,
+                    "link": "https://stackoverflow.com/questions/37009647/compute-pairwise-distance-in-a-batch-without-replicating-tensor-in-tensorflow/37040451#37040451",
+                    "body": "<p>You can use some linear algebra to turn it into matrix ops. Note that what you need matrix <code>D</code> where <code>a[i]</code> is the <code>i</code>th row of your original matrix and </p>\n\n<pre><code>D[i,j] = (a[i]-a[j])(a[i]-a[j])'\n</code></pre>\n\n<p>You can rewrite that into </p>\n\n<pre><code>D[i,j] = r[i] - 2 a[i]a[j]' + r[j]\n</code></pre>\n\n<p>Where <code>r[i]</code> is squared norm of <code>i</code>th row of the original matrix.</p>\n\n<p>In a system that supports standard <a href=\"http://docs.scipy.org/doc/numpy-1.10.1/user/basics.broadcasting.html\">broadcasting rules</a> you can treat <code>r</code> as a column vector and write <code>D</code> as</p>\n\n<pre><code>D = r - 2 A A' + r'\n</code></pre>\n\n<p>In TensorFlow you could write this as</p>\n\n <pre class=\"lang-py prettyprint-override\"><code>A = tf.constant([[1, 1], [2, 2], [3, 3]])\nr = tf.reduce_sum(A*A, 1)\n\n# turn r into column vector\nr = tf.reshape(r, [-1, 1])\nD = r - 2*tf.matmul(A, tf.transpose(A)) + tf.transpose(r)\nsess = tf.Session()\nsess.run(D)\n</code></pre>\n\n<p>result</p>\n\n<pre><code>array([[0, 2, 8],\n       [2, 0, 2],\n       [8, 2, 0]], dtype=int32)\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 232631,
+                                "reputation": 28836,
+                                "user_id": 497600,
+                                "user_type": "registered",
+                                "accept_rate": 81,
+                                "display_name": "lhk"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1479300312,
+                            "post_id": 40053188,
+                            "comment_id": 68497425,
+                            "link": "https://stackoverflow.com/questions/37009647/compute-pairwise-distance-in-a-batch-without-replicating-tensor-in-tensorflow/40053188#comment68497425_40053188",
+                            "body": "thanks for the information that the other solution is less memory intensive. good to know that. +1 for the great answer"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 962605,
+                                "reputation": 109,
+                                "user_id": 1781676,
+                                "user_type": "registered",
+                                "display_name": "Evgeny Savinov"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1513619625,
+                            "post_id": 40053188,
+                            "comment_id": 82713179,
+                            "link": "https://stackoverflow.com/questions/37009647/compute-pairwise-distance-in-a-batch-without-replicating-tensor-in-tensorflow/40053188#comment82713179_40053188",
+                            "body": "This solution is also less compute efficient. But it is very useful when there is no possibility to use matrix multiplication (e.g. for absolute distance)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 927525,
+                        "reputation": 3493,
+                        "user_id": 957997,
+                        "user_type": "registered",
+                        "accept_rate": 95,
+                        "display_name": "Yamaneko"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 22,
+                    "last_activity_date": 1508507689,
+                    "last_edit_date": 1508507689,
+                    "creation_date": 1476486218,
+                    "answer_id": 40053188,
+                    "question_id": 37009647,
+                    "link": "https://stackoverflow.com/questions/37009647/compute-pairwise-distance-in-a-batch-without-replicating-tensor-in-tensorflow/40053188#40053188",
+                    "body": "<p>Using <code>squared_difference</code>:</p>\n\n<pre><code>def squared_dist(A): \n    expanded_a = tf.expand_dims(A, 1)\n    expanded_b = tf.expand_dims(A, 0)\n    distances = tf.reduce_sum(tf.squared_difference(expanded_a, expanded_b), 2)\n    return distances\n</code></pre>\n\n<p>One thing I noticed is that this solution using <code>tf.squared_difference</code> gives me out of memory (OOM) for very large vectors, while the approach by @YaroslavBulatov doesn't. So, I think decomposing the operation yields a smaller memory footprint (which I thought <code>squared_difference</code> would handle better under the hood).</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 13183899,
+                        "reputation": 11,
+                        "user_id": 9522531,
+                        "user_type": "registered",
+                        "display_name": "Hyunguk Choi"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1521546818,
+                    "creation_date": 1521546818,
+                    "answer_id": 49383551,
+                    "question_id": 37009647,
+                    "link": "https://stackoverflow.com/questions/37009647/compute-pairwise-distance-in-a-batch-without-replicating-tensor-in-tensorflow/49383551#49383551",
+                    "body": "<p>If you want compute other method , then change the order of the tf modules.</p>\n\n<pre><code>def compute_euclidean_distance(x, y):\n    size_x = x.shape.dims[0]\n    size_y = y.shape.dims[0]\n    for i in range(size_x):\n        tile_one = tf.reshape(tf.tile(x[i], [size_y]), [size_y, -1])\n        eu_one = tf.expand_dims(tf.sqrt(tf.reduce_sum(tf.pow(tf.subtract(tile_one, y), 2), axis=1)), axis=0)\n        if i == 0:\n            d = eu_one\n        else:\n            d = tf.concat([d, eu_one], axis=0)\nreturn d\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5405949,
+                        "reputation": 2562,
+                        "user_id": 4304503,
+                        "user_type": "registered",
+                        "display_name": "Augustin"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 11,
+                    "last_activity_date": 1530794859,
+                    "last_edit_date": 1530794859,
+                    "creation_date": 1530779437,
+                    "answer_id": 51186660,
+                    "question_id": 37009647,
+                    "link": "https://stackoverflow.com/questions/37009647/compute-pairwise-distance-in-a-batch-without-replicating-tensor-in-tensorflow/51186660#51186660",
+                    "body": "<p>Here is a more general solution for two tensors of coordinates <code>A</code> and <code>B</code>:</p>\n\n<pre><code>def squared_dist(A, B):\n  assert A.shape.as_list() == B.shape.as_list()\n\n  row_norms_A = tf.reduce_sum(tf.square(A), axis=1)\n  row_norms_A = tf.reshape(row_norms_A, [-1, 1])  # Column vector.\n\n  row_norms_B = tf.reduce_sum(tf.square(B), axis=1)\n  row_norms_B = tf.reshape(row_norms_B, [1, -1])  # Row vector.\n\n  return row_norms_A - 2 * tf.matmul(A, tf.transpose(B)) + row_norms_B\n</code></pre>\n\n<p>Note that this is the square distance. If you want to change this to the Euclidean distance, perform a <code>tf.sqrt</code> on the result. If you want to do that, don't forget to add a small constant to compensate for the floating point instabilities: <code>dist = tf.sqrt(squared_dist(A, B) + 1e-6)</code>.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 1311467,
+                "reputation": 2431,
+                "user_id": 1259390,
+                "user_type": "registered",
+                "accept_rate": 44,
+                "display_name": "jrabary"
+            },
+            "comment_count": 2,
+            "is_answered": true,
+            "accepted_answer_id": 37040451,
+            "answer_count": 4,
+            "score": 42,
+            "last_activity_date": 1530794859,
+            "creation_date": 1462293395,
+            "last_edit_date": 1462344852,
+            "question_id": 37009647,
+            "link": "https://stackoverflow.com/questions/37009647/compute-pairwise-distance-in-a-batch-without-replicating-tensor-in-tensorflow",
+            "title": "Compute pairwise distance in a batch without replicating tensor in Tensorflow?",
+            "body": "<p>I want to compute the pairwise square distance of a batch of feature in Tensorflow. I have a simple implementation using + and * operations by\ntiling the original tensor :</p>\n\n<pre><code>def pairwise_l2_norm2(x, y, scope=None):\n    with tf.op_scope([x, y], scope, 'pairwise_l2_norm2'):\n        size_x = tf.shape(x)[0]\n        size_y = tf.shape(y)[0]\n        xx = tf.expand_dims(x, -1)\n        xx = tf.tile(xx, tf.pack([1, 1, size_y]))\n\n        yy = tf.expand_dims(y, -1)\n        yy = tf.tile(yy, tf.pack([1, 1, size_x]))\n        yy = tf.transpose(yy, perm=[2, 1, 0])\n\n        diff = tf.sub(xx, yy)\n        square_diff = tf.square(diff)\n\n        square_dist = tf.reduce_sum(square_diff, 1)\n\n        return square_dist\n</code></pre>\n\n<p>This function takes as input two matrices of size (m,d) and (n,d) and compute the squared distance between each row vector. The output is a matrix of size (m,n) with element 'd_ij = dist(x_i, y_j)'.</p>\n\n<p>The problem is that I have a large batch and high dim features 'm, n, d' replicating the tensor consume a lot of memory. \nI'm looking for another way to implement this without increasing the memory usage and just only store the final distance tensor. Kind of double looping the original tensor.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 6898
+}

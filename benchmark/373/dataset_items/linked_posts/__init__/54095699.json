@@ -1,0 +1,110 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "python-3.x",
+                "opencv",
+                "gstreamer"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 4599255,
+                        "reputation": 1508,
+                        "user_id": 3730484,
+                        "user_type": "registered",
+                        "accept_rate": 85,
+                        "display_name": "b00dle"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 3,
+                    "last_activity_date": 1547030508,
+                    "creation_date": 1547030508,
+                    "answer_id": 54108247,
+                    "question_id": 54095699,
+                    "link": "https://stackoverflow.com/questions/54095699/install-gstreamer-support-for-opencv-python-package/54108247#54108247",
+                    "body": "<p>I was able to solve the issue, with a bit of help from the <a href=\"http://answers.opencv.org/question/206699/install-gstreamer-support-for-opencv-python-package/\" rel=\"nofollow noreferrer\">opencv support forum</a>. Looking at the cmake output hints at the problem:</p>\n\n<pre><code>-- Checking for module 'gstreamer-base-0.10'\n--   No package 'gstreamer-base-0.10' found\n-- Checking for module 'gstreamer-video-0.10'\n--   No package 'gstreamer-video-0.10' found\n-- Checking for module 'gstreamer-app-0.10'\n--   No package 'gstreamer-app-0.10' found\n-- Checking for module 'gstreamer-riff-0.10'\n--   No package 'gstreamer-riff-0.10' found\n-- Checking for module 'gstreamer-pbutils-0.10'\n--   No package 'gstreamer-pbutils-0.10' found\n</code></pre>\n\n<p>During ccmake, I had set both WITH_GSTREAMER as well as WITH_GSTREAMER_0_10 to ON. Seems that cmake prefers the gstreamer0.10 flag over the one for gstreamer1.0. Since I only have gstreamer1.0 installed, opencv entirely failed setting up the gstreamer dependencies. </p>\n\n<p>I made sure to whipe all previously deployed binaries:</p>\n\n<pre><code>cd &lt;opencv-src&gt;/build \nsudo make uninstall\n</code></pre>\n\n<p>Then I simply reinstalled, with the adjusted settings (given my knowledge above):</p>\n\n<pre><code>ccmake ..\nmake -j8\nsudo make install\n</code></pre>\n\n<p>when I</p>\n\n<pre><code>import cv2\nprint(cv2.getBuildInformation())\n</code></pre>\n\n<p>my console now outputs</p>\n\n<pre><code>Video I/O:\nDC1394:                      NO\nFFMPEG:                      NO\n  avcodec:                   NO\n  avformat:                  NO\n  avutil:                    NO\n  swscale:                   NO\n  avresample:                NO\nGStreamer:                   \n  base:                      YES (ver 1.8.3)\n  video:                     YES (ver 1.8.3)\n  app:                       YES (ver 1.8.3)\n  riff:                      YES (ver 1.8.3)\n  pbutils:                   YES (ver 1.8.3)\nlibv4l/libv4l2:              NO\nv4l/v4l2:                    linux/videodev2.h\n</code></pre>\n\n<hr>\n\n<p>Bottom line is, do not set WITH_GSTREAMER_0_10 to ON during cmake, if you actually want gstreamer1.0. In that case you must only set WITH_GSTREAMER ON </p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4493723,
+                        "reputation": 435,
+                        "user_id": 3654155,
+                        "user_type": "registered",
+                        "display_name": "Butterfly"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1550846520,
+                    "creation_date": 1550846520,
+                    "answer_id": 54829513,
+                    "question_id": 54095699,
+                    "link": "https://stackoverflow.com/questions/54095699/install-gstreamer-support-for-opencv-python-package/54829513#54829513",
+                    "body": "<p>For those who are struggling with the same problem on Windows... I had to set following CMake Options:</p>\n\n<ol>\n<li>only set \"WITH_GSTREAMER\" option to True, \"WITH_GSTREAMER_0_10\" MUST BE FALSE</li>\n<li>add new entry \"GSTREAMER_DIR\"=(path to gstreamer)\n    for me it was \"C:/gstreamer/1.0/x86_64\"\nI found this solution <a href=\"https://github.com/opencv/opencv/issues/8836\" rel=\"nofollow noreferrer\">here</a></li>\n</ol>\n\n<p>My OpenCV version: 3.4.3</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 15470796,
+                                "reputation": 782,
+                                "user_id": 11160943,
+                                "user_type": "registered",
+                                "display_name": "fisakhan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1580908066,
+                            "post_id": 56039004,
+                            "comment_id": 106251536,
+                            "link": "https://stackoverflow.com/questions/54095699/install-gstreamer-support-for-opencv-python-package/56039004#comment106251536_56039004",
+                            "body": "How to install DC1394 in opencv-python version 4.1.2? Without CAP_DC1394 I cannot set buffersize for my IP camera."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 15856239,
+                        "reputation": 21,
+                        "user_id": 11440554,
+                        "user_type": "registered",
+                        "display_name": "InG"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1557313916,
+                    "last_edit_date": 1557313916,
+                    "creation_date": 1557312593,
+                    "answer_id": 56039004,
+                    "question_id": 54095699,
+                    "link": "https://stackoverflow.com/questions/54095699/install-gstreamer-support-for-opencv-python-package/56039004#56039004",
+                    "body": "<p>Installing the packages <code>libgstreamer1.0-dev</code> and <code>libgstreamer-plugins-base1.0-dev</code> helped me to solve this issue.</p>\n\n<pre><code>sudo apt install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 4599255,
+                "reputation": 1508,
+                "user_id": 3730484,
+                "user_type": "registered",
+                "accept_rate": 85,
+                "display_name": "b00dle"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 54108247,
+            "answer_count": 3,
+            "score": 6,
+            "last_activity_date": 1664974992,
+            "creation_date": 1546964190,
+            "question_id": 54095699,
+            "link": "https://stackoverflow.com/questions/54095699/install-gstreamer-support-for-opencv-python-package",
+            "title": "Install gstreamer support for opencv python package",
+            "body": "<p>I have built my own opencv python package from source. </p>\n\n<pre><code>import cv2\nprint(cv2.__version__)\n</code></pre>\n\n<p>prints: 3.4.5</p>\n\n<p>Now the issue I am facing is regarding the use of gstreamer from the VideoCapture class of opencv. I am trying to get this mimimum working example running on python3</p>\n\n<pre><code>cap = cv2.VideoCapture(\"videotestsrc ! appsink\")\n\nif not cap.isOpened():\n    print(\"Cannot capture test src. Exiting.\")\n    quit()\n\nwhile True:\n    ret, frame = cap.read()\n    if ret == False:\n        break\n    cv2.imshow(\"CVtest\",frame)\n    if cv2.waitKey(1) &amp; 0xFF == ord('q'):\n        break\n</code></pre>\n\n<p>Capture fails, producing my print above (see <code>if</code> statement). I checked:</p>\n\n<pre><code>import cv2\nprint(cv2.getBuildInformation())\n</code></pre>\n\n<p>prints:</p>\n\n<pre><code>Video I/O:\nDC1394:                      NO\nFFMPEG:                      NO\n  avcodec:                   NO\n  avformat:                  NO\n  avutil:                    NO\n  swscale:                   NO\n  avresample:                NO\nGStreamer:                   NO\nlibv4l/libv4l2:              NO\nv4l/v4l2:                    linux/videodev2.h\n</code></pre>\n\n<p>Seeing that, it made absolute sense that my gstreamer pipeline didn't work. I  ensured WITH_GSTREAMER was set to ON during ccmake of OpenCV (which it already was). Still the issue maintained. I even tried setting WITH_GSTREAMER_0_10 to ON as well. Still no luck having gstreamer enabled from the cv2 python module. </p>\n\n<p>Before anyone suggests using pip3 to install cv2. I tried that, too. The issue with getting the package from pip is, it doesn't let you configure gstreamer support at all. </p>\n\n<p>Can anyone provide help here?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9429
+}

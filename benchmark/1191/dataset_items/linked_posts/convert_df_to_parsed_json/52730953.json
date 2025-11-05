@@ -1,0 +1,93 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "json",
+                "pandas",
+                "datetime"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 12672477,
+                        "reputation": 162576,
+                        "user_id": 9209546,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "jpp"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 20,
+                    "last_activity_date": 1539130922,
+                    "creation_date": 1539130922,
+                    "answer_id": 52730975,
+                    "question_id": 52730953,
+                    "link": "https://stackoverflow.com/questions/52730953/pandas-to-json-output-date-format-in-specific-form/52730975#52730975",
+                    "body": "<p>The easiest fix is to first convert your <code>datetime</code> series to an <code>object</code> dtype series of strings:</p>\n\n<pre><code>df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')\n</code></pre>\n\n<p>I advise you only do this as a final step prior to json conversion, as you lose benefits of vectorised computations and likely will see less efficient memory usage.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 15555564,
+                        "reputation": 1,
+                        "user_id": 11222127,
+                        "user_type": "registered",
+                        "display_name": "hcslomeu"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1580595076,
+                    "last_edit_date": 1580595076,
+                    "creation_date": 1558637418,
+                    "answer_id": 56281312,
+                    "question_id": 52730953,
+                    "link": "https://stackoverflow.com/questions/52730953/pandas-to-json-output-date-format-in-specific-form/56281312#56281312",
+                    "body": "<p>You can also use this alternative:</p>\n\n<pre><code>df = pd.read_json('test.json')\ndf['date_hour'] = [datetime.strptime(date[0:10],'%Y-%m-%d').date() for date in \ndf['date_hour']]\n</code></pre>\n\n<p>You can read more in my answer on a similar topic - <a href=\"https://stackoverflow.com/a/56280982/11222127\">https://stackoverflow.com/a/56280982/11222127</a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 14349986,
+                        "reputation": 21,
+                        "user_id": 17264949,
+                        "user_type": "registered",
+                        "display_name": "TRAPSTEP DUCK"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1635368090,
+                    "creation_date": 1635368090,
+                    "answer_id": 69745376,
+                    "question_id": 52730953,
+                    "link": "https://stackoverflow.com/questions/52730953/pandas-to-json-output-date-format-in-specific-form/69745376#69745376",
+                    "body": "<p>the first one is in case you get an error in this part &quot;.dt.strftime('%m-%d-%Y')&quot;</p>\n<pre><code>df['date'] = pd.to_datetime(df['date'], errors='coerce')\ndf['date'] = df['date'].dt.strftime('%m-%d-%Y')\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 7748987,
+                "reputation": 2340,
+                "user_id": 5865585,
+                "user_type": "registered",
+                "accept_rate": 71,
+                "display_name": "Chan Austin"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 52730975,
+            "answer_count": 3,
+            "score": 11,
+            "last_activity_date": 1635368090,
+            "creation_date": 1539130717,
+            "last_edit_date": 1539130968,
+            "question_id": 52730953,
+            "link": "https://stackoverflow.com/questions/52730953/pandas-to-json-output-date-format-in-specific-form",
+            "title": "pandas.to_json output date format in specific form",
+            "body": "<p>The original form of date in dataframe is:</p>\n\n<pre><code>Date                                                                   \n2018-09-17          12.83  12.92  12.38  12.65         12.65  1937329.0\n2018-09-10          12.92  13.12  12.81  12.83         12.83  1150470.0\n</code></pre>\n\n<p>After converted to json, <code>df.to_json(orient='index',date_format='iso')</code>\nit looks like this:</p>\n\n<pre><code>\"2018-09-17T00:00:00Z\":{\"\n</code></pre>\n\n<p>any way to fix this?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7781
+}

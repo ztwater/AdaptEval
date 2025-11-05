@@ -1,0 +1,296 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "opencv",
+                "image-processing"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 6428404,
+                        "reputation": 22582,
+                        "user_id": 5087436,
+                        "user_type": "registered",
+                        "display_name": "alkasm"
+                    },
+                    "edited": false,
+                    "score": 2,
+                    "creation_date": 1504645450,
+                    "post_id": 45997891,
+                    "comment_id": 79087428,
+                    "link": "https://stackoverflow.com/questions/45997891/cv2-motion-euclidean-for-the-warp-mode-in-ecc-image-alignment-method#comment79087428_45997891",
+                    "body": "The error you got when trying my approach was because <code>warp</code> should be a 32-bit float but <code>numpy</code> automatically uses 64-bit floats when you create a float matrix, and when you multiplied by <code>np.array([[1, 1, 2], [1, 1, 2], [1&#47;2, 1&#47;2, 1]])**(1-nol)</code>, you were multiplying by a 64-bit float thus turning your warp matrix to 64-bit float, which isn&#39;t supported by ECC. My bad on that one."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 11329911,
+                                "reputation": 373,
+                                "user_id": 8307740,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "SacreD"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1504273110,
+                            "post_id": 45998244,
+                            "comment_id": 78963538,
+                            "link": "https://stackoverflow.com/questions/45997891/cv2-motion-euclidean-for-the-warp-mode-in-ecc-image-alignment-method/45998244#comment78963538_45998244",
+                            "body": "what is the initWarp I should put here? Why we need to have the rszImg and rszTmp? I get error &quot;warpMatrix must be single-channel floating-point matrix in function cv::findTransformECC&quot; on this line  warp = cv2.findTransformECC(rszImg, rszTmp, warp, warp_mode, criteria)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6428404,
+                                "reputation": 22582,
+                                "user_id": 5087436,
+                                "user_type": "registered",
+                                "display_name": "alkasm"
+                            },
+                            "reply_to_user": {
+                                "account_id": 11329911,
+                                "reputation": 373,
+                                "user_id": 8307740,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "SacreD"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1504273718,
+                            "post_id": 45998244,
+                            "comment_id": 78963929,
+                            "link": "https://stackoverflow.com/questions/45997891/cv2-motion-euclidean-for-the-warp-mode-in-ecc-image-alignment-method/45998244#comment78963929_45998244",
+                            "body": "Well that depends on if you have an initial warp guess or not...if you don&#39;t, then simply use the identity like you&#39;re doing in your original code above. Don&#39;t use my example if you don&#39;t understand what it&#39;s doing, and instead just use the steps I outlined originally to create your own."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6428404,
+                                "reputation": 22582,
+                                "user_id": 5087436,
+                                "user_type": "registered",
+                                "display_name": "alkasm"
+                            },
+                            "reply_to_user": {
+                                "account_id": 11329911,
+                                "reputation": 373,
+                                "user_id": 8307740,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "SacreD"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1504273764,
+                            "post_id": 45998244,
+                            "comment_id": 78963968,
+                            "link": "https://stackoverflow.com/questions/45997891/cv2-motion-euclidean-for-the-warp-mode-in-ecc-image-alignment-method/45998244#comment78963968_45998244",
+                            "body": "And you need the resized images to do what I was suggesting in the first place...which is to scale down your images and run the ECC on <i>those</i> first so it will be faster and get you a <i>rough</i> estimate, which you can refine at higher resolutions."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11329911,
+                                "reputation": 373,
+                                "user_id": 8307740,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "SacreD"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1504539813,
+                            "post_id": 45998244,
+                            "comment_id": 79041236,
+                            "link": "https://stackoverflow.com/questions/45997891/cv2-motion-euclidean-for-the-warp-mode-in-ecc-image-alignment-method/45998244#comment79041236_45998244",
+                            "body": "Sorry I still do not get the steps that you outlined thats why I am trying to understand from the dense example that you shown me"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11329911,
+                                "reputation": 373,
+                                "user_id": 8307740,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "SacreD"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1504547177,
+                            "post_id": 45998244,
+                            "comment_id": 79044181,
+                            "link": "https://stackoverflow.com/questions/45997891/cv2-motion-euclidean-for-the-warp-mode-in-ecc-image-alignment-method/45998244#comment79044181_45998244",
+                            "body": "I have edited my post with the error message i got. I got error &quot;The algorithm stopped before its convergence. The correlation is going to be minimized. Images may be uncorrelated or non-overlapped in function cv::findTransformECC&quot;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6428404,
+                                "reputation": 22582,
+                                "user_id": 5087436,
+                                "user_type": "registered",
+                                "display_name": "alkasm"
+                            },
+                            "reply_to_user": {
+                                "account_id": 11329911,
+                                "reputation": 373,
+                                "user_id": 8307740,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "SacreD"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1504590226,
+                            "post_id": 45998244,
+                            "comment_id": 79054838,
+                            "link": "https://stackoverflow.com/questions/45997891/cv2-motion-euclidean-for-the-warp-mode-in-ecc-image-alignment-method/45998244#comment79054838_45998244",
+                            "body": "Can you please post examples of the images you&#39;re trying to align? It&#39;s likely they&#39;re too far off to be aligned with these methods on the images themselves. Does the alignment work on scaled down versions?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11329911,
+                                "reputation": 373,
+                                "user_id": 8307740,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "SacreD"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1504600365,
+                            "post_id": 45998244,
+                            "comment_id": 79060187,
+                            "link": "https://stackoverflow.com/questions/45997891/cv2-motion-euclidean-for-the-warp-mode-in-ecc-image-alignment-method/45998244#comment79060187_45998244",
+                            "body": "<a href=\"https://postimg.org/gallery/31gjlvvhi/\" rel=\"nofollow noreferrer\">postimg.org/gallery/31gjlvvhi</a> , ori images too big for me to edit in my post. hmm there&#39;s only slight shift between two images though."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6428404,
+                                "reputation": 22582,
+                                "user_id": 5087436,
+                                "user_type": "registered",
+                                "display_name": "alkasm"
+                            },
+                            "reply_to_user": {
+                                "account_id": 11329911,
+                                "reputation": 373,
+                                "user_id": 8307740,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "SacreD"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1504647015,
+                            "post_id": 45998244,
+                            "comment_id": 79088053,
+                            "link": "https://stackoverflow.com/questions/45997891/cv2-motion-euclidean-for-the-warp-mode-in-ecc-image-alignment-method/45998244#comment79088053_45998244",
+                            "body": "@SacreD I just edited my post with working code and timing examples. Hope that gets you to where you need to be."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 11329911,
+                                "reputation": 373,
+                                "user_id": 8307740,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "SacreD"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1504775827,
+                            "post_id": 45998244,
+                            "comment_id": 79146529,
+                            "link": "https://stackoverflow.com/questions/45997891/cv2-motion-euclidean-for-the-warp-mode-in-ecc-image-alignment-method/45998244#comment79146529_45998244",
+                            "body": "OMG big thumb up for the detailed explanation and timing examples... you&#39;ve been helpful ! Just a quick question. For warp = warp * np.array([[1, 1, 2], [1, 1, 2]], dtype=np.float32)**(1-nol). What is actually the [1, 1, 2], [1, 1, 2] stand for? Need to understand this before I can make adjustment for homography motion."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6428404,
+                                "reputation": 22582,
+                                "user_id": 5087436,
+                                "user_type": "registered",
+                                "display_name": "alkasm"
+                            },
+                            "reply_to_user": {
+                                "account_id": 11329911,
+                                "reputation": 373,
+                                "user_id": 8307740,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "SacreD"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1504778636,
+                            "post_id": 45998244,
+                            "comment_id": 79148602,
+                            "link": "https://stackoverflow.com/questions/45997891/cv2-motion-euclidean-for-the-warp-mode-in-ecc-image-alignment-method/45998244#comment79148602_45998244",
+                            "body": "It&#39;s really simple, I will add a point at the bottom of the post as it&#39;s a little wordy for a comment."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 13125518,
+                                "reputation": 1093,
+                                "user_id": 9481613,
+                                "user_type": "registered",
+                                "display_name": "mLstudent33"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1574112053,
+                            "post_id": 45998244,
+                            "comment_id": 104107580,
+                            "link": "https://stackoverflow.com/questions/45997891/cv2-motion-euclidean-for-the-warp-mode-in-ecc-image-alignment-method/45998244#comment104107580_45998244",
+                            "body": "This is an awesome answer and the basis for a portion of my final project now :)"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 6428404,
+                        "reputation": 22582,
+                        "user_id": 5087436,
+                        "user_type": "registered",
+                        "display_name": "alkasm"
+                    },
+                    "comment_count": 11,
+                    "is_accepted": true,
+                    "score": 17,
+                    "last_activity_date": 1504778909,
+                    "last_edit_date": 1504778909,
+                    "creation_date": 1504261717,
+                    "answer_id": 45998244,
+                    "question_id": 45997891,
+                    "link": "https://stackoverflow.com/questions/45997891/cv2-motion-euclidean-for-the-warp-mode-in-ecc-image-alignment-method/45998244#45998244",
+                    "body": "<p>Thirty minutes is ridiculous, even if the images are large. I would bet that it's because your tolerance of <code>1e-10</code> is extremely strict; it's very likely that your algorithm is just oscillating at that point and cannot get better alignment. You should ease on it, maybe try <code>1e-6</code>.</p>\n\n<p>The best method to speed up your current code (especially for full homography matches) is to implement a pyramid approach, where you run the algorithm on a scaled down version of your image and then use the resulting homography as the initial guess for the next size up, and so on, till you get to the full size. This is usually immensely faster. The typical approach is to repeatedly scale the size by half in each dimension until it's small (maybe somewhere around 300x300 pixels or so), run the algorithm, then upscale. Note that you have to scale the homography too each time; this isn't hard though. If <code>warp</code> is the homography from the smallest scale, then the initial guess for the next level in the pyramid (with twice the size in each dimension) should be</p>\n\n<pre><code>warp = warp * np.array([[1, 1, 2], [1, 1, 2], [1/2, 1/2, 1]])\n</code></pre>\n\n<p>Of course, you don't need to scale the bottom row for affine transformations. So the pseudo-algorithm would be:</p>\n\n<pre><code>create a pyramid of image resolutions, halving the h, w each time\nwarp = np.eye(3)\nfor each image in the pyramid from smallest to second to largest\n    warp = findTransformECC(..., warp, ...)\n    warp = warp * np.array([[1, 1, 2], [1, 1, 2], [1/2, 1/2, 1]])\nwarp = findTransformECC(full resolution images, warp, ...)\n</code></pre>\n\n<p>ECC is a dense alignment (it looks at the modification of every single point in the picture), which takes awhile, even though the above speedups should get you alignment in the matter of seconds, not hours. Also, you may have better luck with Lucas-Kanade or other feature-based sparse methods (features can be invariant to lighting conditions too). OpenCV's Lucas-Kanade functions have this pyramid functionality built in; you can check out tutorials, or OpenCV's sample <a href=\"https://github.com/opencv/opencv/blob/master/samples/python/lk_homography.py\" rel=\"noreferrer\"><code>lk_homography.py</code></a>.</p>\n\n<p>I wrote a custom dense Lucas-Kanade scheme awhile back, and implemented the pyramid myself; I can't fully share it because it's not my code to share, but I can give you the gist:</p>\n\n<pre><code>nol = 5 # nol: number of levels\n# maybe do some calculation to decide the nol based on h, w\n\n# initial guess may not be the identity warp, so scale to smallest level\nwarp = initWarp\nwarp = warp * np.array([[1, 1, 2], [1, 1, 2], [1/2, 1/2, 1]])**(1-nol)\n\nfor level in range(nol):\n\n    scale = 1/2**(nol-1-level)\n    rszImg = cv2.resize(img, None, fx=scale, fy=scale, interpolation=cv2.INTER_AREA)\n    rszTmp = cv2.resize(tmp, None, fx=scale, fy=scale, interpolation=cv2.INTER_AREA)\n\n    warp = your_warping_algorithm(rszImg, rszTmp, warp, ...)\n\n    if level != nol-1:\n        # might want some error catching here to reset initial guess\n        # if your algorithm fails at some level of the pyramid\n\n        # scale up for the next pyramid level\n        warp = warp * np.array([[1, 1, 2], [1, 1, 2], [1/2, 1/2, 1]])\n\nreturn warp\n</code></pre>\n\n<hr>\n\n<p>Edit: The above is helpful when your images are not aligned as closely as your examples are, and offers significant speedups as well as better homographies when they are further from being aligned well. The pyramid approach does offer a speedup from your current code, just not massive---about 2x faster. I see now that your code is running so slowly because you're doing this on a ton of images, not just a pair of images. Registration via ECC does take a long time because it's a dense algorithm, meaning every single iteration it's looking at the warp of every single pixel, and there's a <em>lot</em> in a large image. The better idea for speedup would just be to resize your images. If you need your homographies to be of the full sized images, you can still scale as I mentioned above from a smaller image. </p>\n\n<p>I did some timing of the pyramid method compared to the full scale method. Here's the code and results:</p>\n\n<pre><code>import cv2\nimport numpy as np\nimport timeit\n\n\n\"\"\"Inits\"\"\"\n\n\nimg1 = cv2.imread('IMG_1770_1.png')\nimg2 = cv2.imread('IMG_1868_1.png')\nh, w = img1.shape[:2]\n\n# ECC params\ninit_warp = np.array([[1, 0, 0], [0, 1, 0]], dtype=np.float32)\nn_iters = 1000\ne_thresh = 1e-6\nwarp_mode = cv2.MOTION_EUCLIDEAN\ncriteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, n_iters, e_thresh)\n\n\n\"\"\"Full scale ECC algorithm\"\"\"\n\n\nfull_scale_start_time = timeit.default_timer()\n\ngray1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)\ngray2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)\ncc, warp = cv2.findTransformECC(gray1, gray2, init_warp, warp_mode, criteria)\nprint('Non-pyramid time:', timeit.default_timer() - full_scale_start_time)\n\n# write blended warp and diff\nimg2_aligned = cv2.warpAffine(img2, warp, (w, h), flags=cv2.WARP_INVERSE_MAP)\nblended = cv2.addWeighted(img1, 0.5, img2_aligned, 0.5, 0)\ncv2.imwrite('full_scale_blended.png', blended)\nwarp_diff = cv2.absdiff(img2_aligned, img1)\ncv2.imwrite('full_scale_diff.png', warp_diff)\n\n\n\"\"\"Pyramid ECC algorithm\"\"\"\n\n\npyr_start_time = timeit.default_timer()\n\n# initial guess may not be the identity warp, so scale to smallest level\nnol = 4\nwarp = init_warp\nwarp = warp * np.array([[1, 1, 2], [1, 1, 2]], dtype=np.float32)**(1-nol)\n\nfor level in range(nol):\n    lvl_start_time = timeit.default_timer()\n\n    # resize images\n    scale = 1/2**(nol-1-level)\n    rszImg1 = cv2.resize(img1, None, fx=scale, fy=scale, interpolation=cv2.INTER_AREA)\n    rszImg2 = cv2.resize(img2, None, fx=scale, fy=scale, interpolation=cv2.INTER_AREA)\n    rszGray1 = cv2.cvtColor(rszImg1, cv2.COLOR_BGR2GRAY)\n    rszGray2 = cv2.cvtColor(rszImg2, cv2.COLOR_BGR2GRAY)\n\n    cc, warp = cv2.findTransformECC(rszGray1, rszGray2, warp, warp_mode, criteria)\n\n    if level != nol-1:  # scale up for the next pyramid level\n        warp = warp * np.array([[1, 1, 2], [1, 1, 2]], dtype=np.float32)\n\n    print('Level %i time: '%level, timeit.default_timer() - lvl_start_time)\n\nprint('Pyramid time:', timeit.default_timer() - pyr_start_time)\n\n# write blended warp and diff\nimg2_aligned = cv2.warpAffine(img2, warp, (w, h), flags=cv2.WARP_INVERSE_MAP)\nblended = cv2.addWeighted(img1, 0.5, img2_aligned, 0.5, 0)\ncv2.imwrite('pyr_blended.png', blended)\nwarp_diff = cv2.absdiff(img2_aligned, img1)\ncv2.imwrite('pyr_diff.png', warp_diff)\n</code></pre>\n\n<blockquote>\n  <p>Non-pyramid time: 6.001738801016472<br>\n  Level 0 time:  0.13332156010437757<br>\n  Level 1 time:  0.2627768460661173<br>\n  Level 2 time:  0.7635528810787946<br>\n  Level 3 time:  2.0936299220193177<br>\n  Pyramid time: 3.253465031972155  </p>\n</blockquote>\n\n<p>The idea behind the pyramid approach is to get a close <em>first guess</em> at the homography so that the algorithm comes to termination sooner. The final level of the pyramid, level 3, takes 2 seconds to run instead of ~6 seconds, even though they're both on the full sized image--because it has a better guess. And the pyramid approach is faster in general because it comes to that initial guess with smaller images, where the algorithm runs much faster. </p>\n\n<p>Remember that the warp accuracy level (<code>termination_eps</code>) is not terminating when the warp is accurate to some level, but when the difference between the current warp and last warp is changing by less than the threshold. If you have a really tiny epsilon, like <code>1e-10</code>, it's likely that you can get some oscillation and never actually terminate with the threshold, and instead terminate on your number of iterations.</p>\n\n<hr>\n\n<p>You can even further improve speeds with some preprocessing on the pyramid approach. Construct the resized grayscale images <em>first</em>, using the last resized image and scaling down each time from there---that way, the resize method works on a much smaller image. Then inside your for loop you don't have to do any conversions or resizing, you just use the images in your pyramid. Further, you can lessen the precision you want on the first few warps since you only need a really precise warp for the last level. You don't need sub-pixel accuracy on your smaller image warps to get a rough guess for the next level. Here I timed pre-constructing the pyramid <em>first</em>, and then using that in the algorithm. Seems it gives ~3x speedup; now we're under 1 second for the algorithm as opposed to 6 seconds for the full-scale ECC algorithm. So this is getting much better.</p>\n\n<pre><code>\"\"\"Pre-built pyramid ECC algorithm\"\"\"\n\n\npyr_start_time = timeit.default_timer()\n\nnol = 4\nwarp = init_warp\nwarp = warp * np.array([[1, 1, 2], [1, 1, 2]], dtype=np.float32)**(1-nol)\n\n# construct grayscale pyramid\ngray1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)\ngray2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)\ngray1_pyr = [gray1]\ngray2_pyr = [gray2]\n\nfor level in range(nol):\n    gray1_pyr.insert(0, cv2.resize(gray1_pyr[0], None, fx=1/2, fy=1/2,\n                                   interpolation=cv2.INTER_AREA))\n    gray2_pyr.insert(0, cv2.resize(gray2_pyr[0], None, fx=1/2, fy=1/2,\n                                   interpolation=cv2.INTER_AREA))\n\n# run pyramid ECC\nfor level in range(nol):\n    lvl_start_time = timeit.default_timer()\n\n    cc, warp = cv2.findTransformECC(gray1_pyr[level], gray2_pyr[level],\n                                    warp, warp_mode, criteria)\n\n    if level != nol-1:  # scale up for the next pyramid level\n        warp = warp * np.array([[1, 1, 2], [1, 1, 2]], dtype=np.float32)\n\n    print('Level %i time: '%level, timeit.default_timer() - lvl_start_time)\n\nprint('Pyramid time:', timeit.default_timer() - pyr_start_time)\n</code></pre>\n\n<blockquote>\n  <p>Level 0 time:  0.026944385026581585<br>\n  Level 1 time:  0.06884818698745221<br>\n  Level 2 time:  0.22921762999612838<br>\n  Level 3 time:  0.5990059389732778<br>\n  Pyramid time: 0.9410004370147362  </p>\n</blockquote>\n\n<hr>\n\n<p>Regarding the multiplication of the warp matrices:</p>\n\n<p>If you have a homography that relates <code>img1</code> and <code>img2</code>, then the homography that relates <code>half_size_img1</code> and <code>half_size_img2</code> (that is, the height and width are halved) is exactly the same except the translations are halved as well (10 px translation in the full size images is 5 px in the half-sized images). So before the pyramid loop, if you have an initial warp guess that relates the two full-sized images, you'll need to scale them down by the number of levels if you're going to input it as the initial guess to the warps for the resized images. So I rescale to the smallest scale before the <code>for</code> loop. Note that this is totally unnecessary if your initial guess is always just an identity matrix, since the multiplication does nothing, but it's important to include incase you may have initial guesses.</p>\n\n<p>At the end of the for loop, I scale up the same way---but backwards. I'm coming from smaller images and doubling their size, so I need to double the translations by multiplying them by 2. But you don't need to do this on the last level, since the last level is the full-scale images, hence the <code>if</code> statement which catches this.</p>\n\n<p>If you have <em>full homographies</em> instead of affine warps, it's more than the translations that get scaled like this. You can at the top of my post where I'm showing using the full homography. It's virtually the same, but the two non-linear shearing entries of the homography have a 1/2 in them as well.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 11329911,
+                "reputation": 373,
+                "user_id": 8307740,
+                "user_type": "registered",
+                "accept_rate": 93,
+                "display_name": "SacreD"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 45998244,
+            "answer_count": 1,
+            "score": 3,
+            "last_activity_date": 1512926351,
+            "creation_date": 1504260490,
+            "last_edit_date": 1512926351,
+            "question_id": 45997891,
+            "link": "https://stackoverflow.com/questions/45997891/cv2-motion-euclidean-for-the-warp-mode-in-ecc-image-alignment-method",
+            "title": "cv2.MOTION_EUCLIDEAN for the warp_mode in ECC image alignment method",
+            "body": "<p>I was using the following method for my images alignment. The following code works fine when I define the warp_mode as cv2.MOTION_TRANSLATION. I got some quite good result on images with translation shift....I tried repeating this code and change the warp_mode to EUCLIDEAN to tackle images with rotation shift. But the execution took ages complete after the first output photo. </p>\n\n<pre><code>import cv2\nimport numpy as np\n\npath = \"R:\\\\Temp\\\\xx\\\\ProcessedPhoto_in_PNG\\\\\"\npath1 = \"R:\\\\Temp\\\\xx\\\\AlignedPhoto_in_PNG_EUCLIDEAN\\\\\"\n\n\n\n\ndef alignment():\n    for i in range(1770,1869):\n        # Read the images to be aligned\n        im1 =  cv2.imread(path + 'IMG_1770.png')\n        im2 =  cv2.imread(path + 'IMG_%d.png' %(i))\n\n        # Convert images to grayscale\n        im1_gray = cv2.cvtColor(im1,cv2.COLOR_BGR2GRAY)\n        im2_gray = cv2.cvtColor(im2,cv2.COLOR_BGR2GRAY)\n\n        # Find size of image1\n        sz = im1.shape\n\n        # Define the motion model: can be TRANSLATION OR AFFINE OR HOMOGRAPHY\n        warp_mode = cv2.MOTION_EUCLIDEAN\n\n        # Define 2x3 or 3x3 matrices and initialize the matrix to identity\n        if warp_mode == cv2.MOTION_HOMOGRAPHY :\n            warp_matrix = np.eye(3, 3, dtype=np.float32)\n        else :\n            warp_matrix = np.eye(2, 3, dtype=np.float32)\n\n        # Specify the number of iterations.\n        number_of_iterations = 5000;\n\n        # Specify the threshold of the increment\n        # in the correlation coefficient between two iterations\n        termination_eps = 1e-10;\n\n        # Define termination criteria\n        criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, number_of_iterations,  termination_eps)\n\n        # Run the ECC algorithm. The results are stored in warp_matrix.\n        (cc, warp_matrix) = cv2.findTransformECC(im1_gray, im2_gray, warp_matrix, warp_mode, criteria)\n\n\n        if warp_mode == cv2.MOTION_HOMOGRAPHY :\n            # Use warpPerspective for Homography \n            im2_aligned = cv2.warpPerspective (im2, warp_matrix, (sz[1],sz[0]), flags=cv2.INTER_LINEAR + cv2.WARP_INVERSE_MAP)\n        else :\n            # Use warpAffine for Translation, Euclidean and Affine\n            im2_aligned = cv2.warpAffine(im2, warp_matrix, (sz[1],sz[0]), flags=cv2.INTER_LINEAR + cv2.WARP_INVERSE_MAP);\n        print(i) \n\n        cv2.imwrite(path1 + \"AlignedEU_IMG_%d.png\"%i , im2_aligned )\n        #cv2.waitKey(0)\n\nalignment()\n</code></pre>\n\n<p><strong>Is there any way which I can speed up the process?How can I speed up my code? I am still stuck on 2nd output photo after waited for 30mins.</strong> Each of my images is around 16MB and of uneven brightness...the reason I am using ECC image alignment instead of other method is because this method of alignment invariant to photometric distortion.</p>\n\n<pre><code> &gt;&gt;&gt; \n RESTART: C:\\Users\\310293649\\AppData\\Local\\Programs\\Python\\Python36\\ImageAnalysisCODING\\Picture Alignment.py \n1770\n</code></pre>\n\n<p><strong>EDIT : My attempt of writing the ans suggested by Alexander Reynolds.</strong></p>\n\n<pre><code>import cv2\nimport numpy as np\n\n\npath = \"R:\\\\ProcessedPhoto_in_PNG\\\\\"\npath1 = \"R:\\\\AlignedPhoto_in_PNG_EUCLIDEAN\\\\\"\n\nnol = 3\n\nwarp_mode = cv2.MOTION_EUCLIDEAN\n\nif warp_mode == cv2.MOTION_HOMOGRAPHY :\n    warp = np.eye(3, 3, dtype=np.float32)\nelse :\n    warp = np.eye(2, 3, dtype=np.float32)\n\ntmp =  np.array([[1, 1, 2], [1, 1, 2], [1/2, 1/2, 1]])**(1-nol)\nwarp = np.dot(warp, tmp.astype(np.float32) )\n\n# Specify the number of iterations.\nnumber_of_iterations = 5000;\n\n# Specify the threshold of the increment\n# in the correlation coefficient between two iterations\ntermination_eps = 1e-10;\n\n# Define termination criteria\ncriteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, number_of_iterations,  termination_eps)\n\ndef alignment(criteria, warp_mode, warp, nol):\n\n    for i in range(1770,1869):\n        for level in range(nol):\n            im = cv2.imread(path + 'IMG_1770.png')\n            im1 = cv2.imread(path + 'IMG_%d.png'%(i))\n\n            sz = im1.shape\n\n            im_gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)\n            im1_gray = cv2.cvtColor(im1, cv2.COLOR_BGR2GRAY)\n\n            scale = 1/2**(nol-1-level)\n\n            im_1 = cv2.resize(im_gray, None, fx= scale, fy = scale, interpolation=cv2.INTER_AREA)\n            im_2 = cv2.resize(im1_gray, None, fx= scale, fy= scale, interpolation=cv2.INTER_AREA)\n\n            (cc,warp) = cv2.findTransformECC(im_1, im_2, warp, warp_mode, criteria)\n\n            if level != nol-1:\n\n            # scale up for the next pyramid level\n                tng = np.array([[1, 1, 2], [1, 1, 2], [1/2, 1/2, 1]])\n                warp = np.dot(warp, tng.astype(np.float32)) \n\n            if warp_mode == cv2.MOTION_HOMOGRAPHY :\n                # Use warpPerspective for Homography \n                im2_aligned = cv2.warpPerspective (im2, warp, (sz[1],sz[0]), flags=cv2.INTER_LINEAR + cv2.WARP_INVERSE_MAP)\n            else :\n                # Use warpAffine for Translation, Euclidean and Affine\n                im2_aligned = cv2.warpAffine(im2, warp, (sz[1],sz[0]), flags=cv2.INTER_LINEAR + cv2.WARP_INVERSE_MAP);\n            print(i)\n\nalignment(criteria, warp_mode, warp, nol)\n</code></pre>\n\n<p><strong>I got this error message</strong></p>\n\n<pre><code>&gt;&gt;&gt; \n=============== RESTART: C:\\Users\\310293649\\Desktop\\resize.py ===============\nTraceback (most recent call last):\n  File \"C:\\Users\\310293649\\Desktop\\resize.py\", line 67, in &lt;module&gt;\n    alignment(criteria, warp_mode, warp, nol)\n  File \"C:\\Users\\310293649\\Desktop\\resize.py\", line 48, in alignment\n    warp = cv2.findTransformECC(im_gray, im1_gray, warp, warp_mode, criteria)\ncv2.error: D:\\Build\\OpenCV\\opencv-3.3.0\\modules\\video\\src\\ecc.cpp:540: error: (-7) The algorithm stopped before its convergence. The correlation is going to be minimized. Images may be uncorrelated or non-overlapped in function cv::findTransformECC\n\n&gt;&gt;&gt; \n</code></pre>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8873
+}

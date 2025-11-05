@@ -1,0 +1,6 @@
+>>> %timeit plot1()
+34 ms ± 4.16 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+>>> %timeit plot2()
+50.2 ms ± 234 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+>>> %timeit plot3()
+16.4 ms ± 36 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)

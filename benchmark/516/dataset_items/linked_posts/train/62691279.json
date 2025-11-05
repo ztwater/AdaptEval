@@ -1,0 +1,346 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "pytorch",
+                "huggingface-transformers",
+                "huggingface-tokenizers"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 3999281,
+                        "reputation": 229,
+                        "user_id": 3295751,
+                        "user_type": "registered",
+                        "display_name": "han0ah"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1593693607,
+                    "creation_date": 1593693607,
+                    "answer_id": 62696549,
+                    "question_id": 62691279,
+                    "link": "https://stackoverflow.com/questions/62691279/how-to-disable-tokenizers-parallelism-true-false-warning/62696549#62696549",
+                    "body": "<p>I solved this problem by downgrading huggingface's <em>transfomers</em> library version from 3.0.0 to 2.11.0, and <em>tokenizers</em> library version from 0.8.0rc4 to 0.7.0.</p>\n<p>It seems to be a problem of the huggingface's tokenizer library version &quot;0.8.0rc4&quot;. Currently, it seems that there is no solution to set TOKENIZERS_PARALLELISM=(true | false) as error message say.</p>\n<p>reference : <a href=\"https://github.com/ThilinaRajapakse/simpletransformers/issues/515\" rel=\"nofollow noreferrer\">https://github.com/ThilinaRajapakse/simpletransformers/issues/515</a></p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3821627,
+                                "reputation": 2606,
+                                "user_id": 3873799,
+                                "user_type": "registered",
+                                "display_name": "alelom"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1629803716,
+                            "post_id": 62703850,
+                            "comment_id": 121778224,
+                            "link": "https://stackoverflow.com/questions/62691279/how-to-disable-tokenizers-parallelism-true-false-warning/62703850#comment121778224_62703850",
+                            "body": "Worked for me. Still, worth having a look at <a href=\"https://stackoverflow.com/a/67254879/3873799\">this answer</a> that points out that using Fast Tokenizers may be the source of this, and that you may need to be wary of any consequences of using them."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 19978448,
+                                "reputation": 1076,
+                                "user_id": 14642180,
+                                "user_type": "registered",
+                                "display_name": "Allohvk"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1657440159,
+                            "post_id": 62703850,
+                            "comment_id": 128806979,
+                            "link": "https://stackoverflow.com/questions/62691279/how-to-disable-tokenizers-parallelism-true-false-warning/62703850#comment128806979_62703850",
+                            "body": "Also see my note below on the implications - <a href=\"https://stackoverflow.com/questions/62691279/how-to-disable-tokenizers-parallelism-true-false-warning/72926996#72926996\" title=\"how to disable tokenizers parallelism true false warning\">stackoverflow.com/questions/62691279/&hellip;</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3395920,
+                                "reputation": 394,
+                                "user_id": 2849548,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "alvitawa"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1679562459,
+                            "post_id": 62703850,
+                            "comment_id": 133744783,
+                            "link": "https://stackoverflow.com/questions/62691279/how-to-disable-tokenizers-parallelism-true-false-warning/62703850#comment133744783_62703850",
+                            "body": "I had to do export TOKENIZERS_PARALLELISM=false"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2531442,
+                                "reputation": 1175,
+                                "user_id": 6630230,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "Crouching Kitten"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1691534853,
+                            "post_id": 62703850,
+                            "comment_id": 135504161,
+                            "link": "https://stackoverflow.com/questions/62691279/how-to-disable-tokenizers-parallelism-true-false-warning/62703850#comment135504161_62703850",
+                            "body": "The warning also disappears if it is set to &quot;true&quot;. The important is only to set it to something."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15462527,
+                                "reputation": 8375,
+                                "user_id": 11154841,
+                                "user_type": "registered",
+                                "display_name": "questionto42"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1706297500,
+                            "post_id": 62703850,
+                            "comment_id": 137313184,
+                            "link": "https://stackoverflow.com/questions/62691279/how-to-disable-tokenizers-parallelism-true-false-warning/62703850#comment137313184_62703850",
+                            "body": "Worked for me, but mind that for spreading tensors across the GPUs, and then perhaps also for other tasks, you sometimes have to run <code>export ...</code> instead of in-Python code <code>os.environ[]</code> right at the beginning of the cell you are in or the Python code you want to run, and <code>os.environ[]</code> would disturb or not work, see for example <a href=\"https://stackoverflow.com/q/76519449/11154841\">How to Solve &quot;CUDA: Invalid Device Ordinal&quot; Error in PyTorch Single-GPU Inference on a Model Trained with DataParallel?</a> and <a href=\"https://stackoverflow.com/a/77857149/11154841\">How to set env variable in Jupyter notebook</a>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9698613,
+                                "reputation": 361,
+                                "user_id": 7194271,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Hong Cheng"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1715217442,
+                            "post_id": 62703850,
+                            "comment_id": 138308777,
+                            "link": "https://stackoverflow.com/questions/62691279/how-to-disable-tokenizers-parallelism-true-false-warning/62703850#comment138308777_62703850",
+                            "body": "<code>export TOKENIZERS_PARALLELISM=false</code>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 16036347,
+                        "reputation": 886,
+                        "user_id": 11573966,
+                        "user_type": "registered",
+                        "display_name": "Alec Segal"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": true,
+                    "score": 87,
+                    "last_activity_date": 1593721326,
+                    "last_edit_date": 1593721326,
+                    "creation_date": 1593718628,
+                    "answer_id": 62703850,
+                    "question_id": 62691279,
+                    "link": "https://stackoverflow.com/questions/62691279/how-to-disable-tokenizers-parallelism-true-false-warning/62703850#62703850",
+                    "body": "<p>Set the environment variable to the string <code>&quot;false&quot;</code></p>\n<p>either by</p>\n<pre><code>TOKENIZERS_PARALLELISM=false\n</code></pre>\n<p>in your shell</p>\n<p>or by:</p>\n<pre><code>import os\nos.environ[&quot;TOKENIZERS_PARALLELISM&quot;] = &quot;false&quot;\n</code></pre>\n<p>in the Python script</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2756875,
+                                "reputation": 591,
+                                "user_id": 2374691,
+                                "user_type": "registered",
+                                "display_name": "Ritwik"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1629140923,
+                            "post_id": 67254879,
+                            "comment_id": 121603753,
+                            "link": "https://stackoverflow.com/questions/62691279/how-to-disable-tokenizers-parallelism-true-false-warning/67254879#comment121603753_67254879",
+                            "body": "so does this warning message mean that the training/fine-tuning is not happening in a parallel manner?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2756875,
+                                "reputation": 591,
+                                "user_id": 2374691,
+                                "user_type": "registered",
+                                "display_name": "Ritwik"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1629708053,
+                            "post_id": 67254879,
+                            "comment_id": 121748339,
+                            "link": "https://stackoverflow.com/questions/62691279/how-to-disable-tokenizers-parallelism-true-false-warning/67254879#comment121748339_67254879",
+                            "body": "Not according to my experience. I ran two experiments: (a) one with this warning message (b) another without it. I just saved my dataloader from (a) and simply loaded it using <code>torch.save()</code> and <code>torch.load()</code> . Both experiments finished in approx same time (1 hour per epoch, for 3 epochs)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 484608,
+                                "reputation": 5129,
+                                "user_id": 900394,
+                                "user_type": "registered",
+                                "accept_rate": 63,
+                                "display_name": "Alaa M."
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1653918600,
+                            "post_id": 67254879,
+                            "comment_id": 127962242,
+                            "link": "https://stackoverflow.com/questions/62691279/how-to-disable-tokenizers-parallelism-true-false-warning/67254879#comment127962242_67254879",
+                            "body": "Example how to use the <code>FastTokenizers</code> after training and example using &quot;normal&quot; <code>Tokenizer</code>?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15522187,
+                                "reputation": 446,
+                                "user_id": 11198072,
+                                "user_type": "registered",
+                                "display_name": "flo"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1653920694,
+                            "post_id": 67254879,
+                            "comment_id": 127963061,
+                            "link": "https://stackoverflow.com/questions/62691279/how-to-disable-tokenizers-parallelism-true-false-warning/67254879#comment127963061_67254879",
+                            "body": "Why do you want to use FastTokenizers after training? You should use them during training/inference. The docs tell you how to use &quot;normal&quot; Tokenizers."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 19978448,
+                                "reputation": 1076,
+                                "user_id": 14642180,
+                                "user_type": "registered",
+                                "display_name": "Allohvk"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1657440253,
+                            "post_id": 67254879,
+                            "comment_id": 128806997,
+                            "link": "https://stackoverflow.com/questions/62691279/how-to-disable-tokenizers-parallelism-true-false-warning/67254879#comment128806997_67254879",
+                            "body": "No, it does NOT effect anything else. Pl see my note below"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 15522187,
+                        "reputation": 446,
+                        "user_id": 11198072,
+                        "user_type": "registered",
+                        "display_name": "flo"
+                    },
+                    "comment_count": 5,
+                    "is_accepted": false,
+                    "score": 28,
+                    "last_activity_date": 1664262192,
+                    "last_edit_date": 1664262192,
+                    "creation_date": 1619363381,
+                    "answer_id": 67254879,
+                    "question_id": 62691279,
+                    "link": "https://stackoverflow.com/questions/62691279/how-to-disable-tokenizers-parallelism-true-false-warning/67254879#67254879",
+                    "body": "<p>I'm going to leave this comment here to help anyone wondering if it is possible to <strong>keep the parallelism</strong>. And also because it is the first stackoverflow page when searching the error directly on Google.</p>\n<p>According to this <a href=\"https://github.com/deepset-ai/haystack/issues/660#issuecomment-740453885\" rel=\"noreferrer\">comment on github</a> the <strong>FastTokenizers</strong> seem to be the issue.\nAlso according to <a href=\"https://www.gitmemory.com/issue/huggingface/transformers/10400/786133504\" rel=\"noreferrer\">another comment on gitmemory</a> <strong>you shouldn't use the tokenizer before forking the process.</strong> (which basically means before iterating through your dataloader)</p>\n<p>So the solution is to not use FastTokenizers before training/fine-tuning <strong>or</strong> use the normal Tokenizers.</p>\n<p>Check the huggingface documentation to find out if you really need the FastTokenizer.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 13103445,
+                                "reputation": 186,
+                                "user_id": 9467045,
+                                "user_type": "registered",
+                                "display_name": "runzhi xiao"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1680500341,
+                            "post_id": 72926996,
+                            "comment_id": 133902858,
+                            "link": "https://stackoverflow.com/questions/62691279/how-to-disable-tokenizers-parallelism-true-false-warning/72926996#comment133902858_72926996",
+                            "body": "Comfirmed. Just ignore the warning information could be fine."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 18377262,
+                                "reputation": 91,
+                                "user_id": 13386085,
+                                "user_type": "registered",
+                                "display_name": "Luke Kurlandski"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1687267709,
+                            "post_id": 72926996,
+                            "comment_id": 134910547,
+                            "link": "https://stackoverflow.com/questions/62691279/how-to-disable-tokenizers-parallelism-true-false-warning/72926996#comment134910547_72926996",
+                            "body": "I would be skeptical and unsatisfied with simple advice like &quot;Just ignore the warning&quot;. I need to understand why. Thank you for the detailed explanation."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 19978448,
+                        "reputation": 1076,
+                        "user_id": 14642180,
+                        "user_type": "registered",
+                        "display_name": "Allohvk"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 24,
+                    "last_activity_date": 1657440120,
+                    "creation_date": 1657440120,
+                    "answer_id": 72926996,
+                    "question_id": 62691279,
+                    "link": "https://stackoverflow.com/questions/62691279/how-to-disable-tokenizers-parallelism-true-false-warning/72926996#72926996",
+                    "body": "<p>If you have explicitly selected fast (Rust code)tokenisers, you may have done so for a reason. When dealing with large datasets, Rust-based tokenisers process data much faster and these can be explicitly invoked by setting the &quot;use_fast&quot; option during tokeniser creation. Almost all HF models nowadays come with this option. Though not obvious from the warning message, TOKENIZERS_PARALLELISM is an env variable &amp; not a tokeniser hyper-parameter. By setting this to False, the problem does go away, but as some of the comments above show, there is confusion on the impact of this change. For e.g. does this effect parallelism at the model level? Let us look at the Rust code to see if what is the default behaviour and what may happen if we turn it OFF to solve the problem.</p>\n<p><a href=\"https://docs.rs/tokenizers/latest/src/tokenizers/utils/parallelism.rs.html\" rel=\"noreferrer\">https://docs.rs/tokenizers/latest/src/tokenizers/utils/parallelism.rs.html</a>\nIn most cases, we (the end user) would not have explicitly set the TOKENIZERS_PARALLELISM to True or False. For all such cases, the tokeniser code assumes it to be TRUE. We can explicitly disable it by setting it to False. But you can see that in that case, the code makes the iterator serialised. Even if you dont set this env variable to False, the executing code itself does so if it encounters Python forks later (and this is what causes the warning to be displayed in the first place). Can we avoid this?</p>\n<p>Let us take a step back at the warning itself.</p>\n<p>&quot;The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...To disable this warning, you can either: - Avoid using <code>tokenizers</code> before the fork if possible - Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)&quot;</p>\n<p>This happens only with HF's FastTokenizers as these do parallel processing in Rust. In this situation, when we fork processes via multiprocessing in Python there is a conflict. Forking happens because we would have started looping over the data loader (with num_workers&gt;0) in the train() method. This combination is deemed unsafe to work and if this is encountered, the tokeniser switches OFF parallelism in itself to avoid deadlocks. When we talk of parallelism here we strictly refer to the tokeniser code and NOT anything else. In other words, only the parts of code where we convert the input textual data into tokens (say using tokenizer.encode_plus or any of the other functions) is impacted. So this should not impact the use of parallel threads with num_workers which leverage the multiple GPU cores...like the data loader function. How can we tell this? Well, we can just try adding a 5 sec delay in the dataset get_item function along with a print statement and then see for ourselves by looping over the data loader for diff values of num_workers. When num_workers = 0, the main process does the heavy lifting and there is a gap of 5 sec between fetches. When num_workers = 1 a fork happens, we get the above warning on parallelism and since the main process does not participate in data-lifting, we still get a 5 sec gap between fetches. From num_workers &gt; 2, there are multiple fetches depending on the num_workers in a 5-sec interval.</p>\n<p>In fact this leads to the conclusion that a simple option to fix the above warning might be to simply make the num_workers = 0 in the data-loader definition. If num_workers is 0, then there is no Python fork and the main process itself does all the data-lifting. This works and we are able to now leverage the power of fast tokenisers to the hilt but at the compromise of eliminating parallel processing at the Python end. Considering that Data loaders work best in parallel mode by prefetching batches in parallel to GPU from host(CPU) for execution, this is usually NOT a good option.</p>\n<p>What happens if we set TOKENIZERS_PARALLELISM=true? On the latest versions of Pytorch, transformers, tokenisers etc, if you do this and then try training with num_workers&gt;0 in the data loader, your training will freeze without any error or even warning message. In fact, this issue motivated me to post this answer as I couldnt find a solution to fix that training-freeze problem anywhere. The root cause is actually the data loader which fails in this situation due to the above conflict (it refuses to &quot;fork&quot; due to fear of deadlocks).</p>\n<p>So going back to our core issue, it seems that the RUST based parallelism is in conflict with the forks that we do in Python. However this may be easily solved by simply removing all use of tokenisers prior to the training call (ie prior to data loader being used). Many a times we may be using the tokenisers to see what the tokenised output is etc by doing a my_dataset_name[0]. Just remove all such tokeniser calls and let the train() function loop be the first time that tokenisers get accessed. This simple fix makes the RUST parellization happen after the Python fork and this should work.</p>\n<p>Alternatively convert your data to tokens beforehand and store them in a dict. Then your dataset should not use the tokenizer at all but during runtime simply calls the dict(key) where key is the index. This way you avoid conflict. The warning still comes but you simply dont use tokeniser during training any more (note for such scenarios to save space, avoid padding during tokenise and add later with collate_fn)</p>\n<p>Having said all that, the Rust tokeniser implementation is so insanely fast that it usually does not matter even if the serialised option is invoked inside the tokenizer i.e. if parallelism is automatically disabled in the tokenizer. It still beats the conventional tokeniser.</p>\n<p>So in most cases, one can just ignore the warning and let the tokeniser parallelization be disabled during execution... or explicitly set the TOKENIZERS_PARALLELISM to False right from the beginning. In rare cases, where speed is of utmost importance, one of the above suggested options can be explored.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 7357028,
+                        "reputation": 51,
+                        "user_id": 5601440,
+                        "user_type": "registered",
+                        "display_name": "Riccardo Amadio"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1690383139,
+                    "creation_date": 1690383139,
+                    "answer_id": 76772560,
+                    "question_id": 62691279,
+                    "link": "https://stackoverflow.com/questions/62691279/how-to-disable-tokenizers-parallelism-true-false-warning/76772560#76772560",
+                    "body": "<p>Set the environment variable to string &quot;false&quot; :</p>\n<ol>\n<li>On Bash</li>\n</ol>\n<pre class=\"lang-bash prettyprint-override\"><code>export TOKENIZERS_PARALLELISM=false\n</code></pre>\n<ol start=\"2\">\n<li>On Python</li>\n</ol>\n<pre class=\"lang-py prettyprint-override\"><code>import os\nos.environ[&quot;TOKENIZERS_PARALLELISM&quot;] = &quot;false&quot;\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 5486946,
+                "reputation": 681,
+                "user_id": 4361407,
+                "user_type": "registered",
+                "display_name": "snowzjy"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 62703850,
+            "answer_count": 5,
+            "score": 57,
+            "last_activity_date": 1690383139,
+            "creation_date": 1593675342,
+            "last_edit_date": 1649347645,
+            "question_id": 62691279,
+            "link": "https://stackoverflow.com/questions/62691279/how-to-disable-tokenizers-parallelism-true-false-warning",
+            "title": "How to disable TOKENIZERS_PARALLELISM=(true | false) warning?",
+            "body": "<p>I use pytorch to train huggingface-transformers model, but every epoch, always output the warning:</p>\n<pre><code>The current process just got forked. Disabling parallelism to avoid deadlocks... To disable this warning, please explicitly set TOKENIZERS_PARALLELISM=(true | false)\n</code></pre>\n<p>How to disable this warning?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9118
+}

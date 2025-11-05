@@ -1,0 +1,130 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "flask",
+                "werkzeug"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 35417,
+                        "reputation": 1089172,
+                        "user_id": 100297,
+                        "user_type": "moderator",
+                        "display_name": "Martijn Pieters"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 26,
+                    "last_activity_date": 1552088942,
+                    "last_edit_date": 1552088942,
+                    "creation_date": 1396959925,
+                    "answer_id": 22936947,
+                    "question_id": 22868900,
+                    "link": "https://stackoverflow.com/questions/22868900/how-do-i-safely-get-the-users-real-ip-address-in-flask-using-mod-wsgi/22936947#22936947",
+                    "body": "<p>You can use the <a href=\"http://werkzeug.pocoo.org/docs/wrappers/#werkzeug.wrappers.BaseRequest.access_route\" rel=\"nofollow noreferrer\"><code>request.access_route</code> attribute</a> only if you define a list of <em>trusted</em> proxies.</p>\n\n<p>The <code>access_route</code> attribute uses the <a href=\"http://en.wikipedia.org/wiki/X-Forwarded-For\" rel=\"nofollow noreferrer\"><code>X-Forwarded-For</code> header</a>, falling back to the <code>REMOTE_ADDR</code> WSGI variable; the latter is fine as your server determines this; the <code>X-Forwarded-For</code> could have been set by just about anyone, but if you trust a proxy to set the value correctly, then use the first one (from the end) that is <em>not</em> trusted:</p>\n\n<pre><code>trusted_proxies = {'127.0.0.1'}  # define your own set\nroute = request.access_route + [request.remote_addr]\n\nremote_addr = next((addr for addr in reversed(route) \n                    if addr not in trusted_proxies), request.remote_addr)\n</code></pre>\n\n<p>That way, even if someone spoofs the <code>X-Forwarded-For</code> header with <code>fake_ip1,fake_ip2</code>, the proxy server will add <code>,spoof_machine_ip</code> to the end, and the above code will set the <code>remote_addr</code> to <code>spoof_machine_ip</code>, no matter how many trusted proxies there are in addition to your outermost proxy.</p>\n\n<p>This is the whitelist approach your linked article talks about (briefly, in that Rails uses it), and what <a href=\"https://github.com/zopefoundation/Zope/commit/ee35841ba2209a037c6aafdc5b25f0aa7d6674d6\" rel=\"nofollow noreferrer\">Zope implemented over 11 years ago</a>.</p>\n\n<p>Your ProxyFix approach works just fine, but you misunderstood what it does. It <em>only</em> sets <code>request.remote_addr</code>; the <code>request.access_route</code> attribute is unchanged (the <code>X-Forwarded-For</code> header is <em>not</em> adjusted by the middleware). <em>However</em>, I'd be very wary of blindly counting off proxies.</p>\n\n<p>Applying the same whitelist approach to the middleware would look like:</p>\n\n<pre><code>class WhitelistRemoteAddrFix(object):\n    \"\"\"This middleware can be applied to add HTTP proxy support to an\n    application that was not designed with HTTP proxies in mind.  It\n    only sets `REMOTE_ADDR` from `X-Forwarded` headers.\n\n    Tests proxies against a set of trusted proxies.\n\n    The original value of `REMOTE_ADDR` is stored in the WSGI environment\n    as `werkzeug.whitelist_remoteaddr_fix.orig_remote_addr`.\n\n    :param app: the WSGI application\n    :param trusted_proxies: a set or sequence of proxy ip addresses that can be trusted.\n    \"\"\"\n\n    def __init__(self, app, trusted_proxies=()):\n        self.app = app\n        self.trusted_proxies = frozenset(trusted_proxies)\n\n    def get_remote_addr(self, remote_addr, forwarded_for):\n        \"\"\"Selects the new remote addr from the given list of ips in\n        X-Forwarded-For.  Picks first non-trusted ip address.\n        \"\"\"\n\n        if remote_addr in self.trusted_proxies:\n            return next((ip for ip in reversed(forwarded_for)\n                         if ip not in self.trusted_proxies),\n                        remote_addr)\n\n    def __call__(self, environ, start_response):\n        getter = environ.get\n        remote_addr = getter('REMOTE_ADDR')\n        forwarded_for = getter('HTTP_X_FORWARDED_FOR', '').split(',')\n        environ.update({\n            'werkzeug.whitelist_remoteaddr_fix.orig_remote_addr': remote_addr,\n        })\n        forwarded_for = [x for x in [x.strip() for x in forwarded_for] if x]\n        remote_addr = self.get_remote_addr(remote_addr, forwarded_for)\n        if remote_addr is not None:\n            environ['REMOTE_ADDR'] = remote_addr\n        return self.app(environ, start_response)\n</code></pre>\n\n<p>To be explicit: this middleware too, <em>only</em> sets <code>request.remote_addr</code>; <code>request.access_route</code> remains unaffected.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089172,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1397028007,
+                            "post_id": 22937719,
+                            "comment_id": 35047798,
+                            "link": "https://stackoverflow.com/questions/22868900/how-do-i-safely-get-the-users-real-ip-address-in-flask-using-mod-wsgi/22937719#comment35047798_22937719",
+                            "body": "You can trust your own server to set the ip address of the remote connection correctly. You can choose to trust specific remote connections to tell the truth. Combined with a whitelist, you can build a chain of trust."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 218277,
+                                "reputation": 1112,
+                                "user_id": 474516,
+                                "user_type": "registered",
+                                "display_name": "pbacterio"
+                            },
+                            "reply_to_user": {
+                                "account_id": 35417,
+                                "reputation": 1089172,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1397047532,
+                            "post_id": 22937719,
+                            "comment_id": 35060866,
+                            "link": "https://stackoverflow.com/questions/22868900/how-do-i-safely-get-the-users-real-ip-address-in-flask-using-mod-wsgi/22937719#comment35060866_22937719",
+                            "body": "And what about ip-spoofing or malicious proxies.?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 35417,
+                                "reputation": 1089172,
+                                "user_id": 100297,
+                                "user_type": "moderator",
+                                "display_name": "Martijn Pieters"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1397047949,
+                            "post_id": 22937719,
+                            "comment_id": 35061206,
+                            "link": "https://stackoverflow.com/questions/22868900/how-do-i-safely-get-the-users-real-ip-address-in-flask-using-mod-wsgi/22937719#comment35061206_22937719",
+                            "body": "IP spoofing in a TCP/IP connection requires that you can sniff the packets; e.g. you can also intercept whatever goes up and down already. Malicious proxies shouldn&#39;t be added to your trusted list, <i>duh</i>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 218277,
+                        "reputation": 1112,
+                        "user_id": 474516,
+                        "user_type": "registered",
+                        "display_name": "pbacterio"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": -4,
+                    "last_activity_date": 1396961647,
+                    "creation_date": 1396961647,
+                    "answer_id": 22937719,
+                    "question_id": 22868900,
+                    "link": "https://stackoverflow.com/questions/22868900/how-do-i-safely-get-the-users-real-ip-address-in-flask-using-mod-wsgi/22937719#22937719",
+                    "body": "<p>You can't safely do that, because the you can't trust all the parts in a http (or tcp) connection</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 247912,
+                "reputation": 3788,
+                "user_id": 522962,
+                "user_type": "registered",
+                "accept_rate": 100,
+                "display_name": "user_78361084"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 22936947,
+            "answer_count": 2,
+            "score": 12,
+            "last_activity_date": 1552088942,
+            "creation_date": 1396631283,
+            "last_edit_date": 1396663103,
+            "question_id": 22868900,
+            "link": "https://stackoverflow.com/questions/22868900/how-do-i-safely-get-the-users-real-ip-address-in-flask-using-mod-wsgi",
+            "title": "How do I safely get the user&#39;s real IP address in Flask (using mod_wsgi)?",
+            "body": "<p>I have a flask app setup on mod_wsgi/Apache and need to log the IP Address of the user. request.remote_addr returns \"127.0.0.1\" and <a href=\"http://esd.io/blog/flask-apps-heroku-real-ip-spoofing.html\">this fix</a> attempts to correct that but I've found that Django removed similar code for security reasons.</p>\n\n<p>Is there a better way to safely get the user's real IP address?</p>\n\n<p>EDIT: Maybe I'm missing something obvious. I applied <a href=\"https://github.com/mitsuhiko/werkzeug/blob/master/werkzeug/contrib/fixers.py#L94-144\">werkzeug's/Flask's fix</a> but it doesn't seem to make a difference when I try a request with altered headers:</p>\n\n<p>run.py:</p>\n\n<pre><code>    from werkzeug.contrib.fixers import ProxyFix\n    app.wsgi_app = ProxyFix(app.wsgi_app)\n    app.run()\n</code></pre>\n\n<p>view.py:</p>\n\n<pre><code>for ip in request.access_route:\n        print ip # prints \"1.2.3.4\" and \"my.ip.address\"\n</code></pre>\n\n<p>This same result happens if I have the ProxyFix enabled or not. I feel like I'm missing something completely obvious</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9935
+}

@@ -1,0 +1,1 @@
+inspect.stack(0)

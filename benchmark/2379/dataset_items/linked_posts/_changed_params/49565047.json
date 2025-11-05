@@ -1,0 +1,206 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "python-3.x",
+                "hex",
+                "pprint"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 1265583,
+                        "reputation": 41759,
+                        "user_id": 1222951,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "Aran-Fey"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1522404792,
+                    "post_id": 49565047,
+                    "comment_id": 86152386,
+                    "link": "https://stackoverflow.com/questions/49565047/pprint-with-hex-numbers#comment86152386_49565047",
+                    "body": "I give up. Take it from me: Don&#39;t try to customize the <code>pprint</code> module. It&#39;s <i>much</i> easier and cleaner to reimplement the whole damn thing. They should rewrite the docs to remove any mention of customization."
+                },
+                {
+                    "owner": {
+                        "account_id": 35417,
+                        "reputation": 1089212,
+                        "user_id": 100297,
+                        "user_type": "moderator",
+                        "display_name": "Martijn Pieters"
+                    },
+                    "reply_to_user": {
+                        "account_id": 1265583,
+                        "reputation": 41759,
+                        "user_id": 1222951,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "Aran-Fey"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1522412491,
+                    "post_id": 49565047,
+                    "comment_id": 86156033,
+                    "link": "https://stackoverflow.com/questions/49565047/pprint-with-hex-numbers#comment86156033_49565047",
+                    "body": "@Aran-Fey: I rewrote just <code>_safe_repr</code>. I&#39;ll probably end up suggesting a refactor of the module to Python based on my work below, because using <code>singledispatch</code> would make <code>pprint</code> much more extensible out of the box. I imagine third-party libraries could register their types with <code>pprint</code> by default with this, and for the OPs usecase to be trivial (<i>just register your type-annotated handler directly with the module</i> style instructions)."
+                },
+                {
+                    "owner": {
+                        "account_id": 808621,
+                        "reputation": 360780,
+                        "user_id": 908494,
+                        "user_type": "registered",
+                        "accept_rate": 25,
+                        "display_name": "abarnert"
+                    },
+                    "reply_to_user": {
+                        "account_id": 35417,
+                        "reputation": 1089212,
+                        "user_id": 100297,
+                        "user_type": "moderator",
+                        "display_name": "Martijn Pieters"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1522421170,
+                    "post_id": 49565047,
+                    "comment_id": 86160402,
+                    "link": "https://stackoverflow.com/questions/49565047/pprint-with-hex-numbers#comment86160402_49565047",
+                    "body": "@MartijnPieters You can just wrap <code>_safe_repr</code> to handle your case and then fall the original instead of rewriting the whole thing, which isn\u2019t <i>quite</i> as nasty, but it\u2019s still ugly. But the bigger problem is that you\u2019re hooking all instances this way instead of just the one you create, which defeats the purpose of having a class. If you refactor things, you\u2019d want to make it so you can register types with the instance (although being able to also register with the module would be nice, since nobody actually uses separate instances in practice...)."
+                },
+                {
+                    "owner": {
+                        "account_id": 35417,
+                        "reputation": 1089212,
+                        "user_id": 100297,
+                        "user_type": "moderator",
+                        "display_name": "Martijn Pieters"
+                    },
+                    "reply_to_user": {
+                        "account_id": 808621,
+                        "reputation": 360780,
+                        "user_id": 908494,
+                        "user_type": "registered",
+                        "accept_rate": 25,
+                        "display_name": "abarnert"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1522421343,
+                    "post_id": 49565047,
+                    "comment_id": 86160501,
+                    "link": "https://stackoverflow.com/questions/49565047/pprint-with-hex-numbers#comment86160501_49565047",
+                    "body": "@abarnert: I rather not set a global policy here (which is what monkeypatching <code>_safe_repr()</code> would do). If I refactor, you probably pass in an alternative <code>saferepr()</code> function and are given the opportunity to reuse the standard one to extend, or register with the one used by the module."
+                },
+                {
+                    "owner": {
+                        "account_id": 808621,
+                        "reputation": 360780,
+                        "user_id": 908494,
+                        "user_type": "registered",
+                        "accept_rate": 25,
+                        "display_name": "abarnert"
+                    },
+                    "reply_to_user": {
+                        "account_id": 35417,
+                        "reputation": 1089212,
+                        "user_id": 100297,
+                        "user_type": "moderator",
+                        "display_name": "Martijn Pieters"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1522421921,
+                    "post_id": 49565047,
+                    "comment_id": 86160860,
+                    "link": "https://stackoverflow.com/questions/49565047/pprint-with-hex-numbers#comment86160860_49565047",
+                    "body": "@MartijnPieters Yes, that\u2019s what I meant by defeating the purpose of having a class. Your answer here gets around that by basically dedicating a separate module to the subclass so it can still do the equivalent of a global call to <code>_safe_repr</code>, but you\u2019d really want the dispatcher to be saved with the instance so that it\u2019s easy to allow people to hook it at whichever level they want."
+                },
+                {
+                    "owner": {
+                        "account_id": 35417,
+                        "reputation": 1089212,
+                        "user_id": 100297,
+                        "user_type": "moderator",
+                        "display_name": "Martijn Pieters"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1522422335,
+                    "post_id": 49565047,
+                    "comment_id": 86161060,
+                    "link": "https://stackoverflow.com/questions/49565047/pprint-with-hex-numbers#comment86161060_49565047",
+                    "body": "Perhaps integrating the dispatch into the class (deprecating saferepr) is better. That\u2019s let you handle both modes (one-line and multi-line handling) with a single dispatcher per type, if that can be seen as practical."
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 35417,
+                        "reputation": 1089212,
+                        "user_id": 100297,
+                        "user_type": "moderator",
+                        "display_name": "Martijn Pieters"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 6,
+                    "last_activity_date": 1653652435,
+                    "last_edit_date": 1653652435,
+                    "creation_date": 1522358658,
+                    "answer_id": 49565245,
+                    "question_id": 49565047,
+                    "link": "https://stackoverflow.com/questions/49565047/pprint-with-hex-numbers/49565245#49565245",
+                    "body": "<p>You <em>can</em> alter the output of <code>pprint</code>, but you need to re-implement the <a href=\"https://docs.python.org/3/library/pprint.html#pprint.saferepr\" rel=\"nofollow noreferrer\"><code>saferepr()</code> function</a>, not just subclass the <code>pprint.PrettyPrinter()</code> class.</p>\n<p>What happens is that (an internal version of) the <code>saferepr()</code> function is used for all objects, and that function itself then recursively handles turning objects into representations (using only itself, not the <code>PrettyPrinter()</code> instance), so any customisation <em>has</em> to happen <em>there</em>. Only when the result of <code>saferepr()</code> becomes too large (too wide for the configured width) will the <code>PrettyPrinter</code> class start breaking up container output into components to put on separate lines; the process of calling <code>saferepr()</code> is then repeated for the component elements.</p>\n<p>So <a href=\"https://docs.python.org/3/library/pprint.html#pprint.PrettyPrinter.format\" rel=\"nofollow noreferrer\"><code>PrettyPrinter.format()</code></a> is only responsible for handling the <em>top-level</em> object, and every recursive object that is a) inside a supported container type (dict, list, tuple, string and the standard library subclasses of these) and b) where the representation of the parent container produced by <code>.format()</code> exceeded the display width.</p>\n<p>To be able to override the implementation, we need to understand how the <code>.format()</code> method and the <code>saferepr()</code> implementation interact, what arguments they take and what they need to return.</p>\n<p><code>PrettyPrinter.format()</code> is passed additional arguments, <code>context</code>, <code>maxlevels</code> and <code>level</code>:</p>\n<ul>\n<li><code>context</code> is used to detect recursion (the default implementation returns the result of <code>_recursion(object)</code> if <code>id(object) in context</code> is true.</li>\n<li>when <code>maxlevels</code> is set and <code>level &gt;= maxlevels</code> is true, the default implementation returns <code>...</code> as the contents of a container.</li>\n</ul>\n<p>The method is also supposed to return a tuple of 3 values; the representation string and two flags. You can safely <em>ignore</em> the meaning of those flags, they are actually <em>never used in the current implementation</em>. They are meant to signal if the produced representation is 'readable' (uses Python syntax that can be passed to <code>eval()</code>) or was recursive (the object contained circular references). But the  <code>PrettyPrinter.isreadable()</code> and <code>PrettyPrinter.isrecursive()</code> methodsactually completely bypass <code>.format()</code>; these return values seem to be a hold-over from a refactoring that broke the relationship between <code>.format()</code> and those two methods. So just return a representation string and <em>whatever</em> two boolean values you like.</p>\n<p><code>.format()</code> really just delegates to an internal implementation of <code>saferepr()</code> that then does several things</p>\n<ul>\n<li>handle recursion detection with <code>context</code>, and depth handling for <code>maxlevels</code> and <code>level</code></li>\n<li>recurse over dictionaries, lists and tuples (and their subclasses, as long as their <code>__repr__</code> method is still the default implementation)</li>\n<li>for dictionaries, sort the key-value pairs. This is <a href=\"https://stackoverflow.com/questions/26575183/how-can-i-get-2-x-like-sorting-behaviour-in-python-3-x\">trickier than it appears in Python 3</a>, but this is solved with a custom <code>_safe_tuple</code> sorting key that approximates Python 2's <em>sort everything</em> behaviour. We can re-use this.</li>\n</ul>\n<p>To implement a recursive replacement, I prefer to use <a href=\"https://docs.python.org/3/library/functools.html#functools.singledispatch\" rel=\"nofollow noreferrer\"><code>@functools.singledispatch()</code></a> to delegate handling of different types. Ignoring custom <code>__repr__</code> methods, handling depth issues, recursion, and empty objects, can also be handled by a decorator:</p>\n<pre><code>import pprint\nfrom pprint import PrettyPrinter\nfrom functools import singledispatch, wraps\nfrom typing import get_type_hints\n\ndef common_container_checks(f):\n    type_ = get_type_hints(f)['object']\n    base_impl = type_.__repr__\n    empty_repr = repr(type_())   # {}, [], ()\n    too_deep_repr = f'{empty_repr[0]}...{empty_repr[-1]}'  # {...}, [...], (...)\n    @wraps(f)\n    def wrapper(object, context, maxlevels, level):\n        if type(object).__repr__ is not base_impl:  # subclassed repr\n            return repr(object)\n        if not object:                              # empty, short-circuit\n            return empty_repr\n        if maxlevels and level &gt;= maxlevels:        # exceeding the max depth\n            return too_deep_repr\n        oid = id(object)\n        if oid in context:                          # self-reference\n            return pprint._recursion(object)\n        context[oid] = 1\n        result = f(object, context, maxlevels, level)\n        del context[oid]\n        return result\n    return wrapper\n\n@singledispatch\ndef saferepr(object, context, maxlevels, level):\n    return repr(object)\n\n@saferepr.register\ndef _handle_int(object: int, *args):\n    # uppercase hexadecimal representation with 0x prefix\n    return f'0x{object:X}'\n\n@saferepr.register\n@common_container_checks\ndef _handle_dict(object: dict, context, maxlevels, level):\n    level += 1\n    contents = [\n        f'{saferepr(k, context, maxlevels, level)}: '\n        f'{saferepr(v, context, maxlevels, level)}'\n        for k, v in sorted(object.items(), key=pprint._safe_tuple)\n    ]\n    return f'{{{&quot;, &quot;.join(contents)}}}'\n\n@saferepr.register\n@common_container_checks\ndef _handle_list(object: list, context, maxlevels, level):\n    level += 1\n    contents = [\n        f'{saferepr(v, context, maxlevels, level)}'\n        for v in object\n    ]\n    return f'[{&quot;, &quot;.join(contents)}]'\n\n@saferepr.register\n@common_container_checks\ndef _handle_tuple(object: tuple, context, maxlevels, level):\n    level += 1\n    if len(object) == 1:\n        return f'({saferepr(object[0], context, maxlevels, level)},)'\n    contents = [\n        f'{saferepr(v, context, maxlevels, level)}'\n        for v in object\n    ]\n    return f'({&quot;, &quot;.join(contents)})'\n\nclass HexIntPrettyPrinter(PrettyPrinter):\n    def format(self, *args):\n        # it doesn't matter what the boolean values are here\n        return saferepr(*args), True, False\n</code></pre>\n<p>This hand-full can handle anything the base <code>pprint</code> implementation can, <em>and</em> it will produce hex integers in any supported container. Just create an instance of the <code>HexIntPrettyPrinter()</code> class and call <code>.pprint()</code> on that:</p>\n<pre><code>&gt;&gt;&gt; sample = {66: 'far',\n...  99: 'Bottles of the beer on the wall',\n...  '12': 4277009102,\n...  'boo': 21,\n...  'pprint': [16, 32, 48, 64, 80, 96, 112, 128]}\n&gt;&gt;&gt; pprinter = HexIntPrettyPrinter()\n&gt;&gt;&gt; pprinter.pprint(sample)\n{0x42: 'far',\n 0x63: 'Bottles of the beer on the wall',\n '12': 0xFEEDFACE,\n 'boo': 0x15,\n 'pprint': [0x10, 0x20, 0x30, 0x40, 0x50, 0x60, 0x70, 0x80]}\n</code></pre>\n<p>Side note: if you are using Python 3.6 or older you'll have to replace the <code>@saferepr.registration</code> lines with <code>@saferepr.registration(&lt;type&gt;)</code> calls, where <code>&lt;type&gt;</code> duplicates the type annotation on the first argument of the registered function.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 543178,
+                        "reputation": 13603,
+                        "user_id": 912236,
+                        "user_type": "registered",
+                        "display_name": "Orwellophile"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1631068881,
+                    "last_edit_date": 1631068881,
+                    "creation_date": 1607976698,
+                    "answer_id": 65295800,
+                    "question_id": 49565047,
+                    "link": "https://stackoverflow.com/questions/49565047/pprint-with-hex-numbers/65295800#65295800",
+                    "body": "<h3>Update</h3>\n<p>I have implemented my concept in code. This seems to work fairly well.</p>\n<p>Just use pph for &quot;pretty print hex&quot; or &quot;ppf&quot; for &quot;pretty print hex (format)&quot; (returns results).</p>\n<pre class=\"lang-py prettyprint-override\"><code>from pprint import PrettyPrinter\npp = PrettyPrinter(indent=4).pprint\npf = PrettyPrinter(indent=4).pformat\ndef pph(o):\n    print(re.sub(r&quot;((?:, +|: +|\\( *|\\[ *|\\{ *)-?)(\\d\\d+)(?=[,)}\\]])&quot;, lambda m: m.group(1) + hex(m.group(2)), pf(o)))\ndef pfh(o):\n    return re.sub(r&quot;((?:, +|: +|\\( *|\\[ *|\\{ *)-?)(\\d\\d+)(?=[,)}\\]])&quot;, lambda m: m.group(1) + hex(m.group(2)), pf(o))\n\n</code></pre>\n<h3>Original Post</h3>\n<p>Wow, sounds really complex.  Can I ask what's wrong with just doing something like this?</p>\n<pre><code>d = pprint.pformat(data)\nprint re.sub(r'(\\b\\d+)L', lambda x: &quot;0x{:x}&quot;.format(int(x.group(1))), d)\n</code></pre>\n<p>It worked on my data, which was admittedly all <code>long</code> rather than <code>int</code> (providing the convenient <code>L</code> anchor),  and there are no cases of quoted literal numbers -- but such could be easily dealt with with</p>\n<pre><code>re.split(r&quot;('[^']+')&quot;, d)\n</code></pre>\n<p>I'll grant that it isn't a pretty solution, but given the alternative, at least it's not complicated either.</p>\n<pre class=\"lang-json prettyprint-override\"><code>{'funcStartRanges': [],\n 'noCodeRanges': [],\n 'noOwnerRanges': [{'last': 0x140ce1332, 'length': 0x12, 'start': 0x140ce1321},\n                   {'last': 0x140ce1332, 'length': 0x12, 'start': 0x140ce1321}],\n 'otherOwnerRanges': [{'last': 0x140ce1332,\n                       'length': 0x12,\n                       'start': 0x140ce1321}],\n 'weOwnItRanges': []}\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 979386,
+                "reputation": 21842,
+                "user_id": 999530,
+                "user_type": "registered",
+                "accept_rate": 86,
+                "display_name": "Travis Griggs"
+            },
+            "comment_count": 6,
+            "is_answered": true,
+            "accepted_answer_id": 49565245,
+            "answer_count": 2,
+            "score": 3,
+            "last_activity_date": 1653652435,
+            "creation_date": 1522357629,
+            "last_edit_date": 1522412998,
+            "question_id": 49565047,
+            "link": "https://stackoverflow.com/questions/49565047/pprint-with-hex-numbers",
+            "title": "pprint with hex numbers",
+            "body": "<p>I work with a number of json-like dicts. <code>pprint</code> is handy for structuring them. Is there a way to cause all ints in a pprint output to be printed in hex rather than decimal?</p>\n\n<p>For example, rather than:</p>\n\n<pre><code>{66: 'far',\n 99: 'Bottles of the beer on the wall',\n '12': 4277009102,\n 'boo': 21,\n 'pprint': [16, 32, 48, 64, 80, 96, 112, 128]}\n</code></pre>\n\n<p>I'd rather see:</p>\n\n<pre><code>{0x42: 'far',\n 0x63: 'Bottles of the beer on the wall',\n '12': 0xFEEDFACE,\n 'boo': 0x15,\n 'pprint': [0x10, 0x20, 0x30, 0x40, 0x50, 0x60, 0x70, 0x80]}\n</code></pre>\n\n<p>I have tried customizing <code>PrettyPrinter</code>, but to no avail, was I able to cause the above, having <code>PrettyPrinter.format()</code> handle integers only seems to work for some of the integers:</p>\n\n<pre><code>class MyPrettyPrinter(PrettyPrinter):\n    def format(self, object, context, maxlevels, level):\n        if isinstance(object, int):\n            return '0x{:X}'.format(object), True, False\n        return super().format(object, context, maxlevels, level)\n</code></pre>\n\n<p>the above class produces</p>\n\n<pre><code>{0x42: 'far',\n 0x63: 'Bottles of the beer on the wall',\n '12': 0xFEEDFACE,\n 'boo': 0x15,\n 'pprint': [16, 32, 48, 64, 80, 96, 112, 128]}\n</code></pre>\n\n<p>The list contents are not correctly formatted.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5400
+}

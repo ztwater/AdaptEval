@@ -1,0 +1,99 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "scipy",
+                "linear-programming"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1880602,
+                                "reputation": 7440,
+                                "user_id": 1700890,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "user1700890"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1512747538,
+                            "post_id": 47717327,
+                            "comment_id": 82395333,
+                            "link": "https://stackoverflow.com/questions/47717012/linprog-in-scipy-optimize-checking-solution/47717327#comment82395333_47717327",
+                            "body": "Thank you for reply. I tried <code>res = linprog(c = c,  A_eq = A_eq, b_eq = b_eq,                bounds = ((2,None),(2,None),(2,None),(2,None),(2,None),(2,None),(2,No&zwnj;&#8203;ne)),                method=&#39;interior-point&#39;)</code>, but got back <code>ValueError: Unknown solver interior-point</code>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 193612,
+                                "reputation": 32982,
+                                "user_id": 2320035,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "sascha"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1880602,
+                                "reputation": 7440,
+                                "user_id": 1700890,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "user1700890"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1512747558,
+                            "post_id": 47717327,
+                            "comment_id": 82395345,
+                            "link": "https://stackoverflow.com/questions/47717012/linprog-in-scipy-optimize-checking-solution/47717327#comment82395345_47717327",
+                            "body": "As i said: scipy &gt;= 1.0"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 193612,
+                        "reputation": 32982,
+                        "user_id": 2320035,
+                        "user_type": "registered",
+                        "accept_rate": 79,
+                        "display_name": "sascha"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": true,
+                    "score": 1,
+                    "last_activity_date": 1512748050,
+                    "last_edit_date": 1512748050,
+                    "creation_date": 1512746827,
+                    "answer_id": 47717327,
+                    "question_id": 47717012,
+                    "link": "https://stackoverflow.com/questions/47717012/linprog-in-scipy-optimize-checking-solution/47717327#47717327",
+                    "body": "<p>In general, scipy's linprog (<code>method='simplex'</code>) is somewhat broken and not maintained much anymore.</p>\n\n<p>Negative slacks like:</p>\n\n<pre><code>slack: array([ -2.,  -2.,  -2.,  94.,   0.,   0.,  -2.])\n</code></pre>\n\n<p>should never result in a valid solution!</p>\n\n<p>While i saw some bad things in linprog (not finding an existing feasible solution), this looks very very bad (claiming an infeasible solution to be correct)!</p>\n\n<p>So three things:</p>\n\n<ul>\n<li><strong>scipy >= 1.0</strong> has a new Interior-point based LP-solver <code>method='interior-point'</code> which is more robust and more advanced\n\n<ul>\n<li>algorithmic-wise very different!</li>\n<li>for use-cases like yours the only difference (apart from robustness and performance) is in the nature of solutions:\n\n<ul>\n<li>not guaranteed to be basic solutions (no support for cross-over; commercial solvers allow that)!</li>\n</ul></li>\n</ul></li>\n<li>use the bounds argument instead of those inequalities to describe variable-bounds!\n\n<ul>\n<li>more specialized handling!</li>\n</ul></li>\n<li><strong>you described:</strong> <code>-x &lt;= -2 &lt;-&gt; x &gt;= 2</code>\n\n<ul>\n<li>the expected and correct solution is <code>x &gt;= 2</code>!</li>\n</ul></li>\n</ul>\n\n<p>IPM on your code:</p>\n\n<pre><code>     con: array([ 2.77992740e-10, -1.52664548e-11,  3.69659858e-12, -5.92570437e-12,\n       -2.37077025e-12])\n     fun: 43.3333333331385\n message: 'Optimization terminated successfully.'\n     nit: 5\n   slack: array([4.13333333e+01, 6.92779167e-13, 2.33333333e+00, 1.47777778e+01,\n       1.47777778e+01, 1.47777778e+01, 1.75000000e+01])\n  status: 0\n success: True\n       x: array([43.33333333,  2.        ,  4.33333333, 16.77777778, 16.77777778,\n       16.77777778, 19.5       ])\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 1880602,
+                "reputation": 7440,
+                "user_id": 1700890,
+                "user_type": "registered",
+                "accept_rate": 75,
+                "display_name": "user1700890"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 47717327,
+            "answer_count": 1,
+            "score": 1,
+            "last_activity_date": 1512748050,
+            "creation_date": 1512745622,
+            "question_id": 47717012,
+            "link": "https://stackoverflow.com/questions/47717012/linprog-in-scipy-optimize-checking-solution",
+            "title": "linprog in scipy.optimize - checking solution",
+            "body": "<p>I tried to solve linear system with constraints using <code>linprog</code> from  <code>scipy.optimize</code>, but got answer contradicting some inequalities. \nHere is my set up:</p>\n\n<pre><code>import numpy as np\nfrom scipy.optimize import linprog\nc = np.array([1,0,0,0,0,0,0])\nA_ub = np.identity(7)*(-1)\nb_ub = np.array([[-2],[-2],[-2],[-2],[-2],[-2],[-2]])\nA_eq = np.array([[1,1,1,1,1,1,0],[0.3,1.3,0.9,0,0,0,-1],[0.3,0,0,0,0,0,-2/3],\n                 [0,0.65,0,0,0,0,-1/15],[0,0,0.3,0,0,0,-1/15]])\nb_eq = np.array([[100],[0],[0],[0],[0]])\nres = linprog(c = c, A_ub=A_ub, b_ub=b_ub, A_eq = A_eq, b_eq = b_eq)\n</code></pre>\n\n<p>Here is the answer:</p>\n\n<pre><code>fun: -0.0\n message: 'Optimization terminated successfully.'\n     nit: 15\n   slack: array([ -2.,  -2.,  -2.,  94.,   0.,   0.,  -2.])\n  status: 0\n success: True\n       x: array([  0.00000000e+00,  -8.88178420e-16,  -1.77635684e-15,\n         9.60000000e+01,   2.00000000e+00,   2.00000000e+00,\n        -7.10542736e-15])\n</code></pre>\n\n<p>As you can see <code>x_2 =&gt; 8.88178420e-16</code> is not smaller than -2.</p>\n\n<p>Can somebody clarify why it happens?</p>\n\n<p>Here is link to documentation:\n<a href=\"https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html\" rel=\"nofollow noreferrer\">linprog</a></p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8875
+}

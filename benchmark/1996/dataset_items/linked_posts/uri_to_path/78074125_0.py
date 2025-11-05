@@ -1,0 +1,8 @@
+>>> p = Path.from_uri('file:////server/share')
+WindowsPath('//server/share')
+>>> p = Path.from_uri('file://///server/share')
+WindowsPath('//server/share')
+>>> p = Path.from_uri('file:c:/windows')
+WindowsPath('c:/windows')
+>>> p = Path.from_uri('file:/c|/windows')
+WindowsPath('c:/windows')

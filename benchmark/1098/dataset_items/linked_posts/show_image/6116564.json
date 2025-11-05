@@ -1,0 +1,439 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "user-interface",
+                "opencv"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 756839,
+                                "reputation": 581,
+                                "user_id": 768493,
+                                "user_type": "unregistered",
+                                "display_name": "Arthur"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1307813970,
+                            "post_id": 6304156,
+                            "comment_id": 7384578,
+                            "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/6304156#comment7384578_6304156",
+                            "body": "Thank you. As a workaround, following your comments, I have decided to just re-use the same window without calling cv.DestroyWindow."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 106426,
+                        "reputation": 2228,
+                        "user_id": 283515,
+                        "user_type": "registered",
+                        "accept_rate": 64,
+                        "display_name": "susmits"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": true,
+                    "score": 39,
+                    "last_activity_date": 1550038290,
+                    "last_edit_date": 1550038290,
+                    "creation_date": 1307696316,
+                    "answer_id": 6304156,
+                    "question_id": 6116564,
+                    "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/6304156#6304156",
+                    "body": "<p>There are a few peculiarities with the GUI in OpenCV. The <code>destroyImage</code> call fails to close a window (atleast under Linux, where the default backend was Gtk+ until 2.1.0) unless <code>waitKey</code> was called to pump the events. Adding a <code>waitKey(1)</code> call right after <code>destroyWindow</code> may work.</p>\n\n<p>Even so, closing is not guaranteed; the the <code>waitKey</code> function is only intercepted if a window has focus, and so if the window didn't have focus at the time you invoked <code>destroyWindow</code>, chances are it'll stay visible till the next <code>destroyWindow</code> call.</p>\n\n<p>I'm assuming this is a behaviour that stems from Gtk+; the function didn't give me any trouble when I used it under Windows.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1901613,
+                        "reputation": 61,
+                        "user_id": 1717365,
+                        "user_type": "unregistered",
+                        "display_name": "Marco Centin"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 6,
+                    "last_activity_date": 1349298843,
+                    "last_edit_date": 1349298843,
+                    "creation_date": 1349273579,
+                    "answer_id": 12710371,
+                    "question_id": 6116564,
+                    "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/12710371#12710371",
+                    "body": "<p>This solution works for me (under Ubuntu 12.04 with python open in the shell):</p>\n\n<p>Re-invoke <code>cv.ShowImage</code> after the window is 'destroyed'.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 468268,
+                                "reputation": 6117,
+                                "user_id": 874161,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "buergi"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1373447981,
+                            "post_id": 15058451,
+                            "comment_id": 25557107,
+                            "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/15058451#comment25557107_15058451",
+                            "body": "This is the correct answer, actually it doesn&#39;t matter when you call <code>StartWindowThread()</code> but it needs to be called somewhere before or right after opening the window."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2323535,
+                                "reputation": 9960,
+                                "user_id": 2038544,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "razz"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1412900673,
+                            "post_id": 15058451,
+                            "comment_id": 41250982,
+                            "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/15058451#comment41250982_15058451",
+                            "body": "It worked for me like this: 1- created window <code>cv.namedWindow</code>. 2- created thread (the window opened) <code>cv.startWindowThread()</code>. 3- <code>cv2.imshow</code> to update image. I didn&#39;t have to use <code>cv2.waitKey</code> at all and when i&#39;m finished i just closed the window by hiting x button and it closed normally."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1502929,
+                                "reputation": 1785,
+                                "user_id": 1856885,
+                                "user_type": "registered",
+                                "display_name": "Harris"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1523843252,
+                            "post_id": 15058451,
+                            "comment_id": 86711928,
+                            "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/15058451#comment86711928_15058451",
+                            "body": "According to <a href=\"https://github.com/opencv/opencv/issues/7562\" rel=\"nofollow noreferrer\">this Github issue</a>, the <code>startWindowThread()</code> function is largely unused and potentially deprecated. As of OpenCV 3, they don&#39;t even explain the stub in the documentation. It seems the only use is if you&#39;re using GTK for your windowing API."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 483926,
+                        "reputation": 3113,
+                        "user_id": 899275,
+                        "user_type": "registered",
+                        "accept_rate": 91,
+                        "display_name": "elaRosca"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 42,
+                    "last_activity_date": 1550038493,
+                    "last_edit_date": 1550038493,
+                    "creation_date": 1361752365,
+                    "answer_id": 15058451,
+                    "question_id": 6116564,
+                    "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/15058451#15058451",
+                    "body": "<p>You need to run <code>cv.startWindowThread()</code> after opening the window.\nI had the same issue and now this works for me.</p>\n\n<p>Hope this helps for future readers. And there is also a <code>cv2</code> binding (I advise to use that instead of <code>cv</code>).</p>\n\n<p>This code works for me:</p>\n\n<pre><code>import cv2 as cv\nimport time\n\nWINDOW_NAME = \"win\"\n\nimage = cv.imread(\"ela.jpg\", cv.CV_LOAD_IMAGE_COLOR)\ncv.namedWindow(WINDOW_NAME, cv.CV_WINDOW_AUTOSIZE)\ninitialtime = time.time()\n\ncv.startWindowThread()\n\nwhile (time.time() - initialtime &lt; 5):\n  print \"in first while\"\ncv.imshow(WINDOW_NAME, image)\ncv.waitKey(1000)\n\ncv.waitKey(1)\ncv.destroyAllWindows()\ncv.waitKey(1)\n\ninitialtime = time.time()\nwhile (time.time() - initialtime &lt; 6):\n    print \"in second while\"\n</code></pre>\n\n<p>The same issue happens with the C++ version, on Linux:\n<a href=\"https://stackoverflow.com/questions/7139968/trying-to-close-opencv-window-has-no-effect\">Trying to close OpenCV window has no effect</a></p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 2232160,
+                        "reputation": 2992,
+                        "user_id": 1969455,
+                        "user_type": "registered",
+                        "display_name": "Brandlingo"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1364201685,
+                    "creation_date": 1364201685,
+                    "answer_id": 15610883,
+                    "question_id": 6116564,
+                    "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/15610883#15610883",
+                    "body": "<p>Fiddling around with this issue in the python console I observed the following behavior:</p>\n\n<ul>\n<li>issuing a <code>cv2.imshow</code> after <code>cv2.destroyWindow</code> <em>sometimes</em> closes the window. Albeit the old window pops up again with the next <code>highgui</code> call, e.g., <code>cv2.namedWindow</code></li>\n<li>the <strong>third</strong> call of <code>cv2.waitKey</code> after <code>cv2.destroyWindow</code> closed the window every time I tried. Additionally the closed window remained closed, even when using <code>cv2.namedWindow</code> afterwards</li>\n</ul>\n\n<p>Hope this helps somebody.</p>\n\n<p>(I used Ubuntu 12.10 with python 2.7.3 but OpenCV 2.4.2 from the 13.04 repos)</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3077982,
+                        "reputation": 103,
+                        "user_id": 2606887,
+                        "user_type": "registered",
+                        "accept_rate": 67,
+                        "display_name": "Telewa"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1374836625,
+                    "creation_date": 1374836625,
+                    "answer_id": 17879703,
+                    "question_id": 6116564,
+                    "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/17879703#17879703",
+                    "body": "<p>After searching aroung for some time, none of the solutions provided worked for me so since there's a bug in this function and I did not have time to fix it, I did not have to use the cv2 window to show the frames.  Once a few frames have been saved, you can open the file in a different viewer, like VLC or MoviePlayer ( for linux ).</p>\n\n<p>Here's how i did mine.</p>\n\n<pre><code> import cv2\n\n threadDie = True # change this to false elsewhere to stop getting the video\n def getVideo(Message):\n          print Message\n          print \"Opening url\"\n          video = cv2.VideoCapture(\"rtsp://username:passwordp@IpAddress:554/axis-media/media.amp\")\n\n          print \"Opened url\"\n          fourcc = cv2.cv.CV_FOURCC('X','V','I','D')\n          fps = 25.0 # or 30.0 for a better quality stream\n          writer = cv2.VideoWriter('out.avi', fourcc,fps, (640,480),1)\n          i = 0\n\n          print \"Reading frames \"\n          while threadDie:\n                  ret, img = video.read()\n                  print \"frame number: \",i\n                  i=i+1\n                  writer.write(img)\n          del(video)\n\n\n          print \"Finished capturing video\"\n</code></pre>\n\n<p>Then open the file with a different viewer, prabably in a nother function, like if you like vlc, you can start it and pass the saved file as a parameter. On the terminal, i would do this</p>\n\n<pre><code>vlc out.avi #out.avi is my video file being saved by the function above.\n</code></pre>\n\n<p>This worked for me on arch linux.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4301086,
+                                "reputation": 1287,
+                                "user_id": 3514785,
+                                "user_type": "registered",
+                                "display_name": "Zuks"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1495655590,
+                            "post_id": 25301690,
+                            "comment_id": 75350831,
+                            "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/25301690#comment75350831_25301690",
+                            "body": "Did you intentionally include the destroy command in the loop?"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3538235,
+                        "reputation": 31,
+                        "user_id": 2955993,
+                        "user_type": "registered",
+                        "display_name": "sayem2603"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1514147251,
+                    "last_edit_date": 1514147251,
+                    "creation_date": 1407998778,
+                    "answer_id": 25301690,
+                    "question_id": 6116564,
+                    "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/25301690#25301690",
+                    "body": "<p>I solved the problem by calling <code>cv2.waitKey(1)</code> in a for loop, I don't know why it worked but gets my job done, so I didn't bother myself further.</p>\n\n<pre><code>for i in range(1,10):\n    cv2.destroyAllWindows()\n    cv2.waitkey(1)\n</code></pre>\n\n<p>you are welcome to explain.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5787146,
+                                "reputation": 12051,
+                                "user_id": 4565943,
+                                "user_type": "registered",
+                                "accept_rate": 74,
+                                "display_name": "&#201;be Isaac"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1482394166,
+                            "post_id": 25794701,
+                            "comment_id": 69758348,
+                            "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/25794701#comment69758348_25794701",
+                            "body": "Strangely, this is the only solution that worked for me."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3503923,
+                        "reputation": 488,
+                        "user_id": 2929924,
+                        "user_type": "registered",
+                        "display_name": "Jay"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 31,
+                    "last_activity_date": 1410460384,
+                    "creation_date": 1410460384,
+                    "answer_id": 25794701,
+                    "question_id": 6116564,
+                    "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/25794701#25794701",
+                    "body": "<p>Sayem2603</p>\n\n<p>I tried your solution and it worked for me - thanks!  I did some trial and error and discovered that looping 4 times did the trick for me... or posting the same code 4 times just the same..</p>\n\n<p>Further, I drilled down to:</p>\n\n<pre><code>cv2.destroyAllWindows()\ncv2.waitKey(1)\ncv2.waitKey(1)\ncv2.waitKey(1)\ncv2.waitKey(1)\n</code></pre>\n\n<p>or simply calling DestroyAllWindows and then looping the waitKey() code 4 times:</p>\n\n<pre><code>cv2.destroyAllWindows()\nfor i in range (1,5):\n    cv2.waitKey(1)\n</code></pre>\n\n<p>Worked as well.  I am not savvy enough to know why this works exactly, though I assume it has something to do with the interruption and delay created by looping that code(?)  </p>\n\n<p>Matth\u00e4us Brandl said, above, that the third waitKey() worked for him, so perhaps it is slightly different on each system?  (I am running Linux Mint with 3.16.1 kernel and python 2.7)</p>\n\n<p>The delay, alone, doesn't explain it, as simply increasing the delay time on the waitKey() does not do the trick.  (Also looped print(\"Hello\") 1000 times instead of using wiatKey() just to see if the delay that created helped any - it did not.)  Must have something more to do with how waitKey() interacts with window events.</p>\n\n<p>OpenCV Docs say: <strong>\"This function is the only method in HighGUI that can fetch and handle events, so it needs to be called periodically for normal event processing unless HighGUI is used within an environment that takes care of event processing.\"</strong></p>\n\n<p>Perhaps it creates an interrupt of sorts in the GUI display that allows the destroyAllWindows() action to process?</p>\n\n<p>J</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 4009706,
+                        "reputation": 103,
+                        "user_id": 3303469,
+                        "user_type": "registered",
+                        "display_name": "Michelcyc"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1471374847,
+                    "creation_date": 1471374847,
+                    "answer_id": 38982774,
+                    "question_id": 6116564,
+                    "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/38982774#38982774",
+                    "body": "<p>If you are using Spyder ( Anaconda Package ) there is the problem.</p>\n\n<p>None of the solutions worked for me.\nI discovered that the problem wasn't the functions, but a problem on Spyder really. Try to use a texteditor plus running on terminal and you be fine using simply:</p>\n\n<pre><code>WINDOW_NAME = \"win\"\nimage = cv.imread(\"foto.jpg\", 0)\ncv.namedWindow(WINDOW_NAME, cv.CV_WINDOW_AUTOSIZE)\n\ncv.startWindowThread()\n\ncv.imshow(WINDOW_NAME, image)\ncv.waitKey()\ncv.destroyAllWindows()\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 5622693,
+                        "reputation": 111,
+                        "user_id": 4451973,
+                        "user_type": "registered",
+                        "display_name": "Hassan Alshehri"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 11,
+                    "last_activity_date": 1496960312,
+                    "creation_date": 1496960312,
+                    "answer_id": 44446444,
+                    "question_id": 6116564,
+                    "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/44446444#44446444",
+                    "body": "<p>Here is what worked for me:\n</p>\n\n<pre><code>cv2.namedWindow(\"image\")\ncv2.imshow('image', img)\ncv2.waitKey(0) # close window when a key press is detected\ncv2.destroyWindow('image')\ncv2.waitKey(1)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 12598636,
+                        "reputation": 1277,
+                        "user_id": 9162193,
+                        "user_type": "registered",
+                        "display_name": "yl_low"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1529721806,
+                    "last_edit_date": 1529721806,
+                    "creation_date": 1529720271,
+                    "answer_id": 50997415,
+                    "question_id": 6116564,
+                    "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/50997415#50997415",
+                    "body": "<p>It seems that none of the above solutions worked for me if I run it on Jupyter Notebook (the window hangs when closing and you need to force quit Python to close the window). </p>\n\n<p>I am on macOS High Sierra 10.13.4, Python 3.6.5, OpenCV 3.4.1.</p>\n\n<p>The below code works if you run it as a .py file (source: <a href=\"https://www.learnopencv.com/read-write-and-display-a-video-using-opencv-cpp-python/\" rel=\"nofollow noreferrer\">https://www.learnopencv.com/read-write-and-display-a-video-using-opencv-cpp-python/</a>). It opens the camera, records the video, closes the window successfully upon pressing 'q', and saves the video in .avi format. </p>\n\n<pre><code>import cv2\nimport numpy as np\n\n# Create a VideoCapture object\ncap = cv2.VideoCapture(0)\n\n# Check if camera opened successfully\nif (cap.isOpened() == False): \n  print(\"Unable to read camera feed\")\n\n# Default resolutions of the frame are obtained.The default resolutions are system dependent.\n# We convert the resolutions from float to integer.\nframe_width = int(cap.get(3))\nframe_height = int(cap.get(4))\n\n# Define the codec and create VideoWriter object.The output is stored in 'outpy.avi' file.\nout = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))\n\nwhile(True):\n  ret, frame = cap.read()\n\n  if ret == True: \n\n    # Write the frame into the file 'output.avi'\n    out.write(frame)\n\n    # Display the resulting frame    \n    cv2.imshow('frame',frame)\n\n    # Press Q on keyboard to stop recording\n    if cv2.waitKey(1) &amp; 0xFF == ord('q'):\n      break\n\n  # Break the loop\n  else:\n    break \n\n# When everything done, release the video capture and video write objects\ncap.release()\nout.release()\n\n# Closes all the frames\ncv2.destroyAllWindows() \n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 14973714,
+                        "reputation": 1,
+                        "user_id": 10809741,
+                        "user_type": "registered",
+                        "display_name": "Dinesh jain"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1545204969,
+                    "last_edit_date": 1545204969,
+                    "creation_date": 1545204826,
+                    "answer_id": 53846520,
+                    "question_id": 6116564,
+                    "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/53846520#53846520",
+                    "body": "<p><em>This worked for me in spyder :</em></p>\n\n<pre><code>import cv2 as cv\ncv.namedWindow(\"image\")\nimg = cv.imread(\"image_name.jpg\")\ncv.imshow(\"image\",img)\n\ncv.waitKey(5000) # 5 sec delay before image window closes\ncv.destroyWindow(\"image\")\n</code></pre>\n\n<p><strong>Remember</strong> use only <code>cv.waitKey(positive Integer)</code> for this to work</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 17813879,
+                        "reputation": 152,
+                        "user_id": 12937879,
+                        "user_type": "registered",
+                        "display_name": "Mehmet Kazan&#231;"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1582280002,
+                    "creation_date": 1582280002,
+                    "answer_id": 60336411,
+                    "question_id": 6116564,
+                    "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/60336411#60336411",
+                    "body": "<p>I had the same issue. The problem is that while(cap.isOpened()): loop does not finish so that I added below structure. When video has no frame in the following part, it returns ret values as False. Normally, I put destroyAllWindows command out of loop but I moved it into the loop. It works in my code properly. </p>\n\n<pre><code>while(cap.isOpened()):\n ret, frame = cap.read()  \n if ret == False:\n        cap.release()\n        cv2.waitKey(1)\n        cv2.destroyAllWindows()\n        cv2.waitKey(1)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 21599971,
+                        "reputation": 21,
+                        "user_id": 15928296,
+                        "user_type": "registered",
+                        "display_name": "Bian "
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1652487217,
+                    "creation_date": 1652487217,
+                    "answer_id": 72236442,
+                    "question_id": 6116564,
+                    "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/72236442#72236442",
+                    "body": "<pre><code>cv2.imshow(&quot;the image I want to show &quot;,img)\ncv2.waitKey(0)\ncv2.destroyAllWindows()\ncv2.waitKey(1)  # to close the window.\n</code></pre>\n<p>The above code worked well for me.\nI'm using Mac and python 3.7 .</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 23680768,
+                        "reputation": 11,
+                        "user_id": 17706344,
+                        "user_type": "registered",
+                        "display_name": "ThreeNamesGrace"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1657501026,
+                    "creation_date": 1657501026,
+                    "answer_id": 72932836,
+                    "question_id": 6116564,
+                    "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/72932836#72932836",
+                    "body": "<p>Close the terminal, later close the window, it worked for me in Visual Studio Code in Windows; I made a task to compile and run the executable in the terminal, the program used my webcam to capture video and display it in a QT window, when I clicked the close button it didn't close, it reopened itself again and continued with the program until I closed the terminal and later could close the program window without it reopening again.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 10689509,
+                        "reputation": 1054,
+                        "user_id": 7868937,
+                        "user_type": "registered",
+                        "display_name": "Amila Viraj"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1695297737,
+                    "creation_date": 1695297737,
+                    "answer_id": 77150067,
+                    "question_id": 6116564,
+                    "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/77150067#77150067",
+                    "body": "<p>If you are executing with <strong>VS Code</strong>, please try the following;</p>\n<pre><code>cv2.imshow(&quot;image&quot;,image)\ncv2.waitKey(0)\ncv2.destroyAllWindows()\ncv2.waitKey(1)  # this will eventually close the window when press any key\n</code></pre>\n<p>This works fine for VS code users.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 15622160,
+                        "reputation": 1,
+                        "user_id": 11270689,
+                        "user_type": "registered",
+                        "display_name": "Erick li"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1707992489,
+                    "last_edit_date": 1707992489,
+                    "creation_date": 1707992213,
+                    "answer_id": 77999944,
+                    "question_id": 6116564,
+                    "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv/77999944#77999944",
+                    "body": "<pre><code>import cv2\n\ncam_port = 0 # Your camera seed\n\ncam = cv2.VideoCapture(cam_port)\nwhile cam.isOpened():\n   result, image = cam.read()\n   if result:\n     cv2.imshow(&quot;Real-time Capture&quot;, image)\n     if cv2.waitKey(1) &amp; 0xFF == ord('q'):\n        break # Exit the real-time capture \n\ncam.release()\ncv2.destroyAllWindows()\ncv2.waitKey(1). # Need this line to wait for the destroy actions to complete\n</code></pre>\n<p>This works for me (MacBook M2).</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 756839,
+                "reputation": 581,
+                "user_id": 768493,
+                "user_type": "unregistered",
+                "display_name": "Arthur"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 6304156,
+            "answer_count": 16,
+            "score": 57,
+            "last_activity_date": 1707992489,
+            "creation_date": 1306269509,
+            "question_id": 6116564,
+            "link": "https://stackoverflow.com/questions/6116564/destroywindow-does-not-close-window-on-mac-using-python-and-opencv",
+            "title": "DestroyWindow does not close window on Mac using Python and OpenCV",
+            "body": "<p>My program generates a series of windows using the following code:</p>\n\n<pre><code>def display(img, name, fun):\n    global clicked\n\n    cv.NamedWindow(name, 1)\n    cv.ShowImage(name, img)\n    cv.SetMouseCallback(name, fun, img)\n\n    while cv.WaitKey(33) == -1:\n        if clicked == 1:\n            clicked = 0\n            cv.ShowImage(name, img)\n\n    cv.DestroyWindow(name)\n</code></pre>\n\n<p>I press \"q\" within the gui window to close it. However, the code continues to the next call of the display function and displays a second gui window while not closing the first. I'm using a Mac with OpenCV 2.1, running the program in Terminal. How can I close the gui windows? Thanks.</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7959
+}

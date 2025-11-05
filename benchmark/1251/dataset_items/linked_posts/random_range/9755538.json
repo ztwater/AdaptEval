@@ -1,0 +1,1120 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "random"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 1184810,
+                        "reputation": 4309,
+                        "user_id": 1158990,
+                        "user_type": "registered",
+                        "accept_rate": 89,
+                        "display_name": "gbtimmon"
+                    },
+                    "edited": false,
+                    "score": 2,
+                    "creation_date": 1474744827,
+                    "post_id": 9755538,
+                    "comment_id": 66660485,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates#comment66660485_9755538",
+                    "body": "If they are unique they can be truly random in the right context. Like a random sample of indexes without replacement can still be completely random."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7863495,
+                                "reputation": 1086,
+                                "user_id": 6132097,
+                                "user_type": "registered",
+                                "display_name": "Thomas Lux"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1543553791,
+                            "post_id": 9755548,
+                            "comment_id": 93968804,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/9755548#comment93968804_9755548",
+                            "body": "This technique wastes memory, especially for large samples. I posted code for a much more memory and compute efficient solution below that uses a Linear Congruential Generator."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7863495,
+                                "reputation": 1086,
+                                "user_id": 6132097,
+                                "user_type": "registered",
+                                "display_name": "Thomas Lux"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1543595118,
+                            "post_id": 9755548,
+                            "comment_id": 93988292,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/9755548#comment93988292_9755548",
+                            "body": "It was pointed out to me that the LCG method is less &quot;random&quot; though, so if you want to generate many unique random sequences, the variety will be less than this solution. If you only need a handful of random sequences, LCG is the way to go!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7218880,
+                                "reputation": 93,
+                                "user_id": 5510226,
+                                "user_type": "registered",
+                                "display_name": "Ant Plante"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1599215178,
+                            "post_id": 9755548,
+                            "comment_id": 112711845,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/9755548#comment112711845_9755548",
+                            "body": "<code>numpy</code> instead of <code>random</code>  seems faster. <code>import numpy as np; np.random.permutation(100)[:10]</code> also generates 10 numbers selected from 0 to 99, without duplicates. Benchmarking in IPython, yields 103 &#181;s &#177; 513 ns for <code>%timeit random.sample(range(1000), 100) </code>, and 17 &#181;s &#177; 1.24 &#181;s for <code>%timeit np.random.permutation(1000)[:100] </code>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 17957770,
+                                "reputation": 1304,
+                                "user_id": 13049379,
+                                "user_type": "registered",
+                                "display_name": "Mohit Lamba"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7218880,
+                                "reputation": 93,
+                                "user_id": 5510226,
+                                "user_type": "registered",
+                                "display_name": "Ant Plante"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1643775619,
+                            "post_id": 9755548,
+                            "comment_id": 125426588,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/9755548#comment125426588_9755548",
+                            "body": "Adding to comment by @AntPlante, additionally use <code>.tolist()</code> if the output should be a list and not a numpy array."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4719941,
+                                "reputation": 30749,
+                                "user_id": 4518341,
+                                "user_type": "registered",
+                                "display_name": "wjandrea"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7863495,
+                                "reputation": 1086,
+                                "user_id": 6132097,
+                                "user_type": "registered",
+                                "display_name": "Thomas Lux"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1671386210,
+                            "post_id": 9755548,
+                            "comment_id": 132083627,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/9755548#comment132083627_9755548",
+                            "body": "@ThomasLux Where does it waste memory exactly? Are you aware that in Python 3, <code>range()</code> doesn&#39;t create a list like it did in Python 2?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7863495,
+                                "reputation": 1086,
+                                "user_id": 6132097,
+                                "user_type": "registered",
+                                "display_name": "Thomas Lux"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4719941,
+                                "reputation": 30749,
+                                "user_id": 4518341,
+                                "user_type": "registered",
+                                "display_name": "wjandrea"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1671474740,
+                            "post_id": 9755548,
+                            "comment_id": 132102718,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/9755548#comment132102718_9755548",
+                            "body": "@wjandrea yeah I&#39;m aware that Python 3 <code>range</code> produces a generator. Back when I posted that comment if you tried <code>sample = random.sample(range(1000000000000000000), 10)</code> you could watch the memory of the process grow as it tried to materialize the range before extracting a sample. Checking now with Python 3.10 that appears to have been implemented differently (no memory issues), so my earlier comment is irrelevant now. The LCG solution is still a fun learning exercise though! \ud83e\udd13"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4719941,
+                                "reputation": 30749,
+                                "user_id": 4518341,
+                                "user_type": "registered",
+                                "display_name": "wjandrea"
+                            },
+                            "reply_to_user": {
+                                "account_id": 7863495,
+                                "reputation": 1086,
+                                "user_id": 6132097,
+                                "user_type": "registered",
+                                "display_name": "Thomas Lux"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1671479659,
+                            "post_id": 9755548,
+                            "comment_id": 132104036,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/9755548#comment132104036_9755548",
+                            "body": "@Thomas Ohhh, I see, it probably converted the range to a list/array internally. Glad they fixed that!"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 680,
+                        "reputation": 973690,
+                        "user_id": 893,
+                        "user_type": "registered",
+                        "accept_rate": 84,
+                        "display_name": "Greg Hewgill"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": true,
+                    "score": 309,
+                    "last_activity_date": 1671386003,
+                    "last_edit_date": 1671386003,
+                    "creation_date": 1332038240,
+                    "answer_id": 9755548,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/9755548#9755548",
+                    "body": "<p>This will return a list of 10 numbers selected from the range 0 to 99, without duplicates.</p>\n<pre><code>import random\nrandom.sample(range(100), 10)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 8834,
+                        "reputation": 298424,
+                        "user_id": 16076,
+                        "user_type": "registered",
+                        "display_name": "Mitch Wheat"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1522673076,
+                    "last_edit_date": 1522673076,
+                    "creation_date": 1332038341,
+                    "answer_id": 9755557,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/9755557#9755557",
+                    "body": "<p>If the list of N numbers from 1 to N is randomly generated, then yes, there is a possibility that some numbers may be repeated.</p>\n\n<p>If you want a list of numbers from 1 to N in a random order, fill an array with integers from 1 to N, and then use a <a href=\"http://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle\" rel=\"nofollow noreferrer\">Fisher-Yates shuffle</a> or Python's <a href=\"https://docs.python.org/3.6/library/random.html#random.shuffle\" rel=\"nofollow noreferrer\"><code>random.shuffle()</code></a>.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7863495,
+                                "reputation": 1086,
+                                "user_id": 6132097,
+                                "user_type": "registered",
+                                "display_name": "Thomas Lux"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1543553840,
+                            "post_id": 9755561,
+                            "comment_id": 93968814,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/9755561#comment93968814_9755561",
+                            "body": "Generating a full list of indices is a waste of memory, especially for large samples. I posted code for a much more memory and compute efficient solution below that uses a Linear Congruential Generator."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15807248,
+                                "reputation": 441,
+                                "user_id": 11405455,
+                                "user_type": "registered",
+                                "display_name": "Khaned"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1623240707,
+                            "post_id": 9755561,
+                            "comment_id": 120021821,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/9755561#comment120021821_9755561",
+                            "body": "object has no attribute &#39;sample&#39;"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1042634,
+                        "reputation": 221,
+                        "user_id": 1048328,
+                        "user_type": "registered",
+                        "display_name": "ben"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 12,
+                    "last_activity_date": 1522673263,
+                    "last_edit_date": 1522673263,
+                    "creation_date": 1332038387,
+                    "answer_id": 9755561,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/9755561#9755561",
+                    "body": "<p>You can first create a list of numbers from <code>a</code> to <code>b</code>, where <code>a</code> and <code>b</code> are respectively the smallest and greatest numbers in your list, then shuffle it with <a href=\"http://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle\" rel=\"noreferrer\">Fisher-Yates</a> algorithm or using the Python's <a href=\"https://docs.python.org/3.6/library/random.html#random.shuffle\" rel=\"noreferrer\"><code>random.shuffle</code></a> method.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1332669,
+                        "reputation": 58,
+                        "user_id": 1276189,
+                        "user_type": "registered",
+                        "display_name": "Recaiden"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -2,
+                    "last_activity_date": 1332039045,
+                    "creation_date": 1332039045,
+                    "answer_id": 9755611,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/9755611#9755611",
+                    "body": "<p>If you wish to ensure that the numbers being added are unique, you could use a <a href=\"http://docs.python.org/library/stdtypes.html#set\" rel=\"nofollow\">Set object</a></p>\n\n<p>if using 2.7 or greater, or import the sets module if not.</p>\n\n<p>As others have mentioned, this means the numbers are not truly random.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5342525,
+                                "reputation": 1016,
+                                "user_id": 6362349,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "kyrill"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1587918175,
+                            "post_id": 9755612,
+                            "comment_id": 108692540,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/9755612#comment108692540_9755612",
+                            "body": "Now <code>random.sample</code> uses this approach for small number of samples from a large population, so this problem with memory doesn&#39;t really exist anymore. Although, at the time this answer was written, the implementation of <code>random.shuffle</code> may have been different."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 67986,
+                        "reputation": 112190,
+                        "user_id": 198633,
+                        "user_type": "registered",
+                        "accept_rate": 88,
+                        "display_name": "inspectorG4dget"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 9,
+                    "last_activity_date": 1522673437,
+                    "last_edit_date": 1522673437,
+                    "creation_date": 1332039050,
+                    "answer_id": 9755612,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/9755612#9755612",
+                    "body": "<p>The solution presented in <a href=\"https://stackoverflow.com/a/9755548/3924118\">this answer</a> works, but it could become problematic with memory if the sample size is small, but the population is huge (e.g. <code>random.sample(insanelyLargeNumber, 10)</code>). </p>\n\n<p>To fix that, I would go with this:</p>\n\n<pre><code>answer = set()\nsampleSize = 10\nanswerSize = 0\n\nwhile answerSize &lt; sampleSize:\n    r = random.randint(0,100)\n    if r not in answer:\n        answerSize += 1\n        answer.add(r)\n\n# answer now contains 10 unique, random integers from 0.. 100\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 10330624,
+                                "reputation": 1468,
+                                "user_id": 12340179,
+                                "user_type": "registered",
+                                "display_name": "Shayan Shafiq"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1582729379,
+                            "post_id": 9755713,
+                            "comment_id": 106878676,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/9755713#comment106878676_9755713",
+                            "body": "It is good to mention here that xrange works only in Python 2 and not in Python 3."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 151071,
+                                "reputation": 150282,
+                                "user_id": 364696,
+                                "user_type": "registered",
+                                "display_name": "ShadowRanger"
+                            },
+                            "reply_to_user": {
+                                "account_id": 10330624,
+                                "reputation": 1468,
+                                "user_id": 12340179,
+                                "user_type": "registered",
+                                "display_name": "Shayan Shafiq"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1654281911,
+                            "post_id": 9755713,
+                            "comment_id": 128062030,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/9755713#comment128062030_9755713",
+                            "body": "@ShayanShafiq: That said, on Python 3, <code>range</code> <i>is</i> <code>xrange</code> (but slightly better), so just dropping the <code>x</code> makes it work the same there (if you add the parens <code>print</code> requires too)."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 406065,
+                        "reputation": 2815,
+                        "user_id": 775351,
+                        "user_type": "registered",
+                        "display_name": "Ricardo Murillo"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 32,
+                    "last_activity_date": 1671641300,
+                    "last_edit_date": 1671641300,
+                    "creation_date": 1332040476,
+                    "answer_id": 9755713,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/9755713#9755713",
+                    "body": "<p>You can use the <strong>shuffle</strong> function from the <a href=\"https://docs.python.org/3/library/random.html#random.shuffle\" rel=\"noreferrer\">random</a> module like this:</p>\n<pre><code>import random\n\nnums = list(range(1, 100)) # list of integers from 1 to 99\n                           # adjust this boundaries to fit your needs\nrandom.shuffle(nums)\nprint(nums) # &lt;- List of unique random numbers\n</code></pre>\n<p>Note here that the shuffle method doesn't return any list as one may expect, it only shuffle the list passed by reference.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 241806,
+                        "reputation": 195,
+                        "user_id": 512861,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "exbctel"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -3,
+                    "last_activity_date": 1378906212,
+                    "last_edit_date": 1378906212,
+                    "creation_date": 1378868776,
+                    "answer_id": 18731990,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/18731990#18731990",
+                    "body": "<p>From the CLI in win xp: </p>\n\n<pre><code>python -c \"import random; print(sorted(set([random.randint(6,49) for i in range(7)]))[:6])\"\n</code></pre>\n\n<p>In Canada we have the 6/49 Lotto. I just wrap the above code in lotto.bat and run <code>C:\\home\\lotto.bat</code> or just <code>C:\\home\\lotto</code>.</p>\n\n<p>Because <code>random.randint</code> often repeats a number, I use <code>set</code> with <code>range(7)</code> and then shorten it to a length of 6.</p>\n\n<p>Occasionally if a number repeats more than 2 times the resulting list length will be less than 6.</p>\n\n<p>EDIT: However, <code>random.sample(range(6,49),6)</code> is the correct way to go.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1462827,
+                                "reputation": 10438,
+                                "user_id": 1376627,
+                                "user_type": "registered",
+                                "accept_rate": 63,
+                                "display_name": "david_adler"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1520895656,
+                            "post_id": 38398873,
+                            "comment_id": 85495281,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/38398873#comment85495281_38398873",
+                            "body": "what if you are generate over 8 billion numbers, sooner or later seen will become too big"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7863495,
+                                "reputation": 1086,
+                                "user_id": 6132097,
+                                "user_type": "registered",
+                                "display_name": "Thomas Lux"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1543553668,
+                            "post_id": 38398873,
+                            "comment_id": 93968768,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/38398873#comment93968768_38398873",
+                            "body": "This answer has a severe flaw for large samples. The probability of collision grows linearly with each step. I posted a solution using a Linear Congruential Generator that has O(1) memory overhead and O(k) steps required for generating k numbers. This can be solved much more efficiently!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5342525,
+                                "reputation": 1016,
+                                "user_id": 6362349,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "kyrill"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1587912275,
+                            "post_id": 38398873,
+                            "comment_id": 108690028,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/38398873#comment108690028_38398873",
+                            "body": "<i>&quot;This function resolves both problems&quot;</i> How does it resolve the second problem? You still can&#39;t take 1000 samples from a population of 2. Instead of throwing an exception you produce an incorrect result; that&#39;s hardly a resolution of the &quot;problem&quot; (which really isn&#39;t a problem to begin with since it&#39;s not at all reasonable to request <i>k</i> unique samples from a population of <i>n &lt; k</i>)."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 36049,
+                        "reputation": 6893,
+                        "user_id": 102536,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Handcraftsman"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1698888425,
+                    "last_edit_date": 1698888425,
+                    "creation_date": 1468593522,
+                    "answer_id": 38398873,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/38398873#38398873",
+                    "body": "<p>If you need to sample extremely large numbers, you cannot use <code>range</code></p>\n<pre><code>random.sample(range(10000000000000000000000000000000), 10)\n</code></pre>\n<p>because it throws:</p>\n<pre><code>OverflowError: Python int too large to convert to C ssize_t\n</code></pre>\n<p>Also, if <code>random.sample</code> cannot produce the number of items you want due to the range being too small</p>\n<pre><code>random.sample(range(2), 1000)\n</code></pre>\n<p>it throws:</p>\n<pre><code>ValueError: Sample larger than population\n</code></pre>\n<p>This function resolves both problems:</p>\n<pre><code>import random\n\ndef random_sample(count, start, stop, step=1):\n    def gen_random():\n        while True:\n            yield random.randrange(start, stop, step)\n\n    def gen_n_unique(source, n):\n        seen = set()\n        seenadd = seen.add\n        for i in (i for i in source() if i not in seen and not seenadd(i)):\n            yield i\n            if len(seen) == n:\n                break\n\n    return [i for i in gen_n_unique(gen_random,\n                                    min(count, int(abs(stop - start) / abs(step))))]\n</code></pre>\n<p>Usage with extremely large numbers:</p>\n<pre><code>print('\\n'.join(map(str, random_sample(10, 2, 10000000000000000000000000000000))))\n</code></pre>\n<p>Sample result:</p>\n<pre><code>7822019936001013053229712669368\n6289033704329783896566642145909\n2473484300603494430244265004275\n5842266362922067540967510912174\n6775107889200427514968714189847\n9674137095837778645652621150351\n9969632214348349234653730196586\n1397846105816635294077965449171\n3911263633583030536971422042360\n9864578596169364050929858013943\n</code></pre>\n<p>Usage where the range is smaller than the number of requested items:</p>\n<pre><code>print(', '.join(map(str, random_sample(100000, 0, 3))))\n</code></pre>\n<p>Sample result:</p>\n<pre><code>2, 0, 1\n</code></pre>\n<p>It also works with with negative ranges and steps:</p>\n<pre><code>print(', '.join(map(str, random_sample(10, 10, -10, -2))))\nprint(', '.join(map(str, random_sample(10, 5, -5, -2))))\n</code></pre>\n<p>Sample results:</p>\n<pre><code>2, -8, 6, -2, -4, 0, 4, 10, -6, 8\n-3, 1, 5, -1, 3\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7622729,
+                                "reputation": 187,
+                                "user_id": 5780302,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "DLyons"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1622438941,
+                            "post_id": 45500580,
+                            "comment_id": 119783644,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/45500580#comment119783644_45500580",
+                            "body": "These numbers are evenly spaced so not at all random."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 8134491,
+                        "reputation": 1252,
+                        "user_id": 6126603,
+                        "user_type": "registered",
+                        "accept_rate": 43,
+                        "display_name": "sync11"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1642765191,
+                    "last_edit_date": 1642765191,
+                    "creation_date": 1501831399,
+                    "answer_id": 45500580,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/45500580#45500580",
+                    "body": "<p>You can use <strong>Numpy</strong> library for quick answer as shown below -</p>\n<p>Given code snippet lists down 6 <strong>unique</strong> numbers between the range of 0 to 5. <em>You can adjust the parameters for your comfort.</em></p>\n<pre><code>import numpy as np\nimport random\na = np.linspace( 0, 5, 6 )\nrandom.shuffle(a)\nprint(a)\n</code></pre>\n<p>Output</p>\n<pre><code>[ 2.  1.  5.  3.  4.  0.]\n</code></pre>\n<p>It doesn't put any constraints as we see in <code>random.sample</code> as referred <a href=\"https://stackoverflow.com/a/22842411/6126603\">here</a>.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user8105524"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1543589698,
+                            "post_id": 53551417,
+                            "comment_id": 93985167,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/53551417#comment93985167_53551417",
+                            "body": "This is very cool! But I&#39;m nut sure that it really answers the question; say I want to sample 2 values from 0 to 4. Without generating my own <code>prime</code>, the function will only return me 4 possible answers, because <code>value</code> is the only randomly chosen thing with 4 possible values, when we need at least (4 choose 2) = 6, (allowing for non-random ordering). <code>random_range(2,4)</code> will return values {(1, 0), (3, 2), (2, 1), (0, 3)}, but never the pair (3,1) (or (1,3)).    Are you expecting new randomly generated large primes each function call?"
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user8105524"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1543590946,
+                            "post_id": 53551417,
+                            "comment_id": 93985955,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/53551417#comment93985955_53551417",
+                            "body": "(Also I&#39;m assuming that you expect people to shuffle the sequence after your function returns it if they want random ordering, since <code>random_range(v)</code> returns up to <code>v</code> unique sequences instead of <code>v!</code>)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7863495,
+                                "reputation": 1086,
+                                "user_id": 6132097,
+                                "user_type": "registered",
+                                "display_name": "Thomas Lux"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1543594865,
+                            "post_id": 53551417,
+                            "comment_id": 93988181,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/53551417#comment93988181_53551417",
+                            "body": "Totally true! It&#39;s hard to balance between avoiding integer overflow and generating enough random sequences. I updated the function to incorporate a little more randomness, but it is still not as random as v!. It depends on if you want to use the function multiple times. This solution is best used when you are generating from a large range of values (when the memory consumption of others would be much higher). I&#39;ll think on it more, thanks!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 39365,
+                                "reputation": 443,
+                                "user_id": 113477,
+                                "user_type": "registered",
+                                "accept_rate": 50,
+                                "display_name": "Paul Prescod"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1649868439,
+                            "post_id": 53551417,
+                            "comment_id": 126986773,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/53551417#comment126986773_53551417",
+                            "body": "This algorithm is awesome. Exactly what I needed in a few different places in my project. On my computer it seems to outperform rand.randint too!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5416768,
+                                "reputation": 131,
+                                "user_id": 4311715,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Kristoffer Lindvall"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1661350472,
+                            "post_id": 53551417,
+                            "comment_id": 129751963,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/53551417#comment129751963_53551417",
+                            "body": "Can this be used to populate a np.array or cupy.array?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7863495,
+                                "reputation": 1086,
+                                "user_id": 6132097,
+                                "user_type": "registered",
+                                "display_name": "Thomas Lux"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5416768,
+                                "reputation": 131,
+                                "user_id": 4311715,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Kristoffer Lindvall"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1661386207,
+                            "post_id": 53551417,
+                            "comment_id": 129762596,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/53551417#comment129762596_53551417",
+                            "body": "@KristofferLindvall yes, either do <code>np.asarray(list(random_range(...)))</code> or  <code>numbers = np.zeros(N) ; for i,n in enumerate(random_range(N)): numbers[i] = n</code>."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7863495,
+                        "reputation": 1086,
+                        "user_id": 6132097,
+                        "user_type": "registered",
+                        "display_name": "Thomas Lux"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": false,
+                    "score": 12,
+                    "last_activity_date": 1551285634,
+                    "last_edit_date": 1592644375,
+                    "creation_date": 1543553339,
+                    "answer_id": 53551417,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/53551417#53551417",
+                    "body": "<h1>Linear Congruential Pseudo-random Number Generator</h1>\n<blockquote>\n<p>O(1) Memory</p>\n<p>O(k) Operations</p>\n</blockquote>\n<p>This problem can be solved with a simple <a href=\"https://en.wikipedia.org/wiki/Linear_congruential_generator\" rel=\"noreferrer\">Linear Congruential Generator</a>. This requires constant memory overhead (8 integers) and at most 2*(sequence length) computations.</p>\n<p>All other solutions use more memory and more compute! If you only need a few random sequences, this method will be significantly cheaper. For ranges of size <code>N</code>, if you want to generate on the order of <code>N</code> unique <code>k</code>-sequences or more, I recommend the accepted solution using the builtin methods <code>random.sample(range(N),k)</code> as this <a href=\"https://docs.python.org/3.7/library/random.html#random.sample\" rel=\"noreferrer\">has been optimized</a> in python for speed.</p>\n<h1>Code</h1>\n<pre><code># Return a randomized &quot;range&quot; using a Linear Congruential Generator\n# to produce the number sequence. Parameters are the same as for \n# python builtin &quot;range&quot;.\n#   Memory  -- storage for 8 integers, regardless of parameters.\n#   Compute -- at most 2*&quot;maximum&quot; steps required to generate sequence.\n#\ndef random_range(start, stop=None, step=None):\n    import random, math\n    # Set a default values the same way &quot;range&quot; does.\n    if (stop == None): start, stop = 0, start\n    if (step == None): step = 1\n    # Use a mapping to convert a standard range into the desired range.\n    mapping = lambda i: (i*step) + start\n    # Compute the number of numbers in this range.\n    maximum = (stop - start) // step\n    # Seed range with a random integer.\n    value = random.randint(0,maximum)\n    # \n    # Construct an offset, multiplier, and modulus for a linear\n    # congruential generator. These generators are cyclic and\n    # non-repeating when they maintain the properties:\n    # \n    #   1) &quot;modulus&quot; and &quot;offset&quot; are relatively prime.\n    #   2) [&quot;multiplier&quot; - 1] is divisible by all prime factors of &quot;modulus&quot;.\n    #   3) [&quot;multiplier&quot; - 1] is divisible by 4 if &quot;modulus&quot; is divisible by 4.\n    # \n    offset = random.randint(0,maximum) * 2 + 1      # Pick a random odd-valued offset.\n    multiplier = 4*(maximum//4) + 1                 # Pick a multiplier 1 greater than a multiple of 4.\n    modulus = int(2**math.ceil(math.log2(maximum))) # Pick a modulus just big enough to generate all numbers (power of 2).\n    # Track how many random numbers have been returned.\n    found = 0\n    while found &lt; maximum:\n        # If this is a valid value, yield it in generator fashion.\n        if value &lt; maximum:\n            found += 1\n            yield mapping(value)\n        # Calculate the next value in the sequence.\n        value = (value*multiplier + offset) % modulus\n</code></pre>\n<h1>Usage</h1>\n<p>The usage of this function &quot;random_range&quot; is the same as for any generator (like &quot;range&quot;). An example:</p>\n<pre><code># Show off random range.\nprint()\nfor v in range(3,6):\n    v = 2**v\n    l = list(random_range(v))\n    print(&quot;Need&quot;,v,&quot;found&quot;,len(set(l)),&quot;(min,max)&quot;,(min(l),max(l)))\n    print(&quot;&quot;,l)\n    print()\n</code></pre>\n<h1>Sample Results</h1>\n<pre><code>Required 8 cycles to generate a sequence of 8 values.\nNeed 8 found 8 (min,max) (0, 7)\n [1, 0, 7, 6, 5, 4, 3, 2]\n\nRequired 16 cycles to generate a sequence of 9 values.\nNeed 9 found 9 (min,max) (0, 8)\n [3, 5, 8, 7, 2, 6, 0, 1, 4]\n\nRequired 16 cycles to generate a sequence of 16 values.\nNeed 16 found 16 (min,max) (0, 15)\n [5, 14, 11, 8, 3, 2, 13, 1, 0, 6, 9, 4, 7, 12, 10, 15]\n\nRequired 32 cycles to generate a sequence of 17 values.\nNeed 17 found 17 (min,max) (0, 16)\n [12, 6, 16, 15, 10, 3, 14, 5, 11, 13, 0, 1, 4, 8, 7, 2, ...]\n\nRequired 32 cycles to generate a sequence of 32 values.\nNeed 32 found 32 (min,max) (0, 31)\n [19, 15, 1, 6, 10, 7, 0, 28, 23, 24, 31, 17, 22, 20, 9, ...]\n\nRequired 64 cycles to generate a sequence of 33 values.\nNeed 33 found 33 (min,max) (0, 32)\n [11, 13, 0, 8, 2, 9, 27, 6, 29, 16, 15, 10, 3, 14, 5, 24, ...]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5342525,
+                                "reputation": 1016,
+                                "user_id": 6362349,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "kyrill"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1587921012,
+                            "post_id": 53646842,
+                            "comment_id": 108693706,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/53646842#comment108693706_53646842",
+                            "body": "You think <a href=\"https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates#38398873\"><i>that</i></a> answer is complicated? What is this then?! And then there&#39;s the <a href=\"https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates#9755612\">other answer</a>, which generates many &quot;spurious integers&quot;. I ran your implementation with example input you gave (populationSize = 1000, sampleSize = 999). Your version calls the <code>random.randint</code> function 3996 times, whereas the other one cca. 6000 times. Not that big of an improvement huh?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9550294,
+                                "reputation": 168,
+                                "user_id": 10645311,
+                                "user_type": "registered",
+                                "display_name": "aak318"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5342525,
+                                "reputation": 1016,
+                                "user_id": 6362349,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "kyrill"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1595946151,
+                            "post_id": 53646842,
+                            "comment_id": 111645866,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/53646842#comment111645866_53646842",
+                            "body": "@kyrill, your take on <a href=\"https://stackoverflow.com/a/63103030/10645311\">this answer</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 9550294,
+                        "reputation": 168,
+                        "user_id": 10645311,
+                        "user_type": "registered",
+                        "display_name": "aak318"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1545249539,
+                    "last_edit_date": 1545249539,
+                    "creation_date": 1544082738,
+                    "answer_id": 53646842,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/53646842#53646842",
+                    "body": "<p>The answer provided <a href=\"https://stackoverflow.com/a/38398873/10645311\">here</a> works very well with respect to time\nas well as memory but a bit more complicated as it uses advanced python\nconstructs such as yield. The <a href=\"https://stackoverflow.com/a/9755612/10645311\">simpler answer</a> works well in practice but, the issue with that \nanswer is that it may generate many spurious integers before actually constructing\nthe required set. Try it out with populationSize = 1000, sampleSize = 999.\nIn theory, there is a chance that it doesn't terminate.</p>\n\n<p>The answer below addresses both issues, as it is deterministic and somewhat efficient\nthough currently not as efficient as the other two.</p>\n\n<pre><code>def randomSample(populationSize, sampleSize):\n  populationStr = str(populationSize)\n  dTree, samples = {}, []\n  for i in range(sampleSize):\n    val, dTree = getElem(populationStr, dTree, '')\n    samples.append(int(val))\n  return samples, dTree\n</code></pre>\n\n<p>where the functions getElem, percolateUp are as defined below</p>\n\n<pre><code>import random\n\ndef getElem(populationStr, dTree, key):\n  msd  = int(populationStr[0])\n  if not key in dTree.keys():\n    dTree[key] = range(msd + 1)\n  idx = random.randint(0, len(dTree[key]) - 1)\n  key = key +  str(dTree[key][idx])\n  if len(populationStr) == 1:\n    dTree[key[:-1]].pop(idx)\n    return key, (percolateUp(dTree, key[:-1]))\n  newPopulation = populationStr[1:]\n  if int(key[-1]) != msd:\n    newPopulation = str(10**(len(newPopulation)) - 1)\n  return getElem(newPopulation, dTree, key)\n\ndef percolateUp(dTree, key):\n  while (dTree[key] == []):\n    dTree[key[:-1]].remove( int(key[-1]) )\n    key = key[:-1]\n  return dTree\n</code></pre>\n\n<p>Finally, the timing on average was about 15ms for a large value of n as shown below,</p>\n\n<pre><code>In [3]: n = 10000000000000000000000000000000\n\nIn [4]: %time l,t = randomSample(n, 5)\nWall time: 15 ms\n\nIn [5]: l\nOut[5]:\n[10000000000000000000000000000000L,\n 5731058186417515132221063394952L,\n 85813091721736310254927217189L,\n 6349042316505875821781301073204L,\n 2356846126709988590164624736328L]\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 14977806,
+                        "reputation": 39,
+                        "user_id": 10812747,
+                        "user_type": "registered",
+                        "display_name": "Vinicius Torino"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1545249500,
+                    "last_edit_date": 1545249500,
+                    "creation_date": 1545249318,
+                    "answer_id": 53858326,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/53858326#53858326",
+                    "body": "<p>A very simple function that also solves your problem</p>\n\n<pre><code>from random import randint\n\ndata = []\n\ndef unique_rand(inicial, limit, total):\n\n        data = []\n\n        i = 0\n\n        while i &lt; total:\n            number = randint(inicial, limit)\n            if number not in data:\n                data.append(number)\n                i += 1\n\n        return data\n\n\ndata = unique_rand(1, 60, 6)\n\nprint(data)\n\n\n\"\"\"\n\nprints something like \n\n[34, 45, 2, 36, 25, 32]\n\n\"\"\"\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 1275327,
+                        "reputation": 7946,
+                        "user_id": 1230724,
+                        "user_type": "registered",
+                        "accept_rate": 70,
+                        "display_name": "orange"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1553251360,
+                    "last_edit_date": 1553251360,
+                    "creation_date": 1553250591,
+                    "answer_id": 55297633,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/55297633#55297633",
+                    "body": "<p>The problem with the set based approaches (\"if random value in return values, try again\") is that their runtime is undetermined due to collisions (which require another \"try again\" iteration), especially when a large amount of random values are returned from the range.</p>\n\n<p>An alternative that isn't prone to this non-deterministic runtime is the following:</p>\n\n<pre><code>import bisect\nimport random\n\ndef fast_sample(low, high, num):\n    \"\"\" Samples :param num: integer numbers in range of\n        [:param low:, :param high:) without replacement\n        by maintaining a list of ranges of values that\n        are permitted.\n\n        This list of ranges is used to map a random number\n        of a contiguous a range (`r_n`) to a permissible\n        number `r` (from `ranges`).\n    \"\"\"\n    ranges = [high]\n    high_ = high - 1\n    while len(ranges) - 1 &lt; num:\n        # generate a random number from an ever decreasing\n        # contiguous range (which we'll map to the true\n        # random number).\n        # consider an example with low=0, high=10,\n        # part way through this loop with:\n        #\n        # ranges = [0, 2, 3, 7, 9, 10]\n        #\n        # r_n :-&gt; r\n        #   0 :-&gt; 1\n        #   1 :-&gt; 4\n        #   2 :-&gt; 5\n        #   3 :-&gt; 6\n        #   4 :-&gt; 8\n        r_n = random.randint(low, high_)\n        range_index = bisect.bisect_left(ranges, r_n)\n        r = r_n + range_index\n        for i in xrange(range_index, len(ranges)):\n            if ranges[i] &lt;= r:\n                # as many \"gaps\" we iterate over, as much\n                # is the true random value (`r`) shifted.\n                r = r_n + i + 1\n            elif ranges[i] &gt; r_n:\n                break\n        # mark `r` as another \"gap\" of the original\n        # [low, high) range.\n        ranges.insert(i, r)\n        # Fewer values possible.\n        high_ -= 1\n    # `ranges` happens to contain the result.\n    return ranges[:-1]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 5342525,
+                                "reputation": 1016,
+                                "user_id": 6362349,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "kyrill"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1587915527,
+                            "post_id": 61400402,
+                            "comment_id": 108691483,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/61400402#comment108691483_61400402",
+                            "body": "Why would you generate a permutaiton of a possibly large number of elements and then only select the first <code>n_samples</code> of them? What is your reasoning behind this approach? Can you explain what are the advantages of your approach, compared to any of the large number of existing answers (most of them from 8 years ago)?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 410225,
+                                "reputation": 5681,
+                                "user_id": 781938,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "william_grisaitis"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5342525,
+                                "reputation": 1016,
+                                "user_id": 6362349,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "kyrill"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1590006723,
+                            "post_id": 61400402,
+                            "comment_id": 109521896,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/61400402#comment109521896_61400402",
+                            "body": "actually my answer has similar complexity as other top voted answers and is faster because it uses numpy. other, top-voted methods use <code>random.shuffle</code>, which uses Mersenne Twister, qhich is much slower than algos offered by numpy (and probably jax). numpy and jax allow for other random number generation algorithms. jax also allows jit-compiling and differentiation, which can be useful for stochastic differentiation. also, regarding a &quot;possibly large&quot; array, some top voted answers do the exact same thing with <code>random.shuffle</code>, which i don&#39;t think is sinful in a relative or even absolute sense"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5342525,
+                                "reputation": 1016,
+                                "user_id": 6362349,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "kyrill"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1590024747,
+                            "post_id": 61400402,
+                            "comment_id": 109527617,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/61400402#comment109527617_61400402",
+                            "body": "Not sure what you mean by &quot;<code>random.shuffle</code> uses Mersenne Twister&quot; \u2012 it&#39;s Fisher-Yates shuffle, as mentioned in several answers. It has linear time complexity so it cannot possibly be asymptotically slower than algorithms offered by any other library, numpy or otherwise. If numpy is faster, it is only because it&#39;s imlpemented in C, but this does not warrant generating a huge permutation (one which might not even fit into memory), only to choose a few elements from it. There is not a <i>single</i> answer besides yours which does this."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 410225,
+                                "reputation": 5681,
+                                "user_id": 781938,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "william_grisaitis"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5342525,
+                                "reputation": 1016,
+                                "user_id": 6362349,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "kyrill"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1590350237,
+                            "post_id": 61400402,
+                            "comment_id": 109641768,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/61400402#comment109641768_61400402",
+                            "body": "My apologies, I read that python random used Mersenne Twister as it&#39;s prng. Do you have a source so I can learn more about Fisher Yates and the role in random.shuffle?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 5342525,
+                                "reputation": 1016,
+                                "user_id": 6362349,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "kyrill"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1590396736,
+                            "post_id": 61400402,
+                            "comment_id": 109654205,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/61400402#comment109654205_61400402",
+                            "body": "There already are two separate links to Wikipedia on two separate answers here. If Wikipedia is not a good enough source for you, there are 14 references at the end of the article. And then there&#39;s Google. Does that help? Oh, and the <code>random</code> module is written in Python, so you can easily view its source (try <code>random.__file__</code>)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 410225,
+                                "reputation": 5681,
+                                "user_id": 781938,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "william_grisaitis"
+                            },
+                            "reply_to_user": {
+                                "account_id": 5342525,
+                                "reputation": 1016,
+                                "user_id": 6362349,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "kyrill"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1654531078,
+                            "post_id": 61400402,
+                            "comment_id": 128107064,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/61400402#comment128107064_61400402",
+                            "body": "@kyrill, thanks for correcting me. i&#39;ve striked-through my original answer and suggest people use other approaches like those you mentioned."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 410225,
+                        "reputation": 5681,
+                        "user_id": 781938,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "william_grisaitis"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": false,
+                    "score": -2,
+                    "last_activity_date": 1654531102,
+                    "last_edit_date": 1654531102,
+                    "creation_date": 1587697351,
+                    "answer_id": 61400402,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/61400402#61400402",
+                    "body": "<p>Edit: <strong>ignore my answer here</strong>. use python's <code>random.shuffle</code> or <code>random.sample</code>, as mentioned in other answers.</p>\n<strike>\nto sample integers without replacement between `minval` and `maxval`:\n<pre><code>import numpy as np\n\nminval, maxval, n_samples = -50, 50, 10\ngenerator = np.random.default_rng(seed=0)\nsamples = generator.permutation(np.arange(minval, maxval))[:n_samples]\n\n# or, if minval is 0,\nsamples = generator.permutation(maxval)[:n_samples]\n</code></pre>\n<p>with jax:</p>\n<pre><code>import jax\n\nminval, maxval, n_samples = -50, 50, 10\nkey = jax.random.PRNGKey(seed=0)\nsamples = jax.random.shuffle(key, jax.numpy.arange(minval, maxval))[:n_samples]\n</code></pre>\n</strike>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 16208106,
+                                "reputation": 1266,
+                                "user_id": 11702825,
+                                "user_type": "registered",
+                                "display_name": "octobus"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1588146479,
+                            "post_id": 61492427,
+                            "comment_id": 108784343,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/61492427#comment108784343_61492427",
+                            "body": "Welcome to Stackoverflow. Please explain your answer why and how does it solve the problem so others can understand your answer easily."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 14688437,
+                                "reputation": 5259,
+                                "user_id": 10607772,
+                                "user_type": "registered",
+                                "display_name": "double-beep"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1588149618,
+                            "post_id": 61492427,
+                            "comment_id": 108785898,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/61492427#comment108785898_61492427",
+                            "body": "While this code may solve the question, <a href=\"//meta.stackexchange.com/q/114762\">including an explanation</a> of how and why this solves the problem would really help to improve the quality of your post, and probably result in more up-votes. Remember that you are answering the question for readers in the future, not just the person asking now. Please <a href=\"https://stackoverflow.com/posts/61492427/edit\">edit</a> your answer to add explanations and give an indication of what limitations and assumptions apply. <a href=\"/review/low-quality-posts/25983155\">From Review</a>"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 1782034,
+                        "reputation": 1,
+                        "user_id": 1707806,
+                        "user_type": "registered",
+                        "display_name": "user85510"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1588121501,
+                    "creation_date": 1588121501,
+                    "answer_id": 61492427,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/61492427#61492427",
+                    "body": "<pre><code>import random\n\nsourcelist=[]\nresultlist=[]\n\nfor x in range(100):\n    sourcelist.append(x)\n\nfor y in sourcelist:\n    resultlist.insert(random.randint(0,len(resultlist)),y)\n\nprint (resultlist)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 9550294,
+                        "reputation": 168,
+                        "user_id": 10645311,
+                        "user_type": "registered",
+                        "display_name": "aak318"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1698888468,
+                    "last_edit_date": 1698888468,
+                    "creation_date": 1595782117,
+                    "answer_id": 63103030,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/63103030#63103030",
+                    "body": "<p>In order to obtain a program that generates a list of random values without duplicates that is deterministic, efficient and built with basic programming constructs consider the function <code>extractSamples</code> defined below,</p>\n<pre class=\"lang-py prettyprint-override\"><code>def extractSamples(populationSize, sampleSize, intervalLst) :\n    import random\n    if (sampleSize &gt; populationSize) :\n        raise ValueError(&quot;sampleSize = &quot;+str(sampleSize) +&quot; &gt; populationSize (= &quot; + str(populationSize) + &quot;)&quot;)\n    samples = []\n    while (len(samples) &lt; sampleSize) :\n        i = random.randint(0, (len(intervalLst)-1))\n        (a,b) = intervalLst[i]\n        sample = random.randint(a,b)\n        if (a==b) :\n            intervalLst.pop(i)\n        elif (a == sample) : # shorten beginning of interval                                                                                                                                           \n            intervalLst[i] = (sample+1, b)\n        elif ( sample == b) : # shorten interval end                                                                                                                                                   \n            intervalLst[i] = (a, sample - 1)\n        else :\n            intervalLst[i] = (a, sample - 1)\n            intervalLst.append((sample+1, b))\n        samples.append(sample)\n    return samples\n</code></pre>\n<p>The basic idea is to keep track of intervals <code>intervalLst</code> for possible values from which to select our required elements from. This is deterministic in the sense that we are guaranteed to generate a sample within a fixed number of steps (solely dependent on <code>populationSize</code> and <code>sampleSize</code>).</p>\n<p>To use the above function to generate our required list,</p>\n<pre class=\"lang-py prettyprint-override\"><code>In [3]: populationSize, sampleSize = 10**17, 10**5\n\nIn [4]: %time lst1 = extractSamples(populationSize, sampleSize, [(0, populationSize-1)])\nCPU times: user 289 ms, sys: 9.96 ms, total: 299 ms\nWall time: 293 ms\n</code></pre>\n<p>We may also compare with an earlier solution (for a lower value of populationSize)</p>\n<pre class=\"lang-py prettyprint-override\"><code>In [5]: populationSize, sampleSize = 10**8, 10**5\n\nIn [6]: %time lst = random.sample(range(populationSize), sampleSize)\nCPU times: user 1.89 s, sys: 299 ms, total: 2.19 s\nWall time: 2.18 s\n\nIn [7]: %time lst1 = extractSamples(populationSize, sampleSize, [(0, populationSize-1)])\nCPU times: user 449 ms, sys: 8.92 ms, total: 458 ms\nWall time: 442 ms\n</code></pre>\n<p>Note that I reduced <code>populationSize</code> value as it produces Memory Error for higher values when using the <code>random.sample</code> solution (also mentioned in previous answers <a href=\"https://stackoverflow.com/a/9755612/10645311\">here</a> and <a href=\"https://stackoverflow.com/a/38398873/10645311\">here</a>). For above values, we can also observe that <code>extractSamples</code> outperforms the <code>random.sample</code> approach.</p>\n<p>P.S. : Though the core approach is similar to my <a href=\"https://stackoverflow.com/a/53646842/10645311\">earlier answer</a>, there are substantial modifications in implementation as well as approach alongwith improvement in clarity.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 7102028,
+                                "reputation": 2376,
+                                "user_id": 5433168,
+                                "user_type": "registered",
+                                "accept_rate": 58,
+                                "display_name": "Avishay28"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1669484012,
+                            "post_id": 66063539,
+                            "comment_id": 131652808,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/66063539#comment131652808_66063539",
+                            "body": "How is that generate random numbers? The numbers will always be 0-99"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 15070266,
+                        "reputation": 91,
+                        "user_id": 10876029,
+                        "user_type": "registered",
+                        "display_name": "Sheva Kadu"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1612529130,
+                    "creation_date": 1612529130,
+                    "answer_id": 66063539,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/66063539#66063539",
+                    "body": "<p>Here is a very small function I made, hope this helps!</p>\n<pre><code>import random\nnumbers = list(range(0, 100))\nrandom.shuffle(numbers)\n</code></pre>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 21948894,
+                        "reputation": 1,
+                        "user_id": 16228317,
+                        "user_type": "registered",
+                        "display_name": "Illinoisey"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": -2,
+                    "last_activity_date": 1624922541,
+                    "creation_date": 1624922541,
+                    "answer_id": 68170961,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/68170961#68170961",
+                    "body": "<p>If the amount of numbers you want is random, you can do something like this. In this case, length is the highest number you want to choose from.</p>\n<p>If it notices the new random number was already chosen, itll subtract 1 from count (since a count was added before it knew whether it was a duplicate or not). If its not in the list, then do what you want with it and add it to the list so it cant get picked again.</p>\n<pre><code>import random\ndef randomizer(): \n            chosen_number=[]\n            count=0\n            user_input = int(input(&quot;Enter number for how many rows to randomly select: &quot;))\n            numlist=[]\n            #length = whatever the highest number you want to choose from\n            while 1&lt;=user_input&lt;=length:\n                count=count+1\n                if count&gt;user_input:\n                    break\n                else:\n                    chosen_number = random.randint(0, length)\n                    if line_number in numlist:\n                        count=count-1\n                        continue\n                    if chosen_number not in numlist:\n                        numlist.append(chosen_number)\n                        #do what you want here\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 151071,
+                                "reputation": 150282,
+                                "user_id": 364696,
+                                "user_type": "registered",
+                                "display_name": "ShadowRanger"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1654282256,
+                            "post_id": 69173200,
+                            "comment_id": 128062116,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/69173200#comment128062116_69173200",
+                            "body": "&quot;I don&#180;t like the <code>random</code> built-in library because when you seed it, it repeats the pattern of the random numbers generator&quot; What? The whole point of providing an explicit seed is to get the same &quot;random&quot; outputs reliably. If you don&#39;t seed it (or seed it without passing an argument to <code>seed</code>) it produces unpredictable values as expected (it seeds from OS-supplied cryptographic randomness)."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 16418959,
+                        "reputation": 19,
+                        "user_id": 12102918,
+                        "user_type": "registered",
+                        "display_name": "Diego Iglesias"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 0,
+                    "last_activity_date": 1631617958,
+                    "last_edit_date": 1631617958,
+                    "creation_date": 1631602875,
+                    "answer_id": 69173200,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/69173200#69173200",
+                    "body": "<p>I found a quite faster way than having to use the <code>range</code> function (very slow), and without using <code>random</code> function from <code>python</code> (I don\u00b4t like the <code>random</code> built-in library because when you seed it, it repeats the pattern of the random numbers generator)</p>\n<pre><code>import numpy as np\n\nnums = set(np.random.randint(low=0, high=100, size=150)) #generate some more for the duplicates\nnums = list(nums)[:100]\n</code></pre>\n<p>This is quite fast.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 8487650,
+                                "reputation": 746,
+                                "user_id": 6365199,
+                                "user_type": "registered",
+                                "display_name": "ViggoTW"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1641305435,
+                            "post_id": 70578368,
+                            "comment_id": 124766779,
+                            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/70578368#comment124766779_70578368",
+                            "body": "This is a very unstable approach, since the user has no control over how final length of the list. Not sure if I can see the use-case for this"
+                        }
+                    ],
+                    "owner": {
+                        "user_type": "does_not_exist",
+                        "display_name": "user17805908"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": -1,
+                    "last_activity_date": 1641297104,
+                    "creation_date": 1641297104,
+                    "answer_id": 70578368,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/70578368#70578368",
+                    "body": "<p>Try using...</p>\n<pre class=\"lang-py prettyprint-override\"><code>import random\n\nLENGTH = 100\n\nrandom_with_possible_duplicates = [random.randrange(-3, 3) for _ in range(LENGTH)]\nrandom_without_duplicates = list(set(random_with_possible_duplicates)) # This removes duplicates\n</code></pre>\n<h3>Advatages</h3>\n<p>Fast, efficient and readable.</p>\n<h3>Possible Issues</h3>\n<p>This method can change the length of the list if there are duplicates.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 15978192,
+                        "reputation": 405,
+                        "user_id": 11530542,
+                        "user_type": "registered",
+                        "display_name": "Mauricio Arboleda-Zapata"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 2,
+                    "last_activity_date": 1651683861,
+                    "creation_date": 1651683861,
+                    "answer_id": 72116847,
+                    "question_id": 9755538,
+                    "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates/72116847#72116847",
+                    "body": "<p>One straightforward alternative is to use np.random.choice() as shown below</p>\n<pre><code>np.random.choice(range(10), size=3, replace=False) \n</code></pre>\n<p>This results in three integer numbers that are different from each other. e.g., [1, 3, 5], [2, 5, 1]...</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 423105,
+                "reputation": 17383,
+                "user_id": 802281,
+                "user_type": "registered",
+                "accept_rate": 90,
+                "display_name": "iCodeLikeImDrunk"
+            },
+            "comment_count": 1,
+            "is_answered": true,
+            "accepted_answer_id": 9755548,
+            "answer_count": 21,
+            "score": 196,
+            "last_activity_date": 1698888468,
+            "creation_date": 1332038116,
+            "last_edit_date": 1671385904,
+            "question_id": 9755538,
+            "link": "https://stackoverflow.com/questions/9755538/how-do-i-create-a-list-of-random-numbers-without-duplicates",
+            "title": "How do I create a list of random numbers without duplicates?",
+            "body": "<p>I tried using <code>random.randint(0, 100)</code>, but some numbers were the same. Is there a method/module to create a list unique random numbers?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 7690
+}

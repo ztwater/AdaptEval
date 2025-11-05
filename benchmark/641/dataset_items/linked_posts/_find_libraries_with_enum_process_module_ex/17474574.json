@@ -1,0 +1,57 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "windows",
+                "winapi",
+                "dll",
+                "tasklist"
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 16209,
+                        "reputation": 283906,
+                        "user_id": 35070,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "phihag"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 4,
+                    "last_activity_date": 1372971433,
+                    "last_edit_date": 1372971433,
+                    "creation_date": 1372970426,
+                    "answer_id": 17477833,
+                    "question_id": 17474574,
+                    "link": "https://stackoverflow.com/questions/17474574/tasklist-does-not-list-all-modules-in-64-systems/17477833#17477833",
+                    "body": "<p><a href=\"http://msdn.microsoft.com/en-us/library/windows/desktop/ms682631%28v=vs.85%29.aspx\" rel=\"nofollow\"><code>EnumProcessModules</code></a> just shows processes with the same bittiness as Python. Instead, call <a href=\"http://msdn.microsoft.com/en-us/library/windows/desktop/ms682633%28v=vs.85%29.aspx\" rel=\"nofollow\"><code>EnumProcessModulesEx</code></a> with <code>dwFilterFlag=LIST_MODULES_ALL</code>. </p>\n\n<p>Your current code requires the <code>win32api</code> module, which only <a href=\"http://sourceforge.net/p/pywin32/feature-requests/100/\" rel=\"nofollow\">recently added <code>EnumProcessModulesEx</code></a>, and which is not in the standard library. Here is a solution that uses only the standard library:</p>\n\n<pre class=\"lang-python prettyprint-override\"><code>from ctypes import byref, create_unicode_buffer, sizeof, WinDLL\nfrom ctypes.wintypes import DWORD, HMODULE, MAX_PATH\n\nPsapi = WinDLL('Psapi.dll')\nKernel32 = WinDLL('kernel32.dll')\n\nPROCESS_QUERY_INFORMATION = 0x0400\nPROCESS_VM_READ = 0x0010\n\nLIST_MODULES_ALL = 0x03\n\ndef EnumProcesses():\n    buf_count = 256\n    while True:\n        buf = (DWORD * buf_count)()\n        buf_size = sizeof(buf)\n        res_size = DWORD()\n        if not Psapi.EnumProcesses(byref(buf), buf_size, byref(res_size)):\n            raise OSError('EnumProcesses failed')\n        if res_size.value &gt;= buf_size:\n            buf_count *= 2\n            continue\n        count = res_size.value // (buf_size // buf_count)\n        return buf[:count]\n\ndef EnumProcessModulesEx(hProcess):\n    buf_count = 256\n    while True:\n        buf = (HMODULE * buf_count)()\n        buf_size = sizeof(buf)\n        needed = DWORD()\n        if not Psapi.EnumProcessModulesEx(hProcess, byref(buf), buf_size,\n                                          byref(needed), LIST_MODULES_ALL):\n            raise OSError('EnumProcessModulesEx failed')\n        if buf_size &lt; needed.value:\n            buf_count = needed.value // (buf_size // buf_count)\n            continue\n        count = needed.value // (buf_size // buf_count)\n        return map(HMODULE, buf[:count])\n\ndef GetModuleFileNameEx(hProcess, hModule):\n    buf = create_unicode_buffer(MAX_PATH)\n    nSize = DWORD()\n    if not Psapi.GetModuleFileNameExW(hProcess, hModule,\n                                      byref(buf), byref(nSize)):\n        raise OSError('GetModuleFileNameEx failed')\n    return buf.value\n\ndef get_process_modules(pid):\n    hProcess = Kernel32.OpenProcess(\n        PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,\n        False, pid)\n    if not hProcess:\n        raise OSError('Could not open PID %s' % pid)\n    try:\n        return [\n            GetModuleFileNameEx(hProcess, hModule)\n            for hModule in EnumProcessModulesEx(hProcess)]\n    finally:\n        Kernel32.CloseHandle(hProcess)\n\nfor pid in EnumProcesses():\n    try:\n        dll_list = get_process_modules(pid)\n        print('dll_list: ', dll_list)\n    except OSError as ose:\n        print(str(ose))\n    print('-' * 14)\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 2685257,
+                "reputation": 117,
+                "user_id": 2319786,
+                "user_type": "registered",
+                "accept_rate": 43,
+                "display_name": "user2319786"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 17477833,
+            "answer_count": 1,
+            "score": 3,
+            "last_activity_date": 1372971433,
+            "creation_date": 1372954195,
+            "question_id": 17474574,
+            "link": "https://stackoverflow.com/questions/17474574/tasklist-does-not-list-all-modules-in-64-systems",
+            "title": "tasklist does not list all Modules in 64-systems",
+            "body": "<p>I've got some problem. I'll tried to get all modules(dll files) for all processes on my machine. I tried to do this command in CMD:</p>\n\n<pre><code>tasklist /m\n</code></pre>\n\n<p>But it's a problem with 64-bit systems. If you`re running a 32-bit programm on 64-bit machine it does not list all modules, only </p>\n\n<pre><code>ntdll.dll, wow64.dll, wow64win.dll, wow64cpu.dll\n</code></pre>\n\n<p>Then i tried to do this with Python script, using pywin32 (win32api).</p>\n\n<p>This is code:</p>\n\n<pre><code>import win32security,win32file,win32api,ntsecuritycon,win32con,win32process\n\nprocesses = win32process.EnumProcesses()\n\nfor pid in processes:\n    dll_list = []\n    try:\n        if pid:\n            print('pid:', pid)\n            ph = win32api.OpenProcess(win32con.MAXIMUM_ALLOWED, False, pid)\n            dll = win32process.EnumProcessModules(ph)\n            for dll_name in dll:\n                dll_name_norm = win32process.GetModuleFileNameEx(ph, dll_name)\n                dll_list.append(dll_name_norm)\n\n            print(\"dll_list: \", dll_list)\n            print(\"--------------\")\n    except:\n        print(\"Error\")\n        print(\"--------------\")\n</code></pre>\n\n<p>But result is the same. =( \nPlease, help me with this, how I can see all dll files, load by each process.</p>\n\n<p>P.S. It can be only standart Windows tools like command line, tasklist (NOT ListDlls, Process Explorer or the same thing) or script in Python.</p>\n\n<p>Thank you a lot!</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8888
+}

@@ -1,0 +1,181 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "algorithm",
+                "numpy",
+                "vectorization"
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3057,
+                                "reputation": 244987,
+                                "user_id": 4323,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "John Zwinck"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1530625496,
+                            "post_id": 51156138,
+                            "comment_id": 89295710,
+                            "link": "https://stackoverflow.com/questions/51154989/numpy-vectorized-function-to-repeat-blocks-of-consecutive-elements/51156138#comment89295710_51156138",
+                            "body": "<code>(sizes*repeats).sum()</code> is better done as <code>np.dot(sizes, repeats)</code> if the arrays may be large."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1691833,
+                                "reputation": 12989,
+                                "user_id": 1554020,
+                                "user_type": "registered",
+                                "accept_rate": 66,
+                                "display_name": "yuri kilochek"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1530625959,
+                            "post_id": 51156138,
+                            "comment_id": 89296044,
+                            "link": "https://stackoverflow.com/questions/51154989/numpy-vectorized-function-to-repeat-blocks-of-consecutive-elements/51156138#comment89296044_51156138",
+                            "body": "Could you explain the idea behind this?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3996536,
+                                "reputation": 221021,
+                                "user_id": 3293881,
+                                "user_type": "registered",
+                                "accept_rate": 17,
+                                "display_name": "Divakar"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1691833,
+                                "reputation": 12989,
+                                "user_id": 1554020,
+                                "user_type": "registered",
+                                "accept_rate": 66,
+                                "display_name": "yuri kilochek"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1530626765,
+                            "post_id": 51156138,
+                            "comment_id": 89296606,
+                            "link": "https://stackoverflow.com/questions/51154989/numpy-vectorized-function-to-repeat-blocks-of-consecutive-elements/51156138#comment89296606_51156138",
+                            "body": "@yurikilochek Added some comments."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3996536,
+                        "reputation": 221021,
+                        "user_id": 3293881,
+                        "user_type": "registered",
+                        "accept_rate": 17,
+                        "display_name": "Divakar"
+                    },
+                    "comment_count": 3,
+                    "is_accepted": true,
+                    "score": 4,
+                    "last_activity_date": 1530626753,
+                    "last_edit_date": 1530626753,
+                    "creation_date": 1530625322,
+                    "answer_id": 51156138,
+                    "question_id": 51154989,
+                    "link": "https://stackoverflow.com/questions/51154989/numpy-vectorized-function-to-repeat-blocks-of-consecutive-elements/51156138#51156138",
+                    "body": "<p>Here's one vectorized approach using <code>cumsum</code> -</p>\n\n<pre><code># Get repeats for each group using group lengths/sizes\nr1 = np.repeat(np.arange(len(sizes)), repeats)\n\n# Get total size of output array, as needed to initialize output indexing array\nN = (sizes*repeats).sum() # or np.dot(sizes, repeats)\n\n# Initialize indexing array with ones as we need to setup incremental indexing\n# within each group when cumulatively summed at the final stage. \n# Two steps here:\n# 1. Within each group, we have multiple sequences, so setup the offsetting\n# at each sequence lengths by the seq. lengths preceeeding those.\nid_ar = np.ones(N, dtype=int)\nid_ar[0] = 0\ninsert_index = sizes[r1[:-1]].cumsum()\ninsert_val = (1-sizes)[r1[:-1]]\n\n# 2. For each group, make sure the indexing starts from the next group's\n# first element. So, simply assign 1s there.\ninsert_val[r1[1:] != r1[:-1]] = 1\n\n# Assign index-offseting values\nid_ar[insert_index] = insert_val\n\n# Finally index into input array for the group repeated o/p\nout = a[id_ar.cumsum()]\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 1294209,
+                                "reputation": 2387,
+                                "user_id": 1245694,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "anishtain4"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1530636071,
+                            "post_id": 51156447,
+                            "comment_id": 89302069,
+                            "link": "https://stackoverflow.com/questions/51154989/numpy-vectorized-function-to-repeat-blocks-of-consecutive-elements/51156447#comment89302069_51156447",
+                            "body": "Can you please provide a speed up test?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3057,
+                                "reputation": 244987,
+                                "user_id": 4323,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "John Zwinck"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1294209,
+                                "reputation": 2387,
+                                "user_id": 1245694,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "anishtain4"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1530668043,
+                            "post_id": 51156447,
+                            "comment_id": 89312637,
+                            "link": "https://stackoverflow.com/questions/51154989/numpy-vectorized-function-to-repeat-blocks-of-consecutive-elements/51156447#comment89312637_51156447",
+                            "body": "@anishtain4: Depends on the data size.  For the tiny input in the question, the difference is more than 10x, but for larger inputs the speedup is more like 1.5x."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 3057,
+                        "reputation": 244987,
+                        "user_id": 4323,
+                        "user_type": "registered",
+                        "accept_rate": 82,
+                        "display_name": "John Zwinck"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1530626169,
+                    "creation_date": 1530626169,
+                    "answer_id": 51156447,
+                    "question_id": 51154989,
+                    "link": "https://stackoverflow.com/questions/51154989/numpy-vectorized-function-to-repeat-blocks-of-consecutive-elements/51156447#51156447",
+                    "body": "<p>This function is a great candidate to speed up using Numba:</p>\n\n<pre><code>@numba.njit\ndef repeat_blocks_jit(a, sizes, repeats):\n    out = np.empty((sizes * repeats).sum(), a.dtype)\n    start = 0\n    oi = 0\n    for i, size in enumerate(sizes):\n        end = start + size\n        for rep in range(repeats[i]):\n            oe = oi + size\n            out[oi:oe] = a[start:end]\n            oi = oe\n        start = end\n    return out\n</code></pre>\n\n<p>This is significantly faster than Divakar's pure NumPy solution, and a lot closer to your original code.  I made no effort at all to optimize it.  Note that <code>np.dot()</code> and <code>np.repeat()</code> can't be used here, but that doesn't matter when all the code gets compiled.</p>\n\n<p>Plus, since it is <code>njit</code> meaning \"nopython\" mode, you can even use <code>@numba.njit(nogil=True)</code> and get multicore speedup if you have many of these calls to make.</p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 1691833,
+                "reputation": 12989,
+                "user_id": 1554020,
+                "user_type": "registered",
+                "accept_rate": 66,
+                "display_name": "yuri kilochek"
+            },
+            "comment_count": 0,
+            "is_answered": true,
+            "accepted_answer_id": 51156138,
+            "answer_count": 2,
+            "score": 3,
+            "last_activity_date": 1578178361,
+            "creation_date": 1530621922,
+            "last_edit_date": 1578178361,
+            "question_id": 51154989,
+            "link": "https://stackoverflow.com/questions/51154989/numpy-vectorized-function-to-repeat-blocks-of-consecutive-elements",
+            "title": "Numpy-vectorized function to repeat blocks of consecutive elements",
+            "body": "<p>Numpy has \u0430 <a href=\"https://docs.scipy.org/doc/numpy/reference/generated/numpy.repeat.html\" rel=\"nofollow noreferrer\">repeat</a> function, that repeats each element of the array a given (per element) number of times.</p>\n\n<p>I want to implement a function that does similar thing but repeats not individual elements, but variably sized blocks of consecutive elements. Essentially I want the following function:</p>\n\n<pre><code>import numpy as np\n\ndef repeat_blocks(a, sizes, repeats):\n    b = []    \n    start = 0\n    for i, size in enumerate(sizes):\n        end = start + size\n        b.extend([a[start:end]] * repeats[i])\n        start = end\n    return np.concatenate(b)\n</code></pre>\n\n<p>For example, given</p>\n\n<pre><code>a = np.arange(20)\nsizes = np.array([3, 5, 2, 6, 4])\nrepeats = np.array([2, 3, 2, 1, 3])\n</code></pre>\n\n<p>then</p>\n\n<pre><code>repeat_blocks(a, sizes, repeats)\n</code></pre>\n\n<p>returns</p>\n\n<pre><code>array([ 0,  1,  2, \n        0,  1,  2,\n\n        3,  4,  5,  6,  7, \n        3,  4,  5,  6,  7, \n        3,  4,  5,  6,  7, \n\n        8,  9, \n        8,  9,\n\n        10, 11, 12, 13, 14, 15,\n\n        16, 17, 18, 19,\n        16, 17, 18, 19,\n        16, 17, 18, 19 ])\n</code></pre>\n\n<p>I want to push these loops into numpy in the name of performance. Is this possible? If so, how?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 8232
+}

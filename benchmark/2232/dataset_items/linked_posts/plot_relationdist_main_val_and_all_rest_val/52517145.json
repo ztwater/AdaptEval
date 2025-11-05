@@ -1,0 +1,114 @@
+{
+    "items": [
+        {
+            "tags": [
+                "python",
+                "matplotlib"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 5149286,
+                        "reputation": 331575,
+                        "user_id": 4124317,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "ImportanceOfBeingErnest"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1537963226,
+                    "post_id": 52517145,
+                    "comment_id": 91973931,
+                    "link": "https://stackoverflow.com/questions/52517145/how-to-retrieve-all-data-from-seaborn-distribution-plot-with-mutliple-distributi#comment91973931_52517145",
+                    "body": "The approach here is working, right? It&#39;s just a little cumbersome. But that&#39;s expected for such detour. You wouldn&#39;t usually first plot something to get the data out, but rather the inverse, first get the data, then plot it."
+                },
+                {
+                    "owner": {
+                        "account_id": 4196502,
+                        "reputation": 58912,
+                        "user_id": 3437787,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "vestland"
+                    },
+                    "reply_to_user": {
+                        "account_id": 5149286,
+                        "reputation": 331575,
+                        "user_id": 4124317,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "ImportanceOfBeingErnest"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1537964266,
+                    "post_id": 52517145,
+                    "comment_id": 91974598,
+                    "link": "https://stackoverflow.com/questions/52517145/how-to-retrieve-all-data-from-seaborn-distribution-plot-with-mutliple-distributi#comment91974598_52517145",
+                    "body": "@ImportanceofBeinErnest, it&#39;s working for the most part, but I&#39;ve had little success with the x values for the histograms. And normally I would say that you are 100% right about the &quot;data first, then plot&quot; approach. But seaborn is able to produce a bunch of very informational charts where it, to me at least, would be fantastic to grab all the data in an efficient way. Why? Because I often find myself in the situation that I&#39;m asked to reproduce python / matplotlib / seaborn plots with other visualization tools. And if you ask me why, I&#39;d wish I&#39;d had a good answer to that..."
+                },
+                {
+                    "owner": {
+                        "account_id": 5149286,
+                        "reputation": 331575,
+                        "user_id": 4124317,
+                        "user_type": "registered",
+                        "accept_rate": 78,
+                        "display_name": "ImportanceOfBeingErnest"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1537965559,
+                    "post_id": 52517145,
+                    "comment_id": 91975423,
+                    "link": "https://stackoverflow.com/questions/52517145/how-to-retrieve-all-data-from-seaborn-distribution-plot-with-mutliple-distributi#comment91975423_52517145",
+                    "body": "Since the bars have different color you can use this information to find out which bar belongs to which set of data (<code>h.get_facecolor()</code>)."
+                }
+            ],
+            "answers": [
+                {
+                    "owner": {
+                        "account_id": 17241127,
+                        "reputation": 6479,
+                        "user_id": 12483346,
+                        "user_type": "registered",
+                        "display_name": "Miguel Trejo"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": true,
+                    "score": 3,
+                    "last_activity_date": 1599860331,
+                    "creation_date": 1599860331,
+                    "answer_id": 63854618,
+                    "question_id": 52517145,
+                    "link": "https://stackoverflow.com/questions/52517145/how-to-retrieve-all-data-from-seaborn-distribution-plot-with-mutliple-distributi/63854618#63854618",
+                    "body": "<p>I was just getting the same need of retrieving data from a seaborn distribution plot, what worked for me was to call the method <code>.findobj()</code> on each iteration's graph. Then, one can notice that the <code>matplotlib.lines.Line2D</code> object has a <code>get_data()</code> method, this is similar as what you've mentioned before for <code>myPlot.get_lines()[1].get_data()</code>.</p>\n<p>Following your example code</p>\n<pre><code>data = []\nfor idx, var in enumerate(list(df)):\n    myPlot = sns.distplot(df[var])\n    \n    # Fine Line2D objects\n    lines2D = [obj for obj in myPlot.findobj() if str(type(obj)) == &quot;&lt;class 'matplotlib.lines.Line2D'&gt;&quot;]\n    \n    # Retrieving x, y data\n    x, y = lines2D[idx].get_data()[0], lines2D[idx].get_data()[1]\n    \n    # Store as dataframe \n    data.append(pd.DataFrame({'x':x, 'y':y}))\n</code></pre>\n<p>Notice here that the data for the first <code>sns.distplot</code> plot is stored on the first index of <code>lines2D</code> and the data for the second <code>sns.distplot</code> is stored on the second index. I'm not really sure about why this happens this way, but if you were to consider more than two plots, then you will access each <code>sns.distplot</code> data by calling <code>Lines2D</code> on it's respective index.</p>\n<p>Finally, to verify one can plot each <code>distplot</code></p>\n<pre><code>plt.plot(data[0].x, data[0].y)\n</code></pre>\n<p><a href=\"https://i.stack.imgur.com/nYt0R.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/nYt0R.png\" alt=\"enter image description here\" /></a></p>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 4196502,
+                "reputation": 58912,
+                "user_id": 3437787,
+                "user_type": "registered",
+                "accept_rate": 100,
+                "display_name": "vestland"
+            },
+            "comment_count": 3,
+            "is_answered": true,
+            "accepted_answer_id": 63854618,
+            "answer_count": 1,
+            "score": 4,
+            "last_activity_date": 1599860331,
+            "creation_date": 1537962847,
+            "last_edit_date": 1579802061,
+            "question_id": 52517145,
+            "link": "https://stackoverflow.com/questions/52517145/how-to-retrieve-all-data-from-seaborn-distribution-plot-with-mutliple-distributi",
+            "title": "How to retrieve all data from seaborn distribution plot with mutliple distributions?",
+            "body": "<p>The post <a href=\"https://stackoverflow.com/questions/37374983/get-data-points-from-seaborn-distplot\">Get data points from Seaborn distplot</a> describes how you can get data elements using <code>sns.distplot(x).get_lines()[0].get_data()</code>, <code>sns.distplot(x).patches</code> and <code>[h.get_height() for h in sns.distplot(x).patches]</code></p>\n\n<p>But how can you do this if you've used multiple layers by plotting the data in a loop, such as:</p>\n\n<p><strong>Snippet 1</strong></p>\n\n<pre><code>for var in list(df):\n    print(var)\n    distplot = sns.distplot(df[var])\n</code></pre>\n\n<p><strong>Plot</strong></p>\n\n<p><a href=\"https://i.stack.imgur.com/TuAYU.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/TuAYU.png\" alt=\"enter image description here\"></a></p>\n\n<p>Is there a way to retrieve the X and Y values for both linecharts and the bars?</p>\n\n<hr>\n\n<p>Here's the whole setup for an easy copy&amp;paste:</p>\n\n<pre><code>#%%\n# imports\nimport matplotlib.pyplot as plt\nimport pandas as pd\nimport numpy as np\nimport warnings\nwarnings.simplefilter(action='ignore', category=FutureWarning)\nimport pylab\npylab.rcParams['figure.figsize'] = (8, 4)\nimport seaborn as sns\nfrom collections import OrderedDict\n\n# Function to build synthetic data\ndef sample(rSeed, periodLength, colNames):\n\n    np.random.seed(rSeed)\n    date = pd.to_datetime(\"1st of Dec, 1999\")   \n    cols = OrderedDict()\n\n    for col in colNames:\n        cols[col] = np.random.normal(loc=0.0, scale=1.0, size=periodLength)\n    dates = date+pd.to_timedelta(np.arange(periodLength), 'D')\n\n    df = pd.DataFrame(cols, index = dates)\n    return(df)\n\n# Dataframe with synthetic data\ndf = sample(rSeed = 123, colNames = ['X1', 'X2'], periodLength = 50)\n\n# sns.distplot with multiple layers\nfor var in list(df):\n    myPlot = sns.distplot(df[var])\n</code></pre>\n\n<hr>\n\n<p>Here's what I've tried:</p>\n\n<p><strong>Y-values for histogram:</strong></p>\n\n<p>If I run:</p>\n\n<pre><code>barX = [h.get_height() for h in myPlot.patches]\n</code></pre>\n\n<p>Then I get the following list of lenght 11:</p>\n\n<pre><code>[0.046234272703757885,\n 0.1387028181112736,\n 0.346757045278184,\n 0.25428849987066837,\n 0.2542884998706682,\n 0.11558568175939472,\n 0.11875881712519201,\n 0.3087729245254993,\n 0.3087729245254993,\n 0.28502116110046083,\n 0.1662623439752689]\n</code></pre>\n\n<p>And this seems reasonable since there seems to be 6 values for the blue bars and 5 values for the red bars. But how do I tell which values belong to which variable?</p>\n\n<p><strong>Y-values for line:</strong></p>\n\n<p>This seems a bit easier than the histogram part since you can use <code>myPlot.get_lines()[0].get_data()</code> <strong>AND</strong> <code>myPlot.get_lines()[1].get_data()</code> to get:</p>\n\n<pre><code>Out[678]: \n(array([-4.54448949, -4.47612134, -4.40775319, -4.33938504, -4.27101689,\n         ...\n         3.65968859,  3.72805675,  3.7964249 ,  3.86479305,  3.9331612 ,\n         4.00152935,  4.0698975 ,  4.13826565]),\n array([0.00042479, 0.00042363, 0.000473  , 0.00057404, 0.00073097,\n        0.00095075, 0.00124272, 0.00161819, 0.00208994, 0.00267162,\n        ...\n        0.0033384 , 0.00252219, 0.00188591, 0.00139919, 0.00103544,\n        0.00077219, 0.00059125, 0.00047871]))\n\nmyPlot.get_lines()[1].get_data()\n\nOut[679]: \n(array([-3.68337423, -3.6256517 , -3.56792917, -3.51020664, -3.4524841 ,\n        -3.39476157, -3.33703904, -3.27931651, -3.22159398, -3.16387145,\n         ...\n         3.24332952,  3.30105205,  3.35877458,  3.41649711,  3.47421965,\n         3.53194218,  3.58966471,  3.64738724]),\n array([0.00035842, 0.00038018, 0.00044152, 0.00054508, 0.00069579,\n        0.00090076, 0.00116922, 0.00151242, 0.0019436 , 0.00247792,\n        ...\n        0.00215912, 0.00163627, 0.00123281, 0.00092711, 0.00070127,\n        0.00054097, 0.00043517, 0.00037599]))\n</code></pre>\n\n<p>But the whole thing still seems a bit cumbersome. So does anyone know of a more direct approach to perhaps retrieve all data to a dictionary or dataframe?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 5760
+}

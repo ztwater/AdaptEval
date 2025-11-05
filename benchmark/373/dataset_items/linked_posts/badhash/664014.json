@@ -1,0 +1,2153 @@
+{
+    "items": [
+        {
+            "tags": [
+                "c",
+                "algorithm",
+                "hash"
+            ],
+            "comments": [
+                {
+                    "owner": {
+                        "account_id": 8662,
+                        "reputation": 8437,
+                        "user_id": 15703,
+                        "user_type": "registered",
+                        "accept_rate": 54,
+                        "display_name": "redcalx"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1353678361,
+                    "post_id": 664014,
+                    "comment_id": 18525294,
+                    "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key#comment18525294_664014",
+                    "body": "Also see <a href=\"http://stackoverflow.com/questions/12717413/what-are-good-methods-for-for-hashing-bits-in-an-int32-or-uint32\" title=\"what are good methods for for hashing bits in an int32 or uint32\">stackoverflow.com/questions/12717413/&hellip;</a>"
+                },
+                {
+                    "owner": {
+                        "account_id": 4019407,
+                        "reputation": 11601,
+                        "user_id": 3310334,
+                        "user_type": "registered",
+                        "accept_rate": 64,
+                        "display_name": "minseong"
+                    },
+                    "edited": false,
+                    "score": 1,
+                    "creation_date": 1676325015,
+                    "post_id": 664014,
+                    "comment_id": 133111281,
+                    "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key#comment133111281_664014",
+                    "body": "Why not say <code>hash(x) = x</code> ?"
+                },
+                {
+                    "owner": {
+                        "account_id": 21505671,
+                        "reputation": 74,
+                        "user_id": 15849098,
+                        "user_type": "registered",
+                        "display_name": "jzimmerman"
+                    },
+                    "reply_to_user": {
+                        "account_id": 4019407,
+                        "reputation": 11601,
+                        "user_id": 3310334,
+                        "user_type": "registered",
+                        "accept_rate": 64,
+                        "display_name": "minseong"
+                    },
+                    "edited": false,
+                    "score": 0,
+                    "creation_date": 1709074469,
+                    "post_id": 664014,
+                    "comment_id": 137633298,
+                    "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key#comment137633298_664014",
+                    "body": "@minseong as an addition, if you are building a hash table and care about performance, it&#39;s important to think about the distribution of numbers coming in. In the case that you can make them monotonically increasing at a minimal rate, then hash(x) = x will vastly outperform the other functions."
+                }
+            ],
+            "answers": [
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 17549,
+                                "reputation": 75934,
+                                "user_id": 39375,
+                                "user_type": "registered",
+                                "accept_rate": 82,
+                                "display_name": "Tyler McHenry"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1237496726,
+                            "post_id": 664033,
+                            "comment_id": 477532,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/664033#comment477532_664033",
+                            "body": "Proof by contradiction. Assume that bucket b has more than one key: k1 and k2 where k1 != k2. Then f(k1) = k1 = b and f(k2) = k2 = b, by transitivity k1 = k2. QED. Although this function means that the size of your hash table is the size of your input set which completely defeats the point of a hash"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 19938,
+                                "reputation": 34124,
+                                "user_id": 47161,
+                                "user_type": "registered",
+                                "accept_rate": 66,
+                                "display_name": "erikkallen"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1237566907,
+                            "post_id": 664033,
+                            "comment_id": 480377,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/664033#comment480377_664033",
+                            "body": "@Tyler: The hash container will use f(i) % size to decide which bucket to put the value in. However, only f(i) is the hash function, the modulo operation belongs to the hash table. The object (integer) can&#39;t know which hash table it will be put in."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 7094,
+                                "reputation": 44314,
+                                "user_id": 12166,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "Rafa\u0142 Dowgird"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1237568179,
+                            "post_id": 664033,
+                            "comment_id": 480446,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/664033#comment480446_664033",
+                            "body": "The problem with this is that it&#39;s common to have large sets of integers that are divisible by a common factor (word-aligned memory adresses etc.). Now if your hash table happens to be divisible by the same factor, you end up with only half (or 1/4, 1/8, etc.) buckets used."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 19938,
+                                "reputation": 34124,
+                                "user_id": 47161,
+                                "user_type": "registered",
+                                "accept_rate": 66,
+                                "display_name": "erikkallen"
+                            },
+                            "edited": false,
+                            "score": 10,
+                            "creation_date": 1237637825,
+                            "post_id": 664033,
+                            "comment_id": 482718,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/664033#comment482718_664033",
+                            "body": "@Rafal: That&#39;s why the response says &quot;for a simple counter&quot; and &quot;Depends on how your data is distributed&quot;"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 292977,
+                                "reputation": 750,
+                                "user_id": 596060,
+                                "user_type": "registered",
+                                "display_name": "Juande Carrion"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1349369819,
+                            "post_id": 664033,
+                            "comment_id": 17197025,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/664033#comment17197025_664033",
+                            "body": "That&#39;s actually the implementation by Sun of the method hashCode() in java.lang.Integer <a href=\"http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/6-b14/java/lang/Integer.java#Integer.hashCode%28%29\" rel=\"nofollow noreferrer\">grepcode.com/file/repository.grepcode.com/java/root/jdk/open&zwnj;&#8203;jdk/&hellip;</a>"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 973998,
+                                "reputation": 139465,
+                                "user_id": 995876,
+                                "user_type": "registered",
+                                "display_name": "Esailija"
+                            },
+                            "reply_to_user": {
+                                "account_id": 292977,
+                                "reputation": 750,
+                                "user_id": 596060,
+                                "user_type": "registered",
+                                "display_name": "Juande Carrion"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1370047792,
+                            "post_id": 664033,
+                            "comment_id": 24331622,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/664033#comment24331622_664033",
+                            "body": "@JuandeCarrion That is misleading because that is not the hash that is being used. After moving over to using power of two table sizes, Java rehashes every hash returned from <code>.hashCode()</code>, see <a href=\"http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/6-b14/java/util/HashMap.java#HashMap.hash%28int%29\" rel=\"nofollow noreferrer\">here</a>."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 175476,
+                                "reputation": 1693,
+                                "user_id": 405517,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "awdz9nld"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1421789641,
+                            "post_id": 664033,
+                            "comment_id": 44492854,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/664033#comment44492854_664033",
+                            "body": "The identity function is fairly useless as a hash in many practical applications due to its distributive properties (or lack thereof), unless, of course, locality is a desired attribute"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 19938,
+                        "reputation": 34124,
+                        "user_id": 47161,
+                        "user_type": "registered",
+                        "accept_rate": 66,
+                        "display_name": "erikkallen"
+                    },
+                    "comment_count": 7,
+                    "is_accepted": false,
+                    "score": 32,
+                    "last_activity_date": 1237496265,
+                    "creation_date": 1237496265,
+                    "answer_id": 664033,
+                    "question_id": 664014,
+                    "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/664033#664033",
+                    "body": "<p>Depends on how your data is distributed. For a simple counter, the simplest function</p>\n\n<pre><code>f(i) = i\n</code></pre>\n\n<p>will be good (I suspect optimal, but I can't prove it).</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 17549,
+                        "reputation": 75934,
+                        "user_id": 39375,
+                        "user_type": "registered",
+                        "accept_rate": 82,
+                        "display_name": "Tyler McHenry"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1237496523,
+                    "creation_date": 1237496523,
+                    "answer_id": 664064,
+                    "question_id": 664014,
+                    "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/664064#664064",
+                    "body": "<p><a href=\"http://www.cs.hmc.edu/~geoff/classes/hmc.cs070.200101/homework10/hashfuncs.html\" rel=\"noreferrer\">This page</a> lists some simple hash functions that tend to decently in general, but any simple hash has pathological cases where it doesn't work well. </p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 25824,
+                        "reputation": 109538,
+                        "user_id": 66692,
+                        "user_type": "registered",
+                        "accept_rate": 50,
+                        "display_name": "dirkgently"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1519516972,
+                    "last_edit_date": 1519516972,
+                    "creation_date": 1237496569,
+                    "answer_id": 664066,
+                    "question_id": 664014,
+                    "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/664066#664066",
+                    "body": "<p>The answer depends on a lot of things like:</p>\n\n<ul>\n<li>Where do you intend to employ it?</li>\n<li>What are you trying to do with the hash?</li>\n<li>Do you need a crytographically secure hash function?</li>\n</ul>\n\n<p>I suggest that you take a look at the <a href=\"http://en.wikipedia.org/wiki/Merkle-Damg%C3%A5rd_construction\" rel=\"nofollow noreferrer\">Merkle-Damgard</a> family of hash functions like SHA-1 etc</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 3062,
+                                "reputation": 45735,
+                                "user_id": 4332,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "Adrian Mouat"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1276771971,
+                            "post_id": 664165,
+                            "comment_id": 3134234,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/664165#comment3134234_664165",
+                            "body": "That is a good article, but it is focused on hashing string keys, not integers."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 3062,
+                                "reputation": 45735,
+                                "user_id": 4332,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "Adrian Mouat"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1276772783,
+                            "post_id": 664165,
+                            "comment_id": 3134349,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/664165#comment3134349_664165",
+                            "body": "Just to be clear, although the methods in the article would work for integers (or could be adapted to), I assume there are more efficient algorithms for integers."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 20189,
+                        "reputation": 167525,
+                        "user_id": 48015,
+                        "user_type": "registered",
+                        "accept_rate": 80,
+                        "display_name": "Christoph"
+                    },
+                    "comment_count": 2,
+                    "is_accepted": false,
+                    "score": 3,
+                    "last_activity_date": 1237498308,
+                    "creation_date": 1237498308,
+                    "answer_id": 664165,
+                    "question_id": 664014,
+                    "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/664165#664165",
+                    "body": "<p>There's a nice overview over some hash algorithms at <a href=\"http://eternallyconfuzzled.com/tuts/algorithms/jsw_tut_hashing.aspx\" rel=\"nofollow noreferrer\">Eternally Confuzzled</a>. I'd recommend Bob Jenkins' one-at-a-time hash which quickly reaches avalanche and therefore can be used for efficient hash table lookup.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 4341,
+                                "reputation": 5013,
+                                "user_id": 6475,
+                                "user_type": "registered",
+                                "accept_rate": 80,
+                                "display_name": "Seun Osewa"
+                            },
+                            "edited": false,
+                            "score": 47,
+                            "creation_date": 1281974452,
+                            "post_id": 665545,
+                            "comment_id": 3651120,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment3651120_665545",
+                            "body": "It&#39;s a really bad hash function, albeit attached to a famous name."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 28827,
+                                "reputation": 1920,
+                                "user_id": 111698,
+                                "user_type": "registered",
+                                "display_name": "Paolo Bonzini"
+                            },
+                            "edited": false,
+                            "score": 6,
+                            "creation_date": 1307086112,
+                            "post_id": 665545,
+                            "comment_id": 7250261,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment7250261_665545",
+                            "body": "It&#39;s not a bad hash function at all if used with prime table sizes.  Also, it is meant for <i>closed</i> hashing. If hash values are not uniformly distributed, multiplicative hashing ensures that collisions from one value are unlikely to &quot;disturb&quot; items with other hash values."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 175476,
+                                "reputation": 1693,
+                                "user_id": 405517,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "awdz9nld"
+                            },
+                            "edited": false,
+                            "score": 14,
+                            "creation_date": 1338465007,
+                            "post_id": 665545,
+                            "comment_id": 14103749,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment14103749_665545",
+                            "body": "For the curious, this constant is chosen to be the hash size (2^32) divided by Phi"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 175476,
+                                "reputation": 1693,
+                                "user_id": 405517,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "awdz9nld"
+                            },
+                            "edited": false,
+                            "score": 8,
+                            "creation_date": 1338465076,
+                            "post_id": 665545,
+                            "comment_id": 14103772,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment14103772_665545",
+                            "body": "Paolo: Knuth&#39;s method is &quot;bad&quot; in the sense that it does not avalanche on the upper bits"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 218918,
+                                "reputation": 2671,
+                                "user_id": 475491,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "karadoc"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1382429924,
+                            "post_id": 665545,
+                            "comment_id": 28945529,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment28945529_665545",
+                            "body": "I don&#39;t understand where 2654435761 comes from. 2^32 / phi = 2654435769.5, which is close but clearly not the same."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 224921,
+                                "reputation": 10706,
+                                "user_id": 485088,
+                                "user_type": "registered",
+                                "display_name": "Tim \u010cas"
+                            },
+                            "reply_to_user": {
+                                "account_id": 218918,
+                                "reputation": 2671,
+                                "user_id": 475491,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "karadoc"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1386205271,
+                            "post_id": 665545,
+                            "comment_id": 30445051,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment30445051_665545",
+                            "body": "@karadoc: I&#39;m guessing he simply didn&#39;t use a very precise calculator when calculating that -- that, or the constant itself was only approximated to N places. Or both."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 218918,
+                                "reputation": 2671,
+                                "user_id": 475491,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "karadoc"
+                            },
+                            "reply_to_user": {
+                                "account_id": 224921,
+                                "reputation": 10706,
+                                "user_id": 485088,
+                                "user_type": "registered",
+                                "display_name": "Tim \u010cas"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1386245140,
+                            "post_id": 665545,
+                            "comment_id": 30461932,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment30461932_665545",
+                            "body": "@Tim\u010cas That sounds likely, but it makes me wonder if theres even anything special about that number. Like, would the hash be any worse if I used, say, 2577310911 instead? I&#39;m not completely sure why it&#39;s best to have &#39;no common factors&#39; (presumably wrt the number being hashed), but if that&#39;s true then maybe we should be using a prime number.(?)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 218918,
+                                "reputation": 2671,
+                                "user_id": 475491,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "karadoc"
+                            },
+                            "edited": false,
+                            "score": 13,
+                            "creation_date": 1386245616,
+                            "post_id": 665545,
+                            "comment_id": 30462209,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment30462209_665545",
+                            "body": "On closer inspection, it turns out 2654435761 is actually a prime number. So that&#39;s probably why it was chosen rather than 2654435769."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 28546,
+                                "reputation": 6111,
+                                "user_id": 76349,
+                                "user_type": "registered",
+                                "accept_rate": 72,
+                                "display_name": "Eric Grange"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1412678723,
+                            "post_id": 665545,
+                            "comment_id": 41147580,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment41147580_665545",
+                            "body": "Using prime table sizes basically means you&#39;re applying a poor man&#39;s hash again with the prime modulo, it&#39;s only effective with poor hash functions, and detrimental with good ones"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 175476,
+                                "reputation": 1693,
+                                "user_id": 405517,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "awdz9nld"
+                            },
+                            "edited": false,
+                            "score": 4,
+                            "creation_date": 1421272944,
+                            "post_id": 665545,
+                            "comment_id": 44301611,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment44301611_665545",
+                            "body": "A note of interest is that this function has very poor avalanche properties (it spreads values in a non-uniform way), and as such may cause clustering when used in for example hash tables"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2214003,
+                                "reputation": 33062,
+                                "user_id": 1956010,
+                                "user_type": "registered",
+                                "accept_rate": 83,
+                                "display_name": "nwellnhof"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1457276344,
+                            "post_id": 665545,
+                            "comment_id": 59323364,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment59323364_665545",
+                            "body": "The answer fails to mention that the <i>upper bits</i> of the hash value must be used for good performance (right shift for table sizes that are powers of two). Using <code>hash(i) % table_size</code> results in a huge number of collisions."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 4644867,
+                                "reputation": 6167,
+                                "user_id": 3763545,
+                                "user_type": "registered",
+                                "accept_rate": 51,
+                                "display_name": "InsideLoop"
+                            },
+                            "edited": false,
+                            "score": 5,
+                            "creation_date": 1483959065,
+                            "post_id": 665545,
+                            "comment_id": 70297214,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment70297214_665545",
+                            "body": "Please stop naming this hash function &quot;Knuth&#39;s multiplicative method&quot;. This is not what Knuth proposed."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1527502,
+                                "reputation": 150,
+                                "user_id": 1520074,
+                                "user_type": "registered",
+                                "display_name": "cxs1031"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1506539358,
+                            "post_id": 665545,
+                            "comment_id": 79866499,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment79866499_665545",
+                            "body": "can you explain what do you mean by <code>in the order of your hash size</code>, and why 2654435761 is <code>in the order of</code> 2^32? Do you mean that 2654435761 is the largest prime number in the range of [0, 2^32) ? Thanks!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 68665,
+                                "reputation": 8303,
+                                "user_id": 200224,
+                                "user_type": "registered",
+                                "accept_rate": 64,
+                                "display_name": "Andy"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1545422977,
+                            "post_id": 665545,
+                            "comment_id": 94627528,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment94627528_665545",
+                            "body": "Makes perfect sense for cases like dividing up a table into shards based upon a sequential primary key"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2427788,
+                                "reputation": 1631,
+                                "user_id": 2119377,
+                                "user_type": "registered",
+                                "display_name": "Wolfgang Brehm"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1527502,
+                                "reputation": 150,
+                                "user_id": 1520074,
+                                "user_type": "registered",
+                                "display_name": "cxs1031"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1568804774,
+                            "post_id": 665545,
+                            "comment_id": 102389650,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment102389650_665545",
+                            "body": "@cxs1031 he means the same order of magnitude. In computer science this often means the same number of bits."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 98956,
+                                "reputation": 2920,
+                                "user_id": 267551,
+                                "user_type": "registered",
+                                "accept_rate": 40,
+                                "display_name": "Todd Lehman"
+                            },
+                            "reply_to_user": {
+                                "account_id": 28546,
+                                "reputation": 6111,
+                                "user_id": 76349,
+                                "user_type": "registered",
+                                "accept_rate": 72,
+                                "display_name": "Eric Grange"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1586477130,
+                            "post_id": 665545,
+                            "comment_id": 108149747,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment108149747_665545",
+                            "body": "@EricGrange \u2014 I don&#39;t think that&#39;s correct that a prime modulus is detrimental with good hashes. With a good hash, the modulus should be irrelevant. And if it&#39;s speed you&#39;re worried about, you can compute the modulus efficiently using the multiplicative inverse rather than hardware division."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1200422,
+                                "reputation": 1186,
+                                "user_id": 1171201,
+                                "user_type": "registered",
+                                "accept_rate": 0,
+                                "display_name": "Alexandre M"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1622587342,
+                            "post_id": 665545,
+                            "comment_id": 119833828,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment119833828_665545",
+                            "body": "This function is <i>extremely</i> slow compared to a proper hash function. Test it first before using it and do a proper performance evaluation."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 431541,
+                                "reputation": 13947,
+                                "user_id": 815680,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "bryc"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1200422,
+                                "reputation": 1186,
+                                "user_id": 1171201,
+                                "user_type": "registered",
+                                "accept_rate": 0,
+                                "display_name": "Alexandre M"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1623046338,
+                            "post_id": 665545,
+                            "comment_id": 119956185,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment119956185_665545",
+                            "body": "@AlexandreM Source? Are you talking about 1980s microcontrollers? Are you talking about interpreted languages with inefficient multiplication? Are you talking about extended instruction sets for accelerating these types of computations? Some of the best hash and fastest functions use 64-bit multiplication. In fact, a single multiplication operation is very fast on modern processors. I think you may be mistaken."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 431541,
+                                "reputation": 13947,
+                                "user_id": 815680,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "bryc"
+                            },
+                            "reply_to_user": {
+                                "account_id": 4644867,
+                                "reputation": 6167,
+                                "user_id": 3763545,
+                                "user_type": "registered",
+                                "accept_rate": 51,
+                                "display_name": "InsideLoop"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1623046683,
+                            "post_id": 665545,
+                            "comment_id": 119956287,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment119956287_665545",
+                            "body": "@InsideLoop Can you provide a source or some context? I see nothing to confirm nor deny its origin. So if you think you can make such a claim, please back it up with reproducible facts."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1200422,
+                                "reputation": 1186,
+                                "user_id": 1171201,
+                                "user_type": "registered",
+                                "accept_rate": 0,
+                                "display_name": "Alexandre M"
+                            },
+                            "reply_to_user": {
+                                "account_id": 431541,
+                                "reputation": 13947,
+                                "user_id": 815680,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "bryc"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1623118535,
+                            "post_id": 665545,
+                            "comment_id": 119981696,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment119981696_665545",
+                            "body": "@bryc I&#39;ve already pointed the source in my own comment: <i>a real performance test</i>. This &quot;hash&quot; performs a multiplication + a modulo operation, both are much more expensive than proper hash functions. DJB hash, for instance, is simpler and orders of magnitude faster than this."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 431541,
+                                "reputation": 13947,
+                                "user_id": 815680,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "bryc"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1200422,
+                                "reputation": 1186,
+                                "user_id": 1171201,
+                                "user_type": "registered",
+                                "accept_rate": 0,
+                                "display_name": "Alexandre M"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1623124590,
+                            "post_id": 665545,
+                            "comment_id": 119982602,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment119982602_665545",
+                            "body": "@AlexandreM Your comment is an anecdote, not a source. DJB also uses multiplication (using 33) just like this hash, and as it does not pass <i>any</i> tests in SMHasher, I hardly consider it a &quot;proper&quot; hash. I&#39;d love to test your benchmark test code that lead to this conclusion if you could provide it.  <code>Mod  2^32</code> is not actually modular arithmetic, because it is the same result as <code>AND 0xFFFFFFFF</code>, or mere unsigned 32-bit integer overflow. Modular arithmetic is only used in mathematical definitions."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 431541,
+                                "reputation": 13947,
+                                "user_id": 815680,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "bryc"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1200422,
+                                "reputation": 1186,
+                                "user_id": 1171201,
+                                "user_type": "registered",
+                                "accept_rate": 0,
+                                "display_name": "Alexandre M"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1623127910,
+                            "post_id": 665545,
+                            "comment_id": 119983253,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment119983253_665545",
+                            "body": "@AlexandreM If one uses type unsigned int, and skip the initial value of hash, knuth&#39;s hash (<code>hash = (hash + key[i]) * 2654435761</code>) is essentially the same algorithm as DJB (<code>hash = (hash + key[i]) * 33</code>). The only difference is that the multiplier is smaller. As I said before, modern processors have no trouble doing 64-bit multiplication, which is why it is used in modern hashing algorithms such as xxHash3, and wyhash. Though admittedly, the unmodified &quot;Knuth algorithm, <code>hash = key[i] * 2654435761</code> is extremely weak as a general hash as it cannot handle keys containing null bytes."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 431541,
+                                "reputation": 13947,
+                                "user_id": 815680,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "bryc"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1200422,
+                                "reputation": 1186,
+                                "user_id": 1171201,
+                                "user_type": "registered",
+                                "accept_rate": 0,
+                                "display_name": "Alexandre M"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1623264035,
+                            "post_id": 665545,
+                            "comment_id": 120032680,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment120032680_665545",
+                            "body": "@AlexandreM I don&#39;t appreciate the assumption that I &quot;don&#39;t know what I&#39;m talking about&quot;, there is nothing wrong with what I said and you&#39;ve not provided actual benchmarks to test your claim. DJB uses a a multiplier of 33; that was the original given constant. Similarly, the prime multiplier 31 had been used in the hash function in Java and Emacs.  Yes, <code>n * 33</code> can be implemented with <code>(n &lt;&lt; 5) + n</code>. <code>n * 31</code> can be implemented with <code>(n &lt;&lt; 5) - n</code>.  In terms of performance on modern CPUs, a single <code>imul</code> instruction is faster than <code>shl + add&#47;sub</code>, it is only slower on old CPUs like 8086."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1200422,
+                                "reputation": 1186,
+                                "user_id": 1171201,
+                                "user_type": "registered",
+                                "accept_rate": 0,
+                                "display_name": "Alexandre M"
+                            },
+                            "reply_to_user": {
+                                "account_id": 431541,
+                                "reputation": 13947,
+                                "user_id": 815680,
+                                "user_type": "registered",
+                                "accept_rate": 60,
+                                "display_name": "bryc"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1623282098,
+                            "post_id": 665545,
+                            "comment_id": 120037914,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment120037914_665545",
+                            "body": "@bryc I don&#39;t mind, but for the sake of coherence I suggest you start by posting your own benchmark result that proves that: &quot;on modern CPUs, a single imul instruction is faster than shl + add/sub, it is only slower on old CPUs like 8086&quot;."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 152400,
+                                "reputation": 242173,
+                                "user_id": 366904,
+                                "user_type": "moderator",
+                                "accept_rate": 82,
+                                "display_name": "Cody Gray - on strike"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1623307635,
+                            "post_id": 665545,
+                            "comment_id": 120042925,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment120042925_665545",
+                            "body": "I deleted some rude comments here, but these Q&amp;A are relevant to the claim about performance of a single multiplication vs. shift+arithmetic: <a href=\"https://stackoverflow.com/q/37925143/x86-64-is-imul-faster-than-2x-shl-2x-add\">stackoverflow.com/q/37925143/&hellip;</a>, and <a href=\"https://stackoverflow.com/q/40564004/multiplication-with-constant-imul-or-shl-add-combination\">stackoverflow.com/q/40564004/&hellip;</a>, and <a href=\"https://stackoverflow.com/q/57110383/x86-multiplication-with-3-imul-vs-shl-add\">stackoverflow.com/q/57110383/&hellip;</a>. If you want to start a discussion about the advantages and disadvantages, please do so as a new question, rather than extending this extremely long comment thread any further."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6781763,
+                                "reputation": 3615,
+                                "user_id": 5267751,
+                                "user_type": "registered",
+                                "display_name": "user202729"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1668997519,
+                            "post_id": 665545,
+                            "comment_id": 131534742,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#comment131534742_665545",
+                            "body": "Note. \u25a0 Knuth did suggest this (see the source in <a href=\"https://stackoverflow.com/a/41537995/5267751\">stackoverflow.com/a/41537995/5267751</a>). \u25a0 there are a few notes needed to use it effectively. (e.g. don&#39;t compute hash value mod 2^n for small n) \u25a0 The answer linked above claims that Knuth did not suggest using an adjacent prime at all, in fact he only said to use inverse of golden ratio. \u25a0 (Anecdote: Knuth used some hash function in his famous TeX program that does not perform well for keys consist of integer values <a href=\"https://tex.stackexchange.com/q/147966/250119\">tex.stackexchange.com/q/147966/250119</a> although he most likely didn&#39;t intend it to be used that way) c"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 7094,
+                        "reputation": 44314,
+                        "user_id": 12166,
+                        "user_type": "registered",
+                        "accept_rate": 100,
+                        "display_name": "Rafa\u0142 Dowgird"
+                    },
+                    "comment_count": 26,
+                    "is_accepted": true,
+                    "score": 55,
+                    "last_activity_date": 1237676018,
+                    "last_edit_date": 1237676018,
+                    "creation_date": 1237543174,
+                    "answer_id": 665545,
+                    "question_id": 664014,
+                    "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/665545#665545",
+                    "body": "<p>Knuth's multiplicative method:</p>\n\n<pre><code>hash(i)=i*2654435761 mod 2^32\n</code></pre>\n\n<p>In general, you should pick a multiplier that is in the order of your hash size (<code>2^32</code> in the example) and has no common factors with it. This way the hash function covers all your hash space uniformly.</p>\n\n<p>Edit: The biggest disadvantage of this hash function is that it preserves divisibility, so if your integers are all divisible by 2 or by 4 (which is not uncommon), their hashes will be too. This is a problem in hash tables - you can end up with only 1/2 or 1/4 of the buckets being used.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 41906,
+                        "reputation": 1341,
+                        "user_id": 121958,
+                        "user_type": "registered",
+                        "display_name": "bill"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 7,
+                    "last_activity_date": 1390214665,
+                    "last_edit_date": 1390214665,
+                    "creation_date": 1244973832,
+                    "answer_id": 992558,
+                    "question_id": 664014,
+                    "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/992558#992558",
+                    "body": "<ul>\n<li><p>32-bits multiplicative method (very fast) see @rafal</p>\n\n<pre><code>#define hash32(x) ((x)*2654435761)\n#define H_BITS 24 // Hashtable size\n#define H_SHIFT (32-H_BITS)\nunsigned hashtab[1&lt;&lt;H_BITS]  \n.... \nunsigned slot = hash32(x) &gt;&gt; H_SHIFT\n</code></pre></li>\n<li><p>32-bits and 64-bits (good distribution) at : <a href=\"http://murmurhash.googlepages.com/\" rel=\"noreferrer\">MurmurHash</a></p></li>\n<li><a href=\"https://gist.github.com/badboy/6267743\" rel=\"noreferrer\">Integer Hash Function</a></li>\n</ul>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 960943,
+                                "reputation": 1708,
+                                "user_id": 985306,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "Kshitij Banerjee"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1353663541,
+                            "post_id": 12996028,
+                            "comment_id": 18518807,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment18518807_12996028",
+                            "body": "the first two lines are exactly the same! is there a typo here?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 161745,
+                                "reputation": 49633,
+                                "user_id": 382763,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Thomas Mueller"
+                            },
+                            "reply_to_user": {
+                                "account_id": 960943,
+                                "reputation": 1708,
+                                "user_id": 985306,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "Kshitij Banerjee"
+                            },
+                            "edited": false,
+                            "score": 7,
+                            "creation_date": 1353664458,
+                            "post_id": 12996028,
+                            "comment_id": 18519209,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment18519209_12996028",
+                            "body": "No this is not a typo, the second line further mixes the bits. Using just one multiplication isn&#39;t as good."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 960943,
+                                "reputation": 1708,
+                                "user_id": 985306,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "Kshitij Banerjee"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1353665353,
+                            "post_id": 12996028,
+                            "comment_id": 18519656,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment18519656_12996028",
+                            "body": "yeah but the &#39;h&#39; before was making it redundant .I figured it out though.. thanks for the edit. It is decently fast completing in 19 machine cycles on my machine. BTW, why&#39;d you change the magic number? does better?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 161745,
+                                "reputation": 49633,
+                                "user_id": 382763,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Thomas Mueller"
+                            },
+                            "reply_to_user": {
+                                "account_id": 960943,
+                                "reputation": 1708,
+                                "user_id": 985306,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "Kshitij Banerjee"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1353677925,
+                            "post_id": 12996028,
+                            "comment_id": 18525116,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment18525116_12996028",
+                            "body": "I changed the magic number because according to a <a href=\"http://code.google.com/p/h2database/source/browse/trunk/h2/src/test/org/h2/test/store/CalculateHashConstant.java\" rel=\"nofollow noreferrer\">test case I wrote</a> the value 0x45d9f3b provides better <a href=\"http://en.wikipedia.org/wiki/Confusion_and_diffusion\" rel=\"nofollow noreferrer\">confusion and diffusion</a>, specially that if one output bit changes, each other output bit changes with about the same probability (in addition to all output bits change with the same probability if an input bit changes). How did you measure 0x3335b369 works better for you? Is an int 32 bit for you?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 960943,
+                                "reputation": 1708,
+                                "user_id": 985306,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "Kshitij Banerjee"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1353787930,
+                            "post_id": 12996028,
+                            "comment_id": 18550579,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment18550579_12996028",
+                            "body": "I just did it on some live test cases. I replaced the hash function and ran it in Quantify. Might be case specific though."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 161745,
+                                "reputation": 49633,
+                                "user_id": 382763,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Thomas Mueller"
+                            },
+                            "reply_to_user": {
+                                "account_id": 960943,
+                                "reputation": 1708,
+                                "user_id": 985306,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "Kshitij Banerjee"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1353837448,
+                            "post_id": 12996028,
+                            "comment_id": 18559030,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment18559030_12996028",
+                            "body": "I&#39;m sorry what is Quantify?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 960943,
+                                "reputation": 1708,
+                                "user_id": 985306,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "Kshitij Banerjee"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1353915717,
+                            "post_id": 12996028,
+                            "comment_id": 18577503,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment18577503_12996028",
+                            "body": "Its a performance testing tool. In this case , it showed me that the lookups to the map were on an average faster with the old magic number. But needs more testing to be sure."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 161745,
+                                "reputation": 49633,
+                                "user_id": 382763,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Thomas Mueller"
+                            },
+                            "reply_to_user": {
+                                "account_id": 960943,
+                                "reputation": 1708,
+                                "user_id": 985306,
+                                "user_type": "registered",
+                                "accept_rate": 89,
+                                "display_name": "Kshitij Banerjee"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1353919163,
+                            "post_id": 12996028,
+                            "comment_id": 18578579,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment18578579_12996028",
+                            "body": "Using just one multiplication might be actually faster for your case (even thought you have more conflicts on average). It really depends on the use case. I use it as the supplemental secondary hash function for a concurrent LIRS hash map / cache, and I use 4 or 5 bits of the hash code to select a hash segment (each segment is synchronized). So in my case it is very important to get the best possible distribution to improve concurrency."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1058802,
+                                "reputation": 1711,
+                                "user_id": 1060880,
+                                "user_type": "registered",
+                                "accept_rate": 98,
+                                "display_name": "alessandro"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1354267391,
+                            "post_id": 12996028,
+                            "comment_id": 18715575,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment18715575_12996028",
+                            "body": "I am searching for a nice hash function for 64 bit unsigned int to 32 bit unsigned int. Is for that case, above magic number will be same ? I shifted 32 bit instead of 16 bits."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1058802,
+                                "reputation": 1711,
+                                "user_id": 1060880,
+                                "user_type": "registered",
+                                "accept_rate": 98,
+                                "display_name": "alessandro"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1354267994,
+                            "post_id": 12996028,
+                            "comment_id": 18715849,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment18715849_12996028",
+                            "body": "What I have done is following: uint32_t hash(uint64_t x) {     x = ((x &gt;&gt; 32) ^ x) * 0x45d9f3b;     x = ((x &gt;&gt; 32) ^ x) * 0x45d9f3b;     x = ((x &gt;&gt; 32) ^ x);     return (uint32_t) x; } [code is in c++]"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 161745,
+                                "reputation": 49633,
+                                "user_id": 382763,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Thomas Mueller"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1354270363,
+                            "post_id": 12996028,
+                            "comment_id": 18716986,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment18716986_12996028",
+                            "body": "I believe in that case a larger factor would be better, but you would need to run some tests. Or (this is what I do) first use <code>x = ((x &gt;&gt; 32) ^ x)</code> and then use the 32 bit multiplications above. I&#39;m not sure what&#39;s better. You may also want to look at <a href=\"http://code.google.com/p/smhasher/wiki/MurmurHash3\" rel=\"nofollow noreferrer\">the 64-bit finalizer for Murmur3</a>"
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user1899861"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1414346194,
+                            "post_id": 12996028,
+                            "comment_id": 41769825,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment41769825_12996028",
+                            "body": "OK, so there are no collisions pre range-reduction, but what happens when I have to find a location in a 16k table. Where&#39;s the modulo to guarantee the hash value hashes to a location in the table&#39;s range? What happens to collisions once the range reduction modulo occurs? Without knowing what the range is, how can you know if you have a good hash algorithm?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 161745,
+                                "reputation": 49633,
+                                "user_id": 382763,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Thomas Mueller"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1414349374,
+                            "post_id": 12996028,
+                            "comment_id": 41770813,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment41770813_12996028",
+                            "body": "@RocketRoy if you use modulo afterwards, of course there will be collisions at some point. The point is not to avoid collisions, but to make them as unlikely. The best you can possibly get is the same probability than a true random number (not pseudo random, but true random), but that&#39;s unfeasible. The second best is the same probability as a cryptographically secure random number generator (AES or SHA-3 for example), but that&#39;s slow. The algorithm above is fast but close to AES with regards to probability."
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user1899861"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1414351284,
+                            "post_id": 12996028,
+                            "comment_id": 41771401,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment41771401_12996028",
+                            "body": "Thanks Thomas. Helpful. I&#39;ve been working on a Hash vs Binary search challenge here on SO, and there the OP spec-ed &quot;16k&quot; keys. A hash function I got somewhere (can&#39;t remember where anymore) multiplied the key by 31 % table size. That hash runs almost 4x as fast and produces fewer collisions - 3k vs 4k - for a prime number sized table around 4/3rds the size of the 16k keys. From what Olof Forshell is telling me, hash functions need to be tailored to the key count and data distribution. My bsearch2() function will outperform the hash function above for the given parameters."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 161745,
+                                "reputation": 49633,
+                                "user_id": 382763,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Thomas Mueller"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1414397386,
+                            "post_id": 12996028,
+                            "comment_id": 41782503,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment41782503_12996028",
+                            "body": "@RocketRoy OK I see. Something to remember is that modulo operations (and divisions) are slow on most CPUs. I would avoid using those operations, and instead use a hash table size that is a power of 2. That way, you can just use bitwise and. But binary search sometimes has better locality. By the way, there is also interpolation sort, maybe that is even faster (log log n instead of log n)."
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user1899861"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1414450159,
+                            "post_id": 12996028,
+                            "comment_id": 41810580,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment41810580_12996028",
+                            "body": "Agree a mod of a power of 2 is fastest, as division is then a bit shifts right, but not always practical. Bsearch() has one big problem as implemented in C/C++, and a smaller problem in general. In C/C++ the comparison function is called via a pointer. That turns out to be an order of magnitude albatross around it&#39;s neck. The other is the &quot;stupid&quot; comparisons at the end of the search where it takes 5-6 probes to resolve the last 32-64 values. Locality is excellent, and CPU load very light, as running many .exes proved. Bsearch2() was the result.     <a href=\"http://stackoverflow.com/a/26415664/1899861\">stackoverflow.com/a/26415664/1899861</a>"
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user1899861"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1414450409,
+                            "post_id": 12996028,
+                            "comment_id": 41810670,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment41810670_12996028",
+                            "body": "You&#39;re the only other person I&#39;ve met that knows about interpolation searches, but I&#39;ve never been able to get them to out-perform bsearch(). However, using the Bsearch2() approach of reverting to a linear search at the end might change that. Thanks for the clarifications and feedback. Cheers!"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1557400,
+                                "reputation": 3145,
+                                "user_id": 1448070,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "Santosh Ghimire"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1420457792,
+                            "post_id": 12996028,
+                            "comment_id": 43967425,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment43967425_12996028",
+                            "body": "Is there a way to reverse the process? i.e. generate the key from the hash? @RocketRoy"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 161745,
+                                "reputation": 49633,
+                                "user_id": 382763,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Thomas Mueller"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1557400,
+                                "reputation": 3145,
+                                "user_id": 1448070,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "Santosh Ghimire"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1420466664,
+                            "post_id": 12996028,
+                            "comment_id": 43972171,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment43972171_12996028",
+                            "body": "@SantoshGhimire Yes, in this case reversing the operation is possible, as there are no collisions. You just need to replace  <code>0x45d9f3b</code> with <code>0x119de1f3</code> in the formula (the reciprocal value)."
+                        },
+                        {
+                            "owner": {
+                                "user_type": "does_not_exist",
+                                "display_name": "user1899861"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1557400,
+                                "reputation": 3145,
+                                "user_id": 1448070,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "Santosh Ghimire"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1420496007,
+                            "post_id": 12996028,
+                            "comment_id": 43987622,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment43987622_12996028",
+                            "body": "@SantoshGhimire, the key caveat is there can be no collisions, otherwise two (or more) different values are represented by the same key, one of which must be unreversible. Unless memory is at a premium, and especially if CPU is, you wouldn&#39;t want to do this. As the hash is CPU intensive, it&#39;s preferable to look it up. Hash functions perform range reduction, and that is best thought of as lossy compression. Use reversal with great caution."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1557400,
+                                "reputation": 3145,
+                                "user_id": 1448070,
+                                "user_type": "registered",
+                                "accept_rate": 93,
+                                "display_name": "Santosh Ghimire"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1420520291,
+                            "post_id": 12996028,
+                            "comment_id": 43994213,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment43994213_12996028",
+                            "body": "@ThomasMueller Replacing <code>0x45d9f3b</code> with <code>0x119de1f3</code> didn&#39;t work. Any other changes to be made in the function?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 42143,
+                                "reputation": 170003,
+                                "user_id": 122718,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "usr"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1431703275,
+                            "post_id": 12996028,
+                            "comment_id": 48626150,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment48626150_12996028",
+                            "body": "How do you know there are no collisions? In any case this hash seems to be good. I&#39;m trying right now to find a collision using SMT solver Z3 and it is computing for hours already. Normally, such simple problems are solved very quickly."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 161745,
+                                "reputation": 49633,
+                                "user_id": 382763,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Thomas Mueller"
+                            },
+                            "reply_to_user": {
+                                "account_id": 42143,
+                                "reputation": 170003,
+                                "user_id": 122718,
+                                "user_type": "registered",
+                                "accept_rate": 88,
+                                "display_name": "usr"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1431706702,
+                            "post_id": 12996028,
+                            "comment_id": 48628448,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment48628448_12996028",
+                            "body": "@usr To ensure there are no collisions, I ran a brute-force test, using two bit sets (one for positive, one for negative values). The tests takes a few minutes. The source code of the test is in the linked multi-threaded test program, CalculateHashConstant.java, method getCollisionCount(). I&#39;m sure there are faster ways to test it, and I&#39;m quite sure there is a mathematical proof, but it&#39;s enough for what I needed."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 161745,
+                                "reputation": 49633,
+                                "user_id": 382763,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Thomas Mueller"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1450809,
+                                "reputation": 1645,
+                                "user_id": 1367811,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Anytoe"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1473160485,
+                            "post_id": 12996028,
+                            "comment_id": 66024748,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment66024748_12996028",
+                            "body": "@anytoe what is an uniform length in the context of integers?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1450809,
+                                "reputation": 1645,
+                                "user_id": 1367811,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Anytoe"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1473164756,
+                            "post_id": 12996028,
+                            "comment_id": 66027638,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment66027638_12996028",
+                            "body": "@ThomasMueller Good question - it&#39;s integer based of course. I asked because I need the same number of digits each time, or at least less than a specific number (and then fill up with 0). Does it make sense now?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 161745,
+                                "reputation": 49633,
+                                "user_id": 382763,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Thomas Mueller"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1450809,
+                                "reputation": 1645,
+                                "user_id": 1367811,
+                                "user_type": "registered",
+                                "accept_rate": 75,
+                                "display_name": "Anytoe"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1473166253,
+                            "post_id": 12996028,
+                            "comment_id": 66028599,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment66028599_12996028",
+                            "body": "@anytoe sounds like a different question to me (truncating / formatting an integer to a fixed number of digits, base 10)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1527502,
+                                "reputation": 150,
+                                "user_id": 1520074,
+                                "user_type": "registered",
+                                "display_name": "cxs1031"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1493259211,
+                            "post_id": 12996028,
+                            "comment_id": 74343187,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment74343187_12996028",
+                            "body": "Can you talk more about how to design for certain bits. For instance, I need a hash function to hash integers &lt; 2^24, to an integer &lt; 2^24. i.e. I want the key and value to be both in the range of [0, 2^24)."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 161745,
+                                "reputation": 49633,
+                                "user_id": 382763,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Thomas Mueller"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1527502,
+                                "reputation": 150,
+                                "user_id": 1520074,
+                                "user_type": "registered",
+                                "display_name": "cxs1031"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1493316528,
+                            "post_id": 12996028,
+                            "comment_id": 74377032,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment74377032_12996028",
+                            "body": "@cxs1031 as you can see the basic design is similar for 32 and 64 bits. I guess for different sizes the same design can be used. As for which constants to use, you would need to test that yourself. You could use my <a href=\"https://github.com/h2database/h2database/blob/master/h2/src/test/org/h2/test/store/CalculateHashConstant.java\" rel=\"nofollow noreferrer\">test program</a> as a starting point."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 1527502,
+                                "reputation": 150,
+                                "user_id": 1520074,
+                                "user_type": "registered",
+                                "display_name": "cxs1031"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1493412699,
+                            "post_id": 12996028,
+                            "comment_id": 74423606,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment74423606_12996028",
+                            "body": "@ThomasMueller Thanks! Can I ask how to choose the candidate constants? I think the constants you used in your original program for testing 32 bits are too large for 24 bits. I suppose they should be all within the range of [0, 2^24) in my case. But the smallest constant you used(0x10b5385) has a set bit larger than 2^24."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 161745,
+                                "reputation": 49633,
+                                "user_id": 382763,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Thomas Mueller"
+                            },
+                            "reply_to_user": {
+                                "account_id": 1527502,
+                                "reputation": 150,
+                                "user_id": 1520074,
+                                "user_type": "registered",
+                                "display_name": "cxs1031"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1493467050,
+                            "post_id": 12996028,
+                            "comment_id": 74435711,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment74435711_12996028",
+                            "body": "@cxs1031 I&#39;m sorry I will not be able to help you. You will need to read the code, and try to adopt it for your use case."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2828522,
+                                "reputation": 8360,
+                                "user_id": 2430597,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "plasmacel"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1502461258,
+                            "post_id": 12996028,
+                            "comment_id": 78234265,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment78234265_12996028",
+                            "body": "Does the 64-bits version also have one-to-one mapping (producing unique results) for the full range [0, UINT64_MAX]?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 161745,
+                                "reputation": 49633,
+                                "user_id": 382763,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Thomas Mueller"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2828522,
+                                "reputation": 8360,
+                                "user_id": 2430597,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "plasmacel"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1502793981,
+                            "post_id": 12996028,
+                            "comment_id": 78340071,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment78340071_12996028",
+                            "body": "@plasmacel I&#39;m afraid I don&#39;t know, but I think no, as it&#39;s not using shift by 32. Also, I&#39;m not sure if there are no conflicts that way."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2828522,
+                                "reputation": 8360,
+                                "user_id": 2430597,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "plasmacel"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1502795301,
+                            "post_id": 12996028,
+                            "comment_id": 78340764,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment78340764_12996028",
+                            "body": "@ThomasMueller Your 32-bits version is bijective (as it would be expected from a good bit mixing function), so I assume the 64bit version should be also, however its hard to test empirically. I made a loop running from <code>0</code> to <code>UINT64_MAX</code>, parallelized by OpenMP on a quadcore Core i7, but after running 10 minutes I terminated the process. I will repeat the process when I don&#39;t use the computer and I can keep it running as long as needed."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 161745,
+                                "reputation": 49633,
+                                "user_id": 382763,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Thomas Mueller"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2828522,
+                                "reputation": 8360,
+                                "user_id": 2430597,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "plasmacel"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1511456669,
+                            "post_id": 12996028,
+                            "comment_id": 81875491,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment81875491_12996028",
+                            "body": "@plasmacel I think the 64-bit version is reversible as well, but it&#39;s more complicated: e.g. <code>x ^ (x &gt;&gt; 31)</code> is revered using <code>x ^ (x &gt;&gt; 31) ^ (x &gt;&gt; 62)</code>. I will try to write and test a special reverse function. That would kind of proof it is bijective, right?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 161745,
+                                "reputation": 49633,
+                                "user_id": 382763,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Thomas Mueller"
+                            },
+                            "reply_to_user": {
+                                "account_id": 2828522,
+                                "reputation": 8360,
+                                "user_id": 2430597,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "plasmacel"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1511509262,
+                            "post_id": 12996028,
+                            "comment_id": 81891165,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment81891165_12996028",
+                            "body": "@plasmacel I added the unhash methods for both 32 bit and 64 bit now."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2828522,
+                                "reputation": 8360,
+                                "user_id": 2430597,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "plasmacel"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1511509805,
+                            "post_id": 12996028,
+                            "comment_id": 81891410,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment81891410_12996028",
+                            "body": "Thanks, this is excellent. If I could give you one more upvote I would do so."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6744949,
+                                "reputation": 334,
+                                "user_id": 5196836,
+                                "user_type": "registered",
+                                "display_name": "FooBar"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1517862382,
+                            "post_id": 12996028,
+                            "comment_id": 84258865,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment84258865_12996028",
+                            "body": "@ThomasMueller I tried using &quot;&gt;&gt;&gt;&quot; in Java and it yielded a negative integer. &quot;&gt;&gt;&quot; resulted in positive integers only. Did you get the logical and arithmetical shift confused here? Or did I make some mistake?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 161745,
+                                "reputation": 49633,
+                                "user_id": 382763,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Thomas Mueller"
+                            },
+                            "reply_to_user": {
+                                "account_id": 6744949,
+                                "reputation": 334,
+                                "user_id": 5196836,
+                                "user_type": "registered",
+                                "display_name": "FooBar"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1517894574,
+                            "post_id": 12996028,
+                            "comment_id": 84268507,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment84268507_12996028",
+                            "body": "@MarkusK from what I read, &quot;&gt;&gt;&gt;&quot; shouldn&#39;t yield <a href=\"https://stackoverflow.com/questions/2811319/difference-between-and\">negative integers</a>... Could you re-check?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 6744949,
+                                "reputation": 334,
+                                "user_id": 5196836,
+                                "user_type": "registered",
+                                "display_name": "FooBar"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1518435790,
+                            "post_id": 12996028,
+                            "comment_id": 84491069,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment84491069_12996028",
+                            "body": "@ThomasMueller \u201c&gt;&gt;&gt;\u201c itself does indeed produce positive numbers. The hash function, however, may return negative numbers if this operator is used (due to overflows?). I thought this behaviour was not desired. It could be \u201cfixed\u201c with \u201c&gt;&gt;\u201c. Please correct me if I&#39;m wrong (especially about the desired behaviour)"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 161745,
+                                "reputation": 49633,
+                                "user_id": 382763,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Thomas Mueller"
+                            },
+                            "reply_to_user": {
+                                "account_id": 6744949,
+                                "reputation": 334,
+                                "user_id": 5196836,
+                                "user_type": "registered",
+                                "display_name": "FooBar"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1518451643,
+                            "post_id": 12996028,
+                            "comment_id": 84501746,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment84501746_12996028",
+                            "body": "@MarkusK &quot;&gt;&gt;&gt;&quot; yields positive or 0. Yes, the hash function may return negative numbers (in Java), that&#39;s desired. Java only has signed integers, and the sign is really bit #31 (highest bit; the lowest bit being bit #0). It is desired to return 32 bits. For C / C++, you could use unsigned integers."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 45260,
+                                "reputation": 66874,
+                                "user_id": 133374,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Albert"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1522161790,
+                            "post_id": 12996028,
+                            "comment_id": 86036855,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment86036855_12996028",
+                            "body": "Is there some reference how you came up with this hash?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 161745,
+                                "reputation": 49633,
+                                "user_id": 382763,
+                                "user_type": "registered",
+                                "accept_rate": 92,
+                                "display_name": "Thomas Mueller"
+                            },
+                            "reply_to_user": {
+                                "account_id": 45260,
+                                "reputation": 66874,
+                                "user_id": 133374,
+                                "user_type": "registered",
+                                "accept_rate": 79,
+                                "display_name": "Albert"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1522222311,
+                            "post_id": 12996028,
+                            "comment_id": 86062718,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment86062718_12996028",
+                            "body": "@Albert The 32-bit hash is modelled after the 64-bit hash, just simpler (for speed), and with a different magic number, which was found as described in the answer. The 64-bit hash is based on splitmix64, see link in the answer."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 9651653,
+                                "reputation": 1677,
+                                "user_id": 7162631,
+                                "user_type": "registered",
+                                "display_name": "Adam Brown"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1599216545,
+                            "post_id": 12996028,
+                            "comment_id": 112712439,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment112712439_12996028",
+                            "body": "This should be the accepted answer. In fact, this is in my all-time hall-of-fame best stackoverflow answers ever. Simply amazing."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 914346,
+                                "reputation": 1040,
+                                "user_id": 947488,
+                                "user_type": "registered",
+                                "display_name": "Stefan Reich"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1647346963,
+                            "post_id": 12996028,
+                            "comment_id": 126343420,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment126343420_12996028",
+                            "body": "Can we build some sort of shrine for you? @ThomasMueller Ah nevermind, I saw you&#39;re the maintainer of the H2 database, I guess there&#39;s a shrine already. Excellent routine, love it."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 914346,
+                                "reputation": 1040,
+                                "user_id": 947488,
+                                "user_type": "registered",
+                                "display_name": "Stefan Reich"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1647347476,
+                            "post_id": 12996028,
+                            "comment_id": 126343611,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment126343611_12996028",
+                            "body": "BTW I benched this to take less than 10 CPU cycles per invocation on my Core i5 in Java."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 914346,
+                                "reputation": 1040,
+                                "user_id": 947488,
+                                "user_type": "registered",
+                                "display_name": "Stefan Reich"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1647349259,
+                            "post_id": 12996028,
+                            "comment_id": 126344362,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#comment126344362_12996028",
+                            "body": "Oops, correction: It&#39;s more like 15 cycles"
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 161745,
+                        "reputation": 49633,
+                        "user_id": 382763,
+                        "user_type": "registered",
+                        "accept_rate": 92,
+                        "display_name": "Thomas Mueller"
+                    },
+                    "comment_count": 46,
+                    "is_accepted": false,
+                    "score": 222,
+                    "last_activity_date": 1714898628,
+                    "last_edit_date": 1714898628,
+                    "creation_date": 1350806485,
+                    "answer_id": 12996028,
+                    "question_id": 664014,
+                    "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#12996028",
+                    "body": "<p>I found the following algorithm provides a very good statistical distribution. Each input bit affects each output bit with about 50% probability. There are no collisions (each input results in a different output). The algorithm is fast except if the CPU doesn't have a built-in integer multiplication unit. C code, assuming <code>int</code> is 32 bit (for Java, replace <code>&gt;&gt;</code> with <code>&gt;&gt;&gt;</code> and remove <code>unsigned</code>):</p>\n<pre><code>unsigned int hash(unsigned int x) {\n    x = ((x &gt;&gt; 16) ^ x) * 0x45d9f3b;\n    x = ((x &gt;&gt; 16) ^ x) * 0x45d9f3b;\n    x = (x &gt;&gt; 16) ^ x;\n    return x;\n}\n</code></pre>\n<p>The magic number was calculated using a <a href=\"https://github.com/h2database/h2database/blob/master/h2/src/test/org/h2/test/store/CalculateHashConstant.java\" rel=\"nofollow noreferrer\">special multi-threaded test program</a> that ran for many hours, which calculates the avalanche effect (the number of output bits that change if a single input bit is changed; should be nearly 16 on average), independence of output bit changes (output bits should not depend on each other), and the probability of a change in each output bit if any input bit is changed. The calculated values are better than the 32-bit finalizer used by <a href=\"https://code.google.com/p/smhasher/wiki/MurmurHash3\" rel=\"nofollow noreferrer\">MurmurHash</a>, and nearly as good (not quite) as when using <a href=\"http://en.wikipedia.org/wiki/Advanced_Encryption_Standard\" rel=\"nofollow noreferrer\">AES</a>. A slight advantage is that the same constant is used twice (it did make it slightly faster the last time I tested, not sure if it's still the case).</p>\n<p>You can reverse the process (get the input value from the hash) if you replace the <code>0x45d9f3b</code> with <code>0x119de1f3</code> (the <a href=\"https://lemire.me/blog/2017/09/18/computing-the-inverse-of-odd-integers/\" rel=\"nofollow noreferrer\">multiplicative inverse</a>):</p>\n<pre><code>unsigned int unhash(unsigned int x) {\n    x = ((x &gt;&gt; 16) ^ x) * 0x119de1f3;\n    x = ((x &gt;&gt; 16) ^ x) * 0x119de1f3;\n    x = (x &gt;&gt; 16) ^ x;\n    return x;\n}\n</code></pre>\n<p>For 64-bit numbers, I suggest to use the following, even thought it might not be the fastest. This one is based on <a href=\"http://xorshift.di.unimi.it/splitmix64.c\" rel=\"nofollow noreferrer\">splitmix64</a>, which seems to be based on the blog article <a href=\"http://zimbry.blogspot.it/2011/09/better-bit-mixing-improving-on.html\" rel=\"nofollow noreferrer\">Better Bit Mixing</a> (mix 13).</p>\n<pre><code>uint64_t hash(uint64_t x) {\n    x = (x ^ (x &gt;&gt; 30)) * UINT64_C(0xbf58476d1ce4e5b9);\n    x = (x ^ (x &gt;&gt; 27)) * UINT64_C(0x94d049bb133111eb);\n    x = x ^ (x &gt;&gt; 31);\n    return x;\n}\n</code></pre>\n<p>In this case, reversing is more complicated:</p>\n<pre><code>uint64_t unhash(uint64_t x) {\n    x = (x ^ (x &gt;&gt; 31) ^ (x &gt;&gt; 62)) * UINT64_C(0x319642b2d24d8ec3);\n    x = (x ^ (x &gt;&gt; 27) ^ (x &gt;&gt; 54)) * UINT64_C(0x96de1b173f119089);\n    x = x ^ (x &gt;&gt; 30) ^ (x &gt;&gt; 60);\n    return x;\n}\n</code></pre>\n<p>All the above is for C. For Java, use <code>long</code>, add <code>L</code> to the constant, replace <code>&gt;&gt;</code> with <code>&gt;&gt;&gt;</code> and remove <code>unsigned</code>.</p>\n<p>Update: You may also want to look at the <a href=\"https://github.com/skeeto/hash-prospector\" rel=\"nofollow noreferrer\">Hash Function Prospector</a> project, where other (possibly better) constants are listed. There is a slightly better 32-bit hash function: <code>x ^= x &gt;&gt; 16; x *= 0x7feb352d; x ^= x &gt;&gt; 15; x *= 0x846ca68b; x ^= x &gt;&gt; 16; return x;</code> but it uses two constants.</p>\n"
+                },
+                {
+                    "owner": {
+                        "account_id": 3560674,
+                        "reputation": 126,
+                        "user_id": 2973433,
+                        "user_type": "registered",
+                        "display_name": "Ouanixi"
+                    },
+                    "comment_count": 0,
+                    "is_accepted": false,
+                    "score": 1,
+                    "last_activity_date": 1414268437,
+                    "creation_date": 1414268437,
+                    "answer_id": 26566850,
+                    "question_id": 664014,
+                    "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/26566850#26566850",
+                    "body": "<p>I don't think we can say that a hash function is \"good\" without knowing your data in advance ! and without knowing what you're going to do with it.</p>\n\n<p>There are better data structures than hash tables for unknown data sizes (I'm assuming you're doing the hashing for a hash table here ). I would personally use a hash table when I Know I have a \"finite\" number of elements that are needing stored in a limited amount of memory. I would try and do a quick statistical analysis on my data, see how it is distributed etc before I start thinking about my hash function. </p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 267086,
+                                "reputation": 63515,
+                                "user_id": 555045,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "harold"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1550233700,
+                            "post_id": 54708697,
+                            "comment_id": 96204117,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/54708697#comment96204117_54708697",
+                            "body": "But then why not shift the product right, so you keep the most-mixed bits? That was the way it was supposed to work"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15339478,
+                                "reputation": 41,
+                                "user_id": 11066923,
+                                "user_type": "registered",
+                                "display_name": "Chen-ChungChia"
+                            },
+                            "reply_to_user": {
+                                "account_id": 267086,
+                                "reputation": 63515,
+                                "user_id": 555045,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "harold"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1550236689,
+                            "post_id": 54708697,
+                            "comment_id": 96205712,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/54708697#comment96205712_54708697",
+                            "body": "@harold, golden ratio prime number is carefully chosen, though I think it won&#39;t make any difference, but I will test to see if it&#39;s much better with the &quot;the most-mixed bits&quot;.   While my point is that &quot;It&#39;s not a good choice.&quot; is not true, as the testing results show, just grab the lower part of the bits is good enough, and even better than many hash functions."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15339478,
+                                "reputation": 41,
+                                "user_id": 11066923,
+                                "user_type": "registered",
+                                "display_name": "Chen-ChungChia"
+                            },
+                            "reply_to_user": {
+                                "account_id": 267086,
+                                "reputation": 63515,
+                                "user_id": 555045,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "harold"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1550238429,
+                            "post_id": 54708697,
+                            "comment_id": 96206717,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/54708697#comment96206717_54708697",
+                            "body": "(2654435761, 4295203489) is a golden ratio of primes."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15339478,
+                                "reputation": 41,
+                                "user_id": 11066923,
+                                "user_type": "registered",
+                                "display_name": "Chen-ChungChia"
+                            },
+                            "reply_to_user": {
+                                "account_id": 267086,
+                                "reputation": 63515,
+                                "user_id": 555045,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "harold"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1550239967,
+                            "post_id": 54708697,
+                            "comment_id": 96207636,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/54708697#comment96207636_54708697",
+                            "body": "(1640565991, 2654435761) is also a golden ratio of primes."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 15339478,
+                                "reputation": 41,
+                                "user_id": 11066923,
+                                "user_type": "registered",
+                                "display_name": "Chen-ChungChia"
+                            },
+                            "reply_to_user": {
+                                "account_id": 267086,
+                                "reputation": 63515,
+                                "user_id": 555045,
+                                "user_type": "registered",
+                                "accept_rate": 100,
+                                "display_name": "harold"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1550298587,
+                            "post_id": 54708697,
+                            "comment_id": 96225910,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/54708697#comment96225910_54708697",
+                            "body": "@harold, Shifting the product right becomes worse, even if just shifting right by 1 position (divided by 2), it still becomes worse (though still zero empty bucket, but longest chain length is bigger); shifting right by more positions, the result becomes more worse. Why? I think the reason is: shifting the product right makes more hash values not to be coprime, just my guess, the real reason involves number theory."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2427788,
+                                "reputation": 1631,
+                                "user_id": 2119377,
+                                "user_type": "registered",
+                                "display_name": "Wolfgang Brehm"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1568383430,
+                            "post_id": 54708697,
+                            "comment_id": 102267717,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/54708697#comment102267717_54708697",
+                            "body": "@Chen-ChungChia I think this is because the low bits preserve the bijectivity and will produce no collisions at all if all values are less than MCR_HashTableSize."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 15339478,
+                        "reputation": 41,
+                        "user_id": 11066923,
+                        "user_type": "registered",
+                        "display_name": "Chen-ChungChia"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": false,
+                    "score": 4,
+                    "last_activity_date": 1550293555,
+                    "last_edit_date": 1550293555,
+                    "creation_date": 1550231286,
+                    "answer_id": 54708697,
+                    "question_id": 664014,
+                    "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/54708697#54708697",
+                    "body": "<p>For random hash values, some engineers said golden ratio prime number(2654435761) is a bad choice, with my testing results, I found that it's not true; instead, 2654435761 distributes the hash values pretty good.</p>\n\n<pre><code>#define MCR_HashTableSize 2^10\n\nunsigned int\nHash_UInt_GRPrimeNumber(unsigned int key)\n{\n  key = key*2654435761 &amp; (MCR_HashTableSize - 1)\n  return key;\n}\n</code></pre>\n\n<p>The hash table size must be a power of two.</p>\n\n<p>I have written a test program to evaluate many hash functions for integers, the results show that GRPrimeNumber is a pretty good choice.</p>\n\n<p>I have tried:</p>\n\n<ol>\n<li>total_data_entry_number / total_bucket_number = 2, 3, 4; where total_bucket_number = hash table size;</li>\n<li>map hash value domain into bucket index domain; that is, convert hash value into bucket index by Logical And Operation with (hash_table_size - 1), as shown in Hash_UInt_GRPrimeNumber();</li>\n<li>calculate the collision number of each bucket;</li>\n<li>record the bucket that has not been mapped, that is, an empty bucket;</li>\n<li>find out the max collision number of all buckets; that is, the longest chain length;</li>\n</ol>\n\n<p>With my testing results, I found that Golden Ratio Prime Number always has the fewer empty buckets or zero empty bucket and the shortest collision chain length.</p>\n\n<p>Some hash functions for integers are claimed to be good, but the testing results show that when the total_data_entry / total_bucket_number = 3, the longest chain length is bigger than 10(max collision number > 10), and many buckets are not mapped(empty buckets), which is very bad, compared with the result of zero empty bucket and longest chain length 3 by Golden Ratio Prime Number Hashing. </p>\n\n<p>BTW, with my testing results, I found one version of shifting-xor hash functions is pretty good(It's shared by mikera).</p>\n\n<pre><code>unsigned int Hash_UInt_M3(unsigned int key)\n{\n  key ^= (key &lt;&lt; 13);\n  key ^= (key &gt;&gt; 17);    \n  key ^= (key &lt;&lt; 5); \n  return key;\n}\n</code></pre>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 2427788,
+                                "reputation": 1631,
+                                "user_id": 2119377,
+                                "user_type": "registered",
+                                "display_name": "Wolfgang Brehm"
+                            },
+                            "edited": false,
+                            "score": 3,
+                            "creation_date": 1568386965,
+                            "post_id": 56501471,
+                            "comment_id": 102269670,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/56501471#comment102269670_56501471",
+                            "body": "This function is not bijective. For all v where v = ror(v,25), namely all 0 and all 1 it will produce the same output in two places. For all values v = ror64(v, 24) ^ ror64(v, 49), which are at least two more and the same with v = ror(v,28), yielding another 2^4 , totaling around around 22 unnecessary collisions. Two applications of splitmix are probably just as good and just as fast, but still invertible and collision-free."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 268758,
+                        "reputation": 1975,
+                        "user_id": 557697,
+                        "user_type": "registered",
+                        "accept_rate": 79,
+                        "display_name": "Frederico Schardong"
+                    },
+                    "comment_count": 1,
+                    "is_accepted": false,
+                    "score": 5,
+                    "last_activity_date": 1559943432,
+                    "creation_date": 1559943432,
+                    "answer_id": 56501471,
+                    "question_id": 664014,
+                    "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/56501471#56501471",
+                    "body": "<p>I have been using <code>splitmix64</code> (pointed in Thomas Mueller's <a href=\"https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/12996028#12996028\">answer</a>) ever since I found this thread. However, I recently stumbled upon Pelle Evensen's <a href=\"http://mostlymangling.blogspot.com/2019/01/better-stronger-mixer-and-test-procedure.html\" rel=\"noreferrer\">rrxmrrxmsx_0</a>, which yielded tremendously better statistical distribution than the original MurmurHash3 finalizer and its successors (<code>splitmix64</code> and other mixes). Here is the code snippet in C:</p>\n\n<pre><code>#include &lt;stdint.h&gt;\n\nstatic inline uint64_t ror64(uint64_t v, int r) {\n    return (v &gt;&gt; r) | (v &lt;&lt; (64 - r));\n}\n\nuint64_t rrxmrrxmsx_0(uint64_t v) {\n    v ^= ror64(v, 25) ^ ror64(v, 50);\n    v *= 0xA24BAED4963EE407UL;\n    v ^= ror64(v, 24) ^ ror64(v, 49);\n    v *= 0x9FB21C651E98DF25UL;\n    return v ^ v &gt;&gt; 28;\n}\n</code></pre>\n\n<p>Pelle also provides an <a href=\"http://mostlymangling.blogspot.com/2018/07/on-mixing-functions-in-fast-splittable.html\" rel=\"noreferrer\">in-depth analysis</a> of the 64-bit mixer used in the final step of <code>MurmurHash3</code> and the more recent variants.</p>\n"
+                },
+                {
+                    "comments": [
+                        {
+                            "owner": {
+                                "account_id": 196368,
+                                "reputation": 457,
+                                "user_id": 2016181,
+                                "user_type": "registered",
+                                "display_name": "Jan"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1589627937,
+                            "post_id": 57556517,
+                            "comment_id": 109371630,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/57556517#comment109371630_57556517",
+                            "body": "gfmul: The code appears to be pseudo-code, since afaik you can&#39;t use brackets with  __m128i. Still very interesting. The first line appears to say &quot;take an unitialized __m128i (I) and xor it with (parameter) i. Should I read this as initialize I with 0 and xor with i? If so, would it be the same as load I with i and perform a not (operation) on I?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2427788,
+                                "reputation": 1631,
+                                "user_id": 2119377,
+                                "user_type": "registered",
+                                "display_name": "Wolfgang Brehm"
+                            },
+                            "reply_to_user": {
+                                "account_id": 196368,
+                                "reputation": 457,
+                                "user_id": 2016181,
+                                "user_type": "registered",
+                                "display_name": "Jan"
+                            },
+                            "edited": false,
+                            "score": 0,
+                            "creation_date": 1589629386,
+                            "post_id": 57556517,
+                            "comment_id": 109372091,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/57556517#comment109372091_57556517",
+                            "body": "@Jan what I&#39;d want is to do is <code>__m128i I = i; &#47;&#47;set the lower 64 bits</code>, but that I can&#39;t, so I&#39;m using <code>^=</code>. <code>0^1 = 1</code> therefore no not involed. Regarding the initialisation with <code>{}</code> my compiler never complained, it might not be the best solution, but what I want with that is initialise all of it to 0 so I can do <code>^=</code> or <code>|=</code> . I think I based that code on <a href=\"https://blog.quarkslab.com/reversing-a-finite-field-multiplication-optimization.html\" rel=\"nofollow noreferrer\">this blogpost</a> which also gives the inversion, very usefull :D"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 317894,
+                                "reputation": 33210,
+                                "user_id": 634821,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Violet Giraffe"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1674173997,
+                            "post_id": 57556517,
+                            "comment_id": 132664664,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/57556517#comment132664664_57556517",
+                            "body": "Why should a hash function be reversible?"
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2427788,
+                                "reputation": 1631,
+                                "user_id": 2119377,
+                                "user_type": "registered",
+                                "display_name": "Wolfgang Brehm"
+                            },
+                            "reply_to_user": {
+                                "account_id": 317894,
+                                "reputation": 33210,
+                                "user_id": 634821,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Violet Giraffe"
+                            },
+                            "edited": false,
+                            "score": 2,
+                            "creation_date": 1674212777,
+                            "post_id": 57556517,
+                            "comment_id": 132670768,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/57556517#comment132670768_57556517",
+                            "body": "@VioletGiraffe If a hash is not bijective, it means that the output distribution cannot be uniform. If a hash is bijective, it means that it uses as much of the output space as possible. That is why it is recommended that a hash is bijective, making it reversible, but only disregarding computational feasibility."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 2427788,
+                                "reputation": 1631,
+                                "user_id": 2119377,
+                                "user_type": "registered",
+                                "display_name": "Wolfgang Brehm"
+                            },
+                            "reply_to_user": {
+                                "account_id": 317894,
+                                "reputation": 33210,
+                                "user_id": 634821,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Violet Giraffe"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1674213083,
+                            "post_id": 57556517,
+                            "comment_id": 132670832,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/57556517#comment132670832_57556517",
+                            "body": "@VioletGiraffe If a hash is bijective it is invertible in principle. That does not mean that it is computationally feasible to invert it. Only very specific applications require that a hash be invertible easily. Crypographic applications require hashes to be very hard to invert. You can have a Bijective hash that is very hard to invert (if you want one let me know how to contact you, this comment is too short). And you can have a non-bijective hash that is easily reversible, up to the ambiguities."
+                        },
+                        {
+                            "owner": {
+                                "account_id": 317894,
+                                "reputation": 33210,
+                                "user_id": 634821,
+                                "user_type": "registered",
+                                "accept_rate": 78,
+                                "display_name": "Violet Giraffe"
+                            },
+                            "edited": false,
+                            "score": 1,
+                            "creation_date": 1674215335,
+                            "post_id": 57556517,
+                            "comment_id": 132671525,
+                            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/57556517#comment132671525_57556517",
+                            "body": "I see, thank you, I think now I understand why it&#39;s desirable for the hash function to be bijective (regardless of whether or not it is invertible in practice)."
+                        }
+                    ],
+                    "owner": {
+                        "account_id": 2427788,
+                        "reputation": 1631,
+                        "user_id": 2119377,
+                        "user_type": "registered",
+                        "display_name": "Wolfgang Brehm"
+                    },
+                    "comment_count": 6,
+                    "is_accepted": false,
+                    "score": 26,
+                    "last_activity_date": 1704578539,
+                    "last_edit_date": 1704578539,
+                    "creation_date": 1566216841,
+                    "answer_id": 57556517,
+                    "question_id": 664014,
+                    "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key/57556517#57556517",
+                    "body": "<p>Fast and good hash functions can be composed from fast permutations with lesser qualities, like</p>\n<ul>\n<li>multiplication with an uneven integer</li>\n<li>binary rotations</li>\n<li>xorshift</li>\n</ul>\n<p>To yield a hashing function with superior qualities, like demonstrated with <a href=\"http://www.pcg-random.org/pdf/hmc-cs-2014-0905.pdf\" rel=\"nofollow noreferrer\">PCG</a> for random number generation.</p>\n<p>This is in fact also the recipe rrxmrrxmsx_0 and murmur hash are using, knowingly or unknowingly.</p>\n<p>I personally found</p>\n<pre><code>uint64_t xorshift(const uint64_t&amp; n,int i){\n  return n^(n&gt;&gt;i);\n}\nuint64_t hash(const uint64_t&amp; n){\n  uint64_t p = 0x5555555555555555ull; // pattern of alternating 0 and 1\n  uint64_t c = 17316035218449499591ull;// random uneven integer constant; \n  return c*xorshift(p*xorshift(n,32),32);\n}\n</code></pre>\n<p>to be good enough.</p>\n<p>A good hash function should</p>\n<ol>\n<li>be bijective to not lose information, if possible and have the least collisions</li>\n<li>cascade as much and as evenly as possible, i.e. each input bit should flip every output bit with probability 0.5.</li>\n</ol>\n<p>Let's first look at the identity function. It satisfies 1. but not 2. :</p>\n<p><a href=\"https://i.stack.imgur.com/YgcxN.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/YgcxN.png\" alt=\"identity function\" /></a></p>\n<p>Input bit n determines output bit n with a correlation of 100% (red) and no others, they are therefore blue, giving a perfect red line across.</p>\n<p>A xorshift(n,32) is not much better, yielding one and half a line. Still satisfying 1., because it is invertible with a second application.</p>\n<p><a href=\"https://i.stack.imgur.com/8V7z2.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/8V7z2.png\" alt=\"xorshift\" /></a></p>\n<p>A multiplication with an unsigned integer (<a href=\"https://stackoverflow.com/a/665545/2119377\">&quot;Knuth's multiplicative method&quot;</a>) is much better, cascading more strongly and flipping more output bits with a probability of 0.5, which is what you want, in green. It satisfies 1. as for each uneven integer there is a multiplicative inverse.</p>\n<p><a href=\"https://i.stack.imgur.com/xz54T.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/xz54T.png\" alt=\"knuth\" /></a></p>\n<p>Combining the two gives the following output, still satisfying 1. as the composition of two bijective functions yields another bijective function.</p>\n<p><a href=\"https://i.stack.imgur.com/lpKUG.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/lpKUG.png\" alt=\"knuth\u2022xorshift\" /></a></p>\n<p>A second application of multiplication and xorshift will yield the following:</p>\n<p><a href=\"https://i.stack.imgur.com/kSa2a.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/kSa2a.png\" alt=\"proposed hash\" /></a></p>\n<p>Or you can use Galois field multiplications like <a href=\"https://www.intel.com/content/dam/develop/external/us/en/documents/clmul-wp-rev-2-02-2014-04-20.pdf\" rel=\"nofollow noreferrer\">GHash</a>, they have become reasonably fast on modern CPUs and have superior qualities in one step.</p>\n<pre><code>   uint64_t const inline gfmul(const uint64_t&amp; i,const uint64_t&amp; j){           \n     __m128i I{};I[0]^=i;                                                          \n     __m128i J{};J[0]^=j;                                                          \n     __m128i M{};M[0]^=0xb000000000000000ull;                                      \n     __m128i X = _mm_clmulepi64_si128(I,J,0);                                      \n     __m128i A = _mm_clmulepi64_si128(X,M,0);                                      \n     __m128i B = _mm_clmulepi64_si128(A,M,0);                                      \n     return A[0]^A[1]^B[1]^X[0]^X[1];                                              \n   }\n</code></pre>\n"
+                }
+            ],
+            "owner": {
+                "account_id": 29630,
+                "reputation": 1953,
+                "user_id": 80223,
+                "user_type": "registered",
+                "display_name": "Lear"
+            },
+            "comment_count": 3,
+            "is_answered": true,
+            "accepted_answer_id": 665545,
+            "answer_count": 11,
+            "score": 135,
+            "last_activity_date": 1714898628,
+            "creation_date": 1237496079,
+            "last_edit_date": 1445156225,
+            "question_id": 664014,
+            "link": "https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key",
+            "title": "What integer hash function are good that accepts an integer hash key?",
+            "body": "<p>What integer hash function are good that accepts an integer hash key?</p>\n"
+        }
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9435
+}
