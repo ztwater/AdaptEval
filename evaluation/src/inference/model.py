@@ -77,7 +77,7 @@ class Model:
         else:
             return response.choices[0].message.content
 
-    def run_prompts(self, prompts, api_key):
+    def run_prompts(self, prompts):
         message_history = [{"role": "system", "content": "You are a helpful assistant."}]
         reasoning_history = []
         for prompt in prompts:
