@@ -79,7 +79,7 @@ $ pip install -r requirements.txt
 
 3. Data Downloading
 
-Due to the size of collected repositories, we upload it to [link](). Please first download it to root directory and unzip to the `benchmark/` directory.
+Due to the size of collected repositories, we upload it to [link](https://drive.google.com/file/d/1c495eAO0u1WTGzozlOQBXpVi0aFPVtPa/view?usp=drive_link). Please first download it to root directory and unzip to the `benchmark/` directory.
 
 ``` shell
 $ tar -xzf data.tar.gz --strip-components=1 -C benchmark
