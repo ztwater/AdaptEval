@@ -1,12 +1,14 @@
 import json
 import os
 from tqdm import tqdm
-from src.inference.model import Model
-from src.inference.prompt_loader import PromptLoader
-from src.utils import DataUtil, PathUtil
-from src.globals import Globals
+from model import Model
+from prompt_loader import PromptLoader
+
+from utils import DataUtil, PathUtil
+from globals import Globals
 
 _ONLY_PROMPT = False
+
 
 class Inference:
     def __init__(self, args):

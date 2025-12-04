@@ -3,6 +3,7 @@ import re
 import ast
 import json
 import subprocess
+import tiktoken
 from globals import Globals
 
 

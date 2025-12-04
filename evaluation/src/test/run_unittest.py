@@ -5,7 +5,7 @@ import unittest
 import argparse
 from func_timeout import func_set_timeout
 from func_timeout.exceptions import FunctionTimedOut
-from src.utils import FileUtil, PathUtil
+from utils import FileUtil, PathUtil
 
 
 @func_set_timeout(5)  # set timeout to 5 seconds

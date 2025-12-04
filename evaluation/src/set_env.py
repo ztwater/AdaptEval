@@ -15,5 +15,6 @@ def install_env_files():
         else:
             ProcessUtil.run_process([install_script_path], repo_path)
 
+
 if __name__ == '__main__':
     install_env_files()
