@@ -45,7 +45,7 @@ class Test:
             repo_path = os.path.join(Globals.DATASET_PATH, str(repo_id))
             repo_name = repo_data['repo_name'].split('/')[1]
             venv_path = os.path.join(repo_path, repo_name, 'venv')
-            python_path = os.path.join(venv_path, 'bin', 'python.exe')
+            python_path = os.path.join(venv_path, 'bin', 'python')
             test_path = os.path.join(repo_path, repo_name, 'tests', 'test_adapteval')
             for src_file in repo_data['src_files']:
                 file_path = os.path.join(repo_path, repo_name, src_file['relative_path'])
@@ -57,10 +57,6 @@ class Test:
                         raise Exception("No target context file found.")
                 for method in src_file['linked_methods']:
                     method_name = method['method_name']
-                    # install func_timeout in the first turn
-                    install_func_cmd = [str(python_path), "-m", "pip", "install", "func_timeout", "tiktoken"]
-                    ProcessUtil.run_process(install_func_cmd, test_path)
-
                     test_module_name = '_'.join(['test', file_name.split('.')[0], method_name])
                     test_class_name = 'Test' + DataUtil.snake_to_camel(method_name)
                     res_items = []
