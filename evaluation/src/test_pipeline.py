@@ -19,7 +19,7 @@ class Test:
         self.data = FileUtil.read_json(output_path)
 
     def run_unittest(self, repo_id, test_path, test_module_name, test_class_name, python_path, name_string, repeat):
-        script_path = os.path.join(Globals.ROOT_PATH, 'evaluation', 'src', 'test', 'run_unittest.py')
+        script_path = os.path.join(Globals.ROOT_PATH, 'evaluation', 'src', 'run_unittest.py')
         cmd = [python_path, script_path,
                '--repo_id', str(repo_id),
                '--test_path', test_path,

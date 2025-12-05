@@ -1,6 +1,6 @@
 import argparse
-from inference.inference import Inference
-from test.test_pipeline import Test
+from inference import Inference
+from test_pipeline import Test
 
 def str2bool(value):
     if isinstance(value, bool):
