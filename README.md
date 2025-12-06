@@ -89,6 +89,8 @@ $ cd evaluation/src
 $ python set_env.py
 ```
 
+For repo-76 (adamix), it requires the full repository environment to run evaluation. Please follow its documentation to set up a conda environment NLU, and change the value of `NLU_CONDA_ENV_PATH` path variable in the globals.py.
+
 ---
 
 ## Run Evaluation

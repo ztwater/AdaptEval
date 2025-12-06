@@ -44,7 +44,10 @@ class Test:
             print(f"Looking into Repo-{repo_id}...")
             repo_path = os.path.join(Globals.DATASET_PATH, str(repo_id))
             repo_name = repo_data['repo_name'].split('/')[1]
-            venv_path = os.path.join(repo_path, repo_name, 'venv')
+            if repo_id == 76:
+                venv_path = Globals.NLU_CONDA_ENV_PATH
+            else:
+                venv_path = os.path.join(repo_path, repo_name, 'venv')
             python_path = os.path.join(venv_path, 'bin', 'python')
             test_path = os.path.join(repo_path, repo_name, 'tests', 'test_adapteval')
             for src_file in repo_data['src_files']:

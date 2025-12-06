@@ -5,3 +5,6 @@ class Globals:
     DATASET_PATH = os.path.join(ROOT_PATH, "benchmark")
     METADATA_PATH = os.path.join(ROOT_PATH, "metadata.json")
     RESULT_PATH = os.path.join(ROOT_PATH, "evaluation", "results")
+
+    # repo-76 conda env path
+    NLU_CONDA_ENV_PATH = os.path.join('/path/to/anaconda/envs/NLU')
